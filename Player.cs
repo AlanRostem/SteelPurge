@@ -4,7 +4,7 @@ using System;
 public class Player : KinematicBody2D
 {
 	[Export]
-	public uint Score = 0;
+	public uint Score = 500;
 	
 	static float _speed = 60;
 	static float _jumpSpeed = 350;

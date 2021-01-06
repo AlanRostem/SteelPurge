@@ -1,8 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/texture/tile_set.png" type="Texture" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Map.cs" type="Script" id=3]
+[ext_resource path="res://assets/font/ARCADECLASSIC.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://ScoreLabel.cs" type="Script" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -408,6 +410,9 @@ points = PoolVector2Array( 0, 0, 0, 0, 16, 16, 16, 16, 16, 16, 0, 16 )
 } ]
 17/z_index = 0
 
+[sub_resource type="DynamicFont" id=17]
+font_data = ExtResource( 4 )
+
 [node name="Map" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -419,3 +424,20 @@ tile_data = PoolIntArray( 0, 17, 0, 2, 0, 0, 3, 1, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0,
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 87.8795, 93.2342 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 360.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 17 )
+text = "500"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
