@@ -5,16 +5,30 @@ public class Player : KinematicBody2D
 {
 	[Export]
 	public uint Score = 500;
-	
-	static float _speed = 60;
-	static float _jumpSpeed = 350;
 
-	AnimatedSprite _sprite;
-	Vector2 _vel;
+	private static float _speed = 60;
+	private static float _jumpSpeed = 350;
+
+	private AnimatedSprite _sprite;
+	private Vector2 _vel;
+	private uint _hp = 100;
 
 	public override void _Ready()
 	{
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
+	}
+
+	public uint GetHP()
+	{
+		return _hp;
+	}
+	
+	public void TakeDamage(uint damage)
+	{
+		if (damage <= _hp)
+			_hp -= damage;
+		else 
+			;// TODO: Die
 	}
 
 	public override void _PhysicsProcess(float delta)

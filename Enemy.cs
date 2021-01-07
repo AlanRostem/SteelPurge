@@ -8,9 +8,14 @@ public class Enemy : KinematicBody2D
 	private Vector2 _vel;
 	private uint HP = 100;
 	private AnimatedSprite _sprite;
+	private uint _damagePerHit = 34;
+	private Player _playerRef;
+	private Timer _attackTimer;
+	
 	public override void _Ready()
 	{
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
+		_attackTimer = GetNode<Timer>("AttackTimer");
 		_sprite.Play("walk");
 	}
 
@@ -22,5 +27,27 @@ public class Enemy : KinematicBody2D
 		_vel.x = WalkSpeed * _direction;
 		_vel.y += Constants.Gravity;
 		_vel = MoveAndSlide(_vel, Constants.Up);
+	}
+	
+	private void OnPlayerInMeleeRange(object body)
+	{
+		if (body is Player player)
+		{
+			_playerRef = player;
+			_attackTimer.Start();
+		}
+	}
+	
+	private void OnPlayerExitMeleeRange(object body)
+	{
+		if (body is Player player)
+		{
+			_attackTimer.Stop();
+		}
+	}
+	
+	private void OnDamagePlayer()
+	{
+		_playerRef.TakeDamage(_damagePerHit);
 	}
 }
