@@ -8,7 +8,6 @@ public class Player : KinematicBody2D
 	
 	static float _speed = 60;
 	static float _jumpSpeed = 350;
-	static Vector2 _up = new Vector2(0, -1);
 
 	AnimatedSprite _sprite;
 	Vector2 _vel;
@@ -47,6 +46,6 @@ public class Player : KinematicBody2D
 			_sprite.Play("jump");
 		}
 
-		_vel = MoveAndSlide(_vel, _up, true);
+		_vel = MoveAndSlide(_vel, Constants.Up, true);
 	}
 }
