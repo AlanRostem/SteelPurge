@@ -61,3 +61,12 @@ animation = "jump"
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="RegenStartDelayTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="RegenTickTimer" type="Timer" parent="."]
+wait_time = 0.12
+[connection signal="timeout" from="RegenStartDelayTimer" to="." method="OnCanRegen"]
+[connection signal="timeout" from="RegenTickTimer" to="." method="OnHeal"]

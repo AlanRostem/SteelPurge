@@ -35,6 +35,7 @@ public class Enemy : KinematicBody2D
 		{
 			_playerRef = player;
 			_attackTimer.Start();
+			OnDamagePlayer();
 		}
 	}
 	

@@ -3,8 +3,7 @@ using System;
 
 public class Player : KinematicBody2D
 {
-	[Export]
-	public uint Score = 500;
+	[Export] public uint Score = 500;
 
 	private static float _speed = 60;
 	private static float _jumpSpeed = 350;
@@ -13,22 +12,32 @@ public class Player : KinematicBody2D
 	private Vector2 _vel;
 	private uint _hp = 100;
 
+	private Timer _regenTickTimer;
+	private Timer _regenStartDelayTimer;
+
 	public override void _Ready()
 	{
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
+		_regenTickTimer = GetNode<Timer>("RegenTickTimer");
+		_regenStartDelayTimer = GetNode<Timer>("RegenStartDelayTimer");
 	}
 
 	public uint GetHP()
 	{
 		return _hp;
 	}
-	
+
 	public void TakeDamage(uint damage)
 	{
-		if (damage <= _hp)
+		if (damage < _hp)
+		{
 			_hp -= damage;
-		else 
-			;// TODO: Die
+			_regenTickTimer.Stop();
+			_regenStartDelayTimer.Stop();
+			_regenStartDelayTimer.Start();
+		}
+		else
+			; // TODO: Die
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -40,7 +49,6 @@ public class Player : KinematicBody2D
 			_sprite.Play("run");
 			_sprite.FlipH = true;
 			_vel.x = -_speed;
-
 		}
 		else if (Input.IsActionPressed("right"))
 		{
@@ -61,5 +69,21 @@ public class Player : KinematicBody2D
 		}
 
 		_vel = MoveAndSlide(_vel, Constants.Up, true);
+	}
+
+	private void OnCanRegen()
+	{
+		_regenTickTimer.Start();
+	}
+
+	private void OnHeal()
+	{
+		const uint amount = 12;
+		_hp += amount;
+		if (_hp > 100)
+		{
+			_regenTickTimer.Stop();
+			_hp = 100;
+		}
 	}
 }
