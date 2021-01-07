@@ -463,6 +463,7 @@ position = Vector2( 176, 128 )
 
 [node name="Money" parent="." instance=ExtResource( 7 )]
 position = Vector2( 240, 136 )
+Amount = 50
 
 [node name="Enemy2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 208, 136 )
