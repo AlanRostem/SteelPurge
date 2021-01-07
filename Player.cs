@@ -8,7 +8,6 @@ public class Player : KinematicBody2D
 	
 	static float _speed = 60;
 	static float _jumpSpeed = 350;
-	static float _gravity = 20;
 	static Vector2 _up = new Vector2(0, -1);
 
 	AnimatedSprite _sprite;
@@ -21,7 +20,7 @@ public class Player : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		_vel.y += _gravity;
+		_vel.y += Constants.Gravity;
 
 		if (Input.IsActionPressed("left"))
 		{
