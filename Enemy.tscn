@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
-height = 8.0
+height = 7.0
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -27,7 +27,7 @@ animations = [ {
 extents = Vector2( 10, 8 )
 
 [node name="Enemy" type="KinematicBody2D"]
-collision_mask = 8
+collision_layer = 0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

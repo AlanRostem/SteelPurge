@@ -50,6 +50,12 @@ fire={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="tilemap"
+2d_physics/layer_2="player"
+2d_physics/layer_3="item"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
