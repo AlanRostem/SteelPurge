@@ -27,7 +27,7 @@ animations = [ {
 extents = Vector2( 3, 8 )
 
 [node name="Enemy" type="KinematicBody2D"]
-collision_layer = 0
+collision_layer = 8
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

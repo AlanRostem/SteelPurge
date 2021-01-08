@@ -28,6 +28,10 @@ public class Gun : RayCast2D
 
 	public override void _Process(float delta)
 	{
-		ConfigureScanLine(0);
+		base._Process(delta);
+		if (GetCollider() is Enemy enemy)
+		{
+			enemy.QueueFree();
+		}
 	}
 }
