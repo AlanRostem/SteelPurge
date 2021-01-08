@@ -3,6 +3,7 @@
 [ext_resource path="res://Gun.cs" type="Script" id=1]
 
 [node name="Gun" type="RayCast2D"]
+position = Vector2( 8, 0 )
 enabled = true
 cast_to = Vector2( 50, 0 )
 script = ExtResource( 1 )
