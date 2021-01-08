@@ -14,8 +14,21 @@ public class Gun : RayCast2D
 
 	public void ScanHit(float angle = 0)
 	{
+		Enabled = true;
+		ForceRaycastUpdate();
 		ConfigureScanLine(angle);
-		// TODO: Hit scan logic
+		var collider = GetCollider();
+		if (collider != null)
+		{
+			var pos = GetCollisionPoint() - GlobalPosition;
+			pos.y = 0;
+			CastTo = pos;
+			if (collider is Enemy enemy)
+			{
+				enemy.QueueFree();
+			}
+		}
+		Enabled = false;
 	}
 
 	private void ConfigureScanLine(float angle)
@@ -28,10 +41,9 @@ public class Gun : RayCast2D
 
 	public override void _Process(float delta)
 	{
-		base._Process(delta);
-		if (GetCollider() is Enemy enemy)
+		if (Input.IsActionPressed("fire"))
 		{
-			enemy.QueueFree();
+			ScanHit();
 		}
 	}
 }
