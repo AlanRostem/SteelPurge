@@ -11,18 +11,22 @@ public class Enemy : KinematicBody2D
 	private uint _damagePerHit = 34;
 	private Player _playerRef;
 	private Timer _attackTimer;
+	private Area2D _meleeArea;
 	
 	public override void _Ready()
 	{
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
 		_attackTimer = GetNode<Timer>("AttackTimer");
+		_meleeArea = GetNode<Area2D>("Area2D");
 		_sprite.Play("walk");
 	}
 
 	public override void _PhysicsProcess(float delta)
 	{
+
 		if (IsOnWall())
 			_direction *= -1;
+		_meleeArea.Position = new Vector2(_direction * 8, 0);
 		_sprite.FlipH = _direction < 0;
 		_vel.x = WalkSpeed * _direction;
 		_vel.y += Constants.Gravity;

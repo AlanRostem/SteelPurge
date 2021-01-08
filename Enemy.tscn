@@ -24,7 +24,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 10, 8 )
+extents = Vector2( 3, 8 )
 
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 0
@@ -38,6 +38,7 @@ frames = SubResource( 4 )
 animation = "walk"
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 8, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 5 )
