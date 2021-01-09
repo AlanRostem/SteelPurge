@@ -12,7 +12,7 @@ public class Gun : RayCast2D
 	[Export] public uint DamagePerShot = 15;
 	[Export] public float SpriteOffset;
 
-	private uint _ammoCount;
+	public uint AmmoCount;
 	private bool _isFireButtonPressed = false;
 	private bool _isFiring = false;
 	private bool _isReloading = false;
@@ -40,7 +40,7 @@ public class Gun : RayCast2D
 	public override void _Ready()
 	{
 		ConfigureScanLine(0);
-		_ammoCount = ClipSize;
+		AmmoCount = ClipSize;
 		_fireCycleTimer = GetNode<Timer>("FireCycleTimer");
 		_fireCycleTimer.WaitTime = 60f / RoundsPerMinute;
 
@@ -53,7 +53,7 @@ public class Gun : RayCast2D
 
 	public uint GetAmmo()
 	{
-		return _ammoCount;
+		return AmmoCount;
 	}
 	
 	public void ScanHit(float angle = 0)
@@ -110,7 +110,7 @@ public class Gun : RayCast2D
 
 		if (Input.IsActionJustPressed("reload") && !_isReloading)
 		{
-			if (_ammoCount < ClipSize && ReserveAmmo > 0)
+			if (AmmoCount < ClipSize && ReserveAmmo > 0)
 				StartReloadCycle();
 		}
 		
@@ -144,32 +144,32 @@ public class Gun : RayCast2D
 
 	private void OnFireCycle()
 	{
-		if (_ammoCount == 0 || !_isFireButtonPressed)
+		if (AmmoCount == 0 || !_isFireButtonPressed)
 		{
 			_isFiring = false;
 			_fireCycleTimer.Stop();
-			if (_ammoCount == 0 && ReserveAmmo > 0)
+			if (AmmoCount == 0 && ReserveAmmo > 0)
 				StartReloadCycle();
 			return;
 		}
 
 		OnFire();
-		_ammoCount--;
+		AmmoCount--;
 	}
 
 	private void OnReloaded()
 	{
-		if (ClipSize > _ammoCount)
+		if (ClipSize > AmmoCount)
 		{
-			if (ReserveAmmo > (ClipSize - _ammoCount))
+			if (ReserveAmmo > (ClipSize - AmmoCount))
 			{
-				var ammoDiff = ClipSize - _ammoCount;
-				_ammoCount += ammoDiff;
+				var ammoDiff = ClipSize - AmmoCount;
+				AmmoCount += ammoDiff;
 				ReserveAmmo -= ammoDiff;
 			}
 			else
 			{
-				_ammoCount += ReserveAmmo;
+				AmmoCount += ReserveAmmo;
 				ReserveAmmo = 0;
 			}
 		}
