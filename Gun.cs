@@ -50,10 +50,7 @@ public class Gun : RayCast2D
 		ConfigureScanLine(angle);
 		var collider = GetCollider();
 		if (collider != null)
-		{
-			var pos = GetCollisionPoint() - GlobalPosition;
-			pos.y = 0;
-			CastTo = pos;
+		{				 
 			if (collider is Enemy enemy)
 			{
 				enemy.TakeDamage(DamagePerShot);
