@@ -87,7 +87,7 @@ public class Gun : RayCast2D
 
 	public void SetDirection(float dir)
 	{
-		if (!_isFiring)
+		if (!_isFireButtonPressed)
 			_direction = dir;
 	}
 
