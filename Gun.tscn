@@ -20,7 +20,9 @@ animations = [ {
 cast_to = Vector2( 50, 0 )
 collision_mask = 9
 script = ExtResource( 1 )
-RoundsPerMinute = 300
+DamageRange = 800.0
+ClipSize = 100
+ReserveAmmo = 200
 SpriteOffset = 8.0
 
 [node name="FireCycleTimer" type="Timer" parent="."]

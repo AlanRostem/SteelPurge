@@ -3,6 +3,7 @@ using System;
 
 public class Gun : RayCast2D
 {
+	[Export] public String Name = "Gun";
 	[Export] public float DamageRange = 50;
 	[Export] public uint ClipSize = 30;
 	[Export] public uint ReserveAmmo = 120;
