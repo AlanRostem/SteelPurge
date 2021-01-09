@@ -134,7 +134,7 @@ public class Gun : RayCast2D
 	{
 		ScanHit();
 		_firingSoundPlayer.Play();
-    }
+	}
 
 	public void StartReloadCycle()
 	{
