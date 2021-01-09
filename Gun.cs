@@ -50,6 +50,11 @@ public class Gun : RayCast2D
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
 	}
 
+	public uint GetAmmo()
+	{
+		return _ammoCount;
+	}
+	
 	public void ScanHit(float angle = 0)
 	{
 		Enabled = true;
@@ -136,7 +141,7 @@ public class Gun : RayCast2D
 		{
 			_isFiring = false;
 			_fireCycleTimer.Stop();
-			if (ReserveAmmo > 0)
+			if (_ammoCount == 0 && ReserveAmmo > 0)
 				StartReloadCycle();
 			return;
 		}
