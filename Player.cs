@@ -1,10 +1,8 @@
 using Godot;
-using System;
-using System.Resources;
 
 public class Player : KinematicBody2D
 {
-	private static PackedScene _defaultGunScene = GD.Load<PackedScene>("res://MG27.tscn");
+	private static readonly PackedScene _defaultGunScene = GD.Load<PackedScene>("res://MG27.tscn");
 	[Export] public uint Score = 500;
 
 	private static float _speed = 60;
