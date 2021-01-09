@@ -111,14 +111,16 @@ public class Player : KinematicBody2D
 		if (Input.IsActionPressed("left"))
 		{
 			_sprite.Play("run");
-			_sprite.FlipH = true;
+            if (!EquippedGun.IsFiring())
+			    _sprite.FlipH = true;
 			_vel.x = -_speed;
             EquippedGun.SetDirection(-1);
         }
 		else if (Input.IsActionPressed("right"))
 		{
 			_sprite.Play("run");
-			_sprite.FlipH = false;
+			if (!EquippedGun.IsFiring())
+				_sprite.FlipH = false;
 			_vel.x = _speed;
             EquippedGun.SetDirection(1);
         }

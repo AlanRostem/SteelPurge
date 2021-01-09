@@ -92,6 +92,11 @@ public class Gun : RayCast2D
 			_direction = dir;
 	}
 
+	public bool IsFiring()
+	{
+		return _isFiring;
+	}
+
 	public override void _Process(float delta)
 	{
 		if (!IsEquipped)
