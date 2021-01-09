@@ -7,6 +7,7 @@ public class Gun : RayCast2D
 	[Export] public uint ClipSize = 30;
 	[Export] public uint StartingAmmo = 120;
 	[Export] public uint RoundsPerMinute = 600;
+	[Export] public uint DamagePerShot = 15;
 	[Export] public float SpriteOffset;
 
 	private uint _ammoCount;
@@ -55,7 +56,7 @@ public class Gun : RayCast2D
 			CastTo = pos;
 			if (collider is Enemy enemy)
 			{
-				enemy.QueueFree();
+				enemy.TakeDamage(DamagePerShot);
 			}
 		}
 
@@ -78,7 +79,8 @@ public class Gun : RayCast2D
 
 	public void SetDirection(float dir)
 	{
-		_direction = dir;
+		if (!_isFiring)
+			_direction = dir;
 	}
 
 	public override void _Process(float delta)
@@ -96,7 +98,7 @@ public class Gun : RayCast2D
 			_sprite.FlipH = false;
 			_sprite.Position = new Vector2(SpriteOffset, 0);
 		}
-		
+
 		if (Input.IsActionPressed("fire"))
 		{
 			_isFireButtonPressed = true;

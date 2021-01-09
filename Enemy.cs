@@ -3,15 +3,17 @@ using System;
 
 public class Enemy : KinematicBody2D
 {
+    private static PackedScene _moneyScene = GD.Load<PackedScene>("res://Money.tscn");
 	private static float WalkSpeed = 40;
 	private float _direction = 1;
 	private Vector2 _vel;
-	private uint HP = 100;
+	private uint _hp = 100;
 	private AnimatedSprite _sprite;
 	private uint _damagePerHit = 34;
 	private Player _playerRef;
 	private Timer _attackTimer;
 	private Area2D _meleeArea;
+    
 	
 	public override void _Ready()
 	{
@@ -50,7 +52,24 @@ public class Enemy : KinematicBody2D
 			_attackTimer.Stop();
 		}
 	}
-	
+
+    public void TakeDamage(uint damage)
+    {
+        if (damage >= _hp)
+        {
+            _hp = 0;
+            QueueFree();
+            var money = (Money) _moneyScene.Instance();
+            money.Amount = 50;
+            money.GlobalPosition = GlobalPosition;
+            GetTree().Root.GetNode("Map").AddChild(money);
+        }
+        else
+        {
+            _hp -= damage;
+		}
+    }
+    
 	private void OnDamagePlayer()
 	{
 		_playerRef.TakeDamage(_damagePerHit);
