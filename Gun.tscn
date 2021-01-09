@@ -31,4 +31,7 @@ stream = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "idle"
+
+[node name="ReloadTimer" type="Timer" parent="."]
 [connection signal="timeout" from="FireCycleTimer" to="." method="OnFireCycle"]
+[connection signal="timeout" from="ReloadTimer" to="." method="OnReloaded"]

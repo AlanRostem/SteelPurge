@@ -5,7 +5,8 @@ public class Gun : RayCast2D
 {
 	[Export] public float DamageRange = 50;
 	[Export] public uint ClipSize = 30;
-	[Export] public uint StartingAmmo = 120;
+	[Export] public uint ReserveAmmo = 120;
+	[Export] public uint ReloadSpeed = 2;
 	[Export] public uint RoundsPerMinute = 600;
 	[Export] public uint DamagePerShot = 15;
 	[Export] public float SpriteOffset;
@@ -13,10 +14,12 @@ public class Gun : RayCast2D
 	private uint _ammoCount;
 	private bool _isFireButtonPressed = false;
 	private bool _isFiring = false;
+	private bool _isReloading = false;
 
 	private float _direction = 1;
 	private bool _isEquipped = true;
 	private Timer _fireCycleTimer;
+	private Timer _reloadTimer;
 	private AudioStreamPlayer _firingSoundPlayer;
 
 	private AnimatedSprite _sprite;
@@ -39,6 +42,10 @@ public class Gun : RayCast2D
 		_ammoCount = ClipSize;
 		_fireCycleTimer = GetNode<Timer>("FireCycleTimer");
 		_fireCycleTimer.WaitTime = 60f / RoundsPerMinute;
+
+		_reloadTimer = GetNode<Timer>("ReloadTimer");
+		_reloadTimer.WaitTime = ReloadSpeed;
+
 		_firingSoundPlayer = GetNode<AudioStreamPlayer>("FiringSoundPlayer");
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
 	}
@@ -49,12 +56,9 @@ public class Gun : RayCast2D
 		ForceRaycastUpdate();
 		ConfigureScanLine(angle);
 		var collider = GetCollider();
-		if (collider != null)
-		{				 
-			if (collider is Enemy enemy)
-			{
-				enemy.TakeDamage(DamagePerShot);
-			}
+		if (collider is Enemy enemy)
+		{
+			enemy.TakeDamage(DamagePerShot);
 		}
 
 		Enabled = false;
@@ -64,6 +68,8 @@ public class Gun : RayCast2D
 	{
 		_isFiring = false;
 		_fireCycleTimer.Stop();
+		_isReloading = false;
+		_reloadTimer.Stop();
 	}
 
 	private void ConfigureScanLine(float angle)
@@ -99,7 +105,7 @@ public class Gun : RayCast2D
 		if (Input.IsActionPressed("fire"))
 		{
 			_isFireButtonPressed = true;
-			if (!_isFiring)
+			if (!_isFiring && !_isReloading)
 			{
 				OnFireCycle();
 				_fireCycleTimer.Start();
@@ -118,16 +124,44 @@ public class Gun : RayCast2D
 		_firingSoundPlayer.Play();
 	}
 
+	public void StartReloadCycle()
+	{
+		_isReloading = true;
+		_reloadTimer.Start();
+	}
+
 	private void OnFireCycle()
 	{
 		if (_ammoCount == 0 || !_isFireButtonPressed)
 		{
 			_isFiring = false;
 			_fireCycleTimer.Stop();
+			if (ReserveAmmo > 0)
+				StartReloadCycle();
 			return;
 		}
 
 		OnFire();
-		//_ammoCount--;
+		_ammoCount--;
+	}
+
+	private void OnReloaded()
+	{
+		if (ClipSize > _ammoCount)
+		{
+			if (ReserveAmmo > (ClipSize - _ammoCount))
+			{
+				var ammoDiff = ClipSize - _ammoCount;
+				_ammoCount += ammoDiff;
+				ReserveAmmo -= ammoDiff;
+			}
+			else
+			{
+				_ammoCount += ReserveAmmo;
+				ReserveAmmo = 0;
+			}
+		}
+
+		_isReloading = false;
 	}
 }
