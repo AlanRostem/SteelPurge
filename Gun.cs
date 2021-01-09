@@ -7,6 +7,7 @@ public class Gun : RayCast2D
 	[Export] public uint ClipSize = 30;
 	[Export] public uint StartingAmmo = 120;
 	[Export] public uint RoundsPerMinute = 600;
+	[Export] public float SpriteOffset;
 
 	private uint _ammoCount;
 	private bool _isFireButtonPressed = false;
@@ -16,6 +17,8 @@ public class Gun : RayCast2D
 	private bool _isEquipped = true;
 	private Timer _fireCycleTimer;
 	private AudioStreamPlayer _firingSoundPlayer;
+
+	private AnimatedSprite _sprite;
 
 	public bool IsEquipped
 	{
@@ -36,6 +39,7 @@ public class Gun : RayCast2D
 		_fireCycleTimer = GetNode<Timer>("FireCycleTimer");
 		_fireCycleTimer.WaitTime = 60f / RoundsPerMinute;
 		_firingSoundPlayer = GetNode<AudioStreamPlayer>("FiringSoundPlayer");
+		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
 	}
 
 	public void ScanHit(float angle = 0)
@@ -72,12 +76,27 @@ public class Gun : RayCast2D
 		);
 	}
 
+	public void SetDirection(float dir)
+	{
+		_direction = dir;
+	}
+
 	public override void _Process(float delta)
 	{
 		if (!IsEquipped)
 			return;
 
-
+		if (_direction < 0)
+		{
+			_sprite.FlipH = true;
+			_sprite.Position = new Vector2(-SpriteOffset, 0);
+		}
+		else
+		{
+			_sprite.FlipH = false;
+			_sprite.Position = new Vector2(SpriteOffset, 0);
+		}
+		
 		if (Input.IsActionPressed("fire"))
 		{
 			_isFireButtonPressed = true;

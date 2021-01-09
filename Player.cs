@@ -92,7 +92,7 @@ public class Player : KinematicBody2D
 		{
 			SwitchGun();
 		}
-	}
+    }
 
 	public override void _PhysicsProcess(float delta)
 	{
@@ -103,13 +103,15 @@ public class Player : KinematicBody2D
 			_sprite.Play("run");
 			_sprite.FlipH = true;
 			_vel.x = -_speed;
-		}
+            EquippedGun.SetDirection(-1);
+        }
 		else if (Input.IsActionPressed("right"))
 		{
 			_sprite.Play("run");
 			_sprite.FlipH = false;
 			_vel.x = _speed;
-		}
+            EquippedGun.SetDirection(1);
+        }
 		else
 		{
 			_sprite.Play("idle");
