@@ -424,6 +424,7 @@ script = ExtResource( 3 )
 
 [node name="BuyStation" parent="." instance=ExtResource( 7 )]
 position = Vector2( 336, 56 )
+Cost = 500
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1

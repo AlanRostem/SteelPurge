@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public class Player : KinematicBody2D
@@ -31,7 +32,7 @@ public class Player : KinematicBody2D
 
 	public void SwitchGun()
 	{
-		if (EquippedGun == _gun0)
+        if (EquippedGun == _gun0)
 		{
 			if (_gun1 != null)
 			{
@@ -49,7 +50,16 @@ public class Player : KinematicBody2D
 	}
 
 	public void PickUpGun(Gun gun)
-	{
+    {
+        EquippedGun.IsEquipped = false;
+        if (_gun1 == null)
+        {
+            _gun1 = gun;
+			EquippedGun = _gun1;
+            EquippedGun.IsEquipped = true;
+			return;
+        }
+        
 		if (EquippedGun == _gun0)
 		{
 			_gun0.QueueFree();
@@ -62,7 +72,8 @@ public class Player : KinematicBody2D
 		}
 
 		EquippedGun = gun;
-	}
+        EquippedGun.IsEquipped = true;
+    }
 	
 	public uint GetHP()
 	{
