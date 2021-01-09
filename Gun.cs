@@ -108,6 +108,12 @@ public class Gun : RayCast2D
 			_sprite.Position = new Vector2(SpriteOffset, 0);
 		}
 
+		if (Input.IsActionJustPressed("reload") && !_isReloading)
+		{
+			if (_ammoCount < ClipSize && ReserveAmmo > 0)
+				StartReloadCycle();
+		}
+		
 		if (Input.IsActionPressed("fire"))
 		{
 			_isFireButtonPressed = true;
@@ -128,7 +134,7 @@ public class Gun : RayCast2D
 	{
 		ScanHit();
 		_firingSoundPlayer.Play();
-	}
+    }
 
 	public void StartReloadCycle()
 	{

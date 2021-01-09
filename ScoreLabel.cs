@@ -11,6 +11,6 @@ public class ScoreLabel : Label
 
 	public override void _Process(float delta)
 	{
-	  	Text = _playerRef.Score.ToString();
+	  	Text = "$" + _playerRef.Score;
 	}
 }
