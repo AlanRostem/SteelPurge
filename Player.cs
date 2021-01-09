@@ -57,6 +57,7 @@ public class Player : KinematicBody2D
             _gun1 = gun;
 			EquippedGun = _gun1;
             EquippedGun.IsEquipped = true;
+            AddChild(_gun1);
 			return;
         }
         
