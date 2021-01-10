@@ -14,12 +14,14 @@ public class Spawner : StaticBody2D
 
 	private void OnSpawn()
 	{
-		if (SpawnCount-- > 0)
+		if (SpawnCount > 0)
 		{
+			SpawnCount--;
 			var enemy = (Enemy) _enemyScene.Instance();
 			enemy.GlobalPosition = GlobalPosition;
 			enemy.Spawning = true;
-			GetParent().AddChild(enemy);
+			GetParent().AddChild(enemy);    
+			GD.Print(SpawnCount);
 		}
 	}
 
