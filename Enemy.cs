@@ -4,7 +4,7 @@ using System;
 public class Enemy : KinematicBody2D
 {
     private static PackedScene _moneyScene = GD.Load<PackedScene>("res://Money.tscn");
-    private static float WalkSpeed = 40;
+    private static float WalkSpeed = 30;
     private static float EmergeSpeed = 40;
     private float _direction = 1;
     private Vector2 _vel;
@@ -21,6 +21,7 @@ public class Enemy : KinematicBody2D
     {
         _sprite = GetNode<AnimatedSprite>("AnimatedSprite");
         _mapRef = GetTree().Root.GetNode<Map>("Map");
+        _playerRef = _mapRef.GetNode<Player>("Player");
         _attackTimer = GetNode<Timer>("AttackTimer");
         _meleeArea = GetNode<Area2D>("Area2D");
         _sprite.Play("walk");
@@ -28,8 +29,8 @@ public class Enemy : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
-        if (IsOnWall())
-            _direction *= -1;
+        _direction = Mathf.Sign(_playerRef.GlobalPosition.x - GlobalPosition.x);
+
         _meleeArea.Position = new Vector2(_direction * 8, 0);
         if (!Spawning)
         {
@@ -49,17 +50,15 @@ public class Enemy : KinematicBody2D
 
     private void OnPlayerInMeleeRange(object body)
     {
-        if (body is Player player)
+        if (body is Player)
         {
-            _playerRef = player;
             _attackTimer.Start();
-            OnDamagePlayer();
         }
     }
 
     private void OnPlayerExitMeleeRange(object body)
     {
-        if (body is Player player)
+        if (body is Player)
         {
             _attackTimer.Stop();
         }
