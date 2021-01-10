@@ -6,7 +6,9 @@ public class Player : KinematicBody2D
 	private static readonly PackedScene _defaultGunScene = GD.Load<PackedScene>("res://Judger.tscn");
 	[Export] public uint Score = 500;
 
-	private static float _speed = 60;
+	private static float _runningSpeed = 60;
+	private static float _firingSpeed = 25;
+
 	private static float _jumpSpeed = 350;
 
 	private AnimatedSprite _sprite;
@@ -108,12 +110,14 @@ public class Player : KinematicBody2D
 	{
 		_vel.y += Constants.Gravity;
 
+		var speed = EquippedGun.IsFiring() ? _firingSpeed : _runningSpeed;
+		
 		if (Input.IsActionPressed("left"))
 		{
 			_sprite.Play("run");
 			if (!EquippedGun.IsFiring())
 				_sprite.FlipH = true;
-			_vel.x = -_speed;
+			_vel.x = -speed;
 			EquippedGun.SetDirection(-1);
 		}
 		else if (Input.IsActionPressed("right"))
@@ -121,7 +125,7 @@ public class Player : KinematicBody2D
 			_sprite.Play("run");
 			if (!EquippedGun.IsFiring())
 				_sprite.FlipH = false;
-			_vel.x = _speed;
+			_vel.x = speed;
 			EquippedGun.SetDirection(1);
 		}
 		else
