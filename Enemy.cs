@@ -12,6 +12,7 @@ public class Enemy : KinematicBody2D
     private AnimatedSprite _sprite;
     private uint _damagePerHit = 34;
     private Player _playerRef;
+    private Map _mapRef;
     private Timer _attackTimer;
     private Area2D _meleeArea;
     public bool Spawning = false;
@@ -19,6 +20,7 @@ public class Enemy : KinematicBody2D
     public override void _Ready()
     {
         _sprite = GetNode<AnimatedSprite>("AnimatedSprite");
+        _mapRef = GetTree().Root.GetNode<Map>("Map");
         _attackTimer = GetNode<Timer>("AttackTimer");
         _meleeArea = GetNode<Area2D>("Area2D");
         _sprite.Play("walk");
