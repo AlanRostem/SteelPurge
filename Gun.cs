@@ -12,6 +12,8 @@ public class Gun : RayCast2D
 	[Export] public uint DamagePerShot = 15;
 	[Export] public float SpriteOffset;
 
+	private static readonly AudioStream DefaultSoundStream = GD.Load<AudioStream>("res://assets/audio/fire.ogg");
+
 	public uint AmmoCount;
 	private bool _isFireButtonPressed = false;
 	private bool _isFiring = false;
@@ -21,7 +23,6 @@ public class Gun : RayCast2D
 	private bool _isEquipped = true;
 	private Timer _fireCycleTimer;
 	private Timer _reloadTimer;
-	private AudioStreamPlayer _firingSoundPlayer;
 
 	private AnimatedSprite _sprite;
 
@@ -47,7 +48,6 @@ public class Gun : RayCast2D
 		_reloadTimer = GetNode<Timer>("ReloadTimer");
 		_reloadTimer.WaitTime = ReloadSpeed;
 
-		_firingSoundPlayer = GetNode<AudioStreamPlayer>("FiringSoundPlayer");
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
 	}
 
@@ -138,7 +138,7 @@ public class Gun : RayCast2D
 	public virtual void OnFire()
 	{
 		ScanHit();
-		_firingSoundPlayer.Play();
+		GetTree().Root.GetNode<SoundManager>("Map/SoundManager").PlaySound(DefaultSoundStream);
 	}
 
 	public void StartReloadCycle()
