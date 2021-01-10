@@ -29,7 +29,7 @@ animations = [ {
 
 [node name="BulletHitEffect" type="AnimatedSprite"]
 frames = SubResource( 5 )
-frame = 2
+frame = 1
 playing = true
 script = ExtResource( 1 )
 

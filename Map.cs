@@ -4,12 +4,15 @@ using System;
 public class Map : Node2D
 {
 	[Export] public uint MaxEnemyCountPerRound = 20;
+	[Export] public uint EnemyHpIncreasePerRound = 5;
 	public uint CurrentEnemyCount = 20;
 	public uint EnemiesOnMap = 0;
 	public uint Round = 1;
+	public uint EnemyHp = 100;
 	
 	public override void _Ready()
 	{
+		CurrentEnemyCount = MaxEnemyCountPerRound;
 	}
 
 	public override void _Process(float delta)
@@ -18,7 +21,8 @@ public class Map : Node2D
 		{
 			Round++;
 			CurrentEnemyCount = MaxEnemyCountPerRound;
-			EnemiesOnMap = MaxEnemyCountPerRound;
+			EnemiesOnMap = 0;
+			EnemyHp += EnemyHpIncreasePerRound;
 		}
 	}
 }

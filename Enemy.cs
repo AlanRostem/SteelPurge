@@ -21,6 +21,7 @@ public class Enemy : KinematicBody2D
     {
         _sprite = GetNode<AnimatedSprite>("AnimatedSprite");
         _mapRef = GetTree().Root.GetNode<Map>("Map");
+        _hp = _mapRef.EnemyHp;
         _playerRef = _mapRef.GetNode<Player>("Player");
         _attackTimer = GetNode<Timer>("AttackTimer");
         _meleeArea = GetNode<Area2D>("Area2D");
