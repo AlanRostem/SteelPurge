@@ -12,7 +12,9 @@ public class Gun : RayCast2D
 	[Export] public uint DamagePerShot = 15;
 	[Export] public float SpriteOffset;
 
-	private static readonly AudioStream DefaultSoundStream = GD.Load<AudioStream>("res://assets/audio/fire.ogg");
+	private static readonly AudioStream DefaultFireSoundStream = GD.Load<AudioStream>("res://assets/audio/fire.ogg");
+	private static readonly AudioStream ReloadStartSoundStream = GD.Load<AudioStream>("res://assets/audio/reload_start.ogg");
+	private static readonly AudioStream ReloadEndSoundStream = GD.Load<AudioStream>("res://assets/audio/reload_end.ogg");
 
 	public uint AmmoCount;
 	private bool _isFireButtonPressed = false;
@@ -140,13 +142,14 @@ public class Gun : RayCast2D
 	public virtual void OnFire()
 	{
 		ScanHit();
-		_soundManager.PlaySound(DefaultSoundStream);
+		_soundManager.PlaySound(DefaultFireSoundStream);
 	}
 
 	public void StartReloadCycle()
 	{
 		_isReloading = true;
 		_reloadTimer.Start();
+		_soundManager.PlaySound(ReloadStartSoundStream);
 	}
 
 	private void OnFireCycle()
@@ -179,6 +182,7 @@ public class Gun : RayCast2D
 				AmmoCount += ReserveAmmo;
 				ReserveAmmo = 0;
 			}
+			_soundManager.PlaySound(ReloadEndSoundStream);
 		}
 
 		_isReloading = false;
