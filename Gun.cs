@@ -60,8 +60,8 @@ public class Gun : RayCast2D
 	public void ScanHit(float angle = 0)
 	{
 		Enabled = true;
-		ForceRaycastUpdate();
 		ConfigureScanLine(angle);
+		ForceRaycastUpdate();
 		var collider = GetCollider();
 		if (collider != null)
 		{
