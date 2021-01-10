@@ -18,13 +18,16 @@ public class BuyStation : Area2D
 	
 	private bool _canBuy = false;
 	private Player _playerRef;
+	private Label _label;
 
 	public override void _Ready()
 	{
+		_label = GetNode<Label>("Label");
 	}
 
 	public override void _Process(float delta)
 	{
+		_label.Text = GunToBuy + "\n" + "$" + Cost;
 		if (_canBuy && Input.IsActionJustPressed("buy"))
 		{
 			if (_playerRef.Score >= Cost)
