@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Gun.cs" type="Script" id=1]
-[ext_resource path="res://assets/audio/fire.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/texture/lmg.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -28,7 +27,6 @@ SpriteOffset = 8.0
 [node name="FireCycleTimer" type="Timer" parent="."]
 
 [node name="FiringSoundPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )

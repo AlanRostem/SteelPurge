@@ -21,7 +21,6 @@ public class Spawner : StaticBody2D
 			enemy.GlobalPosition = GlobalPosition;
 			enemy.Spawning = true;
 			GetParent().AddChild(enemy);    
-			GD.Print(SpawnCount);
 		}
 	}
 
