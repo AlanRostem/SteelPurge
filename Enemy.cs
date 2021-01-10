@@ -30,6 +30,12 @@ public class Enemy : KinematicBody2D
     public override void _PhysicsProcess(float delta)
     {
         _direction = Mathf.Sign(_playerRef.GlobalPosition.x - GlobalPosition.x);
+        if (GlobalPosition.DistanceTo(_playerRef.GlobalPosition) > Constants.AiDistance)
+        {
+            _mapRef.EnemiesOnMap--;
+            QueueFree();
+            return;
+        }
 
         _meleeArea.Position = new Vector2(_direction * 8, 0);
         if (!Spawning)
@@ -74,6 +80,8 @@ public class Enemy : KinematicBody2D
             money.Amount = 50;
             money.GlobalPosition = GlobalPosition;
             GetTree().Root.GetNode("Map").AddChild(money);
+            _mapRef.EnemiesOnMap--;
+            _mapRef.CurrentEnemyCount--;
         }
         else
         {

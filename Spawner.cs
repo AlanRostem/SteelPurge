@@ -3,8 +3,7 @@ using System;
 
 public class Spawner : StaticBody2D
 {
-	private static PackedScene _enemyScene = GD.Load<PackedScene>("res://Enemy.tscn");
-	[Export] public uint SpawnCount;
+	private static readonly PackedScene _enemyScene = GD.Load<PackedScene>("res://Enemy.tscn");
 	private Player _playerRef;
 	private Map _mapRef;
 
@@ -17,9 +16,10 @@ public class Spawner : StaticBody2D
 
 	private void OnSpawn()
 	{
-		if (SpawnCount > 0)
+		if (_mapRef.EnemiesOnMap < _mapRef.CurrentEnemyCount &&
+			GlobalPosition.DistanceTo(_playerRef.GlobalPosition) < Constants.AiDistance)
 		{
-			SpawnCount--;
+			_mapRef.EnemiesOnMap++;
 			var enemy = (Enemy) _enemyScene.Instance();
 			enemy.GlobalPosition = GlobalPosition;
 			enemy.Spawning = true;
