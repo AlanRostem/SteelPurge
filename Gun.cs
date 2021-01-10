@@ -3,7 +3,8 @@ using System;
 
 public class Gun : RayCast2D
 {
-	[Export] public String Name = "Gun";
+	private static PackedScene _bulletEffectScene = GD.Load<PackedScene>("res://BulletHitEffect.tscn");
+	[Export] public string Name = "Gun";
 	[Export] public float DamageRange = 50;
 	[Export] public uint ClipSize = 30;
 	[Export] public uint ReserveAmmo = 120;
@@ -62,6 +63,12 @@ public class Gun : RayCast2D
 		ForceRaycastUpdate();
 		ConfigureScanLine(angle);
 		var collider = GetCollider();
+		if (collider != null)
+		{
+			var effect = (BulletHitEffect)_bulletEffectScene.Instance();
+			effect.GlobalPosition = GetCollisionPoint();
+			GetTree().Root.GetNode<Map>("Map").AddChild(effect);
+		}
 		if (collider is Enemy enemy)
 		{
 			enemy.TakeDamage(DamagePerShot);
