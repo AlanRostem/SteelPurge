@@ -3,7 +3,7 @@ using Godot;
 
 public class Player : KinematicBody2D
 {
-	private static readonly PackedScene _defaultGunScene = GD.Load<PackedScene>("res://MG27.tscn");
+	private static readonly PackedScene _defaultGunScene = GD.Load<PackedScene>("res://Judger.tscn");
 	[Export] public uint Score = 500;
 
 	private static float _speed = 60;
@@ -32,7 +32,7 @@ public class Player : KinematicBody2D
 
 	public void SwitchGun()
 	{
-        if (EquippedGun == _gun0)
+		if (EquippedGun == _gun0)
 		{
 			if (_gun1 != null)
 			{
@@ -50,17 +50,17 @@ public class Player : KinematicBody2D
 	}
 
 	public void PickUpGun(Gun gun)
-    {
-        EquippedGun.IsEquipped = false;
-        if (_gun1 == null)
-        {
-            _gun1 = gun;
+	{
+		EquippedGun.IsEquipped = false;
+		if (_gun1 == null)
+		{
+			_gun1 = gun;
 			EquippedGun = _gun1;
-            EquippedGun.IsEquipped = true;
-            AddChild(_gun1);
+			EquippedGun.IsEquipped = true;
+			AddChild(_gun1);
 			return;
-        }
-        
+		}
+		
 		if (EquippedGun == _gun0)
 		{
 			_gun0.QueueFree();
@@ -73,8 +73,8 @@ public class Player : KinematicBody2D
 		}
 
 		EquippedGun = gun;
-        EquippedGun.IsEquipped = true;
-    }
+		EquippedGun.IsEquipped = true;
+	}
 	
 	public uint GetHP()
 	{
@@ -102,7 +102,7 @@ public class Player : KinematicBody2D
 		{
 			SwitchGun();
 		}
-    }
+	}
 
 	public override void _PhysicsProcess(float delta)
 	{
@@ -111,19 +111,19 @@ public class Player : KinematicBody2D
 		if (Input.IsActionPressed("left"))
 		{
 			_sprite.Play("run");
-            if (!EquippedGun.IsFiring())
-			    _sprite.FlipH = true;
+			if (!EquippedGun.IsFiring())
+				_sprite.FlipH = true;
 			_vel.x = -_speed;
-            EquippedGun.SetDirection(-1);
-        }
+			EquippedGun.SetDirection(-1);
+		}
 		else if (Input.IsActionPressed("right"))
 		{
 			_sprite.Play("run");
 			if (!EquippedGun.IsFiring())
 				_sprite.FlipH = false;
 			_vel.x = _speed;
-            EquippedGun.SetDirection(1);
-        }
+			EquippedGun.SetDirection(1);
+		}
 		else
 		{
 			_sprite.Play("idle");

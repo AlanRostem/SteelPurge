@@ -5,12 +5,14 @@ public class BuyStation : Area2D
 {
 	public enum GunId
 	{
-		MG27
+		MG27,
+		Judger
 	}
 
 	private static PackedScene[] _gunScenes =
 	{
-		GD.Load<PackedScene>("res://MG27.tscn")
+		GD.Load<PackedScene>("res://MG27.tscn"),
+		GD.Load<PackedScene>("res://Judger.tscn")
 	};
 	
 	[Export] public uint Cost;
@@ -34,7 +36,7 @@ public class BuyStation : Area2D
 			{
 				_playerRef.Score -= Cost;
 				var gun = (Gun) _gunScenes[(int) GunToBuy].Instance();
-				if (_playerRef.EquippedGun.GetClass() == gun.GetClass())
+				if (_playerRef.EquippedGun.Name == gun.Name)
 				{
 					_playerRef.EquippedGun.AmmoCount = gun.ClipSize;
 					_playerRef.EquippedGun.ReserveAmmo = gun.ReserveAmmo;

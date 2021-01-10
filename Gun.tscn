@@ -19,6 +19,7 @@ animations = [ {
 cast_to = Vector2( 50, 0 )
 collision_mask = 9
 script = ExtResource( 1 )
+Name = "Judger .45"
 DamageRange = 800.0
 ClipSize = 100
 ReserveAmmo = 200

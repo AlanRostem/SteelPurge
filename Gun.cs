@@ -23,7 +23,7 @@ public class Gun : RayCast2D
 	private Timer _reloadTimer;
 
 	private AnimatedSprite _sprite;
-	private SoundManager _soundManager;
+	public SoundManager Sounds;
 
 	public bool IsEquipped
 	{
@@ -48,7 +48,7 @@ public class Gun : RayCast2D
 		_reloadTimer.WaitTime = ReloadSpeed;
 
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
-		_soundManager = GetTree().Root.GetNode<SoundManager>("Map/SoundManager");
+		Sounds = GetTree().Root.GetNode<SoundManager>("Map/SoundManager");
 	}
 
 	public uint GetAmmo()
@@ -138,14 +138,14 @@ public class Gun : RayCast2D
 	public virtual void OnFire()
 	{
 		ScanHit();
-		_soundManager.PlaySound(_soundManager.MG27FireSound);
+		Sounds.PlaySound(Sounds.MG27FireSound);
 	}
 
 	public void StartReloadCycle()
 	{
 		_isReloading = true;
 		_reloadTimer.Start();
-		_soundManager.PlaySound(_soundManager.ReloadStartSound);
+		Sounds.PlaySound(Sounds.ReloadStartSound);
 	}
 
 	private void OnFireCycle()
@@ -178,7 +178,7 @@ public class Gun : RayCast2D
 				AmmoCount += ReserveAmmo;
 				ReserveAmmo = 0;
 			}
-			_soundManager.PlaySound(_soundManager.ReloadEndSound);
+			Sounds.PlaySound(Sounds.ReloadEndSound);
 		}
 
 		_isReloading = false;
