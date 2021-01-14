@@ -57,3 +57,5 @@ script = ExtResource( 3 )
 [connection signal="body_exited" from="Area2D" to="." method="OnPlayerExitMeleeRange"]
 [connection signal="timeout" from="AttackTimer" to="." method="OnDamagePlayer"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="OnScreenExit"]
+[connection signal="PlayerSighted" from="PlayerLineOfSightScanner" to="." method="OnPlayerSighted"]
+[connection signal="PlayerVisualLost" from="PlayerLineOfSightScanner" to="." method="OnPlayerVisualLost"]

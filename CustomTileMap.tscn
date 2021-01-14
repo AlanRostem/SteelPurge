@@ -1,0 +1,154 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/texture/tile_set.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 8 )
+
+[node name="CustomTileMap" type="Node2D"]
+
+[node name="BigMetal" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 2
+hframes = 3
+frame = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BigMetal"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigMetal/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="Metal" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Metal"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Metal/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="MossyMetal" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+frame = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MossyMetal"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MossyMetal/StaticBody2D"]
+shape = SubResource( 3 )
+
+[node name="OneWay1" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+frame = 19
+
+[node name="StaticBody2D" type="StaticBody2D" parent="OneWay1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWay1/StaticBody2D"]
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="OneWay2" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+frame = 20
+
+[node name="StaticBody2D" type="StaticBody2D" parent="OneWay2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWay2/StaticBody2D"]
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="OneWay3" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+frame = 21
+
+[node name="StaticBody2D" type="StaticBody2D" parent="OneWay3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneWay3/StaticBody2D"]
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="Slope1" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+frame = 6
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Slope1"]
+position = Vector2( -8, -8 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Slope1/StaticBody2D"]
+polygon = PoolVector2Array( 16, 0, 16, 16, 0, 16 )
+
+[node name="Slope2" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+frame = 7
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Slope2"]
+position = Vector2( -8, -8 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Slope2/StaticBody2D"]
+polygon = PoolVector2Array( 0, 0, 16, 16, 0, 16 )
+
+[node name="Slope3" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+frame = 12
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Slope3"]
+position = Vector2( -8, -8 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Slope3/StaticBody2D"]
+polygon = PoolVector2Array( 0, 0, 16, 16, 16, 0 )
+
+[node name="Slope4" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+frame = 13
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Slope4"]
+position = Vector2( -8, -8 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Slope4/StaticBody2D"]
+polygon = PoolVector2Array( 0, 0, 0, 16, 16, 0 )
+
+[node name="Stair1" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+frame = 18
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Stair1"]
+position = Vector2( -8, -8 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Stair1/StaticBody2D"]
+polygon = PoolVector2Array( 16, 0, 16, 16, 0, 16 )
+
+[node name="Stair2" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 4
+hframes = 6
+frame = 22
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Stair2"]
+position = Vector2( -8, -8 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Stair2/StaticBody2D"]
+polygon = PoolVector2Array( 0, 0, 16, 16, 0, 16 )
