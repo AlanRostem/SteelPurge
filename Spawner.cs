@@ -6,11 +6,13 @@ public class Spawner : StaticBody2D
 	private static readonly PackedScene _enemyScene = GD.Load<PackedScene>("res://Enemy.tscn");
 	private Player _playerRef;
 	private Map _mapRef;
+	private Timer _spawnTimer;
 
 	public override void _Ready()
 	{
 		_mapRef = GetTree().Root.GetNode<Map>("Map");
 		_playerRef = GetTree().Root.GetNode<Player>("Map/Player");
+		_spawnTimer = GetNode<Timer>("SpawnTimer");
 	}
 
 
@@ -33,5 +35,15 @@ public class Spawner : StaticBody2D
 		{
 			enemy.Spawning = false;
 		}
+	}
+
+	private void OnStartSpawnTimer()
+	{
+		_spawnTimer.Start();
+	}
+
+	private void OnSpawnTimerDisabled()
+	{
+		_spawnTimer.Stop();
 	}
 }
