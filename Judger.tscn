@@ -20,6 +20,7 @@ animations = [ {
 script = ExtResource( 3 )
 ClipSize = 6
 ReserveAmmo = 36
+ReloadSpeed = 1
 RoundsPerMinute = 150
 DamagePerShot = 25
 SpriteOffset = 12.0

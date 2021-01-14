@@ -32,12 +32,6 @@ public class Enemy : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		_direction = Mathf.Sign(_playerRef.GlobalPosition.x - GlobalPosition.x);
-		if (GlobalPosition.DistanceTo(_playerRef.GlobalPosition) > Constants.AiDistance)
-		{
-			_mapRef.EnemiesOnMap--;
-			QueueFree();
-			return;
-		}
 
 		_meleeArea.Position = new Vector2(_direction * MeleeRange, 0);
 		if (!Spawning)
@@ -94,5 +88,13 @@ public class Enemy : KinematicBody2D
 	private void OnDamagePlayer()
 	{
 		_playerRef.TakeDamage(_damagePerHit);
+	}
+	
+	private void OnScreenExit()
+	{
+		if (_hp == 0)
+			return;
+		_mapRef.EnemiesOnMap--;
+		QueueFree();
 	}
 }

@@ -152,6 +152,8 @@ public class Gun : RayCast2D
 	{
 		_isReloading = true;
 		_reloadTimer.Start();
+		_isFiring = false;
+		_fireCycleTimer.Stop();
 		Sounds.PlaySound(Sounds.ReloadStartSound);
 	}
 

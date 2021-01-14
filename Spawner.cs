@@ -16,8 +16,7 @@ public class Spawner : StaticBody2D
 
 	private void OnSpawn()
 	{
-		if (_mapRef.EnemiesOnMap < _mapRef.CurrentEnemyCount &&
-			GlobalPosition.DistanceTo(_playerRef.GlobalPosition) < Constants.AiDistance)
+		if (_mapRef.EnemiesOnMap < _mapRef.CurrentEnemyCount)
 		{
 			_mapRef.EnemiesOnMap++;
 			var enemy = (Enemy) _enemyScene.Instance();
