@@ -19,6 +19,9 @@ public class Enemy : KinematicBody2D
 	[Export] public float MeleeRange;
 	public bool Spawning = false;
 
+	[Signal]
+	public delegate void SendPlayer(Player playerRef);
+
 	public override void _Ready()
 	{
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
@@ -28,6 +31,7 @@ public class Enemy : KinematicBody2D
 		_attackTimer = GetNode<Timer>("AttackTimer");
 		_meleeArea = GetNode<Area2D>("Area2D");
 		_sprite.Play("walk");
+		EmitSignal(nameof(SendPlayer), _playerRef);
 	}
 
 	public override void _PhysicsProcess(float delta)

@@ -52,6 +52,7 @@ wait_time = 0.4
 
 [node name="PlayerLineOfSightScanner" type="RayCast2D" parent="."]
 script = ExtResource( 3 )
+[connection signal="SendPlayer" from="." to="PlayerLineOfSightScanner" method="GetPlayer"]
 [connection signal="body_entered" from="Area2D" to="." method="OnPlayerInMeleeRange"]
 [connection signal="body_exited" from="Area2D" to="." method="OnPlayerExitMeleeRange"]
 [connection signal="timeout" from="AttackTimer" to="." method="OnDamagePlayer"]
