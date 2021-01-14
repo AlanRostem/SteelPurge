@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/texture/enemy.png" type="Texture" id=1]
 [ext_resource path="res://Enemy.cs" type="Script" id=2]
+[ext_resource path="res://PlayerLineOfSightScanner.cs" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 7 )
@@ -48,6 +49,9 @@ shape = SubResource( 5 )
 wait_time = 0.4
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="PlayerLineOfSightScanner" type="RayCast2D" parent="."]
+script = ExtResource( 3 )
 [connection signal="body_entered" from="Area2D" to="." method="OnPlayerInMeleeRange"]
 [connection signal="body_exited" from="Area2D" to="." method="OnPlayerExitMeleeRange"]
 [connection signal="timeout" from="AttackTimer" to="." method="OnDamagePlayer"]
