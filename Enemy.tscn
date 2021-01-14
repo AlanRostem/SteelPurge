@@ -23,7 +23,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 8, 8 )
+extents = Vector2( 8, 16 )
 
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 8

@@ -6,6 +6,7 @@ public class Enemy : KinematicBody2D
 	private static PackedScene _moneyScene = GD.Load<PackedScene>("res://Money.tscn");
 	private static float WalkSpeed = 30;
 	private static float EmergeSpeed = 40;
+	private static float ClimbSpeed = 50;
 	private float _direction = 1;
 	private Vector2 _vel;
 	private uint _hp = 100;
@@ -39,6 +40,8 @@ public class Enemy : KinematicBody2D
 			_sprite.FlipH = _direction < 0;
 			_vel.x = WalkSpeed * _direction;
 			_vel.y += Constants.Gravity;
+			if (IsOnWall())
+				_vel.y = -ClimbSpeed;
 			_vel = MoveAndSlide(_vel, Constants.Up);
 		}
 		else
