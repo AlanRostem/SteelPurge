@@ -18,6 +18,7 @@ animations = [ {
 
 [node name="Judger" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
+WeaponName = "Judger .45"
 ClipSize = 6
 ReserveAmmo = 36
 ReloadSpeed = 1

@@ -7,7 +7,6 @@ public class Enemy : KinematicBody2D
 	private static float WalkSpeed = 30;
 	private static float EmergeSpeed = 40;
 	private static float ClimbSpeed = 50;
-	private static float JumpSpeed = 100;
 	private float _direction = 1;
 	private Vector2 _vel;
 	private uint _hp = 100;
@@ -111,15 +110,5 @@ public class Enemy : KinematicBody2D
 			return;
 		_mapRef.EnemiesOnMap--;
 		QueueFree();
-	}
-	
-	private void OnPlayerSighted()
-	{
-		// Replace with function body.
-	}
-
-	private void OnPlayerVisualLost()
-	{
-		// Replace with function body.
 	}
 }

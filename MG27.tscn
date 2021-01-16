@@ -3,5 +3,5 @@
 [ext_resource path="res://Gun.tscn" type="PackedScene" id=1]
 
 [node name="MG27" instance=ExtResource( 1 )]
-Name = "MG27 Jackhammer"
+WeaponName = "MG27 Jackhammer"
 ReloadSpeed = 4

@@ -36,7 +36,7 @@ public class BuyStation : Area2D
 			{
 				_playerRef.Score -= Cost;
 				var gun = (Gun) _gunScenes[(int) GunToBuy].Instance();
-				if (_playerRef.EquippedGun.Name == gun.Name)
+				if (_playerRef.EquippedGun.WeaponName == gun.WeaponName)
 				{
 					_playerRef.EquippedGun.AmmoCount = gun.ClipSize;
 					_playerRef.EquippedGun.ReserveAmmo = gun.ReserveAmmo;

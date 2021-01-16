@@ -4,7 +4,7 @@ using System;
 public class Gun : RayCast2D
 {
 	private static PackedScene _bulletEffectScene = GD.Load<PackedScene>("res://BulletHitEffect.tscn");
-	[Export] public string Name = "Gun";
+	[Export] public string WeaponName = "Gun";
 	[Export] public float DamageRange = 50;
 	[Export] public uint ClipSize = 30;
 	[Export] public uint ReserveAmmo = 120;
