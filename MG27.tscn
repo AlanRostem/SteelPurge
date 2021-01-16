@@ -5,4 +5,3 @@
 [node name="MG27" instance=ExtResource( 1 )]
 Name = "MG27 Jackhammer"
 ReloadSpeed = 4
-RoundsPerMinute = 550
