@@ -45,8 +45,15 @@ public class Enemy : KinematicBody2D
 			_sprite.FlipH = _direction < 0;
 			_vel.x = WalkSpeed * _direction;
 			_vel.y += Constants.Gravity;
-			if (IsOnWall())
-				_vel.y = -ClimbSpeed;
+			for (var i = 0; i < GetSlideCount(); i++)
+			{
+				var collision = GetSlideCollision(i);
+				if (collision.Collider is TileMap)
+				{
+					if (IsOnWall())
+						_vel.y = -ClimbSpeed;
+				}
+			}
 			_vel = MoveAndSlide(_vel, Constants.Up);
 		}
 		else
