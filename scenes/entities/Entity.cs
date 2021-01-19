@@ -16,5 +16,11 @@ public class Entity : KinematicBody2D
 	{
 		Velocity.y += Gravity * delta;
 		Velocity = MoveAndSlide(Velocity, Up, true);
+		_OnMovement(delta);
+	}
+
+	public virtual void _OnMovement(float delta)
+	{
+		
 	}
 }
