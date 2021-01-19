@@ -5,3 +5,4 @@
 [node name="Main" type="Node2D"]
 
 [node name="Level1" parent="." instance=ExtResource( 1 )]
+script = null
