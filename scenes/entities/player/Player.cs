@@ -10,7 +10,13 @@ public class Player : Entity
 	public bool IsWalking = false;
 	public bool IsJumping = false;
 
-	protected override void _OnMovement(float delta)
+    public override void _Ready()
+    {
+        base._Ready();
+        ParentMap.PlayerRef = this;
+    }
+
+    protected override void _OnMovement(float delta)
 	{
 		bool left = Input.IsActionPressed("left");
 		bool right = Input.IsActionPressed("right");
