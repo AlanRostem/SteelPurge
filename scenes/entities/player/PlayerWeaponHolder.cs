@@ -26,7 +26,6 @@ public class PlayerWeaponHolder : Node2D
 
 	public void AddWeapon(Weapon weapon)
 	{
-		GD.Print(_guns.Length);
 		_guns[_gunCount++] = weapon;
 		weapon.OwnerPlayer = _player;
 		AddChild(weapon);
@@ -50,8 +49,18 @@ public class PlayerWeaponHolder : Node2D
 
 	public void SwitchGun()
 	{
-		_guns[_equippedGunIdx].OnSwap();
+        if (_gunCount == 1)
+            return;
+        _guns[_equippedGunIdx].OnSwap();
 		_equippedGunIdx = (_equippedGunIdx + 1) % MaxGuns;
 		_guns[_equippedGunIdx].OnEquip();
 	}
+
+    public override void _Process(float delta)
+    {
+        if (Input.IsActionJustPressed("switch_gun"))
+        {
+			SwitchGun();
+        }
+    }
 }

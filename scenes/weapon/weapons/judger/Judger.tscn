@@ -4,6 +4,12 @@
 [ext_resource path="res://assets/texture/judger.png" type="Texture" id=2]
 
 [node name="Judger" instance=ExtResource( 1 )]
+ClipSize = 6
+ReserveAmmoSize = 36
+DamagePerShot = 45
+RateOfFire = 230
+ReloadSpeed = 1.5
+DamageRange = 800.0
 
 [node name="JudgerSprite" type="Sprite" parent="." index="3"]
 texture = ExtResource( 2 )

@@ -97,6 +97,7 @@ public class Weapon : Node2D
 			if (!_isReloading && _currentClipAmmo > 0)
 			{
 				_isFiring = true;
+				Fire();
 				EmitSignal(nameof(TriggerFire));
 			}
 		}
