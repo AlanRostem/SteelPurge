@@ -29,7 +29,7 @@ public class Entity : KinematicBody2D
 		_OnMovement(delta);
 	}
 
-	public virtual void _OnMovement(float delta)
+	protected virtual void _OnMovement(float delta)
 	{
 		
 	}

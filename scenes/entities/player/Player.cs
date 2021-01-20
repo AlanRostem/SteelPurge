@@ -8,8 +8,9 @@ public class Player : Entity
 
 	public float Direction = 1;
 	public bool IsWalking = false;
-	
-	public override void _OnMovement(float delta)
+	public bool IsJumping = false;
+
+	protected override void _OnMovement(float delta)
 	{
 		bool left = Input.IsActionPressed("left");
 		bool right = Input.IsActionPressed("right");
@@ -34,9 +35,15 @@ public class Player : Entity
 			IsWalking = false;
 		}
 
-		if (jump && IsOnFloor())
+		bool isOnFloor = IsOnFloor();
+		IsJumping = !isOnFloor;
+
+
+		if (isOnFloor)
 		{
-			Velocity.y = -JumpSpeed;
+			if (jump)
+				Velocity.y = -JumpSpeed;
 		}
 	}
+
 }

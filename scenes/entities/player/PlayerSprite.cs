@@ -13,5 +13,9 @@ public class PlayerSprite : AnimatedSprite
 	{
 		FlipH = _player.Direction < 0;
 		Animation = _player.IsWalking ? "walk" : "idle";
+		if (_player.IsJumping)
+		{
+			Animation = "jump";
+		}
 	}
 }
