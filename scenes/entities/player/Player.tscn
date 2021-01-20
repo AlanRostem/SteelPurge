@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/entities/Entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/entities/player/Player.cs" type="Script" id=2]
 [ext_resource path="res://assets/texture/soldier.png" type="Texture" id=3]
 [ext_resource path="res://scenes/entities/player/PlayerSprite.cs" type="Script" id=4]
+[ext_resource path="res://scenes/entities/player/PlayerWeaponHolder.cs" type="Script" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -69,3 +70,6 @@ script = ExtResource( 4 )
 current = true
 smoothing_enabled = true
 smoothing_speed = 20.0
+
+[node name="PlayerWeaponHolder" type="Node2D" parent="." index="3"]
+script = ExtResource( 5 )

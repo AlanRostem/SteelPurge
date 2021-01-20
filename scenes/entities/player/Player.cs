@@ -16,7 +16,6 @@ public class Player : Entity
 		bool right = Input.IsActionPressed("right");
 		bool jump = Input.IsActionPressed("jump");
 
-
 		if (left && !right)
 		{
 			Velocity.x = -WalkSpeed;
