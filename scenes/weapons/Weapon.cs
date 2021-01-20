@@ -30,11 +30,23 @@ public class Weapon : Node2D
 	[Signal]
 	public delegate void TriggerReload();
 
-	[Signal]
-	public delegate void CancelReload();
-
 	private void OnReload()
 	{
+		if (ClipSize > _currentClipAmmo)
+		{
+			if (_currentReserveAmmo > (ClipSize - _currentClipAmmo))
+			{
+				var ammoDiff = ClipSize - _currentClipAmmo;
+				_currentClipAmmo += ammoDiff;
+				_currentReserveAmmo -= ammoDiff;
+			}
+			else
+			{
+				_currentClipAmmo += _currentReserveAmmo;
+				_currentReserveAmmo = 0;
+			}
+			// Sounds.PlaySound(Sounds.ReloadEndSound);
+		}
 	}
 
 	private void Fire()
@@ -58,6 +70,7 @@ public class Weapon : Node2D
 			if (!_isReloading && !_isFiring)
 			{
 				EmitSignal(nameof(TriggerReload));
+				// Sounds.PlaySound(Sounds.ReloadStartSound);
 			}
 		}
 

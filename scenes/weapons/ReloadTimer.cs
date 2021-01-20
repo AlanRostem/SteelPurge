@@ -12,4 +12,9 @@ public class ReloadTimer : Timer
 	{
 		
 	}
+
+	private void _OnWeaponTriggerReload()
+    {
+        Start();
+    }
 }
