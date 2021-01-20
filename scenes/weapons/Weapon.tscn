@@ -13,6 +13,7 @@ script = ExtResource( 2 )
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
 script = ExtResource( 3 )
+[connection signal="CancelFire" from="." to="FireTimer" method="_OnWeaponCancelFire"]
 [connection signal="TriggerFire" from="." to="FireTimer" method="_OnWeaponTriggerFire"]
 [connection signal="TriggerReload" from="." to="ReloadTimer" method="_OnWeaponTriggerReload"]
 [connection signal="timeout" from="FireTimer" to="." method="Fire"]

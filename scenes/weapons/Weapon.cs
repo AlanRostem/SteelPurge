@@ -11,6 +11,7 @@ public class Weapon : Node2D
 
 	[Export] public uint DamagePerShot;
 	[Export] public uint RateOfFire;
+	[Export] public float ReloadSpeed;
 
 	private bool _isFiring = false;
 	private bool _isReloading = false;
@@ -82,5 +83,9 @@ public class Weapon : Node2D
 				EmitSignal(nameof(TriggerFire));
 			}
 		}
+        else
+        {
+            EmitSignal(nameof(CancelFire));
+        }
 	}
 }
