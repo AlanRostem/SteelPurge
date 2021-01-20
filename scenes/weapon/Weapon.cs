@@ -15,11 +15,25 @@ public class Weapon : Node2D
 
 	private bool _isFiring = false;
 	private bool _isReloading = false;
-
+	public Player OwnerPlayer;
 	public override void _Ready()
 	{
 		_currentClipAmmo = ClipSize;
 		_currentReserveAmmo = ReserveAmmoSize;
+	}
+	
+	public void OnSwap()
+	{
+		EmitSignal(nameof(CancelFire));
+		EmitSignal(nameof(CancelReload));
+		Visible = false;
+		SetProcess(false);
+	}
+
+	public void OnEquip()
+	{
+		Visible = true;
+		SetProcess(true);
 	}
 
 	[Signal]
@@ -30,6 +44,9 @@ public class Weapon : Node2D
 
 	[Signal]
 	public delegate void TriggerReload();
+
+	[Signal]
+	public delegate void CancelReload();
 
 	private void OnReload()
 	{
@@ -83,9 +100,9 @@ public class Weapon : Node2D
 				EmitSignal(nameof(TriggerFire));
 			}
 		}
-        else
-        {
-            EmitSignal(nameof(CancelFire));
-        }
+		else
+		{
+			EmitSignal(nameof(CancelFire));
+		}
 	}
 }

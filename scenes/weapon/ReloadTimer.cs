@@ -13,4 +13,9 @@ public class ReloadTimer : Timer
 	{
 		Start();
 	}
+	
+	private void _OnWeaponCancelReload()
+	{
+		Stop();
+	}
 }
