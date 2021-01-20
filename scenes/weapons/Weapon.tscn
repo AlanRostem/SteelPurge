@@ -16,3 +16,4 @@ script = ExtResource( 3 )
 [connection signal="TriggerFire" from="." to="FireTimer" method="_OnWeaponTriggerFire"]
 [connection signal="TriggerReload" from="." to="ReloadTimer" method="_OnWeaponTriggerReload"]
 [connection signal="timeout" from="FireTimer" to="." method="Fire"]
+[connection signal="timeout" from="ReloadTimer" to="." method="OnReload"]
