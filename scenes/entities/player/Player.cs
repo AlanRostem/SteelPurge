@@ -3,8 +3,15 @@ using System;
 
 public class Player : Entity
 {
+	public class StatusInfo
+	{
+		public uint Round = 1;
+		public uint Money = 500;
+	}
+	
 	private static readonly float WalkSpeed = 60;
 	private static readonly float JumpSpeed = 220;
+	public StatusInfo Stats = new StatusInfo();
 
 	public float Direction = 1;
 	public bool IsWalking = false;
