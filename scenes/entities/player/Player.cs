@@ -9,14 +9,18 @@ public class Player : Entity
 	public float Direction = 1;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
+	private PlayerWeaponHolder _holder;
 
-    public override void _Ready()
-    {
-        base._Ready();
-        ParentMap.PlayerRef = this;
-    }
+	public PlayerWeaponHolder WeaponHolder => _holder;
 
-    protected override void _OnMovement(float delta)
+	public override void _Ready()
+	{
+		base._Ready();
+		ParentMap.PlayerRef = this;
+		_holder = GetNode<PlayerWeaponHolder>("PlayerWeaponHolder");
+	}
+
+	protected override void _OnMovement(float delta)
 	{
 		bool left = Input.IsActionPressed("left");
 		bool right = Input.IsActionPressed("right");
@@ -50,5 +54,4 @@ public class Player : Entity
 				Velocity.y = -JumpSpeed;
 		}
 	}
-
 }

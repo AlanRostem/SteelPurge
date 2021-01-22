@@ -109,4 +109,14 @@ public class Weapon : Node2D
 			EmitSignal(nameof(CancelFire));
 		}
 	}
+
+	public uint GetClipAmmo()
+	{
+		return _currentClipAmmo;
+	}
+
+	public uint GetReserveAmmo()
+	{
+		return _currentReserveAmmo;
+	}
 }
