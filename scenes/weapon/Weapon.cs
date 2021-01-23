@@ -98,6 +98,7 @@ public class Weapon : Node2D
 
 	public override void _Process(float delta)
 	{
+		Scale = new Vector2(OwnerPlayer.Direction, 1);
 		if (Input.IsActionJustPressed("reload"))
 		{
 			if (!_isReloading)
