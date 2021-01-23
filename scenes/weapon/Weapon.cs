@@ -74,6 +74,13 @@ public class Weapon : Node2D
 
 	private void Fire()
 	{
+		if (_currentClipAmmo == 0)
+		{
+			_isFiring = false;
+			EmitSignal(nameof(CancelFire));
+			EmitSignal(nameof(TriggerReload));
+			return;
+		}
 		if (!_isHoldingTrigger)
 		{
 			_isFiring = false;
@@ -82,10 +89,7 @@ public class Weapon : Node2D
 		}
 		_currentClipAmmo--;
 		OnFire();
-		if (_currentClipAmmo == 0)
-		{
-			EmitSignal(nameof(CancelFire));
-		}
+		
 	}
 	
 	public virtual void OnFire()
@@ -96,9 +100,11 @@ public class Weapon : Node2D
 	{
 		if (Input.IsActionJustPressed("reload"))
 		{
-			if (!_isReloading && !_isFiring)
+			if (!_isReloading)
 			{
 				EmitSignal(nameof(TriggerReload));
+				if (_isFiring)
+					EmitSignal(nameof(CancelFire));
 				// Sounds.PlaySound(Sounds.ReloadStartSound);
 			}
 		}
