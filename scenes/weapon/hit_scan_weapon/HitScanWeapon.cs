@@ -6,11 +6,10 @@ public class HitScanWeapon : Weapon
 	[Export] public float DamageRange;
 	
 	[Signal]
-	public delegate void Scan(float range, float direction, uint damage);
+	public delegate void Scan(float range, uint damage);
 	
 	public override void OnFire()
 	{
-		var dir = 1f;
-		EmitSignal(nameof(Scan), DamageRange, dir, DamagePerShot);    
+		EmitSignal(nameof(Scan), DamageRange, DamagePerShot);    
 	}
 }
