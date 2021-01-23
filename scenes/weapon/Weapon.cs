@@ -19,6 +19,8 @@ public class Weapon : Node2D
 	private bool _isFiring = false;
 	private bool _isReloading = false;
 	public Player OwnerPlayer;
+	private bool _isHoldingTrigger = false;
+
 	public override void _Ready()
 	{
 		_currentClipAmmo = ClipSize;
@@ -72,6 +74,12 @@ public class Weapon : Node2D
 
 	private void Fire()
 	{
+		if (!_isHoldingTrigger)
+		{
+			_isFiring = false;
+			EmitSignal(nameof(CancelFire));
+			return;
+		}
 		_currentClipAmmo--;
 		OnFire();
 		if (_currentClipAmmo == 0)
@@ -97,16 +105,17 @@ public class Weapon : Node2D
 
 		if (Input.IsActionPressed("fire"))
 		{
-			if (!_isReloading && _currentClipAmmo > 0)
+			if (!_isReloading && !_isFiring && _currentClipAmmo > 0)
 			{
 				_isFiring = true;
+				_isHoldingTrigger = true;
 				Fire();
 				EmitSignal(nameof(TriggerFire));
 			}
 		}
 		else
 		{
-			EmitSignal(nameof(CancelFire));
+			_isHoldingTrigger = false;
 		}
 	}
 
