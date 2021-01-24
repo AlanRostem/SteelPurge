@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class AmmoLabel : Label
+public class GunNameLabel : Label
 {
 	private Player _player;
 	public override void _Ready()
@@ -12,6 +12,6 @@ public class AmmoLabel : Label
 	public override void _Process(float delta)
 	{
 		var gun = _player.WeaponHolder.EquippedWeapon;
-		Text = gun.GetClipAmmo() +  "/" + gun.GetReserveAmmo();
+		Text = gun.ScreenDisplayName;
 	}
 }

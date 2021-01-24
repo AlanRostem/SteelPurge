@@ -1,11 +1,30 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/ui/PixelTextLabel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/ui/hud/HUD.cs" type="Script" id=2]
 [ext_resource path="res://scenes/ui/hud/AmmoLabel.cs" type="Script" id=3]
 
+[sub_resource type="CSharpScript" id=1]
+script/source = "using Godot;
+using System;
+
+public class HUD : CanvasLayer
+{
+	public Player PlayerRef;
+	public override void _Ready()
+	{
+		
+	}
+
+//  // Called every frame. 'delta' is the elapsed time since the previous frame.
+//  public override void _Process(float delta)
+//  {
+//      
+//  }
+}
+"
+
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource( 2 )
+script = SubResource( 1 )
 
 [node name="AmmoLabel" parent="." instance=ExtResource( 1 )]
 margin_left = 8.0
