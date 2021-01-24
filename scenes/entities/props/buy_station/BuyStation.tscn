@@ -29,3 +29,4 @@ text = "$500
 Gun"
 align = 1
 script = ExtResource( 2 )
+[connection signal="SendWeaponData" from="." to="BuyStationInfoLabel" method="_OnGetWeaponData"]
