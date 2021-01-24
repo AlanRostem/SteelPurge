@@ -5,7 +5,7 @@ public class Weapon : Node2D
 {
 	[Export] public string ScreenDisplayName = "Weapon";
 	[Export] public string BuyDisplayName = "Weapon";
-	
+
 	[Export] public uint ClipSize;
 	private uint _currentClipAmmo = 0;
 
@@ -26,7 +26,7 @@ public class Weapon : Node2D
 		_currentClipAmmo = ClipSize;
 		_currentReserveAmmo = ReserveAmmoSize;
 	}
-	
+
 	public void OnSwap()
 	{
 		EmitSignal(nameof(CancelFire));
@@ -83,17 +83,18 @@ public class Weapon : Node2D
 			EmitSignal(nameof(TriggerReload));
 			return;
 		}
+
 		if (!_isHoldingTrigger)
 		{
 			_isFiring = false;
 			EmitSignal(nameof(CancelFire));
 			return;
 		}
+
 		_currentClipAmmo--;
 		OnFire();
-		
 	}
-	
+
 	public virtual void OnFire()
 	{
 	}
@@ -102,7 +103,7 @@ public class Weapon : Node2D
 	{
 		if (Scale.x != OwnerPlayer.Direction)
 			Scale = new Vector2(OwnerPlayer.Direction, 1);
-		
+
 		if (Input.IsActionJustPressed("reload"))
 		{
 			if (!_isReloading)
@@ -110,7 +111,11 @@ public class Weapon : Node2D
 				_isReloading = true;
 				EmitSignal(nameof(TriggerReload));
 				if (_isFiring)
+				{
+					_isFiring = false;
 					EmitSignal(nameof(CancelFire));
+				}
+
 				// Sounds.PlaySound(Sounds.ReloadStartSound);
 			}
 		}

@@ -7,9 +7,9 @@ public class FireTimer : Timer
 	{
 		var weapon = (Weapon) GetParent();
 		WaitTime = 60f / weapon.RateOfFire;
-    }
+	}
 
-    private void _OnWeaponTriggerFire()
+	private void _OnWeaponTriggerFire()
 	{
 		Start();
 	}
@@ -17,5 +17,5 @@ public class FireTimer : Timer
 	private void _OnWeaponCancelFire()
 	{
 		Stop();
-    }
+	}
 }
