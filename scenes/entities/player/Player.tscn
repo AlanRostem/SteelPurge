@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/entities/Entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/entities/player/Player.cs" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/ui/hud/AmmoLabel.cs" type="Script" id=9]
 [ext_resource path="res://scenes/ui/hud/MoneyLabel.cs" type="Script" id=10]
 [ext_resource path="res://scenes/ui/hud/RoundLabel.cs" type="Script" id=11]
+[ext_resource path="res://scenes/ui/hud/HPBar.cs" type="Script" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -79,7 +80,7 @@ script = ExtResource( 4 )
 [node name="Camera2D" type="Camera2D" parent="." index="2"]
 current = true
 smoothing_enabled = true
-smoothing_speed = 3.0
+smoothing_speed = 8.0
 
 [node name="PlayerWeaponHolder" type="Node2D" parent="." index="3"]
 script = ExtResource( 5 )
@@ -128,6 +129,7 @@ margin_top = 152.0
 margin_right = 312.0
 margin_bottom = 166.0
 percent_visible = false
+script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

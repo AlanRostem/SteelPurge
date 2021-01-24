@@ -7,6 +7,7 @@ public class Player : Entity
 	{
 		public uint Round = 1;
 		public uint Money = 500;
+		public uint Health = 100;
 	}
 	
 	private static readonly float WalkSpeed = 60;
