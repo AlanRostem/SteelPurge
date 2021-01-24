@@ -27,7 +27,6 @@ public class Player : Entity
 		base._Ready();
 		ParentMap.PlayerRef = this;
 		_holder = GetNode<PlayerWeaponHolder>("PlayerWeaponHolder");
-		TakeDamage(65);
 	}
 
 	[Signal]

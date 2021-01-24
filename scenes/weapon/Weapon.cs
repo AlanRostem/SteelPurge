@@ -68,6 +68,8 @@ public class Weapon : Node2D
 				_currentClipAmmo += _currentReserveAmmo;
 				_currentReserveAmmo = 0;
 			}
+
+			_isReloading = false;
 			// Sounds.PlaySound(Sounds.ReloadEndSound);
 		}
 	}
@@ -105,6 +107,7 @@ public class Weapon : Node2D
 		{
 			if (!_isReloading)
 			{
+				_isReloading = true;
 				EmitSignal(nameof(TriggerReload));
 				if (_isFiring)
 					EmitSignal(nameof(CancelFire));

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/environment/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/texture/background.png" type="Texture" id=3]
+[ext_resource path="res://scenes/entities/Scrap.tscn" type="PackedScene" id=4]
 
 [node name="Level1" instance=ExtResource( 1 )]
 
@@ -13,7 +14,16 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 0, 0, 3, 1, 0, 4, 0, 0, 5, 0, 0, 
 position = Vector2( 120, 48 )
 collision_mask = 1
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="2"]
+[node name="Scrap" parent="." index="2" instance=ExtResource( 4 )]
+position = Vector2( 208, 136 )
+
+[node name="Scrap2" parent="." index="3" instance=ExtResource( 4 )]
+position = Vector2( 232, 136 )
+
+[node name="Scrap3" parent="." index="4" instance=ExtResource( 4 )]
+position = Vector2( 255, 136 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="5"]
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground" index="0"]
 position = Vector2( 160, 90 )
