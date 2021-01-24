@@ -9,7 +9,8 @@ public class Player : Entity
 		public uint Money = 500;
 		public uint Health = 100;
 	}
-	
+
+	public static readonly uint HealthRegenCount = 15;
 	private static readonly float WalkSpeed = 60;
 	private static readonly float JumpSpeed = 220;
 	public StatusInfo Stats = new StatusInfo();
@@ -26,7 +27,30 @@ public class Player : Entity
 		base._Ready();
 		ParentMap.PlayerRef = this;
 		_holder = GetNode<PlayerWeaponHolder>("PlayerWeaponHolder");
+		TakeDamage(65);
 	}
+
+	[Signal]
+	public delegate void TriggerRegenCooldown();
+	
+	[Signal]
+	public delegate void CancelRegen();
+
+	public void TakeDamage(uint damage)
+	{
+		if (damage >= Stats.Health)
+		{
+			Stats.Health = 0;
+			// TODO: Die
+		}
+		else
+		{
+			Stats.Health -= damage;
+			EmitSignal(nameof(CancelRegen));
+			EmitSignal(nameof(TriggerRegenCooldown));
+		}
+	}
+
 
 	protected override void _OnMovement(float delta)
 	{
@@ -60,6 +84,17 @@ public class Player : Entity
 		{
 			if (jump)
 				Velocity.y = -JumpSpeed;
+		}
+	}
+
+	private void _OnRegen()
+	{
+		if (HealthRegenCount < Stats.Health)
+			Stats.Health += HealthRegenCount;
+		else
+		{
+			Stats.Health = 100;
+			EmitSignal(nameof(CancelRegen));	
 		}
 	}
 }
