@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/entities/Entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/entities/player/Player.cs" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/ui/PixelTextLabel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/font/font.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scenes/ui/hud/AmmoLabel.cs" type="Script" id=9]
+[ext_resource path="res://scenes/ui/hud/MoneyLabel.cs" type="Script" id=10]
+[ext_resource path="res://scenes/ui/hud/RoundLabel.cs" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -77,7 +79,7 @@ script = ExtResource( 4 )
 [node name="Camera2D" type="Camera2D" parent="." index="2"]
 current = true
 smoothing_enabled = true
-smoothing_speed = 10.0
+smoothing_speed = 3.0
 
 [node name="PlayerWeaponHolder" type="Node2D" parent="." index="3"]
 script = ExtResource( 5 )
@@ -100,14 +102,16 @@ margin_right = 48.0
 margin_bottom = 24.0
 custom_fonts/font = SubResource( 9 )
 text = "$500"
+script = ExtResource( 10 )
 
 [node name="RoundLabel" parent="HUD" index="2" instance=ExtResource( 7 )]
-margin_left = 272.0
-margin_top = 8.0
-margin_right = 312.0
-margin_bottom = 24.0
+margin_left = 288.0
+margin_top = 9.0
+margin_right = 360.0
+margin_bottom = 25.0
 custom_fonts/font = SubResource( 9 )
 text = "1"
+script = ExtResource( 11 )
 
 [node name="GunNameLabel" parent="HUD" index="3" instance=ExtResource( 7 )]
 margin_left = 8.0
