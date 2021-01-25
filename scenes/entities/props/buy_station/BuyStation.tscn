@@ -30,3 +30,5 @@ Gun"
 align = 1
 script = ExtResource( 2 )
 [connection signal="SendWeaponData" from="." to="BuyStationInfoLabel" method="_OnGetWeaponData"]
+[connection signal="body_entered" from="Area2D" to="." method="_OnPlayerEnter"]
+[connection signal="body_exited" from="Area2D" to="." method="_OnPlayerLeave"]
