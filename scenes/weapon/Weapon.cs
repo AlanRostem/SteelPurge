@@ -145,4 +145,15 @@ public class Weapon : Node2D
 	{
 		return _currentReserveAmmo;
 	}
+
+	public void RefillAmmo()
+	{
+		_currentClipAmmo = ClipSize;
+		_currentReserveAmmo = ReserveAmmoSize;
+	}
+
+	public bool IsFull()
+	{
+		return _currentClipAmmo == ClipSize && _currentReserveAmmo == ReserveAmmoSize;
+	}
 }

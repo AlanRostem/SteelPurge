@@ -4,7 +4,7 @@ using System;
 public class BuyStation : Prop
 {
 	[Export(PropertyHint.ResourceType)] public PackedScene GunScene;
-	[Export] public uint Price = 500;
+	[Export] public uint Price = 50;
 
 	public Weapon WeaponToBuy;
 
@@ -25,9 +25,19 @@ public class BuyStation : Prop
 	{
 		if (_canBuy)
 		{
-			if (Input.IsActionJustPressed("buy"))
+			if (Input.IsActionJustPressed("buy") && _player.Stats.Money >= Price)
 			{
-				// TODO: Buy
+				if (_player.WeaponHolder.EquippedWeapon.Name != WeaponToBuy.Name)
+				{
+					_player.WeaponHolder.PickUpGun(WeaponToBuy);
+					WeaponToBuy = (Weapon)GunScene.Instance();
+					_player.Stats.Money -= Price;
+				}
+				else if (!_player.WeaponHolder.EquippedWeapon.IsFull())
+				{
+					_player.WeaponHolder.EquippedWeapon.RefillAmmo();
+					_player.Stats.Money -= Price;
+				}
 			}
 		}
 	}
@@ -35,7 +45,7 @@ public class BuyStation : Prop
 	private void _OnPlayerEnter(object body)
 	{
 		_canBuy = true;
-		if (_player != null)
+		if (_player == null)
 			_player = (Player) body;
 	}
 	
