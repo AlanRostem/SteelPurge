@@ -41,6 +41,8 @@ public class Weapon : Node2D
 	{
 		Visible = true;
 		SetProcess(true);
+		if (Scale.x != OwnerPlayer.Direction)
+			Scale = new Vector2(OwnerPlayer.Direction, 1);
 	}
 
 	[Signal]
