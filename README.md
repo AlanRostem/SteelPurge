@@ -6,7 +6,7 @@ Zombies series.
 
 ## Ideas
 
-### Background
+### Background Story
 
 It is the year 2034 and the world is undergoing a global industrial revolution. This time,
 military technology is the hope of every land's survival. Countries are putting
@@ -24,7 +24,31 @@ along with the winds rests on the ground. Your options become clearer by the sec
 
 ### Game Goal
 
-Neutralize *Experimental Warbots* (A.k.a X-Warbs) using ballistic weapons to progress to 
+Neutralize *Experimental Warbots* (a.k.a X-Warbs) using ballistic weapons to progress to 
 as many waves as possible. Waves increase when all 20 X-Warbs have been destroyed for a 
 given wave. The higher the wave, the harder the X-Warbs are to kill (they get increased
-hit-points). The X-Warbs drop *Scrap* when eliminated, 
+hit-points). The X-Warbs drop *Scrap* when eliminated, which can be used to forge weapons
+on *Ballistations* (machines that weld weapons from scrap). 
+
+### Progression system
+
+Steel Purge will feature a progression system that gets saved, which can interact with the gameplay
+by the player's choice. In addition, there will be progression in the gameplay itself. As previously
+mentioned, scrap and waves are a form of progression in the gameplay.
+
+#### Waves
+
+A *Wave* is a number indicating the difficulty level in which the enemies currently are. Killing the 
+maximum amount of enemies on a wave increases the wave number. The wave starts at one and increases 
+to infinity. The higher the waves the less scrap is required to be able to convert it into *Black Hat Keys*.
+
+#### Black Hat Keys
+
+*Black Hat Keys* are a currency that the player can keep outside of the gameplay. They are used to unlock 
+*Ballistations*. At the spawn location for the player, there is a *Workbench* where the player can craft 
+*Black Hat Keys* and "deposit" them (essentially saves the amount of *Black Hat Keys*). 
+
+#### Scrap
+
+*Scrap* is a gameplay progression unit that is essentially the currency of the game. *Scrap* can be used
+to make weapons and ammo and also upgrade the weapons. All *Scrap* is deleted when losing or quitting a game.  
