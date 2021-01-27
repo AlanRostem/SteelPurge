@@ -6,7 +6,7 @@ Zombies series.
 
 ## Ideas
 
-### Background
+### Background Story
 
 It is the year 2034 and the world is undergoing a global industrial revolution. This time,
 military technology is the hope of every land's survival. Countries are putting
@@ -24,7 +24,15 @@ along with the winds rests on the ground. Your options become clearer by the sec
 
 ### Game Goal
 
-Neutralize *Experimental Warbots* (A.k.a X-Warbs) using ballistic weapons to progress to 
+Neutralize *Experimental Warbots* (a.k.a X-Warbs) using ballistic weapons to progress to 
 as many waves as possible. Waves increase when all 20 X-Warbs have been destroyed for a 
 given wave. The higher the wave, the harder the X-Warbs are to kill (they get increased
-hit-points). The X-Warbs drop *Scrap* when eliminated, 
+hit-points). The X-Warbs drop *Scrap* when eliminated, which can be used to forge weapons
+on *Ballistations* (machines that weld weapons from scrap). 
+
+### Progression system
+
+Steel Purge will feature a progression system that gets saved, which can interact with the gameplay
+by the player's choice. In addition, there will be progression in the gameplay itself. As previously
+mentioned, scrap and waves are a form of progression in the gameplay.
+
