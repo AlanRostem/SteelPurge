@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/weapon/hit_scan_weapon/HitScanWeapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/texture/lmg.png" type="Texture" id=2]
+
+[node name="MG27" instance=ExtResource( 1 )]
+ScreenDisplayName = "MG27 Jackhammer"
+BuyDisplayName = "MG27"
+ClipSize = 100
+ReserveAmmoSize = 200
+DamagePerShot = 18
+RateOfFire = 650
+ReloadSpeed = 3.5
+DamageRange = 800.0
+
+[node name="Sprite" type="Sprite" parent="." index="3"]
+texture = ExtResource( 2 )
+offset = Vector2( 8, 0 )

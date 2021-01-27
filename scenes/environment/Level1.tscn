@@ -3,8 +3,8 @@
 [ext_resource path="res://scenes/environment/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/texture/background.png" type="Texture" id=3]
+[ext_resource path="res://scenes/weapon/weapons/mg27/MG27.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/entities/props/buy_station/BuyStation.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/weapon/weapons/judger/Judger.tscn" type="PackedScene" id=6]
 
 [node name="Level1" instance=ExtResource( 1 )]
 
@@ -13,7 +13,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 0, 0, 3, 1, 0, 4, 0, 0, 5, 0, 0, 
 
 [node name="BuyStation" parent="." index="1" instance=ExtResource( 5 )]
 position = Vector2( 368, 88 )
-GunScene = ExtResource( 6 )
+GunScene = ExtResource( 4 )
 
 [node name="Player" parent="." index="2" instance=ExtResource( 2 )]
 position = Vector2( 120, 48 )

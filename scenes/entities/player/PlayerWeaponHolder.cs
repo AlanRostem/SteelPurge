@@ -32,7 +32,7 @@ public class PlayerWeaponHolder : Node2D
 
 	public void PickUpGun(Weapon weapon)
 	{
-		if (_guns.Length == 1)
+		if (_gunCount == 1)
 		{
 			AddWeapon(weapon);
 			SwitchGun();
