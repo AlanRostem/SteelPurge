@@ -26,7 +26,6 @@ animations = [ {
 
 [node name="XWFrontRogue" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
-BaseHitPoints = 45
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
@@ -35,5 +34,6 @@ shape = SubResource( 1 )
 position = Vector2( 0, -1 )
 frames = SubResource( 4 )
 animation = "walk"
+frame = 1
 playing = true
 script = ExtResource( 1 )

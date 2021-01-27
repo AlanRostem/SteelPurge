@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/environment/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/texture/background.png" type="Texture" id=3]
 [ext_resource path="res://scenes/weapon/weapons/mg27/MG27.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/entities/props/buy_station/BuyStation.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogue.tscn" type="PackedScene" id=6]
 
 [node name="Level1" instance=ExtResource( 1 )]
 
@@ -24,3 +25,6 @@ collision_mask = 1
 [node name="Sprite" type="Sprite" parent="ParallaxBackground" index="0"]
 position = Vector2( 160, 90 )
 texture = ExtResource( 3 )
+
+[node name="XWFrontRogue" parent="." index="4" instance=ExtResource( 6 )]
+position = Vector2( 224, 128 )
