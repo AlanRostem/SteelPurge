@@ -29,6 +29,8 @@ public class Weapon : Node2D
 
 	public void OnSwap()
 	{
+		_isFiring = false;
+		_isReloading = false;
 		EmitSignal(nameof(CancelFire));
 		EmitSignal(nameof(CancelReload));
 		Visible = false;
