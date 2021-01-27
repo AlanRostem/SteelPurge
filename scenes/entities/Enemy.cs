@@ -15,7 +15,7 @@ public class Enemy : Entity
 
 	public virtual void OnDie()
 	{
-
+		QueueFree();
 	}
 
 	public void TakeDamage(uint damage)
