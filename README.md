@@ -18,9 +18,9 @@ the workplace. This factory only produces ballistic infantry weapons, but your c
 doesn't fool you. Seeking around the deeper structures of the factory, you find a hatch
 which seemingly would lead to a sewer. Being your curious you, you open the hatch and for
 some reason strong chiming winds throw you into the hole which leads to a strangely large
-sewer. It is dark, but some lights work. Through the dark holes of the sewer, strange
-metalized humanoid beings emerge with malicious intent. Your industrial revolver rests in
-your holster, and your options become clearer by the second. 
+sewer. It is dark, but some lights work. Through the dark alleys of the sewer, strange
+metalized humanoid beings emerge with malicious intent. An industrial revolver that came 
+along with the winds rests on the ground. Your options become clearer by the second. 
 
 ### Game Goal
 
