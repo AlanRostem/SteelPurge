@@ -15,11 +15,13 @@ public class Weapon : Node2D
 	[Export] public uint DamagePerShot;
 	[Export] public uint RateOfFire;
 	[Export] public float ReloadSpeed;
+	[Export] public float SlowDownMultiplier = .4f;
 
 	private bool _isFiring = false;
 	private bool _isReloading = false;
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
+	public bool IsFiring => _isFiring;
 
 	public override void _Ready()
 	{

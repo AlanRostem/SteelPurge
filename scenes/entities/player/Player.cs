@@ -60,14 +60,16 @@ public class Player : Entity
 		if (_left && !_right)
 		{
 			Velocity.x = -WalkSpeed;
-			Direction = -1;
+			if (!WeaponHolder.EquippedWeapon.IsFiring)
+				Direction = -1;
 			IsWalking = true;
 		}
 
 		else if (_right && !_left)
 		{
 			Velocity.x = WalkSpeed;
-			Direction = 1;
+			if (!WeaponHolder.EquippedWeapon.IsFiring)
+				Direction = 1;
 			IsWalking = true;
 		}
 
@@ -77,6 +79,11 @@ public class Player : Entity
 			IsWalking = false;
 		}
 
+		if (WeaponHolder.EquippedWeapon.IsFiring)
+		{
+			Velocity.x *= WeaponHolder.EquippedWeapon.SlowDownMultiplier;
+		}
+		
 		bool isOnFloor = IsOnFloor();
 		IsJumping = !isOnFloor;
 

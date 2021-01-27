@@ -11,6 +11,7 @@ ReserveAmmoSize = 200
 DamagePerShot = 18
 RateOfFire = 650
 ReloadSpeed = 3.5
+SlowDownMultiplier = 0.2
 DamageRange = 800.0
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
