@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogueSprite.cs" type="Script" id=1]
+[ext_resource path="res://scenes/entities/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/texture/enemy.png" type="Texture" id=3]
+[ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogue.cs" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 7 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[node name="XWFrontRogue" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+BaseHitPoints = 45
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="XWFrontRogueSprite" type="AnimatedSprite" parent="." index="1"]
+position = Vector2( 0, -1 )
+frames = SubResource( 4 )
+animation = "walk"
+playing = true
+script = ExtResource( 1 )
