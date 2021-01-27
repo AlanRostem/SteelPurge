@@ -15,6 +15,9 @@ public class Player : Entity
 	private static readonly float JumpSpeed = 220;
 	public StatusInfo Stats = new StatusInfo();
 
+	private bool _left = false;
+	private bool _right = false;
+	private bool _jump = false;
 	public float Direction = 1;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
@@ -31,7 +34,7 @@ public class Player : Entity
 
 	[Signal]
 	public delegate void TriggerRegenCooldown();
-	
+
 	[Signal]
 	public delegate void CancelRegen();
 
@@ -50,25 +53,24 @@ public class Player : Entity
 		}
 	}
 
-
 	protected override void _OnMovement(float delta)
 	{
-		bool left = Input.IsActionPressed("left");
-		bool right = Input.IsActionPressed("right");
-		bool jump = Input.IsActionPressed("jump");
+		_ProcessInput();
 
-		if (left && !right)
+		if (_left && !_right)
 		{
 			Velocity.x = -WalkSpeed;
 			Direction = -1;
 			IsWalking = true;
 		}
-		else if (right && !left)
+
+		else if (_right && !_left)
 		{
 			Velocity.x = WalkSpeed;
 			Direction = 1;
 			IsWalking = true;
 		}
+
 		else
 		{
 			Velocity.x = 0;
@@ -81,8 +83,44 @@ public class Player : Entity
 
 		if (isOnFloor)
 		{
-			if (jump)
+			if (_jump)
 				Velocity.y = -JumpSpeed;
+		}
+	}
+
+	private void _ProcessInput()
+	{
+		if (Input.IsActionJustPressed("left"))
+		{
+			if (!_left)
+				_left = true;
+		}
+		else if (Input.IsActionJustReleased("left"))
+		{
+			if (_left)
+				_left = false;
+		}
+
+		if (Input.IsActionJustPressed("right"))
+		{
+			if (!_right)
+				_right = true;
+		}
+		else if (Input.IsActionJustReleased("right"))
+		{
+			if (_right)
+				_right = false;
+		}
+
+		if (Input.IsActionJustPressed("jump"))
+		{
+			if (!_jump)
+				_jump = true;
+		}
+		else if (Input.IsActionJustReleased("jump"))
+		{
+			if (_jump)
+				_jump = false;
 		}
 	}
 
@@ -93,7 +131,7 @@ public class Player : Entity
 		else
 		{
 			Stats.Health = 100;
-			EmitSignal(nameof(CancelRegen));	
+			EmitSignal(nameof(CancelRegen));
 		}
 	}
 }
