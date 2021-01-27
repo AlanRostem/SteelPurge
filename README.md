@@ -36,3 +36,19 @@ Steel Purge will feature a progression system that gets saved, which can interac
 by the player's choice. In addition, there will be progression in the gameplay itself. As previously
 mentioned, scrap and waves are a form of progression in the gameplay.
 
+#### Waves
+
+A *Wave* is a number indicating the difficulty level in which the enemies currently are. Killing the 
+maximum amount of enemies on a wave increases the wave number. The wave starts at one and increases 
+to infinity. The higher the waves the less scrap is required to be able to convert it into *Black Hat Keys*.
+
+#### Black Hat Keys
+
+*Black Hat Keys* are a currency that the player can keep outside of the gameplay. They are used to unlock 
+*Ballistations*. At the spawn location for the player, there is a *Workbench* where the player can craft 
+*Black Hat Keys* and "deposit" them (essentially saves the amount of *Black Hat Keys*). 
+
+#### Scrap
+
+*Scrap* is a gameplay progression unit that is essentially the currency of the game. *Scrap* can be used
+to make weapons and ammo and also upgrade the weapons. All *Scrap* is deleted when losing or quitting a game.  
