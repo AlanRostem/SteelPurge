@@ -18,6 +18,7 @@ public class Player : Entity
 	private bool _left = false;
 	private bool _right = false;
 	private bool _jump = false;
+	private bool _aim = false;
 	public float Direction = 1;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
@@ -63,7 +64,7 @@ public class Player : Entity
 		if (_left && !_right)
 		{
 			Velocity.x = -WalkSpeed;
-			if (!WeaponHolder.EquippedWeapon.IsFiring)
+			if (!WeaponHolder.EquippedWeapon.IsFiring && !_aim)
 				Direction = -1;
 			IsWalking = true;
 		}
@@ -71,7 +72,7 @@ public class Player : Entity
 		else if (_right && !_left)
 		{
 			Velocity.x = WalkSpeed;
-			if (!WeaponHolder.EquippedWeapon.IsFiring)
+			if (!WeaponHolder.EquippedWeapon.IsFiring && !_aim)
 				Direction = 1;
 			IsWalking = true;
 		}
@@ -131,6 +132,17 @@ public class Player : Entity
 		{
 			if (_jump)
 				_jump = false;
+		}
+
+		if (Input.IsActionJustPressed("aim"))
+		{
+			if (!_aim)
+				_aim = true;
+		}
+		else if (Input.IsActionJustReleased("aim"))
+		{
+			if (_aim)
+				_aim = false;
 		}
 	}
 
