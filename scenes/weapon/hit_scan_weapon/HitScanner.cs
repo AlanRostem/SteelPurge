@@ -12,10 +12,9 @@ public class HitScanner : RayCast2D
 		{
 			
 		}
-		
-		// if (collider is Enemy)
-		// {
-		//	
-		// }
-	}
+        else if (collider is Enemy enemy)
+		{
+            enemy.TakeDamage(damage);
+		}
+    }
 }
