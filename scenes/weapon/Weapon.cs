@@ -123,7 +123,7 @@ public class Weapon : Node2D
 		if (Scale.x != OwnerPlayer.Direction)
 			Scale = new Vector2(OwnerPlayer.Direction, 1);
 
-		if (Input.IsActionJustPressed("reload"))
+		if (Input.IsActionJustPressed("reload") && _currentClipAmmo < ClipSize)
 		{
 			if (!_isReloading)
 			{
@@ -180,6 +180,13 @@ public class Weapon : Node2D
 	{
 		_currentClipAmmo = ClipSize;
 		_currentReserveAmmo = ReserveAmmoSize;
+
+		_isFiring = false;
+		_isReloading = false;
+		_isPassivelyReloading = false;
+		EmitSignal(nameof(CancelFire));
+		EmitSignal(nameof(CancelReload));
+		EmitSignal(nameof(CancelPassiveReload));
 	}
 
 	public bool IsFull()
