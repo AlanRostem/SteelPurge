@@ -48,9 +48,12 @@ public class Player : Entity
 		else
 		{
 			Stats.Health -= damage;
-			EmitSignal(nameof(CancelRegen));
-			EmitSignal(nameof(TriggerRegenCooldown));
+			//EmitSignal(nameof(CancelRegen));
+			//EmitSignal(nameof(TriggerRegenCooldown));
 		}
+
+		EmitSignal(nameof(CancelRegen));
+		EmitSignal(nameof(TriggerRegenCooldown));
 	}
 
 	protected override void _OnMovement(float delta)
@@ -133,8 +136,10 @@ public class Player : Entity
 
 	private void _OnRegen()
 	{
-		if (HealthRegenCount < Stats.Health)
+		if (HealthRegenCount + Stats.Health < 100)
+		{
 			Stats.Health += HealthRegenCount;
+		}
 		else
 		{
 			Stats.Health = 100;
