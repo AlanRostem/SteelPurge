@@ -9,7 +9,7 @@ public class XWFrontRogue : Enemy
 	protected override void _OnMovement(float delta)
 	{
 		base._OnMovement(delta);
-		Direction = Mathf.Sign(ParentMap.PlayerRef.GlobalPosition.x - GlobalPosition.x);
+		Direction = Mathf.Sign(ParentMap.PlayerRef.Position.x - Position.x);
 		Velocity.x = WalkSpeed * Direction;
 	}
 	
