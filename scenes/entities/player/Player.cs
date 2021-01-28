@@ -23,7 +23,6 @@ public class Player : Entity
 	public bool IsWalking = false;
 	public bool IsJumping = false;
 	private PlayerWeaponHolder _holder;
-
 	public PlayerWeaponHolder WeaponHolder => _holder;
 
 	public override void _Ready()
@@ -32,6 +31,9 @@ public class Player : Entity
 		ParentMap.PlayerRef = this;
 		_holder = GetNode<PlayerWeaponHolder>("PlayerWeaponHolder");
 	}
+
+	[Signal]
+	public delegate void TriggerAimSwap();
 
 	[Signal]
 	public delegate void TriggerRegenCooldown();
@@ -87,7 +89,7 @@ public class Player : Entity
 		{
 			Velocity.x *= WeaponHolder.EquippedWeapon.SlowDownMultiplier;
 		}
-		
+
 		bool isOnFloor = IsOnFloor();
 		IsJumping = !isOnFloor;
 
@@ -136,13 +138,9 @@ public class Player : Entity
 
 		if (Input.IsActionJustPressed("aim"))
 		{
-			if (!_aim)
-				_aim = true;
-		}
-		else if (Input.IsActionJustReleased("aim"))
-		{
-			if (_aim)
-				_aim = false;
+			EmitSignal(nameof(TriggerAimSwap));
+			_aim = !_aim;
+			Direction = -Direction;
 		}
 	}
 
@@ -157,5 +155,10 @@ public class Player : Entity
 			Stats.Health = 100;
 			EmitSignal(nameof(CancelRegen));
 		}
+	}
+
+	private void _OnSwapTimeOver()
+	{
+		_aim = false;
 	}
 }
