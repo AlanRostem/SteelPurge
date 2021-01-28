@@ -11,9 +11,13 @@ ReserveAmmoSize = 36
 DamagePerShot = 45
 RateOfFire = 230
 ReloadSpeed = 1.5
+PassiveReloadSpeed = 3.0
 SlowDownMultiplier = 0.55
 DamageRange = 800.0
 
 [node name="JudgerSprite" type="Sprite" parent="." index="3"]
 texture = ExtResource( 2 )
 offset = Vector2( 12, 2 )
+
+[node name="PassiveReloadTimer" parent="." index="4"]
+one_shot = false

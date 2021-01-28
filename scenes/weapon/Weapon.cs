@@ -15,10 +15,12 @@ public class Weapon : Node2D
 	[Export] public uint DamagePerShot;
 	[Export] public uint RateOfFire;
 	[Export] public float ReloadSpeed;
+	[Export] public float PassiveReloadSpeed;
 	[Export] public float SlowDownMultiplier = .4f;
 
 	private bool _isFiring = false;
 	private bool _isReloading = false;
+	private bool _isPassivelyReloading = false;
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
 	public bool IsFiring => _isFiring;
@@ -59,6 +61,12 @@ public class Weapon : Node2D
 	[Signal]
 	public delegate void CancelReload();
 
+	[Signal]
+	public delegate void TriggerPassiveReload();
+
+	[Signal]
+	public delegate void CancelPassiveReload();
+
 	private void OnReload()
 	{
 		if (ClipSize > _currentClipAmmo)
@@ -94,6 +102,11 @@ public class Weapon : Node2D
 		{
 			_isFiring = false;
 			EmitSignal(nameof(CancelFire));
+			if (!_isPassivelyReloading)
+			{
+				_isPassivelyReloading = true;
+				EmitSignal(nameof(TriggerPassiveReload));
+			}
 			return;
 		}
 
@@ -114,6 +127,12 @@ public class Weapon : Node2D
 		{
 			if (!_isReloading)
 			{
+				if (_isPassivelyReloading)
+				{
+					_isPassivelyReloading = false;
+					EmitSignal(nameof(CancelPassiveReload));
+				}
+				
 				_isReloading = true;
 				EmitSignal(nameof(TriggerReload));
 				if (_isFiring)
@@ -134,6 +153,11 @@ public class Weapon : Node2D
 				_isHoldingTrigger = true;
 				Fire();
 				EmitSignal(nameof(TriggerFire));
+				if (_isPassivelyReloading)
+				{
+					_isPassivelyReloading = false;
+					EmitSignal(nameof(CancelPassiveReload));
+				}
 			}
 		}
 		else
@@ -162,4 +186,17 @@ public class Weapon : Node2D
 	{
 		return _currentClipAmmo == ClipSize && _currentReserveAmmo == ReserveAmmoSize;
 	}
+	
+	
+	private void _OnPassiveReload()
+	{
+		OnReload();
+		_isPassivelyReloading = false;
+	}
 }
+
+
+
+
+
+

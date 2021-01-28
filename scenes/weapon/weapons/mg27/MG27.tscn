@@ -11,9 +11,13 @@ ReserveAmmoSize = 200
 DamagePerShot = 18
 RateOfFire = 650
 ReloadSpeed = 3.5
+PassiveReloadSpeed = 7.0
 SlowDownMultiplier = 0.2
 DamageRange = 800.0
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
 texture = ExtResource( 2 )
 offset = Vector2( 8, 0 )
+
+[node name="PassiveReloadTimer" parent="." index="4"]
+one_shot = false
