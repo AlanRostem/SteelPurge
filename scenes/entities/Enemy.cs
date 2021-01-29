@@ -33,7 +33,7 @@ public class Enemy : Entity
 			ParentMap.AddChild(scrap);
 			ParentMap.CurrentExpectedEnemies--;
 			ParentMap.EnemiesOnMap--;
-			if (ParentMap.CurrentExpectedEnemies == 0)
+            if (ParentMap.CurrentExpectedEnemies == 0)
 			{
 				ParentMap.BeginNewRound();
 			}
