@@ -14,8 +14,12 @@ public class EnemySpawner : Node2D
 	
 	private void _OnSpawn()
 	{
-		var enemy = (Enemy)EnemyScene.Instance();
-		_parenMap.AddChild(enemy);
-		enemy.Position = Position;
+		if (_parenMap.EnemiesOnMap < _parenMap.CurrentExpectedEnemies)
+		{
+			_parenMap.EnemiesOnMap++;
+			var enemy = (Enemy)EnemyScene.Instance();
+			_parenMap.AddChild(enemy);
+			enemy.Position = Position;
+		}
 	}
 }
