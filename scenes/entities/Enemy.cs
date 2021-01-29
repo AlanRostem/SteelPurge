@@ -10,6 +10,7 @@ public class Enemy : Entity
 
 	[Export] public uint BaseHitPoints = 45;
 	private uint _hp;
+	private bool _isDead = false;
 
 	public override void _Ready()
 	{
@@ -33,10 +34,7 @@ public class Enemy : Entity
 			ParentMap.AddChild(scrap);
 			ParentMap.CurrentExpectedEnemies--;
 			ParentMap.EnemiesOnMap--;
-            if (ParentMap.CurrentExpectedEnemies == 0)
-			{
-				ParentMap.BeginNewRound();
-			}
+			_isDead = true;
 			_hp = 0;
 		}
 		else
@@ -48,7 +46,10 @@ public class Enemy : Entity
 
 	private void _OnDisappear()
 	{
-		ParentMap.EnemiesOnMap--;
-		QueueFree();
+		if (!_isDead)
+		{
+			ParentMap.EnemiesOnMap--;
+			QueueFree();
+		}
 	}
 }

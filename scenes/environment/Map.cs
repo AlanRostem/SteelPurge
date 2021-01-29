@@ -11,6 +11,8 @@ public class Map : Node2D
 	public uint CurrentExpectedEnemies;
 	public uint Round = 1;
 
+	private bool _isStartingNewRound = false;
+
 	public override void _Ready()
 	{
 		var main = (Main) GetParent();
@@ -19,6 +21,14 @@ public class Map : Node2D
 
 		EnemiesOnMap = 0;
 		CurrentExpectedEnemies = MaxEnemiesPerRound;
+	}
+
+	public override void _Process(float delta)
+	{
+		if (CurrentExpectedEnemies == 0)
+		{
+			BeginNewRound();
+		}
 	}
 
 	public void BeginNewRound()
