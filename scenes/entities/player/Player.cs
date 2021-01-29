@@ -18,6 +18,7 @@ public class Player : Entity
 	private bool _right = false;
 	private bool _jump = false;
 	private bool _aim = false;
+	private bool _canTakeDamage = true;
 	public float Direction = 1;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
@@ -40,8 +41,24 @@ public class Player : Entity
 	[Signal]
 	public delegate void CancelRegen();
 
+	[Signal]
+	public delegate void TriggerDamageReceptionCooldown();
+
 	public void TakeDamage(uint damage)
 	{
+		EmitSignal(nameof(CancelRegen));
+		EmitSignal(nameof(TriggerRegenCooldown));
+		
+		if (_canTakeDamage)
+		{
+			_canTakeDamage = false;
+			EmitSignal(nameof(TriggerDamageReceptionCooldown));
+		}
+		else
+		{
+			return;
+		}
+
 		if (damage >= Stats.Health)
 		{
 			Stats.Health = 0;
@@ -53,9 +70,6 @@ public class Player : Entity
 			//EmitSignal(nameof(CancelRegen));
 			//EmitSignal(nameof(TriggerRegenCooldown));
 		}
-
-		EmitSignal(nameof(CancelRegen));
-		EmitSignal(nameof(TriggerRegenCooldown));
 	}
 
 	protected override void _OnMovement(float delta)
@@ -159,5 +173,10 @@ public class Player : Entity
 	private void _OnSwapTimeOver()
 	{
 		_aim = false;
+	}
+	
+	private void _OnCanTakeDamage()
+	{
+		_canTakeDamage = true;
 	}
 }
