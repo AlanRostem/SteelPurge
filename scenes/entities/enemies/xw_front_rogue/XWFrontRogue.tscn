@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogueSprite.cs" type="Script" id=1]
 [ext_resource path="res://scenes/entities/Enemy.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogue.cs" type="Script" id=4]
 [ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogueMeleeArea.cs" type="Script" id=5]
 [ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogueAttackCycleTimer.cs" type="Script" id=6]
+[ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogueTrackCooldownTimer.cs" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 7 )
@@ -39,6 +40,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -1 )
 frames = SubResource( 4 )
 animation = "walk"
+frame = 1
 playing = true
 script = ExtResource( 1 )
 
@@ -54,6 +56,13 @@ shape = SubResource( 5 )
 [node name="XWFrontRogueAttackCycleTimer" type="Timer" parent="." index="3"]
 wait_time = 0.5
 script = ExtResource( 6 )
+
+[node name="XWFrontRogueTrackCooldownTimer" type="Timer" parent="." index="5"]
+wait_time = 0.5
+one_shot = true
+script = ExtResource( 7 )
+[connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
 [connection signal="body_entered" from="XWFrontRogueMeleeArea" to="XWFrontRogueAttackCycleTimer" method="_OnPlayerEnterMeleeRange"]
 [connection signal="body_exited" from="XWFrontRogueMeleeArea" to="XWFrontRogueAttackCycleTimer" method="_OnPlayerExitMeleeRange"]
 [connection signal="timeout" from="XWFrontRogueAttackCycleTimer" to="." method="_OnAttackPlayer"]
+[connection signal="timeout" from="XWFrontRogueTrackCooldownTimer" to="." method="_OnCanSwap"]
