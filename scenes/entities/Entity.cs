@@ -6,7 +6,7 @@ public class Entity : KinematicBody2D
 	private static float Gravity = 600;
 	private static Vector2 Up = new Vector2(0, -1);
 	public Vector2 Velocity;
-	protected Map ParentMap;
+	public Map ParentMap;
 
 	public override void _Ready()
 	{

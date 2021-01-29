@@ -5,7 +5,6 @@ public class Player : Entity
 {
 	public class StatusInfo
 	{
-		public uint Round = 1;
 		public uint Money = 500;
 		public uint Health = 100;
 	}

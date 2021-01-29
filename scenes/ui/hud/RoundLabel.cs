@@ -11,6 +11,6 @@ public class RoundLabel : Label
 
 	public override void _Process(float delta)
 	{
-		Text = _player.Stats.Round.ToString();
+		Text = _player.ParentMap.Round.ToString();
 	}
 }

@@ -14,7 +14,7 @@ public class Enemy : Entity
 	public override void _Ready()
 	{
 		base._Ready();
-		_hp = BaseHitPoints * ParentMap.PlayerRef.Stats.Round;
+		_hp = BaseHitPoints * ParentMap.Round;
 	}
 
 	public virtual void OnDie()
