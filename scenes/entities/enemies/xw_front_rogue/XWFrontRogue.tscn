@@ -58,7 +58,7 @@ wait_time = 0.5
 script = ExtResource( 6 )
 
 [node name="XWFrontRogueTrackCooldownTimer" type="Timer" parent="." index="5"]
-wait_time = 0.5
+wait_time = 0.15
 one_shot = true
 script = ExtResource( 7 )
 [connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
