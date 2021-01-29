@@ -17,7 +17,7 @@ public class Map : Node2D
 		main.CurrentMap = this;
 		// TODO: Remove this temporary solution 
 
-		EnemiesOnMap = MaxEnemiesPerRound;
+		EnemiesOnMap = 0;
 		CurrentExpectedEnemies = MaxEnemiesPerRound;
 	}
 
@@ -25,7 +25,7 @@ public class Map : Node2D
 	{
 		Round++;
 		MaxEnemiesPerRound += EnemyCountIncreasePerRound;
-		EnemiesOnMap = MaxEnemiesPerRound;
+		EnemiesOnMap = 0;
 		CurrentExpectedEnemies = MaxEnemiesPerRound;
 	}
 }
