@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Enemy : Entity
 {
-	private PackedScene _scrapScene = GD.Load<PackedScene>("res://scenes/entities/Scrap.tscn");
+	private static readonly PackedScene ScrapScene = GD.Load<PackedScene>("res://scenes/entities/Scrap.tscn");
 
 	[Export] public uint ScrapValue = 50;
 
@@ -28,7 +28,7 @@ public class Enemy : Entity
 		{
 			OnDie();
 			QueueFree();
-			var scrap = (Scrap) _scrapScene.Instance();
+			var scrap = (Scrap) ScrapScene.Instance();
 			scrap.Position = Position;
 			scrap.Value = ScrapValue;
 			ParentMap.AddChild(scrap);
