@@ -3,7 +3,7 @@ using System;
 
 public class XWFrontRogue : Enemy
 {
-	[Export] public float WalkSpeed = 40;
+	[Export] public float WalkSpeed = 32;
 	[Export] public uint DamagePerHit = 40;
 	public int Direction = 1;
 	private bool _canSwapDir = true;
