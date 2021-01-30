@@ -123,7 +123,7 @@ public class Weapon : Node2D
 		if (Scale.x != OwnerPlayer.Direction)
 			Scale = new Vector2(OwnerPlayer.Direction, 1);
 
-		if (Input.IsActionJustPressed("reload") && _currentClipAmmo < ClipSize)
+		if (OwnerPlayer.DidReload && _currentClipAmmo < ClipSize)
 		{
 			if (!_isReloading)
 			{
@@ -145,7 +145,7 @@ public class Weapon : Node2D
 			}
 		}
 
-		if (Input.IsActionPressed("fire"))
+		if (OwnerPlayer.IsHoldingTrigger)
 		{
 			if (!_isReloading && !_isFiring && _currentClipAmmo > 0)
 			{

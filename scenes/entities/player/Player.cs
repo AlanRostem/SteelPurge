@@ -22,6 +22,8 @@ public class Player : Entity
 	public float Direction = 1;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
+	public bool IsHoldingTrigger = false;
+	public bool DidReload = false;
 	private PlayerWeaponHolder _holder;
 	public PlayerWeaponHolder WeaponHolder => _holder;
 
@@ -116,38 +118,9 @@ public class Player : Entity
 
 	private void _ProcessInput()
 	{
-		if (Input.IsActionJustPressed("left"))
-		{
-			if (!_left)
-				_left = true;
-		}
-		else if (Input.IsActionJustReleased("left"))
-		{
-			if (_left)
-				_left = false;
-		}
-
-		if (Input.IsActionJustPressed("right"))
-		{
-			if (!_right)
-				_right = true;
-		}
-		else if (Input.IsActionJustReleased("right"))
-		{
-			if (_right)
-				_right = false;
-		}
-
-		if (Input.IsActionJustPressed("jump"))
-		{
-			if (!_jump)
-				_jump = true;
-		}
-		else if (Input.IsActionJustReleased("jump"))
-		{
-			if (_jump)
-				_jump = false;
-		}
+		_left = Input.IsActionPressed("left");
+		_right = Input.IsActionPressed("right");
+		_jump = Input.IsActionPressed("jump");
 
 		if (Input.IsActionJustPressed("aim"))
 		{
@@ -155,6 +128,9 @@ public class Player : Entity
 			_aim = !_aim;
 			Direction = -Direction;
 		}
+
+		DidReload = Input.IsActionJustPressed("reload") && _canTakeDamage;
+		IsHoldingTrigger = Input.IsActionPressed("fire") && _canTakeDamage;
 	}
 
 	private void _OnRegen()
