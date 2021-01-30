@@ -19,6 +19,7 @@ public class Player : Entity
 	private bool _jump = false;
 	private bool _aim = false;
 	private bool _canTakeDamage = true;
+	private bool _isStunned = false;
 	public float Direction = 1;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
@@ -116,21 +117,31 @@ public class Player : Entity
 		}
 	}
 
+	private bool IsActionPressed(string action)
+	{
+		return Input.IsActionPressed(action) && !_isStunned;
+	}
+
+	private bool IsActionJustPressed(string action)
+	{
+		return Input.IsActionJustPressed(action) && !_isStunned;
+	}
+
 	private void _ProcessInput()
 	{
-		_left = Input.IsActionPressed("left");
-		_right = Input.IsActionPressed("right");
-		_jump = Input.IsActionPressed("jump");
+		_left = IsActionPressed("left");
+		_right = IsActionPressed("right");
+		_jump = IsActionPressed("jump");
 
-		if (Input.IsActionJustPressed("aim"))
+		if (IsActionJustPressed("aim"))
 		{
 			EmitSignal(nameof(TriggerAimSwap));
 			_aim = !_aim;
 			Direction = -Direction;
 		}
 
-		DidReload = Input.IsActionJustPressed("reload") && _canTakeDamage;
-		IsHoldingTrigger = Input.IsActionPressed("fire") && _canTakeDamage;
+		DidReload = IsActionJustPressed("reload");
+		IsHoldingTrigger = IsActionPressed("fire");
 	}
 
 	private void _OnRegen()
