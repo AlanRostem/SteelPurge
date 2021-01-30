@@ -13,6 +13,8 @@ public class Map : Node2D
 
 	private bool _isStartingNewRound = false;
 
+	[Signal]
+	public delegate void TriggerRoundChangeTimer();
 	public override void _Ready()
 	{
 		var main = (Main) GetParent();
@@ -27,7 +29,11 @@ public class Map : Node2D
 	{
 		if (CurrentExpectedEnemies == 0)
 		{
-			BeginNewRound();
+			if (!_isStartingNewRound)
+			{
+				_isStartingNewRound = true;
+				EmitSignal(nameof(TriggerRoundChangeTimer));
+			}
 		}
 	}
 
@@ -37,5 +43,6 @@ public class Map : Node2D
 		MaxEnemiesPerRound += EnemyCountIncreasePerRound;
 		EnemiesOnMap = 0;
 		CurrentExpectedEnemies = MaxEnemiesPerRound;
+		_isStartingNewRound = false;
 	}
 }
