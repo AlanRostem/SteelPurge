@@ -31,6 +31,6 @@ public class XWFrontRogue : Enemy
 	
 	private void _OnAttackPlayer()
 	{
-		ParentMap.PlayerRef.TakeDamage(DamagePerHit);
+		ParentMap.PlayerRef.TakeDamage(DamagePerHit, Direction);
 	}
 }

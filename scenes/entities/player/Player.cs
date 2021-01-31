@@ -47,7 +47,7 @@ public class Player : Entity
 	[Signal]
 	public delegate void TriggerDamageReceptionCooldown();
 
-	public void TakeDamage(uint damage)
+	public void TakeDamage(uint damage, int knockDir)
 	{
 		EmitSignal(nameof(CancelRegen));
 		EmitSignal(nameof(TriggerRegenCooldown));
@@ -55,6 +55,8 @@ public class Player : Entity
 		if (_canTakeDamage)
 		{
 			_canTakeDamage = false;
+			_isStunned = true;
+			Velocity = new Vector2(WalkSpeed * 2 * knockDir, -JumpSpeed / 2);
 			EmitSignal(nameof(TriggerDamageReceptionCooldown));
 		}
 		else
@@ -77,6 +79,7 @@ public class Player : Entity
 
 	protected override void _OnMovement(float delta)
 	{
+		bool isOnFloor = IsOnFloor();
 		_ProcessInput();
 
 		if (_left && !_right)
@@ -94,10 +97,10 @@ public class Player : Entity
 				Direction = 1;
 			IsWalking = true;
 		}
-
-		else
+		else 
 		{
-			Velocity.x = 0;
+			if (isOnFloor)
+				Velocity.x = 0;
 			IsWalking = false;
 		}
 
@@ -106,7 +109,6 @@ public class Player : Entity
 			Velocity.x *= WeaponHolder.EquippedWeapon.SlowDownMultiplier;
 		}
 
-		bool isOnFloor = IsOnFloor();
 		IsJumping = !isOnFloor;
 
 
@@ -164,6 +166,7 @@ public class Player : Entity
 	
 	private void _OnCanTakeDamage()
 	{
+		_isStunned = false;
 		_canTakeDamage = true;
 	}
 }
