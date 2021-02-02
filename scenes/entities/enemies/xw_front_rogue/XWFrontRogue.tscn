@@ -34,7 +34,7 @@ extents = Vector2( 8, 10 )
 script = ExtResource( 4 )
 BaseHitPoints = 30
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+[node name="BodyShape" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
 
 [node name="XWFrontRogueSprite" type="AnimatedSprite" parent="." index="1"]
@@ -61,8 +61,17 @@ script = ExtResource( 6 )
 wait_time = 0.15
 one_shot = true
 script = ExtResource( 7 )
+
+[node name="Area2D" type="Area2D" parent="." index="6"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="BodyShape" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource( 1 )
 [connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
 [connection signal="body_entered" from="XWFrontRogueMeleeArea" to="XWFrontRogueAttackCycleTimer" method="_OnPlayerEnterMeleeRange"]
 [connection signal="body_exited" from="XWFrontRogueMeleeArea" to="XWFrontRogueAttackCycleTimer" method="_OnPlayerExitMeleeRange"]
 [connection signal="timeout" from="XWFrontRogueAttackCycleTimer" to="." method="_OnAttackPlayer"]
 [connection signal="timeout" from="XWFrontRogueTrackCooldownTimer" to="." method="_OnCanSwap"]
+[connection signal="body_entered" from="Area2D" to="." method="_OnRogueCollided"]
+[connection signal="body_exited" from="Area2D" to="." method="_OnRogueExited"]
