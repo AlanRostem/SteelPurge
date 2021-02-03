@@ -1,14 +1,18 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class XWFrontRogue : Enemy
 {
+
 	[Export] public float WalkSpeed = 32;
 	[Export] public uint DamagePerHit = 40;
 	public int Direction = 1;
 	private bool _canSwapDir = true;
-	private XWFrontRogue _otherRogue = null;
+
 	private bool _pushingOut = false;
+	private readonly HashSet<XWFrontRogue> _otherRogues = new HashSet<XWFrontRogue>();
 
 	[Signal]
 	public delegate void TriggerDirSwapCooldown();
@@ -31,7 +35,19 @@ public class XWFrontRogue : Enemy
 
 		if (_pushingOut)
 		{
-			Velocity.x = Position.x - _otherRogue.Position.x;
+			XWFrontRogue otherRogue = _otherRogues.First();
+			var lowestDistance = Position.DistanceSquaredTo(otherRogue.Position);
+			foreach (var rogue in _otherRogues)
+			{
+				var current = Position.DistanceSquaredTo(rogue.Position);
+				if (lowestDistance > current)
+				{
+					otherRogue = rogue;
+					lowestDistance = current;
+				}
+			}
+			
+			Velocity.x = Position.x - otherRogue.Position.x;
 		}
 		else
 		{
@@ -48,7 +64,7 @@ public class XWFrontRogue : Enemy
 	{
 		if (body is XWFrontRogue rogue && rogue != this)
 		{
-            _otherRogue = rogue;
+			_otherRogues.Add(rogue);
 			_pushingOut = true;
 		}
 	}
@@ -58,7 +74,9 @@ public class XWFrontRogue : Enemy
 	{
 		if (body is XWFrontRogue rogue && rogue != this)
 		{
-			_pushingOut = false;
+			_otherRogues.Remove(rogue);
+			if (_otherRogues.Count == 0)
+				_pushingOut = false;
 		}
 	}
 }
