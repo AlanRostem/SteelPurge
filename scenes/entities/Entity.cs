@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Object = Godot.Object;
 
 public class Entity : KinematicBody2D
 {
@@ -26,7 +27,17 @@ public class Entity : KinematicBody2D
 	{
 		Velocity.y += Gravity * delta;
 		Velocity = MoveAndSlide(Velocity, Up, true);
+		for (var i = 0; i < GetSlideCount(); i++)
+		{
+			var collision = GetSlideCollision(i);
+			_OnCollision(collision.Collider);
+		}
 		_OnMovement(delta);
+	}
+
+	public virtual void _OnCollision(Object collider)
+	{
+		
 	}
 
 	protected virtual void _OnMovement(float delta)

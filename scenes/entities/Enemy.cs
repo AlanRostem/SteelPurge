@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections;
+using Object = Godot.Object;
 
 public class Enemy : Entity
 {

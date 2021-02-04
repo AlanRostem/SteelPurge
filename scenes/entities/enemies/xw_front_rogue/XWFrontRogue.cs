@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Object = Godot.Object;
 
 public class XWFrontRogue : Enemy
 {
@@ -24,6 +25,15 @@ public class XWFrontRogue : Enemy
 	{
 		_canSwapDir = true;
 	}
+
+	public override void _OnCollision(Object collider)
+	{
+		if (collider is TileMap && IsOnWall())
+		{
+			Velocity.y = -WalkSpeed * 1.25f;
+		}
+	}
+
 
 	protected override void _OnMovement(float delta)
 	{
