@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogueSprite.cs" type="Script" id=1]
 [ext_resource path="res://scenes/entities/Enemy.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogueMeleeArea.cs" type="Script" id=5]
 [ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogueAttackCycleTimer.cs" type="Script" id=6]
 [ext_resource path="res://scenes/entities/enemies/xw_front_rogue/XWFrontRogueTrackCooldownTimer.cs" type="Script" id=7]
+[ext_resource path="res://scenes/entities/enemies/xw_front_rogue/BodyShape.cs" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 7 )
@@ -36,11 +37,13 @@ BaseHitPoints = 30
 
 [node name="BodyShape" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
+script = ExtResource( 8 )
 
 [node name="XWFrontRogueSprite" type="AnimatedSprite" parent="." index="1"]
 position = Vector2( 0, -1 )
 frames = SubResource( 4 )
 animation = "walk"
+frame = 1
 playing = true
 script = ExtResource( 1 )
 

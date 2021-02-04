@@ -14,8 +14,11 @@ public class XWFrontRogue : Enemy
 	private bool _pushingOut = false;
 	private readonly HashSet<XWFrontRogue> _otherRogues = new HashSet<XWFrontRogue>();
 
+	public float MaxDepth;
+
 	[Signal]
 	public delegate void TriggerDirSwapCooldown();
+	
 
 	private void _OnCanSwap()
 	{
@@ -46,8 +49,11 @@ public class XWFrontRogue : Enemy
 					lowestDistance = current;
 				}
 			}
-			
-			Velocity.x = Position.x - otherRogue.Position.x;
+
+			var dx = Position.x - otherRogue.Position.x;
+			var fx = Mathf.Clamp(dx / MaxDepth, -1.1f, 1.1f);
+			var vx = 1f - fx;
+			Velocity.x = -vx * WalkSpeed;
 		}
 		else
 		{
