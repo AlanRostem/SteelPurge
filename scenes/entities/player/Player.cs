@@ -18,7 +18,7 @@ public class Player : Entity
 	private bool _right = false;
 	private bool _jump = false;
 	private bool _aim = false;
-	private bool _canTakeDamage = true;
+	public bool CanTakeDamage = true;
 	private bool _isStunned = false;
 	public float Direction = 1;
 	public bool IsWalking = false;
@@ -55,9 +55,9 @@ public class Player : Entity
 		EmitSignal(nameof(CancelRegen));
 		EmitSignal(nameof(TriggerRegenCooldown));
 		
-		if (_canTakeDamage)
+		if (CanTakeDamage)
 		{
-			_canTakeDamage = false;
+			CanTakeDamage = false;
 			_isStunned = true;
 			Velocity = new Vector2(WalkSpeed * 2 * knockDir, -JumpSpeed / 2);
 			EmitSignal(nameof(TriggerDamageReceptionCooldown));
@@ -175,6 +175,6 @@ public class Player : Entity
 	
 	private void _OnInvincibilityEnd()
 	{
-		_canTakeDamage = true;
+		CanTakeDamage = true;
 	}
 }
