@@ -17,14 +17,10 @@ public class PlayerSprite : AnimatedSprite
 		{
 			Animation = "jump";
 		}
-
-        if (!_player.CanTakeDamage)
+        
+        _player.Modulate = new Color(Modulate)
         {
-            _player.Modulate = new Color(Modulate) {a = .5f};
-        }
-        else
-        {
-            _player.Modulate = new Color(Modulate) { a = 1f };
-		}
-	}
+            a = _player.CanTakeDamage ? 1f : .5f
+		};
+    }
 }
