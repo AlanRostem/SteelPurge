@@ -51,9 +51,10 @@ public class XWFrontRogue : Enemy
 			}
 
 			var dx = Position.x - otherRogue.Position.x;
-			var fx = Mathf.Clamp(dx / MaxDepth, -1.1f, 1.1f);
-			var vx = 1f - fx;
-			Velocity.x = -vx * WalkSpeed;
+			if (dx == 0f)
+				dx = Mathf.Epsilon;
+			var fx = MaxDepth / dx;
+			Velocity.x = fx * WalkSpeed;
 		}
 		else
 		{
