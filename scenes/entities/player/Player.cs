@@ -46,6 +46,9 @@ public class Player : Entity
 
 	[Signal]
 	public delegate void TriggerDamageReceptionCooldown();
+	
+	[Signal]
+	public delegate void TriggerInvincibility();
 
 	public void TakeDamage(uint damage, int knockDir)
 	{
@@ -58,6 +61,7 @@ public class Player : Entity
 			_isStunned = true;
 			Velocity = new Vector2(WalkSpeed * 2 * knockDir, -JumpSpeed / 2);
 			EmitSignal(nameof(TriggerDamageReceptionCooldown));
+			EmitSignal(nameof(TriggerInvincibility));
 		}
 		else
 		{
@@ -167,6 +171,10 @@ public class Player : Entity
 	private void _OnCanTakeDamage()
 	{
 		_isStunned = false;
+	}
+	
+	private void _OnInvincibilityEnd()
+	{
 		_canTakeDamage = true;
 	}
 }
