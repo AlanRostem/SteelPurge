@@ -9,5 +9,6 @@ script = ExtResource( 2 )
 
 [node name="HitScanner" type="RayCast2D" parent="." index="2"]
 collision_mask = 17
+collide_with_areas = true
 script = ExtResource( 1 )
 [connection signal="Scan" from="." to="HitScanner" method="_OnScan"]
