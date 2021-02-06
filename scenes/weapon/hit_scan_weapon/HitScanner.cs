@@ -7,14 +7,15 @@ public class HitScanner : RayCast2D
 	{
 		ForceRaycastUpdate();
 		CastTo = new Vector2(range, 0);
+		if (!IsColliding()) return;
 		var collider = GetCollider();
-		if (collider is TileMap tileMap)
+		switch (collider)
 		{
-			
+			case TileMap tileMap:
+				break;
+			case VulnerableHitbox hitBox:
+				hitBox.EmitSignal(nameof(VulnerableHitbox.Hit), damage);
+				break;
 		}
-        else if (collider is Enemy enemy)
-		{
-            enemy.TakeDamage(damage);
-		}
-    }
+	}
 }

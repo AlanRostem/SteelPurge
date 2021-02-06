@@ -53,4 +53,12 @@ public class Enemy : Entity
 			QueueFree();
 		}
 	}
+	
+	
+	private void _OnVulnerableHitboxHit(uint damage)
+	{
+		TakeDamage(damage);
+	}
+
 }
+
