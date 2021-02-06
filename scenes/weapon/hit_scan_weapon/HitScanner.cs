@@ -5,8 +5,8 @@ public class HitScanner : RayCast2D
 {
 	private void _OnScan(float range, uint damage)
 	{
-		ForceRaycastUpdate();
 		CastTo = new Vector2(range, 0);
+		ForceRaycastUpdate();
 		if (!IsColliding()) return;
 		var collider = GetCollider();
 		switch (collider)
