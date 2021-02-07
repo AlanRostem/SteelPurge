@@ -16,7 +16,7 @@ public class Enemy : Entity
 	public override void _Ready()
 	{
 		base._Ready();
-		_hp = BaseHitPoints * ParentMap.Round;
+		_hp = BaseHitPoints;
 	}
 
 	public virtual void OnDie()
@@ -32,9 +32,6 @@ public class Enemy : Entity
 			var scrap = (Scrap) ScrapScene.Instance();
 			scrap.Position = Position;
 			scrap.Value = ScrapValue;
-			ParentMap.AddChild(scrap);
-			ParentMap.CurrentExpectedEnemies--;
-			ParentMap.EnemiesOnMap--;
 			_isDead = true;
 			_hp = 0;
 		}
@@ -49,7 +46,6 @@ public class Enemy : Entity
 	{
 		if (!_isDead)
 		{
-			ParentMap.EnemiesOnMap--;
 			QueueFree();
 		}
 	}
