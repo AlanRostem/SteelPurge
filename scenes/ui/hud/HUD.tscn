@@ -41,13 +41,6 @@ margin_right = 48.0
 margin_bottom = 24.0
 text = "$500"
 
-[node name="RoundLabel" parent="." instance=ExtResource( 1 )]
-margin_left = 272.0
-margin_top = 8.0
-margin_right = 312.0
-margin_bottom = 24.0
-text = "1"
-
 [node name="GunNameLabel" parent="." instance=ExtResource( 1 )]
 margin_left = 8.0
 margin_top = 152.0
