@@ -34,6 +34,7 @@ extents = Vector2( 8, 10 )
 [node name="XWFrontRogue" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 BaseHitPoints = 30
+WalkSpeed = 45.0
 
 [node name="BodyShape" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
@@ -56,7 +57,7 @@ position = Vector2( 8, -3 )
 shape = SubResource( 5 )
 
 [node name="XWFrontRogueAttackCycleTimer" type="Timer" parent="." index="3"]
-wait_time = 0.5
+wait_time = 0.1
 script = ExtResource( 6 )
 
 [node name="XWFrontRogueTrackCooldownTimer" type="Timer" parent="." index="5"]
