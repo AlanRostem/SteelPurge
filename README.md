@@ -52,3 +52,11 @@ to infinity. The higher the waves the less scrap is required to be able to conve
 
 *Scrap* is a gameplay progression unit that is essentially the currency of the game. *Scrap* can be used
 to make weapons and ammo and also upgrade the weapons. All *Scrap* is deleted when losing or quitting a game.  
+
+### Movement
+
+The movement in Steel Purge will be quite simple but should have some twists.
+
+#### Auto-sprint
+
+After the player has walked for a few seconds without interruptions he starts sprinting.
