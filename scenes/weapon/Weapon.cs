@@ -123,13 +123,27 @@ public class Weapon : Node2D
 	public override void _Process(float delta)
 	{
 		if (Scale.x != OwnerPlayer.Direction)
+		{
 			Scale = new Vector2(OwnerPlayer.Direction, 1);
+		}
+		
+		
 		if (OwnerPlayer.IsAimingDown)
-			Rotation = 3f / 2f * Mathf.Pi;
+		{
+			Rotation = OwnerPlayer.Direction * Mathf.Pi / 2f;
+			if (IsFiring)
+			{
+				OwnerPlayer.Velocity.y *= 1 - SlowDownMultiplier;
+			}
+		}
 		else if (OwnerPlayer.IsAimingUp)
-			Rotation = Mathf.Pi / 2f;
+		{
+			Rotation = -OwnerPlayer.Direction * Mathf.Pi / 2f;
+		}
 		else
+		{
 			Rotation = 0;
+		}
 		
 		if (OwnerPlayer.DidReload && _currentClipAmmo < ClipSize)
 		{

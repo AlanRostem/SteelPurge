@@ -111,7 +111,7 @@ public class Player : Entity
 			IsWalking = false;
 		}
 
-		if (WeaponHolder.EquippedWeapon.IsFiring)
+		if (WeaponHolder.EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp)
 		{
 			Velocity.x *= WeaponHolder.EquippedWeapon.SlowDownMultiplier;
 		}
