@@ -131,7 +131,7 @@ public class Weapon : Node2D
 		if (OwnerPlayer.IsAimingDown)
 		{
 			Rotation = OwnerPlayer.Direction * Mathf.Pi / 2f;
-			if (IsFiring)
+			if (IsFiring && OwnerPlayer.Velocity.y > 0)
 			{
 				OwnerPlayer.Velocity.y *= 1 - SlowDownMultiplier;
 			}

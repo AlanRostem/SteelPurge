@@ -89,10 +89,12 @@ public class Player : Entity
 		bool isOnFloor = IsOnFloor();
 		_ProcessInput();
 
+		var canSwapDirOnMove = !WeaponHolder.EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
+
 		if (_left && !_right)
 		{
 			Velocity.x = -WalkSpeed;
-			if (!WeaponHolder.EquippedWeapon.IsFiring && !_aim)
+			if (canSwapDirOnMove)
 				Direction = -1;
 			IsWalking = true;
 		}
@@ -100,7 +102,7 @@ public class Player : Entity
 		else if (_right && !_left)
 		{
 			Velocity.x = WalkSpeed;
-			if (!WeaponHolder.EquippedWeapon.IsFiring && !_aim)
+			if (canSwapDirOnMove)
 				Direction = 1;
 			IsWalking = true;
 		}
@@ -111,7 +113,7 @@ public class Player : Entity
 			IsWalking = false;
 		}
 
-		if (WeaponHolder.EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp)
+		if (WeaponHolder.EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
 		{
 			Velocity.x *= WeaponHolder.EquippedWeapon.SlowDownMultiplier;
 		}
