@@ -60,3 +60,15 @@ The movement in Steel Purge will be quite simple but should have some twists.
 #### Auto-sprint
 
 After the player has walked for a few seconds without interruptions he starts sprinting.
+
+#### Double-tap sprint 
+
+Player must double tap a movement key to engage in sprinting mode
+
+### Shooting
+
+Player can shoot with his equipped weapon
+
+#### Recoil-hovering
+
+By firing downwards the player can fall slower. The slower the weapon makes you walk while firing the slower it makes you fall
