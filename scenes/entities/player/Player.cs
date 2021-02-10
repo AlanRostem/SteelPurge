@@ -21,6 +21,7 @@ public class Player : Entity
 	public bool CanTakeDamage = true;
 	private bool _isStunned = false;
 	public float Direction = 1;
+	[Export] public float AimAngle = 0;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
 	public bool IsHoldingTrigger = false;

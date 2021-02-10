@@ -47,6 +47,8 @@ public class Weapon : Node2D
 		SetProcess(true);
 		if (Scale.x != OwnerPlayer.Direction)
 			Scale = new Vector2(OwnerPlayer.Direction, 1);
+		if (Rotation != OwnerPlayer.AimAngle)
+			Rotation = OwnerPlayer.AimAngle;
 	}
 
 	[Signal]
@@ -122,6 +124,8 @@ public class Weapon : Node2D
 	{
 		if (Scale.x != OwnerPlayer.Direction)
 			Scale = new Vector2(OwnerPlayer.Direction, 1);
+		if (Rotation != OwnerPlayer.AimAngle)
+			Rotation = OwnerPlayer.AimAngle;
 
 		if (OwnerPlayer.DidReload && _currentClipAmmo < ClipSize)
 		{
