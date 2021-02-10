@@ -124,9 +124,13 @@ public class Weapon : Node2D
 	{
 		if (Scale.x != OwnerPlayer.Direction)
 			Scale = new Vector2(OwnerPlayer.Direction, 1);
-		if (Rotation != OwnerPlayer.AimAngle)
-			Rotation = OwnerPlayer.AimAngle;
-
+		if (OwnerPlayer.IsAimingDown)
+			Rotation = 3f / 2f * Mathf.Pi;
+		else if (OwnerPlayer.IsAimingUp)
+			Rotation = Mathf.Pi / 2f;
+		else
+			Rotation = 0;
+		
 		if (OwnerPlayer.DidReload && _currentClipAmmo < ClipSize)
 		{
 			if (!_isReloading)

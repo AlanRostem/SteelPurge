@@ -19,6 +19,8 @@ public class Player : Entity
 	private bool _jump = false;
 	private bool _aim = false;
 	public bool CanTakeDamage = true;
+	public bool IsAimingUp = false;
+	public bool IsAimingDown = false;
 	private bool _isStunned = false;
 	public float Direction = 1;
 	[Export] public float AimAngle = 0;
@@ -140,6 +142,9 @@ public class Player : Entity
 		_right = IsActionPressed("right");
 		_jump = IsActionPressed("jump");
 
+		IsAimingUp = IsActionPressed("aim_up");
+		IsAimingDown = IsActionPressed("aim_down");
+
 		if (IsActionJustPressed("aim"))
 		{
 			EmitSignal(nameof(TriggerAimSwap));
@@ -150,6 +155,7 @@ public class Player : Entity
 		DidReload = IsActionJustPressed("reload");
 		IsHoldingTrigger = IsActionPressed("fire");
 	}
+
 
 	private void _OnRegen()
 	{
