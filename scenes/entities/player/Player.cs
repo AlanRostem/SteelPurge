@@ -49,7 +49,7 @@ public class Player : Entity
 
 	[Signal]
 	public delegate void TriggerDamageReceptionCooldown();
-	
+
 	[Signal]
 	public delegate void TriggerInvincibility();
 
@@ -57,7 +57,7 @@ public class Player : Entity
 	{
 		EmitSignal(nameof(CancelRegen));
 		EmitSignal(nameof(TriggerRegenCooldown));
-		
+
 		if (CanTakeDamage)
 		{
 			CanTakeDamage = false;
@@ -106,7 +106,7 @@ public class Player : Entity
 				Direction = 1;
 			IsWalking = true;
 		}
-		else 
+		else
 		{
 			if (isOnFloor)
 				Velocity.x = 0;
@@ -144,8 +144,11 @@ public class Player : Entity
 		_right = IsActionPressed("right");
 		_jump = IsActionPressed("jump");
 
-		IsAimingUp = IsActionPressed("aim_up");
-		IsAimingDown = IsActionPressed("aim_down");
+		if (!WeaponHolder.EquippedWeapon.IsFiring)
+		{
+			IsAimingUp = IsActionPressed("aim_up");
+			IsAimingDown = IsActionPressed("aim_down");
+		}
 
 		if (IsActionJustPressed("aim"))
 		{
@@ -176,12 +179,12 @@ public class Player : Entity
 	{
 		_aim = false;
 	}
-	
+
 	private void _OnCanTakeDamage()
 	{
 		_isStunned = false;
 	}
-	
+
 	private void _OnInvincibilityEnd()
 	{
 		CanTakeDamage = true;

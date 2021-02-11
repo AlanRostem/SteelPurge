@@ -114,7 +114,7 @@ public class Weapon : Node2D
 
 		_currentClipAmmo--;
 		OnFire();
-		if (OwnerPlayer.Velocity.y > 0)
+		if (OwnerPlayer.Velocity.y > 0 && OwnerPlayer.IsAimingDown)
 		{
 			OwnerPlayer.Velocity.y *= SlowDownMultiplier / 2;
 		}
