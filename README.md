@@ -32,15 +32,7 @@ on *Ballistations* (machines that weld weapons from scrap).
 
 ### Progression system
 
-Steel Purge will feature a progression system that gets saved, which can interact with the gameplay
-by the player's choice. In addition, there will be progression in the gameplay itself. As previously
-mentioned, scrap and waves are a form of progression in the gameplay.
 
-#### Waves
-
-A *Wave* is a number indicating the difficulty level in which the enemies currently are. Killing the 
-maximum amount of enemies on a wave increases the wave number. The wave starts at one and increases 
-to infinity. The higher the waves the less scrap is required to be able to convert it into *Black Hat Keys*.
 
 #### Black Hat Keys
 
