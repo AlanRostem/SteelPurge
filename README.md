@@ -24,26 +24,38 @@ along with the winds rests on the ground. Your options become clearer by the sec
 
 ### Game Goal
 
-Neutralize *Experimental Warbots* (a.k.a X-Warbs) using ballistic weapons to progress to 
-as many waves as possible. Waves increase when all 20 X-Warbs have been destroyed for a 
-given wave. The higher the wave, the harder the X-Warbs are to kill (they get increased
-hit-points). The X-Warbs drop *Scrap* when eliminated, which can be used to forge weapons
-on *Ballistations* (machines that weld weapons from scrap). 
+Survive by making the weapons you can to make it out of the apocalypse you found yourself in. 
+The game is a pretty simple platformer with level completion and the strive for the progression
+system. 
 
 ### Progression system
 
+The progression system in Steel Purge will feature RPG style features as well as simple platformer
+traits like completing levels.
 
+#### Gunsmith levels
+
+The player can gain experience and level up. Leveling up to a certain point gives the player the ability
+to craft new weapons, essentially "learning" how to make the new ones.
+
+#### Weapon Blueprints
+
+Weapon blueprints can be found in order to unlock the ability to craft certain weapons. 
+
+#### Weapon Drops
+
+Weapons can be dropped by enemies, even ones the player does not know how to craft. Weapons can be researched
+but will be destroyed in exchange for a blueprint.
 
 #### Black Hat Keys
 
-*Black Hat Keys* are a currency that the player can keep outside of the gameplay. They are used to unlock 
-*Ballistations*. At the spawn location for the player, there is a *Workbench* where the player can craft 
-*Black Hat Keys* and "deposit" them (essentially saves the amount of *Black Hat Keys*). 
+*Black Hat Keys* are a currency that the player can keep outside of the gameplay. This idea is yet to be used
+somewhere. 
 
 #### Scrap
 
-*Scrap* is a gameplay progression unit that is essentially the currency of the game. *Scrap* can be used
-to make weapons and ammo and also upgrade the weapons. All *Scrap* is deleted when losing or quitting a game.  
+*Scrap* is a progression unit that is essentially the currency of the game. *Scrap* can be used
+to make weapons and ammo and also upgrade the weapons. 
 
 ### Movement
 
@@ -57,9 +69,16 @@ After the player has walked for a few seconds without interruptions he starts sp
 
 Player must double tap a movement key to engage in sprinting mode
 
-### Shooting
+### Weapons
 
-Player can shoot with his equipped weapon
+Weapons in Steel Purge are guns that use up ammo and need to be reloaded. They can also be upgraded 
+to 4 different stages that affect their stats and add additional features to them
+
+#### Weapon Stages
+
+#### Shooting
+
+Player can shoot with his equipped weapon in 4 different directions. 
 
 #### Recoil-hovering
 
