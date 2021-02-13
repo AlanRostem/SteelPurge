@@ -1,13 +1,13 @@
 using Godot;
 using System;
 
-public class DurationTimer : Timer
+public class CoolDownTimer : Timer
 {
 	public override void _Ready()
 	{
-		WaitTime = GetParent<TacticalAbility>().Duration;
+		WaitTime = GetParent<TacticalAbility>().CoolDown;
 	}
-
+	
 	private void _OnTrigger()
 	{
 		Start();

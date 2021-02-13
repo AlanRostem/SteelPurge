@@ -12,7 +12,10 @@ public class TacticalAbility : WeaponAbility
 
 	[Signal]
 	public delegate void TriggerDurationTimer();
-	
+
+	[Signal]
+	public delegate void TriggerCoolDownTimer();
+
 	public virtual void OnActivate()
 	{
 
@@ -44,5 +47,17 @@ public class TacticalAbility : WeaponAbility
 				// TODO: Play sound and flash red on icon
 			}
 		}
+	}
+	
+	private void _OnCoolDownFinished()
+	{
+		_isOnCoolDown = false;
+	}
+	
+	private void _OnStartCoolDown()
+	{
+		_isActive = false;
+		_isOnCoolDown = true;
+		EmitSignal(nameof(TriggerCoolDownTimer));
 	}
 }
