@@ -72,9 +72,17 @@ Player must double tap a movement key to engage in sprinting mode
 ### Weapons
 
 Weapons in Steel Purge are guns that use up ammo and need to be reloaded. They can also be upgraded 
-to 4 different stages that affect their stats and add additional features to them
+to 3 different stages that affect their stats and add additional features to them
 
 #### Weapon Stages
+
+- **Stage 0**: Default stage which the weapon comes in. No additional upgrades added
+- **Stage 1**: First upgrade stage which gives the weapon more ammo, damage, or fire rate depending on what
+the weapon is. In addition, the weapon gets a passive ability that comes along with firing.
+- **Stage 2**: This stage grants the weapon a new ability that is on a cooldown whenever it is used. In addition,
+the passive ability gets an upgrade related to this new ability.
+- **Stage 3**: The weapon is given a new abiltiy which needs to be charged up the more damage the player does using
+the weapon. The ability is supposed to be very powerful and do something unique to the weapon. 
 
 #### Shooting
 
