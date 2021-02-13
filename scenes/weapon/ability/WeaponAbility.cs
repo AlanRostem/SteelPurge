@@ -15,9 +15,14 @@ public class WeaponAbility : Node2D
 		return (T)_weapon;
 	}
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+	public Weapon GetWeapon()
+	{
+		return _weapon;
+	}
+
+	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
+	//  public override void _Process(float delta)
+	//  {
+	//      
+	//  }
 }

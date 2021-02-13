@@ -31,6 +31,12 @@ public class TacticalAbility : WeaponAbility
 
 	}
 
+	public override void _Ready()
+	{
+		base._Ready();
+		GetWeapon().TacticalAbilityRef = this;
+	}
+
 	public override void _Process(float delta)
 	{
 		base._Process(delta);
@@ -47,6 +53,9 @@ public class TacticalAbility : WeaponAbility
 				// TODO: Play sound and flash red on icon
 			}
 		}
+		
+		if (_isActive)
+			OnUpdate();
 	}
 	
 	private void _OnCoolDownFinished()
