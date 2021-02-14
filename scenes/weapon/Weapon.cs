@@ -18,7 +18,9 @@ public class Weapon : Node2D
 	[Export] public float PassiveReloadSpeed;
 	[Export] public float SlowDownMultiplier = .4f;
 
+	public PassiveAbility PassiveAbilityRef;
 	public TacticalAbility TacticalAbilityRef;
+
 	private bool _isFiring = false;
 	private bool _isReloading = false;
 	private bool _isPassivelyReloading = false;
