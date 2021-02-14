@@ -11,8 +11,8 @@ public class PassiveAbility : WeaponAbility
 	public override void _Ready()
 	{
 		base._Ready();
-        GetWeapon().PassiveAbilityRef = this;
-    }
+		GetWeapon().PassiveAbilityRef = this;
+	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
