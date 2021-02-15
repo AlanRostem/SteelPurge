@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/judger.png-b83a7de0250f7ba0def860f73a09566c.stex"
+path="res://.import/judger.png-c33a365a8bf0121234d396980a8a1443.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/judger.png"
-dest_files=[ "res://.import/judger.png-b83a7de0250f7ba0def860f73a09566c.stex" ]
+source_file="res://assets/texture/weapon/judger/judger.png"
+dest_files=[ "res://.import/judger.png-c33a365a8bf0121234d396980a8a1443.stex" ]
 
 [params]
 

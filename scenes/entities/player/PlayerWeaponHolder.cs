@@ -5,7 +5,8 @@ public class PlayerWeaponHolder : Node2D
 {
 	private static readonly uint MaxGuns = 2;
 
-	private static readonly PackedScene DefaultGunScene
+	[Export]
+	public PackedScene DefaultGunScene
 		= GD.Load<PackedScene>("res://scenes/weapon/weapons/judger/Judger.tscn");
 
 
