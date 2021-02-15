@@ -103,7 +103,9 @@ The levels in Steel Purge have unique platforming layouts and ways to be complet
 #### Anvils
 
 The checkpoints on each level is an anvil. These can be used to craft certain items (ammo, weapons, etc.). When a level is complete,
-before the player is about to leave the level there is an anvil for the player to use.
+before the player is about to leave the level there is an anvil for the player to use. Anvils have a quick repair-and-refill option
+for players who choose not to upgrade their weapons. There will be a notification on the anvil saying that the player can upgrade
+or make new weapons and the amount of new things he can explore.
 
 #### Purge Mode
 
