@@ -38,19 +38,19 @@ traits like completing levels.
 The player can gain experience and level up. Leveling up to a certain point gives the player the ability
 to craft new weapons. 
 
-#### Weapon Parts
-
-Player can find weapon parts in secret areas or get them by defeating bosses
-
 #### Weapon Drops
 
-Weapons can be dropped by enemies, even ones the player does not know how to craft, he just learns how to
-make them when picking it up for the first time. 
+Weapons can be dropped by enemies when playing in *Purge Mode*, even ones the player does not know how to craft (he just learns how to
+make them when picking it up for the first time).
 
-#### Black Hat Keys
+### Items
 
-*Black Hat Keys* are a currency that the player can keep outside of the gameplay. This idea is yet to be used
-somewhere. 
+There are certain items the player can keep on them.
+
+#### Weapon Parts
+
+Player can find weapon parts in secret areas or get them by defeating bosses. The parts are used to upgrade
+the respective weapons.
 
 #### Scrap
 
