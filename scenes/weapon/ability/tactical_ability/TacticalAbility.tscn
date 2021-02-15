@@ -2,8 +2,9 @@
 
 [ext_resource path="res://scenes/weapon/ability/tactical_ability/DurationTimer.cs" type="Script" id=1]
 [ext_resource path="res://scenes/weapon/ability/tactical_ability/TacticalAbility.cs" type="Script" id=2]
-[ext_resource path="res://scenes/weapon/weapons/judger/WeaponAbility.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/weapon/ability/WeaponAbility.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/weapon/ability/tactical_ability/CoolDownTimer.cs" type="Script" id=4]
+
 
 
 [node name="TacticalAbility" instance=ExtResource( 3 )]

@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/weapon/weapons/judger/WeaponAbility.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/weapon/ability/WeaponAbility.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/weapon/ability/passive_ability/PassiveAbility.cs" type="Script" id=2]
+
 
 
 [node name="PassiveAbility" instance=ExtResource( 1 )]
