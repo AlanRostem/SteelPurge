@@ -36,7 +36,7 @@ traits like completing levels.
 #### Gunsmith levels
 
 The player can gain experience and level up. Leveling up to a certain point gives the player the ability
-to craft new weapons. 
+to craft new weapons and/or weapon parts. The parts are going to be harder to level up for than the weapons.
 
 #### Weapon Drops
 
@@ -50,7 +50,7 @@ There are certain items the player can keep on them.
 #### Weapon Parts
 
 Player can find weapon parts in secret areas or get them by defeating bosses. The parts are used to upgrade
-the respective weapons.
+the respective weapons to their respective stage. 
 
 #### Scrap
 
@@ -59,7 +59,8 @@ to make weapons and ammo and also upgrade the weapons.
 
 ### Movement
 
-The movement in Steel Purge will be quite simple but should have some twists.
+The player movement in Steel Purge is a standard platformer movement with walking and jumping. Due to the 
+limited input the player will have, there are some twists on how he can move.
 
 #### Auto-sprint
 
@@ -72,7 +73,10 @@ Player must double tap a movement key to engage in sprinting mode
 ### Weapons
 
 Weapons in Steel Purge are guns that use up ammo and need to be reloaded. They can also be upgraded 
-to 3 different stages that affect their stats and add additional features to them
+to 3 different stages that affect their stats and add additional features to them. Each weapon has unique
+features when it is upgraded, and its purpose is to provide special mechanics unique to certain level designs.
+The level designs are not meant to force the player to use a weapon (not always at least), but to provide a way
+to choose a strategy. The harder the levels get the more the player has to think about strategies. 
 
 #### Weapon Stages
 
@@ -100,3 +104,12 @@ The levels in Steel Purge have unique platforming layouts and ways to be complet
 
 The checkpoints on each level is an anvil. These can be used to craft certain items (ammo, weapons, etc.). When a level is complete,
 before the player is about to leave the level there is an anvil for the player to use.
+
+#### Purge Mode
+
+Upon clearing a level the player is given the ability to enter *Purge Mode* on that particular level. This mode is essentially an event
+that occurs every now and again on cleared levels. The story aspect of this is that the X-Warbs have suddenly appeared in one particular
+part of the world and you need to destroy them all.
+
+*Purge Mode* is a round-based mode where you survive as many waves of enemies as possible. Every X rounds a mini-boss appears and defeating
+it rewards you with a random *Stage Y* weapon.
