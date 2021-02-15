@@ -36,16 +36,16 @@ traits like completing levels.
 #### Gunsmith levels
 
 The player can gain experience and level up. Leveling up to a certain point gives the player the ability
-to craft new weapons, essentially "learning" how to make the new ones.
+to craft new weapons. 
 
-#### Weapon Blueprints
+#### Weapon Parts
 
-Weapon blueprints can be found in order to unlock the ability to craft certain weapons. 
+Player can find weapon parts in secret areas or get them by defeating bosses
 
 #### Weapon Drops
 
-Weapons can be dropped by enemies, even ones the player does not know how to craft. Weapons can be researched
-but will be destroyed in exchange for a blueprint.
+Weapons can be dropped by enemies, even ones the player does not know how to craft, he just learns how to
+make them when picking it up for the first time. 
 
 #### Black Hat Keys
 
