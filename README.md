@@ -91,3 +91,12 @@ Player can shoot with his equipped weapon in 4 different directions.
 #### Recoil-hovering
 
 By firing downwards the player can fall slower. The slower the weapon makes you walk while firing the slower it makes you fall
+
+### Levels
+
+The levels in Steel Purge have unique platforming layouts and ways to be completed.
+
+#### Anvils
+
+The checkpoints on each level is an anvil. These can be used to craft certain items (ammo, weapons, etc.). When a level is complete,
+before the player is about to leave the level there is an anvil for the player to use.
