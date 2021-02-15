@@ -112,4 +112,6 @@ that occurs every now and again on cleared levels. The story aspect of this is t
 part of the world and you need to destroy them all.
 
 *Purge Mode* is a round-based mode where you survive as many waves of enemies as possible. Every X rounds a mini-boss appears and defeating
-it rewards you with a random *Stage Y* weapon.
+it rewards you with a random *Stage Y* weapon. Dying in this mode has no penalty on the user's progress, but stops the mode and kicks the 
+player out of the level. The player can also choose to exit the level, but this also cancels the mode and the player must wait for another
+one to appear next time.
