@@ -6,9 +6,12 @@ public class TacticalAbility : WeaponAbility
 	[Export] public Texture Icon;
 	[Export] public float CoolDown = 6;
 	[Export] public float Duration = 1;
-
-	private bool _isOnCoolDown = false;
-	private bool _isActive = false;
+	public float CurrentDuration = 0;
+	public float CurrentCoolDown = 0;
+	
+	
+	public bool IsOnCoolDown = false;
+	public bool IsActive = false;
 
 	[Signal]
 	public delegate void TriggerDurationTimer();
@@ -42,9 +45,9 @@ public class TacticalAbility : WeaponAbility
 		base._Process(delta);
 		if (Input.IsActionJustPressed("tactical_ability"))
 		{
-			if (!_isOnCoolDown && !_isActive)
+			if (!IsOnCoolDown && !IsActive)
 			{
-				_isActive = true;
+				IsActive = true;
 				OnActivate();
 				EmitSignal(nameof(TriggerDurationTimer));
 			}
@@ -54,19 +57,19 @@ public class TacticalAbility : WeaponAbility
 			}
 		}
 		
-		if (_isActive)
+		if (IsActive)
 			OnUpdate();
 	}
 	
 	private void _OnCoolDownFinished()
 	{
-		_isOnCoolDown = false;
+		IsOnCoolDown = false;
 	}
 	
 	private void _OnStartCoolDown()
 	{
-		_isActive = false;
-		_isOnCoolDown = true;
+		IsActive = false;
+		IsOnCoolDown = true;
 		EmitSignal(nameof(TriggerCoolDownTimer));
 	}
 }
