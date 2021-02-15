@@ -1,16 +1,11 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/entities/Entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/entities/player/Player.cs" type="Script" id=2]
 [ext_resource path="res://assets/texture/soldier.png" type="Texture" id=3]
 [ext_resource path="res://scenes/entities/player/PlayerSprite.cs" type="Script" id=4]
 [ext_resource path="res://scenes/entities/player/PlayerWeaponHolder.cs" type="Script" id=5]
-[ext_resource path="res://scenes/ui/hud/GunNameLabel.cs" type="Script" id=6]
-[ext_resource path="res://scenes/ui/PixelTextLabel.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/font/font.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://scenes/ui/hud/AmmoLabel.cs" type="Script" id=9]
-[ext_resource path="res://scenes/ui/hud/MoneyLabel.cs" type="Script" id=10]
-[ext_resource path="res://scenes/ui/hud/HPBar.cs" type="Script" id=12]
+[ext_resource path="res://scenes/ui/hud/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/entities/player/RegenCooldownTimer.cs" type="Script" id=13]
 [ext_resource path="res://scenes/entities/player/RegenCycleTimer.cs" type="Script" id=14]
 [ext_resource path="res://scenes/entities/player/AimSwapCooldownTimer.cs" type="Script" id=15]
@@ -27,23 +22,23 @@ region = Rect2( 0, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
-region = Rect2( 72, 0, 18, 18 )
+region = Rect2( 0, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 18, 18 )
+region = Rect2( 18, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
-region = Rect2( 18, 0, 18, 18 )
+region = Rect2( 36, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 36, 0, 18, 18 )
+region = Rect2( 54, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 54, 0, 18, 18 )
+region = Rect2( 72, 0, 18, 18 )
 
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
@@ -52,82 +47,40 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
 } ]
-
-[sub_resource type="DynamicFont" id=9]
-size = 8
-font_data = ExtResource( 8 )
 
 [node name="Player" instance=ExtResource( 1 )]
 collision_layer = 2
 collision_mask = 2147483661
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+[node name="HUD" parent="." index="0" instance=ExtResource( 6 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
-[node name="PlayerSprite" type="AnimatedSprite" parent="." index="1"]
+[node name="PlayerSprite" type="AnimatedSprite" parent="." index="2"]
 frames = SubResource( 8 )
 animation = "jump"
 playing = true
 script = ExtResource( 4 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
 current = true
 smoothing_enabled = true
 smoothing_speed = 8.0
 
-[node name="PlayerWeaponHolder" type="Node2D" parent="." index="3"]
+[node name="PlayerWeaponHolder" type="Node2D" parent="." index="4"]
 script = ExtResource( 5 )
-
-[node name="HUD" type="CanvasLayer" parent="." index="4"]
-
-[node name="AmmoLabel" parent="HUD" index="0" instance=ExtResource( 7 )]
-margin_left = 8.0
-margin_top = 221.0
-margin_right = 64.0
-margin_bottom = 235.0
-custom_fonts/font = SubResource( 9 )
-text = "100/200"
-script = ExtResource( 9 )
-
-[node name="MoneyLabel" parent="HUD" index="1" instance=ExtResource( 7 )]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 48.0
-margin_bottom = 24.0
-custom_fonts/font = SubResource( 9 )
-text = "$500"
-script = ExtResource( 10 )
-
-[node name="GunNameLabel" parent="HUD" index="2" instance=ExtResource( 7 )]
-margin_left = 8.0
-margin_top = 206.0
-margin_right = 128.0
-margin_bottom = 220.0
-custom_fonts/font = SubResource( 9 )
-text = "MG27 Jackhammer"
-script = ExtResource( 6 )
-
-[node name="HPBar" type="ProgressBar" parent="HUD" index="3"]
-margin_left = 277.0
-margin_top = 214.0
-margin_right = 389.0
-margin_bottom = 228.0
-percent_visible = false
-script = ExtResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RegenCooldownTimer" type="Timer" parent="." index="5"]
 wait_time = 4.0
