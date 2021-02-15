@@ -16,8 +16,6 @@ public class AbilityBar : ProgressBar
 		{
 			MaxValue = ability.Duration;
 			Value = ability.CurrentDuration;
-			if (Value < 0)
-				Value = 0;
 		}
 
 		if (ability.IsOnCoolDown)
