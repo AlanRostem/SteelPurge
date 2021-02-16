@@ -36,21 +36,21 @@ traits like completing levels.
 #### Gunsmith levels
 
 The player can gain experience and level up. Leveling up to a certain point gives the player the ability
-to craft new weapons, essentially "learning" how to make the new ones.
-
-#### Weapon Blueprints
-
-Weapon blueprints can be found in order to unlock the ability to craft certain weapons. 
+to craft new weapons and/or weapon parts. The parts are going to be harder to level up for than the weapons.
 
 #### Weapon Drops
 
-Weapons can be dropped by enemies, even ones the player does not know how to craft. Weapons can be researched
-but will be destroyed in exchange for a blueprint.
+Weapons can be dropped by enemies when playing in *Purge Mode*, even ones the player does not know how to craft (he just learns how to
+make them when picking it up for the first time).
 
-#### Black Hat Keys
+### Items
 
-*Black Hat Keys* are a currency that the player can keep outside of the gameplay. This idea is yet to be used
-somewhere. 
+There are certain items the player can keep on them.
+
+#### Weapon Parts
+
+Player can find weapon parts in secret areas or get them by defeating bosses. The parts are used to upgrade
+the respective weapons to their respective stage. 
 
 #### Scrap
 
@@ -59,7 +59,8 @@ to make weapons and ammo and also upgrade the weapons.
 
 ### Movement
 
-The movement in Steel Purge will be quite simple but should have some twists.
+The player movement in Steel Purge is a standard platformer movement with walking and jumping. Due to the 
+limited input the player will have, there are some twists on how he can move.
 
 #### Auto-sprint
 
@@ -72,7 +73,10 @@ Player must double tap a movement key to engage in sprinting mode
 ### Weapons
 
 Weapons in Steel Purge are guns that use up ammo and need to be reloaded. They can also be upgraded 
-to 3 different stages that affect their stats and add additional features to them
+to 3 different stages that affect their stats and add additional features to them. Each weapon has unique
+features when it is upgraded, and its purpose is to provide special mechanics unique to certain level designs.
+The level designs are not meant to force the player to use a weapon (not always at least), but to provide a way
+to choose a strategy. The harder the levels get the more the player has to think about strategies. 
 
 #### Weapon Stages
 
@@ -91,3 +95,25 @@ Player can shoot with his equipped weapon in 4 different directions.
 #### Recoil-hovering
 
 By firing downwards the player can fall slower. The slower the weapon makes you walk while firing the slower it makes you fall
+
+### Levels
+
+The levels in Steel Purge have unique platforming layouts and ways to be completed.
+
+#### Anvils
+
+The checkpoints on each level is an anvil. These can be used to craft certain items (ammo, weapons, etc.). When a level is complete,
+before the player is about to leave the level there is an anvil for the player to use. Anvils have a quick repair-and-refill option
+for players who choose not to upgrade their weapons. There will be a notification on the anvil saying that the player can upgrade
+or make new weapons and the amount of new things he can explore.
+
+#### Purge Mode
+
+Upon clearing a level the player is given the ability to enter *Purge Mode* on that particular level. This mode is essentially an event
+that occurs every now and again on cleared levels. The story aspect of this is that the X-Warbs have suddenly appeared in one particular
+part of the world and you need to destroy them all.
+
+*Purge Mode* is a round-based mode where you survive as many waves of enemies as possible. Every X rounds a mini-boss appears and defeating
+it rewards you with a random *Stage Y* weapon. Dying in this mode has no penalty on the user's progress, but stops the mode and kicks the 
+player out of the level. The player can also choose to exit the level, but this also cancels the mode and the player must wait for another
+one to appear next time.
