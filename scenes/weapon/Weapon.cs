@@ -18,7 +18,6 @@ public class Weapon : Node2D
 	[Export] public float PassiveReloadSpeed;
 	[Export] public float SlowDownMultiplier = .4f;
 
-	public PassiveAbility PassiveAbilityRef;
 	public TacticalAbility TacticalAbilityRef;
 
 	private bool _isFiring = false;
@@ -71,6 +70,9 @@ public class Weapon : Node2D
 
 	[Signal]
 	public delegate void CancelPassiveReload();
+
+	[Signal]
+	public delegate void DamageDealt(uint damage, VulnerableHitbox target);
 
 	private void OnReload()
 	{
