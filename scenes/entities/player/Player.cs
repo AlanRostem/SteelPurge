@@ -123,6 +123,7 @@ public class Player : Entity
 
 		if (isOnFloor)
 		{
+			IsAimingDown = false;
 			if (_jump)
 				Velocity.y = -JumpSpeed;
 		}
@@ -144,10 +145,10 @@ public class Player : Entity
 		_right = IsActionPressed("right");
 		_jump = IsActionPressed("jump");
 
-		if (!WeaponHolder.EquippedWeapon.IsFiring)
+		if (!WeaponHolder.EquippedWeapon.IsFiring && IsJumping && IsActionJustPressed("aim_down"))
 		{
-			IsAimingUp = IsActionPressed("aim_up");
-			IsAimingDown = IsActionPressed("aim_down");
+			//IsAimingUp = IsActionPressed("aim_up");
+			IsAimingDown = !IsAimingDown;
 		}
 
 		if (IsActionJustPressed("aim"))
