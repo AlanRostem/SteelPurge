@@ -28,14 +28,13 @@ public class Player : Entity
 	public bool IsJumping = false;
 	public bool IsHoldingTrigger = false;
 	public bool DidReload = false;
-	private Inventory _inventory;
-	public Inventory WeaponInventory => _inventory;
+    public Inventory WeaponInventory { get; private set; }
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 		base._Ready();
 		ParentMap.PlayerRef = this;
-		_inventory = GetNode<Inventory>("Inventory");
+		WeaponInventory = GetNode<Inventory>("Inventory");
 	}
 
 	[Signal]
