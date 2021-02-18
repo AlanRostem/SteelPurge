@@ -71,6 +71,6 @@ public class TacticalAbility : WeaponAbility
 		IsActive = false;
 		IsOnCoolDown = true;
 		EmitSignal(nameof(TriggerCoolDownTimer));
-        OnEnd();
-    }
+		OnEnd();
+	}
 }

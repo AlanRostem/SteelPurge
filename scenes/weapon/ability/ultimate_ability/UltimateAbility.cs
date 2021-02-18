@@ -21,20 +21,20 @@ public class UltimateAbility : WeaponAbility
 		GetWeapon().Connect(nameof(Weapon.DamageDealt), this, nameof(OnCharge));
 	}
 
-    public virtual void OnActivate()
-    {
+	public virtual void OnActivate()
+	{
 
-    }
+	}
 
 	public virtual void OnUpdate()
-    {
+	{
 
-    }
+	}
 
 	public virtual void OnEnd()
-    {
+	{
 
-    }
+	}
 
 	[Signal]
 	public delegate void TriggerDurationTimer();
@@ -45,12 +45,12 @@ public class UltimateAbility : WeaponAbility
 		{
 			EmitSignal(nameof(TriggerDurationTimer));
 			IsActive = true;
-            OnActivate();
-        }
+			OnActivate();
+		}
 
-        if (IsActive)
-            OnUpdate();
-    }
+		if (IsActive)
+			OnUpdate();
+	}
 
 	public void OnCharge(uint damage, VulnerableHitbox target)
 	{
@@ -63,10 +63,10 @@ public class UltimateAbility : WeaponAbility
 	}
 	
 	private void _OnAbilityDone()
-    {
-        CurrentCharge = 0;
-        IsActive = false;
-        OnEnd();
+	{
+		CurrentCharge = 0;
+		IsActive = false;
+		OnEnd();
 
-    }
+	}
 }

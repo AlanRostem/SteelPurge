@@ -77,7 +77,8 @@ script = ExtResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
 current = true
-smoothing_enabled = true
+limit_top = 0
+limit_bottom = 0
 smoothing_speed = 8.0
 
 [node name="PlayerWeaponHolder" type="Node2D" parent="." index="4"]
