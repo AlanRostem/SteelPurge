@@ -10,7 +10,7 @@ public class Player : Entity
 	}
 
 	public static readonly uint HealthRegenCount = 15;
-	private static readonly float WalkSpeed = 60;
+	private static readonly float WalkSpeed = 80;
 	private static readonly float JumpSpeed = 220;
 	public StatusInfo Stats = new StatusInfo();
 
