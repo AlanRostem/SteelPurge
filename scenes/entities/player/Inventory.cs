@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class PlayerWeaponHolder : Node2D
+public class Inventory : Node2D
 {
 	private static readonly uint MaxGuns = 8;
 
@@ -25,12 +25,12 @@ public class PlayerWeaponHolder : Node2D
 	}
 
 	public void AddWeapon(Weapon weapon)
-    {
-        if (_gunCount >= MaxGuns) return; // TODO: Add to ammo
-        _guns[_gunCount++] = weapon;
-        weapon.OwnerPlayer = _player;
-        AddChild(weapon);
-    }
+	{
+		if (_gunCount >= MaxGuns) return; // TODO: Add to ammo
+		_guns[_gunCount++] = weapon;
+		weapon.OwnerPlayer = _player;
+		AddChild(weapon);
+	}
 
 	public void PickUpGun(Weapon weapon)
 	{

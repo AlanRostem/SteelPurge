@@ -11,7 +11,7 @@ public class AmmoLabel : Label
 
 	public override void _Process(float delta)
 	{
-		var gun = _player.WeaponHolder.EquippedWeapon;
+		var gun = _player.WeaponInventory.EquippedWeapon;
 		Text = gun.GetClipAmmo() +  "/" + gun.GetReserveAmmo();
 	}
 }

@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/entities/player/Player.cs" type="Script" id=2]
 [ext_resource path="res://assets/texture/soldier.png" type="Texture" id=3]
 [ext_resource path="res://scenes/entities/player/PlayerSprite.cs" type="Script" id=4]
-[ext_resource path="res://scenes/entities/player/PlayerWeaponHolder.cs" type="Script" id=5]
+[ext_resource path="res://scenes/entities/player/Inventory.cs" type="Script" id=5]
 [ext_resource path="res://scenes/ui/hud/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/weapon/weapons/judger/variants/fusion/Fusion.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/entities/player/RegenCooldownTimer.cs" type="Script" id=13]
@@ -81,7 +81,7 @@ limit_top = 0
 limit_bottom = 0
 smoothing_speed = 8.0
 
-[node name="PlayerWeaponHolder" type="Node2D" parent="." index="4"]
+[node name="Inventory" type="Node2D" parent="." index="4"]
 script = ExtResource( 5 )
 DefaultGunScene = ExtResource( 7 )
 

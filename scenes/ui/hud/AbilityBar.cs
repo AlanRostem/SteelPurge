@@ -11,7 +11,8 @@ public class AbilityBar : ProgressBar
 
 	public override void _Process(float delta)
 	{
-		var ability = _player.WeaponHolder.EquippedWeapon.TacticalAbilityRef;
+		var ability = _player.WeaponInventory.EquippedWeapon.TacticalAbilityRef;
+		if (ability == null) return;
 		if (ability.IsActive)
 		{
 			MaxValue = ability.Duration;

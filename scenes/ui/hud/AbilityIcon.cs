@@ -11,7 +11,7 @@ public class AbilityIcon : TextureRect
 
 	public override void _Process(float delta)
 	{
-		var ability = _player.WeaponHolder.EquippedWeapon.TacticalAbilityRef;
+		var ability = _player.WeaponInventory.EquippedWeapon.TacticalAbilityRef;
 		if (ability != null)
 		{
 			if (Visible) return;
