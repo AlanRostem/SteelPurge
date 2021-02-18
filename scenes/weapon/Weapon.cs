@@ -17,6 +17,7 @@ public class Weapon : Node2D
 	[Export] public float ReloadSpeed;
 	[Export] public float PassiveReloadSpeed;
 	[Export] public float SlowDownMultiplier = .4f;
+	[Export] public float HoverRecoilMultiplier = .1f;
 
 	public TacticalAbility TacticalAbilityRef;
 	public UltimateAbility UltimateAbilityRef;
@@ -122,7 +123,7 @@ public class Weapon : Node2D
 		OnFire();
 		if (OwnerPlayer.Velocity.y > 0 && OwnerPlayer.IsAimingDown)
 		{
-			OwnerPlayer.Velocity.y *= SlowDownMultiplier / 2;
+			OwnerPlayer.Velocity.y *= HoverRecoilMultiplier;
 		}
 	}
 
