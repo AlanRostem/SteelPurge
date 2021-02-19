@@ -96,6 +96,24 @@ Player can shoot with his equipped weapon in 4 different directions.
 
 By firing downwards the player can fall slower. The slower the weapon makes you walk while firing the slower it makes you fall
 
+### Weapon Ideas
+
+#### Judger .45
+
+#### P53 Viper
+
+#### Marshal D12
+
+#### M11 Warden
+
+#### Hamilton 700
+
+#### MG27 Jackhammer
+
+#### Bellum AT-98
+
+#### WASP AA
+
 ### Levels
 
 The levels in Steel Purge have unique platforming layouts and ways to be completed.
@@ -106,6 +124,11 @@ The checkpoints on each level is an anvil. These can be used to craft certain it
 before the player is about to leave the level there is an anvil for the player to use. Anvils have a quick repair-and-refill option
 for players who choose not to upgrade their weapons. There will be a notification on the anvil saying that the player can upgrade
 or make new weapons and the amount of new things he can explore.
+
+#### Sections
+
+Levels are divided into sections and the camera does not move further than the section. When the player moves out of the section the camera 
+pans over to the next section. This mechanic does not apply to *Purge Mode*.
 
 #### Purge Mode
 
