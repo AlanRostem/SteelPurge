@@ -123,7 +123,9 @@ public class Weapon : Node2D
 		OnFire();
 		if (OwnerPlayer.Velocity.y > 0 && OwnerPlayer.IsAimingDown)
 		{
-			OwnerPlayer.Velocity.y *= HoverRecoilMultiplier;
+			var velocity = new Vector2(OwnerPlayer.Velocity);
+			velocity.y *= HoverRecoilMultiplier;
+			OwnerPlayer.SetVelocity(velocity);
 		}
 	}
 

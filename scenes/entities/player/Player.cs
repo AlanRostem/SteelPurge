@@ -28,9 +28,9 @@ public class Player : Entity
 	public bool IsJumping = false;
 	public bool IsHoldingTrigger = false;
 	public bool DidReload = false;
-    public Inventory WeaponInventory { get; private set; }
+	public Inventory WeaponInventory { get; private set; }
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		base._Ready();
 		ParentMap.PlayerRef = this;
@@ -61,7 +61,7 @@ public class Player : Entity
 		{
 			CanTakeDamage = false;
 			_isStunned = true;
-			Velocity = new Vector2(WalkSpeed * 2 * knockDir, -JumpSpeed / 2);
+			SetVelocity(new Vector2(WalkSpeed * 2 * knockDir, -JumpSpeed / 2));
 			EmitSignal(nameof(TriggerDamageReceptionCooldown));
 			EmitSignal(nameof(TriggerInvincibility));
 		}
@@ -92,7 +92,7 @@ public class Player : Entity
 
 		if (_left && !_right)
 		{
-			Velocity.x = -WalkSpeed;
+			Move(-WalkSpeed, 0);
 			if (canSwapDirOnMove)
 				Direction = -1;
 			IsWalking = true;
@@ -100,7 +100,7 @@ public class Player : Entity
 
 		else if (_right && !_left)
 		{
-			Velocity.x = WalkSpeed;
+			Move(WalkSpeed, 0);
 			if (canSwapDirOnMove)
 				Direction = 1;
 			IsWalking = true;
@@ -108,24 +108,24 @@ public class Player : Entity
 		else
 		{
 			if (isOnFloor)
-				Velocity.x = 0;
+				SetVelocity(0, Velocity.y);
 			IsWalking = false;
 		}
 
 		if (WeaponInventory.EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
 		{
-			Velocity.x *= WeaponInventory.EquippedWeapon.SlowDownMultiplier;
+			var velocity = new Vector2(Velocity);
+			velocity.x *= WeaponInventory.EquippedWeapon.SlowDownMultiplier;
+			SetVelocity(velocity);
 		}
 
 		IsJumping = !isOnFloor;
 
 
-		if (isOnFloor)
-		{
-			IsAimingDown = false;
-			if (_jump)
-				Velocity.y = -JumpSpeed;
-		}
+		if (!isOnFloor) return;
+		IsAimingDown = false;
+		if (_jump)
+			SetVelocity(Velocity.x, -JumpSpeed);
 	}
 
 	private bool IsActionPressed(string action)
