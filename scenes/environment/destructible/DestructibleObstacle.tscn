@@ -4,8 +4,8 @@
 [ext_resource path="res://scenes/environment/destructible/DestructibleObstacle.cs" type="Script" id=2]
 
 [node name="DestructibleObstacle" type="StaticBody2D"]
-collision_layer = 0
-collision_mask = 32
+collision_layer = 32
+collision_mask = 10
 script = ExtResource( 2 )
 
 [node name="VulnerableHitbox" parent="." instance=ExtResource( 1 )]
