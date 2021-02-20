@@ -83,10 +83,10 @@ to choose a strategy. The harder the levels get the more the player has to think
 - **Stage 0**: Default stage which the weapon comes in. No additional upgrades added
 - **Stage 1**: First upgrade stage which gives the weapon more ammo, damage, or fire rate depending on what
 the weapon is. In addition, the weapon gets a passive ability that comes along with firing.
-- **Stage 2**: This stage grants the weapon a new ability that is on a cooldown whenever it is used. In addition,
+- **Stage 2**: The weapon is granted a secondary option to fire which affects various things within how it fires,
+like rate of fire, damage or any other minor effects
+- **Stage 3**: This stage grants the weapon a new ability that is on a cooldown whenever it is used. In addition,
 the passive ability gets an upgrade related to this new ability.
-- **Stage 3**: The weapon is given a new abiltiy which needs to be charged up the more damage the player does using
-the weapon. The ability is supposed to be very powerful and do something unique to the weapon. 
 
 #### Shooting
 
