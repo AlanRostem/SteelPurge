@@ -1,22 +1,29 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using Object = Godot.Object;
 
 public class Entity : KinematicBody2D
 {
 	private const float Gravity = 600;
 	private static readonly Vector2 Up = new Vector2(0, -1);
-	private Vector2 _velocity = new Vector2();
-	public Map ParentMap;
+	public Map ParentMap { get; private set; }
 	public bool CanMove = true;
 	public Vector2 Velocity {
 		get => _velocity;
 		set => _velocity = value;
 	}
 
+	private Vector2 _velocity;
+	
 	public override void _Ready()
 	{
 		ParentMap = GetParent<Map>();
+	}
+
+	public void ApplyStatusEffect(StatusEffect effect)
+	{
+		AddChild(effect);
 	}
 
 	public override void _PhysicsProcess(float delta)
