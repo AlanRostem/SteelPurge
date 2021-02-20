@@ -5,8 +5,7 @@ using Object = Godot.Object;
 
 public class Entity : KinematicBody2D
 {
-    public const float Gravity = 600;
-	public static readonly Vector2 Up = new Vector2(0, -1);
+	public const float Gravity = 600;
 	public Map ParentMap { get; private set; }
 	public bool CanMove = true;
 	public Vector2 Velocity {
@@ -29,7 +28,7 @@ public class Entity : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		_velocity.y += Gravity * delta;
-		_velocity = MoveAndSlide(_velocity, Up, true);
+		_velocity = MoveAndSlide(_velocity, Vector2.Up, true);
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
 			var collision = GetSlideCollision(i);

@@ -110,4 +110,3 @@ tactical_ability={
 2d_physics/layer_4="enemy"
 2d_physics/layer_5="vulnerable"
 2d_physics/layer_6="obstacle"
-2d_physics/layer_7="collectible"
