@@ -20,7 +20,7 @@ public class Weapon : Node2D
 	[Export] public float HoverRecoilMultiplier = .1f;
 
 	public TacticalAbility TacticalAbilityRef;
-	public UltimateAbility UltimateAbilityRef;
+
 
 	private bool _isFiring = false;
 	private bool _isReloading = false;
