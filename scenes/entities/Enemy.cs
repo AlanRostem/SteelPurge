@@ -29,9 +29,7 @@ public class Enemy : Entity
 		{
 			OnDie();
 			QueueFree();
-			var scrap = (Scrap) ScrapScene.Instance();
-			scrap.Position = Position;
-			scrap.Value = ScrapValue;
+			// TODO: Drop scrap
 			_isDead = true;
 			_hp = 0;
 		}
