@@ -5,8 +5,8 @@ using Object = Godot.Object;
 
 public class Entity : KinematicBody2D
 {
-	private const float Gravity = 600;
-	private static readonly Vector2 Up = new Vector2(0, -1);
+    public const float Gravity = 600;
+	public static readonly Vector2 Up = new Vector2(0, -1);
 	public Map ParentMap { get; private set; }
 	public bool CanMove = true;
 	public Vector2 Velocity {
