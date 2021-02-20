@@ -123,7 +123,9 @@ public class Player : Entity
 
 
 		if (!isOnFloor) return;
-		IsAimingDown = false;
+
+		if (IsWalking)
+			IsAimingDown = false;
 		if (_jump)
 			MoveY(-JumpSpeed);
 	}
@@ -144,7 +146,7 @@ public class Player : Entity
 		_right = IsActionPressed("right");
 		_jump = IsActionPressed("jump");
 
-		if (!WeaponInventory.EquippedWeapon.IsFiring && IsJumping && IsActionJustPressed("aim_down"))
+		if (!WeaponInventory.EquippedWeapon.IsFiring && IsActionJustPressed("aim_down"))
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
 			IsAimingDown = !IsAimingDown;
@@ -155,6 +157,8 @@ public class Player : Entity
 			EmitSignal(nameof(TriggerAimSwap));
 			_aim = !_aim;
 			Direction = -Direction;
+			if (!IsJumping && IsAimingDown)
+				IsAimingDown = false;
 		}
 
 		DidReload = IsActionJustPressed("reload");
