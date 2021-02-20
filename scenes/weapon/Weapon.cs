@@ -125,7 +125,7 @@ public class Weapon : Node2D
 		{
 			var velocity = new Vector2(OwnerPlayer.Velocity);
 			velocity.y *= HoverRecoilMultiplier;
-			OwnerPlayer.SetVelocity(velocity);
+			OwnerPlayer.Velocity = velocity;
 		}
 	}
 

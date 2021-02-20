@@ -30,7 +30,7 @@ public class XWFrontRogue : Enemy
 	{
 		if (collider is TileMap && IsOnWall())
 		{
-			Move(0, -WalkSpeed * 1.25f);
+			MoveY(-WalkSpeed * 1.25f);
 		}
 	}
 
@@ -64,11 +64,11 @@ public class XWFrontRogue : Enemy
 			if (dx == 0f)
 				dx = Mathf.Epsilon;
 			var fx = MaxDepth / dx;
-			SetVelocity(fx * WalkSpeed, Velocity.y);
+			MoveX(fx * WalkSpeed);
 		}
 		else
 		{
-			SetVelocity(WalkSpeed * Direction, Velocity.y);
+			MoveX(WalkSpeed * Direction);
 
 		}
 	}

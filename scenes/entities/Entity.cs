@@ -9,7 +9,10 @@ public class Entity : KinematicBody2D
 	private Vector2 _velocity = new Vector2();
 	public Map ParentMap;
 	public bool CanMove = true;
-	public Vector2 Velocity => _velocity;
+	public Vector2 Velocity {
+		get => _velocity;
+		set => _velocity = value;
+	}
 
 	public override void _Ready()
 	{
@@ -29,30 +32,18 @@ public class Entity : KinematicBody2D
 		_OnMovement(delta);
 	}
 
-	public void Move(Vector2 velocity)
+
+
+	public void MoveX(float x)
 	{
 		if (CanMove)
-			_velocity = velocity;
+			_velocity.x = x;
 	}
 
-	public void Move(float x, float y)
+	public void MoveY(float y)
 	{
-		if (x == 0f)
-			x = Velocity.x;
-		if (y == 0f)
-			y = Velocity.y;
 		if (CanMove)
-			Move(new Vector2(x, y));
-	}
-
-	public void SetVelocity(Vector2 velocity)
-	{
-		_velocity = velocity;
-	}
-
-	public void SetVelocity(float x, float y)
-	{
-		SetVelocity(new Vector2(x, y));
+			_velocity.y = y;
 	}
 
 	public virtual void _OnCollision(Object collider)

@@ -61,7 +61,7 @@ public class Player : Entity
 		{
 			CanTakeDamage = false;
 			_isStunned = true;
-			SetVelocity(new Vector2(WalkSpeed * 2 * knockDir, -JumpSpeed / 2));
+			Velocity = (new Vector2(WalkSpeed * 2 * knockDir, -JumpSpeed / 2));
 			EmitSignal(nameof(TriggerDamageReceptionCooldown));
 			EmitSignal(nameof(TriggerInvincibility));
 		}
@@ -92,7 +92,7 @@ public class Player : Entity
 
 		if (_left && !_right)
 		{
-			Move(-WalkSpeed, 0);
+			MoveX(-WalkSpeed);
 			if (canSwapDirOnMove)
 				Direction = -1;
 			IsWalking = true;
@@ -100,7 +100,7 @@ public class Player : Entity
 
 		else if (_right && !_left)
 		{
-			Move(WalkSpeed, 0);
+			MoveX(WalkSpeed);
 			if (canSwapDirOnMove)
 				Direction = 1;
 			IsWalking = true;
@@ -108,7 +108,7 @@ public class Player : Entity
 		else
 		{
 			if (isOnFloor)
-				SetVelocity(0, Velocity.y);
+				Velocity = new Vector2(0, Velocity.y);
 			IsWalking = false;
 		}
 
@@ -116,7 +116,7 @@ public class Player : Entity
 		{
 			var velocity = new Vector2(Velocity);
 			velocity.x *= WeaponInventory.EquippedWeapon.SlowDownMultiplier;
-			SetVelocity(velocity);
+			Velocity = velocity;
 		}
 
 		IsJumping = !isOnFloor;
@@ -125,7 +125,7 @@ public class Player : Entity
 		if (!isOnFloor) return;
 		IsAimingDown = false;
 		if (_jump)
-			SetVelocity(Velocity.x, -JumpSpeed);
+			MoveY(-JumpSpeed);
 	}
 
 	private bool IsActionPressed(string action)
