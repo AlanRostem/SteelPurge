@@ -8,6 +8,5 @@ public class GameGUI : CanvasLayer
 	public override void _Ready()
 	{
 		Hud = GetNode<HUD>("HUD");
-		GetParent<Game>().Gui = this;
 	}
 }
