@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game/weapon/hit_scan_weapon/HitScanWeapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/texture/weapon/judger/judger.png" type="Texture" id=2]
+
+[node name="Judger" instance=ExtResource( 1 )]
+ScreenDisplayName = "Judger .45"
+BuyDisplayName = "Judger"
+ClipSize = 6
+ReserveAmmoSize = 36
+DamagePerShot = 45
+RateOfFire = 230
+ReloadSpeed = 1.5
+PassiveReloadSpeed = 3.0
+SlowDownMultiplier = 0.55
+DamageRange = 800.0
+
+[node name="JudgerSprite" type="Sprite" parent="." index="3"]
+texture = ExtResource( 2 )
+offset = Vector2( 12, 2 )
+
+[node name="PassiveReloadTimer" parent="." index="4"]
+one_shot = false

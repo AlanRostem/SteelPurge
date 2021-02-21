@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Steel Purge"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/game/Game.tscn"
 
 [display]
 
