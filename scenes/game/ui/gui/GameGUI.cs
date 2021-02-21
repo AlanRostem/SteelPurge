@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class GUI : CanvasLayer
+public class GameGUI : CanvasLayer
 {
 	public HUD Hud { get; private set; }
 
