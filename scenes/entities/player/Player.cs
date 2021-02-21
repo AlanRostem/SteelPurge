@@ -35,11 +35,7 @@ public class Player : Entity
 		base._Ready();
 		ParentMap.PlayerRef = this;
 		WeaponInventory = GetNode<Inventory>("Inventory");
-
-		PrintTree();
-		//var gui = GetNode<GUI>("/root/GUI");
-		//Connect(nameof(UpdateHealth), gui.Hud, nameof(gui.Hud.UpdateHealth));
-	}
+    }
 
 	[Signal]
 	public delegate void UpdateHealth(uint hp);
