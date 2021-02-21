@@ -11,4 +11,6 @@ public class Map : Node2D
 		main.CurrentMap = this;
 		// TODO: Remove this temporary solution 
 	}
+	
+	
 }
