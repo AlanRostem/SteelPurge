@@ -68,12 +68,12 @@ public class Player : Entity
 
 		if (damage >= Health)
 		{
-			Health = 0;
+			SetHealthAndEmit(0);
 			// TODO: Die
 		}
 		else
 		{
-			Health -= damage;
+			SetHealthAndEmit(Health - damage);
 			//EmitSignal(nameof(CancelRegen));
 			//EmitSignal(nameof(TriggerRegenCooldown));
 		}
@@ -166,13 +166,19 @@ public class Player : Entity
 	{
 		if (HealthRegenCount + Health < 100)
 		{
-			Health += HealthRegenCount;
+			SetHealthAndEmit(Health + HealthRegenCount);
 		}
 		else
 		{
-			Health = 100;
+			SetHealthAndEmit(100);
 			EmitSignal(nameof(CancelRegen));
 		}
+	}
+
+	private void SetHealthAndEmit(uint hp)
+	{
+		Health = hp;
+		EmitSignal(nameof(UpdateHealth), Health);
 	}
 
 	private void _OnSwapTimeOver()
