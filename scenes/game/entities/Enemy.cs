@@ -10,13 +10,12 @@ public class Enemy : Entity
 	[Export] public uint ScrapValue = 50;
 
 	[Export] public uint BaseHitPoints = 45;
-	private uint _hp;
 	private bool _isDead = false;
 
 	public override void _Ready()
 	{
 		base._Ready();
-		_hp = BaseHitPoints;
+		Health = BaseHitPoints;
 	}
 
 	public virtual void OnDie()
@@ -25,17 +24,17 @@ public class Enemy : Entity
 
 	public void TakeDamage(uint damage)
 	{
-		if (damage >= _hp)
+		if (damage >= Health)
 		{
 			OnDie();
 			QueueFree();
 			// TODO: Drop scrap
 			_isDead = true;
-			_hp = 0;
+			Health = 0;
 		}
 		else
 		{
-			_hp -= damage;
+			Health -= damage;
 		}
 	}
 

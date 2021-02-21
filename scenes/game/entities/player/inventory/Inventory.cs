@@ -15,6 +15,7 @@ public class Inventory : Node2D
 	private uint _equippedGunIdx = 0;
 	private uint _gunCount = 0;
 	public Weapon EquippedWeapon => _guns[_equippedGunIdx];
+    public uint ScrapCount = 0;
 
 
 	public override void _Ready()

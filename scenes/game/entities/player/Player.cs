@@ -3,16 +3,9 @@ using System;
 
 public class Player : Entity
 {
-	public class StatusInfo
-	{
-		public uint Money = 500;
-		public uint Health = 100;
-	}
-
 	public static readonly uint HealthRegenCount = 15;
 	private static readonly float WalkSpeed = 80;
 	private static readonly float JumpSpeed = 220;
-	public StatusInfo Stats = new StatusInfo();
 
 	private bool _left = false;
 	private bool _right = false;
@@ -73,14 +66,14 @@ public class Player : Entity
 			return;
 		}
 
-		if (damage >= Stats.Health)
+		if (damage >= Health)
 		{
-			Stats.Health = 0;
+			Health = 0;
 			// TODO: Die
 		}
 		else
 		{
-			Stats.Health -= damage;
+			Health -= damage;
 			//EmitSignal(nameof(CancelRegen));
 			//EmitSignal(nameof(TriggerRegenCooldown));
 		}
@@ -171,13 +164,13 @@ public class Player : Entity
 
 	private void _OnRegen()
 	{
-		if (HealthRegenCount + Stats.Health < 100)
+		if (HealthRegenCount + Health < 100)
 		{
-			Stats.Health += HealthRegenCount;
+			Health += HealthRegenCount;
 		}
 		else
 		{
-			Stats.Health = 100;
+			Health = 100;
 			EmitSignal(nameof(CancelRegen));
 		}
 	}

@@ -8,6 +8,7 @@ public class Entity : KinematicBody2D
 	public const float Gravity = 600;
 	public Map ParentMap { get; private set; }
 	public bool CanMove = true;
+    public uint Health = 0;
 	public Vector2 Velocity {
 		get => _velocity;
 		set => _velocity = value;
