@@ -33,9 +33,9 @@ public class Player : Entity
 	public override void _Ready()
 	{
 		base._Ready();
-		ParentMap.PlayerRef = this;
+		ParentMap.PlayerNode = this;
 		WeaponInventory = GetNode<Inventory>("Inventory");
-    }
+	}
 
 	[Signal]
 	public delegate void UpdateHealth(uint hp);
