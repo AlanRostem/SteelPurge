@@ -18,10 +18,6 @@ _global_script_class_icons={
 config/name="Steel Purge"
 run/main_scene="res://scenes/Main.tscn"
 
-[autoload]
-
-Gui="*res://scenes/ui/gui/GUI.tscn"
-
 [display]
 
 window/size/width=400
