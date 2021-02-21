@@ -36,4 +36,15 @@ public class Inventory : Node2D
 	{
 		// TODO: Implement
 	}
+
+	[Signal]
+	public delegate void OpenInventory();
+
+	public override void _Process(float delta)
+	{
+		if (Input.IsActionJustPressed("inventory"))
+		{
+			EmitSignal(nameof(OpenInventory));
+		}
+	}
 }
