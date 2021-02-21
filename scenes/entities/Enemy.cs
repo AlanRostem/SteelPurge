@@ -5,7 +5,7 @@ using Object = Godot.Object;
 
 public class Enemy : Entity
 {
-	private static readonly PackedScene ScrapScene = GD.Load<PackedScene>("res://scenes/entities/Scrap.tscn");
+	// private static readonly PackedScene ScrapScene = GD.Load<PackedScene>("res://scenes/entities/Scrap.tscn");
 
 	[Export] public uint ScrapValue = 50;
 
