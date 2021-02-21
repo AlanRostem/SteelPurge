@@ -19,7 +19,7 @@ public class Inventory : Node2D
 
 	public override void _Ready()
 	{
-		_player = (Player) GetParent();
+		_player = GetParent<Player>();
 		var defaultGun = (Weapon) DefaultGunScene.Instance();
 		AddWeapon(defaultGun);
 	}
@@ -38,13 +38,5 @@ public class Inventory : Node2D
 	}
 
 	[Signal]
-	public delegate void OpenInventory();
-
-	public override void _Process(float delta)
-	{
-		if (Input.IsActionJustPressed("inventory"))
-		{
-			EmitSignal(nameof(OpenInventory));
-		}
-	}
+	public delegate void WeaponAdded(Weapon weapon);
 }

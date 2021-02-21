@@ -17,7 +17,7 @@ margin_left = 8.0
 margin_top = 216.0
 margin_right = 64.0
 margin_bottom = 230.0
-text = "100/200"
+text = "??/??"
 script = ExtResource( 3 )
 
 [node name="MoneyLabel" parent="." instance=ExtResource( 1 )]
@@ -25,7 +25,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = 48.0
 margin_bottom = 24.0
-text = "$500"
+text = "¤??"
 script = ExtResource( 2 )
 
 [node name="GunNameLabel" parent="." instance=ExtResource( 1 )]
@@ -33,7 +33,7 @@ margin_left = 8.0
 margin_top = 200.0
 margin_right = 128.0
 margin_bottom = 214.0
-text = "MG27 Jackhammer"
+text = "??? ???"
 script = ExtResource( 4 )
 
 [node name="HPBar" type="ProgressBar" parent="."]

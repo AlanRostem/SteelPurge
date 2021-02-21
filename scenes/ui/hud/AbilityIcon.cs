@@ -4,11 +4,8 @@ using System;
 public class AbilityIcon : TextureRect
 {
 	private Player _player;
-	public override void _Ready()
-	{
-		_player = GetParent<HUD>().GetParent<Player>();
-	}
 
+	/*
 	public override void _Process(float delta)
 	{
 		var ability = _player.WeaponInventory.EquippedWeapon.TacticalAbilityRef;
@@ -25,4 +22,5 @@ public class AbilityIcon : TextureRect
 			Visible = false;
 		}
 	}
+	*/
 }
