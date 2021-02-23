@@ -19,6 +19,8 @@ public class Inventory : Node2D
 	public override void _Ready()
 	{
 		_player = GetParent<Player>();
+        
+		// TODO: Remove this test
 		var defaultGun = (Weapon) DefaultGunScene.Instance();
 		AddWeapon(defaultGun);
         _player.EquippedWeapon = defaultGun;
@@ -26,10 +28,8 @@ public class Inventory : Node2D
 
 	public void AddWeapon(Weapon weapon)
 	{
-		if (_gunCount >= MaxGuns) return; // TODO: Add to ammo
+		if (_gunCount >= MaxGuns) return;
 		_guns[_gunCount++] = weapon;
-		weapon.OwnerPlayer = _player;
-		AddChild(weapon);
 	}
 
 	public void PickUpGun(Weapon weapon)
