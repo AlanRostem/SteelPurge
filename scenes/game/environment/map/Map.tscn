@@ -85,4 +85,4 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="UpdateHealth" from="Player" to="GUI/HUD/HPBar" method="_OnPlayerUpdateHealth"]
+[connection signal="HealthChanged" from="Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]

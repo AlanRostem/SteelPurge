@@ -8,14 +8,29 @@ public class Entity : KinematicBody2D
 	public const float Gravity = 600;
 	public Map ParentMap { get; private set; }
 	public bool CanMove = true;
-    public uint Health = 100;
+
+    public uint Health
+    {
+        get => _health;
+
+        set
+        {
+            _health = value;
+			EmitSignal(nameof(HealthChanged), _health);
+        }
+    }
+
+    private uint _health = 100;
 	public Vector2 Velocity {
 		get => _velocity;
 		set => _velocity = value;
 	}
 
 	private Vector2 _velocity;
-	
+
+    [Signal]
+    public delegate void HealthChanged(uint health);
+    
 	public override void _Ready()
 	{
 		ParentMap = GetParent<Map>();

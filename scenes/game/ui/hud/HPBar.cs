@@ -3,8 +3,8 @@ using System;
 
 public class HPBar : ProgressBar
 {
-	private void _OnPlayerUpdateHealth(uint hp)
+	private void _OnPlayerHealthChanged(uint health)
 	{
-		Value = hp;
+		Value = health;
 	}
 }

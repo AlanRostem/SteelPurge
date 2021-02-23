@@ -28,11 +28,8 @@ public class Player : Entity
 		base._Ready();
 		ParentMap.PlayerNode = this;
 		WeaponInventory = GetNode<Inventory>("Inventory");
-		SetAndEmitHealth(100);
+		Health = 100;
 	}
-
-	[Signal]
-	public delegate void UpdateHealth(uint hp);
 
 	[Signal]
 	public delegate void TriggerAimSwap();
@@ -69,12 +66,12 @@ public class Player : Entity
 
 		if (damage >= Health)
 		{
-			SetAndEmitHealth(0);
+			Health = 0;
 			// TODO: Die
 		}
 		else
 		{
-			SetAndEmitHealth(Health - damage);
+			Health -= damage;
 			//EmitSignal(nameof(CancelRegen));
 			//EmitSignal(nameof(TriggerRegenCooldown));
 		}
@@ -167,19 +164,13 @@ public class Player : Entity
 	{
 		if (HealthRegenCount + Health < 100)
 		{
-			SetAndEmitHealth(Health + HealthRegenCount);
+			Health+=  HealthRegenCount;
 		}
 		else
 		{
-			SetAndEmitHealth(100);
+			Health = 100;
 			EmitSignal(nameof(CancelRegen));
 		}
-	}
-
-	private void SetAndEmitHealth(uint hp)
-	{
-		Health = hp;
-		EmitSignal(nameof(UpdateHealth), Health);
 	}
 
 	private void _OnSwapTimeOver()
