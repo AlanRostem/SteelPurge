@@ -16,7 +16,8 @@ public class Weapon : Node2D
 	[Export] public float SlowDownMultiplier = .4f;
 	[Export] public float HoverRecoilMultiplier = .1f;
 
-	[Export] public TacticalAbility TacticalEnhancement;
+    // TODO: Make sure the enhancement is detachable
+	public TacticalAbility TacticalEnhancement { get; set; }
 
 
 	private bool _isFiring = false;
