@@ -32,7 +32,7 @@ margin_left = 8.0
 margin_top = 216.0
 margin_right = 64.0
 margin_bottom = 230.0
-text = "??/??"
+text = "Ammo: 30"
 script = ExtResource( 10 )
 
 [node name="MoneyLabel" parent="GUI/HUD" instance=ExtResource( 5 )]
@@ -48,7 +48,7 @@ margin_left = 8.0
 margin_top = 200.0
 margin_right = 128.0
 margin_bottom = 214.0
-text = "??? ???"
+text = "Weapon Name"
 script = ExtResource( 7 )
 
 [node name="HPBar" type="ProgressBar" parent="GUI/HUD"]
