@@ -3,8 +3,6 @@ using System;
 
 public class AbilityIcon : TextureRect
 {
-	private Player _player;
-
 	/*
 	public override void _Process(float delta)
 	{

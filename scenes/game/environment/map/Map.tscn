@@ -19,15 +19,15 @@ script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
-[node name="GameGUI" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="HUD" type="Control" parent="GameGUI"]
+[node name="HUD" type="Control" parent="GUI"]
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AmmoLabel" parent="GameGUI/HUD" instance=ExtResource( 5 )]
+[node name="AmmoLabel" parent="GUI/HUD" instance=ExtResource( 5 )]
 margin_left = 8.0
 margin_top = 216.0
 margin_right = 64.0
@@ -35,7 +35,7 @@ margin_bottom = 230.0
 text = "??/??"
 script = ExtResource( 10 )
 
-[node name="MoneyLabel" parent="GameGUI/HUD" instance=ExtResource( 5 )]
+[node name="MoneyLabel" parent="GUI/HUD" instance=ExtResource( 5 )]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 48.0
@@ -43,7 +43,7 @@ margin_bottom = 24.0
 text = "¤??"
 script = ExtResource( 4 )
 
-[node name="GunNameLabel" parent="GameGUI/HUD" instance=ExtResource( 5 )]
+[node name="GunNameLabel" parent="GUI/HUD" instance=ExtResource( 5 )]
 margin_left = 8.0
 margin_top = 200.0
 margin_right = 128.0
@@ -51,7 +51,7 @@ margin_bottom = 214.0
 text = "??? ???"
 script = ExtResource( 7 )
 
-[node name="HPBar" type="ProgressBar" parent="GameGUI/HUD"]
+[node name="HPBar" type="ProgressBar" parent="GUI/HUD"]
 margin_left = 280.0
 margin_top = 6.0
 margin_right = 392.0
@@ -62,7 +62,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AbilityIcon" type="TextureRect" parent="GameGUI/HUD"]
+[node name="AbilityIcon" type="TextureRect" parent="GUI/HUD"]
 visible = false
 margin_left = 144.0
 margin_top = 200.0
@@ -73,7 +73,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AbilityBar" type="ProgressBar" parent="GameGUI/HUD/AbilityIcon"]
+[node name="AbilityBar" type="ProgressBar" parent="GUI/HUD/AbilityIcon"]
 margin_left = 24.0
 margin_top = 24.0
 margin_right = 48.0
@@ -85,4 +85,4 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="UpdateHealth" from="Player" to="GameGUI/HUD/HPBar" method="_OnPlayerUpdateHealth"]
+[connection signal="UpdateHealth" from="Player" to="GUI/HUD/HPBar" method="_OnPlayerUpdateHealth"]
