@@ -3,6 +3,11 @@ using System;
 
 public class AbilityIcon : TextureRect
 {
+	public override void _Ready()
+	{
+		Visible = false; // Default 
+	}
+
 	/*
 	public override void _Process(float delta)
 	{
