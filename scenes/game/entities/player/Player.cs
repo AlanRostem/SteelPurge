@@ -31,7 +31,7 @@ public class Player : Entity
 			_weapon?.QueueFree();
 			_weapon = value;
 			_weapon.OwnerPlayer = this;
-            // TODO: Call AddChild normally after tests
+			// TODO: Call AddChild normally after tests
 			CallDeferred("add_child", _weapon);
 			EmitSignal(nameof(WeaponEquipped), value);
 		}
