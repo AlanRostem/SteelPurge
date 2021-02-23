@@ -3,8 +3,7 @@ using System;
 
 public class Weapon : Node2D
 {
-	[Export] public string ScreenDisplayName = "Weapon";
-	[Export] public string BuyDisplayName = "Weapon";
+	[Export] public string DisplayName = "Weapon";
 
 	[Export] public uint ClipSize;
 	private uint _currentClipAmmo = 0;
