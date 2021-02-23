@@ -6,7 +6,7 @@ public class AbilityBar : ProgressBar
 	/*
 	public override void _Process(float delta)
 	{
-		var ability = _player.WeaponInventory.EquippedWeapon.TacticalAbilityRef;
+		var ability = _player.WeaponInventory.EquippedWeapon.TacticalEnhancement;
 		if (ability == null) return;
 		if (ability.IsActive)
 		{
