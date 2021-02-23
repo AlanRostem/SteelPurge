@@ -21,15 +21,31 @@ public class Player : Entity
 	public bool IsJumping = false;
 	public bool IsHoldingTrigger = false;
 	public bool DidReload = false;
-	public Inventory WeaponInventory { get; private set; }
+
+	private Weapon _weapon;
+	public Weapon EquippedWeapon
+	{
+		get => _weapon;
+		set
+		{
+			_weapon = value;
+			EmitSignal(nameof(WeaponEquipped), value);
+		}
+	}
+
 
 	public override void _Ready()
 	{
 		base._Ready();
 		ParentMap.PlayerNode = this;
-		WeaponInventory = GetNode<Inventory>("Inventory");
 		Health = 100;
 	}
+
+	[Signal]
+	public delegate void WeaponEquipped(Weapon weapon);
+
+	[Signal]
+	public delegate void WeaponAmmoChanged(uint clip, uint reserve);
 
 	[Signal]
 	public delegate void TriggerAimSwap();
@@ -82,7 +98,7 @@ public class Player : Entity
 		bool isOnFloor = IsOnFloor();
 		_ProcessInput();
 
-		var canSwapDirOnMove = !WeaponInventory.EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
+		var canSwapDirOnMove = !EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
 
 		if (_left && !_right)
 		{
@@ -106,10 +122,10 @@ public class Player : Entity
 			IsWalking = false;
 		}
 
-		if (WeaponInventory.EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
+		if (EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
 		{
 			var velocity = new Vector2(Velocity);
-			velocity.x *= WeaponInventory.EquippedWeapon.SlowDownMultiplier;
+			velocity.x *= EquippedWeapon.SlowDownMultiplier;
 			Velocity = velocity;
 		}
 
@@ -140,7 +156,7 @@ public class Player : Entity
 		_right = IsActionPressed("right");
 		_jump = IsActionPressed("jump");
 
-		if (!WeaponInventory.EquippedWeapon.IsFiring && IsActionJustPressed("aim_down"))
+		if (!EquippedWeapon.IsFiring && IsActionJustPressed("aim_down"))
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
 			IsAimingDown = !IsAimingDown;

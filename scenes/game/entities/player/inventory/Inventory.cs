@@ -12,9 +12,7 @@ public class Inventory : Node2D
 
 	private Player _player;
 	private readonly Weapon[] _guns = new Weapon[MaxGuns];
-	private uint _equippedGunIdx = 0;
-	private uint _gunCount = 0;
-	public Weapon EquippedWeapon => _guns[_equippedGunIdx];
+    private uint _gunCount = 0;
     public uint ScrapCount = 0;
 
 
@@ -23,7 +21,8 @@ public class Inventory : Node2D
 		_player = GetParent<Player>();
 		var defaultGun = (Weapon) DefaultGunScene.Instance();
 		AddWeapon(defaultGun);
-	}
+        _player.EquippedWeapon = defaultGun;
+    }
 
 	public void AddWeapon(Weapon weapon)
 	{

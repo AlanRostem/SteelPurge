@@ -23,5 +23,5 @@ position = Vector2( 216, 128 )
 [node name="WoodenWall" parent="." index="3" instance=ExtResource( 4 )]
 position = Vector2( 168, 80 )
 
-[node name="Player" parent="." index="5"]
+[node name="Player" parent="." index="4"]
 position = Vector2( 96, 56 )
