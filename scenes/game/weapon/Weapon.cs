@@ -9,9 +9,6 @@ public class Weapon : Node2D
 	[Export] public uint ClipSize;
 	private uint _currentClipAmmo = 0;
 
-	[Export] public uint ReserveAmmoSize;
-	private uint _currentReserveAmmo = 0;
-
 	[Export] public uint DamagePerShot;
 	[Export] public uint RateOfFire;
 	[Export] public float ReloadSpeed;
@@ -32,7 +29,7 @@ public class Weapon : Node2D
 	public override void _Ready()
 	{
 		_currentClipAmmo = ClipSize;
-		_currentReserveAmmo = ReserveAmmoSize;
+		GetParent<Player>().KnowWeaponClipAmmo(_currentClipAmmo);
 	}
 
 	public void OnSwap()
@@ -78,23 +75,10 @@ public class Weapon : Node2D
 
 	private void OnReload()
 	{
-		if (ClipSize > _currentClipAmmo)
-		{
-			if (_currentReserveAmmo > (ClipSize - _currentClipAmmo))
-			{
-				var ammoDiff = ClipSize - _currentClipAmmo;
-				_currentClipAmmo += ammoDiff;
-				_currentReserveAmmo -= ammoDiff;
-			}
-			else
-			{
-				_currentClipAmmo += _currentReserveAmmo;
-				_currentReserveAmmo = 0;
-			}
-
-			_isReloading = false;
-			// Sounds.PlaySound(Sounds.ReloadEndSound);
-		}
+		_currentClipAmmo = ClipSize;
+		OwnerPlayer.KnowWeaponClipAmmo(_currentClipAmmo);
+		_isReloading = false;
+		// Sounds.PlaySound(Sounds.ReloadEndSound);
 	}
 
 	private void Fire()
@@ -116,10 +100,12 @@ public class Weapon : Node2D
 				_isPassivelyReloading = true;
 				EmitSignal(nameof(TriggerPassiveReload));
 			}
+
 			return;
 		}
 
 		_currentClipAmmo--;
+		OwnerPlayer.KnowWeaponClipAmmo(_currentClipAmmo);
 		OnFire();
 		if (OwnerPlayer.Velocity.y > 0 && OwnerPlayer.IsAimingDown)
 		{
@@ -139,8 +125,8 @@ public class Weapon : Node2D
 		{
 			Scale = new Vector2(OwnerPlayer.Direction, 1);
 		}
-		
-		
+
+
 		if (OwnerPlayer.IsAimingDown)
 		{
 			Rotation = OwnerPlayer.Direction * Mathf.Pi / 2f;
@@ -153,7 +139,7 @@ public class Weapon : Node2D
 		{
 			Rotation = 0;
 		}
-		
+
 		if (OwnerPlayer.DidReload && _currentClipAmmo < ClipSize)
 		{
 			if (!_isReloading)
@@ -163,7 +149,7 @@ public class Weapon : Node2D
 					_isPassivelyReloading = false;
 					EmitSignal(nameof(CancelPassiveReload));
 				}
-				
+
 				_isReloading = true;
 				EmitSignal(nameof(TriggerReload));
 				if (_isFiring)
@@ -202,39 +188,9 @@ public class Weapon : Node2D
 		return _currentClipAmmo;
 	}
 
-	public uint GetReserveAmmo()
-	{
-		return _currentReserveAmmo;
-	}
-
-	public void RefillAmmo()
-	{
-		_currentClipAmmo = ClipSize;
-		_currentReserveAmmo = ReserveAmmoSize;
-
-		_isFiring = false;
-		_isReloading = false;
-		_isPassivelyReloading = false;
-		EmitSignal(nameof(CancelFire));
-		EmitSignal(nameof(CancelReload));
-		EmitSignal(nameof(CancelPassiveReload));
-	}
-
-	public bool IsFull()
-	{
-		return _currentClipAmmo == ClipSize && _currentReserveAmmo == ReserveAmmoSize;
-	}
-	
-	
 	private void _OnPassiveReload()
 	{
 		OnReload();
 		_isPassivelyReloading = false;
 	}
 }
-
-
-
-
-
-

@@ -12,8 +12,6 @@
 [ext_resource path="res://scenes/game/entities/player/DamageReceptionCooldownTimer.cs" type="Script" id=16]
 [ext_resource path="res://scenes/game/entities/player/InvincibilityCooldownTimer.cs" type="Script" id=17]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
 height = 6.0

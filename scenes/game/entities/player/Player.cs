@@ -49,7 +49,7 @@ public class Player : Entity
 	public delegate void WeaponEquipped(Weapon weapon);
 
 	[Signal]
-	public delegate void WeaponAmmoChanged(uint clip, uint reserve);
+	public delegate void WeaponClipChanged(uint clip);
 
 	[Signal]
 	public delegate void TriggerAimSwap();
@@ -66,6 +66,11 @@ public class Player : Entity
 	[Signal]
 	public delegate void TriggerInvincibility();
 
+	public void KnowWeaponClipAmmo(uint ammo)
+	{
+		EmitSignal(nameof(WeaponClipChanged), ammo);
+	}
+	
 	public void TakeDamage(uint damage, int knockDir)
 	{
 		EmitSignal(nameof(CancelRegen));

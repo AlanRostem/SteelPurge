@@ -12,19 +12,19 @@ public class Inventory : Node2D
 
 	private Player _player;
 	private readonly Weapon[] _guns = new Weapon[MaxGuns];
-    private uint _gunCount = 0;
-    public uint ScrapCount = 0;
+	private uint _gunCount = 0;
+	public uint ScrapCount = 0;
 
 
 	public override void _Ready()
 	{
 		_player = GetParent<Player>();
-        
+		
 		// TODO: Implement inventory properly
 		var defaultGun = (Weapon) DefaultGunScene.Instance();
 		AddWeapon(defaultGun);
-        _player.EquippedWeapon = defaultGun;
-    }
+		_player.EquippedWeapon = defaultGun;
+	}
 
 	public void AddWeapon(Weapon weapon)
 	{

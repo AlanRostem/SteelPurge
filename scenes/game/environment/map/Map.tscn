@@ -85,4 +85,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="HealthChanged" from="Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]
+[connection signal="WeaponClipChanged" from="Player" to="GUI/HUD/AmmoLabel" method="_OnPlayerWeaponClipChanged"]
 [connection signal="WeaponEquipped" from="Player" to="GUI/HUD/GunNameLabel" method="_OnPlayerWeaponEquipped"]
