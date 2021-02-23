@@ -3,8 +3,6 @@ using System;
 
 public class AbilityBar : ProgressBar
 {
-	private Player _player;
-
 	/*
 	public override void _Process(float delta)
 	{
