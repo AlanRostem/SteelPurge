@@ -28,6 +28,7 @@ public class Player : Entity
 		base._Ready();
 		ParentMap.PlayerNode = this;
 		WeaponInventory = GetNode<Inventory>("Inventory");
+		SetHealthAndEmit(100);
 	}
 
 	[Signal]
