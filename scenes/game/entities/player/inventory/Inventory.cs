@@ -20,7 +20,7 @@ public class Inventory : Node2D
 	{
 		_player = GetParent<Player>();
         
-		// TODO: Remove this test
+		// TODO: Implement inventory properly
 		var defaultGun = (Weapon) DefaultGunScene.Instance();
 		AddWeapon(defaultGun);
         _player.EquippedWeapon = defaultGun;
