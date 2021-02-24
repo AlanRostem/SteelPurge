@@ -106,10 +106,6 @@ Six-shooter revolver
 
 Pump-action shotgun loaded from detachable tubes
 
-#### G20 Hellstar
-
-Double-barrel shotgun with fast reload speeds
-
 #### P53 Viper
 
 Rapid-fire submachine gun
@@ -122,9 +118,21 @@ Precision three-round burst assault rifle
 
 Powerful bolt-action rifle that pierces through enemies
 
-#### MG27 Jackhammer
+#### G20 Hellstar
+
+Eight-round burst rapid-fire machine rifle
+
+#### Bellum AT-98
+
+Single-round mobile anti-tank shell launcher that pierces through enemies and explodes on hard surfaces
+
+#### M3 Jackhammer
 
 Heavy machine gun with high ammo capacity
+
+#### Swarm AA
+
+Quad-rocket launcher that tracks enemies the farther the rockets travel
 
 ### Levels
 
