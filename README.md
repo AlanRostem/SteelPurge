@@ -100,19 +100,31 @@ By firing downwards the player can fall slower. The slower the weapon makes you 
 
 #### Judger .45
 
-#### P53 Viper
+Six-shooter revolver 
 
 #### Marshal D12
 
+Pump-action shotgun loaded from detachable tubes
+
+#### G20 Hellstar
+
+Double-barrel shotgun with fast reload speeds
+
+#### P53 Viper
+
+Rapid-fire submachine gun
+
 #### M11 Warden
+
+Precision three-round burst assault rifle
 
 #### Hamilton 700
 
+Powerful bolt-action rifle that pierces through enemies
+
 #### MG27 Jackhammer
 
-#### Bellum AT-98
-
-#### WASP AA
+Heavy machine gun with high ammo capacity
 
 ### Levels
 
