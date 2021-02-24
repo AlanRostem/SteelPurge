@@ -34,7 +34,7 @@ public class TacticalAbility : WeaponAbility
 
 	}
 
-    public override void _Process(float delta)
+	public override void _Process(float delta)
 	{
 		base._Process(delta);
 		if (Input.IsActionJustPressed("tactical_ability"))

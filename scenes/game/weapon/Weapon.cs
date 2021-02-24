@@ -15,8 +15,10 @@ public class Weapon : Node2D
 	[Export] public float SlowDownMultiplier = .4f;
 	[Export] public float HoverRecoilMultiplier = .1f;
 
-    // TODO: Make sure the enhancement is detachable
+	// TODO: Make sure the enhancement is detachable
 	public TacticalAbility TacticalEnhancement { get; set; }
+	public TacticalAbility AfterFireMechanism { get; set; }
+	public TacticalAbility FiringModification { get; set; }
 
 
 	private bool _isFiring = false;
@@ -95,11 +97,9 @@ public class Weapon : Node2D
 		{
 			_isFiring = false;
 			EmitSignal(nameof(CancelFire));
-			if (!_isPassivelyReloading)
-			{
-				_isPassivelyReloading = true;
-				EmitSignal(nameof(TriggerPassiveReload));
-			}
+			if (_isPassivelyReloading) return;
+			_isPassivelyReloading = true;
+			EmitSignal(nameof(TriggerPassiveReload));
 
 			return;
 		}
@@ -107,12 +107,10 @@ public class Weapon : Node2D
 		_currentClipAmmo--;
 		OwnerPlayer.KnowWeaponClipAmmo(_currentClipAmmo);
 		OnFire();
-		if (OwnerPlayer.Velocity.y > 0 && OwnerPlayer.IsAimingDown)
-		{
-			var velocity = new Vector2(OwnerPlayer.Velocity);
-			velocity.y *= HoverRecoilMultiplier;
-			OwnerPlayer.Velocity = velocity;
-		}
+		if (!(OwnerPlayer.Velocity.y > 0) || !OwnerPlayer.IsAimingDown) return;
+		var velocity = new Vector2(OwnerPlayer.Velocity);
+		velocity.y *= HoverRecoilMultiplier;
+		OwnerPlayer.Velocity = velocity;
 	}
 
 	public virtual void OnFire()
@@ -164,17 +162,15 @@ public class Weapon : Node2D
 
 		if (OwnerPlayer.IsHoldingTrigger)
 		{
-			if (!_isReloading && !_isFiring && _currentClipAmmo > 0)
+			if (_isReloading || _isFiring || _currentClipAmmo <= 0) return;
+			_isFiring = true;
+			_isHoldingTrigger = true;
+			Fire();
+			EmitSignal(nameof(TriggerFire));
+			if (_isPassivelyReloading)
 			{
-				_isFiring = true;
-				_isHoldingTrigger = true;
-				Fire();
-				EmitSignal(nameof(TriggerFire));
-				if (_isPassivelyReloading)
-				{
-					_isPassivelyReloading = false;
-					EmitSignal(nameof(CancelPassiveReload));
-				}
+				_isPassivelyReloading = false;
+				EmitSignal(nameof(CancelPassiveReload));
 			}
 		}
 		else
