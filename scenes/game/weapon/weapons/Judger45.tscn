@@ -5,12 +5,12 @@
 [ext_resource path="res://scenes/game/weapon/ability/firing_device/hit_scan/HitScanFiringDevice.tscn" type="PackedScene" id=3]
 
 [node name="Weapon" instance=ExtResource( 2 )]
-PassiveReloadSpeed = 3.0
-ReloadSpeed = 1.5
+DisplayName = "Judger .45"
 ClipSize = 6
 DamagePerShot = 150
 RateOfFire = 300
-DisplayName = "Judger .45"
+ReloadSpeed = 1.5
+PassiveReloadSpeed = 3.0
 
 [node name="JudgerSprite" type="Sprite" parent="." index="3"]
 texture = ExtResource( 1 )

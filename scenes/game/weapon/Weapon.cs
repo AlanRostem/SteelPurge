@@ -1,6 +1,5 @@
 using Godot;
 
-[Tool]
 public class Weapon : Node2D
 {
 	[Export] public string DisplayName = "Weapon";
@@ -119,8 +118,6 @@ public class Weapon : Node2D
 
 	public override void _Process(float delta)
 	{
-		if (Engine.EditorHint)
-			return;
 		if (Scale.x != OwnerPlayer.Direction)
 		{
 			Scale = new Vector2(OwnerPlayer.Direction, 1);
@@ -190,15 +187,5 @@ public class Weapon : Node2D
 	{
 		OnReload();
 		_isPassivelyReloading = false;
-	}
-
-	public override string _GetConfigurationWarning()
-	{
-		foreach (Node node in GetChildren())
-		{
-			if (node.IsInGroup("firing_device"))
-				return "";
-		}
-		return "No FiringDevice node is attached. The weapon cannot fire.";
 	}
 }
