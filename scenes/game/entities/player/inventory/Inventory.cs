@@ -15,7 +15,6 @@ public class Inventory : Node2D
 	private uint _gunCount = 0;
 	public uint ScrapCount = 0;
 
-
 	public override void _Ready()
 	{
 		_player = GetParent<Player>();
