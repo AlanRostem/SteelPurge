@@ -3,11 +3,11 @@ using System;
 
 public class HitScanner : RayCast2D
 {
-	private Weapon _parent;
+	private HitScanFiringDevice _parent;
 	public override void _Ready()
 	{
 		base._Ready();
-		_parent = GetParent<HitScanFiringDevice>().GetWeapon();
+		_parent = GetParent<HitScanFiringDevice>();
 	}
 
 	public void _OnScan(float range, uint damage)
@@ -22,7 +22,7 @@ public class HitScanner : RayCast2D
 				break;
 			case VulnerableHitbox hitBox:
 				hitBox.EmitSignal(nameof(VulnerableHitbox.Hit), damage);
-				_parent.EmitSignal(nameof(Weapon.DamageDealt), damage, hitBox);
+				_parent.GetWeapon().EmitSignal(nameof(Weapon.DamageDealt), damage, hitBox);
 				break;
 		}
 	}
