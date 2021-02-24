@@ -10,7 +10,7 @@ public class HitScanner : RayCast2D
 		_parent = GetParent<HitScanFiringDevice>();
 	}
 
-	public void _OnScan(float range, uint damage)
+	public void _OnScan(uint damage, float range)
 	{
 		CastTo = new Vector2(range, 0);
 		ForceRaycastUpdate();
