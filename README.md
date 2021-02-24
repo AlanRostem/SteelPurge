@@ -1,8 +1,6 @@
 # Steel Purge
 
-Steel Purge is a passion project I'm working on for both learning Godot Engine and fun.
-All ideas are my own, but the game mechanics are heavily inspired by the Call of Duty: 
-Zombies series.
+Steel Purge is a passion project I'm working on for both learning Godot Engine and fun
 
 ## Ideas
 
@@ -98,21 +96,41 @@ By firing downwards the player can fall slower. The slower the weapon makes you 
 
 ### Weapon Ideas
 
-#### Judger .45
+#### Judger .37
 
-#### P53 Viper
+Six-shooter revolver 
 
 #### Marshal D12
 
+Pump-action shotgun loaded from detachable tubes
+
+#### P53 Viper
+
+Rapid-fire submachine gun
+
 #### M11 Warden
+
+Precision three-round burst assault rifle
 
 #### Hamilton 700
 
-#### MG27 Jackhammer
+Powerful bolt-action rifle that pierces through enemies
+
+#### G20 Hellstar
+
+Eight-round burst rapid-fire machine rifle
 
 #### Bellum AT-98
 
-#### WASP AA
+Single-round mobile anti-tank shell launcher that pierces through enemies and explodes on hard surfaces
+
+#### MG-X Jackhammer
+
+Heavy machine gun with high ammo capacity
+
+#### Swarm AA
+
+Quad-rocket launcher that tracks enemies the farther the rockets travel
 
 ### Levels
 
