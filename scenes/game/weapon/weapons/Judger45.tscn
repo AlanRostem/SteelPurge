@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/texture/weapon/judger/judger.png" type="Texture" id=1]
+[ext_resource path="res://scenes/game/weapon/Weapon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/weapon/ability/firing_device/hit_scan/HitScanFiringDevice.tscn" type="PackedScene" id=3]
+
+[node name="Weapon" instance=ExtResource( 2 )]
+ClipSize = 6
+DamagePerShot = 150
+RateOfFire = 300
+ReloadSpeed = 1.5
+PassiveReloadSpeed = 3.0
+
+[node name="JudgerSprite" type="Sprite" parent="." index="3"]
+texture = ExtResource( 1 )
+offset = Vector2( 12, 2 )
+
+[node name="HitScanFiringDevice" parent="." index="4" instance=ExtResource( 3 )]

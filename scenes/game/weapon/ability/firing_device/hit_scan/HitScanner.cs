@@ -3,14 +3,14 @@ using System;
 
 public class HitScanner : RayCast2D
 {
-	private HitScanWeapon _parent;
+	private Weapon _parent;
 	public override void _Ready()
 	{
 		base._Ready();
-		_parent = GetParent<HitScanWeapon>();
+		_parent = GetParent<HitScanFiringDevice>().GetWeapon();
 	}
 
-	private void _OnScan(float range, uint damage)
+	public void _OnScan(float range, uint damage)
 	{
 		CastTo = new Vector2(range, 0);
 		ForceRaycastUpdate();

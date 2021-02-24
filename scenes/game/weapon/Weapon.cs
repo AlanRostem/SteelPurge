@@ -17,7 +17,7 @@ public class Weapon : Node2D
 
 	// TODO: Make sure the enhancement is detachable
 	public TacticalAbility TacticalEnhancement { get; set; }
-	public TacticalAbility AfterFireMechanism { get; set; }
+	public FiringDevice FiringDevice { get; set; }
 	public TacticalAbility FiringModification { get; set; }
 
 
@@ -53,6 +53,9 @@ public class Weapon : Node2D
 		if (Rotation != OwnerPlayer.AimAngle)
 			Rotation = OwnerPlayer.AimAngle;
 	}
+
+	[Signal]
+	public delegate void Fired();
 
 	[Signal]
 	public delegate void TriggerFire();
@@ -106,16 +109,13 @@ public class Weapon : Node2D
 
 		_currentClipAmmo--;
 		OwnerPlayer.KnowWeaponClipAmmo(_currentClipAmmo);
-		OnFire();
+		EmitSignal(nameof(Fired));
 		if (!(OwnerPlayer.Velocity.y > 0) || !OwnerPlayer.IsAimingDown) return;
 		var velocity = new Vector2(OwnerPlayer.Velocity);
 		velocity.y *= HoverRecoilMultiplier;
 		OwnerPlayer.Velocity = velocity;
 	}
 
-	public virtual void OnFire()
-	{
-	}
 
 	public override void _Process(float delta)
 	{
