@@ -5,10 +5,8 @@
 [ext_resource path="res://assets/texture/weapon/judger/tactical_ability_icon.png" type="Texture" id=3]
 
 [node name="Fusion" instance=ExtResource( 2 )]
-ScreenDisplayName = "Fusion .238"
-BuyDisplayName = "Fusion"
+DisplayName = "Fusion .238"
 ClipSize = 8
-ReserveAmmoSize = 48
 DamagePerShot = 270
 RateOfFire = 250
 
