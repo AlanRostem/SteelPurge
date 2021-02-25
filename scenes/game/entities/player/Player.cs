@@ -41,7 +41,6 @@ public class Player : Entity
 	public override void _Ready()
 	{
 		base._Ready();
-		ParentMap.PlayerNode = this;
 		Health = 100;
 	}
 

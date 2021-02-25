@@ -3,7 +3,6 @@ using System;
 
 public class Map : Node2D
 {
-	public Player PlayerNode;
 	private World _world;
 
 	public override void _Ready()

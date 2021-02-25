@@ -38,7 +38,7 @@ public class XWFrontRogue : Enemy
 	protected override void _OnMovement(float delta)
 	{
 		base._OnMovement(delta);
-		var dir = Mathf.Sign(ParentMap.PlayerNode.Position.x - Position.x);
+		var dir = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
 		if (dir != Direction && _canSwapDir)
 		{
 			EmitSignal(nameof(TriggerDirSwapCooldown));
@@ -75,7 +75,7 @@ public class XWFrontRogue : Enemy
 
 	private void _OnAttackPlayer()
 	{
-		ParentMap.PlayerNode.TakeDamage(DamagePerHit, Direction);
+		ParentWorld.PlayerNode.TakeDamage(DamagePerHit, Direction);
 	}
 
 	private void _OnRogueCollided(object body)

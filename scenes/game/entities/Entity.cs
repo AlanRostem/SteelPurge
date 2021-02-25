@@ -6,7 +6,7 @@ using Object = Godot.Object;
 public class Entity : KinematicBody2D
 {
 	public const float Gravity = 600;
-	public Map ParentMap { get; private set; }
+	public World ParentWorld { get; private set; }
 	public bool CanMove = true;
 
 	public uint Health
@@ -33,7 +33,7 @@ public class Entity : KinematicBody2D
 	
 	public override void _Ready()
 	{
-		ParentMap = GetParent().GetParent<Map>();
+		ParentWorld = GetParent<World>();
 	}
 
 	public void ApplyStatusEffect(StatusEffect effect)
