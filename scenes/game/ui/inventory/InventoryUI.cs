@@ -12,7 +12,10 @@ public class InventoryUI : TabContainer
 	{
 		if (Input.IsActionJustPressed("ui_inventory_switch_tab_left"))
 		{
-			CurrentTab = (CurrentTab - 1) % GetTabCount();
+			if (CurrentTab == 0)
+				CurrentTab = GetTabCount()-1;
+			else
+				CurrentTab--;
 		}
 
 		if (Input.IsActionJustPressed("ui_inventory_switch_tab_right"))
