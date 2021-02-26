@@ -1,9 +1,11 @@
 using Godot;
-using System;
+using Godot.Collections;
 
 public class Game : Node2D
 {
 	private World _world;
+
+	// private Dictionary<string, object> _saveData = new Dictionary<string, object>();
 
 	[Signal]
 	private delegate void Paused();
