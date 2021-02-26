@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Map : Node2D
+public class Game : Node2D
 {
 	private World _world;
 
