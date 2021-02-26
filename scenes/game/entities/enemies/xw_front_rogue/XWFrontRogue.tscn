@@ -9,7 +9,6 @@
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogueTrackCooldownTimer.cs" type="Script" id=7]
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/BodyShape.cs" type="Script" id=8]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 7 )
 

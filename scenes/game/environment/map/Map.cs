@@ -5,6 +5,9 @@ public class Map : Node2D
 {
 	private World _world;
 
+	[Signal]
+	private delegate void Paused();
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -16,6 +19,7 @@ public class Map : Node2D
 		if (Input.IsActionJustPressed("pause"))
 		{
 			GetTree().Paused = !GetTree().Paused;
+			EmitSignal(nameof(Paused));
 		}
 	}
 }

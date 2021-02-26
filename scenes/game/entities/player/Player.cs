@@ -51,19 +51,19 @@ public class Player : Entity
 	public delegate void WeaponClipChanged(uint clip);
 
 	[Signal]
-	public delegate void TriggerAimSwap();
+	private delegate void TriggerAimSwap();
 
 	[Signal]
-	public delegate void TriggerRegenCooldown();
+	private delegate void TriggerRegenCooldown();
 
 	[Signal]
-	public delegate void CancelRegen();
+	private delegate void CancelRegen();
 
 	[Signal]
-	public delegate void TriggerDamageReceptionCooldown();
+	private delegate void TriggerDamageReceptionCooldown();
 
 	[Signal]
-	public delegate void TriggerInvincibility();
+	private delegate void TriggerInvincibility();
 
 	public void KnowWeaponClipAmmo(uint ammo)
 	{
