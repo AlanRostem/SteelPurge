@@ -7,6 +7,9 @@ public class Map : Node2D
 
 	[Signal]
 	private delegate void Paused();
+	
+	[Signal]
+	private delegate void OpenInventory();
 
 	public override void _Ready()
 	{
@@ -20,6 +23,12 @@ public class Map : Node2D
 		{
 			GetTree().Paused = !GetTree().Paused;
 			EmitSignal(nameof(Paused));
+		}
+		
+		if (Input.IsActionJustPressed("inventory"))
+		{
+			GetTree().Paused = !GetTree().Paused;
+			EmitSignal(nameof(OpenInventory));
 		}
 	}
 }
