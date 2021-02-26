@@ -28,11 +28,8 @@ script = ExtResource( 12 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="HUD" type="Control" parent="GUI"]
+[node name="HUD" type="Container" parent="GUI"]
 script = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AmmoLabel" parent="GUI/HUD" instance=ExtResource( 5 )]
 margin_left = 8.0
@@ -92,7 +89,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InventoryUI" type="Control" parent="GUI"]
+[node name="InventoryUI" type="TabContainer" parent="GUI"]
 pause_mode = 2
 margin_left = 72.0
 margin_top = 56.0
@@ -102,6 +99,22 @@ script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Weapons" type="Tabs" parent="GUI/InventoryUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Parts" type="Tabs" parent="GUI/InventoryUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 [connection signal="OpenInventory" from="." to="GUI/InventoryUI" method="_OnOpen"]
 [connection signal="HealthChanged" from="World/Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]
 [connection signal="WeaponClipChanged" from="World/Player" to="GUI/HUD/AmmoLabel" method="_OnPlayerWeaponClipChanged"]

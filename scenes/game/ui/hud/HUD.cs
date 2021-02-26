@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class HUD : Control
+public class HUD : Container
 {
 	
 }
