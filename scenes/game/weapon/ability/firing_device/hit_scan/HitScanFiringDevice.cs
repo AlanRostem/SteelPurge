@@ -6,11 +6,15 @@ public class HitScanFiringDevice : FiringDevice
 	[Export] public float Range = 800;
 
 	[Signal]
-	public delegate void Scanned(uint damage, float range);
+	private delegate void Scanned(uint damage, float range, float angle);
+	
+	public void ScanHit(float angle)
+	{
+		EmitSignal(nameof(Scanned), GetWeapon().DamagePerShot, Range, angle);
+	}
 	
 	public override void OnFire()
 	{
-		var damage = GetWeapon().DamagePerShot;
-		EmitSignal(nameof(Scanned), damage, Range);
+		ScanHit(0);
 	}
 }

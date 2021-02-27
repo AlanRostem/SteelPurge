@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/game/weapon/Weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/weapon/ability/firing_device/hit_scan/HitScanFiringDevice.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/weapon/ability/firing_device/shot_gun/ShotGunFiringDevice.cs" type="Script" id=3]
+[ext_resource path="res://assets/texture/weapon/marshal/marshal.png" type="Texture" id=4]
+
+[node name="MarshalD12" instance=ExtResource( 1 )]
+DisplayName = "Marshal D12"
+ClipSize = 10
+DamagePerShot = 100
+RateOfFire = 370
+ReloadSpeed = 2.0
+PassiveReloadSpeed = 4.0
+
+[node name="ShotGunFiringDevice" parent="." index="0" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="." index="4"]
+position = Vector2( 7, 0 )
+texture = ExtResource( 4 )

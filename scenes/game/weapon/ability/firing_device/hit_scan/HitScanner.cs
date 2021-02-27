@@ -10,9 +10,9 @@ public class HitScanner : RayCast2D
 		_parent = GetParent<HitScanFiringDevice>();
 	}
 
-	public void _OnScan(uint damage, float range)
+	protected virtual void _OnScan(uint damage, float range, float angle)
 	{
-		CastTo = new Vector2(range, 0);
+		CastTo = new Vector2(range * Mathf.Cos(angle), range * Mathf.Sin(angle));
 		ForceRaycastUpdate();
 		if (!IsColliding()) return;
 		var collider = GetCollider();
