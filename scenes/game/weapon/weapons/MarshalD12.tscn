@@ -13,9 +13,9 @@ RateOfFire = 420
 ReloadSpeed = 2.0
 PassiveReloadSpeed = 4.0
 
-[node name="ShotGunFiringDevice" parent="." index="0" instance=ExtResource( 2 )]
-script = ExtResource( 3 )
-
-[node name="Sprite" type="Sprite" parent="." index="4"]
+[node name="Sprite" type="Sprite" parent="." index="3"]
 position = Vector2( 7, 3 )
 texture = ExtResource( 4 )
+
+[node name="ShotGunFiringDevice" parent="." index="4" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
