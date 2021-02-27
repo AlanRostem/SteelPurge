@@ -7,9 +7,9 @@
 
 [node name="MarshalD12" instance=ExtResource( 1 )]
 DisplayName = "Marshal D12"
-ClipSize = 10
-DamagePerShot = 100
-RateOfFire = 370
+ClipSize = 20
+DamagePerShot = 2
+RateOfFire = 420
 ReloadSpeed = 2.0
 PassiveReloadSpeed = 4.0
 

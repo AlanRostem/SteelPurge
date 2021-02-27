@@ -4,7 +4,7 @@ using System;
 public class ShotGunFiringDevice : HitScanFiringDevice
 {
 	[Export] public uint PelletCount = 12;
-    [Export] public float SpreadAngle = 16;
+	[Export] public float SpreadAngle = 16;
 
 	public override void OnFire()
 	{
@@ -17,7 +17,7 @@ public class ShotGunFiringDevice : HitScanFiringDevice
 		}
 	}
 
-    /*
+	/*
 	public override void _Draw()
 	{
 		float spread = Mathf.Deg2Rad(SpreadAngle);

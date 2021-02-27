@@ -4,10 +4,10 @@
 [ext_resource path="res://scenes/game/weapon/Weapon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/weapon/ability/firing_device/hit_scan/HitScanFiringDevice.tscn" type="PackedScene" id=3]
 
-[node name="Weapon" instance=ExtResource( 2 )]
-DisplayName = "Judger .45"
+[node name="Judger45" instance=ExtResource( 2 )]
+DisplayName = "Judger .37"
 ClipSize = 6
-DamagePerShot = 150
+DamagePerShot = 40
 RateOfFire = 300
 ReloadSpeed = 1.5
 PassiveReloadSpeed = 3.0
