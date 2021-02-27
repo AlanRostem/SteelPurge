@@ -5,7 +5,7 @@ public class Weapon : Node2D
 	[Export] public string DisplayName = "Weapon";
 
 	[Export] public uint ClipSize;
-	private uint _currentClipAmmo = 0;
+	public uint CurrentAmmo = 0;
 
 	[Export] public uint DamagePerShot;
 	[Export] public uint RateOfFire;
@@ -29,8 +29,8 @@ public class Weapon : Node2D
 
 	public override void _Ready()
 	{
-		_currentClipAmmo = ClipSize;
-		GetParent<Player>().KnowWeaponClipAmmo(_currentClipAmmo);
+		CurrentAmmo = ClipSize;
+		GetParent<Player>().KnowWeaponClipAmmo(CurrentAmmo);
 	}
 
 	public void OnSwap()
@@ -79,15 +79,20 @@ public class Weapon : Node2D
 
 	private void OnReload()
 	{
-		_currentClipAmmo = ClipSize;
-		OwnerPlayer.KnowWeaponClipAmmo(_currentClipAmmo);
+		ReloadPerformed();
+		OwnerPlayer.KnowWeaponClipAmmo(CurrentAmmo);
 		_isReloading = false;
 		// Sounds.PlaySound(Sounds.ReloadEndSound);
+	}
+	
+	protected virtual void ReloadPerformed()
+	{
+		CurrentAmmo = ClipSize;
 	}
 
 	private void Fire()
 	{
-		if (_currentClipAmmo == 0)
+		if (CurrentAmmo == 0)
 		{
 			_isFiring = false;
 			EmitSignal(nameof(CancelFire));
@@ -106,8 +111,8 @@ public class Weapon : Node2D
 			return;
 		}
 
-		_currentClipAmmo--;
-		OwnerPlayer.KnowWeaponClipAmmo(_currentClipAmmo);
+		CurrentAmmo--;
+		OwnerPlayer.KnowWeaponClipAmmo(CurrentAmmo);
 		EmitSignal(nameof(Fired));
 		if (!(OwnerPlayer.Velocity.y > 0) || !OwnerPlayer.IsAimingDown) return;
 		var velocity = new Vector2(OwnerPlayer.Velocity);
@@ -137,7 +142,7 @@ public class Weapon : Node2D
 			Rotation = 0;
 		}
 
-		if (OwnerPlayer.DidReload && _currentClipAmmo < ClipSize)
+		if (OwnerPlayer.DidReload && CurrentAmmo < ClipSize)
 		{
 			if (!_isReloading)
 			{
@@ -161,7 +166,7 @@ public class Weapon : Node2D
 
 		if (OwnerPlayer.IsHoldingTrigger)
 		{
-			if (_isReloading || _isFiring || _currentClipAmmo <= 0) return;
+			if (_isReloading || _isFiring || CurrentAmmo <= 0) return;
 			_isFiring = true;
 			_isHoldingTrigger = true;
 			Fire();
@@ -180,7 +185,7 @@ public class Weapon : Node2D
 
 	public uint GetClipAmmo()
 	{
-		return _currentClipAmmo;
+		return CurrentAmmo;
 	}
 
 	private void _OnPassiveReload()
