@@ -13,7 +13,7 @@ public class Inventory : Node2D
 	private Player _player;
 	private readonly Weapon[] _guns = new Weapon[MaxGuns];
 	private uint _gunCount = 0;
-    
+	
 	public uint ScrapCount = 0;
 	public uint XeSlugCount = 0;
 
@@ -37,7 +37,7 @@ public class Inventory : Node2D
 	public void PickUpGun(Weapon weapon)
 	{
 		// TODO: Implement
-	}
+    }
 
 	[Signal]
 	public delegate void WeaponAdded(Weapon weapon);

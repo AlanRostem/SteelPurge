@@ -23,6 +23,7 @@ public class Player : Entity
 	public bool DidReload = false;
 
 	private Weapon _weapon;
+	public Inventory PlayerInventory;
 	public Weapon EquippedWeapon
 	{
 		get => _weapon;
@@ -42,7 +43,8 @@ public class Player : Entity
 	{
 		base._Ready();
 		Health = 100;
-	}
+        PlayerInventory = GetNode<Inventory>("PlayerInventory");
+    }
 
 	[Signal]
 	public delegate void WeaponEquipped(Weapon weapon);

@@ -3,18 +3,16 @@ using System;
 
 public class SpecialWeapon : Weapon
 {
-	[Export]
-	public uint MaxReserveAmmo = 100;
-	protected override void ReloadPerformed()
+    protected override void ReloadPerformed()
 	{
 		if (ClipSize > CurrentAmmo) {
-			if (MaxReserveAmmo > (ClipSize - CurrentAmmo)) {
+			if (OwnerPlayer.PlayerInventory.XeSlugCount > (ClipSize - CurrentAmmo)) {
 				var ammoDiff = ClipSize - CurrentAmmo;
 				CurrentAmmo += ammoDiff;
-				MaxReserveAmmo -= ammoDiff;
+                OwnerPlayer.PlayerInventory.XeSlugCount -= ammoDiff;
 			} else {
-				CurrentAmmo += MaxReserveAmmo;
-				MaxReserveAmmo = 0;
+				CurrentAmmo += OwnerPlayer.PlayerInventory.XeSlugCount;
+                OwnerPlayer.PlayerInventory.XeSlugCount = 0;
 			}
 		}
 	}

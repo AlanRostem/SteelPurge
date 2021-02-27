@@ -30,6 +30,7 @@ public class Weapon : Node2D
 	{
 		CurrentAmmo = ClipSize;
 		GetParent<Player>().KnowWeaponClipAmmo(CurrentAmmo);
+        
 	}
 
 	public void OnSwap()
