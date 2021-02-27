@@ -16,6 +16,6 @@ public class SpecialWeapon : Weapon
 				CurrentAmmo += MaxReserveAmmo;
 				MaxReserveAmmo = 0;
 			}
-        }
+		}
 	}
 }

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.2.24)  27 FEB 2021 21:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.2.24)  28 FEB 2021 00:03
 entering extended mode
 **./Chapter02.tex
 (Chapter02.tex
@@ -63,11 +63,11 @@ Here is how much of TeX's memory you used:
  18000 multiletter control sequences out of 15000+200000
  405593 words of font info for 34 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,4n,67p,387b,102s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 64i,4n,67p,412b,102s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
 :/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Fil
 es/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on Chapter02.pdf (3 pages, 52581 bytes).
+Output written on Chapter02.pdf (3 pages, 51581 bytes).
 PDF statistics:
  24 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -19,7 +19,6 @@ public class Weapon : Node2D
 	public FiringDevice FiringDevice { get; set; }
 	public TacticalAbility FiringModification { get; set; }
 
-
 	private bool _isFiring = false;
 	private bool _isReloading = false;
 	private bool _isPassivelyReloading = false;
