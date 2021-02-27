@@ -17,7 +17,6 @@ public class Weapon : Node2D
 	// TODO: Make sure the enhancement is detachable
 	public TacticalAbility TacticalEnhancement { get; set; }
 	public FiringDevice FiringDevice { get; set; }
-	public TacticalAbility FiringModification { get; set; }
 
 	private bool _isFiring = false;
 	private bool _isReloading = false;
