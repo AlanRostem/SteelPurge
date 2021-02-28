@@ -4,7 +4,9 @@ using System;
 public class Player : Entity
 {
 	public static readonly uint HealthRegenCount = 15;
-	private static readonly float WalkSpeed = 80;
+	private static readonly float MaxWalkSpeed = 80;
+	private static readonly float WalkSpeedGround = 330;
+	private static readonly float WalkSpeedAir = 40;
 	private static readonly float JumpSpeed = 220;
 
 	private bool _left = false;
@@ -98,7 +100,7 @@ public class Player : Entity
 		{
 			CanTakeDamage = false;
 			_isStunned = true;
-			Velocity = (new Vector2(WalkSpeed * 2 * knockDir, -JumpSpeed / 2));
+			Velocity = (new Vector2(WalkSpeedGround * 2 * knockDir, -JumpSpeed / 2));
 			EmitSignal(nameof(TriggerDamageReceptionCooldown));
 			EmitSignal(nameof(TriggerInvincibility));
 		}
@@ -129,7 +131,7 @@ public class Player : Entity
 
 		if (_left && !_right)
 		{
-			MoveX(-WalkSpeed);
+			AccelerateX(-WalkSpeedGround, MaxWalkSpeed, delta);
 			if (canSwapDirOnMove)
 				Direction = -1;
 			IsWalking = true;
@@ -137,7 +139,7 @@ public class Player : Entity
 
 		else if (_right && !_left)
 		{
-			MoveX(WalkSpeed);
+			AccelerateX(WalkSpeedGround, MaxWalkSpeed, delta);
 			if (canSwapDirOnMove)
 				Direction = 1;
 			IsWalking = true;
@@ -145,15 +147,15 @@ public class Player : Entity
 		else
 		{
 			if (isOnFloor)
-				Velocity = new Vector2(0, Velocity.y);
+				Velocity.x = Mathf.Lerp(Velocity.x, 0, .4f);
+			else
+				Velocity.x = Mathf.Lerp(Velocity.x, 0, .05f);
 			IsWalking = false;
 		}
 
 		if (EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
 		{
-			var velocity = new Vector2(Velocity);
-			velocity.x *= EquippedWeapon.SlowDownMultiplier;
-			Velocity = velocity;
+			Velocity.x *= EquippedWeapon.SlowDownMultiplier;
 		}
 
 		IsJumping = !isOnFloor;
@@ -166,6 +168,7 @@ public class Player : Entity
 		if (_jump)
 			MoveY(-JumpSpeed);
 	}
+
 
 	private bool IsActionPressed(string action)
 	{

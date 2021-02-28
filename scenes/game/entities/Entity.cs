@@ -21,12 +21,8 @@ public class Entity : KinematicBody2D
 	}
 
 	private uint _health = 100;
-	public Vector2 Velocity {
-		get => _velocity;
-		set => _velocity = value;
-	}
 
-	private Vector2 _velocity;
+    public Vector2 Velocity;
 
 	[Signal]
 	public delegate void HealthChanged(uint health);
@@ -43,29 +39,36 @@ public class Entity : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		_velocity.y += Gravity * delta;
-		_velocity = MoveAndSlide(_velocity, Vector2.Up, true);
+		Velocity.y += Gravity * delta;
+		Velocity = MoveAndSlide(Velocity, Vector2.Up, false);
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
 			var collision = GetSlideCollision(i);
-			_OnCollision(collision.Collider);
+            if (collision.Normal.y != 0)
+                GD.Print(collision.Normal);
+            _OnCollision(collision.Collider);
 		}
 
 		_OnMovement(delta);
 	}
 
 
+    public void AccelerateX(float x, float maxSpeed, float delta)
+    {
+        if (CanMove)
+            Velocity.x = Mathf.Clamp(Velocity.x + x * delta, -maxSpeed, maxSpeed);
+    }
 
 	public void MoveX(float x)
 	{
 		if (CanMove)
-			_velocity.x = x;
+			Velocity.x = x;
 	}
 
 	public void MoveY(float y)
 	{
 		if (CanMove)
-			_velocity.y = y;
+			Velocity.y = y;
 	}
 
 	public virtual void _OnCollision(Object collider)
