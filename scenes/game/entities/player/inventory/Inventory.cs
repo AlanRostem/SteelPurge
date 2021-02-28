@@ -37,7 +37,7 @@ public class Inventory : Node2D
 	public void PickUpGun(Weapon weapon)
 	{
 		// TODO: Implement
-    }
+	}
 
 	[Signal]
 	public delegate void WeaponAdded(Weapon weapon);
