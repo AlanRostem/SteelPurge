@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/xe_slug.png-7b94823b93a4bccaca08e3eac4d16975.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/texture/ui/icon/xe_slug.png"
+dest_files=[ "res://.import/xe_slug.png-7b94823b93a4bccaca08e3eac4d16975.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

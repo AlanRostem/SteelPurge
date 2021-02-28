@@ -5,6 +5,6 @@ public class AmmoLabel : Label
 {
 	private void _OnPlayerWeaponClipChanged(uint clip)
 	{
-		Text = "Ammo: " + clip;
+		Text = clip.ToString();
 	}
 }
