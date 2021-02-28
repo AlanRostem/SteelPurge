@@ -26,9 +26,9 @@ public class XWFrontRogue : Enemy
 		_canSwapDir = true;
 	}
 
-	public override void _OnCollision(Object collider)
+	public override void _OnCollision(KinematicCollision2D collider)
 	{
-		if (collider is TileMap && IsOnWall())
+		if (collider.Collider is TileMap && IsOnWall())
 		{
 			MoveY(-WalkSpeed * 1.25f);
 		}

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Object = Godot.Object;
 
 public class Player : Entity
 {
@@ -46,7 +47,7 @@ public class Player : Entity
 	{
 		base._Ready();
 		Health = 100;
-		PlayerInventory = GetNode<Inventory>("PlayerInventory");
+		PlayerInventory = GetNode<Inventory>("Inventory");
 	}
 
 	[Signal]
@@ -100,7 +101,7 @@ public class Player : Entity
 		{
 			CanTakeDamage = false;
 			_isStunned = true;
-			Velocity = (new Vector2(WalkSpeedGround * 2 * knockDir, -JumpSpeed / 2));
+			Velocity = (new Vector2(MaxWalkSpeed * 2 * knockDir, -JumpSpeed / 2));
 			EmitSignal(nameof(TriggerDamageReceptionCooldown));
 			EmitSignal(nameof(TriggerInvincibility));
 		}
@@ -147,7 +148,7 @@ public class Player : Entity
 		else
 		{
 			if (isOnFloor)
-				Velocity.x = Mathf.Lerp(Velocity.x, 0, .4f);
+				Velocity.x = Mathf.Lerp(Velocity.x, 0, .9f);
 			else
 				Velocity.x = Mathf.Lerp(Velocity.x, 0, .05f);
 			IsWalking = false;
@@ -169,7 +170,6 @@ public class Player : Entity
 			MoveY(-JumpSpeed);
 	}
 
-
 	private bool IsActionPressed(string action)
 	{
 		return Input.IsActionPressed(action) && !_isStunned;
@@ -180,7 +180,7 @@ public class Player : Entity
 		return Input.IsActionJustPressed(action) && !_isStunned;
 	}
 
-	private void _ProcessInput()
+    private void _ProcessInput()
 	{
 		_left = IsActionPressed("left");
 		_right = IsActionPressed("right");

@@ -8,6 +8,7 @@ public class Entity : KinematicBody2D
 	public const float Gravity = 600;
 	public World ParentWorld { get; private set; }
 	public bool CanMove = true;
+	public Vector2 FloorNormal = Vector2.Up;
 
 	public uint Health
 	{
@@ -40,17 +41,16 @@ public class Entity : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		Velocity.y += Gravity * delta;
-		Velocity = MoveAndSlide(Velocity, Vector2.Up, false);
+		Velocity = MoveAndSlide(Velocity, FloorNormal, false);
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
 			var collision = GetSlideCollision(i);
-            if (collision.Normal.y != 0)
-                GD.Print(collision.Normal);
-            _OnCollision(collision.Collider);
+            _OnCollision(collision);
 		}
 
 		_OnMovement(delta);
 	}
+	
 
 
     public void AccelerateX(float x, float maxSpeed, float delta)
@@ -71,7 +71,7 @@ public class Entity : KinematicBody2D
 			Velocity.y = y;
 	}
 
-	public virtual void _OnCollision(Object collider)
+	public virtual void _OnCollision(KinematicCollision2D collider)
 	{
 	}
 
