@@ -13,6 +13,7 @@ public class Player : Entity
     public float MaxSlideMagnitude = 320;
     public float MaxCrouchSpeed = 20;
     public float CurrentSlideMagnitude = 0;
+    public float SlideFriction = 0.1f;
 
     public float CurrentMaxSpeed = MaxWalkSpeed;
 
@@ -184,8 +185,8 @@ public class Player : Entity
         {
             if (IsOnFloor())
             {
-                CurrentMaxSpeed = Mathf.Lerp(CurrentMaxSpeed, MaxCrouchSpeed, 0.05f);
-                Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * CurrentMaxSpeed, 0.05f);
+                CurrentMaxSpeed = Mathf.Lerp(CurrentMaxSpeed, MaxCrouchSpeed, SlideFriction);
+                Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * CurrentMaxSpeed, SlideFriction);
             }
         }
         else
@@ -213,7 +214,12 @@ public class Player : Entity
             if (isOnFloor)
             {
                 if (!IsSliding)
-                    Velocity.x = Mathf.Lerp(Velocity.x, 0, .95f);
+                {
+                    if (Mathf.Abs(Velocity.x) <= MaxWalkSpeed + 0.1f)
+                        Velocity.x = Mathf.Lerp(Velocity.x, 0, .95f);
+                    else
+                        Velocity.x = Mathf.Lerp(Velocity.x, 0, .1f);
+                }
             }
 
             IsWalking = false;
