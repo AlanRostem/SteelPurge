@@ -8,7 +8,8 @@ public class Entity : KinematicBody2D
 	public const float Gravity = 600;
 	public World ParentWorld { get; private set; }
 	public bool CanMove = true;
-	public Vector2 FloorNormal = Vector2.Up;
+	public static readonly Vector2 DefaultGravity = new Vector2(0, Gravity);
+	public Vector2 GravityVector = new Vector2(0, Gravity);
 
 	public uint Health
 	{
@@ -40,8 +41,8 @@ public class Entity : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		Velocity.y += Gravity * delta;
-		Velocity = MoveAndSlide(Velocity, FloorNormal, false);
+		Velocity += GravityVector * delta;
+		Velocity = MoveAndSlide(Velocity, Vector2.Up, false);
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
 			var collision = GetSlideCollision(i);

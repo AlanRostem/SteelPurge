@@ -162,9 +162,13 @@ public class Player : Entity
 		IsJumping = !isOnFloor;
 
 
-		if (!isOnFloor) return;
+		if (!isOnFloor)
+        {
+			GravityVector = DefaultGravity;
+			return;
+        }
 
-		if (IsWalking)
+        if (IsWalking)
 			IsAimingDown = false;
 		if (_jump)
 			MoveY(-JumpSpeed);
@@ -205,8 +209,15 @@ public class Player : Entity
 		IsHoldingTrigger = IsActionPressed("fire");
 	}
 
+    public override void _OnCollision(KinematicCollision2D collider)
+    {
+        if (collider.Normal.y != -1 && IsOnFloor())
+            GravityVector = -collider.Normal * Gravity;
+        else
+            GravityVector = DefaultGravity;
+    }
 
-	private void _OnRegen()
+    private void _OnRegen()
 	{
 		if (HealthRegenCount + Health < 100)
 		{

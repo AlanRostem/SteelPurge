@@ -13,6 +13,8 @@ public class Game : Node2D
 	[Signal]
 	private delegate void OpenInventory();
 
+	
+
 	public override void _Ready()
 	{
 		base._Ready();
