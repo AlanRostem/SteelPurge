@@ -10,6 +10,12 @@ public class Player : Entity
     private static readonly float WalkSpeedAir = 40;
     private static readonly float JumpSpeed = 220;
 
+    public float MaxSlideMagnitude = 320;
+    public float MaxCrouchSpeed = 20;
+    public float CurrentSlideMagnitude = 0;
+
+    public float CurrentMaxSpeed = MaxWalkSpeed;
+
     private bool _left = false;
     private bool _right = false;
     private bool _jump = false;
@@ -25,7 +31,6 @@ public class Player : Entity
     public bool IsHoldingTrigger = false;
     public bool DidReload = false;
     public bool IsSliding = false;
-    public float SlideMagnitude = 0;
 
     private Weapon _weapon;
     public Inventory PlayerInventory;
@@ -125,6 +130,49 @@ public class Player : Entity
         }
     }
 
+    private void _ProcessInput()
+    {
+        _left = IsActionPressed("left");
+        _right = IsActionPressed("right");
+        _jump = IsActionPressed("jump");
+
+        if (IsActionPressed("slide"))
+        {
+            var velX = Mathf.Abs(Velocity.x);
+            if (!IsSliding && IsOnFloor())
+            {
+                if (velX > 0)
+                    CurrentMaxSpeed = MaxSlideMagnitude;
+                else
+                    CurrentMaxSpeed = MaxCrouchSpeed;
+                IsSliding = true;
+            }
+        }
+        else
+        {
+            IsSliding = false;
+        }
+
+        if (!EquippedWeapon.IsFiring && IsActionJustPressed("aim_down"))
+        {
+            //IsAimingUp = IsActionPressed("aim_up");
+            IsAimingDown = !IsAimingDown;
+        }
+
+        if (IsActionJustPressed("aim"))
+        {
+            EmitSignal(nameof(TriggerAimSwap));
+            _aim = !_aim;
+            Direction = -Direction;
+            if (!IsJumping && IsAimingDown)
+                IsAimingDown = false;
+        }
+
+        DidReload = IsActionJustPressed("reload");
+        IsHoldingTrigger = IsActionPressed("fire");
+    }
+
+
     protected override void _OnMovement(float delta)
     {
         bool isOnFloor = IsOnFloor();
@@ -132,16 +180,22 @@ public class Player : Entity
 
         var canSwapDirOnMove = !EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
 
-        var maxSpeed = MaxWalkSpeed;
         if (IsSliding)
         {
-            SlideMagnitude = Mathf.Lerp(SlideMagnitude, MaxWalkSpeed / 2, 0.05f);
-            maxSpeed = SlideMagnitude;
+            if (IsOnFloor())
+            {
+                CurrentMaxSpeed = Mathf.Lerp(CurrentMaxSpeed, MaxCrouchSpeed, 0.05f);
+                Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * CurrentMaxSpeed, 0.05f);
+            }
+        }
+        else
+        {
+            CurrentMaxSpeed = MaxWalkSpeed;
         }
 
         if (_left && !_right)
         {
-            AccelerateX(-WalkSpeedGround, maxSpeed, delta);
+            AccelerateX(-WalkSpeedGround, CurrentMaxSpeed, delta);
             if (canSwapDirOnMove)
                 Direction = -1;
             IsWalking = true;
@@ -149,7 +203,7 @@ public class Player : Entity
 
         else if (_right && !_left)
         {
-            AccelerateX(WalkSpeedGround, maxSpeed, delta);
+            AccelerateX(WalkSpeedGround, CurrentMaxSpeed, delta);
             if (canSwapDirOnMove)
                 Direction = 1;
             IsWalking = true;
@@ -158,13 +212,9 @@ public class Player : Entity
         {
             if (isOnFloor)
             {
-                if (IsSliding)
-                    Velocity.x = Mathf.Lerp(Velocity.x, 0, .1f);
-                else
+                if (!IsSliding)
                     Velocity.x = Mathf.Lerp(Velocity.x, 0, .95f);
             }
-            else
-                Velocity.x = Mathf.Lerp(Velocity.x, 0, .05f);
 
             IsWalking = false;
         }
@@ -199,39 +249,6 @@ public class Player : Entity
         return Input.IsActionJustPressed(action) && !_isStunned;
     }
 
-    private void _ProcessInput()
-    {
-        _left = IsActionPressed("left");
-        _right = IsActionPressed("right");
-        _jump = IsActionPressed("jump");
-        IsSliding = IsActionPressed("slide") && IsOnFloor();
-        if (IsActionJustPressed("slide") && IsOnFloor())
-        {
-            if (Mathf.Abs(Velocity.x) > 0)
-                SlideMagnitude = MaxWalkSpeed * 4;
-            else
-                SlideMagnitude = MaxWalkSpeed / 2;
-        }
-
-
-        if (!EquippedWeapon.IsFiring && IsActionJustPressed("aim_down"))
-        {
-            //IsAimingUp = IsActionPressed("aim_up");
-            IsAimingDown = !IsAimingDown;
-        }
-
-        if (IsActionJustPressed("aim"))
-        {
-            EmitSignal(nameof(TriggerAimSwap));
-            _aim = !_aim;
-            Direction = -Direction;
-            if (!IsJumping && IsAimingDown)
-                IsAimingDown = false;
-        }
-
-        DidReload = IsActionJustPressed("reload");
-        IsHoldingTrigger = IsActionPressed("fire");
-    }
 
     public override void _OnCollision(KinematicCollision2D collider)
     {
