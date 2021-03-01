@@ -148,7 +148,7 @@ public class Player : Entity
 		else
 		{
 			if (isOnFloor)
-				Velocity.x = Mathf.Lerp(Velocity.x, 0, .9f);
+				Velocity.x = Mathf.Lerp(Velocity.x, 0, .95f);
 			else
 				Velocity.x = Mathf.Lerp(Velocity.x, 0, .05f);
 			IsWalking = false;
