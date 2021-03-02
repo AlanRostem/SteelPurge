@@ -8,14 +8,18 @@ public class Player : Entity
     private static readonly float MaxWalkSpeed = 80;
     private static readonly float WalkSpeedGround = 330;
     private static readonly float WalkSpeedAir = 40;
-    private static readonly float JumpSpeed = 220;
+    private static readonly float MaxJumpSpeed = 220;
+    private static readonly float MinJumpSpeed = 80;
+    private static readonly float JumpSpeedReduction = 80;
+    private static readonly float JumpSpeedRegeneration = 400;
 
-    public float MaxSlideMagnitude = 320;
-    public float MaxCrouchSpeed = 20;
-    public float CurrentSlideMagnitude = 0;
-    public float SlideFriction = 0.1f;
+    private static readonly float MaxSlideMagnitude = 320;
+    private static readonly float MaxCrouchSpeed = 20;
+
+    private static readonly float SlideFriction = 0.1f;
 
     public float CurrentMaxSpeed = MaxWalkSpeed;
+    public float CurrentJumpSpeed = MaxJumpSpeed;
 
     private bool _left = false;
     private bool _right = false;
@@ -109,7 +113,7 @@ public class Player : Entity
         {
             CanTakeDamage = false;
             _isStunned = true;
-            Velocity = (new Vector2(MaxWalkSpeed * 2 * knockDir, -JumpSpeed / 2));
+            Velocity = (new Vector2(MaxWalkSpeed * 2 * knockDir, -MaxJumpSpeed / 2));
             EmitSignal(nameof(TriggerDamageReceptionCooldown));
             EmitSignal(nameof(TriggerInvincibility));
         }
@@ -241,8 +245,24 @@ public class Player : Entity
 
         if (IsWalking)
             IsAimingDown = false;
+
         if (_jump)
-            MoveY(-JumpSpeed);
+        {
+            if (CurrentJumpSpeed > MinJumpSpeed)
+            {
+                MoveY(-CurrentJumpSpeed);
+                if (IsSliding)
+                    CurrentJumpSpeed -= JumpSpeedReduction;
+            }
+        }
+        else if (CurrentJumpSpeed < MaxJumpSpeed)
+        {
+            CurrentJumpSpeed += JumpSpeedRegeneration * delta;
+        }
+        else
+        {
+            CurrentJumpSpeed = MaxJumpSpeed;
+        }
     }
 
     private bool IsActionPressed(string action)
