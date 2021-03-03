@@ -5,77 +5,78 @@ using Object = Godot.Object;
 
 public class Entity : KinematicBody2D
 {
-    public const float Gravity = 600;
-    public World ParentWorld { get; private set; }
-    public bool CanMove = true;
-    public static readonly Vector2 DefaultGravity = new Vector2(0, Gravity);
-    public Vector2 GravityVector = new Vector2(0, Gravity);
+	public const float Gravity = 600;
+	public World ParentWorld { get; private set; }
+	public bool CanMove = true;
+	public static readonly Vector2 DefaultGravity = new Vector2(0, Gravity);
+	public Vector2 GravityVector = new Vector2(0, Gravity);
 
-    public uint Health
-    {
-        get => _health;
+	public uint Health
+	{
+		get => _health;
 
-        set
-        {
-            _health = value;
-            EmitSignal(nameof(HealthChanged), _health);
-        }
-    }
+		set
+		{
+			_health = value;
+			EmitSignal(nameof(HealthChanged), _health);
+		}
+	}
 
-    private uint _health = 100;
+	private uint _health = 100;
 
     public Vector2 Velocity;
 
-    [Signal]
-    public delegate void HealthChanged(uint health);
+	[Signal]
+	public delegate void HealthChanged(uint health);
+	
+	public override void _Ready()
+	{
+		ParentWorld = GetParent<World>();
+	}
 
-    public override void _Ready()
-    {
-        ParentWorld = GetParent<World>();
-    }
+	public void ApplyStatusEffect(StatusEffect effect)
+	{
+		AddChild(effect);
+	}
 
-    public void ApplyStatusEffect(StatusEffect effect)
-    {
-        AddChild(effect);
-    }
-
-    public override void _PhysicsProcess(float delta)
-    {
-        Velocity += GravityVector * delta;
-        Velocity = MoveAndSlide(Velocity, Vector2.Up, false);
-        for (var i = 0; i < GetSlideCount(); i++)
-        {
-            var collision = GetSlideCollision(i);
+	public override void _PhysicsProcess(float delta)
+	{
+		Velocity += GravityVector * delta;
+		Velocity = MoveAndSlide(Velocity, Vector2.Up, false);
+		for (var i = 0; i < GetSlideCount(); i++)
+		{
+			var collision = GetSlideCollision(i);
             _OnCollision(collision);
-        }
+		}
 
-        _OnMovement(delta);
-    }
+		_OnMovement(delta);
+	}
+	
 
 
     public void AccelerateX(float x, float maxSpeed, float delta)
     {
-        if (!CanMove) return;
-        Velocity.x = Mathf.Clamp(Velocity.x + x * delta, -maxSpeed, maxSpeed);
-    }
-
-    public void MoveX(float x)
-    {
         if (CanMove)
-            Velocity.x = x;
+            Velocity.x = Mathf.Clamp(Velocity.x + x * delta, -maxSpeed, maxSpeed);
     }
 
-    public void MoveY(float y)
-    {
-        if (CanMove)
-            Velocity.y = y;
-    }
+	public void MoveX(float x)
+	{
+		if (CanMove)
+			Velocity.x = x;
+	}
 
-    public virtual void _OnCollision(KinematicCollision2D collider)
-    {
-    }
+	public void MoveY(float y)
+	{
+		if (CanMove)
+			Velocity.y = y;
+	}
 
-    protected virtual void _OnMovement(float delta)
-    {
-    }
+	public virtual void _OnCollision(KinematicCollision2D collider)
+	{
+	}
+
+	protected virtual void _OnMovement(float delta)
+	{
+	}
 }
