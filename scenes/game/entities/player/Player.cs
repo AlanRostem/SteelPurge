@@ -146,9 +146,7 @@ public class Player : Entity
             var velX = Mathf.Abs(Velocity.x);
             if (!IsSliding && IsOnFloor())
             {
-                if (velX > 0)
-                    CurrentMaxSpeed = MaxSlideMagnitude;
-                else
+                if (velX == 0)
                     CurrentMaxSpeed = MaxCrouchSpeed;
                 IsSliding = true;
             }
