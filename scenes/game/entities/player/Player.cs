@@ -13,10 +13,13 @@ public class Player : Entity
     private static readonly float JumpSpeedReduction = 80;
     private static readonly float JumpSpeedRegeneration = 400;
 
-    private static readonly float MaxSlideMagnitude = 320;
     private static readonly float MaxCrouchSpeed = 20;
-
     private static readonly float SlideFriction = 0.1f;
+    
+    private static readonly float StandingHeight = 6;
+    private static readonly float CrouchingHeight = 3;
+    private CapsuleShape2D _bodyShape;
+
 
     public float CurrentMaxSpeed = MaxWalkSpeed;
     public float CurrentJumpSpeed = MaxJumpSpeed;
@@ -60,6 +63,8 @@ public class Player : Entity
         base._Ready();
         Health = 100;
         PlayerInventory = GetNode<Inventory>("Inventory");
+        var collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+        _bodyShape = (CapsuleShape2D) collisionShape.Shape;
     }
 
     [Signal]
@@ -144,6 +149,7 @@ public class Player : Entity
         if (IsActionPressed("slide"))
         {
             var velX = Mathf.Abs(Velocity.x);
+            _bodyShape.Height = CrouchingHeight;
             if (!IsSliding && IsOnFloor())
             {
                 if (velX == 0)
@@ -154,6 +160,7 @@ public class Player : Entity
         else
         {
             IsSliding = false;
+            _bodyShape.Height = StandingHeight;
         }
 
         if (!EquippedWeapon.IsFiring && IsActionJustPressed("aim_down"))
