@@ -53,14 +53,36 @@ public class Entity : KinematicBody2D
 	}
 	
 
+    private bool _canAccelerate = true;
 
     public void AccelerateX(float x, float maxSpeed, float delta)
     {
-        if (CanMove)
-            Velocity.x = Mathf.Clamp(Velocity.x + x * delta, -maxSpeed, maxSpeed);
+        if (!CanMove) return;
+        var movement = x * delta;
+        var result = Mathf.Abs(Velocity.x + movement);
+        
+        if (!_canAccelerate)
+        {
+            if (result < maxSpeed)
+            {
+                _canAccelerate = true;
+            }
+            else return;
+        }
+        
+        if (result > maxSpeed)
+        {
+            movement = (result - maxSpeed) * delta * Mathf.Sign(x);
+            result = Mathf.Abs(Velocity.x + movement);
+            if (result > maxSpeed)
+                movement = 0;
+            _canAccelerate = false;
+        }
+
+        Velocity.x += movement;
     }
 
-	public void MoveX(float x)
+    public void MoveX(float x)
 	{
 		if (CanMove)
 			Velocity.x = x;
