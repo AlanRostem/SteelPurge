@@ -152,7 +152,9 @@ public class Player : Entity
             _bodyShape.Height = CrouchingHeight;
             if (!IsSliding && IsOnFloor())
             {
-                if (velX == 0)
+                if (velX > 0)
+                    CurrentMaxSpeed = MaxSlideMagnitude;
+                else
                     CurrentMaxSpeed = MaxCrouchSpeed;
                 IsSliding = true;
             }
