@@ -190,7 +190,10 @@ public class Player : Entity
             if (IsOnFloor())
             {
                 CurrentMaxSpeed = Mathf.Lerp(CurrentMaxSpeed, MaxCrouchSpeed, SlideFriction);
-                Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * CurrentMaxSpeed, SlideFriction);
+                if (Math.Abs(Velocity.x) < MaxCrouchSpeed + 0.1)
+                    Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
+                else
+                    Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * CurrentMaxSpeed, SlideFriction);
             }
         }
         else
