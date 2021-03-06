@@ -200,7 +200,7 @@ public class Player : Entity
 		else
 		{
 			CurrentMaxSpeed = MaxWalkSpeed;
-			if (Mathf.Abs(Velocity.x) > CurrentMaxSpeed)
+			if (Mathf.Abs(Velocity.x) > CurrentMaxSpeed && IsOnFloor())
 				Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * CurrentMaxSpeed, SlideFriction);
 		}
 
@@ -242,6 +242,7 @@ public class Player : Entity
 
 		IsJumping = !isOnFloor;
 
+		// TODO: Remove debug later
 		_speedLabel.Text = ((int)Velocity.x).ToString();
 		if (!isOnFloor)
 		{
@@ -257,7 +258,7 @@ public class Player : Entity
 			if (CurrentJumpSpeed > MinJumpSpeed)
 			{
 				MoveY(-CurrentJumpSpeed);
-				if (IsSliding)
+				if (Mathf.Abs(Velocity.x) > MaxWalkSpeed)
 					CurrentJumpSpeed -= JumpSpeedReduction;
 			}
 		}
