@@ -156,6 +156,8 @@ public class Player : Entity
 		}
 		else
 		{
+			if (IsSliding && IsOnFloor())
+				Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * MaxWalkSpeed, 0.99f);
 			IsSliding = false;
 		}
 
