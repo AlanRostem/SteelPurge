@@ -58,13 +58,12 @@ public class Player : Entity
 		}
 	}
 
-	private Label _speedLabel;
+	
 	public override void _Ready()
 	{
 		base._Ready();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
-		_speedLabel = GetNode<Label>("SpeedLabel");
 	}
 
 	[Signal]
@@ -95,13 +94,13 @@ public class Player : Entity
 	private delegate void TriggerInvincibility();
 
 	[Signal]
-    private delegate void Died();
+	private delegate void Died();
 
-    private void _Die()
-    {
+	private void _Die()
+	{
 		EmitSignal(nameof(Died));
-    }
-    
+	}
+	
 	public void KnowWeaponClipAmmo(uint ammo)
 	{
 		EmitSignal(nameof(WeaponClipChanged), ammo);
@@ -138,8 +137,8 @@ public class Player : Entity
 		if (damage >= Health)
 		{
 			Health = 0;
-            _Die();
-        }
+			_Die();
+		}
 		else
 		{
 			Health -= damage;
@@ -280,8 +279,6 @@ public class Player : Entity
 
 		IsJumping = !isOnFloor;
 
-		// TODO: Remove debug later
-		_speedLabel.Text = ((int)Velocity.x).ToString();
 		if (!isOnFloor)
 		{
 			GravityVector = DefaultGravity;
