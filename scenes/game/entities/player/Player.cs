@@ -32,7 +32,8 @@ public class Player : Entity
 	public bool IsAimingUp = false;
 	public bool IsAimingDown = false;
 	private bool _isStunned = false;
-	public float Direction = 1;
+	public float HorizontalLookingDirection = 1;
+	public float MovingDirection = 1;
 	[Export] public float AimAngle = 0;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
@@ -158,7 +159,7 @@ public class Player : Entity
 		{
 			EmitSignal(nameof(TriggerAimSwap));
 			_aim = !_aim;
-			Direction = -Direction;
+			HorizontalLookingDirection = -HorizontalLookingDirection;
 			if (!IsJumping && IsAimingDown)
 				IsAimingDown = false;
 		}
@@ -200,7 +201,7 @@ public class Player : Entity
 		else
 		{
 			if (IsSliding && IsOnFloor())
-				Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * MaxWalkSpeed, 0.99f);
+				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * MaxWalkSpeed, 0.99f);
 			IsSliding = false;
 		}
 
@@ -222,28 +223,30 @@ public class Player : Entity
 			if (velX < MaxCrouchSpeed + 0.1)
 				Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
 			else
-				Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * CurrentMaxSpeed, SlideFriction);
+				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFriction);
 		}
 		else
 		{
 			CurrentMaxSpeed = MaxWalkSpeed;
 			if (velX > CurrentMaxSpeed && IsOnFloor())
-				Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * CurrentMaxSpeed, SlideFriction);
+				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFriction);
 		}
 
 		if (_left && !_right)
 		{
 			AccelerateX(-WalkSpeedGround, CurrentMaxSpeed, delta);
+			MovingDirection = -1;
 			if (canSwapDirOnMove)
-				Direction = -1;
+				HorizontalLookingDirection = -1;
 			IsWalking = true;
 		}
 
 		else if (_right && !_left)
 		{
 			AccelerateX(WalkSpeedGround, CurrentMaxSpeed, delta);
+			MovingDirection = 1;
 			if (canSwapDirOnMove)
-				Direction = 1;
+				HorizontalLookingDirection = 1;
 			IsWalking = true;
 		}
 		else

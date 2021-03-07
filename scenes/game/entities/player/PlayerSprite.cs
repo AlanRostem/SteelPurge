@@ -11,7 +11,7 @@ public class PlayerSprite : AnimatedSprite
 
 	public override void _Process(float delta)
 	{
-		FlipH = _player.Direction < 0;
+		FlipH = _player.HorizontalLookingDirection < 0;
 		Animation = _player.IsWalking ? "walk" : "idle";
 		if (_player.IsJumping)
 		{

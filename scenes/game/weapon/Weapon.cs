@@ -46,8 +46,8 @@ public class Weapon : Node2D
 	{
 		Visible = true;
 		SetProcess(true);
-		if (Scale.x != OwnerPlayer.Direction)
-			Scale = new Vector2(OwnerPlayer.Direction, 1);
+		if (Scale.x != OwnerPlayer.HorizontalLookingDirection)
+			Scale = new Vector2(OwnerPlayer.HorizontalLookingDirection, 1);
 		if (Rotation != OwnerPlayer.AimAngle)
 			Rotation = OwnerPlayer.AimAngle;
 	}
@@ -122,19 +122,19 @@ public class Weapon : Node2D
 
 	public override void _Process(float delta)
 	{
-		if (Scale.x != OwnerPlayer.Direction)
+		if (Scale.x != OwnerPlayer.HorizontalLookingDirection)
 		{
-			Scale = new Vector2(OwnerPlayer.Direction, 1);
+			Scale = new Vector2(OwnerPlayer.HorizontalLookingDirection, 1);
 		}
 
 
 		if (OwnerPlayer.IsAimingDown)
 		{
-			Rotation = OwnerPlayer.Direction * Mathf.Pi / 2f;
+			Rotation = OwnerPlayer.HorizontalLookingDirection * Mathf.Pi / 2f;
 		}
 		else if (OwnerPlayer.IsAimingUp)
 		{
-			Rotation = -OwnerPlayer.Direction * Mathf.Pi / 2f;
+			Rotation = -OwnerPlayer.HorizontalLookingDirection * Mathf.Pi / 2f;
 		}
 		else
 		{
