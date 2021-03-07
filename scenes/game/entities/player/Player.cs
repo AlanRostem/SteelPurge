@@ -204,7 +204,7 @@ public class Player : Entity
 			IsSliding = false;
 		}
 
-		if (isOnFloor)
+		if (isOnFloor && !IsSliding)
 		{
 			if (CurrentSlideMagnitude < MaxSlideMagnitude)
 			{
