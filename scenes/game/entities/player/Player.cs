@@ -15,11 +15,13 @@ public class Player : Entity
 
 	private static readonly float MaxSlideMagnitude = 320;
 	private static readonly float MaxCrouchSpeed = 20;
+	private static readonly float SlideDecrease = 120;
 
 	private static readonly float SlideFriction = 0.1f;
 
 	public float CurrentMaxSpeed = MaxWalkSpeed;
 	public float CurrentJumpSpeed = MaxJumpSpeed;
+	public float CurrentSlideMagnitude = MaxCrouchSpeed;
 
 	private bool _left = false;
 	private bool _right = false;
@@ -136,30 +138,14 @@ public class Player : Entity
 		}
 	}
 
+	private bool _slide = false;
+	
 	private void _ProcessInput()
 	{
 		_left = IsActionPressed("left");
 		_right = IsActionPressed("right");
 		_jump = IsActionPressed("jump");
-
-		if (IsActionPressed("slide"))
-		{
-			var velX = Mathf.Abs(Velocity.x);
-			if (!IsSliding && IsOnFloor())
-			{
-				if (velX > 0)
-					CurrentMaxSpeed = MaxSlideMagnitude;
-				else
-					CurrentMaxSpeed = MaxCrouchSpeed;
-				IsSliding = true;
-			}
-		}
-		else
-		{
-			if (IsSliding && IsOnFloor())
-				Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * MaxWalkSpeed, 0.99f);
-			IsSliding = false;
-		}
+		_slide = IsActionPressed("slide");
 
 		if (!EquippedWeapon.IsFiring && IsActionJustPressed("aim_down"))
 		{
@@ -187,11 +173,32 @@ public class Player : Entity
 		_ProcessInput();
 
 		var canSwapDirOnMove = !EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
+		var velX = Mathf.Abs(Velocity.x);
+
+		if (_slide)
+		{
+			if (!IsSliding && IsOnFloor())
+			{
+				if (velX > 0)
+				{
+					CurrentMaxSpeed = MaxSlideMagnitude;
+				}
+				else
+					CurrentMaxSpeed = MaxCrouchSpeed;
+				IsSliding = true;
+			}
+		}
+		else
+		{
+			if (IsSliding && IsOnFloor())
+				Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * MaxWalkSpeed, 0.99f);
+			IsSliding = false;
+		}
 
 		if (IsSliding && IsOnFloor())
 		{
 			CurrentMaxSpeed = Mathf.Lerp(CurrentMaxSpeed, MaxCrouchSpeed, SlideFriction);
-			if (Math.Abs(Velocity.x) < MaxCrouchSpeed + 0.1)
+			if (velX < MaxCrouchSpeed + 0.1)
 				Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
 			else
 				Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * CurrentMaxSpeed, SlideFriction);
@@ -199,7 +206,7 @@ public class Player : Entity
 		else
 		{
 			CurrentMaxSpeed = MaxWalkSpeed;
-			if (Mathf.Abs(Velocity.x) > CurrentMaxSpeed && IsOnFloor())
+			if (velX > CurrentMaxSpeed && IsOnFloor())
 				Velocity.x = Mathf.Lerp(Velocity.x, Mathf.Sign(Velocity.x) * CurrentMaxSpeed, SlideFriction);
 		}
 
@@ -224,7 +231,7 @@ public class Player : Entity
 			{
 				if (!IsSliding)
 				{
-					if (Mathf.Abs(Velocity.x) <= MaxWalkSpeed + 0.1f)
+					if (velX <= MaxWalkSpeed + 0.1f)
 						Velocity.x = Mathf.Lerp(Velocity.x, 0, .95f);
 					else
 						Velocity.x = Mathf.Lerp(Velocity.x, 0, .1f);
@@ -257,7 +264,7 @@ public class Player : Entity
 			if (CurrentJumpSpeed > MinJumpSpeed)
 			{
 				MoveY(-CurrentJumpSpeed);
-				if (Mathf.Abs(Velocity.x) > MaxWalkSpeed)
+				if (velX > MaxWalkSpeed)
 					CurrentJumpSpeed -= JumpSpeedReduction;
 			}
 		}
