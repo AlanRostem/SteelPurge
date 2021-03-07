@@ -94,6 +94,14 @@ public class Player : Entity
 	[Signal]
 	private delegate void TriggerInvincibility();
 
+	[Signal]
+    private delegate void Died();
+
+    private void _Die()
+    {
+		EmitSignal(nameof(Died));
+    }
+    
 	public void KnowWeaponClipAmmo(uint ammo)
 	{
 		EmitSignal(nameof(WeaponClipChanged), ammo);
@@ -130,8 +138,8 @@ public class Player : Entity
 		if (damage >= Health)
 		{
 			Health = 0;
-			// TODO: Die
-		}
+            _Die();
+        }
 		else
 		{
 			Health -= damage;
