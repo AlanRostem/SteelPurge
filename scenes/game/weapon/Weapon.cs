@@ -11,7 +11,6 @@ public class Weapon : Node2D
 	[Export] public uint RateOfFire;
 	[Export] public float ReloadSpeed;
 	[Export] public float PassiveReloadSpeed;
-	[Export] public float SlowDownMultiplier = .4f;
 	[Export] public float HoverRecoilMultiplier = .1f;
 
 	// TODO: Make sure the enhancement is detachable
