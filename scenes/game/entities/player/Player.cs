@@ -7,6 +7,7 @@ public class Player : Entity
 	public static readonly uint HealthRegenCount = 15;
 	private static readonly float MaxWalkSpeed = 80;
 	private static readonly float WalkSpeedGround = 330;
+	private static readonly float MaxWalkSpeedFiring = 35;
 	private static readonly float WalkSpeedAir = 40;
 	private static readonly float MaxJumpSpeed = 220;
 	private static readonly float MinJumpSpeed = 80;
@@ -58,7 +59,7 @@ public class Player : Entity
 		}
 	}
 
-	
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -100,7 +101,7 @@ public class Player : Entity
 	{
 		EmitSignal(nameof(Died));
 	}
-	
+
 	public void KnowWeaponClipAmmo(uint ammo)
 	{
 		EmitSignal(nameof(WeaponClipChanged), ammo);
@@ -148,7 +149,7 @@ public class Player : Entity
 	}
 
 	private bool _slide = false;
-	
+
 	private void _ProcessInput()
 	{
 		_left = IsActionPressed("left");
@@ -202,6 +203,7 @@ public class Player : Entity
 				}
 				else
 					CurrentMaxSpeed = MaxCrouchSpeed;
+
 				IsSliding = true;
 			}
 		}
@@ -234,7 +236,10 @@ public class Player : Entity
 		}
 		else
 		{
-			CurrentMaxSpeed = MaxWalkSpeed;
+			if (EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
+				CurrentMaxSpeed = MaxWalkSpeedFiring;
+			else
+				CurrentMaxSpeed = MaxWalkSpeed;
 			if (velX > CurrentMaxSpeed && IsOnFloor())
 				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFriction);
 		}
