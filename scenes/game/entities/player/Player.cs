@@ -71,6 +71,9 @@ public class Player : Entity
 
 	[Signal]
 	public delegate void WeaponClipChanged(uint clip);
+	
+	[Signal]
+	public delegate void WeaponAddedToInventory(Weapon weapon);
 
 	[Signal]
 	public delegate void ScrapCountChanged(uint count);

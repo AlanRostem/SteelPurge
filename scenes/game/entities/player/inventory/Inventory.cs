@@ -32,13 +32,11 @@ public class Inventory : Node2D
 	{
 		if (_gunCount >= MaxGuns) return;
 		_guns[_gunCount++] = weapon;
+		_player.EmitSignal(nameof(Player.WeaponAddedToInventory), weapon);
 	}
 
 	public void PickUpGun(Weapon weapon)
 	{
 		// TODO: Implement
 	}
-
-	[Signal]
-	public delegate void WeaponAdded(Weapon weapon);
 }
