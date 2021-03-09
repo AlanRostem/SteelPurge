@@ -306,6 +306,8 @@ public class Player : Entity
 		else
 		{
 			CurrentJumpSpeed = MaxJumpSpeed;
+			if (IsSliding)
+				CurrentJumpSpeed /= 2;
 		}
 	}
 
