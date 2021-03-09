@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/game/environment/map/CustomTileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/Game.cs" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/texture/ui/icon/scrap.png" type="Texture" id=14]
 [ext_resource path="res://assets/texture/ui/icon/ammo.png" type="Texture" id=15]
 [ext_resource path="res://assets/texture/ui/icon/xe_slug.png" type="Texture" id=16]
+[ext_resource path="res://scenes/game/ui/inventory/InventoryTabs.cs" type="Script" id=17]
 
 [node name="Game" type="Node2D"]
 pause_mode = 2
@@ -124,18 +125,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InventoryUI" type="TabContainer" parent="GUI"]
-pause_mode = 2
-margin_left = 72.0
-margin_top = 56.0
-margin_right = 328.0
-margin_bottom = 184.0
+[node name="InventoryUI" type="Control" parent="GUI"]
+margin_right = 40.0
+margin_bottom = 40.0
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Weapons" type="Tabs" parent="GUI/InventoryUI"]
+[node name="InventoryTabs" type="TabContainer" parent="GUI/InventoryUI"]
+pause_mode = 2
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 328.0
+margin_bottom = 184.0
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapons" type="Tabs" parent="GUI/InventoryUI/InventoryTabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -143,7 +152,7 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Parts" type="Tabs" parent="GUI/InventoryUI"]
+[node name="Parts" type="Tabs" parent="GUI/InventoryUI/InventoryTabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -152,7 +161,7 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Items" type="Tabs" parent="GUI/InventoryUI"]
+[node name="Items" type="Tabs" parent="GUI/InventoryUI/InventoryTabs"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
