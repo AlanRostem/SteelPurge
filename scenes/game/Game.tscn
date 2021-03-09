@@ -135,9 +135,9 @@ __meta__ = {
 
 [node name="InventoryTabs" type="TabContainer" parent="GUI/InventoryUI"]
 pause_mode = 2
-margin_left = 72.0
+margin_left = 20.0
 margin_top = 56.0
-margin_right = 328.0
+margin_right = 268.0
 margin_bottom = 184.0
 script = ExtResource( 17 )
 __meta__ = {
@@ -169,6 +169,12 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+
+[node name="Panel" type="Panel" parent="GUI/InventoryUI"]
+margin_left = 272.0
+margin_top = 80.0
+margin_right = 368.0
+margin_bottom = 184.0
 [connection signal="OpenInventory" from="." to="GUI/InventoryUI" method="_OnOpen"]
 [connection signal="HealthChanged" from="World/Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]
 [connection signal="WeaponClipChanged" from="World/Player" to="GUI/HUD/AmmoLabel" method="_OnPlayerWeaponClipChanged"]
