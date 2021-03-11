@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.2.24)  27 FEB 2021 17:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.2.24)  11 MAR 2021 21:24
 entering extended mode
 **./Main.tex
 (Main.tex
@@ -68,7 +68,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 31.
 ) (Chapters/Chapter02.tex [2] [3] [4]) (Chapters/Chapter03.tex
-[5]) (Chapters/Chapter04.tex) (Chapters/Chapter05.tex [6]) [7] (Main.aux) ) 
+[5]) (Chapters/Chapter04.tex) (Chapters/Chapter05.tex) [6] [7] (Main.aux) ) 
 Here is how much of TeX's memory you used:
  516 strings out of 479334
  9171 string characters out of 2866960
@@ -84,7 +84,7 @@ s/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/publi
 c/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/
 Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on Main.pdf (7 pages, 103028 bytes).
+Output written on Main.pdf (7 pages, 102325 bytes).
 PDF statistics:
  54 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
