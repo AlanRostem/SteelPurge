@@ -3,8 +3,10 @@ using System;
 
 public class TacticalAbility : WeaponAbility
 {
-	[Export] public Texture Icon;
-	[Export] public float CoolDown = 6;
+    [Export] public Texture Icon;
+    [Export] public Inventory.OrdinanceFuelType FuelType = Inventory.OrdinanceFuelType.Gasoline;	
+    [Export] public uint FuelRequirement = 10;
+    [Export] public float CoolDown = 6;
 	[Export] public float Duration = 1;
 	public float CurrentDuration = 0;
 	public float CurrentCoolDown = 0;
@@ -38,18 +40,20 @@ public class TacticalAbility : WeaponAbility
 	{
 		base._Process(delta);
 		if (Input.IsActionJustPressed("tactical_ability"))
-		{
-			if (!IsOnCoolDown && !IsActive)
-			{
-				IsActive = true;
-				OnActivate();
-				EmitSignal(nameof(TriggerDurationTimer));
-			}
-			else
-			{
-				// TODO: Play sound and flash red on icon
-			}
-		}
+        {
+            var fuels = GetWeapon().OwnerPlayer.PlayerInventory.OrdinanceFuels;
+            if (!IsOnCoolDown && !IsActive && fuels[(int)FuelType] >= FuelRequirement)
+            {
+                IsActive = true;
+                OnActivate();
+                EmitSignal(nameof(TriggerDurationTimer));
+                fuels[(int)FuelType] -= FuelRequirement;
+            }
+            else
+            {
+                // TODO: Play sound and flash red on icon
+            }
+        }
 		
 		if (IsActive)
 			OnUpdate();
