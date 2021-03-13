@@ -35,6 +35,7 @@ animations = [ {
 } ]
 
 [node name="Flare" instance=ExtResource( 1 )]
+MaxVelocity = 5.0
 
 [node name="FlareSprite" type="AnimatedSprite" parent="." index="2"]
 frames = SubResource( 4 )
