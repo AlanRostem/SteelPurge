@@ -26,9 +26,7 @@ public class Enemy : Entity
 
 	public void TakeDamage(uint damage)
 	{
-		//var scrap = (Scrap) ScrapScene.Instance();
-		//ParentWorld.AddChild(scrap);
-		//scrap.Position = Position;
+
 		
 		if (damage >= Health)
 		{
@@ -37,6 +35,7 @@ public class Enemy : Entity
 
 			if (_isDead) return;
 			_isDead = true;
+			
 			var scrap = (Scrap)ScrapScene.Instance();
 			ParentWorld.AddChild(scrap);
 			scrap.Position = Position;
@@ -46,7 +45,10 @@ public class Enemy : Entity
 		}
 		else
 		{
-			//scrap.Count = ScrapDropHit;
+			var scrap = (Scrap)ScrapScene.Instance();
+			ParentWorld.AddChild(scrap);
+			scrap.Position = Position;
+			scrap.Count = ScrapDropHit;
 			Health -= damage;
 		}
 	}

@@ -9,10 +9,10 @@
 DisplayName = "Firewall .127"
 ClipSize = 12
 DamagePerShot = 2
-RateOfFire = 90
+RateOfFire = 250
 ReloadSpeed = 2.0
 PassiveReloadSpeed = 3.5
-HoverRecoilMultiplier = -0.6
+HoverRecoilMultiplier = 0.0
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
 position = Vector2( 8, 1 )
@@ -20,4 +20,4 @@ texture = ExtResource( 2 )
 
 [node name="FlareFiringDevice" parent="." index="4" instance=ExtResource( 3 )]
 script = ExtResource( 4 )
-PelletCount = 6
+PelletCount = 3
