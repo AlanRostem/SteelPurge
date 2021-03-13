@@ -3,6 +3,12 @@ using System;
 
 public class Inventory : Node2D
 {
+	public enum OrdinanceFuelType
+	{
+		Gasoline,
+		EmSlug
+	}
+	
 	private static readonly uint MaxGuns = 8;
 
 	[Export]
@@ -15,8 +21,12 @@ public class Inventory : Node2D
 	private uint _gunCount = 0;
 	
 	public uint ScrapCount = 0;
-	public uint XeSlugCount = 0;
 
+    public uint[] OrdinanceFuels =
+    {
+        40,
+        40
+    };
 
 	public override void _Ready()
 	{
@@ -35,8 +45,22 @@ public class Inventory : Node2D
 		_player.EmitSignal(nameof(Player.WeaponAddedToInventory), weapon);
 	}
 
+    public void PickUpScrap(uint count)
+    {
+        ScrapCount += count;
+        _player.KnowInventoryScrapCount(ScrapCount);
+    }
+
+
+	public void PickUpOrdinanceFuel(uint count, OrdinanceFuelType type)
+    {
+        OrdinanceFuels[(int)type] += count;
+        _player.KnowInventoryOrdinanceFuelCount(OrdinanceFuels[(int)type], type);
+    }
+
 	public void PickUpGun(Weapon weapon)
 	{
 		// TODO: Implement
+        
 	}
 }

@@ -34,6 +34,9 @@ script = ExtResource( 12 )
 
 [node name="HUD" type="Control" parent="GUI"]
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AmmoLabel" parent="GUI/HUD" instance=ExtResource( 5 )]
 margin_left = 32.0
@@ -177,5 +180,6 @@ margin_right = 368.0
 margin_bottom = 184.0
 [connection signal="OpenInventory" from="." to="GUI/InventoryUI" method="_OnOpen"]
 [connection signal="HealthChanged" from="World/Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]
+[connection signal="ScrapCountChanged" from="World/Player" to="GUI/HUD/MoneyLabel" method="_OnPlayerScrapCountChanged"]
 [connection signal="WeaponClipChanged" from="World/Player" to="GUI/HUD/AmmoLabel" method="_OnPlayerWeaponClipChanged"]
 [connection signal="WeaponEquipped" from="World/Player" to="GUI/HUD/GunNameLabel" method="_OnPlayerWeaponEquipped"]

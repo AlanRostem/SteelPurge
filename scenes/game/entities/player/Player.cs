@@ -79,7 +79,7 @@ public class Player : Entity
 	public delegate void ScrapCountChanged(uint count);
 
 	[Signal]
-	public delegate void XeSlugCountChanged(uint count);
+	public delegate void OrdinanceFuelCountChanged(uint count, Inventory.OrdinanceFuelType type);
 
 	[Signal]
 	private delegate void TriggerAimSwap();
@@ -114,9 +114,9 @@ public class Player : Entity
 		EmitSignal(nameof(ScrapCountChanged), count);
 	}
 
-	public void KnowInventoryXeSlugCount(uint count)
+	public void KnowInventoryOrdinanceFuelCount(uint count, Inventory.OrdinanceFuelType type)
 	{
-		EmitSignal(nameof(XeSlugCountChanged), count);
+		EmitSignal(nameof(OrdinanceFuelCountChanged), count, type);
 	}
 
 	public void TakeDamage(uint damage, int knockDir)
