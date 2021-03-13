@@ -4,14 +4,15 @@ using System;
 public class FallingCollectible : KinematicBody2D
 {
 	private static readonly RandomNumberGenerator Rng = new RandomNumberGenerator();
-	
+
 	[Export] public float LungeSpeed = 50;
 
 	public Vector2 GravityVector = Vector2.Down;
+	public bool IsOnSlope = false;
 
 	private Vector2 _vel;
 
-	
+
 	public override void _Ready()
 	{
 		_vel = new Vector2(
@@ -27,6 +28,8 @@ public class FallingCollectible : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		_vel += GravityVector * Entity.Gravity * delta;
+		if (IsOnSlope)
+			_vel = new Vector2();
 		_vel = MoveAndSlide(_vel, Vector2.Up);
 		if (IsOnFloor())
 			_vel.x = 0;
@@ -35,7 +38,9 @@ public class FallingCollectible : KinematicBody2D
 		{
 			var collision = GetSlideCollision(i);
 			if (collision.Normal.y != -1 && IsOnFloor())
-				_vel = new Vector2();
+			{
+				IsOnSlope = true;
+			}
 		}
 	}
 
