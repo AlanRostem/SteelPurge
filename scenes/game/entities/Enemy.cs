@@ -5,9 +5,11 @@ using Object = Godot.Object;
 
 public class Enemy : Entity
 {
-	// private static readonly PackedScene ScrapScene = GD.Load<PackedScene>("res://scenes/entities/Scrap.tscn");
+	private static readonly PackedScene ScrapScene =
+		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
 
-	[Export] public uint ScrapValue = 50;
+	[Export] public uint ScrapDropHit = 5;
+	[Export] public uint ScrapDropKilled = 25;
 
 	[Export] public uint BaseHitPoints = 45;
 	private bool _isDead = false;
@@ -24,16 +26,23 @@ public class Enemy : Entity
 
 	public void TakeDamage(uint damage)
 	{
+		var scrap = (Scrap) ScrapScene.Instance();
+		ParentWorld.AddChild(scrap);
+		scrap.Position = Position;
+		
 		if (damage >= Health)
 		{
 			OnDie();
 			QueueFree();
-			// TODO: Drop scrap
+
+			scrap.Count = ScrapDropKilled;
+
 			_isDead = true;
 			Health = 0;
 		}
 		else
 		{
+			scrap.Count = ScrapDropHit;
 			Health -= damage;
 		}
 	}
@@ -46,12 +55,10 @@ public class Enemy : Entity
 			QueueFree();
 		}
 	}
-	
-	
+
+
 	private void _OnVulnerableHitboxHit(uint damage)
 	{
 		TakeDamage(damage);
 	}
-
 }
-
