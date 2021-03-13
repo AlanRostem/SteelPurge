@@ -13,6 +13,7 @@ public class Enemy : Entity
 
 	[Export] public uint BaseHitPoints = 45;
 	private bool _isDead;
+	private bool _dropScrap;
 
 	public override void _Ready()
 	{
@@ -24,31 +25,41 @@ public class Enemy : Entity
 	{
 	}
 
-	public void TakeDamage(uint damage)
+	public override void _Process(float delta)
 	{
-
-		
-		if (damage >= Health)
+		base._Process(delta);
+		if (_isDead)
 		{
-			OnDie();
-			QueueFree();
-
-			if (_isDead) return;
-			_isDead = true;
-			
-			var scrap = (Scrap)ScrapScene.Instance();
+			var scrap = (Scrap) ScrapScene.Instance();
 			ParentWorld.AddChild(scrap);
 			scrap.Position = Position;
 			scrap.Count = ScrapDropKilled;
+			QueueFree();
+		}
+
+		if (_dropScrap)
+		{
+			_dropScrap = false;
+			var scrap = (Scrap) ScrapScene.Instance();
+			ParentWorld.AddChild(scrap);
+			scrap.Position = Position;
+			scrap.Count = ScrapDropHit;
+		}
+	}
+
+	public void TakeDamage(uint damage)
+	{
+		if (damage >= Health)
+		{
+			OnDie();
+
+			_isDead = true;
 
 			Health = 0;
 		}
 		else
 		{
-			var scrap = (Scrap)ScrapScene.Instance();
-			ParentWorld.AddChild(scrap);
-			scrap.Position = Position;
-			scrap.Count = ScrapDropHit;
+			_dropScrap = true;
 			Health -= damage;
 		}
 	}
