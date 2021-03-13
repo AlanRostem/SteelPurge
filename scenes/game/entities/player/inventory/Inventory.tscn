@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/game/entities/player/inventory/Inventory.cs" type="Script" id=1]
-[ext_resource path="res://scenes/game/weapon/weapons/MarshalD12.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/weapon/weapons/firewall/Firewall.tscn" type="PackedScene" id=2]
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource( 1 )

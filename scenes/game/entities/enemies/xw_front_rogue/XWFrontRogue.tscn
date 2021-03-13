@@ -66,7 +66,6 @@ script = ExtResource( 6 )
 shape = SubResource( 1 )
 
 [node name="XWFrontRogueTrackCooldownTimer" type="Timer" parent="." index="5"]
-wait_time = 0.15
 one_shot = true
 script = ExtResource( 7 )
 
