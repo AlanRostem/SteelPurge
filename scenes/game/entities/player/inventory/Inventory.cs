@@ -22,11 +22,11 @@ public class Inventory : Node2D
 	
 	public uint ScrapCount = 0;
 
-    public uint[] OrdinanceFuels =
-    {
-        40,
-        40
-    };
+	public uint[] OrdinanceFuels =
+	{
+		40,
+		40
+	};
 
 	public override void _Ready()
 	{
@@ -45,22 +45,22 @@ public class Inventory : Node2D
 		_player.EmitSignal(nameof(Player.WeaponAddedToInventory), weapon);
 	}
 
-    public void PickUpScrap(uint count)
-    {
-        ScrapCount += count;
-        _player.KnowInventoryScrapCount(ScrapCount);
-    }
+	public void PickUpScrap(uint count)
+	{
+		ScrapCount += count;
+		_player.KnowInventoryScrapCount(ScrapCount);
+	}
 
 
 	public void PickUpOrdinanceFuel(uint count, OrdinanceFuelType type)
-    {
-        OrdinanceFuels[(int)type] += count;
-        _player.KnowInventoryOrdinanceFuelCount(OrdinanceFuels[(int)type], type);
-    }
+	{
+		OrdinanceFuels[(int)type] += count;
+		_player.KnowInventoryOrdinanceFuelCount(OrdinanceFuels[(int)type], type);
+	}
 
 	public void PickUpGun(Weapon weapon)
 	{
 		// TODO: Implement
-        
+		
 	}
 }
