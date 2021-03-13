@@ -2,16 +2,33 @@
 
 \begin{document}
 
-\section{Movement}
+
+\section{Player Traits}
+
+This section describes all the traits the player has regarding movement among other things.
+
+\subsection{Health / Hit Points}
+
+The player can take several hits by enemies until they die. There are several methods the player can survive the hits by enemies
+
+\subsection{Health regeneration and invincibility}
+
+When the player is hit by an enemy, they are invulnerable for a short time. After the invulnerability is over, some time later the player will slowly recover health
+
+\subsection{Movement}
 
 The player movement in Steel Purge is a standard platformer movement with walking and jumping. Due to the limited input the player will have, there are some twists on how he can move.
 
-\subsection{Gravity and Left-Right Movement + Jumping}
+\subsubsection{Gravity and Left-Right Movement + Jumping}
 
 The player character in Steel Purge falls and can walk from left to right and jump on top of obstacles.
 
-\subsection{Recoil-Hovering}
+\subsubsection{Recoil-Hovering}
 
-By firing downwards the player can fall slower. The slower the weapon makes you walk while firing the slower it makes you fall
+By firing downwards the player can fall slower after each fire interval.
+
+\subsubsection{Sliding}
+
+The player can slide on the ground and on slopes. Sliding allows the player to build up momentum, especially on slopes, and jump in order to keep that momentum. Combining this with \emph{recoil hovering} lets the player keep the high momentum for longer.
 
 \end{document}

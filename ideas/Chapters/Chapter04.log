@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.2.24)  13 MAR 2021 14:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.2.24)  13 MAR 2021 14:05
 entering extended mode
-**./Chapter01.tex
-(Chapter01.tex
+**./Chapter04.tex
+(Chapter04.tex
 LaTeX2e <2020-10-01> patch level 4
 L3 programming layer <2021-02-18> xparse <2020-03-03>
 (C:\Program Files\MiKTeX\tex/latex/subfiles\subfiles.cls
@@ -35,8 +35,8 @@ File: l3backend-pdftex.def 2021-02-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count187
 \l__pdf_internal_box=\box47
 )
-(Chapter01.aux)
-\openout1 = `Chapter01.aux'.
+(Chapter04.aux)
+\openout1 = `Chapter04.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
@@ -54,8 +54,8 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
  [1
 
-{C:/Users/arost/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] (Chapter01.
-aux) ) 
+{C:/Users/arost/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] (Chapter04.aux)
+ ) 
 Here is how much of TeX's memory you used:
  483 strings out of 479334
  8720 string characters out of 2866960
@@ -63,13 +63,13 @@ Here is how much of TeX's memory you used:
  18000 multiletter control sequences out of 15000+200000
  405593 words of font info for 34 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,4n,67p,272b,102s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
-ogram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on Chapter01.pdf (2 pages, 42109 bytes).
+ 64i,4n,67p,288b,102s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Progra
+m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on Chapter04.pdf (1 page, 40290 bytes).
 PDF statistics:
- 21 PDF objects out of 1000 (max. 8388607)
+ 18 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
