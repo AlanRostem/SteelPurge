@@ -6,7 +6,8 @@ public class Inventory : Node2D
 	public enum OrdinanceFuelType
 	{
 		Gasoline,
-		EmSlug
+		EmSlug,
+		_Count
 	}
 	
 	private static readonly uint MaxGuns = 8;
@@ -36,6 +37,11 @@ public class Inventory : Node2D
 		var defaultGun = (Weapon) DefaultGunScene.Instance();
 		AddWeapon(defaultGun);
 		_player.EquippedWeapon = defaultGun;
+		_player.KnowInventoryScrapCount(ScrapCount);
+		for (var i = 0; i < (int) OrdinanceFuelType._Count; i++)
+		{
+			_player.KnowInventoryOrdinanceFuelCount(OrdinanceFuels[i], (OrdinanceFuelType)i);
+		}
 	}
 
 	public void AddWeapon(Weapon weapon)
