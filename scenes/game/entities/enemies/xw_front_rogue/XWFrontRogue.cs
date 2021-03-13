@@ -11,7 +11,8 @@ public class XWFrontRogue : Enemy
 	[Export] public uint DamagePerHit = 40;
 	public int Direction = 1;
 	private bool _canSwapDir = true;
-
+	private Player _detectedPlayer;
+	private bool _isPlayerFound = false;
 
 	[Signal]
 	public delegate void TriggerDirSwapCooldown();
@@ -34,20 +35,36 @@ public class XWFrontRogue : Enemy
 	protected override void _OnMovement(float delta)
 	{
 		base._OnMovement(delta);
-		var dir = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
-		if (dir != Direction && _canSwapDir)
+		
+		
+		if (!_isPlayerFound && _canSwapDir)
 		{
 			EmitSignal(nameof(TriggerDirSwapCooldown));
 			_canSwapDir = false;
-			Direction = dir;
+			Direction = -Direction;
 		}
 
+		if (_isPlayerFound)
+		{
+			Direction = Mathf.Sign(_detectedPlayer.Position.x - Position.x);
+		}
 		
 		MoveX(WalkSpeed * Direction);
 	}
 
 	private void _OnAttackPlayer()
 	{
-		ParentWorld.PlayerNode.TakeDamage(DamagePerHit, Direction);
+		_detectedPlayer.TakeDamage(DamagePerHit, Direction);
+	}
+	
+	private void _OnPlayerDetected(object body)
+	{
+		_detectedPlayer = (Player)body;
+		_isPlayerFound = true;
+	}
+	
+	private void _OnPlayerLeave(object body)
+	{
+		_isPlayerFound = false;
 	}
 }
