@@ -12,10 +12,6 @@ public class XWFrontRogue : Enemy
 	public int Direction = 1;
 	private bool _canSwapDir = true;
 
-	private bool _pushingOut = false;
-	private readonly HashSet<XWFrontRogue> _otherRogues = new HashSet<XWFrontRogue>();
-
-	public float MaxDepth;
 
 	[Signal]
 	public delegate void TriggerDirSwapCooldown();
@@ -46,55 +42,12 @@ public class XWFrontRogue : Enemy
 			Direction = dir;
 		}
 
-		if (_pushingOut)
-		{
-			XWFrontRogue otherRogue = _otherRogues.First();
-			var lowestDistance = Position.DistanceSquaredTo(otherRogue.Position);
-			foreach (var rogue in _otherRogues)
-			{
-				var current = Position.DistanceSquaredTo(rogue.Position);
-				if (lowestDistance > current)
-				{
-					otherRogue = rogue;
-					lowestDistance = current;
-				}
-			}
-
-			var dx = Position.x - otherRogue.Position.x;
-			if (dx == 0f)
-				dx = Mathf.Epsilon;
-			var fx = MaxDepth / dx;
-			MoveX(fx * WalkSpeed);
-		}
-		else
-		{
-			MoveX(WalkSpeed * Direction);
-
-		}
+		
+		MoveX(WalkSpeed * Direction);
 	}
 
 	private void _OnAttackPlayer()
 	{
 		ParentWorld.PlayerNode.TakeDamage(DamagePerHit, Direction);
-	}
-
-	private void _OnRogueCollided(object body)
-	{
-		if (body is XWFrontRogue rogue && rogue != this)
-		{
-			_otherRogues.Add(rogue);
-			_pushingOut = true;
-		}
-	}
-
-
-	private void _OnRogueExited(object body)
-	{
-		if (body is XWFrontRogue rogue && rogue != this)
-		{
-			_otherRogues.Remove(rogue);
-			if (_otherRogues.Count == 0)
-				_pushingOut = false;
-		}
 	}
 }

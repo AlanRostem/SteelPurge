@@ -8,11 +8,10 @@ public class Enemy : Entity
 	private static readonly PackedScene ScrapScene =
 		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
 
-	[Export] public uint ScrapDropHit = 5;
+	[Export] public uint ScrapDropHit = 2;
 	[Export] public uint ScrapDropKilled = 25;
 
 	[Export] public uint BaseHitPoints = 45;
-	private bool _isDead = false;
 
 	public override void _Ready()
 	{
@@ -37,7 +36,6 @@ public class Enemy : Entity
 
 			scrap.Count = ScrapDropKilled;
 
-			_isDead = true;
 			Health = 0;
 		}
 		else
@@ -46,16 +44,6 @@ public class Enemy : Entity
 			Health -= damage;
 		}
 	}
-
-
-	private void _OnDisappear()
-	{
-		if (!_isDead)
-		{
-			QueueFree();
-		}
-	}
-
 
 	private void _OnVulnerableHitboxHit(uint damage)
 	{

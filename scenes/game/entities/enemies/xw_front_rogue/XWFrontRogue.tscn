@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogueSprite.cs" type="Script" id=1]
 [ext_resource path="res://scenes/game/entities/Enemy.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogueMeleeArea.cs" type="Script" id=5]
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogueAttackCycleTimer.cs" type="Script" id=6]
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogueTrackCooldownTimer.cs" type="Script" id=7]
-[ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/BodyShape.cs" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 7 )
@@ -38,7 +37,6 @@ WalkSpeed = 45.0
 
 [node name="BodyShape" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
-script = ExtResource( 8 )
 
 [node name="XWFrontRogueSprite" type="AnimatedSprite" parent="." index="1"]
 position = Vector2( 0, -1 )
@@ -61,24 +59,17 @@ shape = SubResource( 5 )
 wait_time = 0.1
 script = ExtResource( 6 )
 
+[node name="BodyShape" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
+shape = SubResource( 1 )
+
 [node name="XWFrontRogueTrackCooldownTimer" type="Timer" parent="." index="5"]
 wait_time = 0.15
 one_shot = true
 script = ExtResource( 7 )
 
-[node name="Area2D" type="Area2D" parent="." index="6"]
-collision_layer = 0
-collision_mask = 8
-
-[node name="BodyShape" type="CollisionShape2D" parent="Area2D" index="0"]
-shape = SubResource( 1 )
-
-[node name="BodyShape" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
-shape = SubResource( 1 )
+[node name="PlayerDetectionArea" type="Area2D" parent="." index="7"]
 [connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
 [connection signal="body_entered" from="XWFrontRogueMeleeArea" to="XWFrontRogueAttackCycleTimer" method="_OnPlayerEnterMeleeRange"]
 [connection signal="body_exited" from="XWFrontRogueMeleeArea" to="XWFrontRogueAttackCycleTimer" method="_OnPlayerExitMeleeRange"]
 [connection signal="timeout" from="XWFrontRogueAttackCycleTimer" to="." method="_OnAttackPlayer"]
 [connection signal="timeout" from="XWFrontRogueTrackCooldownTimer" to="." method="_OnCanSwap"]
-[connection signal="body_entered" from="Area2D" to="." method="_OnRogueCollided"]
-[connection signal="body_exited" from="Area2D" to="." method="_OnRogueExited"]
