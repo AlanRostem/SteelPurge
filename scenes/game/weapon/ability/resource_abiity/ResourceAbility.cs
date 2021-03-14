@@ -10,7 +10,7 @@ public class ResourceAbility : WeaponAbility
 	public float LingerDuration = 0.6f;
 	
 	[Export]
-	public float DrainInterval = 0.4f; 
+	public float DrainInterval = 0.1f; 
 	
 	private float _currentDrainTime = 0;
 	private bool _isActive = false;
