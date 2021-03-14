@@ -10,6 +10,8 @@ public class Entity : KinematicBody2D
 	public bool CanMove = true;
 	public static readonly Vector2 DefaultGravity = new Vector2(0, Gravity);
 	public Vector2 GravityVector = new Vector2(0, Gravity);
+    public bool IsGravityEnabled = true;
+
 
 	public uint Health
 	{
@@ -41,7 +43,8 @@ public class Entity : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		Velocity += GravityVector * delta;
+        if (IsGravityEnabled)
+		    Velocity += GravityVector * delta;
 		Velocity = MoveAndSlide(Velocity, Vector2.Up, false);
 		for (var i = 0; i < GetSlideCount(); i++)
 		{

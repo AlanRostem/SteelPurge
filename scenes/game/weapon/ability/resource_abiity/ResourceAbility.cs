@@ -20,7 +20,13 @@ public class ResourceAbility : WeaponAbility
 	
 	public override void _Process(float delta)
 	{
-		if (Input.IsActionPressed("tactical_ability"))
+		var type = (int)FuelType;
+		var player = GetWeapon().OwnerPlayer;
+		var fuels = player.PlayerInventory.OrdinanceFuels;
+		
+		if (fuels[type] < DrainPerTick) return;
+
+			if (Input.IsActionPressed("tactical_ability"))
 		{
 			EmitSignal(nameof(Linger));
 			// TODO: Drain the resource
@@ -30,34 +36,37 @@ public class ResourceAbility : WeaponAbility
 				OnActivate();
 			}
 		}
+
+		if (!_isActive) return;
 		
-		if (_isActive)
+		OnUpdate();
+
+		if (_currentDrainTime >= DrainInterval)
 		{
-			var type = (int)FuelType;
-			var player = GetWeapon().OwnerPlayer;
-			var fuels = player.PlayerInventory.OrdinanceFuels;
-			if (fuels[type] >= DrainPerTick)
-			{
-				if (_currentDrainTime >= DrainInterval) 
-				{			
-					_currentDrainTime = 0;
-					fuels[type] -= DrainPerTick;
-					player.KnowInventoryOrdinanceFuelCount(fuels[type], FuelType);
-				}
-				_currentDrainTime += delta;
-			}
-			else
-			{	
-				_LingerStopped();
-			}
+			_currentDrainTime = 0;
+			fuels[type] -= DrainPerTick;
+			player.KnowInventoryOrdinanceFuelCount(fuels[type], FuelType);
+			OnTick();
 		}
+		
+		_currentDrainTime += delta;
 	}
 	
 	public virtual void OnActivate()
 	{
 		
 	}
-	
+
+	public virtual void OnTick()
+	{
+
+	}
+
+	public virtual void OnUpdate()
+	{
+
+	}
+
 	public virtual void OnDeActivate()
 	{
 		
