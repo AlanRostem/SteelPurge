@@ -35,7 +35,7 @@ public class ResourceAbility : WeaponAbility
 			}
 		}
 		
-		if (fuels[type] < DrainPerTick)
+		if (fuels[type] < DrainPerTick && _isActive)
 		{
 			_LingerStopped();
 			return;
