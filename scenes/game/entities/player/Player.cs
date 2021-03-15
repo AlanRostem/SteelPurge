@@ -119,7 +119,7 @@ public class Player : Entity
 		EmitSignal(nameof(OrdinanceFuelCountChanged), count, type);
 	}
 
-	public void TakeDamage(uint damage, int knockDir)
+	public override void TakeDamage(uint damage, float direction = 0)
 	{
 		EmitSignal(nameof(CancelRegen));
 		EmitSignal(nameof(TriggerRegenCooldown));
@@ -128,7 +128,7 @@ public class Player : Entity
 		{
 			CanTakeDamage = false;
 			_isStunned = true;
-			Velocity = (new Vector2(MaxWalkSpeed * 2 * knockDir, -MaxJumpSpeed / 2));
+			Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -MaxJumpSpeed / 2));
 			EmitSignal(nameof(TriggerDamageReceptionCooldown));
 			EmitSignal(nameof(TriggerInvincibility));
 		}

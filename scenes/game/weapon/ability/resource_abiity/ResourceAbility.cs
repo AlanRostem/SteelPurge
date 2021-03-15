@@ -43,7 +43,7 @@ public class ResourceAbility : WeaponAbility
 
 		var pressed = Input.IsActionPressed("tactical_ability");
 
-		if (pressed)
+		if (pressed && fuels[type] > DrainPerTick)
 		{
 			EmitSignal(nameof(Linger));
 			if (!_isActive)

@@ -47,6 +47,11 @@ public class Entity : KinematicBody2D
 		AddChild(effect);
 	}
 
+	public virtual void TakeDamage(uint damage, float direction = 0)
+	{
+		Health -= damage;
+	}
+	
 	public override void _PhysicsProcess(float delta)
 	{
 		if (IsGravityEnabled)

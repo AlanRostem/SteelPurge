@@ -47,7 +47,7 @@ public class Enemy : Entity
 		}
 	}
 
-	public void TakeDamage(uint damage)
+	public override void TakeDamage(uint damage, float direction = 0)
 	{
 		if (damage >= Health)
 		{
