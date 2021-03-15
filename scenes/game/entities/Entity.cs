@@ -6,11 +6,17 @@ using Object = Godot.Object;
 public class Entity : KinematicBody2D
 {
 	public const float Gravity = 600;
+	
 	public World ParentWorld { get; private set; }
+	
+	[Export]
 	public bool CanMove = true;
+	
 	public static readonly Vector2 DefaultGravity = new Vector2(0, Gravity);
 	public Vector2 GravityVector = new Vector2(0, Gravity);
-    public bool IsGravityEnabled = true;
+	
+	[Export]
+	public bool IsGravityEnabled = true;
 
 
 	public uint Health
@@ -26,7 +32,7 @@ public class Entity : KinematicBody2D
 
 	private uint _health = 100;
 
-    public Vector2 Velocity;
+	public Vector2 Velocity;
 
 	[Signal]
 	public delegate void HealthChanged(uint health);
@@ -43,49 +49,49 @@ public class Entity : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-        if (IsGravityEnabled)
-		    Velocity += GravityVector * delta;
+		if (IsGravityEnabled)
+			Velocity += GravityVector * delta;
 		Velocity = MoveAndSlide(Velocity, Vector2.Up, false);
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
 			var collision = GetSlideCollision(i);
-            _OnCollision(collision);
+			_OnCollision(collision);
 		}
 
 		_OnMovement(delta);
 	}
 	
 
-    private bool _canAccelerate = true;
+	private bool _canAccelerate = true;
 
-    public void AccelerateX(float x, float maxSpeed, float delta)
-    {
-        if (!CanMove) return;
-        var movement = x * delta;
-        var result = Mathf.Abs(Velocity.x + movement);
-        
-        if (!_canAccelerate)
-        {
-            if (result < maxSpeed)
-            {
-                _canAccelerate = true;
-            }
-            else return;
-        }
-        
-        if (result > maxSpeed)
-        {
-            movement = (result - maxSpeed) * delta * Mathf.Sign(x);
-            result = Mathf.Abs(Velocity.x + movement);
-            if (result > maxSpeed)
-                movement = 0;
-            _canAccelerate = false;
-        }
+	public void AccelerateX(float x, float maxSpeed, float delta)
+	{
+		if (!CanMove) return;
+		var movement = x * delta;
+		var result = Mathf.Abs(Velocity.x + movement);
+		
+		if (!_canAccelerate)
+		{
+			if (result < maxSpeed)
+			{
+				_canAccelerate = true;
+			}
+			else return;
+		}
+		
+		if (result > maxSpeed)
+		{
+			movement = (result - maxSpeed) * delta * Mathf.Sign(x);
+			result = Mathf.Abs(Velocity.x + movement);
+			if (result > maxSpeed)
+				movement = 0;
+			_canAccelerate = false;
+		}
 
-        Velocity.x += movement;
-    }
+		Velocity.x += movement;
+	}
 
-    public void MoveX(float x)
+	public void MoveX(float x)
 	{
 		if (CanMove)
 			Velocity.x = x;

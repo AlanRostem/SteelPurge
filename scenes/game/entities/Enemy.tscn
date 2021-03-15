@@ -18,6 +18,7 @@ margin_left = -24.0
 margin_top = -24.0
 margin_right = 24.0
 margin_bottom = -14.0
+text = "<HP>"
 align = 1
 script = ExtResource( 5 )
 [connection signal="HealthChanged" from="." to="EnemyHPLabel" method="_OnEnemyHealthChanged"]
