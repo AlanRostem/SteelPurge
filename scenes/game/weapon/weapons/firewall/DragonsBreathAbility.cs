@@ -18,6 +18,7 @@ public class DragonsBreathAbility : ResourceAbility
 	public override void OnActivate()
 	{
 		EmitSignal(nameof(TurnOn));
+		GetWeapon().IsFiring = true;
 	}
 
 	public override void OnDeActivate()
@@ -25,6 +26,7 @@ public class DragonsBreathAbility : ResourceAbility
 		EmitSignal(nameof(TurnOff));
 		GetWeapon().OwnerPlayer.IsGravityEnabled = true;
 		_hitBoxes.Clear();
+		GetWeapon().IsFiring = false;
 	}
 
 	public override void OnTick()

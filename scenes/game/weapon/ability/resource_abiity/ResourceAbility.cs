@@ -21,40 +21,37 @@ public class ResourceAbility : WeaponAbility
 		var player = GetWeapon().OwnerPlayer;
 		var fuels = player.PlayerInventory.OrdinanceFuels;
 
+		if (_isActive)
+		{
+			OnUpdate();
+
+			_currentDrainTime += delta;
+			if (_currentDrainTime >= DrainInterval)
+			{
+				_currentDrainTime = 0;
+				fuels[type] -= DrainPerTick;
+				player.KnowInventoryOrdinanceFuelCount(fuels[type], FuelType);
+				OnTick();
+			}
+		}
+		
 		if (fuels[type] < DrainPerTick)
 		{
 			_LingerStopped();
 			return;
 		}
 
-		if (Input.IsActionPressed("tactical_ability"))
+		var pressed = Input.IsActionPressed("tactical_ability");
+
+		if (pressed)
 		{
 			EmitSignal(nameof(Linger));
-			// TODO: Drain the resource
 			if (!_isActive)
 			{
 				_isActive = true;
 				OnActivate();
 			}
 		}
-
-		if (!_isActive)
-		{
-			_LingerStopped();
-			return;
-		}
-
-		OnUpdate();
-
-		if (_currentDrainTime >= DrainInterval)
-		{
-			_currentDrainTime = 0;
-			fuels[type] -= DrainPerTick;
-			player.KnowInventoryOrdinanceFuelCount(fuels[type], FuelType);
-			OnTick();
-		}
-
-		_currentDrainTime += delta;
 	}
 
 	public virtual void OnActivate()

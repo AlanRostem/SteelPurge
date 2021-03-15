@@ -183,6 +183,7 @@ public class Weapon : Node2D
 		{
 			_isHoldingTrigger = false;
 		}
+		
 	}
 
 	public uint GetClipAmmo()
