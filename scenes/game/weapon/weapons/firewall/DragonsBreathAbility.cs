@@ -27,16 +27,11 @@ public class DragonsBreathAbility : ResourceAbility
 		_hitBoxes.Clear();
 	}
 
-	public override void OnUpdate()
-	{
-		var player = GetWeapon().OwnerPlayer;
-		player.IsGravityEnabled = !player.IsAimingDown;
-		if (!player.IsGravityEnabled)
-			player.Velocity.y = 0;
-	}
-
 	public override void OnTick()
 	{
+		var player = GetWeapon().OwnerPlayer;		
+		if (player.Velocity.y > 0 && player.IsAimingDown)
+			player.Velocity.y *= 0.2f;
 		foreach (var pair in _hitBoxes)
 		{
 			var hitBox = pair.Value;
