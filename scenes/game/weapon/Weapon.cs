@@ -21,7 +21,12 @@ public class Weapon : Node2D
 	private bool _isPassivelyReloading = false;
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
-	public bool IsFiring => _isFiring;
+
+	public bool IsFiring
+	{
+		get => _isFiring;
+		set => _isFiring = value;
+	}
 
 	public override void _Ready()
 	{
