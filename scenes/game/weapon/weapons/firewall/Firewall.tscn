@@ -46,6 +46,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="DragonsBreathAbility/FireArea" index="1"]
 position = Vector2( 88, 0 )
 texture = ExtResource( 8 )
+[connection signal="DamageDealt" from="." to="FlareFiringDevice" method="_OnDamageDealt"]
 [connection signal="TurnOff" from="DragonsBreathAbility" to="DragonsBreathAbility/FireArea" method="_OnDisabled"]
 [connection signal="TurnOn" from="DragonsBreathAbility" to="DragonsBreathAbility/FireArea" method="_OnEnabled"]
 [connection signal="area_entered" from="DragonsBreathAbility/FireArea" to="DragonsBreathAbility" method="_HitBoxEnteredFire"]

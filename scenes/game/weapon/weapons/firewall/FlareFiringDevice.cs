@@ -28,4 +28,12 @@ public class FlareFiringDevice : ProjectileShotGunFiringDevice
 		flare.Position = player.Position;
 		world.AddChild(flare);
 	}
+	
+	private void _OnDamageDealt(uint damage, VulnerableHitbox target)
+	{
+        if (target.GetParent() is Entity entity)
+        {
+
+        }
+	}
 }

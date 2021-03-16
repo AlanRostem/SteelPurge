@@ -1,12 +1,10 @@
 using Godot;
-using System;
-using System.Collections.Generic;
-using Object = Godot.Object;
+using Godot.Collections;
 
 public class Entity : KinematicBody2D
 {
 	public const float Gravity = 600;
-	
+    
 	public World ParentWorld { get; private set; }
 	
 	[Export]
@@ -18,8 +16,7 @@ public class Entity : KinematicBody2D
 	[Export]
 	public bool IsGravityEnabled = true;
 
-
-	public uint Health
+    public uint Health
 	{
 		get => _health;
 
@@ -44,6 +41,7 @@ public class Entity : KinematicBody2D
 
 	public void ApplyStatusEffect(StatusEffect effect)
 	{
+        
 		AddChild(effect);
 	}
 
