@@ -19,6 +19,7 @@ public class DragonsBreathAbility : ResourceAbility
 	{
 		EmitSignal(nameof(TurnOn));
 		GetWeapon().IsFiring = true;
+		GetWeapon().EmitSignal(nameof(Weapon.CancelFire));
 	}
 
 	public override void OnDeActivate()
