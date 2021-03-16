@@ -74,17 +74,18 @@ public class Entity : KinematicBody2D
 		if (!CanMove) return;
 		var movement = x * delta;
 		var result = Mathf.Abs(Velocity.x + movement);
-		
+		var differingDir = Mathf.Sign(movement) != Mathf.Sign(Velocity.x);
+
 		if (!_canAccelerate)
 		{
-			if (result < maxSpeed)
+			if (result < maxSpeed || differingDir)
 			{
 				_canAccelerate = true;
 			}
 			else return;
 		}
 		
-		if (result > maxSpeed)
+		if (result > maxSpeed && !differingDir)
 		{
 			movement = (result - maxSpeed) * delta * Mathf.Sign(x);
 			result = Mathf.Abs(Velocity.x + movement);
