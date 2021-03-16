@@ -24,7 +24,7 @@ public class FlareFiringDevice : ProjectileShotGunFiringDevice
 		}
 
 
-		flare.InitVelocity();
+		flare.Init(GetWeapon());
 		flare.Position = player.Position;
 		world.AddChild(flare);
 	}
