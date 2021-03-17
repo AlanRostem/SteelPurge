@@ -5,7 +5,7 @@ public class Entity : KinematicBody2D
 {
 	public const float Gravity = 600;
 
-	[Export] public bool StopOnSlope = false;
+	[Export] public bool StopOnSlope = true;
 
 	public enum StatusEffectType
 	{

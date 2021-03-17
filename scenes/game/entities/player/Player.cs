@@ -71,7 +71,7 @@ public class Player : Entity
 
 	[Signal]
 	public delegate void WeaponClipChanged(uint clip);
-	
+
 	[Signal]
 	public delegate void WeaponAddedToInventory(Weapon weapon);
 
@@ -227,6 +227,8 @@ public class Player : Entity
 				CurrentSlideMagnitude = MaxSlideMagnitude;
 			}
 		}
+		
+		StopOnSlope = !IsSliding;
 
 		if (IsSliding && isOnFloor)
 		{
@@ -246,6 +248,7 @@ public class Player : Entity
 				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFriction);
 		}
 
+		
 		if (_left && !_right)
 		{
 			AccelerateX(-WalkSpeedGround, CurrentMaxSpeed, delta);
@@ -325,9 +328,13 @@ public class Player : Entity
 	public override void _OnCollision(KinematicCollision2D collider)
 	{
 		if (collider.Normal.y != -1 && IsOnFloor() && !IsSliding)
+		{
 			GravityVector = -collider.Normal * Gravity;
+		}
 		else
+		{
 			GravityVector = DefaultGravity;
+		}
 	}
 
 	private void _OnRegen()
