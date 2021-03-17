@@ -14,7 +14,7 @@ public class Inventory : Node2D
 
 	[Export]
 	public PackedScene DefaultGunScene
-		= GD.Load<PackedScene>("res://scenes/game/weapon/weapons/Judger45.tscn");
+		= GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/Firewall.tscn");
 
 
 	private Player _player;
