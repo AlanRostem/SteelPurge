@@ -9,6 +9,7 @@ radius = 40.0
 collision_layer = 0
 collision_mask = 18
 script = ExtResource( 1 )
+KnockBackForce = 15000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

@@ -12,8 +12,8 @@ public class Explosion : Area2D
 		hitBox.EmitSignal(nameof(VulnerableHitbox.Hit), Damage);
 		if (hitBox.GetParent() is Entity entity)
 		{
-			var angle = Position.AngleTo(entity.Position);
-			entity.ApplyForce(new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce);
+			var angle = Position.AngleToPoint(entity.Position);
+			entity.ApplyForce(new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce * GetPhysicsProcessDeltaTime());
 		}
 	}
 	
@@ -23,8 +23,11 @@ public class Explosion : Area2D
 		{
 			float damage = 0.5f * Damage;
 			player.TakeDamage((uint)damage);
-			var angle = Position.AngleTo(player.Position);
-			player.ApplyForce(new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce);
+			var angle = Position.AngleToPoint(player.Position);
+			var force = new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce *
+						GetPhysicsProcessDeltaTime();
+			GD.Print(force);
+			player.ApplyForce(force);
 		}
 	}
 
