@@ -126,9 +126,13 @@ public class Player : Entity
 
 		if (CanTakeDamage)
 		{
-			CanTakeDamage = false;
-			_isStunned = true;
-			Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -MaxJumpSpeed / 2));
+			if (direction != 0)
+			{
+				CanTakeDamage = false;
+				_isStunned = true;
+				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -MaxJumpSpeed / 2));
+			}
+
 			EmitSignal(nameof(TriggerDamageReceptionCooldown));
 			EmitSignal(nameof(TriggerInvincibility));
 		}
