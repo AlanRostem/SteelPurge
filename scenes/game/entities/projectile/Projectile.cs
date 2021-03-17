@@ -5,6 +5,7 @@ public class Projectile : KinematicBody2D
 {
 	[Export] public float DirectionAngle = 0;
 	[Export] public float MaxVelocity = 5;
+	private bool _hasDisappeared = false;
 	
 	public Weapon OwnerWeapon { get; private set; }
 
@@ -29,16 +30,30 @@ public class Projectile : KinematicBody2D
 		var hitBox = (VulnerableHitbox) area;
 		hitBox.EmitSignal(nameof(VulnerableHitbox.Hit), OwnerWeapon.DamagePerShot);
 		OwnerWeapon.EmitSignal(nameof(Weapon.DamageDealt), OwnerWeapon.DamagePerShot, hitBox);
-		QueueFree();
+		if (!_hasDisappeared)
+		{
+			_hasDisappeared = true;
+			_OnDisappear();
+			QueueFree();
+		}
 	}
 
 	private void _OnHitTileMap(object body)
 	{
-		QueueFree();
+		if (!_hasDisappeared)
+		{
+			_hasDisappeared = true;
+			_OnDisappear();
+			QueueFree();
+		}
+	}
+
+	public virtual void _OnDisappear()
+	{
 	}
 	
-	private void _OnDisappear()
+	private void _OnDelete()
 	{
-	   QueueFree();
+		QueueFree();
 	}
 }

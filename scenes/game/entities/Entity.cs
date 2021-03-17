@@ -7,6 +7,9 @@ public class Entity : KinematicBody2D
 
 	[Export] public bool StopOnSlope = true;
 
+
+	private bool _canAccelerate = true;
+
 	public enum StatusEffectType
 	{
 		Burn,
@@ -91,7 +94,6 @@ public class Entity : KinematicBody2D
 	}
 
 
-	private bool _canAccelerate = true;
 
 	public void AccelerateX(float x, float maxSpeed, float delta)
 	{
@@ -144,5 +146,11 @@ public class Entity : KinematicBody2D
 	public void RemoveStatusEffect(StatusEffectType type)
 	{
 		_effects.Remove(type);
+	}
+
+	public void ApplyForce(Vector2 knockBackForce)
+	{
+		if (!CanMove) return;
+		Velocity += knockBackForce;
 	}
 }

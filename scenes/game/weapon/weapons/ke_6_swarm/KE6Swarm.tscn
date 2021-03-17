@@ -9,7 +9,7 @@
 DisplayName = "KE-6 Swarm"
 ClipSize = 6
 DamagePerShot = 65
-RateOfFire = 150
+RateOfFire = 80
 ReloadSpeed = 3.0
 PassiveReloadSpeed = 5.0
 HoverRecoilMultiplier = 0.0

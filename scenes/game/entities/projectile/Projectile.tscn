@@ -26,4 +26,4 @@ shape = SubResource( 2 )
 scale = Vector2( 0.5, 0.5 )
 [connection signal="area_entered" from="HitDetectionArea" to="." method="_OnVulnerableHitBoxEntered"]
 [connection signal="body_entered" from="HitDetectionArea" to="." method="_OnHitTileMap"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_OnDisappear"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_OnDelete"]
