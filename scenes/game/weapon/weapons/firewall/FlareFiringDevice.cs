@@ -31,9 +31,9 @@ public class FlareFiringDevice : ProjectileShotGunFiringDevice
 	
 	private void _OnDamageDealt(uint damage, VulnerableHitbox target)
 	{
-        if (target.GetParent() is Entity entity)
-        {
-
-        }
+		if (target.GetParent() is Entity entity)
+		{
+			entity.ApplyStatusEffect(Entity.StatusEffectType.Burn);
+		}
 	}
 }

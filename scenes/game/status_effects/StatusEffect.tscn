@@ -3,7 +3,6 @@
 [ext_resource path="res://scenes/game/status_effects/StatusEffect.cs" type="Script" id=1]
 [ext_resource path="res://scenes/game/status_effects/StatusEffectTimer.cs" type="Script" id=2]
 
-
 [node name="StatusEffect" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -11,4 +10,5 @@ script = ExtResource( 1 )
 one_shot = true
 autostart = true
 script = ExtResource( 2 )
+[connection signal="Reset" from="." to="StatusEffectTimer" method="_OnReset"]
 [connection signal="timeout" from="StatusEffectTimer" to="." method="OnEnd"]

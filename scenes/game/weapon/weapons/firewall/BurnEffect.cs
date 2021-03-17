@@ -7,9 +7,10 @@ public class BurnEffect : StatusEffect
 	[Export] public uint DamagePerTick = 5;
 
 	private float _currentDamageTime = 0;
-	
+
 	public override void _Process(float delta)
 	{
+		_currentDamageTime += delta;
 		if (_currentDamageTime >= DamageInterval)
 		{
 			_currentDamageTime = 0;

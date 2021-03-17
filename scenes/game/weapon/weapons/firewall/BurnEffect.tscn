@@ -5,4 +5,5 @@
 
 [node name="BurnEffect" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-Duration = 1.0
+Type = 0
+Duration = 6.0

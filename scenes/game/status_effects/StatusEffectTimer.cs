@@ -7,4 +7,9 @@ public class StatusEffectTimer : Timer
 	{
 		WaitTime = GetParent<StatusEffect>().Duration;
 	}
+	
+	private void _OnReset()
+	{
+		Start();
+	}
 }
