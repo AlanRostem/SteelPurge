@@ -24,7 +24,7 @@ public class Explosion : Area2D
 			float damage = 0.5f * Damage;
 			player.TakeDamage((uint)damage);
 			var angle = Position.AngleToPoint(player.Position);
-			var force = new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce *
+			var force = new Vector2(-Mathf.Cos(angle) * 0.2f, -Mathf.Sin(angle)) * KnockBackForce *
 						GetPhysicsProcessDeltaTime();
 			GD.Print(force);
 			player.ApplyForce(force);

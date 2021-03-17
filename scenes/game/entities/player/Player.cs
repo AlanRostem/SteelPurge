@@ -1,10 +1,12 @@
 using Godot;
 using System;
+using System.Globalization;
 using Object = Godot.Object;
 
 public class Player : Entity
 {
 	public static readonly uint HealthRegenCount = 15;
+	private static readonly float MaxMovementSpeed = 250;
 	private static readonly float MaxWalkSpeed = 80;
 	private static readonly float WalkSpeedGround = 330;
 	private static readonly float MaxWalkSpeedFiring = 35;
@@ -58,12 +60,15 @@ public class Player : Entity
 		}
 	}
 
+	private Label _speedLabel;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
+		_speedLabel = new Label {Text = "0"};
+		AddChild(_speedLabel);
 	}
 
 	[Signal]
@@ -287,6 +292,11 @@ public class Player : Entity
 		}
 
 		IsJumping = !isOnFloor;
+
+		_speedLabel.Text = Velocity.x.ToString(CultureInfo.InvariantCulture);
+
+		Velocity.x = Mathf.Clamp(-MaxMovementSpeed, Velocity.x, MaxMovementSpeed);
+		Velocity.y = Mathf.Clamp(-MaxMovementSpeed, Velocity.y, MaxMovementSpeed);
 
 		if (!isOnFloor)
 		{
