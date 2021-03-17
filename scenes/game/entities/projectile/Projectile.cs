@@ -4,8 +4,7 @@ using System;
 public class Projectile : KinematicBody2D
 {
 	[Export] public float DirectionAngle = 0;
-	[Export] public float MaxVelocity = 1;
-	[Export] public float Damage = 10;
+	[Export] public float MaxVelocity = 5;
 	
 	public Weapon OwnerWeapon { get; private set; }
 
@@ -28,8 +27,8 @@ public class Projectile : KinematicBody2D
 	private void _OnVulnerableHitBoxEntered(object area)
 	{
 		var hitBox = (VulnerableHitbox) area;
-		hitBox.EmitSignal(nameof(VulnerableHitbox.Hit), Damage);
-		OwnerWeapon.EmitSignal(nameof(Weapon.DamageDealt), Damage, hitBox);
+		hitBox.EmitSignal(nameof(VulnerableHitbox.Hit), OwnerWeapon.DamagePerShot);
+		OwnerWeapon.EmitSignal(nameof(Weapon.DamageDealt), OwnerWeapon.DamagePerShot, hitBox);
 		QueueFree();
 	}
 

@@ -6,6 +6,13 @@
 [ext_resource path="res://scenes/game/weapon/weapons/ke_6_swarm/OrbFiringDevice.cs" type="Script" id=4]
 
 [node name="KE6Swarm" instance=ExtResource( 1 )]
+DisplayName = "KE-6 Swarm"
+ClipSize = 6
+DamagePerShot = 65
+RateOfFire = 150
+ReloadSpeed = 3.0
+PassiveReloadSpeed = 5.0
+HoverRecoilMultiplier = 0.0
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
 position = Vector2( 8, 0 )

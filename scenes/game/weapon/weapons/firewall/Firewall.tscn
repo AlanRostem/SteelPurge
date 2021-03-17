@@ -15,7 +15,7 @@ extents = Vector2( 72, 8 )
 [node name="Firewall" instance=ExtResource( 1 )]
 DisplayName = "Firewall .127"
 ClipSize = 12
-DamagePerShot = 2
+DamagePerShot = 8
 RateOfFire = 250
 ReloadSpeed = 2.0
 PassiveReloadSpeed = 3.5
