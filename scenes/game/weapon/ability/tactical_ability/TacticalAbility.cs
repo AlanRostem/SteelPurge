@@ -3,7 +3,7 @@ using System;
 
 public class TacticalAbility : WeaponAbility
 {
-   [Export] public uint FuelRequirement = 10;
+	[Export] public uint FuelRequirement = 10;
 	[Export] public float CoolDown = 6;
 	[Export] public float Duration = 1;
 	public float CurrentDuration = 0;
