@@ -60,15 +60,12 @@ public class Player : Entity
 		}
 	}
 
-	private Label _speedLabel;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
-		_speedLabel = new Label {Text = "0"};
-		AddChild(_speedLabel);
 	}
 
 	[Signal]
@@ -292,8 +289,6 @@ public class Player : Entity
 		}
 
 		IsJumping = !isOnFloor;
-
-		_speedLabel.Text = Velocity.x.ToString(CultureInfo.InvariantCulture);
 
 		Velocity.x = Mathf.Clamp(-MaxMovementSpeed, Velocity.x, MaxMovementSpeed);
 		Velocity.y = Mathf.Clamp(-MaxMovementSpeed, Velocity.y, MaxMovementSpeed);
