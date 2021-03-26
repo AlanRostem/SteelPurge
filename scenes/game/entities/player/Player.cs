@@ -336,7 +336,6 @@ public class Player : Entity
 		return Input.IsActionJustPressed(action) && !_isStunned;
 	}
 
-
 	public override void _OnCollision(KinematicCollision2D collider)
 	{
 		if (collider.Normal.y != -1 && IsOnFloor() && !IsSliding)
@@ -348,8 +347,8 @@ public class Player : Entity
 			GravityVector = DefaultGravity;
 		}
 	}
-
-	private void _OnRegen()
+    
+    private void _OnRegen()
 	{
 		if (HealthRegenCount + Health < 100)
 		{

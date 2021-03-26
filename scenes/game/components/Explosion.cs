@@ -26,7 +26,6 @@ public class Explosion : Area2D
 			var angle = Position.AngleToPoint(player.Position);
 			var force = new Vector2(-Mathf.Cos(angle) * 0.2f, -Mathf.Sin(angle)) * KnockBackForce *
 						GetPhysicsProcessDeltaTime();
-			GD.Print(force);
 			player.ApplyForce(force);
 		}
 	}
