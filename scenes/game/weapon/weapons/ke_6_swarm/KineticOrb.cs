@@ -9,6 +9,6 @@ public class KineticOrb : Projectile
 	{
 		var explosion = (Explosion) ExplosionScene.Instance();
 		explosion.Position = Position;
-		OwnerWeapon.OwnerPlayer.ParentWorld.AddChild(explosion);
+		OwnerWeapon.OwnerPlayer.ParentWorld.CallDeferred("add_child",explosion);
 	}
 }
