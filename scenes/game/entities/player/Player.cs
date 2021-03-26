@@ -31,6 +31,7 @@ public class Player : Entity
 	private bool _jump = false;
 	private bool _aim = false;
 	public bool CanTakeDamage = true;
+	public bool IsInvulnerable = false;
 	public bool IsAimingUp = false;
 	public bool IsAimingDown = false;
 	private bool _isStunned = false;
@@ -123,16 +124,15 @@ public class Player : Entity
 
 	public override void TakeDamage(uint damage, float direction = 0)
 	{
-		EmitSignal(nameof(CancelRegen));
-		EmitSignal(nameof(TriggerRegenCooldown));
-
-		if (CanTakeDamage)
+		if (!IsInvulnerable)
 		{
 			if (direction != 0)
 			{
-				CanTakeDamage = false;
-				_isStunned = true;
 				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -MaxJumpSpeed / 2));
+				if (!CanTakeDamage) return;
+
+				IsInvulnerable = true;
+				_isStunned = true;
 			}
 
 			EmitSignal(nameof(TriggerDamageReceptionCooldown));
@@ -142,6 +142,9 @@ public class Player : Entity
 		{
 			return;
 		}
+
+		EmitSignal(nameof(CancelRegen));
+		EmitSignal(nameof(TriggerRegenCooldown));
 
 		if (damage >= Health)
 		{
@@ -233,7 +236,7 @@ public class Player : Entity
 				CurrentSlideMagnitude = MaxSlideMagnitude;
 			}
 		}
-		
+
 		StopOnSlope = !IsSliding;
 
 		if (IsSliding && isOnFloor)
@@ -254,7 +257,7 @@ public class Player : Entity
 				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFriction);
 		}
 
-		
+
 		if (_left && !_right)
 		{
 			AccelerateX(-WalkSpeedGround, CurrentMaxSpeed, delta);
@@ -371,6 +374,6 @@ public class Player : Entity
 
 	private void _OnInvincibilityEnd()
 	{
-		CanTakeDamage = true;
+		IsInvulnerable = false;
 	}
 }

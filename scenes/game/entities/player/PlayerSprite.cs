@@ -20,7 +20,7 @@ public class PlayerSprite : AnimatedSprite
 		
 		_player.Modulate = new Color(Modulate)
 		{
-			a = _player.CanTakeDamage ? 1f : .5f
+			a = !_player.IsInvulnerable ? 1f : .5f
 		};
 	}
 }
