@@ -6,9 +6,9 @@ public class Entity : KinematicBody2D
 	public const float Gravity = 600;
 
 	[Export] public bool StopOnSlope = true;
+	[Export] public bool CanReceiveStatusEffect = true;
 
-
-	private bool _canAccelerate = true;
+    private bool _canAccelerate = true;
 
 	public enum StatusEffectType
 	{
@@ -58,7 +58,7 @@ public class Entity : KinematicBody2D
 
 	public void ApplyStatusEffect(StatusEffectType type)
 	{
-		if (type == StatusEffectType.None)
+		if (type == StatusEffectType.None || !CanReceiveStatusEffect)
 			return;
 
 		if (_effects.ContainsKey(type))

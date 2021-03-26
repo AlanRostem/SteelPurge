@@ -347,8 +347,8 @@ public class Player : Entity
 			GravityVector = DefaultGravity;
 		}
 	}
-    
-    private void _OnRegen()
+	
+	private void _OnRegen()
 	{
 		if (HealthRegenCount + Health < 100)
 		{
@@ -375,4 +375,11 @@ public class Player : Entity
 	{
 		IsInvulnerable = false;
 	}
+	
+	
+	private void _OnHitBoxHit(uint damage, float direction)
+	{
+        TakeDamage(damage, direction);
+	}
 }
+
