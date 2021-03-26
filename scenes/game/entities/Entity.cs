@@ -8,7 +8,7 @@ public class Entity : KinematicBody2D
 	[Export] public bool StopOnSlope = true;
 	[Export] public bool CanReceiveStatusEffect = true;
 
-    private bool _canAccelerate = true;
+	private bool _canAccelerate = true;
 
 	public enum StatusEffectType
 	{

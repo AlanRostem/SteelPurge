@@ -1,7 +1,4 @@
 using Godot;
-using System;
-using System.Globalization;
-using Object = Godot.Object;
 
 public class Player : Entity
 {
@@ -142,6 +139,8 @@ public class Player : Entity
 		{
 			return;
 		}
+		
+		if (!CanTakeDamage) return;
 
 		EmitSignal(nameof(CancelRegen));
 		EmitSignal(nameof(TriggerRegenCooldown));
@@ -379,7 +378,7 @@ public class Player : Entity
 	
 	private void _OnHitBoxHit(uint damage, float direction)
 	{
-        TakeDamage(damage, direction);
+		TakeDamage(damage, direction);
 	}
 }
 
