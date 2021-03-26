@@ -1,5 +1,23 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/entities/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/texture/ar43_executor.png" type="Texture" id=2]
+[ext_resource path="res://scenes/game/entities/enemies/ar43_executor/AR43Executor.cs" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 16 )
 
 [node name="AR43Executor" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+ScrapDropHit = 3
+ScrapDropKilled = 60
+BaseHitPoints = 225
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
+shape = SubResource( 1 )
+
+[node name="ExecutorSprite" type="Sprite" parent="." index="2"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+shape = SubResource( 1 )

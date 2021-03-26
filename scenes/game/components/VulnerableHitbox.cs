@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 /// <summary>
 /// Hitbox component with signals tied to projectiles or hit-scan
