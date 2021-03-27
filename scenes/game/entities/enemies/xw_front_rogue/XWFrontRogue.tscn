@@ -31,7 +31,7 @@ animations = [ {
 extents = Vector2( 8, 10 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 96, 64 )
+extents = Vector2( 88, 40 )
 
 [node name="XWFrontRogue" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
@@ -69,16 +69,10 @@ shape = SubResource( 1 )
 one_shot = true
 script = ExtResource( 7 )
 
-[node name="PlayerDetectionArea" type="Area2D" parent="." index="7"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayeFindArea" index="0"]
 shape = SubResource( 6 )
 [connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
 [connection signal="body_entered" from="XWFrontRogueMeleeArea" to="XWFrontRogueAttackCycleTimer" method="_OnPlayerEnterMeleeRange"]
 [connection signal="body_exited" from="XWFrontRogueMeleeArea" to="XWFrontRogueAttackCycleTimer" method="_OnPlayerExitMeleeRange"]
 [connection signal="timeout" from="XWFrontRogueAttackCycleTimer" to="." method="_OnAttackPlayer"]
 [connection signal="timeout" from="XWFrontRogueTrackCooldownTimer" to="." method="_OnCanSwap"]
-[connection signal="body_entered" from="PlayerDetectionArea" to="." method="_OnPlayerDetected"]
-[connection signal="body_exited" from="PlayerDetectionArea" to="." method="_OnPlayerLeave"]

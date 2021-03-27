@@ -14,6 +14,8 @@ public class Enemy : Entity
 	[Export] public uint BaseHitPoints = 45;
 	private bool _isDead;
 	private bool _dropScrap;
+	private bool _isPlayerFound;
+	public Player DetectedPlayer { get; private set; }
 
 	public override void _Ready()
 	{
@@ -45,6 +47,15 @@ public class Enemy : Entity
 			scrap.Position = Position;
 			scrap.Count = ScrapDropHit;
 		}
+
+		if (_isPlayerFound)
+		{
+			_WhenPlayerDetected(DetectedPlayer);
+		}
+		else
+		{
+			_WhenPlayerNotSeen();
+		}
 	}
 
 	public override void TakeDamage(uint damage, float direction = 0)
@@ -67,5 +78,26 @@ public class Enemy : Entity
 	private void _OnVulnerableHitboxHit(uint damage)
 	{
 		TakeDamage(damage);
+	}
+
+	protected virtual void _WhenPlayerDetected(Player player)
+	{
+		
+	}
+
+	protected virtual void _WhenPlayerNotSeen()
+	{
+		
+	}
+	
+	private void _OnPlayerDetected(object body)
+	{
+		DetectedPlayer = (Player)body;
+		_isPlayerFound = true;
+	}
+	
+	private void _OnPlayerLeave(object body)
+	{
+		_isPlayerFound = false;
 	}
 }
