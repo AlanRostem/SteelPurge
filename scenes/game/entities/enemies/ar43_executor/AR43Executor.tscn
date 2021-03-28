@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/game/entities/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/texture/ar43_executor.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/ApproachIntervalTimer.cs" type="Script" id=5]
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/StandIntervalTimer.cs" type="Script" id=6]
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/GroundScanner.cs" type="Script" id=7]
+[ext_resource path="res://scenes/game/entities/enemies/ar43_executor/FireRateTimer.cs" type="Script" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 12.0
@@ -41,13 +42,20 @@ one_shot = true
 autostart = true
 script = ExtResource( 6 )
 
-[node name="GroundScanner" type="RayCast2D" parent="." index="6"]
+[node name="FireRateTimer" type="Timer" parent="." index="6"]
+wait_time = 0.3
+script = ExtResource( 8 )
+
+[node name="GroundScanner" type="RayCast2D" parent="." index="7"]
 position = Vector2( 10, 0 )
 enabled = true
 cast_to = Vector2( 0, 24 )
 script = ExtResource( 7 )
 ScanRange = 10.0
 [connection signal="TriggerApproach" from="." to="ApproachIntervalTimer" method="_OnTrigger"]
+[connection signal="TriggerApproach" from="." to="FireRateTimer" method="_OnCancel"]
 [connection signal="TriggerStand" from="." to="StandIntervalTimer" method="_OnTrigger"]
+[connection signal="TriggerStand" from="." to="FireRateTimer" method="_OnTrigger"]
 [connection signal="timeout" from="ApproachIntervalTimer" to="." method="_OnApproach"]
 [connection signal="timeout" from="StandIntervalTimer" to="." method="_OnStand"]
+[connection signal="timeout" from="FireRateTimer" to="." method="_OnFire"]

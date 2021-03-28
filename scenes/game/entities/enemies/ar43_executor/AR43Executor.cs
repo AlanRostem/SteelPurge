@@ -42,4 +42,9 @@ public class AR43Executor : Enemy
 		_startWalking = true;
 		EmitSignal(nameof(TriggerApproach));
 	}
+	
+	private void _OnFire()
+	{
+		
+	}
 }
