@@ -28,7 +28,7 @@ public class FiringDevice : WeaponAbility
 		}
 
 		projectile.Position = player.Position;
-		projectile.Init(GetWeapon());
+		projectile.InitWithAngularVelocity(GetWeapon());
 
 		world.AddChild(projectile);
 	}

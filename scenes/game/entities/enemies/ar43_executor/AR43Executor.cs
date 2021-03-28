@@ -3,6 +3,9 @@ using System;
 
 public class AR43Executor : Enemy
 {
+	private readonly PackedScene BulletScene =
+		GD.Load<PackedScene>("res://scenes/game/entities/enemies/ar43_executor/ExecutorBullet.tscn");
+
 	public int Direction = -1;
 	[Export] public float WalkSpeed = 40;
 	private RayCast2D _groundScanner;
@@ -45,6 +48,10 @@ public class AR43Executor : Enemy
 	
 	private void _OnFire()
 	{
-		
+		var bullet = (HostileProjectile) BulletScene.Instance();
+		bullet.Position = Position;
+		bullet.DamageDirection = Direction;
+		bullet.InitWithHorizontalVelocity();
+		ParentWorld.AddChild(bullet);
 	}
 }
