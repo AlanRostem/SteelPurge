@@ -8,7 +8,7 @@ extents = Vector2( 16, 4 )
 
 [node name="ExecutorBullet" instance=ExtResource( 1 )]
 MaxVelocity = 200.0
-Damage = 25
+Damage = 60
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetectionArea" index="0"]
 shape = SubResource( 1 )
