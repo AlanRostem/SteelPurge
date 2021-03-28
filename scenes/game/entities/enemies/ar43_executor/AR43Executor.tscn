@@ -1,15 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game/entities/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/texture/ar43_executor.png" type="Texture" id=2]
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/AR43Executor.cs" type="Script" id=3]
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/ExecutorSprite.cs" type="Script" id=4]
+[ext_resource path="res://scenes/game/entities/enemies/ar43_executor/ApproachIntervalTimer.cs" type="Script" id=5]
+[ext_resource path="res://scenes/game/entities/enemies/ar43_executor/StandIntervalTimer.cs" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 160, 56 )
+extents = Vector2( 232, 56 )
 
 [node name="AR43Executor" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -29,3 +31,18 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayeFindArea" index="0"]
 shape = SubResource( 2 )
+
+[node name="ApproachIntervalTimer" type="Timer" parent="." index="5"]
+wait_time = 1.2
+one_shot = true
+script = ExtResource( 5 )
+
+[node name="StandIntervalTimer" type="Timer" parent="." index="6"]
+wait_time = 2.5
+one_shot = true
+autostart = true
+script = ExtResource( 6 )
+[connection signal="TriggerApproach" from="." to="ApproachIntervalTimer" method="_OnTrigger"]
+[connection signal="TriggerStand" from="." to="StandIntervalTimer" method="_OnTrigger"]
+[connection signal="timeout" from="ApproachIntervalTimer" to="." method="_OnApproach"]
+[connection signal="timeout" from="StandIntervalTimer" to="." method="_OnStand"]
