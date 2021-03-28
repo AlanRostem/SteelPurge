@@ -33,7 +33,7 @@ position = Vector2( 1624, 72 )
 position = Vector2( 96, 104 )
 
 [node name="AR43Executor" parent="World" index="6" instance=ExtResource( 5 )]
-position = Vector2( 312, 136 )
+position = Vector2( 384, 112 )
 
 [node name="AR43Executor2" parent="World" index="7" instance=ExtResource( 5 )]
 position = Vector2( 1192, 48 )
