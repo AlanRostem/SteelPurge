@@ -20,16 +20,13 @@ public class AR43Executor : Enemy
 		base._Ready();
 		_groundScanner = GetNode<RayCast2D>("GroundScanner");
 	}
-
-	protected override void _OnMovement(float delta)
-	{
-		Velocity.x = Direction * WalkSpeed;
-	}
-
+	
 	protected override void _WhenPlayerDetected(Player player)
 	{
+		Direction = Mathf.Sign(player.Position.x - Position.x);
+
 		if (_startWalking && _groundScanner.IsColliding())
-			Direction = Mathf.Sign(player.Position.x - Position.x);
+			Velocity.x = Direction * WalkSpeed;
 		else
 			Velocity.x = 0;
 	}
