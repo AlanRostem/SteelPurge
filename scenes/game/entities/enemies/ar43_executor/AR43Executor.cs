@@ -8,6 +8,7 @@ public class AR43Executor : Enemy
 
 	public int Direction = -1;
 	[Export] public float WalkSpeed = 40;
+	[Export] public uint MeleeDamage = 40;
 	private RayCast2D _groundScanner;
 
 	private bool _startWalking = false;
@@ -53,5 +54,11 @@ public class AR43Executor : Enemy
 		bullet.DamageDirection = Direction;
 		bullet.InitWithHorizontalVelocity();
 		ParentWorld.AddChild(bullet);
+	}
+	
+	private void _OnPlayerMelee(object body)
+	{
+		var player = (Player)body;
+		player.TakeDamage(MeleeDamage, Direction);
 	}
 }
