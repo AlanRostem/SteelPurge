@@ -33,7 +33,7 @@ extents = Vector2( 8, 10 )
 [node name="XWFrontRogue" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 BaseHitPoints = 100
-PlayerDetectionRange = 160.0
+PlayerDetectionRange = 96.0
 WalkSpeed = 45.0
 
 [node name="BodyShape" type="CollisionShape2D" parent="." index="0"]
@@ -43,6 +43,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -1 )
 frames = SubResource( 4 )
 animation = "walk"
+frame = 1
 playing = true
 script = ExtResource( 1 )
 

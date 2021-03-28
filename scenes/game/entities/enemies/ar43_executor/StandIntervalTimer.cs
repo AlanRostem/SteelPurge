@@ -7,4 +7,9 @@ public class StandIntervalTimer : Timer
 	{
 		Start();
 	}
+	
+	private void _OnCancel()
+	{
+		Stop();
+	}
 }

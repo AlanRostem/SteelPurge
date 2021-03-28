@@ -11,7 +11,7 @@ public class AR43Executor : Enemy
 	private RayCast2D _groundScanner;
 
 	private bool _startWalking = false;
-
+	
 	[Signal]
 	public delegate void TriggerApproach();
 
@@ -21,6 +21,7 @@ public class AR43Executor : Enemy
 	public override void _Ready()
 	{
 		base._Ready();
+		PlayerDetectionRange = 160;
 		_groundScanner = GetNode<RayCast2D>("GroundScanner");
 	}
 	

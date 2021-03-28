@@ -7,4 +7,9 @@ public class ApproachIntervalTimer : Timer
 	{
 		Start();
 	}
+	
+	private void _OnCancel()
+	{
+		Stop();
+	}
 }
