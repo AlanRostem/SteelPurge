@@ -21,5 +21,9 @@ margin_bottom = -14.0
 text = "<HP>"
 align = 1
 script = ExtResource( 5 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="." index="2"]
+process_parent = true
+physics_process_parent = true
 [connection signal="HealthChanged" from="." to="EnemyHPLabel" method="_OnEnemyHealthChanged"]
 [connection signal="Hit" from="VulnerableHitbox" to="." method="_OnVulnerableHitboxHit"]

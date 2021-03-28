@@ -36,7 +36,7 @@ position = Vector2( 96, 104 )
 position = Vector2( 800, 127 )
 
 [node name="AR43Executor2" parent="World" index="7" instance=ExtResource( 5 )]
-position = Vector2( 992, 127 )
+position = Vector2( 1264, 48 )
 
 [node name="InventoryUI" parent="GUI" index="1"]
 visible = false
