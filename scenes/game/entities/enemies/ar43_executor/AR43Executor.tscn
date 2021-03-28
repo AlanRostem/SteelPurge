@@ -57,8 +57,8 @@ script = ExtResource( 7 )
 ScanRange = 10.0
 
 [node name="VisibilityEnabler2D" parent="." index="8"]
-position = Vector2( 0, 4 )
-scale = Vector2( 1, 1.2 )
+position = Vector2( -1.90735e-06, 2.38419e-07 )
+scale = Vector2( 3.2, 1.6 )
 
 [node name="MeleeArea" type="Area2D" parent="." index="9"]
 collision_layer = 0

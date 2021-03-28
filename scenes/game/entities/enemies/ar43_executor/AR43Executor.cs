@@ -7,7 +7,7 @@ public class AR43Executor : Enemy
 		GD.Load<PackedScene>("res://scenes/game/entities/enemies/ar43_executor/ExecutorBullet.tscn");
 
 	public int Direction = -1;
-	[Export] public float WalkSpeed = 40;
+	[Export] public float WalkSpeed = 57;
 	[Export] public uint MeleeDamage = 40;
 	private RayCast2D _groundScanner;
 

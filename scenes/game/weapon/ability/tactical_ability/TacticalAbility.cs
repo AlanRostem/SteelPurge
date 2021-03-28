@@ -9,7 +9,6 @@ public class TacticalAbility : WeaponAbility
 	public float CurrentDuration = 0;
 	public float CurrentCoolDown = 0;
 	
-	
 	public bool IsOnCoolDown = false;
 	public bool IsActive = false;
 
@@ -40,12 +39,14 @@ public class TacticalAbility : WeaponAbility
 		if (Input.IsActionJustPressed("tactical_ability"))
 		{
 			var fuels = GetWeapon().OwnerPlayer.PlayerInventory.OrdinanceFuels;
-			if (!IsOnCoolDown && !IsActive && fuels[(int)FuelType] >= FuelRequirement)
+			var count = fuels[(int) FuelType];
+			if (!IsOnCoolDown && !IsActive && count >= FuelRequirement)
 			{
 				IsActive = true;
 				OnActivate();
 				EmitSignal(nameof(TriggerDurationTimer));
 				fuels[(int)FuelType] -= FuelRequirement;
+				GetWeapon().OwnerPlayer.KnowInventoryOrdinanceFuelCount(fuels[(int)FuelType], FuelType);
 			}
 			else
 			{
