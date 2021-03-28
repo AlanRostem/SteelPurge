@@ -49,10 +49,6 @@ public class HostileProjectile : KinematicBody2D
 
 	public virtual void _OnDisappear()
 	{
-	}
-	
-	private void _OnDelete()
-	{
 		QueueFree();
 	}
 }

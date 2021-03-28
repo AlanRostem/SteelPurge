@@ -12,7 +12,7 @@ public class Enemy : Entity
 	[Export] public uint ScrapDropKilled = 25;
 
 	[Export] public uint BaseHitPoints = 45;
-	[Export] public float PlayerDetectionRange;
+	[Export] public float PlayerDetectionRange = 1000;
 	private bool _isDead;
 	private bool _dropScrap;
 	public Player DetectedPlayer {get; private set; }
@@ -49,7 +49,6 @@ public class Enemy : Entity
 		}
 
 		var distance = Mathf.Abs(ParentWorld.PlayerNode.Position.x - Position.x);
-		GD.Print(distance + "," + PlayerDetectionRange);
 		if (distance < PlayerDetectionRange)
 		{
 			if (DetectedPlayer is null)
