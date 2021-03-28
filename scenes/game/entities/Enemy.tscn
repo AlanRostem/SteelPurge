@@ -21,11 +21,5 @@ margin_bottom = -14.0
 text = "<HP>"
 align = 1
 script = ExtResource( 5 )
-
-[node name="PlayeFindArea" type="Area2D" parent="." index="2"]
-collision_layer = 0
-collision_mask = 2
 [connection signal="HealthChanged" from="." to="EnemyHPLabel" method="_OnEnemyHealthChanged"]
 [connection signal="Hit" from="VulnerableHitbox" to="." method="_OnVulnerableHitboxHit"]
-[connection signal="body_entered" from="PlayeFindArea" to="." method="_OnPlayerDetected"]
-[connection signal="body_exited" from="PlayeFindArea" to="." method="_OnPlayerLeave"]

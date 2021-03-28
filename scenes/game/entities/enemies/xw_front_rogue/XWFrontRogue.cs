@@ -38,7 +38,7 @@ public class XWFrontRogue : Enemy
 
 	protected override void _WhenPlayerDetected(Player player)
 	{
-		Direction = Mathf.Sign(DetectedPlayer.Position.x - Position.x);
+		Direction = Mathf.Sign(player.Position.x - Position.x);
 	}
 
 	protected override void _WhenPlayerNotSeen()

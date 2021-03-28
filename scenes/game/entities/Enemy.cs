@@ -12,10 +12,10 @@ public class Enemy : Entity
 	[Export] public uint ScrapDropKilled = 25;
 
 	[Export] public uint BaseHitPoints = 45;
+	[Export] public float PlayerDetectionRange = 1000;
 	private bool _isDead;
 	private bool _dropScrap;
-	private bool _isPlayerFound;
-	public Player DetectedPlayer { get; private set; }
+	public Player DetectedPlayer {get; private set; }
 
 	public override void _Ready()
 	{
@@ -48,10 +48,12 @@ public class Enemy : Entity
 			scrap.Count = ScrapDropHit;
 		}
 
-		if (_isPlayerFound)
+		if (Mathf.Abs(ParentWorld.PlayerNode.Position.x - Position.x) < PlayerDetectionRange)
 		{
-			_WhenPlayerDetected(DetectedPlayer);
-		}
+			if (DetectedPlayer is null)
+				DetectedPlayer = ParentWorld.PlayerNode;
+			_WhenPlayerDetected(ParentWorld.PlayerNode);
+		}		
 		else
 		{
 			_WhenPlayerNotSeen();
@@ -88,16 +90,5 @@ public class Enemy : Entity
 	protected virtual void _WhenPlayerNotSeen()
 	{
 		
-	}
-	
-	private void _OnPlayerDetected(object body)
-	{
-		DetectedPlayer = (Player)body;
-		_isPlayerFound = true;
-	}
-	
-	private void _OnPlayerLeave(object body)
-	{
-		_isPlayerFound = false;
 	}
 }
