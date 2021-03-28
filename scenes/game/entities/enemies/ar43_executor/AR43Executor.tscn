@@ -20,6 +20,7 @@ script = ExtResource( 3 )
 ScrapDropHit = 3
 ScrapDropKilled = 60
 BaseHitPoints = 225
+PlayerDetectionRange = 192.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
 shape = SubResource( 1 )
@@ -43,7 +44,7 @@ autostart = true
 script = ExtResource( 6 )
 
 [node name="FireRateTimer" type="Timer" parent="." index="6"]
-wait_time = 0.3
+wait_time = 0.83
 script = ExtResource( 8 )
 
 [node name="GroundScanner" type="RayCast2D" parent="." index="7"]
