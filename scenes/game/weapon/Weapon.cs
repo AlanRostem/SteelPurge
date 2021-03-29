@@ -11,7 +11,8 @@ public class Weapon : Node2D
 	[Export] public uint RateOfFire;
 	[Export] public float ReloadSpeed;
 	[Export] public float PassiveReloadSpeed;
-	[Export] public float HoverRecoilMultiplier = .1f;
+	[Export] public float HoverRecoilSpeed = 100;
+	[Export] public float MinFallSpeedForRecoilHovering = -20;
 
 	public TacticalAbility TacticalEnhancement { get; set; }
 	public FiringDevice FiringDevice { get; set; }
@@ -116,9 +117,9 @@ public class Weapon : Node2D
 		CurrentAmmo--;
 		OwnerPlayer.KnowWeaponClipAmmo(CurrentAmmo);
 		EmitSignal(nameof(Fired));
-		if (!(OwnerPlayer.Velocity.y > 0) || !OwnerPlayer.IsAimingDown) return;
+		if (!(OwnerPlayer.Velocity.y > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
 		var velocity = new Vector2(OwnerPlayer.Velocity);
-		velocity.y *= HoverRecoilMultiplier;
+		velocity.y = -HoverRecoilSpeed;
 		OwnerPlayer.Velocity = velocity;
 	}
 

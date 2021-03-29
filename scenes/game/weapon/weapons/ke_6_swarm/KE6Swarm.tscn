@@ -13,7 +13,7 @@ DamagePerShot = 45
 RateOfFire = 80
 ReloadSpeed = 2.2
 PassiveReloadSpeed = 4.4
-HoverRecoilMultiplier = 0.0
+HoverRecoilAcceleration = 70.0
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
 position = Vector2( 8, 0 )
