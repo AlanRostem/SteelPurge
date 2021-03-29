@@ -17,12 +17,12 @@ public class Explosion : Area2D
 		}
 	}
 	
+	// TODO: Move this code to KineticOrbExplosion scene
 	private void _OnPlayerHit(object body)
 	{
 		if (body is Player player)
 		{
-			float damage = 0.5f * Damage;
-			player.TakeDamage((uint)damage);
+			player.TakeDamage(Damage);
 			var angle = Position.AngleToPoint(player.Position);
 			var force = new Vector2(-Mathf.Cos(angle) * 0.2f, -Mathf.Sin(angle)) * KnockBackForce *
 						GetPhysicsProcessDeltaTime();

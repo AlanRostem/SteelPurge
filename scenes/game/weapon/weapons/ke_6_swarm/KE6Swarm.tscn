@@ -9,10 +9,10 @@
 [node name="KE6Swarm" instance=ExtResource( 1 )]
 DisplayName = "KE-6 Joule"
 ClipSize = 6
-DamagePerShot = 65
+DamagePerShot = 45
 RateOfFire = 80
-ReloadSpeed = 3.0
-PassiveReloadSpeed = 5.0
+ReloadSpeed = 2.2
+PassiveReloadSpeed = 4.4
 HoverRecoilMultiplier = 0.0
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
