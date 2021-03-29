@@ -34,7 +34,12 @@ public class AR43Executor : Enemy
 		if (_startWalking && _groundScanner.IsColliding())
 			Velocity.x = Direction * WalkSpeed;
 	}
-	
+
+	protected override void _WhenPlayerNotSeen()
+	{
+		Velocity.x = 0;
+	}
+
 	private void _OnApproach()
 	{
 		_startWalking = false;
