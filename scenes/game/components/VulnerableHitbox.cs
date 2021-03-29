@@ -8,4 +8,9 @@ public class VulnerableHitbox : Area2D
 {
 	[Signal]
 	public delegate void Hit(uint damage);
+
+	public virtual void TakeHit(uint damage)
+	{
+		EmitSignal(nameof(Hit), damage);
+	}
 }

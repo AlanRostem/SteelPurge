@@ -9,7 +9,7 @@ public class Explosion : Area2D
 	private void _OnVulnerableHitBoxHit(object area)
 	{
 		var hitBox = (VulnerableHitbox)area;
-		hitBox.EmitSignal(nameof(VulnerableHitbox.Hit), Damage);
+		hitBox.TakeHit(Damage);
 		if (hitBox.GetParent() is Entity entity)
 		{
 			var angle = Position.AngleToPoint(entity.Position);

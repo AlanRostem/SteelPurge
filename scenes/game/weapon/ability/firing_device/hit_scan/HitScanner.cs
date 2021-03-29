@@ -21,7 +21,7 @@ public class HitScanner : RayCast2D
 			case TileMap tileMap:
 				break;
 			case VulnerableHitbox hitBox:
-				hitBox.EmitSignal(nameof(VulnerableHitbox.Hit), damage);
+				hitBox.TakeHit(damage);
 				_parent.GetWeapon().EmitSignal(nameof(Weapon.DamageDealt), damage, hitBox);
 				break;
 		}
