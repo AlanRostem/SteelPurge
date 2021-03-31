@@ -19,7 +19,7 @@ public class Explosion : Area2D
 		}
 	}
 	
-	// TODO: Move this code to KineticOrbExplosion scene
+	// TODO: Move this code to a KineticOrbExplosion scene
 	private void _OnPlayerHit(object body)
 	{
 		if (body is Player player)
