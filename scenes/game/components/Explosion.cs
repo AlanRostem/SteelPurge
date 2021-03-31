@@ -8,6 +8,8 @@ public class Explosion : Area2D
 	
 	private void _OnVulnerableHitBoxHit(object area)
 	{
+		if (area is CriticalHitbox)
+			return;
 		var hitBox = (VulnerableHitbox)area;
 		hitBox.TakeHit(Damage);
 		if (hitBox.GetParent() is Entity entity)
