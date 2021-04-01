@@ -68,10 +68,7 @@ public class Player : Entity
 
 	[Signal]
 	public delegate void WeaponEquipped(Weapon weapon);
-
-	[Signal]
-	public delegate void WeaponClipChanged(uint clip);
-
+	
 	[Signal]
 	public delegate void WeaponAddedToInventory(Weapon weapon);
 
@@ -103,12 +100,7 @@ public class Player : Entity
 	{
 		EmitSignal(nameof(Died));
 	}
-
-	public void KnowWeaponClipAmmo(uint ammo)
-	{
-		EmitSignal(nameof(WeaponClipChanged), ammo);
-	}
-
+	
 	public void KnowInventoryScrapCount(uint count)
 	{
 		EmitSignal(nameof(ScrapCountChanged), count);
