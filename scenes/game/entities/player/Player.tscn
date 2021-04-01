@@ -77,7 +77,6 @@ script = ExtResource( 4 )
 current = true
 limit_top = 0
 limit_bottom = 0
-smoothing_enabled = true
 smoothing_speed = 8.0
 
 [node name="RegenCooldownTimer" type="Timer" parent="." index="4"]
