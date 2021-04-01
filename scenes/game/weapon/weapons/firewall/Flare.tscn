@@ -6,7 +6,7 @@
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 16, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
@@ -14,13 +14,13 @@ region = Rect2( 0, 32, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ SubResource( 1 ) ],
 "loop": true,
-"name": "angle_zero",
+"name": "angle_up",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 2 ) ],
@@ -30,12 +30,13 @@ animations = [ {
 }, {
 "frames": [ SubResource( 3 ) ],
 "loop": true,
-"name": "angle_up",
+"name": "angle_zero",
 "speed": 5.0
 } ]
 
 [node name="Flare" instance=ExtResource( 1 )]
 MaxVelocity = 300.0
+Gravity = 0.0
 
 [node name="FlareSprite" type="AnimatedSprite" parent="." index="2"]
 frames = SubResource( 4 )

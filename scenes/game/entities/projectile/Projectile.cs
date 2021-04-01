@@ -5,6 +5,7 @@ public class Projectile : KinematicBody2D
 {
 	[Export] public float DirectionAngle = 0;
 	[Export] public float MaxVelocity = 250;
+	[Export] public float Gravity = Entity.Gravity;
 	private bool _hasDisappeared = false;
 	
 	public Weapon OwnerWeapon { get; private set; }
@@ -28,6 +29,7 @@ public class Projectile : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
+		Velocity.y += Gravity * delta;
 		MoveAndCollide(Velocity * delta);
 	}
 	

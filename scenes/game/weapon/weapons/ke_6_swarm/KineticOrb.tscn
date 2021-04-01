@@ -6,6 +6,7 @@
 
 [node name="KineticOrb" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+Gravity = 0.0
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
