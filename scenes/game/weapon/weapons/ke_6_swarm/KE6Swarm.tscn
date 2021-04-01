@@ -8,21 +8,18 @@
 
 [node name="KE6Swarm" instance=ExtResource( 1 )]
 DisplayName = "KE-6 Joule"
-ClipSize = 6
 DamagePerShot = 35
 RateOfFire = 80
-ReloadSpeed = 2.2
-PassiveReloadSpeed = 4.4
 HoverRecoilSpeed = 10.0
 
-[node name="Sprite" type="Sprite" parent="." index="3"]
+[node name="Sprite" type="Sprite" parent="." index="1"]
 position = Vector2( 8, 0 )
 texture = ExtResource( 2 )
 
-[node name="OrbFiringDevice" parent="." index="4" instance=ExtResource( 3 )]
+[node name="OrbFiringDevice" parent="." index="2" instance=ExtResource( 3 )]
 script = ExtResource( 4 )
 
-[node name="KineticBubbleAbility" parent="." index="5" instance=ExtResource( 5 )]
+[node name="KineticBubbleAbility" parent="." index="3" instance=ExtResource( 5 )]
 FuelType = 1
 FuelRequirement = 10
 CoolDown = 3.0

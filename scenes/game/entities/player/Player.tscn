@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/game/entities/Entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entities/player/Player.cs" type="Script" id=2]
 [ext_resource path="res://assets/texture/soldier.png" type="Texture" id=3]
 [ext_resource path="res://scenes/game/entities/player/PlayerSprite.cs" type="Script" id=4]
 [ext_resource path="res://scenes/game/entities/player/inventory/Inventory.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/entities/player/RegenCooldownTimer.cs" type="Script" id=13]
 [ext_resource path="res://scenes/game/entities/player/RegenCycleTimer.cs" type="Script" id=14]
 [ext_resource path="res://scenes/game/entities/player/AimSwapCooldownTimer.cs" type="Script" id=15]
@@ -21,23 +22,23 @@ region = Rect2( 0, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
-region = Rect2( 72, 0, 18, 18 )
+region = Rect2( 0, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 18, 18 )
+region = Rect2( 18, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
-region = Rect2( 18, 0, 18, 18 )
+region = Rect2( 36, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 36, 0, 18, 18 )
+region = Rect2( 54, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 54, 0, 18, 18 )
+region = Rect2( 72, 0, 18, 18 )
 
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
@@ -46,15 +47,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
+}, {
+"frames": [ SubResource( 7 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
 } ]
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -72,6 +73,7 @@ playing = true
 script = ExtResource( 4 )
 
 [node name="Inventory" parent="." index="2" instance=ExtResource( 5 )]
+DefaultGunScene = ExtResource( 6 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
 current = true
