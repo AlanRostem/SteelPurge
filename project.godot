@@ -23,7 +23,7 @@ run/main_scene="res://scenes/game/environment/levels/Level1.tscn"
 window/size/width=400
 window/size/height=240
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
+window/stretch/aspect="keep_width"
 
 [input]
 
