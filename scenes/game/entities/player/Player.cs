@@ -3,10 +3,13 @@ using Godot;
 public class Player : Entity
 {
 	public static readonly uint HealthRegenCount = 15;
+	
 	private static readonly float MaxMovementSpeed = 250;
+	
 	private static readonly float MaxWalkSpeed = 80;
 	private static readonly float WalkSpeedGround = 330;
 	private static readonly float MaxWalkSpeedFiring = 35;
+	
 	private static readonly float MaxJumpSpeed = 220;
 	private static readonly float MinJumpSpeed = 80;
 	private static readonly float JumpSpeedReduction = 80;
@@ -16,7 +19,6 @@ public class Player : Entity
 	private static readonly float MaxCrouchSpeed = 20;
 	private static readonly float SlideDecreasePerSlide = 120;
 	private static readonly float SlideIncreasePerSecond = 280;
-
 	private static readonly float SlideFriction = 0.1f;
 
 	public float CurrentMaxSpeed = MaxWalkSpeed;
@@ -312,8 +314,8 @@ public class Player : Entity
 		else
 		{
 			CurrentJumpSpeed = MaxJumpSpeed;
-			if (IsSliding)
-				CurrentJumpSpeed /= 2;
+			//if (IsSliding)
+				//CurrentJumpSpeed /= 2;
 		}
 	}
 
