@@ -11,10 +11,10 @@ public class Player : Entity
 	private static readonly float MaxWalkSpeedFiring = 35;
 	
 	private static readonly float MaxJumpHeight = CustomTileMap.Size * 6;
-	private static readonly float MinJumpHeight = CustomTileMap.Size * 1;
+	private static readonly float MinJumpHeight = CustomTileMap.Size;
 	private static readonly float JumpHeightReduction = CustomTileMap.Size * 2;
 	private static readonly float JumpHeightRegeneration = CustomTileMap.Size * 10;
-	private static readonly float JumpDuration = .5f;
+	private static readonly float JumpDuration = .52f;
 	
 	private float _currentJumpSpeed;
 	private float _minJumpSpeed;
@@ -36,7 +36,6 @@ public class Player : Entity
 			_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * value);
 			_currentJumpHeight = value;
 		}
-
 	}
 	
 	public float CurrentSlideMagnitude = MaxSlideMagnitude;
@@ -52,7 +51,7 @@ public class Player : Entity
 	private bool _isStunned = false;
 	public float HorizontalLookingDirection = 1;
 	public float MovingDirection = 1;
-	[Export] public float AimAngle = 0;
+	public float AimAngle = 0;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
 	public bool IsHoldingTrigger = false;
@@ -139,7 +138,7 @@ public class Player : Entity
 		{
 			if (direction != 0)
 			{
-				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -MaxJumpHeight / 2));
+				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -_currentJumpSpeed / 2));
 				if (!CanTakeDamage) return;
 
 				IsInvulnerable = true;
