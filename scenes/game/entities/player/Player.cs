@@ -15,7 +15,7 @@ public class Player : Entity
 	private static readonly float MinJumpHeight = CustomTileMap.Size;
 	private static readonly float JumpHeightReduction = CustomTileMap.Size * 2;
 	private static readonly float JumpHeightRegeneration = CustomTileMap.Size * 10;
-	private static readonly float JumpDuration = .52f;
+	private static readonly float JumpDuration = .5f;
 	
 	private float _currentJumpSpeed;
 	private float _minJumpSpeed;
@@ -84,7 +84,8 @@ public class Player : Entity
 		PlayerInventory = GetNode<Inventory>("Inventory");
 		
 		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
-		CurrentJumpHeight = MaxJumpHeight;
+		_currentJumpHeight = MaxJumpHeight;
+		_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * MaxJumpHeight);
 		_minJumpSpeed = Mathf.Sqrt(2 * Gravity * MinJumpHeight);
 	}
 
