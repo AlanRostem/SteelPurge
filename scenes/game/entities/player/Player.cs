@@ -166,8 +166,6 @@ public class Player : Entity
 		else
 		{
 			Health -= damage;
-			//EmitSignal(nameof(CancelRegen));
-			//EmitSignal(nameof(TriggerRegenCooldown));
 		}
 	}
 
@@ -175,18 +173,19 @@ public class Player : Entity
 
 	private void _ProcessInput()
 	{
-		_left = IsActionPressed("left");
-		_right = IsActionPressed("right");
-		_jump = IsActionPressed("jump");
-		_slide = IsActionPressed("slide");
+		if (_isStunned) return;
+		_left = Input.IsActionPressed("left");
+		_right = Input.IsActionPressed("right");
+		_jump = Input.IsActionPressed("jump");
+		_slide = Input.IsActionPressed("slide");
 
-		if (!EquippedWeapon.IsFiring && IsActionJustPressed("aim_down"))
+		if (!EquippedWeapon.IsFiring && Input.IsActionJustPressed("aim_down"))
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
 			IsAimingDown = !IsAimingDown;
 		}
 
-		if (IsActionJustPressed("aim"))
+		if (Input.IsActionJustPressed("aim"))
 		{
 			EmitSignal(nameof(TriggerAimSwap));
 			_aim = !_aim;
@@ -195,8 +194,8 @@ public class Player : Entity
 				IsAimingDown = false;
 		}
 
-		DidReload = IsActionJustPressed("reload");
-		IsHoldingTrigger = IsActionPressed("fire");
+		DidReload = Input.IsActionJustPressed("reload");
+		IsHoldingTrigger = Input.IsActionPressed("fire");
 	}
 
 
@@ -349,16 +348,6 @@ public class Player : Entity
 				//CurrentJumpSpeed /= 2;
 			}
 		}
-	}
-
-	private bool IsActionPressed(string action)
-	{
-		return Input.IsActionPressed(action) && !_isStunned;
-	}
-
-	private bool IsActionJustPressed(string action)
-	{
-		return Input.IsActionJustPressed(action) && !_isStunned;
 	}
 
 	public override void _OnCollision(KinematicCollision2D collider)
