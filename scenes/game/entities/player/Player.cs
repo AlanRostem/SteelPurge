@@ -322,11 +322,17 @@ public class Player : Entity
 
 		if (_jump)
 		{
-			if (CurrentJumpHeight > MinJumpHeight)
+			if (velX > MaxWalkSpeed)
 			{
-				if (velX > MaxWalkSpeed)
+				if (CurrentJumpHeight > 0)
+				{
 					CurrentJumpHeight -= JumpHeightReduction;
-			}
+				}
+				else
+				{
+					CurrentJumpHeight = 0;
+				}
+			}	
 			
 			MoveY(-_currentJumpSpeed);
 		}
