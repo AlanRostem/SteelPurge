@@ -10,10 +10,11 @@ public class Player : Entity
 	private static readonly float WalkSpeedGround = 330;
 	private static readonly float MaxWalkSpeedFiring = 35;
 	
-	private static readonly float MaxJumpSpeed = 220;
-	private static readonly float MinJumpSpeed = 80;
-	private static readonly float JumpSpeedReduction = 80;
-	private static readonly float JumpSpeedRegeneration = 400;
+	private static readonly float MaxJumpHeight = 16 * 6;
+	private static readonly float MinJumpHeight = 16 * 1;
+	private static readonly float JumpHeightReduction = 16 * 2;
+	private static readonly float JumpHeightRegeneration = 16 * 10;
+	private static readonly float JumpSpeed = 220;
 
 	private static readonly float MaxSlideMagnitude = 320;
 	private static readonly float MaxCrouchSpeed = 20;
@@ -22,7 +23,9 @@ public class Player : Entity
 	private static readonly float SlideFriction = 0.1f;
 
 	public float CurrentMaxSpeed = MaxWalkSpeed;
-	public float CurrentJumpSpeed = MaxJumpSpeed;
+	
+	public float CurrentJumpHeight = MaxJumpHeight;
+
 	public float CurrentSlideMagnitude = MaxSlideMagnitude;
 
 	private bool _left = false;
@@ -119,7 +122,7 @@ public class Player : Entity
 		{
 			if (direction != 0)
 			{
-				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -MaxJumpSpeed / 2));
+				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -MaxJumpHeight / 2));
 				if (!CanTakeDamage) return;
 
 				IsInvulnerable = true;
@@ -300,20 +303,20 @@ public class Player : Entity
 
 		if (_jump)
 		{
-			if (CurrentJumpSpeed > MinJumpSpeed)
+			if (CurrentJumpHeight > MinJumpHeight)
 			{
-				MoveY(-CurrentJumpSpeed);
+				MoveY(-JumpSpeed);
 				if (velX > MaxWalkSpeed)
-					CurrentJumpSpeed -= JumpSpeedReduction;
+					CurrentJumpHeight -= JumpHeightReduction;
 			}
 		}
-		else if (CurrentJumpSpeed < MaxJumpSpeed)
+		else if (CurrentJumpHeight < MaxJumpHeight)
 		{
-			CurrentJumpSpeed += JumpSpeedRegeneration * delta;
+			CurrentJumpHeight += JumpHeightRegeneration * delta;
 		}
 		else
 		{
-			CurrentJumpSpeed = MaxJumpSpeed;
+			CurrentJumpHeight = MaxJumpHeight;
 			//if (IsSliding)
 				//CurrentJumpSpeed /= 2;
 		}
