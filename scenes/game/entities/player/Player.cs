@@ -11,18 +11,33 @@ public class Player : Entity
 	private static readonly float WalkSpeedGround = 330;
 	private static readonly float MaxWalkSpeedFiring = 35;
 	
-	private static readonly float MaxJumpSpeed = 450;
-	private static readonly float MinJumpSpeed = 130;
+	private static readonly float MaxJumpHeight = CustomTileMap.Size * 6;
+	private static readonly float MinJumpHeight = CustomTileMap.Size;
+	private static readonly float JumpHeightReduction = CustomTileMap.Size * 2;
+	private static readonly float JumpHeightRegeneration = CustomTileMap.Size * 10;
+	private static readonly float JumpDuration = .5f;
 	
+	private float _currentJumpSpeed;
+	private float _minJumpSpeed;
 
 	private static readonly float MaxSlideMagnitude = 320;
 	private static readonly float MaxCrouchSpeed = 20;
 	private static readonly float SlideDecreasePerSlide = 120;
 	private static readonly float SlideIncreasePerSecond = 280;
 	private static readonly float SlideFriction = 0.1f;
-	private static readonly float SlideFrictionJump = 0.85f;
 
 	public float CurrentMaxSpeed = MaxWalkSpeed;
+
+	private float _currentJumpHeight;
+	public float CurrentJumpHeight
+	{
+		get => _currentJumpHeight;
+		set
+		{
+			_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * value);
+			_currentJumpHeight = value;
+		}
+	}
 	
 	public float CurrentSlideMagnitude = MaxSlideMagnitude;
 
@@ -67,9 +82,11 @@ public class Player : Entity
 		base._Ready();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
-
-		// TODO: Put this in static declarations 
-		Gravity = 800; 
+		
+		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
+		_currentJumpHeight = MaxJumpHeight;
+		_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * MaxJumpHeight);
+		_minJumpSpeed = Mathf.Sqrt(2 * Gravity * MinJumpHeight);
 	}
 
 	[Signal]
@@ -123,7 +140,7 @@ public class Player : Entity
 		{
 			if (direction != 0)
 			{
-				Velocity = (new Vector2(MaxWalkSpeed * direction, -MinJumpSpeed));
+				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -_currentJumpSpeed / 2));
 				if (!CanTakeDamage) return;
 
 				IsInvulnerable = true;
@@ -292,8 +309,8 @@ public class Player : Entity
 		Velocity.x = Mathf.Clamp(-MaxMovementSpeed, Velocity.x, MaxMovementSpeed);
 		Velocity.y = Mathf.Clamp(-MaxMovementSpeed, Velocity.y, MaxMovementSpeed);
 
-		if (Velocity.y < -MinJumpSpeed && Input.IsActionJustReleased("jump"))
-			MoveY(-MinJumpSpeed);
+		if (Velocity.y < -_minJumpSpeed && Input.IsActionJustReleased("jump"))
+			MoveY(-_minJumpSpeed);
 		
 		if (!isOnFloor)
 		{
@@ -306,9 +323,32 @@ public class Player : Entity
 
 		if (_jump)
 		{
-			MoveY(-MaxJumpSpeed);
 			if (velX > MaxWalkSpeed)
-				Velocity.x *= SlideFrictionJump;
+			{
+				if (CurrentJumpHeight > JumpHeightReduction)
+				{
+					CurrentJumpHeight -= JumpHeightReduction;
+				}
+				else
+				{
+					CurrentJumpHeight = 0;
+				}
+			}	
+			
+			MoveY(-_currentJumpSpeed);
+		}
+		else
+		{
+			if (CurrentJumpHeight < MaxJumpHeight)
+			{
+				CurrentJumpHeight += JumpHeightRegeneration * delta;
+			}
+			else
+			{
+				CurrentJumpHeight = MaxJumpHeight;
+				//if (IsSliding)
+				//CurrentJumpSpeed /= 2;
+			}
 		}
 	}
 
