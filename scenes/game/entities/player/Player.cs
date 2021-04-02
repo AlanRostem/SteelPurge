@@ -12,7 +12,7 @@ public class Player : Entity
 	private static readonly float MaxWalkSpeedFiring = 35;
 	
 	private static readonly float MaxJumpSpeed = 850;
-	private static readonly float MinJumpSpeed = 100;
+	private static readonly float MinJumpSpeed = 130;
 
 	private static readonly float MaxSlideMagnitude = 320;
 	private static readonly float MaxCrouchSpeed = 20;
