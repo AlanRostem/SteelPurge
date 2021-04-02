@@ -4,6 +4,7 @@ using System;
 public class FallingCollectible : KinematicBody2D
 {
 	private static readonly RandomNumberGenerator Rng = new RandomNumberGenerator();
+	private static readonly float Gravity = 600;
 
 	[Export] public float LungeSpeed = 50;
 
@@ -27,7 +28,7 @@ public class FallingCollectible : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		_vel += GravityVector * Entity.Gravity * delta;
+		_vel += GravityVector * Gravity * delta;
 		if (IsOnSlope)
 			_vel = new Vector2();
 		_vel = MoveAndSlide(_vel, Vector2.Up);

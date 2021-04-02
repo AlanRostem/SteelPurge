@@ -10,11 +10,14 @@ public class Player : Entity
 	private static readonly float WalkSpeedGround = 330;
 	private static readonly float MaxWalkSpeedFiring = 35;
 	
-	private static readonly float MaxJumpHeight = 16 * 6;
-	private static readonly float MinJumpHeight = 16 * 1;
-	private static readonly float JumpHeightReduction = 16 * 2;
-	private static readonly float JumpHeightRegeneration = 16 * 10;
-	private static readonly float JumpSpeed = 220;
+	private static readonly float MaxJumpHeight = CustomTileMap.Size * 6;
+	private static readonly float MinJumpHeight = CustomTileMap.Size * 1;
+	private static readonly float JumpHeightReduction = CustomTileMap.Size;
+	private static readonly float JumpHeightRegeneration = CustomTileMap.Size * 10;
+	private static readonly float JumpDuration = .5f;
+	
+	private float _currentJumpSpeed;
+	private float _minJumpSpeed;
 
 	private static readonly float MaxSlideMagnitude = 320;
 	private static readonly float MaxCrouchSpeed = 20;
@@ -23,9 +26,19 @@ public class Player : Entity
 	private static readonly float SlideFriction = 0.1f;
 
 	public float CurrentMaxSpeed = MaxWalkSpeed;
-	
-	public float CurrentJumpHeight = MaxJumpHeight;
 
+	private float _currentJumpHeight;
+	public float CurrentJumpHeight
+	{
+		get => _currentJumpHeight;
+		set
+		{
+			_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * value);
+			_currentJumpHeight = value;
+		}
+
+	}
+	
 	public float CurrentSlideMagnitude = MaxSlideMagnitude;
 
 	private bool _left = false;
@@ -69,6 +82,10 @@ public class Player : Entity
 		base._Ready();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
+		
+		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
+		CurrentJumpHeight = MaxJumpHeight;
+		_minJumpSpeed = Mathf.Sqrt(2 * Gravity * MinJumpHeight);
 	}
 
 	[Signal]
@@ -292,6 +309,9 @@ public class Player : Entity
 		Velocity.x = Mathf.Clamp(-MaxMovementSpeed, Velocity.x, MaxMovementSpeed);
 		Velocity.y = Mathf.Clamp(-MaxMovementSpeed, Velocity.y, MaxMovementSpeed);
 
+		if (Velocity.y < -_minJumpSpeed && Input.IsActionJustReleased("jump"))
+			MoveY(-_minJumpSpeed);
+		
 		if (!isOnFloor)
 		{
 			GravityVector = DefaultGravity;
@@ -305,20 +325,24 @@ public class Player : Entity
 		{
 			if (CurrentJumpHeight > MinJumpHeight)
 			{
-				MoveY(-JumpSpeed);
 				if (velX > MaxWalkSpeed)
 					CurrentJumpHeight -= JumpHeightReduction;
 			}
-		}
-		else if (CurrentJumpHeight < MaxJumpHeight)
-		{
-			CurrentJumpHeight += JumpHeightRegeneration * delta;
+			
+			MoveY(-_currentJumpSpeed);
 		}
 		else
 		{
-			CurrentJumpHeight = MaxJumpHeight;
-			//if (IsSliding)
+			if (CurrentJumpHeight < MaxJumpHeight)
+			{
+				CurrentJumpHeight += JumpHeightRegeneration * delta;
+			}
+			else
+			{
+				CurrentJumpHeight = MaxJumpHeight;
+				//if (IsSliding)
 				//CurrentJumpSpeed /= 2;
+			}
 		}
 	}
 
@@ -336,7 +360,7 @@ public class Player : Entity
 	{
 		if (collider.Normal.y != -1 && IsOnFloor() && !IsSliding)
 		{
-			GravityVector = -collider.Normal * Gravity;
+			GravityVector = -collider.Normal;
 		}
 		else
 		{

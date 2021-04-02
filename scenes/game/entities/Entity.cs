@@ -3,7 +3,7 @@ using Godot.Collections;
 
 public class Entity : KinematicBody2D
 {
-	public const float Gravity = 600;
+	public float Gravity = 600;
 
 	[Export] public bool StopOnSlope = true;
 	[Export] public bool CanReceiveStatusEffect = true;
@@ -28,8 +28,8 @@ public class Entity : KinematicBody2D
 
 	[Export] public bool CanMove = true;
 
-	public static readonly Vector2 DefaultGravity = new Vector2(0, Gravity);
-	public Vector2 GravityVector = new Vector2(0, Gravity);
+	public static readonly Vector2 DefaultGravity = Vector2.Down;
+	public Vector2 GravityVector = DefaultGravity;
 
 	[Export] public bool IsGravityEnabled = true;
 
@@ -82,7 +82,7 @@ public class Entity : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		if (IsGravityEnabled)
-			Velocity += GravityVector * delta;
+			Velocity += GravityVector * Gravity * delta;
 		Velocity = MoveAndSlide(Velocity, Vector2.Up, StopOnSlope);
 		for (var i = 0; i < GetSlideCount(); i++)
 		{

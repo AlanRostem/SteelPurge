@@ -5,7 +5,7 @@ public class Projectile : KinematicBody2D
 {
 	[Export] public float DirectionAngle = 0;
 	[Export] public float MaxVelocity = 250;
-	[Export] public float Gravity = Entity.Gravity;
+	[Export] public float Gravity = 600;
 	private bool _hasDisappeared = false;
 	
 	public Weapon OwnerWeapon { get; private set; }
