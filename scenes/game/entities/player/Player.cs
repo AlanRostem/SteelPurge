@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public class Player : Entity
@@ -323,7 +324,7 @@ public class Player : Entity
 		{
 			if (velX > MaxWalkSpeed)
 			{
-				if (CurrentJumpHeight > 0)
+				if (CurrentJumpHeight > JumpHeightReduction)
 				{
 					CurrentJumpHeight -= JumpHeightReduction;
 				}
