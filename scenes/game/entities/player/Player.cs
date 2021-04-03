@@ -188,6 +188,14 @@ public class Player : Entity
 		}
 	}
 
+	private void Walk(int direction, bool canSwapDirOnMove, float delta)
+	{
+		AccelerateX(direction * WalkSpeedGround, CurrentMaxSpeed, delta);
+		MovingDirection = direction;
+		if (canSwapDirOnMove)
+			HorizontalLookingDirection = direction;
+		IsWalking = true;
+	}
 
 	protected override void _OnMovement(float delta)
 	{
@@ -200,6 +208,7 @@ public class Player : Entity
 		if (_slide && isOnFloor && !IsSliding && velX > 0)
 		{
 			IsSliding = true;
+			Velocity.x = MovingDirection * 400;
 		}
 
 		if (!_slide)
@@ -220,20 +229,11 @@ public class Player : Entity
 
 		if (_left && !_right)
 		{
-			AccelerateX(-WalkSpeedGround, CurrentMaxSpeed, delta);
-			MovingDirection = -1;
-			if (canSwapDirOnMove)
-				HorizontalLookingDirection = -1;
-			IsWalking = true;
+			Walk(-1, canSwapDirOnMove, delta);
 		}
-
 		else if (_right && !_left)
 		{
-			AccelerateX(WalkSpeedGround, CurrentMaxSpeed, delta);
-			MovingDirection = 1;
-			if (canSwapDirOnMove)
-				HorizontalLookingDirection = 1;
-			IsWalking = true;
+			Walk(1, canSwapDirOnMove, delta);
 		}
 		else
 		{
