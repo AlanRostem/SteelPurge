@@ -18,13 +18,17 @@ public class Weapon : Node2D
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
 	private bool _isMeleeAttacking = false;
+	private bool _isWaitingForFire = false;
+
+	private Timer _meleeToFireCheckTimer;
+	private Timer _meleeCooldownTimer;
 
 	public bool IsFiring
 	{
 		get => _isFiring;
 		set => _isFiring = value;
 	}
-	
+
 	public void OnSwap()
 	{
 		_isFiring = false;
@@ -48,16 +52,20 @@ public class Weapon : Node2D
 
 	[Signal]
 	public delegate void TriggerFire();
-	
-	[Signal]
-	public delegate void TriggerMelee();
+
 
 	[Signal]
 	public delegate void CancelFire();
 
 	[Signal]
 	public delegate void DamageDealt(uint damage, VulnerableHitbox target);
-	
+
+
+	public override void _Ready()
+	{
+		_meleeToFireCheckTimer = GetNode<Timer>("MeleeToFireCheckTimer");
+		_meleeCooldownTimer = GetNode<Timer>("MeleeCooldownTimer");
+	}
 
 	private void Fire()
 	{
@@ -76,26 +84,41 @@ public class Weapon : Node2D
 
 	public override void _Process(float delta)
 	{
-		
 		if (Scale.x != OwnerPlayer.HorizontalLookingDirection)
 		{
 			Scale = new Vector2(OwnerPlayer.HorizontalLookingDirection, 1);
 		}
-		
+
 		_isHoldingTrigger = Input.IsActionPressed("fire");
-		if (_isHoldingTrigger)
+		if (_isHoldingTrigger && !_isFiring)
 		{
-			
+			if (!_isWaitingForFire)
+			{
+				_meleeToFireCheckTimer.Start();
+				_isWaitingForFire = true;
+			}
 		}
 
-		if (_isMeleeAttacking)
+		if (_isWaitingForFire)
 		{
 			if (Input.IsActionJustReleased("fire"))
 			{
-				
+				_meleeCooldownTimer.Start();
+				if (!_isMeleeAttacking)
+				{
+					_meleeToFireCheckTimer.Stop();
+					_isMeleeAttacking = true;
+					_isWaitingForFire = false;
+					
+					
+					// TODO: Replace with melee functionality
+					GD.Print("Melee Attack!");
+				}
 			}
-			return;
 		}
+		
+		if (_isMeleeAttacking)
+			return;
 
 		if (OwnerPlayer.IsAimingDown)
 		{
@@ -117,5 +140,15 @@ public class Weapon : Node2D
 			Fire();
 			EmitSignal(nameof(TriggerFire));
 		}
+	}
+
+	private void _OnMeleeCooldownTimerTimeout()
+	{
+		_isMeleeAttacking = false;
+	}
+
+	private void _OnMeleeToFireCheckTimerTimeout()
+	{
+		_isWaitingForFire = false;
 	}
 }

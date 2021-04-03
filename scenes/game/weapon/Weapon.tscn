@@ -19,3 +19,5 @@ one_shot = true
 [connection signal="CancelFire" from="." to="FireTimer" method="_OnWeaponCancelFire"]
 [connection signal="TriggerFire" from="." to="FireTimer" method="_OnWeaponTriggerFire"]
 [connection signal="timeout" from="FireTimer" to="." method="Fire"]
+[connection signal="timeout" from="MeleeCooldownTimer" to="." method="_OnMeleeCooldownTimerTimeout"]
+[connection signal="timeout" from="MeleeToFireCheckTimer" to="." method="_OnMeleeToFireCheckTimerTimeout"]
