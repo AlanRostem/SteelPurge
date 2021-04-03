@@ -40,7 +40,6 @@ public class Player : Entity
 	public float AimAngle = 0;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
-	public bool IsHoldingTrigger = false;
 	public bool IsSliding = false;
 
 	private Weapon _weapon;
@@ -158,7 +157,16 @@ public class Player : Entity
 
 	private void _ProcessInput()
 	{
-		if (_isStunned) return;
+		if (_isStunned)
+		{
+			_left = false;
+			_right = false;
+			_jump = false;
+			_slide = false;
+			IsAimingDown = false;
+			return;
+		}
+		
 		_left = Input.IsActionPressed("left");
 		_right = Input.IsActionPressed("right");
 		_jump = Input.IsActionPressed("jump");
@@ -179,7 +187,6 @@ public class Player : Entity
 				IsAimingDown = false;
 		}
 
-		IsHoldingTrigger = Input.IsActionPressed("fire");
 	}
 
 

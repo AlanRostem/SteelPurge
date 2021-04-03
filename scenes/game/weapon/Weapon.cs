@@ -17,6 +17,7 @@ public class Weapon : Node2D
 	private bool _isFiring = false;
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
+	private bool _isMeleeAttacking = false;
 
 	public bool IsFiring
 	{
@@ -47,6 +48,9 @@ public class Weapon : Node2D
 
 	[Signal]
 	public delegate void TriggerFire();
+	
+	[Signal]
+	public delegate void TriggerMelee();
 
 	[Signal]
 	public delegate void CancelFire();
@@ -74,11 +78,17 @@ public class Weapon : Node2D
 
 	public override void _Process(float delta)
 	{
+		 _isHoldingTrigger = Input.IsActionPressed("fire");
+		
 		if (Scale.x != OwnerPlayer.HorizontalLookingDirection)
 		{
 			Scale = new Vector2(OwnerPlayer.HorizontalLookingDirection, 1);
 		}
 
+		if (_isMeleeAttacking)
+		{
+			//return;
+		}
 
 		if (OwnerPlayer.IsAimingDown)
 		{
@@ -93,18 +103,12 @@ public class Weapon : Node2D
 			Rotation = 0;
 		}
 
-		if (OwnerPlayer.IsHoldingTrigger)
+		if (_isHoldingTrigger)
 		{
-			if (_isFiring ) return;
+			if (_isFiring) return;
 			_isFiring = true;
-			_isHoldingTrigger = true;
 			Fire();
 			EmitSignal(nameof(TriggerFire));
 		}
-		else
-		{
-			_isHoldingTrigger = false;
-		}
-		
 	}
 }
