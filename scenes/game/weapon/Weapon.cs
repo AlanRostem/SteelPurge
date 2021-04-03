@@ -17,7 +17,7 @@ public class Weapon : Node2D
 	private bool _isFiring = false;
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
-	private bool _isMeleeAttacking = false;
+	public bool IsMeleeAttacking = false;
 	private bool _isWaitingForFire = false;
 
 	private Timer _meleeToFireCheckTimer;
@@ -71,8 +71,8 @@ public class Weapon : Node2D
 	{
 		if (!_isHoldingTrigger)
 		{
-			//_isFiring = false;
-			//EmitSignal(nameof(CancelFire));
+			_isFiring = false;
+			EmitSignal(nameof(CancelFire));
 			return;
 		}
 
@@ -103,24 +103,18 @@ public class Weapon : Node2D
 
 		if (Input.IsActionJustReleased("fire"))
 		{
-			if (!_isFiring)
+			if (!IsMeleeAttacking && !_isFiring)
 			{
-				if (!_isMeleeAttacking)
-				{
-					_meleeCooldownTimer.Start();
-					_meleeToFireCheckTimer.Stop();
-					_isMeleeAttacking = true;
-					_isWaitingForFire = false;
+				_meleeCooldownTimer.Start();
+				_meleeToFireCheckTimer.Stop();
+				IsMeleeAttacking = true;
+				_isWaitingForFire = false;
 
-					// TODO: Replace with melee functionality
-					OwnerPlayer.Velocity.x = 50 * OwnerPlayer.HorizontalLookingDirection;
-				}
+				// TODO: Replace with melee functionality
+				OwnerPlayer.Velocity.x = 50 * OwnerPlayer.HorizontalLookingDirection;
 			}
-			else
-			{
-				_isFiring = false;
-				EmitSignal(nameof(CancelFire));
-			}
+
+			_isFiring = false;
 		}
 
 		if (_isWaitingForFire)
@@ -150,7 +144,7 @@ public class Weapon : Node2D
 
 	private void _OnMeleeCooldownTimerTimeout()
 	{
-		_isMeleeAttacking = false;
+		IsMeleeAttacking = false;
 	}
 
 	private void _OnMeleeToFireCheckTimerTimeout()

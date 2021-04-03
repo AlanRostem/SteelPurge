@@ -208,6 +208,8 @@ public class Player : Entity
 		{
 			if (EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
 				CurrentMaxSpeed = MaxWalkSpeedFiring;
+			else if (EquippedWeapon.IsMeleeAttacking)
+				CurrentMaxSpeed = 0;
 			else
 				CurrentMaxSpeed = MaxWalkSpeed;
 			if (velX > CurrentMaxSpeed && IsOnFloor())
