@@ -108,7 +108,7 @@ public class Weapon : Node2D
 
 		if (IsMeleeAttacking) return;
 		
-		if (Input.IsActionJustPressed("melee"))
+		if (Input.IsActionJustPressed("melee") && OwnerPlayer.IsOnFloor())
 		{
 			IsMeleeAttacking = true;
 			_meleeShape.Disabled = false;
