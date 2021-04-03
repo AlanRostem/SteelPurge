@@ -7,10 +7,10 @@ using Godot;
 public class VulnerableHitbox : Area2D
 {
 	[Signal]
-	public delegate void Hit(uint damage);
+	public delegate void Hit(uint damage, int knockBackDirection = 0);
 
-	public virtual void TakeHit(uint damage)
+	public virtual void TakeHit(uint damage, int knockBackDirection = 0)
 	{
-		EmitSignal(nameof(Hit), damage);
+		EmitSignal(nameof(Hit), damage, knockBackDirection);
 	}
 }

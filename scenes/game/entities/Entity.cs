@@ -74,7 +74,7 @@ public class Entity : KinematicBody2D
 		AddChild(newEffect);
 	}
 
-	public virtual void TakeDamage(uint damage, float direction = 0)
+	public virtual void TakeDamage(uint damage, int direction = 0)
 	{
 		Health -= damage;
 	}

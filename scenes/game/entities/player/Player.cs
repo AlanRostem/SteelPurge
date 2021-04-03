@@ -116,7 +116,7 @@ public class Player : Entity
 		EmitSignal(nameof(OrdinanceFuelCountChanged), count, type);
 	}
 
-	public override void TakeDamage(uint damage, float direction = 0)
+	public override void TakeDamage(uint damage, int direction = 0)
 	{
 		if (!IsInvulnerable)
 		{
@@ -319,7 +319,7 @@ public class Player : Entity
 	}
 
 
-	private void _OnHitBoxHit(uint damage, float direction)
+	private void _OnHitBoxHit(uint damage, int direction)
 	{
 		TakeDamage(damage, direction);
 	}

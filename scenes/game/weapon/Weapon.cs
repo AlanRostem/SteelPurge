@@ -144,6 +144,3 @@ public class Weapon : Node2D
 		hitBox.TakeHit(MeleeDamage);
 	}
 }
-
-
-

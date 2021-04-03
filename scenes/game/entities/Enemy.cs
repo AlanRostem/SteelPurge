@@ -61,7 +61,7 @@ public class Enemy : Entity
 		}
 	}
 
-	public override void TakeDamage(uint damage, float direction = 0)
+	public override void TakeDamage(uint damage, int direction = 0)
 	{
 		if (damage >= Health)
 		{
@@ -78,9 +78,9 @@ public class Enemy : Entity
 		}
 	}
 
-	private void _OnVulnerableHitboxHit(uint damage)
+	private void _OnVulnerableHitboxHit(uint damage, int knockBackDirection)
 	{
-		TakeDamage(damage);
+		TakeDamage(damage, knockBackDirection);
 	}
 
 	protected virtual void _WhenPlayerDetected(Player player)
