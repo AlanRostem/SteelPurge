@@ -103,9 +103,9 @@ public class Weapon : Node2D
 
 		if (Input.IsActionJustReleased("fire") && !_isFiring)
 		{
-			_meleeCooldownTimer.Start();
 			if (!_isMeleeAttacking)
 			{
+				_meleeCooldownTimer.Start();
 				_meleeToFireCheckTimer.Stop();
 				_isMeleeAttacking = true;
 				_isWaitingForFire = false;
