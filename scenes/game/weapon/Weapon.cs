@@ -70,24 +70,31 @@ public class Weapon : Node2D
 
 		EmitSignal(nameof(Fired));
 		if (!(OwnerPlayer.Velocity.y > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
-		var velocity = new Vector2(OwnerPlayer.Velocity);
-		velocity.y = -HoverRecoilSpeed;
-		OwnerPlayer.Velocity = velocity;
+		OwnerPlayer.Velocity.y = -HoverRecoilSpeed;
 	}
 
 
 	public override void _Process(float delta)
 	{
-		 _isHoldingTrigger = Input.IsActionPressed("fire");
 		
 		if (Scale.x != OwnerPlayer.HorizontalLookingDirection)
 		{
 			Scale = new Vector2(OwnerPlayer.HorizontalLookingDirection, 1);
 		}
+		
+		_isHoldingTrigger = Input.IsActionPressed("fire");
+		if (_isHoldingTrigger)
+		{
+			
+		}
 
 		if (_isMeleeAttacking)
 		{
-			//return;
+			if (Input.IsActionJustReleased("fire"))
+			{
+				
+			}
+			return;
 		}
 
 		if (OwnerPlayer.IsAimingDown)
