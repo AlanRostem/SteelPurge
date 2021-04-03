@@ -8,8 +8,7 @@ public class Player : Entity
 	private static readonly float MaxMovementSpeed = 250;
 
 	private static readonly float MaxWalkSpeed = 80;
-	private static readonly float MaxDiveSpeed = 160;
-	private static readonly float WalkAccelerationGround = 330;
+	private static readonly float WalkSpeedGround = 330;
 	private static readonly float MaxWalkSpeedFiring = 35;
 
 	private static readonly float MaxJumpHeight = CustomTileMap.Size * 6;
@@ -31,7 +30,6 @@ public class Player : Entity
 	private bool _right = false;
 	private bool _jump = false;
 	private bool _aim = false;
-	private bool _melee = false;
 	public bool CanTakeDamage = true;
 	public bool IsInvulnerable = false;
 	public bool IsAimingUp = false;
@@ -165,7 +163,6 @@ public class Player : Entity
 			_right = false;
 			_jump = false;
 			_slide = false;
-			_melee = false;
 			IsAimingDown = false;
 			return;
 		}
@@ -174,7 +171,6 @@ public class Player : Entity
 		_right = Input.IsActionPressed("right");
 		_jump = Input.IsActionPressed("jump");
 		_slide = Input.IsActionPressed("slide");
-		_melee = Input.IsActionPressed("melee");
 
 		if (!EquippedWeapon.IsFiring && Input.IsActionJustPressed("aim_down"))
 		{
@@ -201,18 +197,12 @@ public class Player : Entity
 
 		var canSwapDirOnMove = !EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
 		var velX = Mathf.Abs(Velocity.x);
-
-		if (_melee && !isOnFloor)
-		{
-			CurrentMaxSpeed = MaxDiveSpeed;
-			IsSliding = true;
-		}
 		
 		StopOnSlope = !IsSliding;
 
 		if (IsSliding && isOnFloor)
 		{
-			CurrentMaxSpeed = Mathf.Lerp(CurrentMaxSpeed, MaxWalkSpeed, SlideFriction);
+			// TODO: Remove?
 		}
 		else
 		{
@@ -229,7 +219,7 @@ public class Player : Entity
 
 		if (_left && !_right)
 		{
-			AccelerateX(-WalkAccelerationGround, CurrentMaxSpeed, delta);
+			AccelerateX(-WalkSpeedGround, CurrentMaxSpeed, delta);
 			MovingDirection = -1;
 			if (canSwapDirOnMove)
 				HorizontalLookingDirection = -1;
@@ -238,7 +228,7 @@ public class Player : Entity
 
 		else if (_right && !_left)
 		{
-			AccelerateX(WalkAccelerationGround, CurrentMaxSpeed, delta);
+			AccelerateX(WalkSpeedGround, CurrentMaxSpeed, delta);
 			MovingDirection = 1;
 			if (canSwapDirOnMove)
 				HorizontalLookingDirection = 1;
@@ -284,8 +274,6 @@ public class Player : Entity
 				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFrictionJump);
 			}
 
-			IsSliding = false;
-			
 			MoveY(-_currentJumpSpeed);
 		}
 	}
