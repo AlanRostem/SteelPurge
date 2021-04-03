@@ -24,6 +24,13 @@ public class Player : Entity
 	private static readonly float SlideFrictionJump = 0.85f;
 	private static readonly float WalkFriction = 0.95f;
 
+	private static readonly float MaxCrouchSpeed = 20;
+	private static readonly float MaxSlideMagnitude = 320;
+	private static readonly float SlideDecreasePerSlide = 120;
+	private static readonly float SlideIncreasePerSecond = 280;
+
+	public float CurrentSlideMagnitude = MaxSlideMagnitude;
+
 	public float CurrentMaxSpeed = MaxWalkSpeed;
 
 	private bool _left = false;
@@ -205,30 +212,67 @@ public class Player : Entity
 		var canSwapDirOnMove = !EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
 		var velX = Mathf.Abs(Velocity.x);
 
-		if (_slide && isOnFloor && !IsSliding && velX > 0)
+
+		if (_slide)
 		{
-			IsSliding = true;
-			Velocity.x = MovingDirection * 400;
+			if (!IsSliding && isOnFloor)
+			{
+				if (velX > 0)
+				{
+					CurrentMaxSpeed = CurrentSlideMagnitude;
+					if (CurrentSlideMagnitude > MaxCrouchSpeed)
+					{
+						CurrentSlideMagnitude -= SlideDecreasePerSlide;
+					}
+					else
+					{
+						CurrentSlideMagnitude = MaxCrouchSpeed;
+					}
+				}
+				else
+					CurrentMaxSpeed = MaxCrouchSpeed;
+
+				IsSliding = true;
+			}
+		}
+		else
+		{
+			if (IsSliding && IsOnFloor())
+				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * MaxWalkSpeed, 0.99f);
+			IsSliding = false;
 		}
 
-		if (IsSliding)
+		if (isOnFloor && !IsSliding)
 		{
-			Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
-			if (velX <= CurrentMaxSpeed - 0.1f)
-				IsSliding = false;
+			if (CurrentSlideMagnitude < MaxSlideMagnitude)
+			{
+				CurrentSlideMagnitude += SlideIncreasePerSecond * delta;
+			}
+			else
+			{
+				CurrentSlideMagnitude = MaxSlideMagnitude;
+			}
 		}
-
+		
 		StopOnSlope = !IsSliding;
 
 		// Affects speed when player is attacking
-		if (!IsSliding && isOnFloor)
+		if (IsSliding && isOnFloor)
 		{
-			if (EquippedWeapon.IsFiring && !IsAimingUp && !IsAimingDown)
+			CurrentMaxSpeed = Mathf.Lerp(CurrentMaxSpeed, MaxCrouchSpeed, SlideFriction);
+			if (velX < MaxCrouchSpeed + 0.1)
+				Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
+			else
+				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFriction);
+		}
+		else
+		{
+			if (EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
 				CurrentMaxSpeed = MaxWalkSpeedFiring;
-			else if (EquippedWeapon.IsMeleeAttacking)
-				CurrentMaxSpeed = 0;
 			else
 				CurrentMaxSpeed = MaxWalkSpeed;
+			if (velX > CurrentMaxSpeed && IsOnFloor())
+				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFriction);
 		}
 
 		if (_left && !_right)
@@ -245,13 +289,13 @@ public class Player : Entity
 			{
 				if (!IsSliding)
 				{
-					Velocity.x = Mathf.Lerp(Velocity.x, 0, WalkFriction);
-				}
-				else
-				{
-					Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
+					if (velX <= MaxWalkSpeed + 0.1f)
+						Velocity.x = Mathf.Lerp(Velocity.x, 0, WalkFriction);
+					else
+						Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
 				}
 			}
+
 			IsWalking = false;
 		}
 
