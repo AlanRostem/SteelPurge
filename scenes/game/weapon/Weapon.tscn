@@ -12,7 +12,7 @@ script = ExtResource( 2 )
 script = ExtResource( 4 )
 
 [node name="MeleeCooldownTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.55
 one_shot = true
 
 [node name="MeleeToFireCheckTimer" type="Timer" parent="."]
