@@ -90,36 +90,34 @@ public class Weapon : Node2D
 		}
 
 		_isHoldingTrigger = Input.IsActionPressed("fire");
-		if (_isHoldingTrigger && !_isFiring)
+
+		var triggerHeld = Input.IsActionJustPressed("fire");
+		if (triggerHeld)
 		{
 			if (!_isWaitingForFire)
 			{
-				_meleeToFireCheckTimer.Start();
 				_isWaitingForFire = true;
+				_meleeToFireCheckTimer.Start();
+			}
+		}
+
+		if (Input.IsActionJustReleased("fire") && !_isFiring)
+		{
+			_meleeCooldownTimer.Start();
+			if (!_isMeleeAttacking)
+			{
+				_meleeToFireCheckTimer.Stop();
+				_isMeleeAttacking = true;
+				_isWaitingForFire = false;
+					
+				// TODO: Replace with melee functionality
+				GD.Print("Melee Attack!");
 			}
 		}
 
 		if (_isWaitingForFire)
-		{
-			if (Input.IsActionJustReleased("fire"))
-			{
-				_meleeCooldownTimer.Start();
-				if (!_isMeleeAttacking)
-				{
-					_meleeToFireCheckTimer.Stop();
-					_isMeleeAttacking = true;
-					_isWaitingForFire = false;
-					
-					
-					// TODO: Replace with melee functionality
-					GD.Print("Melee Attack!");
-				}
-			}
-		}
-		
-		if (_isMeleeAttacking)
 			return;
-
+		
 		if (OwnerPlayer.IsAimingDown)
 		{
 			Rotation = OwnerPlayer.HorizontalLookingDirection * Mathf.Pi / 2f;
