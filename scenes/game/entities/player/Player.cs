@@ -211,8 +211,12 @@ public class Player : Entity
 			Velocity.x = MovingDirection * 400;
 		}
 
-		if (!_slide)
-			IsSliding = false;
+		if (IsSliding)
+		{
+			Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
+			if (velX <= CurrentMaxSpeed - 0.1f)
+				IsSliding = false;
+		}
 
 		StopOnSlope = !IsSliding;
 
