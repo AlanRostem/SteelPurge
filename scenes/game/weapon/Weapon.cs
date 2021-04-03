@@ -113,8 +113,6 @@ public class Weapon : Node2D
 				// TODO: Replace with melee functionality
 				OwnerPlayer.Velocity.x = 50 * OwnerPlayer.HorizontalLookingDirection;
 			}
-
-			_isFiring = false;
 		}
 
 		if (_isWaitingForFire)
