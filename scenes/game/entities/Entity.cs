@@ -151,6 +151,6 @@ public class Entity : KinematicBody2D
 	public void ApplyForce(Vector2 knockBackForce)
 	{
 		if (!CanMove) return;
-		Velocity += knockBackForce;
+		Velocity += knockBackForce * GetPhysicsProcessDeltaTime();
 	}
 }
