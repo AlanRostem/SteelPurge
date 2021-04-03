@@ -22,9 +22,9 @@ public class Player : Entity
 
 	private static readonly float SlideFriction = 0.1f;
 	private static readonly float SlideFrictionJump = 0.85f;
+	private static readonly float WalkFriction = 0.95f;
 
 	public float CurrentMaxSpeed = MaxWalkSpeed;
-
 
 	private bool _left = false;
 	private bool _right = false;
@@ -166,7 +166,7 @@ public class Player : Entity
 			IsAimingDown = false;
 			return;
 		}
-		
+
 		_left = Input.IsActionPressed("left");
 		_right = Input.IsActionPressed("right");
 		_jump = Input.IsActionPressed("jump");
@@ -186,7 +186,6 @@ public class Player : Entity
 			if (!IsJumping && IsAimingDown)
 				IsAimingDown = false;
 		}
-
 	}
 
 
@@ -197,25 +196,27 @@ public class Player : Entity
 
 		var canSwapDirOnMove = !EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
 		var velX = Mathf.Abs(Velocity.x);
-		
+
+		if (_slide && isOnFloor && !IsSliding && velX > 0)
+		{
+			IsSliding = true;
+		}
+
+		if (!_slide)
+			IsSliding = false;
+
 		StopOnSlope = !IsSliding;
 
-		if (IsSliding && isOnFloor)
+		// Affects speed when player is attacking
+		if (!IsSliding && isOnFloor)
 		{
-			// TODO: Remove?
-		}
-		else
-		{
-			if (EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
+			if (EquippedWeapon.IsFiring && !IsAimingUp && !IsAimingDown)
 				CurrentMaxSpeed = MaxWalkSpeedFiring;
 			else if (EquippedWeapon.IsMeleeAttacking)
 				CurrentMaxSpeed = 0;
 			else
 				CurrentMaxSpeed = MaxWalkSpeed;
-			if (velX > CurrentMaxSpeed && IsOnFloor())
-				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFriction);
 		}
-
 
 		if (_left && !_right)
 		{
@@ -240,13 +241,13 @@ public class Player : Entity
 			{
 				if (!IsSliding)
 				{
-					if (velX <= MaxWalkSpeed + 0.1f)
-						Velocity.x = Mathf.Lerp(Velocity.x, 0, .95f);
-					else
-						Velocity.x = Mathf.Lerp(Velocity.x, 0, .1f);
+					Velocity.x = Mathf.Lerp(Velocity.x, 0, WalkFriction);
+				}
+				else
+				{
+					Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
 				}
 			}
-
 			IsWalking = false;
 		}
 
