@@ -25,20 +25,10 @@ public class Player : Entity
 	private static readonly float SlideDecreasePerSlide = 120;
 	private static readonly float SlideIncreasePerSecond = 280;
 	private static readonly float SlideFriction = 0.1f;
+	private static readonly float SlideFrictionJump = 0.85f;
 
 	public float CurrentMaxSpeed = MaxWalkSpeed;
 
-	private float _currentJumpHeight;
-	public float CurrentJumpHeight
-	{
-		get => _currentJumpHeight;
-		set
-		{
-			_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * value);
-			_currentJumpHeight = value;
-		}
-	}
-	
 	public float CurrentSlideMagnitude = MaxSlideMagnitude;
 
 	private bool _left = false;
@@ -84,7 +74,6 @@ public class Player : Entity
 		PlayerInventory = GetNode<Inventory>("Inventory");
 		
 		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
-		_currentJumpHeight = MaxJumpHeight;
 		_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * MaxJumpHeight);
 		_minJumpSpeed = Mathf.Sqrt(2 * Gravity * MinJumpHeight);
 	}
@@ -325,30 +314,10 @@ public class Player : Entity
 		{
 			if (velX > MaxWalkSpeed)
 			{
-				if (CurrentJumpHeight > JumpHeightReduction)
-				{
-					CurrentJumpHeight -= JumpHeightReduction;
-				}
-				else
-				{
-					CurrentJumpHeight = 0;
-				}
+				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFrictionJump);
 			}	
 			
 			MoveY(-_currentJumpSpeed);
-		}
-		else
-		{
-			if (CurrentJumpHeight < MaxJumpHeight)
-			{
-				CurrentJumpHeight += JumpHeightRegeneration * delta;
-			}
-			else
-			{
-				CurrentJumpHeight = MaxJumpHeight;
-				//if (IsSliding)
-				//CurrentJumpSpeed /= 2;
-			}
 		}
 	}
 
