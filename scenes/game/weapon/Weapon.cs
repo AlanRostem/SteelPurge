@@ -19,10 +19,9 @@ public class Weapon : Node2D
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
 	public bool IsMeleeAttacking = false;
-	private bool _isWaitingForFire = false;
 
-	private Timer _meleeToFireCheckTimer;
 	private Timer _meleeCooldownTimer;
+	private Timer _meleeDurationTimer;
 	private CollisionShape2D _meleeShape;
 
 	public bool IsFiring
@@ -65,8 +64,8 @@ public class Weapon : Node2D
 
 	public override void _Ready()
 	{
-		_meleeToFireCheckTimer = GetNode<Timer>("MeleeToFireCheckTimer");
 		_meleeCooldownTimer = GetNode<Timer>("MeleeCooldownTimer");
+		_meleeDurationTimer = GetNode<Timer>("MeleeDurationTimer");
 		_meleeShape = GetNode<CollisionShape2D>("MeleeArea/CollisionShape2D");
 	}
 
@@ -94,31 +93,6 @@ public class Weapon : Node2D
 
 		_isHoldingTrigger = Input.IsActionPressed("fire");
 
-		var triggerHeld = Input.IsActionJustPressed("fire");
-		if (triggerHeld)
-		{
-			if (!_isWaitingForFire)
-			{
-				_isWaitingForFire = true;
-				_meleeToFireCheckTimer.Start();
-			}
-		}
-
-		if (Input.IsActionJustReleased("fire"))
-		{
-			if (!IsMeleeAttacking && !_isFiring)
-			{
-				_meleeCooldownTimer.Start();
-				_meleeToFireCheckTimer.Stop();
-				IsMeleeAttacking = true;
-				_isWaitingForFire = false;
-				_meleeShape.Disabled = false;
-			}
-		}
-
-		if (_isWaitingForFire)
-			return;
-		
 		if (OwnerPlayer.IsAimingDown)
 		{
 			Rotation = OwnerPlayer.HorizontalLookingDirection * Mathf.Pi / 2f;
@@ -130,6 +104,16 @@ public class Weapon : Node2D
 		else
 		{
 			Rotation = 0;
+		}
+
+		if (IsMeleeAttacking) return;
+		
+		if (Input.IsActionJustPressed("melee"))
+		{
+			IsMeleeAttacking = true;
+			_meleeShape.Disabled = false;
+			_meleeCooldownTimer.Start();
+			_meleeDurationTimer.Start();
 		}
 
 		if (_isHoldingTrigger)
@@ -144,14 +128,13 @@ public class Weapon : Node2D
 	private void _OnMeleeCooldownTimerTimeout()
 	{
 		IsMeleeAttacking = false;
+	}
+
+	private void _OnMeleeDurationTimerTimeout()
+	{
 		_meleeShape.Disabled = true;
 	}
 
-	private void _OnMeleeToFireCheckTimerTimeout()
-	{
-		_isWaitingForFire = false;
-	}
-	
 	private void _OnMeleeAreaHitBoxEntered(object area)
 	{
 		if (area is CriticalHitbox)
@@ -161,3 +144,6 @@ public class Weapon : Node2D
 		hitBox.TakeHit(MeleeDamage);
 	}
 }
+
+
+
