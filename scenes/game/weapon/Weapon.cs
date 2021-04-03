@@ -7,6 +7,7 @@ public class Weapon : Node2D
 	[Export] public uint ClipSize;
 
 	[Export] public uint DamagePerShot;
+	[Export] public uint MeleeDamage = 80;
 	[Export] public uint RateOfFire;
 	[Export] public float HoverRecoilSpeed = 100;
 	[Export] public float MinFallSpeedForRecoilHovering = -20;
@@ -22,6 +23,7 @@ public class Weapon : Node2D
 
 	private Timer _meleeToFireCheckTimer;
 	private Timer _meleeCooldownTimer;
+	private CollisionShape2D _meleeShape;
 
 	public bool IsFiring
 	{
@@ -65,6 +67,7 @@ public class Weapon : Node2D
 	{
 		_meleeToFireCheckTimer = GetNode<Timer>("MeleeToFireCheckTimer");
 		_meleeCooldownTimer = GetNode<Timer>("MeleeCooldownTimer");
+		_meleeShape = GetNode<CollisionShape2D>("MeleeArea/CollisionShape2D");
 	}
 
 	private void Fire()
@@ -109,9 +112,7 @@ public class Weapon : Node2D
 				_meleeToFireCheckTimer.Stop();
 				IsMeleeAttacking = true;
 				_isWaitingForFire = false;
-
-				// TODO: Replace with melee functionality
-				OwnerPlayer.Velocity.x = 50 * OwnerPlayer.HorizontalLookingDirection;
+				_meleeShape.Disabled = false;
 			}
 		}
 
@@ -143,10 +144,20 @@ public class Weapon : Node2D
 	private void _OnMeleeCooldownTimerTimeout()
 	{
 		IsMeleeAttacking = false;
+		_meleeShape.Disabled = true;
 	}
 
 	private void _OnMeleeToFireCheckTimerTimeout()
 	{
 		_isWaitingForFire = false;
+	}
+	
+	private void _OnMeleeAreaHitBoxEntered(object area)
+	{
+		if (area is CriticalHitbox)
+			return;
+
+		var hitBox = (VulnerableHitbox) area;
+		hitBox.TakeHit(MeleeDamage);
 	}
 }

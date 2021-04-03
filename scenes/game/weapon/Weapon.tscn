@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/weapon/Weapon.cs" type="Script" id=2]
 [ext_resource path="res://scenes/game/weapon/FireTimer.cs" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource( 2 )
@@ -16,8 +18,18 @@ one_shot = true
 [node name="MeleeToFireCheckTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="MeleeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeArea"]
+position = Vector2( 16, 0 )
+shape = SubResource( 1 )
+disabled = true
 [connection signal="CancelFire" from="." to="FireTimer" method="_OnWeaponCancelFire"]
 [connection signal="TriggerFire" from="." to="FireTimer" method="_OnWeaponTriggerFire"]
 [connection signal="timeout" from="FireTimer" to="." method="Fire"]
 [connection signal="timeout" from="MeleeCooldownTimer" to="." method="_OnMeleeCooldownTimerTimeout"]
 [connection signal="timeout" from="MeleeToFireCheckTimer" to="." method="_OnMeleeToFireCheckTimerTimeout"]
+[connection signal="area_entered" from="MeleeArea" to="." method="_OnMeleeAreaHitBoxEntered"]
