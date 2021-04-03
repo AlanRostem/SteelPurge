@@ -113,7 +113,7 @@ public class Weapon : Node2D
 					_isWaitingForFire = false;
 
 					// TODO: Replace with melee functionality
-					GD.Print("Melee Attack!");
+					OwnerPlayer.Velocity.x = 50 * OwnerPlayer.HorizontalLookingDirection;
 				}
 			}
 			else
