@@ -10,10 +10,11 @@ script = ExtResource( 2 )
 script = ExtResource( 4 )
 
 [node name="MeleeCooldownTimer" type="Timer" parent="."]
+wait_time = 0.1
 one_shot = true
 
 [node name="MeleeToFireCheckTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.2
 one_shot = true
 [connection signal="CancelFire" from="." to="FireTimer" method="_OnWeaponCancelFire"]
 [connection signal="TriggerFire" from="." to="FireTimer" method="_OnWeaponTriggerFire"]

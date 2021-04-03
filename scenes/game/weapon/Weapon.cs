@@ -71,8 +71,8 @@ public class Weapon : Node2D
 	{
 		if (!_isHoldingTrigger)
 		{
-			_isFiring = false;
-			EmitSignal(nameof(CancelFire));
+			//_isFiring = false;
+			//EmitSignal(nameof(CancelFire));
 			return;
 		}
 
@@ -101,17 +101,25 @@ public class Weapon : Node2D
 			}
 		}
 
-		if (Input.IsActionJustReleased("fire") && !_isFiring)
+		if (Input.IsActionJustReleased("fire"))
 		{
-			if (!_isMeleeAttacking)
+			if (!_isFiring)
 			{
-				_meleeCooldownTimer.Start();
-				_meleeToFireCheckTimer.Stop();
-				_isMeleeAttacking = true;
-				_isWaitingForFire = false;
-					
-				// TODO: Replace with melee functionality
-				GD.Print("Melee Attack!");
+				if (!_isMeleeAttacking)
+				{
+					_meleeCooldownTimer.Start();
+					_meleeToFireCheckTimer.Stop();
+					_isMeleeAttacking = true;
+					_isWaitingForFire = false;
+
+					// TODO: Replace with melee functionality
+					GD.Print("Melee Attack!");
+				}
+			}
+			else
+			{
+				_isFiring = false;
+				EmitSignal(nameof(CancelFire));
 			}
 		}
 
