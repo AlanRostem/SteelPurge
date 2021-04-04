@@ -7,7 +7,7 @@ public class Player : Entity
 
 	private static readonly float MaxMovementSpeed = 250;
 
-	private static readonly float MaxWalkSpeed = 80;
+	private static readonly float MaxWalkSpeed = 90;
 	private static readonly float WalkSpeedGround = 330;
 	private static readonly float MaxWalkSpeedFiring = 35;
 
@@ -180,7 +180,7 @@ public class Player : Entity
 		_jump = Input.IsActionPressed("jump");
 		_slide = Input.IsActionPressed("slide");
 
-		if (!EquippedWeapon.IsFiring && Input.IsActionJustPressed("aim_down"))
+		if (Input.IsActionJustPressed("aim_down"))
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
 			IsAimingDown = !IsAimingDown;
