@@ -30,7 +30,7 @@ public class XWFrontRogue : Enemy
 	public override void _Ready()
 	{
 		base._Ready();
-		_rushDelayTimer = GetNode<Timer>("XWFrontRogueTrackCooldownTimer");
+		_rushDelayTimer = GetNode<Timer>("XWFrontRogueRushDelayTimer");
 	}
 
 	protected override void _WhenPlayerDetected(Player player)
@@ -46,6 +46,8 @@ public class XWFrontRogue : Enemy
 
 	protected override void _WhenPlayerNotSeen()
 	{
+		if (_isRushing) return; // TODO: Might cause bugs
+		
 		if (_canSwapDir)
 		{
 			EmitSignal(nameof(TriggerDirSwapCooldown));
@@ -65,6 +67,5 @@ public class XWFrontRogue : Enemy
 	private void _OnCanRush()
 	{
 		Velocity.x = Direction * RushSpeed;
-		GD.Print(":O");
 	}
 }
