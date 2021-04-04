@@ -13,6 +13,7 @@ public class XWFrontRogue : Enemy
 	public int Direction = 1;
 	private bool _canSwapDir = true;
 	private bool _isRushing = false;
+	private bool _canRush = false;
 
 	private Timer _rushDelayTimer;
 
@@ -41,6 +42,10 @@ public class XWFrontRogue : Enemy
 			_rushDelayTimer.Start();
 			Velocity.x = 0;
 			Direction = Mathf.Sign(player.Position.x - Position.x);
+		} 
+		else if (_canRush)
+		{
+			MoveX(Direction * RushSpeed);
 		}
 	}
 
@@ -66,6 +71,6 @@ public class XWFrontRogue : Enemy
 	
 	private void _OnCanRush()
 	{
-		Velocity.x = Direction * RushSpeed;
+		_canRush = true;
 	}
 }
