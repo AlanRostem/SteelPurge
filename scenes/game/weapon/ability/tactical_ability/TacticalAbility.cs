@@ -10,7 +10,6 @@ public class TacticalAbility : WeaponAbility
 	public float CurrentCoolDown = 0;
 	
 	public bool IsOnCoolDown = false;
-	public bool IsActive = false;
 
 	private Timer _cooldownTimer;
 	private Timer _durationTimer;
@@ -26,6 +25,7 @@ public class TacticalAbility : WeaponAbility
 		base._Ready();
 		_cooldownTimer = GetNode<Timer>("CoolDownTimer");
 		_durationTimer = GetNode<Timer>("DurationTimer");
+		GetWeapon().TacticalEnhancement = this;
 	}
 
 	public virtual void OnActivate()
@@ -43,7 +43,7 @@ public class TacticalAbility : WeaponAbility
 
 	}
 
-	public void DeActivate()
+	public override void DeActivate()
 	{
 		IsActive = false;
 		IsOnCoolDown = true;

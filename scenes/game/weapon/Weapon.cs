@@ -12,7 +12,7 @@ public class Weapon : Node2D
 	[Export] public float HoverRecoilSpeed = 100;
 	[Export] public float MinFallSpeedForRecoilHovering = -20;
 
-	public TacticalAbility TacticalEnhancement { get; set; }
+	public WeaponAbility TacticalEnhancement { get; set; }
 	public FiringDevice FiringDevice { get; set; }
 
 	private bool _isFiring = false;

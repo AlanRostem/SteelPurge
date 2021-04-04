@@ -132,7 +132,10 @@ public class Player : Entity
 			{
 				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -_currentJumpSpeed / 2));
 				if (!CanTakeDamage) return;
-
+				
+				if (EquippedWeapon.TacticalEnhancement.IsActive)
+					EquippedWeapon.TacticalEnhancement.DeActivate();
+				
 				IsInvulnerable = true;
 				_isStunned = true;
 			}

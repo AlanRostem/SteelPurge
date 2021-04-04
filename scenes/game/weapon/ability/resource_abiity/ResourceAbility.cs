@@ -10,10 +10,15 @@ public class ResourceAbility : WeaponAbility
 	[Export] public float DrainInterval = 0.1f;
 
 	private float _currentDrainTime = 0;
-	private bool _isActive = false;
 
 	[Signal]
 	public delegate void Linger();
+
+	public override void _Ready()
+	{
+		base._Ready();
+		GetWeapon().TacticalEnhancement = this;
+	}
 
 	public override void _Process(float delta)
 	{
@@ -21,7 +26,7 @@ public class ResourceAbility : WeaponAbility
 		var player = GetWeapon().OwnerPlayer;
 		var fuels = player.PlayerInventory.OrdinanceFuels;
 
-		if (_isActive)
+		if (IsActive)
 		{
 			OnUpdate();
 
@@ -35,7 +40,7 @@ public class ResourceAbility : WeaponAbility
 			}
 		}
 		
-		if (fuels[type] < DrainPerTick && _isActive)
+		if (fuels[type] < DrainPerTick && IsActive)
 		{
 			_LingerStopped();
 			return;
@@ -46,9 +51,9 @@ public class ResourceAbility : WeaponAbility
 		if (pressed && fuels[type] > DrainPerTick)
 		{
 			EmitSignal(nameof(Linger));
-			if (!_isActive)
+			if (!IsActive)
 			{
-				_isActive = true;
+				IsActive = true;
 				OnActivate();
 			}
 		}
@@ -73,7 +78,7 @@ public class ResourceAbility : WeaponAbility
 	private void _LingerStopped()
 	{
 		_currentDrainTime = 0;
-		_isActive = false;
+		IsActive = false;
 		OnDeActivate();
 	}
 }
