@@ -51,7 +51,13 @@ public class XWFrontRogue : Enemy
 
 	protected override void _WhenPlayerNotSeen()
 	{
-		if (_isRushing) return; // TODO: Might cause bugs
+		if (_isRushing)
+		{
+			_isRushing = false;
+			_canRush = false;
+			_rushDelayTimer.Stop();
+			return;
+		} // TODO: Might cause bugs
 		
 		if (_canSwapDir)
 		{

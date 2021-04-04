@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogueSprite.cs" type="Script" id=1]
 [ext_resource path="res://scenes/game/entities/Enemy.tscn" type="PackedScene" id=2]
@@ -29,6 +29,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 8, 10 )
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 1 )
+
 [node name="XWFrontRogue" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 BaseHitPoints = 300
@@ -42,7 +45,6 @@ shape = SubResource( 1 )
 position = Vector2( 0, -1 )
 frames = SubResource( 4 )
 animation = "walk"
-frame = 1
 playing = true
 script = ExtResource( 1 )
 
@@ -63,8 +65,15 @@ autostart = true
 script = ExtResource( 7 )
 
 [node name="XWFrontRogueRushDelayTimer" type="Timer" parent="." index="5"]
-wait_time = 0.1
+wait_time = 0.8
 one_shot = true
+
+[node name="CriticalHitbox" parent="." index="6"]
+CriticalHitMultiplier = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CriticalHitbox" index="0"]
+position = Vector2( 0, -8 )
+shape = SubResource( 6 )
 [connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
 [connection signal="body_entered" from="XWFrontRogueMeleeArea" to="." method="_OnPlayerEnterMeleeArea"]
 [connection signal="timeout" from="XWFrontRogueTrackCooldownTimer" to="." method="_OnCanSwap"]
