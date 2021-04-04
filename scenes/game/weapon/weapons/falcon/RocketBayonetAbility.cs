@@ -15,6 +15,16 @@ public class RocketBayonetAbility : TacticalAbility
 		GetWeapon().MeleeHitBoxEnabled = true;
 	}
 
+	public override void OnUpdate()
+	{
+		var player = GetWeapon().OwnerPlayer;
+		if (player.IsOnWall())
+		{
+			DeActivate();
+			player.Velocity.x = 0;
+		}
+	}
+
 	public override void OnEnd()
 	{
 		var player = GetWeapon().OwnerPlayer;
@@ -27,5 +37,7 @@ public class RocketBayonetAbility : TacticalAbility
 	{
 		hitBox.TakeHit(BayonetDamage, (int)GetWeapon().OwnerPlayer.HorizontalLookingDirection);
 		DeActivate();
+		var player = GetWeapon().OwnerPlayer;
+		player.Velocity.x = 0;
 	}
 }

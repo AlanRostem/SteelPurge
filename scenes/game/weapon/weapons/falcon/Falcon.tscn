@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/game/weapon/weapons/falcon/RocketBayonetAbility.cs" type="Script" id=5]
 
 [node name="Falcon" instance=ExtResource( 1 )]
+DisplayName = "Falcon"
 DamagePerShot = 12
 RateOfFire = 250
 HoverRecoilSpeed = 10.0
