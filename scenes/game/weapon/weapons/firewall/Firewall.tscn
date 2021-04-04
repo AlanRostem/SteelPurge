@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/weapon/Weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/texture/weapon/firewall/firewall.png" type="Texture" id=2]
 [ext_resource path="res://scenes/game/weapon/ability/firing_device/shot_gun/ProjectileShotGunFiringDevice.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/weapon/weapons/firewall/FlareFiringDevice.cs" type="Script" id=4]
 [ext_resource path="res://scenes/game/weapon/ability/resource_abiity/ResourceAbility.tscn" type="PackedScene" id=5]
@@ -17,12 +18,15 @@ ClipSize = 12
 DamagePerShot = 11
 RateOfFire = 120
 
-[node name="FlareFiringDevice" parent="." index="1" instance=ExtResource( 3 )]
+[node name="Sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 2 )
+
+[node name="FlareFiringDevice" parent="." index="2" instance=ExtResource( 3 )]
 script = ExtResource( 4 )
 PelletCount = 5
 SpreadAngle = 20.0
 
-[node name="DragonsBreathAbility" parent="." index="2" instance=ExtResource( 5 )]
+[node name="DragonsBreathAbility" parent="." index="3" instance=ExtResource( 5 )]
 script = ExtResource( 6 )
 DrainInterval = 0.07
 DamagePerTick = 15
@@ -37,7 +41,7 @@ position = Vector2( 72, 0 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="DragonsBreathAbility/FireArea" index="1"]
-position = Vector2( 72, 0 )
+position = Vector2( 80, 0 )
 texture = ExtResource( 8 )
 [connection signal="DamageDealt" from="." to="FlareFiringDevice" method="_OnDamageDealt"]
 [connection signal="TurnOff" from="DragonsBreathAbility" to="DragonsBreathAbility/FireArea" method="_OnDisabled"]
