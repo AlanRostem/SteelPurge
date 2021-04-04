@@ -13,7 +13,7 @@
 extents = Vector2( 10, 12 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 4 )
+extents = Vector2( 16, 4 )
 
 [sub_resource type="CapsuleShape2D" id=3]
 height = 12.0
@@ -29,9 +29,13 @@ PlayerDetectionRange = 160.0
 position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
+[node name="CriticalHitbox" parent="." index="1"]
+CriticalHitMultiplier = 12.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CriticalHitbox" index="0"]
 position = Vector2( 0, -12 )
 shape = SubResource( 2 )
+one_way_collision = true
 
 [node name="ExecutorSprite" type="Sprite" parent="." index="2"]
 texture = ExtResource( 2 )

@@ -30,7 +30,7 @@ animations = [ {
 extents = Vector2( 8, 10 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 4, 1 )
+extents = Vector2( 8, 1 )
 
 [node name="XWFrontRogue" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
@@ -74,6 +74,7 @@ CriticalHitMultiplier = 100.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CriticalHitbox" index="0"]
 position = Vector2( 0, -8 )
 shape = SubResource( 6 )
+one_way_collision = true
 [connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
 [connection signal="body_entered" from="XWFrontRogueMeleeArea" to="." method="_OnPlayerEnterMeleeArea"]
 [connection signal="timeout" from="XWFrontRogueTrackCooldownTimer" to="." method="_OnCanSwap"]

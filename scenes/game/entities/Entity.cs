@@ -9,6 +9,7 @@ public class Entity : KinematicBody2D
 	[Export] public bool CanReceiveStatusEffect = true;
 
 	private bool _canAccelerate = true;
+	public bool IsOnSlope { get; private set; }
 
 	public enum StatusEffectType
 	{
@@ -84,9 +85,12 @@ public class Entity : KinematicBody2D
 		if (IsGravityEnabled)
 			Velocity += GravityVector * Gravity * delta;
 		Velocity = MoveAndSlide(Velocity, Vector2.Up, StopOnSlope);
+		IsOnSlope = false;
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
 			var collision = GetSlideCollision(i);
+			if (IsOnWall() && collision.Normal.y != -1)
+				IsOnSlope = true;
 			_OnCollision(collision);
 		}
 
