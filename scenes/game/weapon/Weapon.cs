@@ -119,7 +119,7 @@ public class Weapon : Node2D
 			_meleeDurationTimer.Start();
 			
 			// TODO: Remove this after adding animations
-			Position = new Vector2(8, 0);
+			Position = new Vector2(8 * Scale.x, 0);
 		}
 
 		if (_isHoldingTrigger)
