@@ -42,7 +42,6 @@ shape = SubResource( 1 )
 position = Vector2( 0, -1 )
 frames = SubResource( 4 )
 animation = "walk"
-frame = 1
 playing = true
 script = ExtResource( 1 )
 
@@ -59,8 +58,13 @@ shape = SubResource( 5 )
 shape = SubResource( 1 )
 
 [node name="XWFrontRogueTrackCooldownTimer" type="Timer" parent="." index="4"]
-one_shot = true
+autostart = true
 script = ExtResource( 7 )
+
+[node name="XWFrontRogueRushDelayTimer" type="Timer" parent="." index="5"]
+wait_time = 0.1
+one_shot = true
 [connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
 [connection signal="body_entered" from="XWFrontRogueMeleeArea" to="." method="_OnPlayerEnterMeleeArea"]
 [connection signal="timeout" from="XWFrontRogueTrackCooldownTimer" to="." method="_OnCanSwap"]
+[connection signal="timeout" from="XWFrontRogueRushDelayTimer" to="." method="_OnCanRush"]

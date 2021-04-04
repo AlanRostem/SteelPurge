@@ -9,29 +9,39 @@ public class XWFrontRogue : Enemy
 	[Export] public float WalkSpeed = 32;
 	[Export] public float RushSpeed = 110;
 	[Export] public uint DamagePerHit = 40;
+	[Export] public float PlayerVisualLossRange = 3 * CustomTileMap.Size;
 	public int Direction = 1;
 	private bool _canSwapDir = true;
-	private bool _isRushing = true;
+	private bool _isRushing = false;
+
+	private Timer _rushDelayTimer;
 
 	[Signal]
 	public delegate void TriggerDirSwapCooldown();
-
+	
+	[Signal]
+	public delegate void OnRush();
 
 	private void _OnCanSwap()
 	{
 		_canSwapDir = true;
 	}
 
-	protected override void _OnMovement(float delta)
+	public override void _Ready()
 	{
-		base._OnMovement(delta);
-
-		MoveX(WalkSpeed * Direction);
+		base._Ready();
+		_rushDelayTimer = GetNode<Timer>("XWFrontRogueTrackCooldownTimer");
 	}
 
 	protected override void _WhenPlayerDetected(Player player)
 	{
-		
+		if (!_isRushing)
+		{
+			_isRushing = true;
+			_rushDelayTimer.Start();
+			Velocity.x = 0;
+			Direction = Mathf.Sign(player.Position.x - Position.x);
+		}
 	}
 
 	protected override void _WhenPlayerNotSeen()
@@ -42,6 +52,8 @@ public class XWFrontRogue : Enemy
 			_canSwapDir = false;
 			Direction = -Direction;
 		}
+		
+		MoveX(WalkSpeed * Direction);
 	}
 
 	private void _OnPlayerEnterMeleeArea(object body)
@@ -49,6 +61,10 @@ public class XWFrontRogue : Enemy
 		((Player)body).TakeDamage(DamagePerHit, Direction);
 		_isRushing = false;
 	}
+	
+	private void _OnCanRush()
+	{
+		Velocity.x = Direction * RushSpeed;
+		GD.Print(":O");
+	}
 }
-
-
