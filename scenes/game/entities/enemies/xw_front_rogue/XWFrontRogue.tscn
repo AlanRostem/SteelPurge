@@ -35,7 +35,7 @@ extents = Vector2( 4, 1 )
 [node name="XWFrontRogue" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 BaseHitPoints = 300
-PlayerDetectionRange = 96.0
+PlayerDetectionRange = 128.0
 WalkSpeed = 45.0
 
 [node name="BodyShape" type="CollisionShape2D" parent="." index="0"]
@@ -45,6 +45,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -1 )
 frames = SubResource( 4 )
 animation = "walk"
+frame = 1
 playing = true
 script = ExtResource( 1 )
 
@@ -65,7 +66,7 @@ autostart = true
 script = ExtResource( 7 )
 
 [node name="XWFrontRogueRushDelayTimer" type="Timer" parent="." index="5"]
-wait_time = 0.8
+wait_time = 1.1
 one_shot = true
 
 [node name="CriticalHitbox" parent="." index="6"]

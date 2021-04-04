@@ -46,6 +46,15 @@ public class XWFrontRogue : Enemy
 		else if (_canRush)
 		{
 			MoveX(Direction * RushSpeed);
+			
+			var newDirection = Mathf.Sign(player.Position.x - Position.x);
+			if (newDirection != Direction)
+			{
+				_canRush = false;
+				_rushDelayTimer.Start();
+				Velocity.x = 0;
+				Direction = newDirection;
+			}
 		}
 	}
 
