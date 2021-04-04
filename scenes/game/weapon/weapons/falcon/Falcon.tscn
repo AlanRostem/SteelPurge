@@ -12,6 +12,7 @@ RateOfFire = 250
 HoverRecoilSpeed = 10.0
 
 [node name="HitScanFiringDevice" parent="." index="3" instance=ExtResource( 2 )]
+DamageRange = 256.0
 
 [node name="CollisionShape2D" parent="MeleeArea" index="0"]
 position = Vector2( 32, 0 )
