@@ -14,7 +14,7 @@ HoverRecoilSpeed = 10.0
 [node name="HitScanFiringDevice" parent="." index="3" instance=ExtResource( 2 )]
 
 [node name="CollisionShape2D" parent="MeleeArea" index="0"]
-position = Vector2( 24, 0 )
+position = Vector2( 32, 0 )
 
 [node name="Sprite" type="Sprite" parent="." index="5"]
 position = Vector2( 16, 0 )
@@ -22,3 +22,4 @@ texture = ExtResource( 3 )
 
 [node name="RocketBayonetAbility" parent="." index="6" instance=ExtResource( 4 )]
 script = ExtResource( 5 )
+[connection signal="OnMeleeHit" from="." to="RocketBayonetAbility" method="_OnFalconOnMeleeHit"]

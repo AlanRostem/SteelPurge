@@ -11,6 +11,8 @@ public class TacticalAbility : WeaponAbility
 	
 	public bool IsOnCoolDown = false;
 	public bool IsActive = false;
+	
+	// TODO: Make references to the timers to make it easier to manipulate them manually
 
 	[Signal]
 	public delegate void TriggerDurationTimer();
@@ -29,6 +31,11 @@ public class TacticalAbility : WeaponAbility
 	}
 
 	public virtual void OnEnd()
+	{
+
+	}
+
+	public void DeActivate()
 	{
 
 	}

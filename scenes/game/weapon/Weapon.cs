@@ -20,6 +20,12 @@ public class Weapon : Node2D
 	private bool _isHoldingTrigger = false;
 	public bool IsMeleeAttacking = false;
 
+	public bool MeleeHitBoxEnabled
+	{
+		get => !_meleeShape.Disabled;
+		set => _meleeShape.Disabled = !value;
+	}
+
 	private Timer _meleeCooldownTimer;
 	private Timer _meleeDurationTimer;
 	private CollisionShape2D _meleeShape;
@@ -60,6 +66,9 @@ public class Weapon : Node2D
 
 	[Signal]
 	public delegate void DamageDealt(uint damage, VulnerableHitbox target);
+
+	[Signal]
+	public delegate void OnMeleeHit(VulnerableHitbox hitBox);
 
 
 	public override void _Ready()
@@ -150,5 +159,6 @@ public class Weapon : Node2D
 
 		var hitBox = (VulnerableHitbox) area;
 		hitBox.TakeHit(MeleeDamage);
+		EmitSignal(nameof(OnMeleeHit), hitBox);
 	}
 }
