@@ -20,7 +20,7 @@ public class RocketBayonetAbility : TacticalAbility
 		var player = GetWeapon().OwnerPlayer;
 		player.IsGravityEnabled = true;
 		player.CanMove = true;
-		GetWeapon().MeleeHitBoxEnabled = true;
+		GetWeapon().MeleeHitBoxEnabled = false;
 	}
 	
 	private void _OnFalconOnMeleeHit(VulnerableHitbox hitBox)
