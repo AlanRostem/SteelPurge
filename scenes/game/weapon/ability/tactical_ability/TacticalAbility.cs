@@ -11,14 +11,22 @@ public class TacticalAbility : WeaponAbility
 	
 	public bool IsOnCoolDown = false;
 	public bool IsActive = false;
-	
-	// TODO: Make references to the timers to make it easier to manipulate them manually
+
+	private Timer _cooldownTimer;
+	private Timer _durationTimer;
 
 	[Signal]
 	public delegate void TriggerDurationTimer();
 
 	[Signal]
 	public delegate void TriggerCoolDownTimer();
+
+	public override void _Ready()
+	{
+		base._Ready();
+		_cooldownTimer = GetNode<Timer>("CoolDownTimer");
+		_durationTimer = GetNode<Timer>("DurationTimer");
+	}
 
 	public virtual void OnActivate()
 	{
@@ -37,7 +45,11 @@ public class TacticalAbility : WeaponAbility
 
 	public void DeActivate()
 	{
-
+		IsActive = false;
+		IsOnCoolDown = true;
+		_cooldownTimer.Start();
+		_durationTimer.Stop();
+		OnEnd();
 	}
 
 	public override void _Process(float delta)
@@ -51,7 +63,7 @@ public class TacticalAbility : WeaponAbility
 			{
 				IsActive = true;
 				OnActivate();
-				EmitSignal(nameof(TriggerDurationTimer));
+				_durationTimer.Start();
 				fuels[(int)FuelType] -= FuelRequirement;
 				GetWeapon().OwnerPlayer.KnowInventoryOrdinanceFuelCount(fuels[(int)FuelType], FuelType);
 			}
@@ -74,7 +86,7 @@ public class TacticalAbility : WeaponAbility
 	{
 		IsActive = false;
 		IsOnCoolDown = true;
-		EmitSignal(nameof(TriggerCoolDownTimer));
+		_cooldownTimer.Start();
 		OnEnd();
 	}
 }
