@@ -8,7 +8,7 @@ public class XWFrontRogue : Enemy
 {
 	[Export] public float WalkSpeed = 32;
 	[Export] public float RushSpeed = 110;
-	[Export] public uint DamagePerHit = 40;
+	[Export] public uint DamagePerHit = 90;
 	[Export] public float PlayerVisualLossRange = 3 * CustomTileMap.Size;
 	public int Direction = 1;
 	private bool _canSwapDir = true;
@@ -67,6 +67,7 @@ public class XWFrontRogue : Enemy
 	{
 		((Player)body).TakeDamage(DamagePerHit, Direction);
 		_isRushing = false;
+		QueueFree();
 	}
 	
 	private void _OnCanRush()
