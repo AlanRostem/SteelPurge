@@ -7,9 +7,11 @@ using Object = Godot.Object;
 public class XWFrontRogue : Enemy
 {
 	[Export] public float WalkSpeed = 32;
+	[Export] public float RushSpeed = 110;
 	[Export] public uint DamagePerHit = 40;
 	public int Direction = 1;
 	private bool _canSwapDir = true;
+	private bool _isRushing = true;
 
 	[Signal]
 	public delegate void TriggerDirSwapCooldown();
@@ -20,15 +22,6 @@ public class XWFrontRogue : Enemy
 		_canSwapDir = true;
 	}
 
-	public override void _OnCollision(KinematicCollision2D collider)
-	{
-		if (collider.Collider is TileMap && IsOnWall())
-		{
-			MoveY(-WalkSpeed * 1.25f);
-		}
-	}
-
-
 	protected override void _OnMovement(float delta)
 	{
 		base._OnMovement(delta);
@@ -38,7 +31,7 @@ public class XWFrontRogue : Enemy
 
 	protected override void _WhenPlayerDetected(Player player)
 	{
-		Direction = Mathf.Sign(player.Position.x - Position.x);
+		
 	}
 
 	protected override void _WhenPlayerNotSeen()
@@ -51,8 +44,11 @@ public class XWFrontRogue : Enemy
 		}
 	}
 
-	private void _OnAttackPlayer()
+	private void _OnPlayerEnterMeleeArea(object body)
 	{
-		DetectedPlayer.TakeDamage(DamagePerHit, Direction);
+		((Player)body).TakeDamage(DamagePerHit, Direction);
+		_isRushing = false;
 	}
 }
+
+
