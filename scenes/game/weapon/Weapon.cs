@@ -106,14 +106,20 @@ public class Weapon : Node2D
 			Rotation = 0;
 		}
 
-		if (IsMeleeAttacking) return;
-		
+		if (IsMeleeAttacking)
+		{
+			return;
+		}
+	
 		if (Input.IsActionJustPressed("melee") && OwnerPlayer.IsOnFloor())
 		{
 			IsMeleeAttacking = true;
 			_meleeShape.Disabled = false;
 			_meleeCooldownTimer.Start();
 			_meleeDurationTimer.Start();
+			
+			// TODO: Remove this after adding animations
+			Position = new Vector2(8, 0);
 		}
 
 		if (_isHoldingTrigger)
@@ -133,6 +139,8 @@ public class Weapon : Node2D
 	private void _OnMeleeDurationTimerTimeout()
 	{
 		_meleeShape.Disabled = true;
+		// TODO: Remove this after adding animations
+		Position = new Vector2(0, 0);
 	}
 
 	private void _OnMeleeAreaHitBoxEntered(object area)
