@@ -19,7 +19,6 @@ DamageRange = 256.0
 position = Vector2( 24, 0 )
 
 [node name="Sprite" type="Sprite" parent="." index="5"]
-position = Vector2( 8, 0 )
 texture = ExtResource( 3 )
 
 [node name="RocketBayonetAbility" parent="." index="6" instance=ExtResource( 4 )]
