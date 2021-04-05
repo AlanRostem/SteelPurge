@@ -7,14 +7,20 @@ public class MainMenu : Control
 	{
 		
 	}
+
+	private void PlayLevel(string scenePath)
+	{
+		// TODO: Improve this function
+		GetTree().ChangeScene(scenePath);
+	}
 	
 	private void _OnPlayButtonPressed()
 	{
-		GD.Print("Play!");
+		PlayLevel("res://scenes/game/environment/levels/Level1.tscn");
 	}
 
 	private void _OnQuitButtonPressed()
 	{
-		GD.Print("Quit...");
+		GetTree().Quit();
 	}
 }
