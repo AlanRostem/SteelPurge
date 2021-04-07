@@ -10,7 +10,7 @@
 [node name="Falcon" instance=ExtResource( 1 )]
 DisplayName = "Falcon"
 DamagePerShot = 52
-RateOfFire = 250
+RateOfFire = 150
 HoverRecoilSpeed = 10.0
 
 [node name="CollisionShape2D" parent="MeleeArea" index="0"]
