@@ -5,7 +5,7 @@ public class Talon : Projectile
 {
 	private Sprite _sprite;
 	private bool _followPlayer = false;
-	
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -23,9 +23,10 @@ public class Talon : Projectile
 		if (_followPlayer)
 		{
 			var angle = OwnerWeapon.OwnerPlayer.Position.AngleToPoint(Position);
-			Velocity.x = MaxVelocity * Mathf.Cos(angle);
-			Velocity.y = MaxVelocity * Mathf.Sin(angle);
+			Velocity.x = Mathf.Lerp(Velocity.x, MaxVelocity * Mathf.Cos(angle), 0.14f);
+			Velocity.y = Mathf.Lerp(Velocity.y, MaxVelocity * Mathf.Sin(angle), 0.14f);
 		}
+
 		base._PhysicsProcess(delta);
 	}
 
@@ -36,7 +37,6 @@ public class Talon : Projectile
 			Velocity = new Vector2();
 			_followPlayer = true;
 		}
-		
 	}
 
 	public override void _OnLostVisual()
@@ -47,7 +47,7 @@ public class Talon : Projectile
 			_followPlayer = true;
 		}
 	}
-	
+
 	private void _OnPlayerDetectionAreaPlayerEntered(object body)
 	{
 		if (_followPlayer)
