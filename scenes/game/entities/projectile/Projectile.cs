@@ -6,6 +6,8 @@ public class Projectile : KinematicBody2D
 	[Export] public float DirectionAngle = 0;
 	[Export] public float MaxVelocity = 250;
 	[Export] public float Gravity = 600;
+	[Export] public bool DeleteOnEnemyHit = true;
+	[Export] public bool DeleteOnTileMapHit = true;
 	private bool _hasDisappeared = false;
 	
 	public Weapon OwnerWeapon { get; private set; }
@@ -38,7 +40,8 @@ public class Projectile : KinematicBody2D
 		var hitBox = (VulnerableHitbox) area;
 		hitBox.TakeHit(OwnerWeapon.DamagePerShot);
 		OwnerWeapon.EmitSignal(nameof(Weapon.DamageDealt), OwnerWeapon.DamagePerShot, hitBox);
-		if (!_hasDisappeared)
+		_OnHit();
+		if (!_hasDisappeared && DeleteOnEnemyHit)
 		{
 			_hasDisappeared = true;
 			_OnDisappear();
@@ -48,7 +51,7 @@ public class Projectile : KinematicBody2D
 
 	private void _OnHitTileMap(object body)
 	{
-		if (!_hasDisappeared)
+		if (!_hasDisappeared && DeleteOnTileMapHit)
 		{
 			_hasDisappeared = true;
 			_OnDisappear();
@@ -56,11 +59,16 @@ public class Projectile : KinematicBody2D
 		}
 	}
 
+	public virtual void _OnHit()
+	{
+		
+	}
+	
 	public virtual void _OnDisappear()
 	{
 	}
 	
-	private void _OnDelete()
+	public virtual void _OnLostVisual()
 	{
 		QueueFree();
 	}
