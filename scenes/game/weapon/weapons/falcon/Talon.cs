@@ -47,4 +47,15 @@ public class Talon : Projectile
 			_followPlayer = true;
 		}
 	}
+	
+	private void _OnPlayerDetectionAreaPlayerEntered(object body)
+	{
+		if (_followPlayer)
+		{
+			var player = (Player) body;
+			var firingDevice = (TalconFiringDevice) player.EquippedWeapon.FiringDevice;
+			firingDevice.Ammo++;
+			QueueFree();
+		}
+	}
 }
