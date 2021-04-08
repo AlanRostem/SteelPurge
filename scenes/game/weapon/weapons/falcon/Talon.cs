@@ -12,12 +12,6 @@ public class Talon : Projectile
 		_sprite = GetNode<Sprite>("Sprite");
 	}
 
-	public override void _Process(float delta)
-	{
-		base._Process(delta);
-		_sprite.FlipH = Velocity.x < 0;
-	}
-
 	public override void _PhysicsProcess(float delta)
 	{
 		if (_followPlayer)

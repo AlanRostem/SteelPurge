@@ -7,12 +7,16 @@ public class RocketBayonetAbility : TacticalAbility
 	[Export] public float RocketSpeed = 250;
 	public override void OnActivate()
 	{
-		var player = GetWeapon().OwnerPlayer;
+		var weapon = GetWeapon();
+		weapon.MeleeHitBoxEnabled = true;
+		weapon.CanFire = false;
+		var player = weapon.OwnerPlayer;
 		player.Velocity.x = RocketSpeed * player.HorizontalLookingDirection;
 		player.Velocity.y = 0;
 		player.IsGravityEnabled = false;
 		player.CanMove = false;
-		GetWeapon().MeleeHitBoxEnabled = true;
+		player.IsAimingDown = false;
+		player.CanAimDown = false;
 	}
 
 	public override void OnUpdate()
@@ -27,10 +31,14 @@ public class RocketBayonetAbility : TacticalAbility
 
 	public override void OnEnd()
 	{
-		var player = GetWeapon().OwnerPlayer;
+		var weapon = GetWeapon();
+		weapon.MeleeHitBoxEnabled = false;
+		weapon.CanFire = true;
+
+		var player = weapon.OwnerPlayer;
 		player.IsGravityEnabled = true;
 		player.CanMove = true;
-		GetWeapon().MeleeHitBoxEnabled = false;
+		player.CanAimDown = true;
 	}
 	
 	private void _OnFalconOnMeleeHit(VulnerableHitbox hitBox)

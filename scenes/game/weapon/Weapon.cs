@@ -15,6 +15,18 @@ public class Weapon : Node2D
 	public WeaponAbility TacticalEnhancement { get; set; }
 	public FiringDevice FiringDevice { get; set; }
 
+	private bool _canFire = true;
+	public bool CanFire
+	{
+		get => _canFire;
+		set
+		{
+			_canFire = value;
+			if (value) return;
+			_isFiring = false;
+			EmitSignal(nameof(CancelFire));
+		}
+	}
 	private bool _isFiring = false;
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
@@ -131,7 +143,7 @@ public class Weapon : Node2D
 			Position = new Vector2(8 * Scale.x, 0);
 		}
 
-		if (_isHoldingTrigger)
+		if (_isHoldingTrigger && CanFire)
 		{
 			if (_isFiring) return;
 			_isFiring = true;

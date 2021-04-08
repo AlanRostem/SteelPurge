@@ -10,6 +10,7 @@
 [node name="Falcon" instance=ExtResource( 1 )]
 DisplayName = "Falcon"
 DamagePerShot = 52
+MeleeDamage = 30
 RateOfFire = 150
 HoverRecoilSpeed = 60.0
 

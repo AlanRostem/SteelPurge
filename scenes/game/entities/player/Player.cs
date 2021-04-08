@@ -39,6 +39,8 @@ public class Player : Entity
 	private bool _jump = false;
 	private bool _aim = false;
 	public bool CanTakeDamage = true;
+	public bool CanAimDown = true;
+
 	public bool IsInvulnerable = false;
 	public bool IsAimingUp = false;
 	public bool IsAimingDown = false;
@@ -66,6 +68,7 @@ public class Player : Entity
 			EmitSignal(nameof(WeaponEquipped), value);
 		}
 	}
+
 
 
 	public override void _Ready()
@@ -183,7 +186,7 @@ public class Player : Entity
 		_jump = Input.IsActionPressed("jump");
 		_slide = Input.IsActionPressed("slide");
 
-		if (Input.IsActionJustPressed("aim_down"))
+		if (Input.IsActionJustPressed("aim_down") && CanAimDown)
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
 			IsAimingDown = !IsAimingDown;
