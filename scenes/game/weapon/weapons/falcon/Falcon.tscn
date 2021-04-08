@@ -22,6 +22,7 @@ texture = ExtResource( 3 )
 
 [node name="RocketBayonetAbility" parent="." index="5" instance=ExtResource( 4 )]
 script = ExtResource( 5 )
+FuelRequirement = 30
 
 [node name="TalconFiringDevice" parent="." index="6" instance=ExtResource( 2 )]
 script = ExtResource( 6 )

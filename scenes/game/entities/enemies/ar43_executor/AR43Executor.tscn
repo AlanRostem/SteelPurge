@@ -30,7 +30,7 @@ position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="CriticalHitbox" parent="." index="1"]
-CriticalHitMultiplier = 12.0
+CriticalHitMultiplier = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CriticalHitbox" index="0"]
 position = Vector2( 0, -12 )
@@ -77,14 +77,14 @@ position = Vector2( -4.76837e-07, 2.38419e-07 )
 scale = Vector2( 4, 1.6 )
 [connection signal="TriggerApproach" from="." to="ApproachIntervalTimer" method="_OnTrigger"]
 [connection signal="TriggerApproach" from="." to="FireRateTimer" method="_OnCancel"]
-[connection signal="TriggerStand" from="." to="StandIntervalTimer" method="_OnTrigger"]
 [connection signal="TriggerStand" from="." to="FireRateTimer" method="_OnTrigger"]
+[connection signal="TriggerStand" from="." to="StandIntervalTimer" method="_OnTrigger"]
 [connection signal="timeout" from="ApproachIntervalTimer" to="." method="_OnApproach"]
 [connection signal="timeout" from="StandIntervalTimer" to="." method="_OnStand"]
 [connection signal="timeout" from="FireRateTimer" to="." method="_OnFire"]
 [connection signal="body_entered" from="MeleeArea" to="." method="_OnPlayerMelee"]
-[connection signal="screen_entered" from="VisibilityEnabler2D" to="StandIntervalTimer" method="_OnTrigger"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="FireRateTimer" method="_OnTrigger"]
-[connection signal="screen_exited" from="VisibilityEnabler2D" to="StandIntervalTimer" method="_OnCancel"]
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="StandIntervalTimer" method="_OnTrigger"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="ApproachIntervalTimer" method="_OnCancel"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="FireRateTimer" method="_OnCancel"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="StandIntervalTimer" method="_OnCancel"]
