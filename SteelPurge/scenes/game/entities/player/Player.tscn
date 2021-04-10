@@ -65,11 +65,10 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 4, 4 )
+extents = Vector2( 6, 8 )
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 5.0
-height = 0.0
+[sub_resource type="CircleShape2D" id=11]
+radius = 6.0
 
 [node name="Player" instance=ExtResource( 1 )]
 collision_layer = 2
@@ -77,18 +76,20 @@ collision_mask = 37
 script = ExtResource( 2 )
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="." index="0"]
+position = Vector2( -1.19209e-07, 0.437499 )
+scale = Vector2( 1.33333, 1.27083 )
 frames = SubResource( 8 )
-animation = "slide"
+animation = "idle"
 playing = true
 script = ExtResource( 4 )
 
 [node name="UpperBodyShape" type="CollisionShape2D" parent="." index="1"]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -2 )
 shape = SubResource( 9 )
 
 [node name="LowerBodyShape" type="CollisionShape2D" parent="." index="2"]
-position = Vector2( 0, 4 )
-shape = SubResource( 1 )
+position = Vector2( 0, 6 )
+shape = SubResource( 11 )
 
 [node name="Inventory" parent="." index="3" instance=ExtResource( 5 )]
 DefaultGunScene = ExtResource( 7 )
