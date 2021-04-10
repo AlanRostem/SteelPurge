@@ -220,6 +220,7 @@ public class Player : Entity
 		//_shape.Position = new Vector2(0, WalkingHeight);
 
 		_shape.Rotation = Mathf.Pi / 2;
+		Position = new Vector2(Position.x, Position.y + 5);
 	}
 
 	void Stand()
@@ -271,6 +272,7 @@ public class Player : Entity
 				Stand();
 			IsSliding = false;
 		}
+		
 
 		if (isOnFloor && !IsSliding)
 		{
