@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/game/entities/Entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entities/player/Player.cs" type="Script" id=2]
@@ -12,10 +12,6 @@
 [ext_resource path="res://scenes/game/entities/player/AimSwapCooldownTimer.cs" type="Script" id=15]
 [ext_resource path="res://scenes/game/entities/player/DamageReceptionCooldownTimer.cs" type="Script" id=16]
 [ext_resource path="res://scenes/game/entities/player/InvincibilityCooldownTimer.cs" type="Script" id=17]
-
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 5.0
-height = 8.0
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -59,24 +55,36 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 4, 4 )
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.0
+height = 0.0
+
 [node name="Player" instance=ExtResource( 1 )]
 collision_layer = 2
 collision_mask = 37
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-shape = SubResource( 1 )
-
-[node name="PlayerSprite" type="AnimatedSprite" parent="." index="1"]
+[node name="PlayerSprite" type="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 8 )
-animation = "walk"
+animation = "idle"
 playing = true
 script = ExtResource( 4 )
 
-[node name="Inventory" parent="." index="2" instance=ExtResource( 5 )]
+[node name="UpperBodyShape" type="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, -4 )
+shape = SubResource( 9 )
+
+[node name="LowerBodyShape" type="CollisionShape2D" parent="." index="2"]
+position = Vector2( 0, 4 )
+shape = SubResource( 1 )
+
+[node name="Inventory" parent="." index="3" instance=ExtResource( 5 )]
 DefaultGunScene = ExtResource( 7 )
 
-[node name="PlayerCamera" type="Camera2D" parent="." index="3"]
+[node name="PlayerCamera" type="Camera2D" parent="." index="4"]
 current = true
 limit_top = 0
 limit_bottom = 0
@@ -86,25 +94,25 @@ drag_margin_left = 0.1
 drag_margin_right = 0.1
 script = ExtResource( 6 )
 
-[node name="RegenCooldownTimer" type="Timer" parent="." index="4"]
+[node name="RegenCooldownTimer" type="Timer" parent="." index="5"]
 wait_time = 4.0
 one_shot = true
 script = ExtResource( 13 )
 
-[node name="RegenCycleTimer" type="Timer" parent="." index="5"]
+[node name="RegenCycleTimer" type="Timer" parent="." index="6"]
 wait_time = 1.2
 script = ExtResource( 14 )
 
-[node name="AimSwapCooldownTimer" type="Timer" parent="." index="6"]
+[node name="AimSwapCooldownTimer" type="Timer" parent="." index="7"]
 one_shot = true
 script = ExtResource( 15 )
 
-[node name="DamageReceptionCooldownTimer" type="Timer" parent="." index="7"]
+[node name="DamageReceptionCooldownTimer" type="Timer" parent="." index="8"]
 wait_time = 0.5
 one_shot = true
 script = ExtResource( 16 )
 
-[node name="InvincibilityCooldownTimer" type="Timer" parent="." index="8"]
+[node name="InvincibilityCooldownTimer" type="Timer" parent="." index="9"]
 wait_time = 3.0
 one_shot = true
 script = ExtResource( 17 )

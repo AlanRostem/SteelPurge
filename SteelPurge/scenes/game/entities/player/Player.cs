@@ -53,7 +53,7 @@ public class Player : Entity
 	public bool IsSliding = false;
 
 	private Weapon _weapon;
-	private CollisionShape2D _shape;
+	private CollisionShape2D _upperBodyShape;
 	public Inventory PlayerInventory;
 
 	public Weapon EquippedWeapon
@@ -77,7 +77,7 @@ public class Player : Entity
 		base._Ready();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
-		_shape = GetNode<CollisionShape2D>("CollisionShape2D");
+		_upperBodyShape = GetNode<CollisionShape2D>("UpperBodyShape");
 
 		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
 		_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * MaxJumpHeight);
@@ -218,9 +218,7 @@ public class Player : Entity
 		//var shape = (CapsuleShape2D) _shape.Shape;
 		//shape.Height = SlidingHeight;
 		//_shape.Position = new Vector2(0, WalkingHeight);
-
-		_shape.Rotation = Mathf.Pi / 2;
-		Position = new Vector2(Position.x, Position.y + 5);
+		_upperBodyShape.SetDeferred("disabled", true);
 	}
 
 	void Stand()
@@ -228,8 +226,7 @@ public class Player : Entity
 		//var shape = (CapsuleShape2D) _shape.Shape;
 		//shape.Height = WalkingHeight;
 		//_shape.Position = new Vector2(0, 0);
-
-		_shape.Rotation = 0;
+		_upperBodyShape.SetDeferred("disabled", false);
 	}
 
 	protected override void _OnMovement(float delta)
@@ -284,6 +281,7 @@ public class Player : Entity
 			{
 				CurrentSlideMagnitude = MaxSlideMagnitude;
 			}
+			
 		}
 
 		StopOnSlope = !IsSliding;
