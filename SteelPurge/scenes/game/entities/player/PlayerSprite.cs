@@ -17,6 +17,11 @@ public class PlayerSprite : AnimatedSprite
 		{
 			Animation = "jump";
 		}
+
+		if (_player.IsSliding && _player.IsOnFloor())
+		{
+			Animation = "slide";
+		}
 		
 		_player.Modulate = new Color(Modulate)
 		{
