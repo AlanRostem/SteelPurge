@@ -28,6 +28,8 @@ public class Player : Entity
 	private static readonly float MaxSlideMagnitude = 420;
 	private static readonly float SlideDecreasePerSlide = 120;
 	private static readonly float SlideIncreasePerSecond = 280;
+	private static readonly float WalkingHeight = 6;
+	private static readonly float SlidingHeight = 0;
 
 	public float CurrentSlideMagnitude = MaxSlideMagnitude;
 
@@ -53,6 +55,7 @@ public class Player : Entity
 	public bool IsSliding = false;
 
 	private Weapon _weapon;
+	private CollisionShape2D _shape;
 	public Inventory PlayerInventory;
 
 	public Weapon EquippedWeapon
@@ -76,6 +79,7 @@ public class Player : Entity
 		base._Ready();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
+		_shape = GetNode<CollisionShape2D>("PlayerHitBox/CollisionShape2D");
 
 		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
 		_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * MaxJumpHeight);
@@ -211,6 +215,20 @@ public class Player : Entity
 		IsWalking = true;
 	}
 
+	void Crouch()
+	{
+		var shape = (CapsuleShape2D) _shape.Shape;
+		shape.Height = SlidingHeight;
+		_shape.Position = new Vector2(0, WalkingHeight);
+	}
+
+	void Stand()
+	{
+		var shape = (CapsuleShape2D) _shape.Shape;
+		shape.Height = WalkingHeight;
+		_shape.Position = new Vector2(0, 0);
+	}
+
 	protected override void _OnMovement(float delta)
 	{
 		bool isOnFloor = IsOnFloor();
@@ -240,12 +258,16 @@ public class Player : Entity
 					CurrentMaxSpeed = MaxCrouchSpeed;
 
 				IsSliding = true;
+				Crouch();
+				
 			}
 		}
 		else
 		{
 			if (IsSliding && IsOnFloor())
 				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * MaxWalkSpeed, 0.99f);
+			if (IsSliding)
+				Stand();
 			IsSliding = false;
 		}
 
