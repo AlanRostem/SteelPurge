@@ -79,7 +79,7 @@ public class Player : Entity
 		base._Ready();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
-		_shape = GetNode<CollisionShape2D>("PlayerHitBox/CollisionShape2D");
+		_shape = GetNode<CollisionShape2D>("CollisionShape2D");
 
 		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
 		_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * MaxJumpHeight);
@@ -217,16 +217,20 @@ public class Player : Entity
 
 	void Crouch()
 	{
-		var shape = (CapsuleShape2D) _shape.Shape;
-		shape.Height = SlidingHeight;
-		_shape.Position = new Vector2(0, WalkingHeight);
+		//var shape = (CapsuleShape2D) _shape.Shape;
+		//shape.Height = SlidingHeight;
+		//_shape.Position = new Vector2(0, WalkingHeight);
+
+		_shape.Rotation = Mathf.Pi / 2;
 	}
 
 	void Stand()
 	{
-		var shape = (CapsuleShape2D) _shape.Shape;
-		shape.Height = WalkingHeight;
-		_shape.Position = new Vector2(0, 0);
+		//var shape = (CapsuleShape2D) _shape.Shape;
+		//shape.Height = WalkingHeight;
+		//_shape.Position = new Vector2(0, 0);
+
+		_shape.Rotation = 0;
 	}
 
 	protected override void _OnMovement(float delta)
