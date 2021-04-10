@@ -28,8 +28,6 @@ public class Player : Entity
 	private static readonly float MaxSlideMagnitude = 420;
 	private static readonly float SlideDecreasePerSlide = 120;
 	private static readonly float SlideIncreasePerSecond = 280;
-	private static readonly float WalkingHeight = 6;
-	private static readonly float SlidingHeight = 0;
 
 	public float CurrentSlideMagnitude = MaxSlideMagnitude;
 
@@ -55,7 +53,6 @@ public class Player : Entity
 	public bool IsSliding = false;
 
 	private Weapon _weapon;
-	private CollisionShape2D _shape;
 	public Inventory PlayerInventory;
 
 	public Weapon EquippedWeapon
@@ -262,16 +259,12 @@ public class Player : Entity
 					CurrentMaxSpeed = MaxCrouchSpeed;
 
 				IsSliding = true;
-				Crouch();
-				
 			}
 		}
 		else
 		{
 			if (IsSliding && IsOnFloor())
 				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * MaxWalkSpeed, 0.99f);
-			if (IsSliding)
-				Stand();
 			IsSliding = false;
 		}
 
