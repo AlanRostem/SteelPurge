@@ -15,8 +15,12 @@ public class PlayerSprite : AnimatedSprite
 		Animation = _player.IsWalking ? "walk" : "idle";
 		if (_player.IsJumping)
 		{
-			Animation = "jump";
+			if (!_player.IsAimingDown)
+				Animation = "jump";
 		}
+
+		if (_player.IsAimingDown)
+			Animation = "aim_down";
 
 		if (_player.IsSliding && _player.IsOnFloor())
 		{

@@ -28,7 +28,7 @@ script = ExtResource( 2 )
 position = Vector2( 7.10543e-15, -9 )
 scale = Vector2( 1.33333, 1.27083 )
 frames = ExtResource( 3 )
-animation = "idle"
+animation = "aim_down"
 playing = true
 script = ExtResource( 4 )
 
