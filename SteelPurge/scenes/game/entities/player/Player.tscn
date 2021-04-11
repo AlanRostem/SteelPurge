@@ -80,6 +80,7 @@ script = ExtResource( 17 )
 [connection signal="TriggerDamageReceptionCooldown" from="." to="DamageReceptionCooldownTimer" method="_on_Player_TriggerDamageReceptionCooldown"]
 [connection signal="TriggerInvincibility" from="." to="InvincibilityCooldownTimer" method="_OnTrigger"]
 [connection signal="TriggerRegenCooldown" from="." to="RegenCooldownTimer" method="_OnTrigger"]
+[connection signal="WeaponEquipped" from="." to="PlayerSprite" method="_OnPlayerWeaponEquipped"]
 [connection signal="timeout" from="RegenCooldownTimer" to="RegenCycleTimer" method="_OnStartRegen"]
 [connection signal="timeout" from="RegenCycleTimer" to="." method="_OnRegen"]
 [connection signal="timeout" from="AimSwapCooldownTimer" to="." method="_OnSwapTimeOver"]

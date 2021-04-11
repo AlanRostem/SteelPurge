@@ -11,6 +11,7 @@ public class Weapon : Node2D
 	[Export] public uint RateOfFire;
 	[Export] public float HoverRecoilSpeed = 100;
 	[Export] public float MinFallSpeedForRecoilHovering = -20;
+	[Export] public SpriteFrames PlayerSpriteFrames;
 
 	public WeaponAbility TacticalEnhancement { get; set; }
 	public FiringDevice FiringDevice { get; set; }

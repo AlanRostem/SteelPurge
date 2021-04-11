@@ -28,4 +28,9 @@ public class PlayerSprite : AnimatedSprite
 			a = !_player.IsInvulnerable ? 1f : .5f
 		};
 	}
+	
+	private void _OnPlayerWeaponEquipped(Weapon weapon)
+	{
+		Frames = weapon.PlayerSpriteFrames;
+	}
 }
