@@ -26,7 +26,9 @@ shape = SubResource( 2 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="CriticalHitRayCast" type="RayCast2D" parent="."]
+enabled = true
 cast_to = Vector2( 0, 3 )
+collision_mask = 128
 [connection signal="area_entered" from="HitDetectionArea" to="." method="_OnVulnerableHitBoxEntered"]
 [connection signal="body_entered" from="HitDetectionArea" to="." method="_OnHitTileMap"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_OnLostVisual"]
