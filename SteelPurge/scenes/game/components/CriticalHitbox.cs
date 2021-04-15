@@ -1,11 +1,14 @@
 using Godot;
-using System;
 
-public class CriticalHitbox : VulnerableHitbox
+public class CriticalHitbox : Area2D
 {
 	[Export] public float CriticalHitMultiplier = 1.5f;
-	public override void TakeHit(uint damage, int knockBackDirection = 0)
+
+	[Signal]
+	public delegate void Hit(uint damage, int knockBackDirection = 0);
+
+	public void TakeHit(uint damage, int knockBackDirection = 0)
 	{
-		base.TakeHit((uint)(damage * CriticalHitMultiplier), knockBackDirection);
+		EmitSignal(nameof(Hit), (uint)(damage * CriticalHitMultiplier), knockBackDirection);
 	}
 }

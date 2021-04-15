@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://scenes/game/components/CriticalHitbox.cs" type="Script" id=1]
-[ext_resource path="res://scenes/game/components/VulnerableHitbox.tscn" type="PackedScene" id=2]
 
-[node name="CriticalHitbox" instance=ExtResource( 2 )]
+[node name="CriticalHitbox" type="Area2D"]
+collision_layer = 128
+collision_mask = 0
 script = ExtResource( 1 )
