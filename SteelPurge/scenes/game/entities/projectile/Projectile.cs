@@ -40,7 +40,7 @@ public class Projectile : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		Velocity.y += Gravity * delta;
-		var angle = Velocity.Angle();
+		var angle = Velocity.Angle() - Rotation;
 		_criticalHitRayCast.CastTo = new Vector2(
 			CriticalRaySize * Mathf.Cos(angle),
 			CriticalRaySize * Mathf.Sin(angle));
