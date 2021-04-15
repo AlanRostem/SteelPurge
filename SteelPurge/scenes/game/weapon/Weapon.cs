@@ -79,6 +79,9 @@ public class Weapon : Node2D
 
 	[Signal]
 	public delegate void DamageDealt(uint damage, VulnerableHitbox target);
+	
+	[Signal]
+	public delegate void CriticalDamageDealt(uint damage, VulnerableHitbox target);
 
 	[Signal]
 	public delegate void OnMeleeHit(VulnerableHitbox hitBox);

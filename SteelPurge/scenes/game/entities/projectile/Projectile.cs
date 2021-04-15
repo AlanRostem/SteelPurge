@@ -8,11 +8,19 @@ public class Projectile : KinematicBody2D
 	[Export] public float Gravity = 600;
 	[Export] public bool DeleteOnEnemyHit = true;
 	[Export] public bool DeleteOnTileMapHit = true;
+	[Export] public float CriticalRaySize = 3f;
 	private bool _hasDisappeared = false;
 	
 	public Weapon OwnerWeapon { get; private set; }
 
 	public Vector2 Velocity;
+
+	private RayCast2D _criticalHitRayCast;
+
+	public override void _Ready()
+	{
+		_criticalHitRayCast = GetNode<RayCast2D>("CriticalHitRayCast");
+	}
 
 	public void InitWithAngularVelocity(Weapon owner)
 	{
@@ -32,7 +40,29 @@ public class Projectile : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		Velocity.y += Gravity * delta;
+		var angle = Velocity.Angle();
+		_criticalHitRayCast.CastTo = new Vector2(
+			CriticalRaySize * Mathf.Cos(angle),
+			CriticalRaySize * Mathf.Sin(angle));
 		MoveAndCollide(Velocity * delta);
+		if (_criticalHitRayCast.IsColliding())
+		{
+			var criticalHitBox = _criticalHitRayCast.GetCollider();
+			_OnCriticalHitBoxEntered((CriticalHitbox) criticalHitBox);
+		}
+	}
+
+	private void _OnCriticalHitBoxEntered(CriticalHitbox hitbox)
+	{
+		hitbox.TakeHit(OwnerWeapon.DamagePerShot);
+		OwnerWeapon.EmitSignal(nameof(Weapon.CriticalDamageDealt), OwnerWeapon.DamagePerShot, hitbox);
+		_OnHit();
+		if (!_hasDisappeared && DeleteOnEnemyHit)
+		{
+			_hasDisappeared = true;
+			_OnDisappear();
+			QueueFree();
+		}
 	}
 	
 	private void _OnVulnerableHitBoxEntered(object area)
