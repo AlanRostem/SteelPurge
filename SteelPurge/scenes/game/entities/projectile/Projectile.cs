@@ -8,7 +8,7 @@ public class Projectile : KinematicBody2D
 	[Export] public float Gravity = 600;
 	[Export] public bool DeleteOnEnemyHit = true;
 	[Export] public bool DeleteOnTileMapHit = true;
-	[Export] public float CriticalRaySize = 5f;
+	[Export] public float CriticalRaySize = 3f;
 	private bool _hasDisappeared = false;
 	
 	public Weapon OwnerWeapon { get; private set; }

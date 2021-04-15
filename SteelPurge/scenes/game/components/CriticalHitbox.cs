@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public class CriticalHitbox : Area2D
