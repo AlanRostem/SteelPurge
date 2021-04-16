@@ -6,7 +6,7 @@ public class ProjectileSprite : Sprite
 	public override void _Ready()
 	{
 		_parent = GetParent<Projectile>();
-		var angle = Mathf.Deg2Rad(_parent.DirectionAngle);
+		var angle = Mathf.Deg2Rad(_parent.VisualAngle);
 		if (Rotation != angle)
 		{
 			Rotation = angle;
