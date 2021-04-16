@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/entities/projectile/Projectile.cs" type="Script" id=1]
+[ext_resource path="res://scenes/game/entities/projectile/ProjectileSprite.cs" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 2.0
@@ -31,6 +32,9 @@ cast_to = Vector2( 0, 5 )
 collision_mask = 128
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="ProjectileSprite" type="Sprite" parent="."]
+script = ExtResource( 2 )
 [connection signal="area_entered" from="HitDetectionArea" to="." method="_OnVulnerableHitBoxEntered"]
 [connection signal="body_entered" from="HitDetectionArea" to="." method="_OnHitTileMap"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_OnLostVisual"]

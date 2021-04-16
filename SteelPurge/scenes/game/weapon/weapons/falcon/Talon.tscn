@@ -14,13 +14,13 @@ Gravity = 0.0
 DeleteOnEnemyHit = false
 DeleteOnTileMapHit = false
 
-[node name="Sprite" type="Sprite" parent="." index="3"]
-texture = ExtResource( 3 )
-
-[node name="PlayerDetectionArea" type="Area2D" parent="." index="4"]
+[node name="PlayerDetectionArea" type="Area2D" parent="." index="3"]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" index="0"]
 shape = SubResource( 1 )
+
+[node name="ProjectileSprite" parent="." index="5"]
+texture = ExtResource( 3 )
 [connection signal="body_entered" from="PlayerDetectionArea" to="." method="_OnPlayerDetectionAreaPlayerEntered"]

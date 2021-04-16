@@ -3,14 +3,7 @@ using System;
 
 public class Talon : Projectile
 {
-	private Sprite _sprite;
 	private bool _followPlayer = false;
-
-	public override void _Ready()
-	{
-		base._Ready();
-		_sprite = GetNode<Sprite>("Sprite");
-	}
 
 	public override void _PhysicsProcess(float delta)
 	{
