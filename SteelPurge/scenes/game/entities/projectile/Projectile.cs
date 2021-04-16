@@ -9,10 +9,12 @@ public class Projectile : KinematicBody2D
 	[Export] public bool DeleteOnEnemyHit = true;
 	[Export] public bool DeleteOnTileMapHit = true;
 	[Export] public float CriticalRaySize = 5f;
+	[Export] public float VisualRotation = 0;
 	private bool _hasDisappeared = false;
 	
 	public Weapon OwnerWeapon { get; private set; }
-
+	public float DirectionSign = 1;
+	
 	public Vector2 Velocity;
 
 	private RayCast2D _criticalHitRayCast;
@@ -40,7 +42,7 @@ public class Projectile : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		Velocity.y += Gravity * delta;
-		var angle = Velocity.Angle() - Rotation;
+		var angle = Velocity.Angle();
 		_criticalHitRayCast.CastTo = new Vector2(
 			CriticalRaySize * Mathf.Cos(angle),
 			CriticalRaySize * Mathf.Sin(angle));
@@ -96,6 +98,7 @@ public class Projectile : KinematicBody2D
 	
 	public virtual void _OnDisappear()
 	{
+		
 	}
 	
 	public virtual void _OnLostVisual()

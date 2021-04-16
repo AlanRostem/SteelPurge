@@ -16,11 +16,10 @@ public class FiringDevice : WeaponAbility
 		var world = player.ParentWorld;
 
 		projectile.DirectionAngle = Mathf.Rad2Deg(angle);
-		projectile.Scale = GetWeapon().Scale;
+		projectile.DirectionSign = GetWeapon().Scale.x;
 		if (player.IsAimingDown)
 		{
 			projectile.DirectionAngle += 90;
-			projectile.Rotation += Mathf.Deg2Rad(90);
 		}
 		else if (player.HorizontalLookingDirection < 0)
 		{
