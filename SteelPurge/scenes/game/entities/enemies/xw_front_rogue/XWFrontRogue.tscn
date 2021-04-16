@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogueSprite.cs" type="Script" id=1]
 [ext_resource path="res://scenes/game/entities/Enemy.tscn" type="PackedScene" id=2]
@@ -29,17 +29,14 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 8, 10 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 8, 1 )
-
 [node name="XWFrontRogue" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 BaseHitPoints = 300
 PlayerDetectionRange = 128.0
 WalkSpeed = 45.0
 
-[node name="VisibilityEnabler2D" parent="." index="0"]
-position = Vector2( 0, -1 )
+[node name="BodyShape" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
+shape = SubResource( 1 )
 
 [node name="BodyShape" type="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
@@ -49,6 +46,7 @@ position = Vector2( 0, -3 )
 scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 4 )
 animation = "walk"
+frame = 1
 playing = true
 script = ExtResource( 1 )
 
@@ -61,24 +59,20 @@ script = ExtResource( 5 )
 position = Vector2( 8, -3 )
 shape = SubResource( 5 )
 
-[node name="BodyShape" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
-shape = SubResource( 1 )
-
-[node name="XWFrontRogueTrackCooldownTimer" type="Timer" parent="." index="5"]
+[node name="XWFrontRogueTrackCooldownTimer" type="Timer" parent="." index="4"]
 autostart = true
 script = ExtResource( 7 )
 
-[node name="XWFrontRogueRushDelayTimer" type="Timer" parent="." index="6"]
+[node name="XWFrontRogueRushDelayTimer" type="Timer" parent="." index="5"]
 wait_time = 1.1
 one_shot = true
 
-[node name="CriticalHitbox" parent="." index="7"]
+[node name="CriticalHitbox" parent="." index="6"]
+position = Vector2( 0, -10 )
 CriticalHitMultiplier = 100.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CriticalHitbox" index="0"]
-position = Vector2( 0, -9 )
-shape = SubResource( 6 )
-one_way_collision = true
+[node name="VisibilityEnabler2D" parent="." index="8"]
+position = Vector2( 0, -1 )
 [connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
 [connection signal="body_entered" from="XWFrontRogueMeleeArea" to="." method="_OnPlayerEnterMeleeArea"]
 [connection signal="timeout" from="XWFrontRogueTrackCooldownTimer" to="." method="_OnCanSwap"]
