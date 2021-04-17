@@ -5,7 +5,7 @@ public class TalconFiringDevice : FiringDevice
 {
 	private readonly PackedScene
 		TalonScene = GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/Talon.tscn");
-	private static readonly uint MaxAmmo = 4;
+	public static readonly uint MaxAmmo = 4;
 	public uint Ammo = 4;
 	
 	public override void OnFire()
@@ -14,6 +14,11 @@ public class TalconFiringDevice : FiringDevice
 		{
 			Ammo--;
 			FireProjectile((Talon) TalonScene.Instance());
+		}
+
+		if (Ammo == 0)
+		{
+			GetWeapon().CanFire = false;
 		}
 	}
 }

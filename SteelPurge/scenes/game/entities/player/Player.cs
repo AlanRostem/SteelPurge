@@ -236,8 +236,7 @@ public class Player : Entity
 
 		var canSwapDirOnMove = !EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
 		var velX = Mathf.Abs(Velocity.x);
-
-
+		
 		if (_slide)
 		{
 			if (!IsSliding && isOnFloor)

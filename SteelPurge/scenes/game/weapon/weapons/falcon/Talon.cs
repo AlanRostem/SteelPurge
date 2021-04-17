@@ -42,6 +42,10 @@ public class Talon : Projectile
 			var player = (Player) body;
 			var firingDevice = (TalconFiringDevice) player.EquippedWeapon.FiringDevice;
 			firingDevice.Ammo++;
+			if (firingDevice.Ammo == TalconFiringDevice.MaxAmmo)
+			{
+				firingDevice.GetWeapon().CanFire = true;
+			}
 			QueueFree();
 		}
 	}
