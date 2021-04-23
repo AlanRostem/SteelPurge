@@ -6,12 +6,12 @@ fridays, will have less demanding goals than the ones on weekends.
 
 ## Week 1
 
-| Day           | Goal          |
-| ------------- |:-------------:|
-| Saturday      |               |
-| Sunday        |               |
-| Monday        |               |
-| Tuesday       |               |
-| Wednesday     |               |
-| Thursday      |               |
-| Friday        |               |
+| Day           | Goal          | Status    |
+| ------------- |:-------------:| --------- |
+| Saturday      |               |           |
+| Sunday        |               |           |
+| Monday        |               |           |
+| Tuesday       |               |           |
+| Wednesday     |               |           |
+| Thursday      |               |           |
+| Friday        |               |           |
