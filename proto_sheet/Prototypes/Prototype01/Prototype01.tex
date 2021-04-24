@@ -33,7 +33,7 @@ The first enemy is the "XW Rush-Rogue", which is a small enemy with a high healt
 The second enemy is the "AR43 Executor". This enemy shoots three metal rods at a time and runs towards the player after each shooting interval. This enemy can also melee the player, which is why it runs towards them every interval.
 
 \paragraph{}
-The last enemy, which is a boss, is called the "TX9 Titan of Law". This enemy is a tall robot and has critical hit areas on its knees. It smashes the ground and causes an earthquake dealing damage to the player. There should be platforming areas for the player to be able to reach the critical hit areas with a high risk and high reward. 
+The last enemy, which is a boss, is called the "TX9 Titan of Law". This enemy is a tall robot and has critical hit areas on its knees and head. It runs back and forth to stomp the player. Each iteration it smashes the ground and causes an earthquake dealing damage to the player. There should be platforming areas for the player to be able to reach the critical hit areas with a high risk and high reward. 
 
 \subsubsection{Scrap}
 
@@ -49,16 +49,102 @@ The checkpoints on the level will also serve as crafting stations. The player ca
 
 \subsection{User interface}
 
-This section focuses on the user interface that will be present in the first prototype. There is little to cover here, but it will be sufficient. 
+This section focuses on the user interface that will be present in the first prototype. There will be little descriptions of each interface and a figure with its overall design.
 
 \subsubsection{Inventory/Start Menu}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\columnwidth]{Figures/InventoryUI.png}
+	\caption{Inventory and start menu general design}
+\end{figure}
+
 \subsubsection{HUD}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\columnwidth]{Figures/HUD.png}
+	\caption{HUD design}
+\end{figure}
+
 \subsubsection{Main Menu}
 \subsubsection{Shop Menu}
 
 \subsection{Art}
 
+The art in Steel Purge will currently be purely pixel art. For Prototype 1, the art will consist of somewhat altered free pixel art ripped from itch.io. There will also exist some custom art for the relevant areas, such as weapons. 
+
 \subsection{Music}
+
+The main menu and first level will have their own respective music themes. 
+
+\subsection{Sound Effects}
+
+The following list will indicate all the game elements that require a sound effect\newline
+
+\textbf{Player:}
+\begin{itemize}
+	\item Jumping
+	\item Sliding
+	\item Taking damage
+	\item Dying
+	\item Walking
+	\item Sprint start
+	\item Collecting scrap
+	\item Collecting fuels (both Gasoline and Energy is different)
+	\item Health regeneration start
+	\item Health regeneration cancel
+	\item Health regeneration fill per tick
+	\item Health regeneration end after full health
+\end{itemize}
+
+\textbf{Enemies in general}
+\begin{itemize}
+	\item Taking damage (and dropping scrap)
+	\item Taking critical damage
+	\item Dying (make robotic collapse sound)
+\end{itemize}
+
+\textbf{Rush Rogue}
+\begin{itemize}
+	\item Detecting Player
+	\item Rushing Player
+	\item Exploding on player
+\end{itemize}
+
+\textbf{Executor}
+\begin{itemize}
+	\item Firing rods
+	\item Walking towards player
+\end{itemize}
+
+\textbf{Titan of Law}
+\begin{itemize}
+	\item Ground slam
+	\item Stomp Run
+\end{itemize}
+
+\textbf{Weapons}
+\begin{itemize}
+	\item When picked up (different for every weapon)
+	\item Firing (different for every weapon)
+	\item Ordinance used (different for every weapon)
+	\item Ordinance ready
+\end{itemize}
+
+\textbf{Menus in general}
+\begin{itemize}
+	\item Button selection
+	\item Button clicking
+	\item Special button click (i.e, switching menu when pressed, crafting item in inventory)
+\end{itemize}
+
+
+\textbf{Inventory and Shop}
+\begin{itemize}
+	\item Open
+	\item Close
+\end{itemize}
 
 \subsection{The first level}
 
