@@ -18,6 +18,16 @@ The player has a total of 100 health. When the player takes damage, a timer will
 
 Weapons can fire automatically by holding down a button or key. Weapons can shoot to the left, right or downwards. Firing downwards produces recoil which can propel the player upwards. Weapons can also be used to melee and they each have special damage numbers. They have special abilities which can be powered using unique fuels that can be crafted or found. 
 
+\subsubsection{Weapons}
+
+The following weapons from the ideas document will be implemented in Prototype 1:
+
+\begin{itemize}
+	\item Firewall
+	\item Joule
+	\item Neostar
+\end{itemize}
+
 \subsubsection{Movement mechanics}
 
 The player will be able to slide on the ground to increase their speed shortly or to preserve their momentum if they managed to move fast initially. Using their weapon, the player can also aim downwards to fire which propels them a little higher each time they shoot. When the player walks for long enough, they will automatically start running slightly faster.
@@ -61,16 +71,25 @@ This section focuses on the user interface that will be present in the first pro
 
 \subsubsection{HUD}
 
+\textbf{Normal}
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\columnwidth]{Figures/HUD.png}
-	\caption{HUD design}
+	\caption{HUD design (normally)}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\columnwidth]{Figures/HUD.png}
+	\caption{HUD design (active boss)}
 \end{figure}
 
 \subsubsection{Main Menu}
 \subsubsection{Shop Menu}
 
-\subsection{Art}
+\subsection{Game Art}
 
 The art in Steel Purge will currently be purely pixel art. For Prototype 1, the art will consist of somewhat altered free pixel art ripped from itch.io. There will also exist some custom art for the relevant areas, such as weapons. The following list will show the required art elements:
 
@@ -79,15 +98,16 @@ The art in Steel Purge will currently be purely pixel art. For Prototype 1, the 
 	\item Jump
 	\item Walk
 	\item Run
+	\item Sliding
 	\item Shooting alternating between each hand
-	\item All animations above with different weapons
+	\item All animations above with different weapons equipped
 \end{itemize}
 
-\textbf{Weapon Sprites (Falcon, Firewall, Joule)}
+\textbf{Weapon Sprites (General)}
 \begin{itemize}
 	\item Item icon on ground
 	\item Icon in inventory
-	\item Ordinance icon on menu
+	\item Ordinance icon on HUD
 \end{itemize}
 
 
@@ -101,20 +121,42 @@ The art in Steel Purge will currently be purely pixel art. For Prototype 1, the 
 \textbf{Joule}
 \begin{itemize}
 	\item Bubble shield sprite
-\item Kinetic orb 
-\item Orb explosion
+	\item Kinetic orb 
+	\item Orb explosion
 \end{itemize}
 
 \textbf{Neostar}
 \begin{itemize}
 	\item Slam player animation
-\item Slam impact sprite
-\item Magnetic energy orbs
+	\item Slam impact sprite
+	\item Magnetic energy orbs
+\end{itemize}
+
+\textbf{Rush Rogue}
+\begin{itemize}
+	\item Patrolling
+	\item Detecting player
+	\item Rushing player
+	\item Death
+\end{itemize}
+
+\textbf{Executor}
+\begin{itemize}
+	\item Shooting player
+	\item Running towards player
+	\item Death
+\end{itemize}
+
+\textbf{Titan of Law}
+\begin{itemize}
+	\item Running
+	\item Slamming ground
+	\item Death
 \end{itemize}
 
 \textbf{}
 \begin{itemize}
-	\item	 
+	\item 
 \end{itemize}
 
 \subsection{Music}
