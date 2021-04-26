@@ -10,6 +10,7 @@ public class Player : Entity
 	private static readonly float MaxWalkSpeed = 90;
 	private static readonly float MaxRunSpeed = 130;
 	private static readonly float WalkSpeedGround = 330;
+	private static readonly float RunAccel = 60;
 	private static readonly float MaxWalkSpeedFiring = 35;
 
 	private static readonly float MaxJumpHeight = CustomTileMap.Size * 6;
@@ -24,6 +25,7 @@ public class Player : Entity
 	private static readonly float SlideFriction = 0.1f;
 	private static readonly float SlideFrictionJump = 0.85f;
 	private static readonly float WalkFriction = 0.95f;
+	private static readonly float RunFriction = 0.97f;
 
 	private static readonly float MaxCrouchSpeed = 20;
 	private static readonly float MaxSlideMagnitude = 420;
@@ -33,6 +35,7 @@ public class Player : Entity
 	public float CurrentSlideMagnitude = MaxSlideMagnitude;
 
 	public float CurrentMaxSpeed = MaxWalkSpeed;
+	public float CurrentAccel = WalkSpeedGround;
 	private bool _hasJumpedOnSlide = false;
 
 	private bool _left = false;
@@ -71,7 +74,6 @@ public class Player : Entity
 			EmitSignal(nameof(WeaponEquipped), value);
 		}
 	}
-
 
 
 	public override void _Ready()
@@ -139,10 +141,10 @@ public class Player : Entity
 			{
 				Velocity = new Vector2(MaxWalkSpeed * 2 * direction, -_currentJumpSpeed / 2);
 				if (!CanTakeDamage) return;
-				
+
 				if (EquippedWeapon.TacticalEnhancement.IsActive)
 					EquippedWeapon.TacticalEnhancement.DeActivate();
-				
+
 				IsInvulnerable = true;
 				_isStunned = true;
 			}
@@ -206,9 +208,14 @@ public class Player : Entity
 		}
 	}
 
-	private void Walk(int direction, bool canSwapDirOnMove, float delta)
+	private void Walk(int direction, bool canSwapDirOnMove, float delta, float currentSpeedMag)
 	{
-		AccelerateX(direction * WalkSpeedGround, CurrentMaxSpeed, delta);
+		if (currentSpeedMag > MaxWalkSpeed - 0.1f)
+		{
+			CurrentAccel = RunAccel;
+			IsRunning = true;
+		}
+		AccelerateX(direction * CurrentAccel, CurrentMaxSpeed, delta);
 		MovingDirection = direction;
 		if (canSwapDirOnMove)
 			HorizontalLookingDirection = direction;
@@ -238,7 +245,7 @@ public class Player : Entity
 
 		var canSwapDirOnMove = !EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
 		var velX = Mathf.Abs(Velocity.x);
-		
+
 		if (_slide)
 		{
 			if (!IsSliding && isOnFloor)
@@ -270,7 +277,7 @@ public class Player : Entity
 				Stand();
 			IsSliding = false;
 		}
-		
+
 
 		if (isOnFloor && !IsSliding)
 		{
@@ -282,7 +289,6 @@ public class Player : Entity
 			{
 				CurrentSlideMagnitude = MaxSlideMagnitude;
 			}
-			
 		}
 
 		StopOnSlope = !IsSliding;
@@ -310,11 +316,11 @@ public class Player : Entity
 
 		if (_left && !_right)
 		{
-			Walk(-1, canSwapDirOnMove, delta);
+			Walk(-1, canSwapDirOnMove, delta, velX);
 		}
 		else if (_right && !_left)
 		{
-			Walk(1, canSwapDirOnMove, delta);
+			Walk(1, canSwapDirOnMove, delta, velX);
 		}
 		else
 		{
@@ -331,10 +337,22 @@ public class Player : Entity
 						else
 						{
 							Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
-							if (IsRunning)
+						}
+					}
+					else
+					{
+						if (velX <= MaxRunSpeed + 0.1f)
+						{
+							Velocity.x = Mathf.Lerp(Velocity.x, 0, RunFriction);
+							if (velX <= MaxWalkSpeed + 0.1f)
 							{
 								IsRunning = false;
+								CurrentAccel = WalkSpeedGround;
 							}
+						}
+						else
+						{
+							Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
 						}
 					}
 				}
