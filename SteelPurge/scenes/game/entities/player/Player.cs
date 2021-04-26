@@ -8,7 +8,6 @@ public class Player : Entity
 	private static readonly float MaxMovementSpeed = 250;
 
 	private static readonly float MaxWalkSpeed = 90;
-	private static readonly float MaxRunSpeed = 130;
 	private static readonly float WalkSpeedGround = 330;
 	private static readonly float MaxWalkSpeedFiring = 35;
 
@@ -41,7 +40,6 @@ public class Player : Entity
 	private bool _aim = false;
 	public bool CanTakeDamage = true;
 	public bool CanAimDown = true;
-	public bool IsRunning = false;
 
 	public bool IsInvulnerable = false;
 	public bool IsAimingUp = false;
@@ -137,7 +135,7 @@ public class Player : Entity
 		{
 			if (direction != 0)
 			{
-				Velocity = new Vector2(MaxWalkSpeed * 2 * direction, -_currentJumpSpeed / 2);
+				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -_currentJumpSpeed / 2));
 				if (!CanTakeDamage) return;
 				
 				if (EquippedWeapon.TacticalEnhancement.IsActive)
@@ -322,21 +320,10 @@ public class Player : Entity
 			{
 				if (!IsSliding)
 				{
-					if (!IsRunning)
-					{
-						if (velX <= MaxWalkSpeed + 0.1f)
-						{
-							Velocity.x = Mathf.Lerp(Velocity.x, 0, WalkFriction);
-						}
-						else
-						{
-							Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
-							if (IsRunning)
-							{
-								IsRunning = false;
-							}
-						}
-					}
+					if (velX <= MaxWalkSpeed + 0.1f)
+						Velocity.x = Mathf.Lerp(Velocity.x, 0, WalkFriction);
+					else
+						Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
 				}
 			}
 
