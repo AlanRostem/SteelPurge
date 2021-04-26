@@ -51,9 +51,11 @@ public class Player : Entity
 	public bool IsWalking = false;
 	public bool IsJumping = false;
 	public bool IsSliding = false;
+	private bool _isRoofAbove = false;
 
 	private Weapon _weapon;
 	private CollisionShape2D _upperBodyShape;
+	private CollisionShape2D _roofDetectorShape;
 	public Inventory PlayerInventory;
 
 	public Weapon EquippedWeapon
@@ -78,6 +80,7 @@ public class Player : Entity
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
 		_upperBodyShape = GetNode<CollisionShape2D>("UpperBodyShape");
+		_roofDetectorShape = GetNode<CollisionShape2D>("RoofDetector/UpperBodyShape");
 
 		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
 		_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * MaxJumpHeight);
@@ -215,17 +218,17 @@ public class Player : Entity
 
 	void Crouch()
 	{
-		//var shape = (CapsuleShape2D) _shape.Shape;
-		//shape.Height = SlidingHeight;
-		//_shape.Position = new Vector2(0, WalkingHeight);
+		
+		_roofDetectorShape.SetDeferred("disabled", false);
 		_upperBodyShape.SetDeferred("disabled", true);
 	}
 
 	void Stand()
 	{
-		//var shape = (CapsuleShape2D) _shape.Shape;
-		//shape.Height = WalkingHeight;
-		//_shape.Position = new Vector2(0, 0);
+		if (_isRoofAbove)
+			return;
+		IsSliding = false;
+		_roofDetectorShape.SetDeferred("disabled", true);
 		_upperBodyShape.SetDeferred("disabled", false);
 	}
 
@@ -266,7 +269,6 @@ public class Player : Entity
 				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * MaxWalkSpeed, 0.99f);
 			if (IsSliding)
 				Stand();
-			IsSliding = false;
 		}
 		
 
@@ -415,5 +417,15 @@ public class Player : Entity
 	private void _OnHitBoxHit(uint damage, int direction)
 	{
 		TakeDamage(damage, direction);
+	}
+	
+	private void _OnRoofDetectorBodyEntered(object body)
+	{
+		_isRoofAbove = true;
+	}
+	
+	private void _OnRoofDetectorBodyExited(object body)
+	{
+		_isRoofAbove = false;
 	}
 }
