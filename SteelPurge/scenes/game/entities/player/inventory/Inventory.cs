@@ -56,6 +56,12 @@ public class Inventory : Node2D
 		ScrapCount += count;
 		_player.KnowInventoryScrapCount(ScrapCount);
 	}
+	
+	public void LoseScrap(uint count)
+	{
+		ScrapCount -= count;
+		_player.KnowInventoryScrapCount(ScrapCount);
+	}
 
 
 	public void PickUpOrdinanceFuel(uint count, OrdinanceFuelType type)

@@ -3,6 +3,8 @@ using Godot;
 
 public class Player : Entity
 {
+	
+	public static uint ScrapDepletionPerDeath = 50;
 	public static readonly uint HealthRegenCount = 15;
 
 	private static readonly float MaxMovementSpeed = 250;
@@ -121,7 +123,15 @@ public class Player : Entity
 	{
 		EmitSignal(nameof(Died));
 		// TODO: Implement additional functionality after Prototype 1
+
+		var oldPos = new Vector2(Position);
 		Position = ParentWorld.CurrentCheckPoint.Position;
+		
+		var scrap = ParentWorld.Entities.SpawnEntity<Scrap>(EntityPool.ScrapScene, oldPos);
+		scrap.Count = ScrapDepletionPerDeath;
+		
+		PlayerInventory.LoseScrap(ScrapDepletionPerDeath);
+		
 		ResetAllStates();
 	}
 
@@ -130,6 +140,7 @@ public class Player : Entity
 		Health = 100;
 		Velocity = new Vector2();
 		ClearStatusEffects();
+		// TODO: Reset invulnerability 
 	}
 
 	public void KnowInventoryScrapCount(uint count)
