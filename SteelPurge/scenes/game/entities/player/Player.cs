@@ -120,6 +120,7 @@ public class Player : Entity
 	private void _Die()
 	{
 		EmitSignal(nameof(Died));
+		
 	}
 
 	public void KnowInventoryScrapCount(uint count)
