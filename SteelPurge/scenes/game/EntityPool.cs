@@ -8,7 +8,7 @@ public class EntityPool : Node2D
 
 
 	// TODO: Separate what type of entity that can be spawned (kinematic, static, other)
-	public T SpawnEntity<T>(PackedScene scrapScene, Vector2 position) where T : Node2D
+	public T SpawnEntityDeferred<T>(PackedScene scrapScene, Vector2 position) where T : Node2D
 	{
 		var entity = (T)scrapScene.Instance();
 		entity.Position = position;

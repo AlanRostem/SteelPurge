@@ -3,7 +3,6 @@ using Godot;
 
 public class Player : Entity
 {
-	
 	public static uint ScrapDepletionPerDeath = 50;
 	public static readonly uint HealthRegenCount = 15;
 
@@ -57,7 +56,9 @@ public class Player : Entity
 
 	private Weapon _weapon;
 	private CollisionShape2D _upperBodyShape;
+	private CollisionShape2D _lowerBodyShape;
 	private CollisionShape2D _roofDetectorShape;
+	private Timer _respawnTimer;
 	public Inventory PlayerInventory;
 
 	public Weapon EquippedWeapon
@@ -75,14 +76,15 @@ public class Player : Entity
 	}
 
 
-
 	public override void _Ready()
 	{
 		base._Ready();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
 		_upperBodyShape = GetNode<CollisionShape2D>("UpperBodyShape");
+		_lowerBodyShape = GetNode<CollisionShape2D>("LowerBodyShape");
 		_roofDetectorShape = GetNode<CollisionShape2D>("RoofDetector/UpperBodyShape");
+		_respawnTimer = GetNode<Timer>("RespawnTimer");
 
 		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
 		_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * MaxJumpHeight);
@@ -126,13 +128,12 @@ public class Player : Entity
 
 		var oldPos = new Vector2(Position);
 		Position = ParentWorld.CurrentCheckPoint.Position;
-		
-		var scrap = ParentWorld.Entities.SpawnEntity<Scrap>(EntityPool.ScrapScene, oldPos);
-		scrap.Count = ScrapDepletionPerDeath;
-		
-		PlayerInventory.LoseScrap(ScrapDepletionPerDeath);
-		
 		ResetAllStates();
+		InitiateRespawnSequence();
+
+		var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(EntityPool.ScrapScene, oldPos);
+		scrap.Count = ScrapDepletionPerDeath;
+		PlayerInventory.LoseScrap(ScrapDepletionPerDeath);
 	}
 
 	public void ResetAllStates()
@@ -140,7 +141,21 @@ public class Player : Entity
 		Health = 100;
 		Velocity = new Vector2();
 		ClearStatusEffects();
+		
 		// TODO: Reset invulnerability 
+	}
+
+
+	/// <summary>
+	/// Disable all movement and collision for a brief moment
+	/// </summary>
+	private void InitiateRespawnSequence()
+	{
+		_upperBodyShape.SetDeferred("disabled", true);
+		_lowerBodyShape.SetDeferred("disabled", true);
+		IsGravityEnabled = false;
+		CanMove = false;
+		_respawnTimer.Start();
 	}
 
 	public void KnowInventoryScrapCount(uint count)
@@ -161,10 +176,10 @@ public class Player : Entity
 			{
 				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -_currentJumpSpeed / 2));
 				if (!CanTakeDamage) return;
-				
+
 				if (EquippedWeapon.TacticalEnhancement.IsActive)
 					EquippedWeapon.TacticalEnhancement.DeActivate();
-				
+
 				IsInvulnerable = true;
 				_isStunned = true;
 			}
@@ -239,7 +254,6 @@ public class Player : Entity
 
 	void Crouch()
 	{
-		
 		_roofDetectorShape.SetDeferred("disabled", false);
 		_upperBodyShape.SetDeferred("disabled", true);
 	}
@@ -260,7 +274,7 @@ public class Player : Entity
 
 		var canSwapDirOnMove = !EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
 		var velX = Mathf.Abs(Velocity.x);
-		
+
 		if (_slide)
 		{
 			if (!IsSliding && isOnFloor)
@@ -291,7 +305,7 @@ public class Player : Entity
 			if (IsSliding)
 				Stand();
 		}
-		
+
 
 		if (isOnFloor && !IsSliding)
 		{
@@ -303,7 +317,6 @@ public class Player : Entity
 			{
 				CurrentSlideMagnitude = MaxSlideMagnitude;
 			}
-			
 		}
 
 		StopOnSlope = !IsSliding;
@@ -439,14 +452,22 @@ public class Player : Entity
 	{
 		TakeDamage(damage, direction);
 	}
-	
+
 	private void _OnRoofDetectorBodyEntered(object body)
 	{
 		_isRoofAbove = true;
 	}
-	
+
 	private void _OnRoofDetectorBodyExited(object body)
 	{
 		_isRoofAbove = false;
+	}
+	
+	private void _EndRespawnSequence()
+	{
+		_upperBodyShape.SetDeferred("disabled", false);
+		_lowerBodyShape.SetDeferred("disabled", false);
+		IsGravityEnabled = true;
+		CanMove = true;
 	}
 }

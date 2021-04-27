@@ -84,6 +84,9 @@ collision_mask = 33
 position = Vector2( 0, -2 )
 shape = SubResource( 1 )
 disabled = true
+
+[node name="RespawnTimer" type="Timer" parent="." index="11"]
+one_shot = true
 [connection signal="CancelRegen" from="." to="RegenCycleTimer" method="_OnCancelRegen"]
 [connection signal="TriggerAimSwap" from="." to="AimSwapCooldownTimer" method="_OnSwap"]
 [connection signal="TriggerDamageReceptionCooldown" from="." to="DamageReceptionCooldownTimer" method="_on_Player_TriggerDamageReceptionCooldown"]
@@ -97,3 +100,4 @@ disabled = true
 [connection signal="timeout" from="InvincibilityCooldownTimer" to="." method="_OnInvincibilityEnd"]
 [connection signal="body_entered" from="RoofDetector" to="." method="_OnRoofDetectorBodyEntered"]
 [connection signal="body_exited" from="RoofDetector" to="." method="_OnRoofDetectorBodyExited"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_EndRespawnSequence"]
