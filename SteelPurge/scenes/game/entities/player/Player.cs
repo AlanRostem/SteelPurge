@@ -120,7 +120,16 @@ public class Player : Entity
 	private void _Die()
 	{
 		EmitSignal(nameof(Died));
-		
+		// TODO: Implement additional functionality after Prototype 1
+		Position = ParentWorld.CurrentCheckPoint.Position;
+		ResetAllStates();
+	}
+
+	public void ResetAllStates()
+	{
+		Health = 100;
+		Velocity = new Vector2();
+		ClearStatusEffects();
 	}
 
 	public void KnowInventoryScrapCount(uint count)

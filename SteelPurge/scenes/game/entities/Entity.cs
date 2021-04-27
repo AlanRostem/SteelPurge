@@ -75,6 +75,14 @@ public class Entity : KinematicBody2D
 		AddChild(newEffect);
 	}
 
+	public void ClearStatusEffects()
+	{
+		foreach (var effect in _effects)
+		{
+			effect.Value.EmitSignal(nameof(StatusEffect.End));
+		}
+	}
+
 	public virtual void TakeDamage(uint damage, int direction = 0)
 	{
 		Health -= damage;
