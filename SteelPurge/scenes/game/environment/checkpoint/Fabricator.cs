@@ -13,7 +13,7 @@ public class Fabricator : Area2D
 	[Export] public bool IsDefaultSpawnPoint = false;
 	public override void _Ready()
 	{
-		_world = GetParent<World>();
+		_world = GetParent().GetParent<World>();
 		if (IsDefaultSpawnPoint)
 		{
 			_world.CurrentCheckPoint = this;

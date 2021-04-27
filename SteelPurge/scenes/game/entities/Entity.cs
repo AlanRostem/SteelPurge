@@ -54,7 +54,7 @@ public class Entity : KinematicBody2D
 
 	public override void _Ready()
 	{
-		ParentWorld = GetParent<World>();
+		ParentWorld = GetParent().GetParent<World>();
 	}
 
 	public void ApplyStatusEffect(StatusEffectType type)
