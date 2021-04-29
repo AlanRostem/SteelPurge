@@ -27,3 +27,4 @@ FuelRequirement = 30
 [node name="TalconFiringDevice" parent="." index="5" instance=ExtResource( 2 )]
 script = ExtResource( 6 )
 [connection signal="OnMeleeHit" from="." to="RocketBayonetAbility" method="_OnFalconOnMeleeHit"]
+[connection signal="Swapped" from="." to="TalconFiringDevice" method="_OnSwap"]

@@ -15,6 +15,9 @@ public class Weapon : Node2D
 	[Export] public float MinFallSpeedForRecoilHovering = -20;
 	[Export] public SpriteFrames PlayerSpriteFrames;
 
+	[Signal]
+	public delegate void Swapped();
+
 	public WeaponAbility TacticalEnhancement { get; set; }
 	public FiringDevice FiringDevice { get; set; }
 
@@ -57,6 +60,7 @@ public class Weapon : Node2D
 	{
 		_isFiring = false;
 		EmitSignal(nameof(CancelFire));
+		EmitSignal(nameof(Swapped));
 		Visible = false;
 		SetProcess(false);
 		if (TacticalEnhancement.IsActive)
