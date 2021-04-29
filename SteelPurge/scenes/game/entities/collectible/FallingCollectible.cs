@@ -7,12 +7,13 @@ public class FallingCollectible : KinematicBody2D
 	private static readonly float Gravity = 600;
 
 	[Export] public float LungeSpeed = 50;
-
+	[Export] public bool InteractToPickUp = false;
+	
 	public Vector2 GravityVector = Vector2.Down;
 	public bool IsOnSlope = false;
 
 	private Vector2 _vel;
-
+	private Player _player;
 
 	public override void _Ready()
 	{
@@ -43,10 +44,23 @@ public class FallingCollectible : KinematicBody2D
 				IsOnSlope = true;
 			}
 		}
+
+		if (!InteractToPickUp) return;
+
+		if (Input.IsActionJustPressed("interact"))
+		{
+			OnCollected(_player);
+			QueueFree();
+		}
 	}
 
 	private void _OnPlayerEnter(object body)
 	{
+		if (InteractToPickUp)
+		{
+			_player = (Player) body;
+			return;
+		}
 		OnCollected((Player) body);
 		QueueFree();
 	}
