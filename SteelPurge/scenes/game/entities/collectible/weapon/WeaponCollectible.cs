@@ -3,8 +3,7 @@ using System;
 
 public class WeaponCollectible : FallingCollectible
 {
-	[Export] public PackedScene WeaponScene =
-		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/Firewall.tscn");
+	[Export] public PackedScene WeaponScene;
 
 	private Weapon _weapon;
 
@@ -19,10 +18,16 @@ public class WeaponCollectible : FallingCollectible
 			sprite.Texture = _weapon.CollectibleSprite;
 		}
 	}
-
+	
 	public override void OnCollected(Player player)
 	{
-		player.PlayerInventory.SwitchWeapon((Weapon) WeaponScene.Instance());
+		if (_weapon is null)
+		{
+			if (WeaponScene != null)
+				player.PlayerInventory.SwitchWeapon((Weapon) WeaponScene.Instance());
+			return;
+		}
+		player.PlayerInventory.SwitchWeapon(_weapon);
 		_weapon = null;
 	}
 
