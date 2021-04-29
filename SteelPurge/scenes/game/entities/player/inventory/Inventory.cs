@@ -25,8 +25,8 @@ public class Inventory : Node2D
 
 	public uint[] OrdinanceFuels =
 	{
-		400,
-		400
+		40,
+		40
 	};
 
 	public override void _Ready()
