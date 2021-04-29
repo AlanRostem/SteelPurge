@@ -15,7 +15,6 @@ public class WeaponCollectible : FallingCollectible
 			_weapon = value;
 			
 			AddChild(_weapon); // TODO: This might be a source of some further bugs
-			_weapon.Owner = this;
 			
 			_weapon.OnSwap();
 			var sprite = GetNode<Sprite>("Sprite"); // TODO: Possibly bad
@@ -34,7 +33,6 @@ public class WeaponCollectible : FallingCollectible
 
 		RemoveChild(_weapon);
 		player.PlayerInventory.SwitchWeapon(_weapon);
-		_weapon.Owner = player;
 		_weapon = null;
 	}
 

@@ -17,7 +17,9 @@ public class Weapon : Node2D
 
 	[Signal]
 	public delegate void Swapped();
-
+	
+	public bool Equipped { get; private set; }
+	
 	public WeaponAbility TacticalEnhancement { get; set; }
 	public FiringDevice FiringDevice { get; set; }
 
@@ -65,6 +67,7 @@ public class Weapon : Node2D
 		SetProcess(false);
 		if (TacticalEnhancement.IsActive)
 			TacticalEnhancement.DeActivate();
+		Equipped = false;
 	}
 
 	public void OnEquip()
@@ -75,6 +78,7 @@ public class Weapon : Node2D
 			Scale = new Vector2(OwnerPlayer.HorizontalLookingDirection, 1);
 		if (Rotation != OwnerPlayer.AimAngle)
 			Rotation = OwnerPlayer.AimAngle;
+		Equipped = true;
 	}
 
 	[Signal]
