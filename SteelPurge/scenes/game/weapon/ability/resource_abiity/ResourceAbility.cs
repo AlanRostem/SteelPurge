@@ -46,7 +46,7 @@ public class ResourceAbility : WeaponAbility
 			return;
 		}
 
-		var pressed = Input.IsActionPressed("tactical_ability");
+		var pressed = Input.IsActionPressed("tactical_ability") && GetWeapon().Equipped;
 
 		if (pressed && fuels[type] > DrainPerTick)
 		{
