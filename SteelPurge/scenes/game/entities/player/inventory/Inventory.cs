@@ -77,9 +77,9 @@ public class Inventory : Node2D
 		_player.KnowInventoryOrdinanceFuelCount(OrdinanceFuels[(int)type], type);
 	}
 
-	public void PickUpGun(Weapon weapon)
+	public void SwitchWeapon(Weapon weapon)
 	{
-		// TODO: Implement
-		
+		_player.ParentWorld.Entities.SpawnEntityDeferred<WeaponCollectible>(_player.EquippedWeapon.CollectibleScene, Position);
+		_player.EquippedWeapon = weapon;
 	}
 }

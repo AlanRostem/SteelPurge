@@ -4,6 +4,9 @@ public class Weapon : Node2D
 {
 	[Export] public string DisplayName = "Weapon";
 
+	[Export] public PackedScene CollectibleScene =
+		GD.Load<PackedScene>("res://scenes/game/entities/collectible/weapon/WeaponCollectible.tscn");
+	
 	[Export] public uint ClipSize;
 
 	[Export] public uint DamagePerShot;
