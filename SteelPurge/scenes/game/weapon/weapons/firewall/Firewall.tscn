@@ -14,6 +14,7 @@ extents = Vector2( 64, 8 )
 
 [node name="Firewall" instance=ExtResource( 1 )]
 DisplayName = "Firewall"
+CollectibleSprite = ExtResource( 2 )
 ClipSize = 12
 DamagePerShot = 11
 RateOfFire = 120
