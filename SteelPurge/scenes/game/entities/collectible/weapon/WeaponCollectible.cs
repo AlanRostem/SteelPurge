@@ -13,6 +13,10 @@ public class WeaponCollectible : FallingCollectible
 		set
 		{
 			_weapon = value;
+			
+			AddChild(_weapon); // TODO: This might be a source of some further bugs
+			_weapon.Owner = this;
+			
 			_weapon.OnSwap();
 			var sprite = GetNode<Sprite>("Sprite"); // TODO: Possibly bad
 			sprite.Texture = _weapon.CollectibleSprite;
@@ -27,7 +31,10 @@ public class WeaponCollectible : FallingCollectible
 				player.PlayerInventory.SwitchWeapon((Weapon) WeaponScene.Instance());
 			return;
 		}
+		
+		RemoveChild(_weapon);
 		player.PlayerInventory.SwitchWeapon(_weapon);
+		_weapon.Owner = player;
 		_weapon = null;
 	}
 
