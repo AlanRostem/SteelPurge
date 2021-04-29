@@ -47,7 +47,7 @@ public class FallingCollectible : KinematicBody2D
 
 		if (!InteractToPickUp) return;
 
-		if (Input.IsActionJustPressed("interact"))
+		if (Input.IsActionJustPressed("interact") && _player != null)
 		{
 			OnCollected(_player);
 			QueueFree();
@@ -63,5 +63,10 @@ public class FallingCollectible : KinematicBody2D
 		}
 		OnCollected((Player) body);
 		QueueFree();
+	}
+	
+	private void _OnPlayerExit(object body)
+	{
+		_player = null;
 	}
 }

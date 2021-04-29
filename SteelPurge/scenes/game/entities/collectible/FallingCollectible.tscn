@@ -21,3 +21,4 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 [connection signal="body_entered" from="Area2D" to="." method="_OnPlayerEnter"]
+[connection signal="body_exited" from="Area2D" to="." method="_OnPlayerExit"]
