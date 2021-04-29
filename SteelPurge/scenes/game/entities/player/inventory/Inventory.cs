@@ -79,7 +79,7 @@ public class Inventory : Node2D
 
 	public void SwitchWeapon(Weapon weapon)
 	{
-		_player.ParentWorld.Entities.SpawnEntityDeferred<WeaponCollectible>(_player.EquippedWeapon.CollectibleScene, Position);
+		_player.ParentWorld.Entities.SpawnEntityDeferred<WeaponCollectible>(_player.EquippedWeapon.CollectibleScene, _player.Position);
 		_player.EquippedWeapon = weapon;
 	}
 }
