@@ -64,7 +64,7 @@ public class Inventory : Node2D
 	}
 
 
-	public void PickUpOrdinanceFuel(uint count, OrdinanceFuelType type)
+	public void AddOrdinanceFuel(uint count, OrdinanceFuelType type)
 	{
 		OrdinanceFuels[(int)type] += count;
 		_player.KnowInventoryOrdinanceFuelCount(OrdinanceFuels[(int)type], type);

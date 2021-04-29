@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gas.png-6f5ba3b420afbd81b6e0e13913776be1.stex"
+path="res://.import/gas.png-c8cbbcc4a7ffba6a4a23bcf7fd1b7dd6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/ui/icon/gas.png"
-dest_files=[ "res://.import/gas.png-6f5ba3b420afbd81b6e0e13913776be1.stex" ]
+source_file="res://assets/texture/gas.png"
+dest_files=[ "res://.import/gas.png-c8cbbcc4a7ffba6a4a23bcf7fd1b7dd6.stex" ]
 
 [params]
 
