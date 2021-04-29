@@ -6,6 +6,11 @@ public class ShopItem : Godot.Object
 	public uint Price = 20;
 	public uint MaxCount = 100;
 	public PackedScene CollectibleScene;
+
+	public ShopItem()
+	{
+		
+	}
 	
 	public ShopItem(uint price, string collectibleScenePath)
 	{

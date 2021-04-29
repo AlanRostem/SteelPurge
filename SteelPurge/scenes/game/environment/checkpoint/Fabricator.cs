@@ -58,7 +58,7 @@ public class Fabricator : Area2D
 		{
 			_player.ParentWorld.Entities.SpawnEntityDeferred<FallingCollectible>(
 				purchase.Item.CollectibleScene,
-				Position);
+				Position - new Vector2(0, 24));
 		}
 		_cart.Clear();
 		
