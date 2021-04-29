@@ -59,7 +59,14 @@ public class Inventory : Node2D
 	
 	public void LoseScrap(uint count)
 	{
-		ScrapCount -= count;
+		if (ScrapCount < count)
+		{
+			ScrapCount = 0;
+		}
+		else
+		{
+			ScrapCount -= count;
+		}
 		_player.KnowInventoryScrapCount(ScrapCount);
 	}
 
