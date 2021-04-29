@@ -84,6 +84,7 @@ public class Inventory : Node2D
 		var item = _player.ParentWorld.Entities.SpawnEntityDeferred<WeaponCollectible>(WeaponCollectibleScene, _player.Position);
 		_player.RemoveChild(_player.EquippedWeapon);
 		item.Weapon = _player.EquippedWeapon;
+		
 		_player.EquippedWeapon = weapon;
 	}
 }

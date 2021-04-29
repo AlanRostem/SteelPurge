@@ -66,7 +66,6 @@ public class Player : Entity
 		get => _weapon;
 		set
 		{
-			_weapon?.QueueFree();
 			_weapon = value;
 			_weapon.OwnerPlayer = this;
 			_weapon.OnEquip();

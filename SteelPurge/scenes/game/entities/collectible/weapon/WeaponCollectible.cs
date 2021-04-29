@@ -31,7 +31,7 @@ public class WeaponCollectible : FallingCollectible
 				player.PlayerInventory.SwitchWeapon((Weapon) WeaponScene.Instance());
 			return;
 		}
-		
+
 		RemoveChild(_weapon);
 		player.PlayerInventory.SwitchWeapon(_weapon);
 		_weapon.Owner = player;
