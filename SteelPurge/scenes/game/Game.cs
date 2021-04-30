@@ -12,11 +12,14 @@ public class Game : Node2D
 	
 	[Signal]
 	private delegate void OpenInventory();
+	
+	public PlayerStats PlayerStats { get; private set; }
 
 	public override void _Ready()
 	{
 		base._Ready();
 		_world = GetNode<World>("World");
+		PlayerStats = new PlayerStats();
 	}
 
 	public override void _Process(float delta)

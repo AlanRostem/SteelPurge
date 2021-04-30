@@ -20,8 +20,6 @@ public class Inventory : Node2D
 		= GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn");
 
 	private Player _player;
-	private readonly Weapon[] _guns = new Weapon[MaxGuns];
-	private uint _gunCount = 0;
 	
 	public uint ScrapCount = 0;
 
@@ -37,7 +35,6 @@ public class Inventory : Node2D
 		
 		// TODO: Implement inventory properly
 		var defaultGun = (Weapon) DefaultGunScene.Instance();
-		AddWeapon(defaultGun);
 		_player.EquippedWeapon = defaultGun;
 		_player.KnowInventoryScrapCount(ScrapCount);
 		for (var i = 0; i < (int) OrdinanceFuelType._Count; i++)
@@ -45,13 +42,7 @@ public class Inventory : Node2D
 			_player.KnowInventoryOrdinanceFuelCount(OrdinanceFuels[i], (OrdinanceFuelType)i);
 		}
 	}
-
-	public void AddWeapon(Weapon weapon)
-	{
-		if (_gunCount >= MaxGuns) return;
-		_guns[_gunCount++] = weapon;
-		_player.EmitSignal(nameof(Player.WeaponAddedToInventory), weapon);
-	}
+	
 
 	public void PickUpScrap(uint count)
 	{
