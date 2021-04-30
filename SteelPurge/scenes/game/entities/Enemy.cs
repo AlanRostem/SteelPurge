@@ -32,8 +32,7 @@ public class Enemy : Entity
 		base._Process(delta);
 		if (_isDead)
 		{
-			var scrap = (Scrap) ScrapScene.Instance();
-			ParentWorld.AddChild(scrap);
+			var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
 			scrap.Position = Position;
 			scrap.Count = ScrapDropKilled;
 			QueueFree();
@@ -42,9 +41,7 @@ public class Enemy : Entity
 		if (_dropScrap)
 		{
 			_dropScrap = false;
-			var scrap = (Scrap) ScrapScene.Instance();
-			ParentWorld.AddChild(scrap);
-			scrap.Position = Position;
+			var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
 			scrap.Count = ScrapDropHit;
 		}
 

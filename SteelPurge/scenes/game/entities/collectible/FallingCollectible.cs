@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class FallingCollectible : KinematicBody2D
+public class FallingCollectible : Entity
 {
 	private static readonly RandomNumberGenerator Rng = new RandomNumberGenerator();
 	private static readonly float Gravity = 600;
@@ -17,6 +17,7 @@ public class FallingCollectible : KinematicBody2D
 
 	public override void _Ready()
 	{
+		base._Ready();
 		_vel = new Vector2(
 			Rng.RandfRange(-1, 1) * LungeSpeed,
 			Rng.Randf() * -LungeSpeed

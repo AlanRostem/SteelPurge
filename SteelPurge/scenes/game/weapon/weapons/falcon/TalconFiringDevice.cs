@@ -17,7 +17,9 @@ public class TalconFiringDevice : FiringDevice
 		{
 			talon.QueueFree();
 		}
-		
+
+		Ammo = 4;
+		GetWeapon().CanFire = true;
 		Talons.Clear();
 	}
 	
