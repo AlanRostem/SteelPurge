@@ -12,7 +12,7 @@ public class World : Node2D
 
 	public override void _Ready()
 	{
-		PlayerNode = GetNode<Player>("EntityPool/Player");
+		PlayerNode = GetNode<Player>("Player");
 		Entities = GetNode<EntityPool>("EntityPool");
 	}
 }

@@ -32,7 +32,7 @@ script = ExtResource( 12 )
 [node name="EntityPool" type="Node2D" parent="World"]
 script = ExtResource( 10 )
 
-[node name="Player" parent="World/EntityPool" instance=ExtResource( 3 )]
+[node name="Player" parent="World" instance=ExtResource( 3 )]
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -132,7 +132,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="OpenInventory" from="." to="GUI/InventoryUI" method="_OnOpen"]
-[connection signal="HealthChanged" from="World/EntityPool/Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]
-[connection signal="OrdinanceFuelCountChanged" from="World/EntityPool/Player" to="GUI/HUD/FuelLabel" method="_OnFuelChanged"]
-[connection signal="ScrapCountChanged" from="World/EntityPool/Player" to="GUI/HUD/MoneyLabel" method="_OnPlayerScrapCountChanged"]
-[connection signal="WeaponEquipped" from="World/EntityPool/Player" to="GUI/HUD/GunNameLabel" method="_OnPlayerWeaponEquipped"]
+[connection signal="HealthChanged" from="World/Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]
+[connection signal="OrdinanceFuelCountChanged" from="World/Player" to="GUI/HUD/FuelLabel" method="_OnFuelChanged"]
+[connection signal="ScrapCountChanged" from="World/Player" to="GUI/HUD/MoneyLabel" method="_OnPlayerScrapCountChanged"]
+[connection signal="WeaponEquipped" from="World/Player" to="GUI/HUD/GunNameLabel" method="_OnPlayerWeaponEquipped"]

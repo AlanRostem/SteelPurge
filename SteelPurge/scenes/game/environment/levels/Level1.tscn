@@ -38,12 +38,12 @@ position = Vector2( 1008, 128 )
 [node name="AR43Executor2" parent="World/EntityPool" index="2" instance=ExtResource( 5 )]
 position = Vector2( 1608, 96 )
 
-[node name="Player" parent="World/EntityPool" index="3"]
-position = Vector2( 176, 160 )
-
-[node name="WeaponCollectible" parent="World/EntityPool" index="4" instance=ExtResource( 4 )]
+[node name="WeaponCollectible" parent="World/EntityPool" index="3" instance=ExtResource( 4 )]
 position = Vector2( 312, 160 )
 WeaponScene = ExtResource( 7 )
+
+[node name="Player" parent="World" index="3"]
+position = Vector2( 88, 96 )
 
 [node name="InventoryUI" parent="GUI" index="1"]
 visible = false

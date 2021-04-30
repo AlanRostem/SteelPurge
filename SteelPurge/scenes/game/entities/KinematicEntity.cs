@@ -25,7 +25,7 @@ public class KinematicEntity : KinematicBody2D
 	private readonly Dictionary<StatusEffectType, StatusEffect> _effects =
 		new Dictionary<StatusEffectType, StatusEffect>();
 
-	public World ParentWorld { get; private set; }
+	public World ParentWorld { get; protected set; }
 
 	[Export] public bool CanMove = true;
 

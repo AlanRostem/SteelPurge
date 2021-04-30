@@ -78,7 +78,7 @@ public class Player : KinematicEntity
 
 	public override void _Ready()
 	{
-		base._Ready();
+		ParentWorld = GetParent<World>();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
 		_upperBodyShape = GetNode<CollisionShape2D>("UpperBodyShape");
