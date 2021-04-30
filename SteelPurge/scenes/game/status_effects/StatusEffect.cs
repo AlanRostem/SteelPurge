@@ -3,20 +3,20 @@ using System;
 
 public class StatusEffect : Node2D
 {
-	[Export] public Entity.StatusEffectType Type = Entity.StatusEffectType.None;
+	[Export] public KinematicEntity.StatusEffectType Type = KinematicEntity.StatusEffectType.None;
 	[Export] public float Duration = 1;
-	public Entity Subject { get; private set; }
+	public KinematicEntity Subject { get; private set; }
 
 	public override void _Ready()
 	{
-		Subject = GetParent<Entity>();
+		Subject = GetParent<KinematicEntity>();
 
-		if (OS.IsDebugBuild() && Type == Entity.StatusEffectType.None)
+		if (OS.IsDebugBuild() && Type == KinematicEntity.StatusEffectType.None)
 			throw new Exception("StatusEffectType cannot have None type");
 	}
 
 	[Signal]
-	public delegate void End(Entity subject);
+	public delegate void End(KinematicEntity subject);
 
 	[Signal]
 	public delegate void Reset();

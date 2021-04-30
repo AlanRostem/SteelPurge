@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class FallingCollectible : Entity
+public class FallingCollectible : KinematicEntity
 {
 	private static readonly RandomNumberGenerator Rng = new RandomNumberGenerator();
 	private static readonly float Gravity = 600;

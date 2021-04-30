@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public class Player : Entity
+public class Player : KinematicEntity
 {
 	public static uint ScrapDepletionPerDeath = 50;
 	public static readonly uint HealthRegenCount = 15;

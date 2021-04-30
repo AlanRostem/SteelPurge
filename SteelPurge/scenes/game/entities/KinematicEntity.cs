@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-public class Entity : KinematicBody2D
+public class KinematicEntity : KinematicBody2D
 {
 	public float Gravity = 600;
 

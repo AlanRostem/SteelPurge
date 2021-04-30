@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using Object = Godot.Object;
 
-public class Enemy : Entity
+public class Enemy : KinematicEntity
 {
 	private static readonly PackedScene ScrapScene =
 		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
@@ -33,7 +33,6 @@ public class Enemy : Entity
 		if (_isDead)
 		{
 			var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
-			scrap.Position = Position;
 			scrap.Count = ScrapDropKilled;
 			QueueFree();
 		}
