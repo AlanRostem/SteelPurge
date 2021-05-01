@@ -13,7 +13,6 @@
 [ext_resource path="res://scenes/game/entities/player/DamageReceptionCooldownTimer.cs" type="Script" id=16]
 [ext_resource path="res://scenes/game/entities/player/InvincibilityCooldownTimer.cs" type="Script" id=17]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 8 )
 
@@ -21,6 +20,7 @@ extents = Vector2( 6, 8 )
 radius = 6.0
 
 [node name="Player" instance=ExtResource( 1 )]
+z_index = 1000
 collision_layer = 2
 collision_mask = 37
 script = ExtResource( 2 )
