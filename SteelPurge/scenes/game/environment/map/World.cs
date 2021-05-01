@@ -30,11 +30,19 @@ public class World : Node2D
 	public override void _Ready()
 	{
 		PlayerNode = GetNode<Player>("Player");
+		CreateFirstSegment();
+	}
+
+	public void CreateFirstSegment()
+	{
 		LoadSegment(0);
+		PlayerNode.Position = CurrentSegment.InitialSpawnPoint;
+		GD.Print(CurrentSegment.InitialSpawnPoint);
 	}
 
 	public void SwitchToNextSegment()
 	{
 		LoadSegment(++_currentSegmentIndex);
+		PlayerNode.Position = CurrentSegment.InitialSpawnPoint;
 	}
 }

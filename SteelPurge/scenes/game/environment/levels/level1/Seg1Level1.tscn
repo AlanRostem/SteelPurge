@@ -32,3 +32,6 @@ position = Vector2( 1616, 96 )
 
 [node name="XWFrontRogue2" parent="EntityPool" index="3" instance=ExtResource( 3 )]
 position = Vector2( 1064, 128 )
+
+[node name="SpawnPoint" parent="." index="2"]
+position = Vector2( 96, 80 )
