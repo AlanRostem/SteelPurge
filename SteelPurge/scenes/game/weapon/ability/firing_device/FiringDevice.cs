@@ -10,11 +10,11 @@ public class FiringDevice : WeaponAbility
 		GetWeapon().FiringDevice = this;
 	}
 
-	public void FireProjectile(Projectile projectile, float angle = 0)
+	public Projectile FireProjectile(PackedScene projectileScene, float angle = 0)
 	{
 		var player = GetWeapon().OwnerPlayer;
-		var world = player.ParentWorld;
-
+		var world = player.ParentWorld.Entities;
+		var projectile = world.SpawnEntityDeferred<Projectile>(projectileScene, player.Position);
 		projectile.DirectionAngle = Mathf.Rad2Deg(angle);
 		projectile.VisualAngle = Mathf.Rad2Deg(angle);
 		projectile.DirectionSign = GetWeapon().Scale.x;
@@ -30,8 +30,7 @@ public class FiringDevice : WeaponAbility
 
 		projectile.Position = player.Position;
 		projectile.InitWithAngularVelocity(GetWeapon());
-
-		world.AddChild(projectile);
+		return projectile;
 	}
 	
 	

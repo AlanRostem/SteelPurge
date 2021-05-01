@@ -28,8 +28,7 @@ public class TalconFiringDevice : FiringDevice
 		if (Ammo > 0)
 		{
 			Ammo--;
-			var talon = (Talon) TalonScene.Instance();
-			FireProjectile(talon);
+			var talon = (Talon)FireProjectile(TalonScene);
 			Talons.Add(talon);
 		}
 

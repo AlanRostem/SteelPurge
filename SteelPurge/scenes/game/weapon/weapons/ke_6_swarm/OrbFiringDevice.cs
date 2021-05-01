@@ -8,7 +8,6 @@ public class OrbFiringDevice : FiringDevice
 
 	public override void OnFire()
 	{
-		var orb = (Projectile) OrbScene.Instance();
-		FireProjectile(orb);
+		FireProjectile(OrbScene);
 	}
 }

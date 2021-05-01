@@ -7,7 +7,7 @@ public class FlareFiringDevice : ProjectileShotGunFiringDevice
 	
 	public override void OnProjectileShot(float angle)
 	{
-		FireProjectile((Projectile)FlareScene.Instance(), angle);
+		FireProjectile(FlareScene, angle);
 	}
 	
 	private void _OnDamageDealt(uint damage, VulnerableHitbox target)

@@ -54,11 +54,9 @@ public class AR43Executor : Enemy
 	
 	private void _OnFire()
 	{
-		var bullet = (HostileProjectile) BulletScene.Instance();
-		bullet.Position = Position;
+		var bullet = ParentWorld.Entities.SpawnEntityDeferred<HostileProjectile>(BulletScene, Position);
 		bullet.DamageDirection = Direction;
 		bullet.InitWithHorizontalVelocity();
-		ParentWorld.AddChild(bullet);
 	}
 	
 	private void _OnPlayerMelee(object body)
