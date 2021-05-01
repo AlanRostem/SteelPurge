@@ -15,5 +15,16 @@ script = ExtResource( 3 )
 [node name="Fabricator" parent="Environment" instance=ExtResource( 2 )]
 position = Vector2( 64, 176 )
 
+[node name="TransferArea" type="Area2D" parent="Environment"]
+position = Vector2( 392, 160 )
+collision_layer = 0
+collision_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/TransferArea"]
+
 [node name="EntityPool" type="Node2D" parent="."]
 script = ExtResource( 4 )
+[connection signal="body_entered" from="Environment/TransferArea" to="." method="_OnTransferAreaPlayerEntered"]

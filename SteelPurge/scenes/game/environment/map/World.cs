@@ -18,6 +18,8 @@ public class World : Node2D
 	
 	public WorldSegment CurrentSegment { get; private set; }
 
+	private int _currentSegmentIndex = 0;
+	
 	public void LoadSegment(int index)
 	{
 		CurrentSegment?.QueueFree();
@@ -29,5 +31,10 @@ public class World : Node2D
 	{
 		PlayerNode = GetNode<Player>("Player");
 		LoadSegment(0);
+	}
+
+	public void SwitchToNextSegment()
+	{
+		LoadSegment(++_currentSegmentIndex);
 	}
 }

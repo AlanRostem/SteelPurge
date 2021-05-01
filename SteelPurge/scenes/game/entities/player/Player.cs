@@ -149,7 +149,7 @@ public class Player : KinematicEntity
 	/// <summary>
 	/// Disable all movement and collision for a brief moment
 	/// </summary>
-	private void InitiateRespawnSequence()
+	public void InitiateRespawnSequence()
 	{
 		_upperBodyShape.SetDeferred("disabled", true);
 		_lowerBodyShape.SetDeferred("disabled", true);
