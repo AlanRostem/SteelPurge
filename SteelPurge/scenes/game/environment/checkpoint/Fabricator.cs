@@ -9,8 +9,6 @@ using System.Collections.Generic;
 /// </summary>
 public class Fabricator : Area2D
 {
-	private World _world;
-	public uint Order { get; private set; }
 	private bool _isPlayerNearShop = false;
 	private Player _player;
 
@@ -25,9 +23,6 @@ public class Fabricator : Area2D
 
 	public override void _Ready()
 	{
-		_world = GetParent().GetParent<World>();
-		Order = _world.LastCheckPointUuid++;
-		
 		AddItemToCart(_availableItems[0]); // TODO: Temporary solution to have something to buy
 	}
 
@@ -69,11 +64,6 @@ public class Fabricator : Area2D
 	{
 		_isPlayerNearShop = true;
 		_player = (Player) body;
-		// TODO: Consider more factors after Prototype 1
-		if (_world.CurrentCheckPointEarned >= Order)
-			return;
-		_world.CurrentCheckPointEarned = Order;
-		_world.CurrentCheckPoint = this;
 	}
 
 	private void _OnPlayerLeave(object body)

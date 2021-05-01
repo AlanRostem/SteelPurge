@@ -1,14 +1,15 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public class World : Node2D
 {
 	public Player PlayerNode { get; private set; }
 	public EntityPool Entities { get; private set; }
 
-	public uint LastCheckPointUuid = 0;
-	public uint CurrentCheckPointEarned = 0;
-	public Fabricator CurrentCheckPoint = null;
+	[Export] public Array<PackedScene> SegmentScenes = new Array<PackedScene>();
+	
+	public WorldSegment CurrentSegment;
 
 	public override void _Ready()
 	{

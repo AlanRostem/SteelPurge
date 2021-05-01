@@ -127,7 +127,7 @@ public class Player : KinematicEntity
 		// TODO: Implement additional functionality after Prototype 1
 
 		var oldPos = new Vector2(Position);
-		Position = ParentWorld.CurrentCheckPoint.Position;
+		Position = ParentWorld.CurrentSegment.SpawnPoint.Position;
 		ResetAllStates();
 		InitiateRespawnSequence();
 
