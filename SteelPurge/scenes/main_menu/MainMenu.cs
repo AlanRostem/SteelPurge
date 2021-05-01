@@ -16,7 +16,7 @@ public class MainMenu : Control
 	
 	private void _OnPlayButtonPressed()
 	{
-		PlayLevel("res://scenes/game/environment/levels/Level1.tscn");
+		PlayLevel("res://scenes/game/environment/levels/level1/Level1.tscn");
 	}
 
 	private void _OnQuitButtonPressed()
