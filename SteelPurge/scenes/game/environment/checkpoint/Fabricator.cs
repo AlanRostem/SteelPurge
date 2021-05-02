@@ -21,9 +21,13 @@ public class Fabricator : Area2D
 	
 	private List<Purchase> _cart = new List<Purchase>();
 
+	private Control _shopMenu;
+	
 	public override void _Ready()
 	{
 		AddItemToCart(_availableItems[0]); // TODO: Temporary solution to have something to buy
+		_shopMenu = GetNode<Control>("CanvasLayer/ShopMenu");
+		_shopMenu.Visible = false;
 	}
 
 	public override void _Process(float delta)
@@ -31,10 +35,13 @@ public class Fabricator : Area2D
 		if (!_isPlayerNearShop) return;
 		if (Input.IsActionJustPressed("interact")) // TODO: This is a temporary solution aside from the UI
 		{
+			_shopMenu.Visible = !_shopMenu.Visible;
+			/*
 			if (_player.PlayerInventory.ScrapCount >= _totalPurchasePrice)
 			{
 				BuyAllItems();
 			}
+			*/
 		}
 	}
 
