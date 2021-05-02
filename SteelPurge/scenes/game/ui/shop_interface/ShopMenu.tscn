@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/font/font.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://scenes/game/ui/shop_interface/ShopItemWidget.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/game/ui/shop_interface/PurchaseWidget.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/ui/MiniPixelTextLabel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/texture/ui/shop/shop_cancel_button-export.png" type="Texture" id=7]
+[ext_resource path="res://assets/texture/ui/shop/shop_finish_button.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -22,9 +24,9 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -128.0
-margin_top = 40.0
+margin_top = 16.0
 margin_right = 136.0
-margin_bottom = 192.0
+margin_bottom = 224.0
 color = Color( 0.160784, 0.160784, 0.160784, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -34,35 +36,35 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -128.0
-margin_top = 40.0
+margin_top = 16.0
 margin_right = -120.0
-margin_bottom = 192.0
+margin_bottom = 224.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TitleLabel" parent="." instance=ExtResource( 2 )]
-margin_left = 84.0
-margin_top = 48.0
-margin_right = 164.0
-margin_bottom = 62.0
+margin_left = 88.0
+margin_top = 24.0
+margin_right = 168.0
+margin_bottom = 38.0
 custom_fonts/font = SubResource( 1 )
 text = "Fabricator"
 
 [node name="TotalLabelCount" parent="." instance=ExtResource( 2 )]
-margin_left = 289.0
-margin_top = 78.0
-margin_right = 321.0
-margin_bottom = 92.0
+margin_left = 288.0
+margin_top = 54.0
+margin_right = 320.0
+margin_bottom = 68.0
 custom_fonts/font = SubResource( 1 )
 text = "6500"
 
 [node name="TotalLabel" parent="." instance=ExtResource( 6 )]
 margin_left = 256.0
-margin_top = 80.0
+margin_top = 54.0
 margin_right = 288.0
-margin_bottom = 88.0
+margin_bottom = 62.0
 text = "Total: "
 
 [node name="Tabs" type="Tabs" parent="."]
@@ -78,7 +80,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -4.0
+margin_top = -24.0
 margin_right = -4.0
+margin_bottom = 32.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -142,9 +146,9 @@ margin_bottom = -4.0
 
 [node name="CartContainer" type="ScrollContainer" parent="."]
 margin_left = 256.0
-margin_top = 88.0
-margin_right = 328.0
-margin_bottom = 160.0
+margin_top = 64.0
+margin_right = 332.0
+margin_bottom = 184.0
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -152,7 +156,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CartContainer"]
 margin_right = 64.0
-margin_bottom = 92.0
+margin_bottom = 188.0
 
 [node name="PurchaseWidget" parent="CartContainer/VBoxContainer" instance=ExtResource( 5 )]
 anchor_top = 0.0
@@ -177,5 +181,49 @@ anchor_bottom = 0.0
 margin_top = 64.0
 margin_right = 64.0
 margin_bottom = 92.0
+
+[node name="PurchaseWidget4" parent="CartContainer/VBoxContainer" instance=ExtResource( 5 )]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 96.0
+margin_right = 64.0
+margin_bottom = 124.0
+
+[node name="PurchaseWidget5" parent="CartContainer/VBoxContainer" instance=ExtResource( 5 )]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 128.0
+margin_right = 64.0
+margin_bottom = 156.0
+
+[node name="PurchaseWidget6" parent="CartContainer/VBoxContainer" instance=ExtResource( 5 )]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 160.0
+margin_right = 64.0
+margin_bottom = 188.0
+
+[node name="CraftButton" type="TextureButton" parent="."]
+margin_left = 296.0
+margin_top = 192.0
+margin_right = 360.0
+margin_bottom = 216.0
+texture_normal = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelButton" type="TextureButton" parent="."]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 288.0
+margin_bottom = 216.0
+texture_normal = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [editable path="Tabs/TabContainer/Fuels"]
