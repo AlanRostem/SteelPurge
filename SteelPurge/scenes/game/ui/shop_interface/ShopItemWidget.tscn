@@ -1,11 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/texture/ui/shop/shop_item_frame_defaultt.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/ui/shop/shop_item_frame_focused.png" type="Texture" id=2]
 
-[node name="ShopItemWidget" type="Button"]
+[node name="ShopItemWidget" type="TextureButton"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -17.0
-margin_bottom = 17.0
-icon = ExtResource( 1 )
+margin_top = -10.0
+margin_bottom = 10.0
+texture_normal = ExtResource( 1 )
+texture_focused = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
