@@ -36,6 +36,7 @@ public class Fabricator : Area2D
 		if (Input.IsActionJustPressed("interact")) // TODO: This is a temporary solution aside from the UI
 		{
 			_shopMenu.Visible = !_shopMenu.Visible;
+			_player.ParentWorld.SetPaused(_shopMenu.Visible);
 			/*
 			if (_player.PlayerInventory.ScrapCount >= _totalPurchasePrice)
 			{

@@ -45,4 +45,9 @@ public class World : Node2D
 		LoadSegment(++_currentSegmentIndex);
 		PlayerNode.Position = CurrentSegment.InitialSpawnPoint;
 	}
+
+	public void SetPaused(bool paused)
+	{
+		GetTree().Paused = paused;
+	}
 }
