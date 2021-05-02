@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/font/font.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/ui/shop_interface/ShopItemList.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game/ui/shop_interface/ShopItemWidget.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -69,9 +70,55 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
+[node name="VBoxContainer" parent="Tabs/TabContainer/Fuels" index="0"]
+margin_right = 144.0
+margin_bottom = 156.0
+
+[node name="ShopItemWidget" parent="Tabs/TabContainer/Fuels/VBoxContainer" index="0" instance=ExtResource( 4 )]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 0.0
+margin_right = 144.0
+margin_bottom = 28.0
+
+[node name="ShopItemWidget2" parent="Tabs/TabContainer/Fuels/VBoxContainer" index="1" instance=ExtResource( 4 )]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 32.0
+margin_right = 144.0
+margin_bottom = 60.0
+
+[node name="ShopItemWidget3" parent="Tabs/TabContainer/Fuels/VBoxContainer" index="2" instance=ExtResource( 4 )]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 64.0
+margin_right = 144.0
+margin_bottom = 92.0
+
+[node name="ShopItemWidget4" parent="Tabs/TabContainer/Fuels/VBoxContainer" index="3" instance=ExtResource( 4 )]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 96.0
+margin_right = 144.0
+margin_bottom = 124.0
+
+[node name="ShopItemWidget5" parent="Tabs/TabContainer/Fuels/VBoxContainer" index="4" instance=ExtResource( 4 )]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 128.0
+margin_right = 144.0
+margin_bottom = 156.0
+
 [node name="Weapons" parent="Tabs/TabContainer" instance=ExtResource( 3 )]
 visible = false
 margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+
+[editable path="Tabs/TabContainer/Fuels"]
