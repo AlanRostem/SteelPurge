@@ -18,12 +18,14 @@ public class ShopMenu : Control
 	public void AddFuelItem(ShopItem item)
 	{
 		var widget = (ShopItemWidget)ItemWidgetScene.Instance();
-		
+		widget.Init(item);
 		_fuels.AddItem(widget);
 	}
 	
 	public void AddWeaponItem(ShopItem item)
 	{
-		
+		var widget = (ShopItemWidget)ItemWidgetScene.Instance();
+		widget.Init(item);
+		_weapons.AddItem(widget);
 	}
 }

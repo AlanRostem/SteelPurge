@@ -14,20 +14,34 @@ public class Fabricator : Area2D
 
 	private ShopItem[] _availableItems = //TODO: Some items can only be bought once. Consider it in the future
 	{
-		new ShopItem(20, "res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn")
+		new ShopItem(20, "res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn", ShopItem.ItemType.Fuel)
 	};
 
 	private uint _totalPurchasePrice = 0;
 	
 	private List<Purchase> _cart = new List<Purchase>();
 
-	private Control _shopMenu;
+	private ShopMenu _shopMenu;
 	
 	public override void _Ready()
 	{
 		AddItemToCart(_availableItems[0]); // TODO: Temporary solution to have something to buy
-		_shopMenu = GetNode<Control>("CanvasLayer/ShopMenu");
+		_shopMenu = GetNode<ShopMenu>("CanvasLayer/ShopMenu");
 		_shopMenu.Visible = false;
+		foreach (var item in _availableItems)
+		{
+			switch (item.Type)
+			{
+				case ShopItem.ItemType.Weapon:
+					_shopMenu.AddWeaponItem(item);
+					break;
+				case ShopItem.ItemType.Fuel:
+					_shopMenu.AddFuelItem(item);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
 	}
 
 	public override void _Process(float delta)
