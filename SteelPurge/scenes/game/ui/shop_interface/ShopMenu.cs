@@ -11,9 +11,11 @@ public class ShopMenu : Control
 	private ShopItemList _fuels;
 	private ShopItemList _weapons;
 	private CartContainer _cartContainer;
+	private Fabricator _parent;
 	
 	public override void _Ready()
 	{
+		_parent = GetParent<Fabricator>();
 		_fuels = GetNode<ShopItemList>("Tabs/TabContainer/Fuels");
 		_weapons = GetNode<ShopItemList>("Tabs/TabContainer/Weapons");
 		_cartContainer = GetNode<CartContainer>("CartContainer");
@@ -39,4 +41,11 @@ public class ShopMenu : Control
 		widget.Init(purchase, this);
 		_cartContainer.AddPurchase(widget);
 	}
+	
+	
+	private void _OnCompletePurchases()
+	{
+		
+	}
+	
 }

@@ -133,5 +133,6 @@ texture_normal = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="CraftButton" to="." method="_OnCompletePurchases"]
 
 [editable path="Tabs/TabContainer/Fuels"]
