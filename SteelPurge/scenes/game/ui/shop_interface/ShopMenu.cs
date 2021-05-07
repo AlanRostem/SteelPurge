@@ -62,6 +62,7 @@ public class ShopMenu : Control
 	private void _OnCompletePurchases()
 	{
 		_parent.BuyAllItems();
+		_cartContainer.RemoveAllItems();
 		// TODO: Close
 	}
 }

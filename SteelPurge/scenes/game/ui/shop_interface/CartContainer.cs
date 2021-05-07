@@ -14,4 +14,12 @@ public class CartContainer : ScrollContainer
 	{
 		_container.AddChild(widget);
 	}
+
+	public void RemoveAllItems()
+	{
+		foreach (PurchaseWidget child in _container.GetChildren())
+		{
+			child.QueueFree();
+		}
+	}
 }
