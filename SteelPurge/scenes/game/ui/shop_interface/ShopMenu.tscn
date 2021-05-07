@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/font/font.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/ui/shop_interface/ShopItemList.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game/ui/shop_interface/CartContainer.cs" type="Script" id=4]
 [ext_resource path="res://scenes/game/ui/MiniPixelTextLabel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/texture/ui/shop/shop_cancel_button-export.png" type="Texture" id=7]
 [ext_resource path="res://assets/texture/ui/shop/shop_finish_button.png" type="Texture" id=8]
@@ -106,6 +107,7 @@ margin_top = 64.0
 margin_right = 332.0
 margin_bottom = 184.0
 scroll_horizontal_enabled = false
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

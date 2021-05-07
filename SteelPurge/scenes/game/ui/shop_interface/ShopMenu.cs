@@ -5,14 +5,18 @@ public class ShopMenu : Control
 {
 	private static readonly PackedScene ItemWidgetScene =
 		GD.Load<PackedScene>("res://scenes/game/ui/shop_interface/ShopItemWidget.tscn");
+	private static readonly PackedScene PurchaseWidgetScene =
+		GD.Load<PackedScene>("res://scenes/game/ui/shop_interface/PurchaseWidget.tscn");
 
 	private ShopItemList _fuels;
 	private ShopItemList _weapons;
+	private CartContainer _cartContainer;
 	
 	public override void _Ready()
 	{
 		_fuels = GetNode<ShopItemList>("Tabs/TabContainer/Fuels");
 		_weapons = GetNode<ShopItemList>("Tabs/TabContainer/Weapons");
+		_cartContainer = GetNode<CartContainer>("CartContainer");
 	}
 
 	public void AddFuelItem(ShopItem item)
@@ -31,6 +35,8 @@ public class ShopMenu : Control
 
 	public void AddPurchase(Purchase purchase)
 	{
-		throw new NotImplementedException();
+		var widget = (PurchaseWidget) PurchaseWidgetScene.Instance();
+		widget.Init(purchase, this);
+		_cartContainer.AddPurchase(widget);
 	}
 }

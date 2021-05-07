@@ -20,7 +20,7 @@ public class ShopItemWidget : TextureButton
 	{
 		GetNode<TextureRect>("ItemIcon").Texture = texture;
 	}
-	
+
 	public void Init(ShopItem item, ShopMenu menu)
 	{
 		_item = item;
