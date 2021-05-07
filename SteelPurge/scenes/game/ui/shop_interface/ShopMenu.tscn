@@ -1,10 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/font/font.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/ui/shop_interface/ShopItemList.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/game/ui/shop_interface/ShopItemWidget.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/game/ui/shop_interface/PurchaseWidget.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/ui/MiniPixelTextLabel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/texture/ui/shop/shop_cancel_button-export.png" type="Texture" id=7]
 [ext_resource path="res://assets/texture/ui/shop/shop_finish_button.png" type="Texture" id=8]
@@ -95,50 +93,6 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="VBoxContainer" parent="Tabs/TabContainer/Fuels" index="0"]
-margin_right = 144.0
-margin_bottom = 156.0
-
-[node name="ShopItemWidget" parent="Tabs/TabContainer/Fuels/VBoxContainer" index="0" instance=ExtResource( 4 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 0.0
-margin_right = 144.0
-margin_bottom = 28.0
-
-[node name="ShopItemWidget2" parent="Tabs/TabContainer/Fuels/VBoxContainer" index="1" instance=ExtResource( 4 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 32.0
-margin_right = 144.0
-margin_bottom = 60.0
-
-[node name="ShopItemWidget3" parent="Tabs/TabContainer/Fuels/VBoxContainer" index="2" instance=ExtResource( 4 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 64.0
-margin_right = 144.0
-margin_bottom = 92.0
-
-[node name="ShopItemWidget4" parent="Tabs/TabContainer/Fuels/VBoxContainer" index="3" instance=ExtResource( 4 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 96.0
-margin_right = 144.0
-margin_bottom = 124.0
-
-[node name="ShopItemWidget5" parent="Tabs/TabContainer/Fuels/VBoxContainer" index="4" instance=ExtResource( 4 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 128.0
-margin_right = 144.0
-margin_bottom = 156.0
-
 [node name="Weapons" parent="Tabs/TabContainer" instance=ExtResource( 3 )]
 visible = false
 margin_left = 4.0
@@ -157,56 +111,6 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CartContainer"]
-margin_right = 64.0
-margin_bottom = 188.0
-
-[node name="PurchaseWidget" parent="CartContainer/VBoxContainer" instance=ExtResource( 5 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 0.0
-margin_right = 64.0
-margin_bottom = 28.0
-
-[node name="PurchaseWidget2" parent="CartContainer/VBoxContainer" instance=ExtResource( 5 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 32.0
-margin_right = 64.0
-margin_bottom = 60.0
-
-[node name="PurchaseWidget3" parent="CartContainer/VBoxContainer" instance=ExtResource( 5 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 64.0
-margin_right = 64.0
-margin_bottom = 92.0
-
-[node name="PurchaseWidget4" parent="CartContainer/VBoxContainer" instance=ExtResource( 5 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 96.0
-margin_right = 64.0
-margin_bottom = 124.0
-
-[node name="PurchaseWidget5" parent="CartContainer/VBoxContainer" instance=ExtResource( 5 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 128.0
-margin_right = 64.0
-margin_bottom = 156.0
-
-[node name="PurchaseWidget6" parent="CartContainer/VBoxContainer" instance=ExtResource( 5 )]
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 160.0
-margin_right = 64.0
-margin_bottom = 188.0
 
 [node name="CraftButton" type="TextureButton" parent="."]
 margin_left = 296.0
