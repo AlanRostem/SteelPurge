@@ -18,14 +18,19 @@ public class ShopMenu : Control
 	public void AddFuelItem(ShopItem item)
 	{
 		var widget = (ShopItemWidget)ItemWidgetScene.Instance();
-		widget.Init(item);
+		widget.Init(item, this);
 		_fuels.AddItem(widget);
 	}
 	
 	public void AddWeaponItem(ShopItem item)
 	{
 		var widget = (ShopItemWidget)ItemWidgetScene.Instance();
-		widget.Init(item);
+		widget.Init(item, this);
 		_weapons.AddItem(widget);
+	}
+
+	public void AddPurchase(Purchase purchase)
+	{
+		throw new NotImplementedException();
 	}
 }
