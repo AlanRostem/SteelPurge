@@ -28,6 +28,8 @@ public class Fabricator : Area2D
 
 	private ShopMenu _shopMenu;
 
+	public bool CanBuy => _totalPurchasePrice <= _player.PlayerInventory.ScrapCount && _player.PlayerInventory.ScrapCount > 0;
+
 	public override void _Ready()
 	{
 		_shopMenu = GetNode<ShopMenu>("CanvasLayer/ShopMenu");
@@ -91,7 +93,6 @@ public class Fabricator : Area2D
 		_cart.Clear();
 	}
 
-	public bool CanBuy => _totalPurchasePrice <= _player.PlayerInventory.ScrapCount;
 
 	private void _OnPlayerEnter(object body)
 	{
