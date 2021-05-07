@@ -14,9 +14,9 @@ public class Fabricator : Area2D
 
 	private ShopItem[] _availableItems = //TODO: Some items can only be bought once. Consider it in the future
 	{
-		new ShopItem("Gasoline", 20, 
-			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn", 
-			ShopItem.ItemType.Fuel, 
+		new ShopItem("Gasoline", 20,
+			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn",
+			ShopItem.ItemType.Fuel,
 			"res://assets/texture/ui/icon/gas.png")
 	};
 
@@ -27,7 +27,7 @@ public class Fabricator : Area2D
 	private List<Purchase> _cart = new List<Purchase>();
 
 	private ShopMenu _shopMenu;
-	
+
 	public override void _Ready()
 	{
 		_shopMenu = GetNode<ShopMenu>("CanvasLayer/ShopMenu");
@@ -53,14 +53,8 @@ public class Fabricator : Area2D
 		if (!_isPlayerNearShop) return;
 		if (Input.IsActionJustPressed("interact")) // TODO: This is a temporary solution aside from the UI
 		{
-			_shopMenu.Visible = !_shopMenu.Visible;
-			_player.ParentWorld.SetPaused(_shopMenu.Visible);
-			/*
-			if (_player.PlayerInventory.ScrapCount >= _totalPurchasePrice)
-			{
-				BuyAllItems();
-			}
-			*/
+			if (!_shopMenu.Visible)
+				_shopMenu.Open();
 		}
 	}
 
@@ -71,6 +65,7 @@ public class Fabricator : Area2D
 			purchase = null;
 			return;
 		}
+
 		_cart.Add(purchase = new Purchase(item, quantity));
 		_totalPurchasePrice += item.Price;
 	}
@@ -92,8 +87,11 @@ public class Fabricator : Area2D
 				purchase.Item.CollectibleScene,
 				Position - new Vector2(0, 24));
 		}
+
 		_cart.Clear();
 	}
+
+	public bool CanBuy => _totalPurchasePrice <= _player.PlayerInventory.ScrapCount;
 
 	private void _OnPlayerEnter(object body)
 	{

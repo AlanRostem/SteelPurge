@@ -24,6 +24,18 @@ public class ShopMenu : Control
 		_totalLabel = GetNode<Label>("TotalLabelCount");
 	}
 
+	public void Open()
+	{
+		Visible = true;
+		GetTree().Paused = true;
+	}
+
+	public void Close()
+	{
+		Visible = false;
+		GetTree().Paused = false;		
+	}
+
 	public void AddFuelItemUi(ShopItem item)
 	{
 		var widget = (ShopItemWidget)ItemWidgetScene.Instance();
@@ -61,8 +73,10 @@ public class ShopMenu : Control
 
 	private void _OnCompletePurchases()
 	{
-		_parent.BuyAllItems();
+		 if (!_parent.CanBuy) return;
+		 _parent.BuyAllItems();
 		_cartContainer.RemoveAllItems();
-		// TODO: Close
+		_totalLabel.Text = _parent.TotalPurchasePrice.ToString();
+		Close();
 	}
 }
