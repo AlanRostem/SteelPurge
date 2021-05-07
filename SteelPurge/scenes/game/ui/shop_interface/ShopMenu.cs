@@ -11,41 +11,51 @@ public class ShopMenu : Control
 	private ShopItemList _fuels;
 	private ShopItemList _weapons;
 	private CartContainer _cartContainer;
+	private Label _totalLabel;
+	
 	private Fabricator _parent;
 	
 	public override void _Ready()
 	{
-		_parent = GetParent<Fabricator>();
+		_parent = GetParent().GetParent<Fabricator>();
 		_fuels = GetNode<ShopItemList>("Tabs/TabContainer/Fuels");
 		_weapons = GetNode<ShopItemList>("Tabs/TabContainer/Weapons");
 		_cartContainer = GetNode<CartContainer>("CartContainer");
+		_totalLabel = GetNode<Label>("TotalLabelCount");
 	}
 
-	public void AddFuelItem(ShopItem item)
+	public void AddFuelItemUi(ShopItem item)
 	{
 		var widget = (ShopItemWidget)ItemWidgetScene.Instance();
 		widget.Init(item, this);
 		_fuels.AddItem(widget);
 	}
 	
-	public void AddWeaponItem(ShopItem item)
+	public void AddWeaponItemUi(ShopItem item)
 	{
 		var widget = (ShopItemWidget)ItemWidgetScene.Instance();
 		widget.Init(item, this);
 		_weapons.AddItem(widget);
 	}
 
-	public void AddPurchase(Purchase purchase)
+	public void AddPurchaseUi(Purchase purchase)
 	{
 		var widget = (PurchaseWidget) PurchaseWidgetScene.Instance();
 		widget.Init(purchase, this);
 		_cartContainer.AddPurchase(widget);
 	}
-	
-	
+
+	public void AddItemToCartParent(ShopItem item)
+	{
+		_parent.AddItemToCart(item, out var purchase);
+		if (purchase is null) return;
+		AddPurchaseUi(purchase);
+		_totalLabel.Text = _parent.TotalPurchasePrice.ToString();
+	}
+
 	private void _OnCompletePurchases()
 	{
-		
+		_parent.BuyAllItems();
+		// TODO: Close
 	}
-	
 }

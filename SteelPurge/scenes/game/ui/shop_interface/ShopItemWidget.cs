@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class ShopItemWidget : TextureButton
 {
@@ -32,6 +31,6 @@ public class ShopItemWidget : TextureButton
 	
 	private void _OnPressed()
 	{
-		_contextMenu.AddPurchase(new Purchase(_item, 1));
+		_contextMenu.AddItemToCartParent(_item);
 	}
 }

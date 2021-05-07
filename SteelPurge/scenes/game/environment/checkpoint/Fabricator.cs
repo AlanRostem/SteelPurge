@@ -21,14 +21,15 @@ public class Fabricator : Area2D
 	};
 
 	private uint _totalPurchasePrice = 0;
-	
+
+	public uint TotalPurchasePrice => _totalPurchasePrice;
+
 	private List<Purchase> _cart = new List<Purchase>();
 
 	private ShopMenu _shopMenu;
 	
 	public override void _Ready()
 	{
-		AddItemToCart(_availableItems[0]); // TODO: Temporary solution to have something to buy
 		_shopMenu = GetNode<ShopMenu>("CanvasLayer/ShopMenu");
 		_shopMenu.Visible = false;
 		foreach (var item in _availableItems)
@@ -36,10 +37,10 @@ public class Fabricator : Area2D
 			switch (item.Type)
 			{
 				case ShopItem.ItemType.Weapon:
-					_shopMenu.AddWeaponItem(item);
+					_shopMenu.AddWeaponItemUi(item);
 					break;
 				case ShopItem.ItemType.Fuel:
-					_shopMenu.AddFuelItem(item);
+					_shopMenu.AddFuelItemUi(item);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
@@ -63,11 +64,21 @@ public class Fabricator : Area2D
 		}
 	}
 
-	public void AddItemToCart(ShopItem item, uint quantity = 1)
+	public void AddItemToCart(ShopItem item, out Purchase purchase, uint quantity = 1)
 	{
-		if (quantity > item.MaxCount) return;
-		_cart.Add(new Purchase(item, quantity));
+		if (quantity > item.MaxCount)
+		{
+			purchase = null;
+			return;
+		}
+		_cart.Add(purchase = new Purchase(item, quantity));
 		_totalPurchasePrice += item.Price;
+	}
+
+	public void RemoveItemFromCart(Purchase purchase)
+	{
+		// TODO: May need to consider quantity soon
+		_cart.Remove(purchase);
 	}
 
 	public void BuyAllItems()
@@ -81,8 +92,6 @@ public class Fabricator : Area2D
 				Position - new Vector2(0, 24));
 		}
 		_cart.Clear();
-		
-		AddItemToCart(_availableItems[0]); // TODO: Temporary solution to have something to buy, but again
 	}
 
 	private void _OnPlayerEnter(object body)
