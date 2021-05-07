@@ -26,6 +26,7 @@ public class PurchaseWidget : TextureButton
 	
 	private void _OnPressed()
 	{
+		_contextMenu.RemoveItemFromCartParent(_purchase);
 		QueueFree();
 	}
 }

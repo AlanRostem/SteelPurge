@@ -53,6 +53,12 @@ public class ShopMenu : Control
 		_totalLabel.Text = _parent.TotalPurchasePrice.ToString();
 	}
 
+	public void RemoveItemFromCartParent(Purchase purchase)
+	{
+		_parent.RemoveItemFromCart(purchase);
+		_totalLabel.Text = _parent.TotalPurchasePrice.ToString();
+	}
+
 	private void _OnCompletePurchases()
 	{
 		_parent.BuyAllItems();

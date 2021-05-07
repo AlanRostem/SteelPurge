@@ -79,6 +79,7 @@ public class Fabricator : Area2D
 	{
 		// TODO: May need to consider quantity soon
 		_cart.Remove(purchase);
+		_totalPurchasePrice -= purchase.Item.Price;
 	}
 
 	public void BuyAllItems()
