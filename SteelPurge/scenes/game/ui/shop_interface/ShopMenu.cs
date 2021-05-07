@@ -79,4 +79,15 @@ public class ShopMenu : Control
 		_totalLabel.Text = _parent.TotalPurchasePrice.ToString();
 		Close();
 	}
+	
+	private void _OnCancel()
+	{
+		_parent.CancelShopping();
+		_cartContainer.RemoveAllItems();
+		_totalLabel.Text = _parent.TotalPurchasePrice.ToString();
+		Close();
+	}
 }
+
+
+

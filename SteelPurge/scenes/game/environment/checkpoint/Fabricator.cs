@@ -103,4 +103,10 @@ public class Fabricator : Area2D
 	{
 		_isPlayerNearShop = false;
 	}
+
+	public void CancelShopping()
+	{
+		_totalPurchasePrice = 0;
+		_cart.Clear();
+	}
 }
