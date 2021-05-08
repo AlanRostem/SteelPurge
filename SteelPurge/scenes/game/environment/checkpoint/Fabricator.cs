@@ -17,7 +17,11 @@ public class Fabricator : Area2D
 		new ShopItem("Gasoline", 20,
 			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn",
 			ShopItem.ItemType.Fuel,
-			"res://assets/texture/ui/icon/gas.png")
+			"res://assets/texture/ui/icon/gas.png"),
+		new ShopItem("Firewall", 100,
+			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn",
+			ShopItem.ItemType.Fuel,
+			"res://assets/texture/weapon/firewall/firewall.png"),
 	};
 
 	private uint _totalPurchasePrice = 0;
@@ -53,7 +57,7 @@ public class Fabricator : Area2D
 	public override void _Process(float delta)
 	{
 		if (!_isPlayerNearShop) return;
-		if (Input.IsActionJustPressed("interact")) // TODO: This is a temporary solution aside from the UI
+		if (Input.IsActionJustPressed("interact"))
 		{
 			if (!_shopMenu.Visible)
 				_shopMenu.Open();
