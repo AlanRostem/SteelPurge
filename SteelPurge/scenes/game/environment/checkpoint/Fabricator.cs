@@ -10,7 +10,7 @@ using System.Collections.Generic;
 public class Fabricator : Area2D
 {
 	private bool _isPlayerNearShop = false;
-	public Player Player { get; private set; }
+	public Player PlayerCustomer { get; private set; }
 
 	private ShopItem[] _availableItems = //TODO: Some items can only be bought once. Consider it in the future
 	{
@@ -32,7 +32,7 @@ public class Fabricator : Area2D
 
 	private ShopMenu _shopMenu;
 
-	public bool CanBuy => _totalPurchasePrice <= Player.PlayerInventory.ScrapCount && Player.PlayerInventory.ScrapCount > 0;
+	public bool CanBuy => _totalPurchasePrice <= PlayerCustomer.PlayerInventory.ScrapCount && PlayerCustomer.PlayerInventory.ScrapCount > 0;
 
 	public override void _Ready()
 	{
@@ -85,11 +85,11 @@ public class Fabricator : Area2D
 
 	public void BuyAllItems()
 	{
-		Player.PlayerInventory.LoseScrap(_totalPurchasePrice);
+		PlayerCustomer.PlayerInventory.LoseScrap(_totalPurchasePrice);
 		_totalPurchasePrice = 0;
 		foreach (var purchase in _cart)
 		{
-			Player.ParentWorld.Entities.SpawnEntityDeferred<FallingCollectible>(
+			PlayerCustomer.ParentWorld.Entities.SpawnEntityDeferred<FallingCollectible>(
 				purchase.Item.CollectibleScene,
 				Position - new Vector2(0, 24));
 		}
@@ -101,7 +101,7 @@ public class Fabricator : Area2D
 	private void _OnPlayerEnter(object body)
 	{
 		_isPlayerNearShop = true;
-		Player = (Player) body;
+		PlayerCustomer = (Player) body;
 	}
 
 	private void _OnPlayerLeave(object body)

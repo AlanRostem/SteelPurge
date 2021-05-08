@@ -16,9 +16,9 @@ public class ShopItem : Godot.Object
 	public Texture IconTexture;
 	public ItemType Type = ItemType.Fuel;
 
-	public delegate bool PurchaseValidator(Player player, Inventory inventory);
+	public delegate bool PurchaseValidator(Player player, Fabricator fabricator);
 
-	public  PurchaseValidator Validator = (player, inventory) => true;
+	public  PurchaseValidator Validator = (player, fabricator) => true;
 	
 	public ShopItem()
 	{
