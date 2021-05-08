@@ -11,6 +11,8 @@ public class Fabricator : Area2D
 {
 	private bool _isPlayerNearShop = false;
 	public Player PlayerCustomer { get; private set; }
+	
+	public bool HasWeaponInCart { get; private set; }
 
 	private ShopItem[] _availableItems = //TODO: Some items can only be bought once. Consider it in the future
 	{
@@ -18,7 +20,7 @@ public class Fabricator : Area2D
 			"res://assets/texture/ui/icon/gas.png",
 			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn"),
 		new WeaponShopItem("Firewall", 5,
-			"res://assets/texture/ui/icon/gas.png",
+			"res://assets/texture/weapon/firewall/firewall.png",
 			"res://scenes/game/weapon/weapons/firewall/Firewall.tscn"),
 	};
 
@@ -70,6 +72,7 @@ public class Fabricator : Area2D
 			return;
 		}
 
+		if (item.Type == ShopItem.ItemType.Weapon) HasWeaponInCart = true;
 		_cart.Add(purchase = new Purchase(item, quantity));
 		_totalPurchasePrice += item.Price;
 	}
@@ -77,6 +80,7 @@ public class Fabricator : Area2D
 	public void RemoveItemFromCart(Purchase purchase)
 	{
 		// TODO: May need to consider quantity soon
+		if (purchase.Item.Type == ShopItem.ItemType.Weapon) HasWeaponInCart = false;
 		_cart.Remove(purchase);
 		_totalPurchasePrice -= purchase.Item.Price;
 	}
@@ -107,6 +111,7 @@ public class Fabricator : Area2D
 
 	public void CancelShopping()
 	{
+		HasWeaponInCart = false;
 		_totalPurchasePrice = 0;
 		_cart.Clear();
 	}

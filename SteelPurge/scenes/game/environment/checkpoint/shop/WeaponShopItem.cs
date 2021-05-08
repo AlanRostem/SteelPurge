@@ -16,4 +16,9 @@ public class WeaponShopItem : ShopItem
 		var weapon = (Weapon) WeaponScene.Instance();
 		weapon.Drop(world, fabricator.Position + new Vector2(0, -24));
 	}
+
+	public override bool Validate(Player player, Fabricator fabricator)
+	{
+		return player.EquippedWeapon.DisplayName != Name && !fabricator.HasWeaponInCart;
+	}
 }
