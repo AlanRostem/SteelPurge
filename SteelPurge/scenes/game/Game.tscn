@@ -107,21 +107,19 @@ __meta__ = {
 }
 
 [node name="InventoryUI" type="Control" parent="GUI"]
-margin_right = 400.0
-margin_bottom = 240.0
+margin_left = 72.0
+margin_top = 16.0
+margin_right = 336.0
+margin_bottom = 224.0
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="GUI/InventoryUI"]
-margin_left = 65.0
-margin_top = 56.0
-margin_right = 352.0
-margin_bottom = 184.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="BackgroundRect" type="ColorRect" parent="GUI/InventoryUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.14902, 0.14902, 0.14902, 1 )
 [connection signal="OpenInventory" from="." to="GUI/InventoryUI" method="_OnOpen"]
 [connection signal="HealthChanged" from="World/Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]
 [connection signal="OrdinanceFuelCountChanged" from="World/Player" to="GUI/HUD/FuelLabel" method="_OnFuelChanged"]
