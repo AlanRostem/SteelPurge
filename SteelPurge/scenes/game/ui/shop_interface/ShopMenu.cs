@@ -59,7 +59,7 @@ public class ShopMenu : Control
 
 	public void AddItemToCartParent(ShopItem item)
 	{
-		if (!item.Validator(_parent.PlayerCustomer, _parent) ||
+		if (!item.Validate(_parent.PlayerCustomer, _parent) ||
 			_parent.PlayerCustomer.PlayerInventory.ScrapCount < _parent.TotalPurchasePrice + item.Price) return;
 		_parent.AddItemToCart(item, out var purchase);
 		if (purchase is null) return;

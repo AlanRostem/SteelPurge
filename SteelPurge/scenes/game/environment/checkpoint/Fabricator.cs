@@ -14,14 +14,9 @@ public class Fabricator : Area2D
 
 	private ShopItem[] _availableItems = //TODO: Some items can only be bought once. Consider it in the future
 	{
-		new ShopItem("Gasoline", 20,
-			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn",
-			ShopItem.ItemType.Fuel,
-			"res://assets/texture/ui/icon/gas.png"),
-		new ShopItem("Firewall", 100,
-			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn",
-			ShopItem.ItemType.Fuel,
-			"res://assets/texture/weapon/firewall/firewall.png"),
+		new FuelShopItem("Gasoline", 20,
+			"res://assets/texture/ui/icon/gas.png",
+			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn"),
 	};
 
 	private uint _totalPurchasePrice = 0;
@@ -89,9 +84,7 @@ public class Fabricator : Area2D
 		_totalPurchasePrice = 0;
 		foreach (var purchase in _cart)
 		{
-			PlayerCustomer.ParentWorld.Entities.SpawnEntityDeferred<FallingCollectible>(
-				purchase.Item.CollectibleScene,
-				Position - new Vector2(0, 24));
+			purchase.Item.OnPurchase(this, PlayerCustomer.ParentWorld, PlayerCustomer);
 		}
 
 		_cart.Clear();

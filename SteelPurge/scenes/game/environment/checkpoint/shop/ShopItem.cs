@@ -12,27 +12,31 @@ public class ShopItem : Godot.Object
 	public uint Price = 20;
 	public uint MaxCount = 100;
 	public string Name;
-	public PackedScene CollectibleScene;
 	public Texture IconTexture;
 	public ItemType Type = ItemType.Fuel;
 
 	public delegate bool PurchaseValidator(Player player, Fabricator fabricator);
-
-	public  PurchaseValidator Validator = (player, fabricator) => true;
 	
 	public ShopItem()
 	{
 		
 	}
-	
-	public ShopItem(string name, uint price, string collectibleScenePath, ItemType type, string iconTexturePath, PurchaseValidator validator = null)
+
+	public virtual void OnPurchase(Fabricator fabricator, World world, Player player)
 	{
-		CollectibleScene = GD.Load<PackedScene>(collectibleScenePath);
+		
+	}
+
+	public virtual bool Validate(Player player, Fabricator fabricator)
+	{
+		return true;
+	}
+	
+	public ShopItem(string name, uint price, ItemType type, string iconTexturePath)
+	{
 		IconTexture = GD.Load<Texture>(iconTexturePath);
 		Price = price;
 		Name = name;
 		Type = type;
-		if (validator != null)
-			Validator = validator;
 	}
 }
