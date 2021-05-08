@@ -3,8 +3,6 @@ using System;
 
 public class Inventory : Node2D
 {
-	private static PackedScene WeaponCollectibleScene 
-		= GD.Load<PackedScene>("res://scenes/game/entities/collectible/weapon/WeaponCollectible.tscn"); 
 	
 	public enum OrdinanceFuelType
 	{
@@ -72,10 +70,7 @@ public class Inventory : Node2D
 
 	public void SwitchWeapon(Weapon weapon)
 	{
-		var item = _player.ParentWorld.Entities.SpawnEntityDeferred<WeaponCollectible>(WeaponCollectibleScene, _player.Position);
-		_player.RemoveChild(_player.EquippedWeapon);
-		item.Weapon = _player.EquippedWeapon;
-		
+		_player.EquippedWeapon.Drop(_player.ParentWorld, _player.Position);
 		_player.EquippedWeapon = weapon;
 	}
 }

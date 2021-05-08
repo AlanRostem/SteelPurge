@@ -24,6 +24,7 @@ public class ResourceAbility : WeaponAbility
 	{
 		var type = (int) FuelType;
 		var player = GetWeapon().OwnerPlayer;
+		if (player is null) return;
 		var fuels = player.PlayerInventory.OrdinanceFuels;
 
 		if (IsActive)

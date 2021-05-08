@@ -14,16 +14,19 @@ public class Fabricator : Area2D
 
 	private ShopItem[] _availableItems = //TODO: Some items can only be bought once. Consider it in the future
 	{
-		new FuelShopItem("Gasoline", 20,
+		new FuelShopItem("Gasoline", 2,
 			"res://assets/texture/ui/icon/gas.png",
 			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn"),
+		new WeaponShopItem("Firewall", 5,
+			"res://assets/texture/ui/icon/gas.png",
+			"res://scenes/game/weapon/weapons/firewall/Firewall.tscn"),
 	};
 
 	private uint _totalPurchasePrice = 0;
 
 	public uint TotalPurchasePrice => _totalPurchasePrice;
 
-	private List<Purchase> _cart = new List<Purchase>();
+	private readonly List<Purchase> _cart = new List<Purchase>();
 
 	private ShopMenu _shopMenu;
 

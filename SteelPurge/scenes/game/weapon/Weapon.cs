@@ -2,6 +2,9 @@ using Godot;
 
 public class Weapon : Node2D
 {
+	private static PackedScene WeaponCollectibleScene 
+		= GD.Load<PackedScene>("res://scenes/game/entities/collectible/weapon/WeaponCollectible.tscn"); 
+	
 	[Export] public string DisplayName = "Weapon";
 
 	[Export] public Texture CollectibleSprite;
@@ -65,7 +68,7 @@ public class Weapon : Node2D
 		EmitSignal(nameof(Swapped));
 		Visible = false;
 		SetProcess(false);
-		if (TacticalEnhancement.IsActive)
+		if (TacticalEnhancement != null && TacticalEnhancement.IsActive)
 			TacticalEnhancement.DeActivate();
 		Equipped = false;
 	}
@@ -125,6 +128,7 @@ public class Weapon : Node2D
 
 	public override void _Process(float delta)
 	{
+		if (OwnerPlayer is null) return;
 		if (Scale.x != OwnerPlayer.HorizontalLookingDirection)
 		{
 			Scale = new Vector2(OwnerPlayer.HorizontalLookingDirection, 1);
@@ -190,5 +194,13 @@ public class Weapon : Node2D
 		var hitBox = (VulnerableHitbox) area;
 		hitBox.TakeHit(MeleeDamage);
 		EmitSignal(nameof(OnMeleeHit), hitBox);
+	}
+
+	public void Drop(World world, Vector2 position)
+	{
+		// var collectible = 
+		var item = world.Entities.SpawnEntityDeferred<WeaponCollectible>(WeaponCollectibleScene, position);
+		item.Weapon = this;
+		OwnerPlayer?.RemoveChild(this);
 	}
 }
