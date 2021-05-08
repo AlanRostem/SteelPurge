@@ -14,7 +14,8 @@ public class WeaponShopItem : ShopItem
 	public override void OnPurchase(Fabricator fabricator, World world, Player player)
 	{
 		var weapon = (Weapon) WeaponScene.Instance();
-		weapon.Drop(world, fabricator.Position + new Vector2(0, -24));
+		player.EquippedWeapon.Drop(world, fabricator.Position + new Vector2(0, -24));
+		player.EquippedWeapon = weapon;
 	}
 
 	public override bool Validate(Player player, Fabricator fabricator)
