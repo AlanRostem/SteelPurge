@@ -200,7 +200,7 @@ public class Weapon : Node2D
 	{
 		// var collectible = 
 		var item = world.Entities.SpawnEntityDeferred<WeaponCollectible>(WeaponCollectibleScene, position);
-		item.Weapon = this;
 		OwnerPlayer?.RemoveChild(this);
+		item.Weapon = this;
 	}
 }
