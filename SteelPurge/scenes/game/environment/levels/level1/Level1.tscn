@@ -19,6 +19,3 @@ texture = ExtResource( 7 )
 
 [node name="Player" parent="World" index="1"]
 position = Vector2( 88, 96 )
-
-[node name="InventoryUI" parent="GUI" index="1"]
-visible = false
