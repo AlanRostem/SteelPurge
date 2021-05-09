@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/game/Game.cs" type="Script" id=2]
 [ext_resource path="res://scenes/game/entities/player/Player.tscn" type="PackedScene" id=3]
@@ -10,7 +10,6 @@
 [ext_resource path="res://scenes/game/ui/hud/HUD.cs" type="Script" id=9]
 [ext_resource path="res://scenes/game/ui/hud/HPBar.cs" type="Script" id=11]
 [ext_resource path="res://scenes/game/environment/map/World.cs" type="Script" id=12]
-[ext_resource path="res://scenes/game/ui/inventory/InventoryUI.cs" type="Script" id=13]
 [ext_resource path="res://assets/texture/ui/icon/scrap.png" type="Texture" id=14]
 [ext_resource path="res://assets/texture/ui/icon/xe_slug.png" type="Texture" id=16]
 [ext_resource path="res://scenes/game/ui/hud/FuelLabel.cs" type="Script" id=18]
@@ -105,22 +104,6 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="InventoryUI" type="Control" parent="GUI"]
-margin_left = 72.0
-margin_top = 16.0
-margin_right = 336.0
-margin_bottom = 224.0
-script = ExtResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackgroundRect" type="ColorRect" parent="GUI/InventoryUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.14902, 0.14902, 0.14902, 1 )
-[connection signal="OpenInventory" from="." to="GUI/InventoryUI" method="_OnOpen"]
 [connection signal="HealthChanged" from="World/Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]
 [connection signal="OrdinanceFuelCountChanged" from="World/Player" to="GUI/HUD/FuelLabel" method="_OnFuelChanged"]
 [connection signal="ScrapCountChanged" from="World/Player" to="GUI/HUD/MoneyLabel" method="_OnPlayerScrapCountChanged"]
