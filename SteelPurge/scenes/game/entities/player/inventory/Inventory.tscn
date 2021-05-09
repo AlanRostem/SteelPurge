@@ -1,8 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/entities/player/inventory/Inventory.cs" type="Script" id=1]
 [ext_resource path="res://scenes/game/weapon/weapons/firewall/Firewall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/ui/inventory/InventoryUI.tscn" type="PackedScene" id=3]
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource( 1 )
 DefaultGunScene = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InventoryUI" parent="CanvasLayer" instance=ExtResource( 3 )]

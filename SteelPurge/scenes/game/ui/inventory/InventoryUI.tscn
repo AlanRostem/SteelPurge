@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/game/ui/inventory/InventoryUI.cs" type="Script" id=1]
+[ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=2]
 
 [node name="InventoryUI" type="Control"]
 margin_left = 72.0
@@ -16,3 +17,21 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.14902, 0.14902, 0.14902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SideRect" type="ColorRect" parent="."]
+margin_left = -8.0
+margin_bottom = 208.0
+color = Color( 0.168627, 0.207843, 0.247059, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PixelTextLabel" parent="." instance=ExtResource( 2 )]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 80.0
+margin_bottom = 22.0
+text = "Inventory"
