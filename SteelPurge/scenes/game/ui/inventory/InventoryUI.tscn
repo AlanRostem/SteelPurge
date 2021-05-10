@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game/ui/inventory/InventoryUI.cs" type="Script" id=1]
 [ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/ui/inventory/InventoryTabs.cs" type="Script" id=3]
 [ext_resource path="res://scenes/game/ui/inventory/InventoryItems.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/resources/LargeFont.tres" type="DynamicFont" id=5]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 5 )
 
 [node name="InventoryUI" type="Control"]
 anchor_left = 0.5
@@ -58,6 +62,7 @@ __meta__ = {
 [node name="InventoryTabs" type="TabContainer" parent="Tabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = SubResource( 1 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,7 +70,7 @@ __meta__ = {
 
 [node name="Weapons" parent="Tabs/InventoryTabs" instance=ExtResource( 4 )]
 margin_left = 4.0
-margin_top = 32.0
+margin_top = 34.0
 margin_right = -4.0
 margin_bottom = -4.0
 
