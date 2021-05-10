@@ -27,6 +27,7 @@ public class Inventory : Node2D
 			_weapon.OnEquip();
 			// TODO: Call AddChild normally after tests
 			CallDeferred("add_child", _weapon);
+			CallDeferred(nameof(KnowEquippedWeaponFuelType));
 			_player.EmitSignal(nameof(Player.WeaponEquipped), value);
 		}
 	}
@@ -54,7 +55,7 @@ public class Inventory : Node2D
 		_fuelLabel = GetNode<Label>("CanvasLayer/FuelLabel");
 		
 		_scrapLabel.Text = "x" + ScrapCount;
-		_fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
+		// _fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
 		
 		// TODO: Implement inventory properly
 		var defaultGun = (Weapon) DefaultGunScene.Instance();
@@ -65,7 +66,12 @@ public class Inventory : Node2D
 			// Update UI
 		}
 	}
-	
+
+	private void KnowEquippedWeaponFuelType()
+	{
+		_displayedFuel = _weapon.TacticalEnhancement.FuelType;
+		_fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
+	}
 
 	public void PickUpScrap(uint count)
 	{
