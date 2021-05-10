@@ -8,6 +8,12 @@ public class InventoryUI : Control
 		Visible = false;
 	}
 
+	public override void _Process(float delta)
+	{
+		if (Input.IsActionJustPressed("inventory"))
+			Visible = !Visible; // TODO: Remove temporary solution
+	}
+
 	private void _OnOpen()
 	{
 		Visible = !Visible;
