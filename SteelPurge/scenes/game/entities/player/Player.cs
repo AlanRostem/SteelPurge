@@ -158,16 +158,6 @@ public class Player : KinematicEntity
 		_respawnTimer.Start();
 	}
 
-	public void KnowInventoryScrapCount(uint count)
-	{
-		EmitSignal(nameof(ScrapCountChanged), count);
-	}
-
-	public void KnowInventoryOrdinanceFuelCount(uint count, Inventory.OrdinanceFuelType type)
-	{
-		EmitSignal(nameof(OrdinanceFuelCountChanged), count, type);
-	}
-
 	public override void TakeDamage(uint damage, int direction = 0)
 	{
 		if (!IsInvulnerable)

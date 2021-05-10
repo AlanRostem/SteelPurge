@@ -35,8 +35,7 @@ public class ResourceAbility : WeaponAbility
 			if (_currentDrainTime >= DrainInterval)
 			{
 				_currentDrainTime = 0;
-				fuels[type] -= DrainPerTick;
-				player.KnowInventoryOrdinanceFuelCount(fuels[type], FuelType);
+				player.PlayerInventory.DrainFuel(FuelType, DrainPerTick);
 				OnTick();
 			}
 		}

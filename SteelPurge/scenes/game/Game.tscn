@@ -105,6 +105,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="HealthChanged" from="World/Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]
-[connection signal="OrdinanceFuelCountChanged" from="World/Player" to="GUI/HUD/FuelLabel" method="_OnFuelChanged"]
-[connection signal="ScrapCountChanged" from="World/Player" to="GUI/HUD/MoneyLabel" method="_OnPlayerScrapCountChanged"]
 [connection signal="WeaponEquipped" from="World/Player" to="GUI/HUD/GunNameLabel" method="_OnPlayerWeaponEquipped"]

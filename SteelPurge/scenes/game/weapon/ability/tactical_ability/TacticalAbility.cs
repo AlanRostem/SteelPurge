@@ -64,8 +64,7 @@ public class TacticalAbility : WeaponAbility
 				IsActive = true;
 				OnActivate();
 				_durationTimer.Start();
-				fuels[(int)FuelType] -= FuelRequirement;
-				GetWeapon().OwnerPlayer.KnowInventoryOrdinanceFuelCount(fuels[(int)FuelType], FuelType);
+				GetWeapon().OwnerPlayer.PlayerInventory.DrainFuel(FuelType, FuelRequirement);
 			}
 			else
 			{

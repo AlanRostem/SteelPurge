@@ -34,10 +34,10 @@ public class Inventory : Node2D
 		// TODO: Implement inventory properly
 		var defaultGun = (Weapon) DefaultGunScene.Instance();
 		_player.EquippedWeapon = defaultGun;
-		_player.KnowInventoryScrapCount(ScrapCount);
+		// TODO: Update UI for scrap
 		for (var i = 0; i < (int) OrdinanceFuelType._Count; i++)
 		{
-			_player.KnowInventoryOrdinanceFuelCount(OrdinanceFuels[i], (OrdinanceFuelType)i);
+			// Update UI
 		}
 	}
 	
@@ -45,7 +45,7 @@ public class Inventory : Node2D
 	public void PickUpScrap(uint count)
 	{
 		ScrapCount += count;
-		_player.KnowInventoryScrapCount(ScrapCount);
+		// TODO: Update UI
 	}
 	
 	public void LoseScrap(uint count)
@@ -58,19 +58,25 @@ public class Inventory : Node2D
 		{
 			ScrapCount -= count;
 		}
-		_player.KnowInventoryScrapCount(ScrapCount);
+		// TODO: Update UI
 	}
 
 
 	public void AddOrdinanceFuel(uint count, OrdinanceFuelType type)
 	{
 		OrdinanceFuels[(int)type] += count;
-		_player.KnowInventoryOrdinanceFuelCount(OrdinanceFuels[(int)type], type);
+		// TODO: Update UI
 	}
 
 	public void SwitchWeapon(Weapon weapon)
 	{
 		_player.EquippedWeapon.Drop(_player.ParentWorld, _player.Position);
 		_player.EquippedWeapon = weapon;
+	}
+
+	public void DrainFuel(OrdinanceFuelType fuelType, uint drainPerTick)
+	{
+		// TODO: Update UI
+		OrdinanceFuels[(int) fuelType] -= drainPerTick;
 	}
 }
