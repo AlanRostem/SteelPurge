@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/game/ui/inventory/InventoryUI.cs" type="Script" id=1]
 [ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/game/ui/inventory/InventoryItems.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/resources/DefaultTheme.tres" type="Theme" id=5]
 [ext_resource path="res://assets/texture/ui/inventory/soldier_sihouette_equipped_firewall.png" type="Texture" id=6]
+[ext_resource path="res://assets/texture/ui/icon/gas.png" type="Texture" id=7]
 
 [node name="InventoryUI" type="Control"]
 pause_mode = 2
@@ -100,10 +101,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PixelTextLabel" parent="EquippedWeaponFrame" instance=ExtResource( 2 )]
+[node name="WeaponNameLabel" parent="EquippedWeaponFrame" instance=ExtResource( 2 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -14.0
 margin_right = 64.0
 margin_bottom = 0.0
 text = "Firewall"
+
+[node name="FuelIcon" type="TextureRect" parent="EquippedWeaponFrame"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -16.0
+margin_right = -23.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FuelCountLabel" parent="EquippedWeaponFrame" instance=ExtResource( 2 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -24.0
+margin_top = -14.0
+margin_right = 0.0
+margin_bottom = 0.0
+text = "40"
