@@ -1,13 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/ui/inventory/InventoryUI.cs" type="Script" id=1]
 [ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/ui/inventory/InventoryTabs.cs" type="Script" id=3]
+[ext_resource path="res://scenes/game/ui/inventory/InventoryItems.tscn" type="PackedScene" id=4]
 
 [node name="InventoryUI" type="Control"]
-margin_left = 72.0
-margin_top = 16.0
-margin_right = 336.0
-margin_bottom = 224.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -168.0
+margin_top = -104.0
+margin_right = 168.0
+margin_bottom = 104.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -22,7 +28,7 @@ __meta__ = {
 }
 
 [node name="SideRect" type="ColorRect" parent="."]
-margin_left = -8.0
+margin_right = 8.0
 margin_bottom = 208.0
 color = Color( 0.168627, 0.207843, 0.247059, 1 )
 __meta__ = {
@@ -30,8 +36,41 @@ __meta__ = {
 }
 
 [node name="PixelTextLabel" parent="." instance=ExtResource( 2 )]
-margin_left = 8.0
+margin_left = 16.0
 margin_top = 8.0
-margin_right = 80.0
+margin_right = 88.0
 margin_bottom = 22.0
 text = "Inventory"
+
+[node name="Tabs" type="Tabs" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -184.0
+margin_top = -96.0
+margin_bottom = 96.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventoryTabs" type="TabContainer" parent="Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapons" parent="Tabs/InventoryTabs" instance=ExtResource( 4 )]
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Items" parent="Tabs/InventoryTabs" instance=ExtResource( 4 )]
+visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
