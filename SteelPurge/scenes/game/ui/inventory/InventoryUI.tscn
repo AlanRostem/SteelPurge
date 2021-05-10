@@ -4,10 +4,8 @@
 [ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/ui/inventory/InventoryTabs.cs" type="Script" id=3]
 [ext_resource path="res://scenes/game/ui/inventory/InventoryItems.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/resources/LargeFont.tres" type="DynamicFont" id=5]
-
-[sub_resource type="Theme" id=1]
-default_font = ExtResource( 5 )
+[ext_resource path="res://assets/resources/DefaultTheme.tres" type="Theme" id=5]
+[ext_resource path="res://assets/texture/ui/inventory/soldier_sihouette_equipped_firewall.png" type="Texture" id=6]
 
 [node name="InventoryUI" type="Control"]
 pause_mode = 2
@@ -63,7 +61,7 @@ __meta__ = {
 [node name="InventoryTabs" type="TabContainer" parent="Tabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( 1 )
+theme = ExtResource( 5 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -78,6 +76,34 @@ margin_bottom = -4.0
 [node name="Items" parent="Tabs/InventoryTabs" instance=ExtResource( 4 )]
 visible = false
 margin_left = 4.0
-margin_top = 32.0
+margin_top = 26.0
 margin_right = -4.0
 margin_bottom = -4.0
+
+[node name="EquippedWeaponFrame" type="TextureRect" parent="."]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 136.0
+margin_bottom = 184.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoldierSilhouette" type="TextureRect" parent="EquippedWeaponFrame"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_right = 64.0
+margin_bottom = 128.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PixelTextLabel" parent="EquippedWeaponFrame" instance=ExtResource( 2 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -14.0
+margin_right = 64.0
+margin_bottom = 0.0
+text = "Firewall"
