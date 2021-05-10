@@ -54,26 +54,11 @@ public class Player : KinematicEntity
 	public bool IsSliding = false;
 	private bool _isRoofAbove = false;
 
-	private Weapon _weapon;
 	private CollisionShape2D _upperBodyShape;
 	private CollisionShape2D _lowerBodyShape;
 	private CollisionShape2D _roofDetectorShape;
 	private Timer _respawnTimer;
 	public Inventory PlayerInventory;
-
-	public Weapon EquippedWeapon
-	{
-		get => _weapon;
-		set
-		{
-			_weapon = value;
-			_weapon.OwnerPlayer = this;
-			_weapon.OnEquip();
-			// TODO: Call AddChild normally after tests
-			CallDeferred("add_child", _weapon);
-			EmitSignal(nameof(WeaponEquipped), value);
-		}
-	}
 
 
 	public override void _Ready()
@@ -167,8 +152,8 @@ public class Player : KinematicEntity
 				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -_currentJumpSpeed / 2));
 				if (!CanTakeDamage) return;
 
-				if (EquippedWeapon.TacticalEnhancement.IsActive)
-					EquippedWeapon.TacticalEnhancement.DeActivate();
+				if (PlayerInventory.EquippedWeapon.TacticalEnhancement.IsActive)
+					PlayerInventory.EquippedWeapon.TacticalEnhancement.DeActivate();
 
 				IsInvulnerable = true;
 				_isStunned = true;
@@ -262,7 +247,7 @@ public class Player : KinematicEntity
 		bool isOnFloor = IsOnFloor();
 		_ProcessInput();
 
-		var canSwapDirOnMove = !EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
+		var canSwapDirOnMove = !PlayerInventory.EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
 		var velX = Mathf.Abs(Velocity.x);
 
 		if (_slide)
@@ -322,9 +307,9 @@ public class Player : KinematicEntity
 		}
 		else
 		{
-			if (EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
+			if (PlayerInventory.EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
 				CurrentMaxSpeed = MaxWalkSpeedFiring;
-			else if (EquippedWeapon.IsMeleeAttacking)
+			else if (PlayerInventory.EquippedWeapon.IsMeleeAttacking)
 				Velocity.x = 0;
 			else
 				CurrentMaxSpeed = MaxWalkSpeed;

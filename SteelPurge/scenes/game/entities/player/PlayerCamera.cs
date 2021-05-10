@@ -15,7 +15,7 @@ public class PlayerCamera : Camera2D
 
 	public override void _Process(float delta)
 	{
-		if (_player.EquippedWeapon.IsFiring)
+		if (_player.PlayerInventory.EquippedWeapon.IsFiring)
 		{
 			if (_player.HorizontalLookingDirection < 0)
 			{
