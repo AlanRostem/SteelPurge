@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/game/entities/player/inventory/Inventory.cs" type="Script" id=1]
 [ext_resource path="res://scenes/game/weapon/weapons/firewall/Firewall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/ui/inventory/InventoryUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/texture/ui/icon/scrap.png" type="Texture" id=5]
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource( 1 )
@@ -11,3 +13,20 @@ DefaultGunScene = ExtResource( 2 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="InventoryUI" parent="CanvasLayer" instance=ExtResource( 3 )]
+
+[node name="ScrapLabel" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_left = 24.0
+margin_top = 16.0
+margin_right = 64.0
+margin_bottom = 30.0
+text = "x??"
+
+[node name="ScrapIcon" type="TextureRect" parent="CanvasLayer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

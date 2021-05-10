@@ -18,6 +18,7 @@ public class Inventory : Node2D
 		= GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn");
 
 	private Player _player;
+	private Label _scrapLabel;
 	
 	public uint ScrapCount = 0;
 
@@ -30,6 +31,8 @@ public class Inventory : Node2D
 	public override void _Ready()
 	{
 		_player = GetParent<Player>();
+		_scrapLabel = GetNode<Label>("CanvasLayer/ScrapLabel");
+		_scrapLabel.Text = "x" + ScrapCount;
 		
 		// TODO: Implement inventory properly
 		var defaultGun = (Weapon) DefaultGunScene.Instance();
@@ -45,7 +48,7 @@ public class Inventory : Node2D
 	public void PickUpScrap(uint count)
 	{
 		ScrapCount += count;
-		// TODO: Update UI
+		_scrapLabel.Text = "x" + ScrapCount;
 	}
 	
 	public void LoseScrap(uint count)
@@ -58,7 +61,7 @@ public class Inventory : Node2D
 		{
 			ScrapCount -= count;
 		}
-		// TODO: Update UI
+		_scrapLabel.Text = "x" + ScrapCount;
 	}
 
 
