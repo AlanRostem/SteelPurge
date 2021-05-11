@@ -98,10 +98,10 @@ one_shot = true
 [node name="HPBar" type="TextureProgress" parent="CanvasLayer" index="0"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 16.0
-margin_top = 92.0
-margin_right = 56.0
-margin_bottom = 100.0
+margin_left = 288.0
+margin_top = -112.0
+margin_right = 392.0
+margin_bottom = -96.0
 texture_under = ExtResource( 8 )
 texture_over = ExtResource( 11 )
 texture_progress = ExtResource( 9 )

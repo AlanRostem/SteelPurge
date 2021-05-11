@@ -23,6 +23,7 @@ position = Vector2( 24, 0 )
 [node name="RocketBayonetAbility" parent="." index="4" instance=ExtResource( 4 )]
 script = ExtResource( 5 )
 FuelRequirement = 30
+CoolDown = 2.0
 
 [node name="TalconFiringDevice" parent="." index="5" instance=ExtResource( 2 )]
 script = ExtResource( 6 )
