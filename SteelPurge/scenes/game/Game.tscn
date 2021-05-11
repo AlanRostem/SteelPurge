@@ -1,11 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/Game.cs" type="Script" id=2]
 [ext_resource path="res://scenes/game/entities/player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/game/ui/hud/GunNameLabel.cs" type="Script" id=7]
-[ext_resource path="res://scenes/game/ui/hud/HUD.cs" type="Script" id=9]
-[ext_resource path="res://scenes/game/ui/hud/HPBar.cs" type="Script" id=11]
 [ext_resource path="res://scenes/game/environment/map/World.cs" type="Script" id=12]
 
 [node name="Game" type="Node2D"]
@@ -17,32 +13,3 @@ pause_mode = 1
 script = ExtResource( 12 )
 
 [node name="Player" parent="World" instance=ExtResource( 3 )]
-
-[node name="GUI" type="CanvasLayer" parent="."]
-
-[node name="HUD" type="Control" parent="GUI"]
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="GunNameLabel" parent="GUI/HUD" instance=ExtResource( 5 )]
-margin_left = 8.0
-margin_top = 212.0
-margin_right = 128.0
-margin_bottom = 226.0
-text = "Weapon Name"
-script = ExtResource( 7 )
-
-[node name="HPBar" type="ProgressBar" parent="GUI/HUD"]
-margin_left = 280.0
-margin_top = 6.0
-margin_right = 392.0
-margin_bottom = 20.0
-percent_visible = false
-script = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="HealthChanged" from="World/Player" to="GUI/HUD/HPBar" method="_OnPlayerHealthChanged"]
-[connection signal="WeaponEquipped" from="World/Player" to="GUI/HUD/GunNameLabel" method="_OnPlayerWeaponEquipped"]

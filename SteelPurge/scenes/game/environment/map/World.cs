@@ -37,7 +37,6 @@ public class World : Node2D
 	{
 		LoadSegment(0);
 		PlayerNode.Position = CurrentSegment.InitialSpawnPoint;
-		GD.Print(CurrentSegment.InitialSpawnPoint);
 	}
 
 	public void SwitchToNextSegment()
