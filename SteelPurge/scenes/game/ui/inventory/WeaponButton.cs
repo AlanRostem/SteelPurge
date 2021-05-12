@@ -24,5 +24,19 @@ public class WeaponButton : TextureButton
 	private void _OnPressed()
 	{
 		// TODO: Close menu and switch weapon
+		if (!Pressed)
+		{
+			Pressed = true;
+		}
 	}	
+	
+	private void _OnGetFocus()
+	{
+		Pressed = true;
+	}
+	
+	private void _OnLoseFocus()
+	{
+		Pressed = false;
+	}
 }
