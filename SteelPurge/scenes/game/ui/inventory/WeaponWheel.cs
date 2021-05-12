@@ -11,12 +11,18 @@ public class WeaponWheel : Control
 	
 	public override void _Ready()
 	{
+		Visible = false;
 		_gridContainer = GetNode<GridContainer>("GridContainer");
 		_gridContainer.Columns = _weaponCount;
 		for (var i = 0; i < _weaponCount; i++)
 		{
 			AddWeaponButton((Inventory.InventoryWeapon)i);
 		}
+	}
+
+	public override void _Process(float delta)
+	{
+		
 	}
 
 	private void AddWeaponButton(Inventory.InventoryWeapon weapon)
