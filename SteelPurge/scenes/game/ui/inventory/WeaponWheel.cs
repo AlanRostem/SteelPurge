@@ -55,6 +55,8 @@ public class WeaponWheel : Control
 			_buttons[_selectedWeaponIndex].Pressed = false;
 			if (_selectedWeaponIndex - 1 == -1) _selectedWeaponIndex = _buttons.Count - 1;
 			else _selectedWeaponIndex--;
+			if (_buttons[_selectedWeaponIndex].Disabled)
+				_selectedWeaponIndex--;
 			_buttons[_selectedWeaponIndex].Pressed = true;
 		}
 
@@ -63,6 +65,8 @@ public class WeaponWheel : Control
 			_buttons[_selectedWeaponIndex].Pressed = false;
 			if (_selectedWeaponIndex + 1 == _buttons.Count) _selectedWeaponIndex = 0;
 			else _selectedWeaponIndex++;
+			if (_buttons[_selectedWeaponIndex].Disabled)
+				_selectedWeaponIndex++;
 			_buttons[_selectedWeaponIndex].Pressed = true;
 		}
 	}
