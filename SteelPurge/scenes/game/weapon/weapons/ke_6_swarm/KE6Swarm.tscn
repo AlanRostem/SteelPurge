@@ -17,7 +17,7 @@ script = ExtResource( 4 )
 
 [node name="KineticBubbleAbility" parent="." index="2" instance=ExtResource( 5 )]
 FuelType = 1
-FuelRequirement = 45
+FuelRequirement = 10
 CoolDown = 3.0
 Duration = 8.0
 
