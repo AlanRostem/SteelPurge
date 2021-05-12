@@ -73,7 +73,6 @@ public class Inventory : Node2D
 		
 		// TODO: Remove this after testing weapon wheel
 		AddWeapon(InventoryWeapon.Falcon);
-		AddWeapon(InventoryWeapon.Firewall);
 		AddWeapon(InventoryWeapon.Joule);
 		
 		// TODO: When implementing save files, make sure to change this
@@ -129,6 +128,7 @@ public class Inventory : Node2D
 
 		
 		_weaponId = weapon;
+		_weaponWheel.SelectWeapon(_weaponId);
 
 		CallDeferred("add_child", _weapon);
 		CallDeferred(nameof(KnowEquippedWeaponFuelType));

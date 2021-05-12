@@ -69,6 +69,8 @@ public class WeaponWheel : Control
 
 	public void SelectWeapon(Inventory.InventoryWeapon weapon)
 	{
+		if (_selectedWeaponIndex >= 0 && _selectedWeaponIndex < _buttons.Count)
+			_buttons[_selectedWeaponIndex].Pressed = false;
 		_selectedWeaponIndex = (int) weapon;
 		_buttons[_selectedWeaponIndex].Pressed = true;
 	}
@@ -80,7 +82,7 @@ public class WeaponWheel : Control
 		button.Weapon = weapon;
 		button.Disabled = false;
 	}
-	
+
 	private void AddWeaponButton(Inventory.InventoryWeapon weapon)
 	{
 		var button = (WeaponButton) WeaponButtonScene.Instance();
