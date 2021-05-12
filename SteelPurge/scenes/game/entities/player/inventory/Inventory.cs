@@ -33,6 +33,7 @@ public class Inventory : Node2D
 		= GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn");
 	
 	public Weapon EquippedWeapon => _weapon;
+	public InventoryWeapon EquippedWeaponEnum => _weaponId;
 
 	private Weapon _weapon;
 	private InventoryWeapon _weaponId = InventoryWeapon.Count;
@@ -52,12 +53,15 @@ public class Inventory : Node2D
 	private readonly bool[] _weaponContainer = new bool[(int) InventoryWeapon.Count];
 
 	private OrdinanceFuelType _displayedFuel = OrdinanceFuelType.Gasoline;
+
+	private WeaponWheel _weaponWheel;
 	
 	public override void _Ready()
 	{
 		_player = GetParent<Player>();
 		_scrapLabel = GetNode<Label>("CanvasLayer/ScrapLabel");
 		_fuelLabel = GetNode<Label>("CanvasLayer/FuelLabel");
+		_weaponWheel = GetNode<WeaponWheel>("CanvasLayer/WeaponWheel");
 		
 		_scrapLabel.Text = "x" + ScrapCount;
 		// _fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
@@ -67,11 +71,14 @@ public class Inventory : Node2D
 			// Update UI
 		}
 		
+		// TODO: Remove this after testing weapon wheel
 		AddWeapon(InventoryWeapon.Falcon);
 		AddWeapon(InventoryWeapon.Firewall);
 		AddWeapon(InventoryWeapon.Joule);
 		
+		// TODO: When implementing save files, make sure to change this
 		SwitchWeapon(InventoryWeapon.Falcon);
+		_weaponWheel.SelectWeapon(_weaponId);
 	}
 
 	private void KnowEquippedWeaponFuelType()
@@ -131,6 +138,7 @@ public class Inventory : Node2D
 	public void AddWeapon(InventoryWeapon weapon)
 	{
 		_weaponContainer[(int) weapon] = true;
+		_weaponWheel.EnableWeaponButton(weapon);
 	}
 
 	public bool HasWeapon(InventoryWeapon weapon)

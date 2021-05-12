@@ -9,18 +9,26 @@ public class WeaponButton : TextureButton
 		GD.Load<Texture>("res://assets/texture/ui/icon/firewall_weapon_inventory.png"),
 		GD.Load<Texture>("res://assets/texture/ui/icon/joule_weapon_inventory.png"),
 	};
-	
+
 	private TextureRect _iconTextureRect;
-	public Inventory.InventoryWeapon Weapon = Inventory.InventoryWeapon.Count;
-	// private Inventory _inventory;
-	
-	public override void _Ready()
+
+	public Inventory.InventoryWeapon Weapon
 	{
-		// _inventory = GetParent().GetParent().GetParent().GetParent<Inventory>();
-		_iconTextureRect = GetNode<TextureRect>("WeaponIcon");
-		_iconTextureRect.Texture = _weaponIcons[(int) Weapon];
+		get => _weapon;
+		set
+		{
+			_weapon = value;
+			_iconTextureRect.Texture = _weaponIcons[(int) value];
+		}
 	}
 	
+	private Inventory.InventoryWeapon _weapon = Inventory.InventoryWeapon.Count;
+
+	public override void _Ready()
+	{
+		_iconTextureRect = GetNode<TextureRect>("WeaponIcon");
+	}
+
 	private void _OnPressed()
 	{
 		// TODO: Close menu and switch weapon
@@ -28,13 +36,13 @@ public class WeaponButton : TextureButton
 		{
 			Pressed = true;
 		}
-	}	
-	
+	}
+
 	private void _OnGetFocus()
 	{
 		Pressed = true;
 	}
-	
+
 	private void _OnLoseFocus()
 	{
 		Pressed = false;

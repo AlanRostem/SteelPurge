@@ -7,7 +7,9 @@
 [node name="WeaponButton" type="TextureButton"]
 margin_right = 24.0
 margin_bottom = 24.0
+focus_mode = 0
 toggle_mode = true
+enabled_focus_mode = 0
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 2 )
 script = ExtResource( 3 )
