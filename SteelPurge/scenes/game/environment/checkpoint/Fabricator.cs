@@ -21,7 +21,7 @@ public class Fabricator : Area2D
 			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn"),
 		new WeaponShopItem("Firewall", 5,
 			"res://assets/texture/weapon/firewall/firewall.png",
-			"res://scenes/game/weapon/weapons/firewall/Firewall.tscn"),
+			Inventory.InventoryWeapon.Firewall),
 	};
 
 	private uint _totalPurchasePrice = 0;

@@ -32,23 +32,10 @@ public class Inventory : Node2D
 	public PackedScene DefaultGunScene
 		= GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn");
 	
-	public Weapon EquippedWeapon
-	{
-		get => _weapon;
-		set
-		{
-			_weapon = value;
-			_weapon.OwnerPlayer = _player;
-			_weapon.OnEquip();
-			// TODO: Call AddChild normally after tests
-			CallDeferred("add_child", _weapon);
-			CallDeferred(nameof(KnowEquippedWeaponFuelType));
-			_player.EmitSignal(nameof(Player.WeaponEquipped), value);
-		}
-	}
+	public Weapon EquippedWeapon => _weapon;
 
 	private Weapon _weapon;
-	private InventoryWeapon _weaponId;
+	private InventoryWeapon _weaponId = InventoryWeapon.Count;
 
 	private Player _player;
 	private Label _scrapLabel;
@@ -84,9 +71,7 @@ public class Inventory : Node2D
 		AddWeapon(InventoryWeapon.Firewall);
 		AddWeapon(InventoryWeapon.Joule);
 		
-		// TODO: Implement inventory properly
-		var defaultGun = (Weapon) DefaultGunScene.Instance();
-		EquippedWeapon = defaultGun;
+		SwitchWeapon(InventoryWeapon.Falcon);
 	}
 
 	private void KnowEquippedWeaponFuelType()
@@ -122,18 +107,12 @@ public class Inventory : Node2D
 			_fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
 	}
 
-	public void SwitchWeapon(Weapon weapon)
-	{
-		EquippedWeapon.Drop(_player.ParentWorld, _player.Position);
-		EquippedWeapon = weapon;
-	}
-
 	public void SwitchWeapon(InventoryWeapon weapon)
 	{
-		if (!HasWeapon(weapon)) return;
+		if (!HasWeapon(weapon) || weapon == _weaponId) return;
 		
-		_weapon.OnSwap();
-		_weapon.QueueFree();
+		_weapon?.OnSwap();
+		_weapon?.QueueFree();
 		
 		var newWeapon = (Weapon)WeaponScenes[(int)weapon].Instance();
 		
@@ -141,8 +120,9 @@ public class Inventory : Node2D
 		_weapon.OwnerPlayer = _player;
 		_weapon.OnEquip();
 
-		_weaponId = weapon;
 		
+		_weaponId = weapon;
+
 		CallDeferred("add_child", _weapon);
 		CallDeferred(nameof(KnowEquippedWeaponFuelType));
 		_player.EmitSignal(nameof(Player.WeaponEquipped), newWeapon);

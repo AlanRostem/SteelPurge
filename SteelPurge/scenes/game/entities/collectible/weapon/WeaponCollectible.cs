@@ -24,16 +24,7 @@ public class WeaponCollectible : FallingCollectible
 	
 	public override void OnCollected(Player player)
 	{
-		if (_weapon is null)
-		{
-			if (WeaponScene != null)
-				player.PlayerInventory.SwitchWeapon((Weapon) WeaponScene.Instance());
-			return;
-		}
-
-		RemoveChild(_weapon);
-		player.PlayerInventory.SwitchWeapon(_weapon);
-		_weapon = null;
+		// TODO: Remove this type completely!
 	}
 
 	private void _OnTreeExited()
