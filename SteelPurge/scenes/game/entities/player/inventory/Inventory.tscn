@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/entities/player/inventory/Inventory.cs" type="Script" id=1]
 [ext_resource path="res://scenes/game/weapon/weapons/firewall/Firewall.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/texture/ui/icon/scrap.png" type="Texture" id=5]
 [ext_resource path="res://assets/texture/ui/icon/xe_slug.png" type="Texture" id=6]
 [ext_resource path="res://assets/font/font.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/game/ui/inventory/WeaponWheel.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -58,3 +59,5 @@ texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WeaponWheel" parent="CanvasLayer" instance=ExtResource( 8 )]

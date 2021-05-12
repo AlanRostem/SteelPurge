@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/texture/ui/inventory/empty_item_column.png" type="Texture" id=1]
+[ext_resource path="res://assets/texture/ui/inventory/focused_item_column.png" type="Texture" id=2]
+[ext_resource path="res://scenes/game/ui/inventory/WeaponButton.cs" type="Script" id=3]
+
+[node name="WeaponButton" type="TextureButton"]
+margin_right = 24.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 1 )
+texture_focused = ExtResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WeaponIcon" type="TextureRect" parent="."]
+margin_right = 24.0
+margin_bottom = 24.0
+[connection signal="pressed" from="." to="." method="_OnPressed"]
