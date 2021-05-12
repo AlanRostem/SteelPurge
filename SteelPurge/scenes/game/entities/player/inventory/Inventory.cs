@@ -3,13 +3,28 @@ using System;
 
 public class Inventory : Node2D
 {
-	
+
+	public enum InventoryWeapon
+	{
+		Falcon,
+		Firewall,
+		Joule,
+		Count,
+	}
+
 	public enum OrdinanceFuelType
 	{
 		Gasoline,
-		EmSlug,
-		_Count
+		EmCell,
+		Count
 	}
+
+	private static readonly PackedScene[] WeaponScenes =
+	{
+		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/Falcon.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/Firewall.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn"),
+	};
 	
 	private static readonly uint MaxGuns = 8;
 
@@ -33,6 +48,7 @@ public class Inventory : Node2D
 	}
 
 	private Weapon _weapon;
+	private InventoryWeapon _weaponId;
 
 	private Player _player;
 	private Label _scrapLabel;
@@ -46,6 +62,8 @@ public class Inventory : Node2D
 		40
 	};
 
+	private bool[] _weaponContainer = new bool[(int) InventoryWeapon.Count];
+
 	private OrdinanceFuelType _displayedFuel = OrdinanceFuelType.Gasoline;
 	
 	public override void _Ready()
@@ -57,14 +75,18 @@ public class Inventory : Node2D
 		_scrapLabel.Text = "x" + ScrapCount;
 		// _fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
 		
-		// TODO: Implement inventory properly
-		var defaultGun = (Weapon) DefaultGunScene.Instance();
-		EquippedWeapon = defaultGun;
-		// TODO: Update UI for scrap
-		for (var i = 0; i < (int) OrdinanceFuelType._Count; i++)
+		for (var i = 0; i < (int) OrdinanceFuelType.Count; i++)
 		{
 			// Update UI
 		}
+		
+		AddWeapon(InventoryWeapon.Falcon);
+		AddWeapon(InventoryWeapon.Firewall);
+		AddWeapon(InventoryWeapon.Joule);
+		
+		// TODO: Implement inventory properly
+		var defaultGun = (Weapon) DefaultGunScene.Instance();
+		EquippedWeapon = defaultGun;
 	}
 
 	private void KnowEquippedWeaponFuelType()
@@ -106,6 +128,36 @@ public class Inventory : Node2D
 		EquippedWeapon = weapon;
 	}
 
+	public void SwitchWeapon(InventoryWeapon weapon)
+	{
+		if (!HasWeapon(weapon)) return;
+		
+		_weapon.OnSwap();
+		_weapon.QueueFree();
+		
+		var newWeapon = (Weapon)WeaponScenes[(int)weapon].Instance();
+		
+		_weapon = newWeapon;
+		_weapon.OwnerPlayer = _player;
+		_weapon.OnEquip();
+
+		_weaponId = weapon;
+		
+		CallDeferred("add_child", _weapon);
+		CallDeferred(nameof(KnowEquippedWeaponFuelType));
+		_player.EmitSignal(nameof(Player.WeaponEquipped), newWeapon);
+	}
+	
+	public void AddWeapon(InventoryWeapon weapon)
+	{
+		_weaponContainer[(int) weapon] = true;
+	}
+
+	public bool HasWeapon(InventoryWeapon weapon)
+	{
+		return _weaponContainer[(int) weapon];
+	}
+	
 	public void DrainFuel(OrdinanceFuelType fuelType, uint drainPerTick)
 	{
 		OrdinanceFuels[(int) fuelType] -= drainPerTick;

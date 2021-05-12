@@ -6,13 +6,7 @@ public class World : Node2D
 {
 	public Player PlayerNode { get; private set; }
 
-	public EntityPool Entities
-	{
-		get
-		{
-			return CurrentSegment.Entities;
-		}
-	}
+	public EntityPool Entities => CurrentSegment.Entities;
 
 	[Export] public Array<PackedScene> SegmentScenes = new Array<PackedScene>();
 	
