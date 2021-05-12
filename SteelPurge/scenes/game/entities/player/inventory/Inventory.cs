@@ -43,13 +43,13 @@ public class Inventory : Node2D
 	
 	public uint ScrapCount = 0;
 
-	public uint[] OrdinanceFuels =
+	public readonly uint[] OrdinanceFuels =
 	{
 		40,
 		40
 	};
 
-	private bool[] _weaponContainer = new bool[(int) InventoryWeapon.Count];
+	private readonly bool[] _weaponContainer = new bool[(int) InventoryWeapon.Count];
 
 	private OrdinanceFuelType _displayedFuel = OrdinanceFuelType.Gasoline;
 	
@@ -127,7 +127,7 @@ public class Inventory : Node2D
 		CallDeferred(nameof(KnowEquippedWeaponFuelType));
 		_player.EmitSignal(nameof(Player.WeaponEquipped), newWeapon);
 	}
-	
+
 	public void AddWeapon(InventoryWeapon weapon)
 	{
 		_weaponContainer[(int) weapon] = true;
