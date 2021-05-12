@@ -15,7 +15,7 @@ public class WeaponWheel : Control
 	
 	public override void _Ready()
 	{
-		// Visible = false;
+		Visible = false;
 		_gridContainer = GetNode<GridContainer>("GridContainer");
 		_gridContainer.Columns = _weaponCount;
 		for (var i = 0; i < _weaponCount; i++)
@@ -29,7 +29,23 @@ public class WeaponWheel : Control
 
 	public override void _Process(float delta)
 	{
+		if (Input.IsActionJustPressed("weapon_wheel"))
+		{
+			if (!GetTree().Paused)
+			{
+				GetTree().Paused = true;
+				Visible = true;
+			}
+		}
 		
+		if (Input.IsActionJustReleased("weapon_wheel"))
+		{
+			if (GetTree().Paused)
+			{
+				GetTree().Paused = false;
+				Visible = false;
+			}
+		}
 	}
 
 	private void AddWeaponButton(Inventory.InventoryWeapon weapon)
