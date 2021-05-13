@@ -229,7 +229,7 @@ public class Player : KinematicEntity
 		MovingDirection = direction;
 		if (canSwapDirOnMove)
 		{
-			if (IsOnFloor() && Mathf.Sign(Velocity.x) != direction)
+			if (!IsSliding && IsOnFloor() && Mathf.Sign(Velocity.x) != direction)
 			{
 				Velocity.x *= -1;
 			}

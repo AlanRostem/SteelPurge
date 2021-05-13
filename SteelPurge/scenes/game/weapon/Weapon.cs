@@ -192,7 +192,7 @@ public class Weapon : Node2D
 			return;
 
 		var hitBox = (VulnerableHitbox) area;
-		hitBox.TakeHit(MeleeDamage);
+		hitBox.TakeHit(MeleeDamage, (int)OwnerPlayer.HorizontalLookingDirection);
 		EmitSignal(nameof(OnMeleeHit), hitBox);
 	}
 
