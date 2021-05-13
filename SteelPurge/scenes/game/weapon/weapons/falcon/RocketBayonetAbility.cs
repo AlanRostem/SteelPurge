@@ -19,7 +19,7 @@ public class RocketBayonetAbility : TacticalAbility
 		player.IsAimingDown = false;
 		player.CanAimDown = false;
 		player.CanSwapDirection = false;
-		
+		// TODO: Check if melee attacking and disable it to fix the abrupt stopping bug
 	}
 
 	public override void OnUpdate()
