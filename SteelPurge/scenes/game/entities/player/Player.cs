@@ -8,8 +8,8 @@ public class Player : KinematicEntity
 
 	private static readonly float MaxMovementSpeed = 250;
 
-	private static readonly float MaxWalkSpeed = 90;
-	private static readonly float WalkSpeedGround = 330;
+	private static readonly float MaxWalkSpeed = 100;
+	private static readonly float WalkSpeedGround = 360;
 	private static readonly float MaxWalkSpeedFiring = 35;
 
 	private static readonly float MaxJumpHeight = CustomTileMap.Size * 6;
@@ -228,7 +228,13 @@ public class Player : KinematicEntity
 		AccelerateX(direction * WalkSpeedGround, CurrentMaxSpeed, delta);
 		MovingDirection = direction;
 		if (canSwapDirOnMove)
+		{
+			if (IsOnFloor() && HorizontalLookingDirection != direction)
+			{
+				Velocity.x *= -1;
+			}
 			HorizontalLookingDirection = direction;
+		}
 		IsWalking = true;
 	}
 
