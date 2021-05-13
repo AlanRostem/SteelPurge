@@ -10,6 +10,7 @@ public class RocketBayonetAbility : TacticalAbility
 		var weapon = GetWeapon();
 		weapon.MeleeHitBoxEnabled = true;
 		weapon.CanFire = false;
+		weapon.CanMelee = false;
 		var player = weapon.OwnerPlayer;
 		player.Velocity.x = RocketSpeed * player.HorizontalLookingDirection;
 		player.Velocity.y = 0;
@@ -18,6 +19,7 @@ public class RocketBayonetAbility : TacticalAbility
 		player.IsAimingDown = false;
 		player.CanAimDown = false;
 		player.CanSwapDirection = false;
+		
 	}
 
 	public override void OnUpdate()
@@ -35,6 +37,7 @@ public class RocketBayonetAbility : TacticalAbility
 		var weapon = GetWeapon();
 		weapon.MeleeHitBoxEnabled = false;
 		weapon.CanFire = true;
+		weapon.CanMelee = true;
 
 		var player = weapon.OwnerPlayer;
 		player.IsGravityEnabled = true;

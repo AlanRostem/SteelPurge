@@ -44,6 +44,8 @@ public class Weapon : Node2D
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
 	public bool IsMeleeAttacking = false;
+	
+	public bool CanMelee = true;
 
 	public bool MeleeHitBoxEnabled
 	{
@@ -154,7 +156,7 @@ public class Weapon : Node2D
 			return;
 		}
 
-		if (Input.IsActionJustPressed("melee"))
+		if (Input.IsActionJustPressed("melee") && CanMelee)
 		{
 			IsMeleeAttacking = true;
 			_meleeShape.Disabled = false;
