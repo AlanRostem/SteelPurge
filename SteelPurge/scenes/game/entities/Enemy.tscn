@@ -7,8 +7,7 @@
 [ext_resource path="res://scenes/game/entities/enemies/EnemyHPLabel.cs" type="Script" id=5]
 [ext_resource path="res://scenes/game/components/CriticalHitbox.tscn" type="PackedScene" id=6]
 
-
-[sub_resource type="SegmentShape2D" id=4]
+[sub_resource type="SegmentShape2D" id=1]
 a = Vector2( -12, 0 )
 b = Vector2( 12, 0 )
 
@@ -22,7 +21,7 @@ script = ExtResource( 2 )
 [node name="CriticalHitbox" parent="." index="1" instance=ExtResource( 6 )]
 
 [node name="CriticalShape" type="CollisionShape2D" parent="CriticalHitbox" index="0"]
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 one_way_collision = true
 
 [node name="EnemyHPLabel" parent="." index="2" instance=ExtResource( 4 )]
