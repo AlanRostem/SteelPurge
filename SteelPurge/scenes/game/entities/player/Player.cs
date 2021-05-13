@@ -229,7 +229,7 @@ public class Player : KinematicEntity
 		MovingDirection = direction;
 		if (canSwapDirOnMove)
 		{
-			if (IsOnFloor() && HorizontalLookingDirection != direction)
+			if (IsOnFloor() && Mathf.Sign(Velocity.x) != direction)
 			{
 				Velocity.x *= -1;
 			}
@@ -321,7 +321,7 @@ public class Player : KinematicEntity
 		{
 			if (PlayerInventory.EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
 				CurrentMaxSpeed = MaxWalkSpeedFiring;
-			else if (PlayerInventory.EquippedWeapon.IsMeleeAttacking)
+			else if (PlayerInventory.EquippedWeapon.IsMeleeAttacking && isOnFloor)
 				Velocity.x = 0;
 			else
 				CurrentMaxSpeed = MaxWalkSpeed;
