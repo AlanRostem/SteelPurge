@@ -23,6 +23,11 @@ public class FiringDevice : WeaponAbility
 			projectile.DirectionAngle += 90;
 			projectile.VisualAngle += Mathf.Rad2Deg(90);
 		}
+		else if (player.IsAimingUp)
+		{
+			projectile.DirectionAngle -= 90;
+			projectile.VisualAngle -= Mathf.Rad2Deg(90);
+		}
 		else if (player.HorizontalLookingDirection < 0)
 		{
 			projectile.DirectionAngle = 180 - projectile.DirectionAngle;

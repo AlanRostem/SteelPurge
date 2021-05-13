@@ -41,6 +41,7 @@ public class Player : KinematicEntity
 	private bool _aim = false;
 	public bool CanTakeDamage = true;
 	public bool CanAimDown = true;
+	public bool CanSwapDirection = true;
 
 	public bool IsInvulnerable = false;
 	public bool IsAimingUp = false;
@@ -194,6 +195,7 @@ public class Player : KinematicEntity
 			_jump = false;
 			_slide = false;
 			IsAimingDown = false;
+			IsAimingUp = false;
 			return;
 		}
 
@@ -201,11 +203,14 @@ public class Player : KinematicEntity
 		_right = Input.IsActionPressed("right");
 		_jump = Input.IsActionPressed("jump");
 		_slide = Input.IsActionPressed("slide");
+		IsAimingUp = Input.IsActionPressed("aim_up");
 
 		if (Input.IsActionJustPressed("aim_down") && CanAimDown)
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
 			IsAimingDown = !IsAimingDown;
+			if (IsAimingDown)
+				IsAimingUp = false;
 		}
 
 		if (Input.IsActionJustPressed("aim"))
@@ -248,6 +253,7 @@ public class Player : KinematicEntity
 		_ProcessInput();
 
 		var canSwapDirOnMove = !PlayerInventory.EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
+		canSwapDirOnMove = canSwapDirOnMove && CanSwapDirection;
 		var velX = Mathf.Abs(Velocity.x);
 
 		if (_slide)

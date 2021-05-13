@@ -17,6 +17,7 @@ public class RocketBayonetAbility : TacticalAbility
 		player.CanMove = false;
 		player.IsAimingDown = false;
 		player.CanAimDown = false;
+		player.CanSwapDirection = false;
 	}
 
 	public override void OnUpdate()
@@ -39,6 +40,7 @@ public class RocketBayonetAbility : TacticalAbility
 		player.IsGravityEnabled = true;
 		player.CanMove = true;
 		player.CanAimDown = true;
+		player.CanSwapDirection = true;
 	}
 	
 	private void _OnFalconOnMeleeHit(VulnerableHitbox hitBox)
