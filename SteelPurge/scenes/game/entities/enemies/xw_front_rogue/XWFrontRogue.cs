@@ -40,7 +40,7 @@ public class XWFrontRogue : Enemy
 		{
 			_isRushing = true;
 			_rushDelayTimer.Start();
-			Velocity.x = 0;
+			MoveX(0);
 			Direction = Mathf.Sign(player.Position.x - Position.x);
 		} 
 		else if (_canRush)
@@ -52,7 +52,7 @@ public class XWFrontRogue : Enemy
 			{
 				_canRush = false;
 				_rushDelayTimer.Start();
-				Velocity.x = 0;
+				StopMovingX();
 				Direction = newDirection;
 			}
 		}

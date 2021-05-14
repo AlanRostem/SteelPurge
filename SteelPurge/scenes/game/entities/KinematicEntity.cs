@@ -106,7 +106,15 @@ public class KinematicEntity : KinematicBody2D
 	}
 
 
-
+	/// <summary>
+	/// When CanMove == true the entity's x-velocity is set to zero
+	/// </summary>
+	public void StopMovingX()
+	{
+		if (CanMove)
+			Velocity.x = 0;
+	}
+	
 	public void AccelerateX(float x, float maxSpeed, float delta)
 	{
 		if (!CanMove) return;

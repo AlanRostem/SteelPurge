@@ -13,20 +13,25 @@ public class Enemy : KinematicEntity
 
 	[Export] public uint BaseHitPoints = 45;
 	[Export] public float PlayerDetectionRange = 1000;
+	[Export] public float KnockBackSpeed = 300;
+	
 	private bool _isDead;
 	private bool _dropScrap;
+	private bool _isKnockedBack;
 	public Player DetectedPlayer {get; private set; }
+	private Timer _meleeAffectedKnockBackTimer;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		Health = BaseHitPoints;
+		_meleeAffectedKnockBackTimer = GetNode<Timer>("MeleeAffectedKnockBackTimer");
 	}
 
 	public virtual void OnDie()
 	{
 	}
-
+	
 	public override void _Process(float delta)
 	{
 		base._Process(delta);
@@ -66,6 +71,13 @@ public class Enemy : KinematicEntity
 			_isDead = true;
 
 			Health = 0;
+			if (direction != 0)
+			{
+				ApplyForce(new Vector2(direction * KnockBackSpeed, 0));
+				CanMove = false;
+				_isKnockedBack = true;
+				_meleeAffectedKnockBackTimer.Start();
+			}
 		}
 		else
 		{
@@ -87,5 +99,15 @@ public class Enemy : KinematicEntity
 	protected virtual void _ProcessWhenPlayerNotSeen()
 	{
 		
+	}
+	
+	private void _OnKnockBackEnd()
+	{
+		if (_isKnockedBack) 
+		{
+			CanMove = true;	
+		}
+		
+		_isKnockedBack = false;
 	}
 }

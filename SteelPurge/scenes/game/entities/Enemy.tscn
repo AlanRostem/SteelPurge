@@ -36,6 +36,11 @@ script = ExtResource( 5 )
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="." index="3"]
 process_parent = true
 physics_process_parent = true
+
+[node name="MeleeAffectedKnockBackTimer" type="Timer" parent="." index="4"]
+wait_time = 0.1
+one_shot = true
 [connection signal="HealthChanged" from="." to="EnemyHPLabel" method="_OnEnemyHealthChanged"]
 [connection signal="Hit" from="VulnerableHitbox" to="." method="_OnVulnerableHitboxHit"]
 [connection signal="Hit" from="CriticalHitbox" to="." method="_OnVulnerableHitboxHit"]
+[connection signal="timeout" from="MeleeAffectedKnockBackTimer" to="." method="_OnKnockBackEnd"]

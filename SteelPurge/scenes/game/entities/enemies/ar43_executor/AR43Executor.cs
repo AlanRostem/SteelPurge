@@ -30,14 +30,14 @@ public class AR43Executor : Enemy
 	{
 		Direction = Mathf.Sign(player.Position.x - Position.x);
 
-		Velocity.x = 0;
+		StopMovingX();
 		if (_startWalking && _groundScanner.IsColliding())
-			Velocity.x = Direction * WalkSpeed;
+			MoveX(Direction * WalkSpeed);
 	}
 
 	protected override void _ProcessWhenPlayerNotSeen()
 	{
-		Velocity.x = 0;
+		StopMovingX();
 	}
 
 	private void _OnApproach()
