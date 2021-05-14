@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class RocketBayonetAbility : TacticalAbility
 {
@@ -11,6 +10,8 @@ public class RocketBayonetAbility : TacticalAbility
 		weapon.MeleeHitBoxEnabled = true;
 		weapon.CanFire = false;
 		weapon.CanMelee = false;
+		weapon.IsMeleeAttacking = false;
+
 		var player = weapon.OwnerPlayer;
 		player.Velocity.x = RocketSpeed * player.HorizontalLookingDirection;
 		player.Velocity.y = 0;
@@ -19,7 +20,6 @@ public class RocketBayonetAbility : TacticalAbility
 		player.IsAimingDown = false;
 		player.CanAimDown = false;
 		player.CanSwapDirection = false;
-		weapon.IsMeleeAttacking = false;
 	}
 
 	public override void OnUpdate()

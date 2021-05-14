@@ -14,7 +14,9 @@ public class FiringDevice : WeaponAbility
 	{
 		var player = GetWeapon().OwnerPlayer;
 		var world = player.ParentWorld.Entities;
+		
 		var projectile = world.SpawnEntityDeferred<Projectile>(projectileScene, player.Position);
+		
 		projectile.DirectionAngle = Mathf.Rad2Deg(angle);
 		projectile.VisualAngle = Mathf.Rad2Deg(angle);
 		projectile.DirectionSign = GetWeapon().Scale.x;
