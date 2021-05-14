@@ -71,6 +71,12 @@ public class Enemy : KinematicEntity
 			_isDead = true;
 
 			Health = 0;
+		
+		}
+		else
+		{
+			_dropScrap = true;
+			Health -= damage;
 			if (direction != 0)
 			{
 				ApplyForce(new Vector2(direction * KnockBackSpeed, 0));
@@ -78,11 +84,6 @@ public class Enemy : KinematicEntity
 				_isKnockedBack = true;
 				_meleeAffectedKnockBackTimer.Start();
 			}
-		}
-		else
-		{
-			_dropScrap = true;
-			Health -= damage;
 		}
 	}
 
