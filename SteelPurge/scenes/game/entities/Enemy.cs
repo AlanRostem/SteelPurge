@@ -49,11 +49,11 @@ public class Enemy : KinematicEntity
 		{
 			if (DetectedPlayer is null)
 				DetectedPlayer = ParentWorld.PlayerNode;
-			_WhenPlayerDetected(ParentWorld.PlayerNode);
+			_ProcessWhenPlayerDetected(ParentWorld.PlayerNode);
 		}		
 		else
 		{
-			_WhenPlayerNotSeen();
+			_ProcessWhenPlayerNotSeen();
 		}
 	}
 
@@ -79,12 +79,12 @@ public class Enemy : KinematicEntity
 		TakeDamage(damage, knockBackDirection);
 	}
 
-	protected virtual void _WhenPlayerDetected(Player player)
+	protected virtual void _ProcessWhenPlayerDetected(Player player)
 	{
 		
 	}
 
-	protected virtual void _WhenPlayerNotSeen()
+	protected virtual void _ProcessWhenPlayerNotSeen()
 	{
 		
 	}

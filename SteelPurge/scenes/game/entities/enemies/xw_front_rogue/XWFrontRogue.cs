@@ -34,7 +34,7 @@ public class XWFrontRogue : Enemy
 		_rushDelayTimer = GetNode<Timer>("XWFrontRogueRushDelayTimer");
 	}
 
-	protected override void _WhenPlayerDetected(Player player)
+	protected override void _ProcessWhenPlayerDetected(Player player)
 	{
 		if (!_isRushing)
 		{
@@ -58,7 +58,7 @@ public class XWFrontRogue : Enemy
 		}
 	}
 
-	protected override void _WhenPlayerNotSeen()
+	protected override void _ProcessWhenPlayerNotSeen()
 	{
 		if (_isRushing)
 		{

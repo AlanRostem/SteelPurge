@@ -26,7 +26,7 @@ public class AR43Executor : Enemy
 		_groundScanner = GetNode<RayCast2D>("GroundScanner");
 	}
 	
-	protected override void _WhenPlayerDetected(Player player)
+	protected override void _ProcessWhenPlayerDetected(Player player)
 	{
 		Direction = Mathf.Sign(player.Position.x - Position.x);
 
@@ -35,7 +35,7 @@ public class AR43Executor : Enemy
 			Velocity.x = Direction * WalkSpeed;
 	}
 
-	protected override void _WhenPlayerNotSeen()
+	protected override void _ProcessWhenPlayerNotSeen()
 	{
 		Velocity.x = 0;
 	}

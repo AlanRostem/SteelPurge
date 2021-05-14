@@ -14,8 +14,6 @@ public class Player : KinematicEntity
 
 	private static readonly float MaxJumpHeight = CustomTileMap.Size * 6;
 	private static readonly float MinJumpHeight = CustomTileMap.Size;
-	private static readonly float JumpHeightReduction = CustomTileMap.Size * 2;
-	private static readonly float JumpHeightRegeneration = CustomTileMap.Size * 10;
 	private static readonly float JumpDuration = .5f;
 
 	private float _currentJumpSpeed;
