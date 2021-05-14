@@ -57,6 +57,7 @@ public class Player : KinematicEntity
 	private CollisionShape2D _lowerBodyShape;
 	private CollisionShape2D _roofDetectorShape;
 	private Timer _respawnTimer;
+	private Timer _slideDurationTimer;
 	public Inventory PlayerInventory;
 
 
@@ -69,6 +70,7 @@ public class Player : KinematicEntity
 		_lowerBodyShape = GetNode<CollisionShape2D>("LowerBodyShape");
 		_roofDetectorShape = GetNode<CollisionShape2D>("RoofDetector/UpperBodyShape");
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
+		_slideDurationTimer = GetNode<Timer>("SlideDurationTimer");
 
 		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
 		_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * MaxJumpHeight);
@@ -125,7 +127,7 @@ public class Player : KinematicEntity
 		Health = 100;
 		Velocity = new Vector2();
 		ClearStatusEffects();
-		
+
 		// TODO: Reset invulnerability 
 	}
 
@@ -183,6 +185,7 @@ public class Player : KinematicEntity
 	}
 
 	private bool _slide = false;
+	private bool _canCancelSlide;
 
 	private void _ProcessInput()
 	{
@@ -231,8 +234,10 @@ public class Player : KinematicEntity
 			{
 				Velocity.x *= -1;
 			}
+
 			HorizontalLookingDirection = direction;
 		}
+
 		IsWalking = true;
 	}
 
@@ -244,7 +249,7 @@ public class Player : KinematicEntity
 
 	void Stand()
 	{
-		if (_isRoofAbove)
+		if (_isRoofAbove || !_canCancelSlide)
 			return;
 		IsSliding = false;
 		_roofDetectorShape.SetDeferred("disabled", true);
@@ -253,6 +258,7 @@ public class Player : KinematicEntity
 
 	protected override void _OnMovement(float delta)
 	{
+		GD.Print(IsSliding);
 		bool isOnFloor = IsOnFloor();
 		_ProcessInput();
 
@@ -270,6 +276,8 @@ public class Player : KinematicEntity
 					if (CurrentSlideMagnitude > MaxCrouchSpeed)
 					{
 						CurrentSlideMagnitude -= SlideDecreasePerSlide;
+						_canCancelSlide = false;
+						_slideDurationTimer.Start();
 					}
 					else
 					{
@@ -388,6 +396,12 @@ public class Player : KinematicEntity
 				}
 			}
 
+			if (IsSliding)
+			{
+				_canCancelSlide = true;
+				IsSliding = false;
+				_slideDurationTimer.Stop();
+			}
 			MoveY(-_currentJumpSpeed);
 		}
 	}
@@ -447,7 +461,7 @@ public class Player : KinematicEntity
 	{
 		_isRoofAbove = false;
 	}
-	
+
 	private void _EndRespawnSequence()
 	{
 		_upperBodyShape.SetDeferred("disabled", false);
@@ -459,5 +473,11 @@ public class Player : KinematicEntity
 	public bool IsMovingFast()
 	{
 		return Mathf.Abs(Velocity.x) >= MaxWalkSpeed - 0.1f;
+	}
+
+
+	private void _OnCanCancelSlide()
+	{
+		_canCancelSlide = true;
 	}
 }

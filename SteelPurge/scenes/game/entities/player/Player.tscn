@@ -81,7 +81,11 @@ wait_time = 3.0
 one_shot = true
 script = ExtResource( 17 )
 
-[node name="RoofDetector" type="Area2D" parent="." index="10"]
+[node name="SlideDurationTimer" type="Timer" parent="." index="10"]
+wait_time = 0.2
+one_shot = true
+
+[node name="RoofDetector" type="Area2D" parent="." index="11"]
 collision_layer = 0
 collision_mask = 33
 
@@ -90,10 +94,10 @@ position = Vector2( 0, -2 )
 shape = SubResource( 1 )
 disabled = true
 
-[node name="RespawnTimer" type="Timer" parent="." index="11"]
+[node name="RespawnTimer" type="Timer" parent="." index="12"]
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="12"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="13"]
 
 [node name="HPBar" type="TextureProgress" parent="CanvasLayer" index="0"]
 anchor_top = 0.5
@@ -121,6 +125,7 @@ __meta__ = {
 [connection signal="timeout" from="AimSwapCooldownTimer" to="." method="_OnSwapTimeOver"]
 [connection signal="timeout" from="DamageReceptionCooldownTimer" to="." method="_OnCanTakeDamage"]
 [connection signal="timeout" from="InvincibilityCooldownTimer" to="." method="_OnInvincibilityEnd"]
+[connection signal="timeout" from="SlideDurationTimer" to="." method="_OnCanCancelSlide"]
 [connection signal="body_entered" from="RoofDetector" to="." method="_OnRoofDetectorBodyEntered"]
 [connection signal="body_exited" from="RoofDetector" to="." method="_OnRoofDetectorBodyExited"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_EndRespawnSequence"]
