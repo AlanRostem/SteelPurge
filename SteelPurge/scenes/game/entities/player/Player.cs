@@ -6,6 +6,7 @@ public class Player : KinematicEntity
 	public static uint ScrapDepletionPerDeath = 50;
 	public static readonly uint HealthRegenCount = 15;
 
+	private static readonly float KnockBackSpeed = 100;
 	private static readonly float MaxMovementSpeed = 250;
 
 	private static readonly float MaxWalkSpeed = 100;
@@ -148,7 +149,7 @@ public class Player : KinematicEntity
 		{
 			if (direction != 0)
 			{
-				Velocity = (new Vector2(MaxWalkSpeed * 2 * direction, -_currentJumpSpeed / 2));
+				Velocity = (new Vector2(KnockBackSpeed * direction, -_currentJumpSpeed / 2));
 				if (!CanTakeDamage) return;
 
 				if (PlayerInventory.EquippedWeapon.TacticalEnhancement.IsActive)
