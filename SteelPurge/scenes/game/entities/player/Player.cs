@@ -185,7 +185,7 @@ public class Player : KinematicEntity
 	}
 
 	private bool _slide = false;
-	private bool _canCancelSlide;
+	private bool _canCancelSlide = true;
 
 	private void _ProcessInput()
 	{
@@ -203,9 +203,13 @@ public class Player : KinematicEntity
 		_left = Input.IsActionPressed("left");
 		_right = Input.IsActionPressed("right");
 		_jump = Input.IsActionPressed("jump");
-		_slide = Input.IsActionPressed("slide");
 		IsAimingUp = Input.IsActionPressed("aim_up");
 
+		if (_canCancelSlide)
+		{
+			_slide = Input.IsActionPressed("slide");
+		}
+		
 		if (Input.IsActionJustPressed("aim_down") && CanAimDown)
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
