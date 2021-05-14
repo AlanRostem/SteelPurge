@@ -18,7 +18,7 @@
 [ext_resource path="res://scenes/game/entities/player/InvincibilityCooldownTimer.cs" type="Script" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 8 )
+extents = Vector2( 6, 7 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 6, 10 )
