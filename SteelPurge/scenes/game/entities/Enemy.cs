@@ -79,7 +79,7 @@ public class Enemy : KinematicEntity
 			Health -= damage;
 			if (direction.x != 0 || direction.y != 0)
 			{
-				ApplyForce(new Vector2(direction.x * KnockBackSpeed, 0));
+				ApplyForce(direction * KnockBackSpeed);
 				CanMove = false;
 				_isKnockedBack = true;
 				_meleeAffectedKnockBackTimer.Start();
