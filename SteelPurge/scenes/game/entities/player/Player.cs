@@ -248,9 +248,6 @@ public class Player : KinematicEntity
 		var shape = (RectangleShape2D)_bodyShape.Shape;
 		shape.Extents = new Vector2(shape.Extents.x, 5);
 		_bodyShape.Position = new Vector2(0, 5);
-		
-		// TODO
-		// _upperBodyShape.SetDeferred("disabled", true);
 	}
 
 	void Stand()
@@ -262,9 +259,6 @@ public class Player : KinematicEntity
 		var shape = (RectangleShape2D)_bodyShape.Shape;
 		shape.Extents = new Vector2(shape.Extents.x, 10);
 		_bodyShape.Position = new Vector2(0, 0);
-		
-		// TODO
-		// _upperBodyShape.SetDeferred("disabled", false);
 	}
 
 	protected override void _OnMovement(float delta)
