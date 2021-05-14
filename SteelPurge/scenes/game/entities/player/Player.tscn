@@ -20,8 +20,8 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 8 )
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 6.0
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6, 10 )
 
 [node name="Player" instance=ExtResource( 1 )]
 z_index = 1000
@@ -37,18 +37,10 @@ animation = "aim_down"
 playing = true
 script = ExtResource( 4 )
 
-[node name="UpperBodyShape" type="CollisionShape2D" parent="." index="1"]
-position = Vector2( 0, -2 )
-shape = SubResource( 1 )
-
-[node name="LowerBodyShape" type="CollisionShape2D" parent="." index="2"]
-position = Vector2( 0, 6 )
-shape = SubResource( 2 )
-
-[node name="Inventory" parent="." index="3" instance=ExtResource( 5 )]
+[node name="Inventory" parent="." index="1" instance=ExtResource( 5 )]
 DefaultGunScene = ExtResource( 7 )
 
-[node name="PlayerCamera" type="Camera2D" parent="." index="4"]
+[node name="PlayerCamera" type="Camera2D" parent="." index="2"]
 current = true
 limit_top = 0
 limit_bottom = 0
@@ -58,46 +50,46 @@ drag_margin_left = 0.1
 drag_margin_right = 0.1
 script = ExtResource( 6 )
 
-[node name="RegenCooldownTimer" type="Timer" parent="." index="5"]
+[node name="RegenCooldownTimer" type="Timer" parent="." index="3"]
 wait_time = 4.0
 one_shot = true
 script = ExtResource( 13 )
 
-[node name="RegenCycleTimer" type="Timer" parent="." index="6"]
+[node name="RegenCycleTimer" type="Timer" parent="." index="4"]
 wait_time = 1.2
 script = ExtResource( 14 )
 
-[node name="AimSwapCooldownTimer" type="Timer" parent="." index="7"]
+[node name="AimSwapCooldownTimer" type="Timer" parent="." index="5"]
 one_shot = true
 script = ExtResource( 15 )
 
-[node name="DamageReceptionCooldownTimer" type="Timer" parent="." index="8"]
+[node name="DamageReceptionCooldownTimer" type="Timer" parent="." index="6"]
 wait_time = 0.5
 one_shot = true
 script = ExtResource( 16 )
 
-[node name="InvincibilityCooldownTimer" type="Timer" parent="." index="9"]
+[node name="InvincibilityCooldownTimer" type="Timer" parent="." index="7"]
 wait_time = 3.0
 one_shot = true
 script = ExtResource( 17 )
 
-[node name="SlideDurationTimer" type="Timer" parent="." index="10"]
+[node name="SlideDurationTimer" type="Timer" parent="." index="8"]
 wait_time = 0.72
 one_shot = true
 
-[node name="RoofDetector" type="Area2D" parent="." index="11"]
+[node name="RoofDetector" type="Area2D" parent="." index="9"]
 collision_layer = 0
 collision_mask = 33
 
 [node name="UpperBodyShape" type="CollisionShape2D" parent="RoofDetector" index="0"]
-position = Vector2( 0, -2 )
+position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 disabled = true
 
-[node name="RespawnTimer" type="Timer" parent="." index="12"]
+[node name="RespawnTimer" type="Timer" parent="." index="10"]
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="13"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="11"]
 
 [node name="HPBar" type="TextureProgress" parent="CanvasLayer" index="0"]
 anchor_top = 0.5
@@ -113,6 +105,10 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BodyShape" type="CollisionShape2D" parent="." index="12"]
+position = Vector2( 0, 1 )
+shape = SubResource( 2 )
 [connection signal="CancelRegen" from="." to="RegenCycleTimer" method="_OnCancelRegen"]
 [connection signal="HealthChanged" from="." to="CanvasLayer/HPBar" method="_OnPlayerHealthChanged"]
 [connection signal="TriggerAimSwap" from="." to="AimSwapCooldownTimer" method="_OnSwap"]

@@ -53,8 +53,7 @@ public class Player : KinematicEntity
 	public bool IsSliding = false;
 	private bool _isRoofAbove = false;
 
-	private CollisionShape2D _upperBodyShape;
-	private CollisionShape2D _lowerBodyShape;
+	private CollisionShape2D _bodyShape;
 	private CollisionShape2D _roofDetectorShape;
 	private Timer _respawnTimer;
 	private Timer _slideDurationTimer;
@@ -66,8 +65,7 @@ public class Player : KinematicEntity
 		ParentWorld = GetParent<World>();
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
-		_upperBodyShape = GetNode<CollisionShape2D>("UpperBodyShape");
-		_lowerBodyShape = GetNode<CollisionShape2D>("LowerBodyShape");
+		_bodyShape = GetNode<CollisionShape2D>("BodyShape");
 		_roofDetectorShape = GetNode<CollisionShape2D>("RoofDetector/UpperBodyShape");
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
 		_slideDurationTimer = GetNode<Timer>("SlideDurationTimer");
@@ -137,8 +135,7 @@ public class Player : KinematicEntity
 	/// </summary>
 	public void InitiateRespawnSequence()
 	{
-		_upperBodyShape.SetDeferred("disabled", true);
-		_lowerBodyShape.SetDeferred("disabled", true);
+		_bodyShape.SetDeferred("disabled", true);
 		IsGravityEnabled = false;
 		CanMove = false;
 		_respawnTimer.Start();
@@ -248,7 +245,12 @@ public class Player : KinematicEntity
 	void Crouch()
 	{
 		_roofDetectorShape.SetDeferred("disabled", false);
-		_upperBodyShape.SetDeferred("disabled", true);
+		var shape = (RectangleShape2D)_bodyShape.Shape;
+		shape.Extents = new Vector2(shape.Extents.x, 5);
+		_bodyShape.Position = new Vector2(0, 5);
+		
+		// TODO
+		// _upperBodyShape.SetDeferred("disabled", true);
 	}
 
 	void Stand()
@@ -257,7 +259,12 @@ public class Player : KinematicEntity
 			return;
 		IsSliding = false;
 		_roofDetectorShape.SetDeferred("disabled", true);
-		_upperBodyShape.SetDeferred("disabled", false);
+		var shape = (RectangleShape2D)_bodyShape.Shape;
+		shape.Extents = new Vector2(shape.Extents.x, 10);
+		_bodyShape.Position = new Vector2(0, 0);
+		
+		// TODO
+		// _upperBodyShape.SetDeferred("disabled", false);
 	}
 
 	protected override void _OnMovement(float delta)
@@ -468,8 +475,7 @@ public class Player : KinematicEntity
 
 	private void _EndRespawnSequence()
 	{
-		_upperBodyShape.SetDeferred("disabled", false);
-		_lowerBodyShape.SetDeferred("disabled", false);
+		_bodyShape.SetDeferred("disabled", false);
 		IsGravityEnabled = true;
 		CanMove = true;
 	}
