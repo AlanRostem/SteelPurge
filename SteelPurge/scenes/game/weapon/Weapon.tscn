@@ -14,7 +14,7 @@ PlayerSpriteFrames = ExtResource( 1 )
 script = ExtResource( 4 )
 
 [node name="MeleeCooldownTimer" type="Timer" parent="."]
-wait_time = 0.55
+wait_time = 0.3
 one_shot = true
 
 [node name="MeleeDurationTimer" type="Timer" parent="."]
