@@ -82,7 +82,7 @@ one_shot = true
 script = ExtResource( 17 )
 
 [node name="SlideDurationTimer" type="Timer" parent="." index="10"]
-wait_time = 0.2
+wait_time = 0.72
 one_shot = true
 
 [node name="RoofDetector" type="Area2D" parent="." index="11"]
