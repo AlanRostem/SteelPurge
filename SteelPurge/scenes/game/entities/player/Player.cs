@@ -455,4 +455,9 @@ public class Player : KinematicEntity
 		IsGravityEnabled = true;
 		CanMove = true;
 	}
+
+	public bool IsMovingFast()
+	{
+		return Mathf.Abs(Velocity.x) >= MaxWalkSpeed - 0.1f;
+	}
 }

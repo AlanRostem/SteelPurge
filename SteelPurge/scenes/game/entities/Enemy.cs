@@ -67,11 +67,8 @@ public class Enemy : KinematicEntity
 		if (damage >= Health)
 		{
 			OnDie();
-
 			_isDead = true;
-
 			Health = 0;
-		
 		}
 		else
 		{
