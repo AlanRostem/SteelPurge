@@ -70,7 +70,7 @@ public class Projectile : KinematicBody2D
 	private void _OnVulnerableHitBoxEntered(object area)
 	{
 		var hitBox = (VulnerableHitbox) area;
-		hitBox.TakeHit(OwnerWeapon.DamagePerShot);
+		hitBox.TakeHit(OwnerWeapon.DamagePerShot, Vector2.Zero);
 		OwnerWeapon.EmitSignal(nameof(Weapon.DamageDealt), OwnerWeapon.DamagePerShot, hitBox);
 		_OnHit();
 		if (!_hasDisappeared && DeleteOnEnemyHit)

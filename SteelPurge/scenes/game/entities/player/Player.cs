@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public class Player : KinematicEntity
@@ -143,13 +142,13 @@ public class Player : KinematicEntity
 		_respawnTimer.Start();
 	}
 
-	public override void TakeDamage(uint damage, int direction = 0)
+	public override void TakeDamage(uint damage, Vector2 direction)
 	{
 		if (!IsInvulnerable)
 		{
-			if (direction != 0)
+			if (direction.x != 0 || direction.y != 0)
 			{
-				Velocity = (new Vector2(KnockBackSpeed * direction, -_currentJumpSpeed / 2));
+				Velocity = (new Vector2(KnockBackSpeed * direction.x, -_currentJumpSpeed / 2));
 				if (!CanTakeDamage) return;
 
 				if (PlayerInventory.EquippedWeapon.TacticalEnhancement.IsActive)
@@ -434,7 +433,7 @@ public class Player : KinematicEntity
 	}
 
 
-	private void _OnHitBoxHit(uint damage, int direction)
+	private void _OnHitBoxHit(uint damage, Vector2 direction)
 	{
 		TakeDamage(damage, direction);
 	}

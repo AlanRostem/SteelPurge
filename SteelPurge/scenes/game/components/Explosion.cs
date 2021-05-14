@@ -9,7 +9,7 @@ public class Explosion : Area2D
 	private void _OnVulnerableHitBoxHit(object area)
 	{
 		var hitBox = (VulnerableHitbox)area;
-		hitBox.TakeHit(Damage);
+		hitBox.TakeHit(Damage, Vector2.Zero);
 		if (hitBox.GetParent() is KinematicEntity entity)
 		{
 			var angle = Position.AngleToPoint(entity.Position);
@@ -22,7 +22,7 @@ public class Explosion : Area2D
 	{
 		if (body is Player player)
 		{
-			player.TakeDamage(Damage);
+			player.TakeDamage(Damage, Vector2.Zero);
 			var angle = Position.AngleToPoint(player.Position);
 			var force = new Vector2(-Mathf.Cos(angle) * 0.2f, -Mathf.Sin(angle)) * KnockBackForce *
 						GetPhysicsProcessDeltaTime();

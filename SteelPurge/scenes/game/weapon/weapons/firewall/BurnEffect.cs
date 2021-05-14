@@ -14,7 +14,7 @@ public class BurnEffect : StatusEffect
 		if (_currentDamageTime >= DamageInterval)
 		{
 			_currentDamageTime = 0;
-			Subject.TakeDamage(DamagePerTick);
+			Subject.TakeDamage(DamagePerTick, Vector2.Zero);
 		}
 	}
 }

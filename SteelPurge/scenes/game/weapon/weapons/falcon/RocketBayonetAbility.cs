@@ -49,7 +49,7 @@ public class RocketBayonetAbility : TacticalAbility
 	private void _OnFalconOnMeleeHit(VulnerableHitbox hitBox)
 	{
 		if (!IsActive) return;
-		hitBox.TakeHit(BayonetDamage, (int)GetWeapon().OwnerPlayer.HorizontalLookingDirection);
+		hitBox.TakeHit(BayonetDamage, new Vector2(GetWeapon().OwnerPlayer.HorizontalLookingDirection, 0));
 		DeActivate();
 		var player = GetWeapon().OwnerPlayer;
 		player.Velocity.x = 0;

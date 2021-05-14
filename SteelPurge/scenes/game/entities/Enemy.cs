@@ -62,7 +62,7 @@ public class Enemy : KinematicEntity
 		}
 	}
 
-	public override void TakeDamage(uint damage, int direction = 0)
+	public override void TakeDamage(uint damage, Vector2 direction)
 	{
 		if (damage >= Health)
 		{
@@ -77,9 +77,9 @@ public class Enemy : KinematicEntity
 		{
 			_dropScrap = true;
 			Health -= damage;
-			if (direction != 0)
+			if (direction.x != 0 || direction.y != 0)
 			{
-				ApplyForce(new Vector2(direction * KnockBackSpeed, 0));
+				ApplyForce(new Vector2(direction.x * KnockBackSpeed, 0));
 				CanMove = false;
 				_isKnockedBack = true;
 				_meleeAffectedKnockBackTimer.Start();
@@ -87,7 +87,7 @@ public class Enemy : KinematicEntity
 		}
 	}
 
-	private void _OnVulnerableHitboxHit(uint damage, int knockBackDirection)
+	private void _OnVulnerableHitboxHit(uint damage, Vector2 knockBackDirection)
 	{
 		TakeDamage(damage, knockBackDirection);
 	}

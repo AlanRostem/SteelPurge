@@ -35,7 +35,7 @@ public class HostileProjectile : KinematicBody2D
 	{
 		if (body is Player player)
 		{
-			player.TakeDamage(Damage, DamageDirection);
+			player.TakeDamage(Damage, new Vector2(DamageDirection, 0));
 		}
 		
 		if (!_hasDisappeared)

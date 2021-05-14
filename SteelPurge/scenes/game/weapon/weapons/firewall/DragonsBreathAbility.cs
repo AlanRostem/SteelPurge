@@ -38,7 +38,7 @@ public class DragonsBreathAbility : ResourceAbility
 		foreach (var pair in _hitBoxes)
 		{
 			var hitBox = pair.Value;
-			hitBox.TakeHit(DamagePerTick);
+			hitBox.TakeHit(DamagePerTick, Vector2.Zero);
 		}
 	}
 
