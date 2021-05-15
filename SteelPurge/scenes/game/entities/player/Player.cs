@@ -371,6 +371,14 @@ public class Player : KinematicEntity
 		if (Velocity.y < -_minJumpSpeed && Input.IsActionJustReleased("jump"))
 			MoveY(-_minJumpSpeed);
 
+		if (IsSliding && IsMovingFast())
+		{
+			if (!PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled)
+				PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = true;
+		}
+		else if (PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled && !PlayerInventory.EquippedWeapon.IsMeleeAttacking)
+			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
+
 		if (!isOnFloor)
 		{
 			GravityVector = DefaultGravity;
