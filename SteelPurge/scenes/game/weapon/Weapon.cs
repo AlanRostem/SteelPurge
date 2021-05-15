@@ -81,8 +81,6 @@ public class Weapon : Node2D
 		SetProcess(true);
 		if (Scale.x != OwnerPlayer.HorizontalLookingDirection)
 			Scale = new Vector2(OwnerPlayer.HorizontalLookingDirection, 1);
-		if (Rotation != OwnerPlayer.AimAngle)
-			Rotation = OwnerPlayer.AimAngle;
 		Equipped = true;
 	}
 
@@ -131,24 +129,12 @@ public class Weapon : Node2D
 	public override void _Process(float delta)
 	{
 		if (OwnerPlayer is null) return;
-		if (Scale.x != OwnerPlayer.HorizontalLookingDirection)
-		{
-			Scale = new Vector2(OwnerPlayer.HorizontalLookingDirection, 1);
-		}
 
 		_isHoldingTrigger = Input.IsActionPressed("fire");
 
-		if (OwnerPlayer.IsAimingDown)
+		if (Mathf.Sign(_meleeShape.Position.x) != OwnerPlayer.HorizontalLookingDirection)
 		{
-			Rotation = OwnerPlayer.HorizontalLookingDirection * Mathf.Pi / 2f;
-		}
-		else if (OwnerPlayer.IsAimingUp)
-		{
-			Rotation = -OwnerPlayer.HorizontalLookingDirection * Mathf.Pi / 2f;
-		}
-		else
-		{
-			Rotation = 0;
+			_meleeShape.Position = new Vector2(OwnerPlayer.HorizontalLookingDirection * Mathf.Abs(_meleeShape.Position.x), _meleeShape.Position.y);
 		}
 
 		if (IsMeleeAttacking)

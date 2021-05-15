@@ -412,7 +412,7 @@ public class Player : KinematicEntity
 			if (IsSliding)
 			{
 				_canCancelSlide = true;
-				IsSliding = false;
+				Stand();
 				_slideDurationTimer.Stop();
 			}
 			MoveY(-_currentJumpSpeed);
