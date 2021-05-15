@@ -263,7 +263,6 @@ public class Player : KinematicEntity
 
 	protected override void _OnMovement(float delta)
 	{
-		GD.Print(IsSliding);
 		bool isOnFloor = IsOnFloor();
 		_ProcessInput();
 
