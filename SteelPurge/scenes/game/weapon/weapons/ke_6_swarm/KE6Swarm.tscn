@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game/weapon/Weapon.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/texture/weapon/ke_6_swarm/ke_6_swarm.png" type="Texture" id=2]
+[ext_resource path="res://scenes/game/weapon/WeaponTestSprite.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/weapon/ability/firing_device/FiringDevice.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/weapon/weapons/ke_6_swarm/OrbFiringDevice.cs" type="Script" id=4]
 [ext_resource path="res://scenes/game/weapon/weapons/ke_6_swarm/KineticBubbleAbility.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/texture/ui/icon/joule_weapon_inventory.png" type="Texture" id=6]
 
 [node name="KE6Swarm" instance=ExtResource( 1 )]
 DisplayName = "Joule"
@@ -21,5 +22,5 @@ FuelRequirement = 10
 CoolDown = 3.0
 Duration = 8.0
 
-[node name="Sprite" type="Sprite" parent="." index="3"]
-texture = ExtResource( 2 )
+[node name="WeaponTestSprite" parent="." index="5" instance=ExtResource( 2 )]
+texture = ExtResource( 6 )
