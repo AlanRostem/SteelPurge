@@ -245,9 +245,9 @@ public class Player : KinematicEntity
 	void Crouch()
 	{
 		_roofDetectorShape.SetDeferred("disabled", false);
-		var shape = (RectangleShape2D)_bodyShape.Shape;
-		shape.Extents = new Vector2(shape.Extents.x, 5);
-		_bodyShape.Position = new Vector2(0, 5);
+		var shape = (CapsuleShape2D)_bodyShape.Shape;
+		shape.Height = 1;
+		_bodyShape.Position = new Vector2(0, 4.5f);
 	}
 
 	void Stand()
@@ -256,8 +256,8 @@ public class Player : KinematicEntity
 			return;
 		IsSliding = false;
 		_roofDetectorShape.SetDeferred("disabled", true);
-		var shape = (RectangleShape2D)_bodyShape.Shape;
-		shape.Extents = new Vector2(shape.Extents.x, 10);
+		var shape = (CapsuleShape2D)_bodyShape.Shape;
+		shape.Height = 10;
 		_bodyShape.Position = new Vector2(0, 0);
 	}
 
