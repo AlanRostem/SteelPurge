@@ -18,8 +18,8 @@ public class ShopMenu : Control
 	public override void _Ready()
 	{
 		_parent = GetParent().GetParent<Fabricator>();
-		_fuels = GetNode<ShopItemList>("Tabs/TabContainer/Fuels");
-		_weapons = GetNode<ShopItemList>("Tabs/TabContainer/Weapons");
+		_fuels = GetNode<ShopItemList>("Tabs/CustomTabContainer/Fuels");
+		_weapons = GetNode<ShopItemList>("Tabs/CustomTabContainer/Weapons");
 		_cartContainer = GetNode<CartContainer>("CartContainer");
 		_totalLabel = GetNode<Label>("TotalLabelCount");
 	}

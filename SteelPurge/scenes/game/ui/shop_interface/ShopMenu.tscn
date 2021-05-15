@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/font/font.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/ui/shop_interface/ShopItemList.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/ui/shop_interface/CartContainer.cs" type="Script" id=4]
+[ext_resource path="res://scenes/game/ui/CustomTabContainer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/ui/MiniPixelTextLabel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/texture/ui/shop/shop_cancel_button-export.png" type="Texture" id=7]
 [ext_resource path="res://assets/texture/ui/shop/shop_finish_button.png" type="Texture" id=8]
@@ -69,37 +70,28 @@ margin_bottom = 62.0
 text = "Total: "
 
 [node name="Tabs" type="Tabs" parent="."]
-margin_left = 88.0
-margin_top = 64.0
-margin_right = 256.0
+margin_left = 82.0
+margin_top = 40.0
+margin_right = 258.0
 margin_bottom = 184.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TabContainer" type="TabContainer" parent="Tabs"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -4.0
-margin_top = -24.0
-margin_right = -4.0
-margin_bottom = 32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="CustomTabContainer" parent="Tabs" instance=ExtResource( 5 )]
+margin_right = 168.0
+margin_bottom = 176.0
 
-[node name="Fuels" parent="Tabs/TabContainer" instance=ExtResource( 3 )]
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+[node name="Fuels" parent="Tabs/CustomTabContainer" instance=ExtResource( 3 )]
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -28.0
 
-[node name="Weapons" parent="Tabs/TabContainer" instance=ExtResource( 3 )]
+[node name="Weapons" parent="Tabs/CustomTabContainer" instance=ExtResource( 3 )]
 visible = false
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -28.0
 
 [node name="CartContainer" type="ScrollContainer" parent="."]
 margin_left = 256.0
@@ -135,5 +127,3 @@ __meta__ = {
 }
 [connection signal="pressed" from="CraftButton" to="." method="_OnCompletePurchases"]
 [connection signal="pressed" from="CancelButton" to="." method="_OnCancel"]
-
-[editable path="Tabs/TabContainer/Fuels"]
