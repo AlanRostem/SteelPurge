@@ -83,15 +83,17 @@ margin_right = 168.0
 margin_bottom = 176.0
 
 [node name="Fuels" parent="Tabs/CustomTabContainer" instance=ExtResource( 3 )]
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -28.0
+margin_left = 4.0
+margin_top = 26.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="Weapons" parent="Tabs/CustomTabContainer" instance=ExtResource( 3 )]
 visible = false
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -28.0
+margin_left = 4.0
+margin_top = 26.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="CartContainer" type="ScrollContainer" parent="."]
 margin_left = 256.0
