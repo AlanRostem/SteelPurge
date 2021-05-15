@@ -371,6 +371,7 @@ public class Player : KinematicEntity
 		if (Velocity.y < -_minJumpSpeed && Input.IsActionJustReleased("jump"))
 			MoveY(-_minJumpSpeed);
 
+		// Slide melee if the player has enough momentum
 		if (IsSliding && IsMovingFast())
 		{
 			if (!PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled)
