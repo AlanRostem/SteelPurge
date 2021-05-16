@@ -142,7 +142,7 @@ public class Weapon : Node2D
 			return;
 		}
 
-		if (Input.IsActionJustPressed("melee") && CanMelee)
+		if (Input.IsActionJustPressed("melee") && CanMelee && !OwnerPlayer.IsRamSliding)
 		{
 			IsMeleeAttacking = true;
 			_meleeShape.Disabled = false;

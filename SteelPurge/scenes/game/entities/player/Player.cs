@@ -44,6 +44,7 @@ public class Player : KinematicEntity
 	public bool IsInvulnerable = false;
 	public bool IsAimingUp = false;
 	public bool IsAimingDown = false;
+	public bool IsRamSliding = false;
 	private bool _isStunned = false;
 	public float HorizontalLookingDirection = 1;
 	public float MovingDirection = 1;
@@ -372,13 +373,23 @@ public class Player : KinematicEntity
 			MoveY(-_minJumpSpeed);
 
 		// Slide melee if the player has enough momentum
-		if (IsSliding && IsMovingFast())
+		if (IsSliding)
 		{
-			if (!PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled)
+			if (!PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled && IsMovingFast() && isOnFloor && !IsRamSliding)
+			{
 				PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = true;
+				IsRamSliding = true;
+			}
 		}
-		else if (PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled && !PlayerInventory.EquippedWeapon.IsMeleeAttacking)
-			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
+
+		if (IsRamSliding && !IsMovingFast())
+		{
+			if (PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled && !PlayerInventory.EquippedWeapon.IsMeleeAttacking)
+			{
+				IsRamSliding = false;
+				PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
+			}
+		}
 
 		if (!isOnFloor)
 		{

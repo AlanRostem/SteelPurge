@@ -16,6 +16,7 @@ public class RocketBayonetAbility : TacticalAbility
 		player.Velocity.x = RocketSpeed * player.HorizontalLookingDirection;
 		player.Velocity.y = 0;
 		player.IsGravityEnabled = false;
+		player.IsRamSliding = false;
 		player.CanMove = false;
 		player.IsAimingDown = false;
 		player.CanAimDown = false;
