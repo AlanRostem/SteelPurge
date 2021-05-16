@@ -22,8 +22,6 @@ public class ShopMenu : Control
 		_weapons = GetNode<ShopItemList>("Tabs/CustomTabContainer/Weapons");
 		_cartContainer = GetNode<CartContainer>("CartContainer");
 		_totalLabel = GetNode<Label>("TotalLabelCount");
-		
-		_fuels.GrabFocus();
 	}
 
 	public void Open()
