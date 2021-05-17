@@ -14,6 +14,8 @@ public class Weapon : Node2D
 	[Export] public uint DamagePerShot;
 	[Export] public uint MeleeDamage = 80;
 	[Export] public uint RateOfFire;
+	[Export] public uint MaxAmmoCount = 6;
+	[Export] public bool AutoReloadEnabled = true;
 	[Export] public float HoverRecoilSpeed = 100;
 	[Export] public float MinFallSpeedForRecoilHovering = -20;
 	[Export] public SpriteFrames PlayerSpriteFrames;
