@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/resources/PlayerSpriteAnimNoWeapon.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/game/weapon/Weapon.cs" type="Script" id=2]
+[ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/weapon/FireTimer.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -29,6 +30,17 @@ collision_mask = 16
 position = Vector2( 16, 0 )
 shape = SubResource( 1 )
 disabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AmmoLabel" parent="CanvasLayer" instance=ExtResource( 3 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 22.0
+margin_top = -23.0
+margin_right = 62.0
+margin_bottom = -9.0
+text = "6 / 6"
 [connection signal="CancelFire" from="." to="FireTimer" method="_OnWeaponCancelFire"]
 [connection signal="TriggerFire" from="." to="FireTimer" method="_OnWeaponTriggerFire"]
 [connection signal="timeout" from="FireTimer" to="." method="Fire"]

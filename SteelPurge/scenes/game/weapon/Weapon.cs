@@ -49,6 +49,19 @@ public class Weapon : Node2D
 	
 	public bool CanMelee = true;
 
+	public uint CurrentAmmo
+	{
+		get => _currentAmmo;
+		set
+		{
+			_ammoLabel.Text = value + " / " + MaxAmmoCount;
+			_currentAmmo = value;
+		}
+	}
+	
+	
+	private uint _currentAmmo;
+
 	public bool MeleeHitBoxEnabled
 	{
 		get => !_meleeShape.Disabled;
@@ -57,6 +70,7 @@ public class Weapon : Node2D
 
 	private Timer _meleeCooldownTimer;
 	private Timer _meleeDurationTimer;
+	private Label _ammoLabel;
 	private CollisionShape2D _meleeShape;
 
 	public bool IsFiring
@@ -111,6 +125,8 @@ public class Weapon : Node2D
 		_meleeCooldownTimer = GetNode<Timer>("MeleeCooldownTimer");
 		_meleeDurationTimer = GetNode<Timer>("MeleeDurationTimer");
 		_meleeShape = GetNode<CollisionShape2D>("MeleeArea/CollisionShape2D");
+		_ammoLabel = GetNode<Label>("CanvasLayer/AmmoLabel");
+		CurrentAmmo = MaxAmmoCount;
 	}
 
 	private void Fire()
@@ -122,7 +138,14 @@ public class Weapon : Node2D
 			return;
 		}
 
+		CurrentAmmo--;
 		EmitSignal(nameof(Fired));
+		if (CurrentAmmo == 0)
+		{
+			_isFiring = false;
+			EmitSignal(nameof(CancelFire));
+		}
+		
 		if (!(OwnerPlayer.Velocity.y > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
 		OwnerPlayer.Velocity.y = -HoverRecoilSpeed;
 	}
@@ -157,7 +180,7 @@ public class Weapon : Node2D
 
 		if (_isHoldingTrigger && CanFire)
 		{
-			if (_isFiring) return;
+			if (_isFiring || CurrentAmmo == 0) return;
 			_isFiring = true;
 			Fire();
 			EmitSignal(nameof(TriggerFire));

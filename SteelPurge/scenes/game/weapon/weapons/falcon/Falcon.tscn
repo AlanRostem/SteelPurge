@@ -14,11 +14,9 @@ CollectibleSprite = ExtResource( 7 )
 DamagePerShot = 52
 MeleeDamage = 30
 RateOfFire = 150
+MaxAmmoCount = 4
 HoverRecoilSpeed = 60.0
 PlayerSpriteFrames = ExtResource( 3 )
-
-[node name="MeleeDurationTimer" parent="." index="2"]
-one_shot = true
 
 [node name="CollisionShape2D" parent="MeleeArea" index="0"]
 position = Vector2( 24, 0 )

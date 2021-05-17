@@ -7,8 +7,6 @@ public class TalconFiringDevice : FiringDevice
 {
 	private readonly PackedScene
 		TalonScene = GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/Talon.tscn");
-	public static readonly uint MaxAmmo = 4;
-	public uint Ammo = 4;
 	public Array<Talon> Talons = new Array<Talon>();
 
 	private void _OnSwap()
@@ -18,21 +16,19 @@ public class TalconFiringDevice : FiringDevice
 			talon.QueueFree();
 		}
 
-		Ammo = 4;
 		GetWeapon().CanFire = true;
 		Talons.Clear();
 	}
 	
 	public override void OnFire()
 	{
-		if (Ammo > 0)
+		if (GetWeapon().CurrentAmmo > 0)
 		{
-			Ammo--;
 			var talon = (Talon)FireProjectile(TalonScene);
 			Talons.Add(talon);
 		}
 
-		if (Ammo == 0)
+		if (GetWeapon().CurrentAmmo == 0)
 		{
 			GetWeapon().CanFire = false;
 		}
