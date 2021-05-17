@@ -2,9 +2,9 @@ using Godot;
 
 public class Weapon : Node2D
 {
-	private static PackedScene WeaponCollectibleScene 
-		= GD.Load<PackedScene>("res://scenes/game/entities/collectible/weapon/WeaponCollectible.tscn"); 
-	
+	private static PackedScene WeaponCollectibleScene
+		= GD.Load<PackedScene>("res://scenes/game/entities/collectible/weapon/WeaponCollectible.tscn");
+
 	[Export] public string DisplayName = "Weapon";
 
 	[Export] public Texture CollectibleSprite;
@@ -23,9 +23,9 @@ public class Weapon : Node2D
 
 	[Signal]
 	public delegate void Swapped();
-	
+
 	public bool Equipped { get; private set; }
-	
+
 	public WeaponAbility TacticalEnhancement { get; set; }
 	public FiringDevice FiringDevice { get; set; }
 
@@ -49,7 +49,7 @@ public class Weapon : Node2D
 	private bool _isReloading = false;
 	private bool _isRecharging = false;
 	public bool IsMeleeAttacking = false;
-	
+
 	public bool CanMelee = true;
 
 	public uint CurrentAmmo
@@ -61,8 +61,8 @@ public class Weapon : Node2D
 			_currentAmmo = value;
 		}
 	}
-	
-	
+
+
 	private uint _currentAmmo;
 
 	public bool MeleeHitBoxEnabled
@@ -151,7 +151,8 @@ public class Weapon : Node2D
 		if (CurrentAmmo == 0)
 		{
 			_isFiring = false;
-			_isRecharging = true;
+			if (AutoReloadEnabled)
+				_isRecharging = true;
 			EmitSignal(nameof(CancelFire));
 		}
 
@@ -161,7 +162,8 @@ public class Weapon : Node2D
 			_individualReloadTimer.Stop();
 		}
 
-		_reloadDelayTimer.Start();
+		if (AutoReloadEnabled)
+			_reloadDelayTimer.Start();
 		if (!(OwnerPlayer.Velocity.y > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
 		OwnerPlayer.Velocity.y = -HoverRecoilSpeed;
 	}
@@ -175,7 +177,9 @@ public class Weapon : Node2D
 
 		if (Mathf.Sign(_meleeShape.Position.x) != OwnerPlayer.HorizontalLookingDirection)
 		{
-			_meleeShape.Position = new Vector2(OwnerPlayer.HorizontalLookingDirection * Mathf.Abs(_meleeShape.Position.x), _meleeShape.Position.y);
+			_meleeShape.Position =
+				new Vector2(OwnerPlayer.HorizontalLookingDirection * Mathf.Abs(_meleeShape.Position.x),
+					_meleeShape.Position.y);
 		}
 
 		if (IsMeleeAttacking)
@@ -226,7 +230,7 @@ public class Weapon : Node2D
 		{
 			direction = Vector2.Up;
 		}
-		
+
 		hitBox.TakeHit(MeleeDamage, direction);
 		EmitSignal(nameof(OnMeleeHit), hitBox);
 	}
@@ -238,7 +242,7 @@ public class Weapon : Node2D
 		OwnerPlayer?.RemoveChild(this);
 		item.Weapon = this;
 	}
-	
+
 	private void _OnReloadShot()
 	{
 		CurrentAmmo += ReloadCount;
@@ -251,7 +255,7 @@ public class Weapon : Node2D
 			_individualReloadTimer.Stop();
 		}
 	}
-	
+
 	private void _OnReloadStart()
 	{
 		_individualReloadTimer.Start();
