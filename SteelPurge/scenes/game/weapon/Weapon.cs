@@ -140,15 +140,12 @@ public class Weapon : Node2D
 
 	private void Fire()
 	{
-		if (!_isHoldingTrigger)
+		if (!_isHoldingTrigger || CurrentAmmo == 0)
 		{
 			_isFiring = false;
 			EmitSignal(nameof(CancelFire));
 			return;
 		}
-
-		if (CurrentAmmo == 0)
-			throw new Exception("Ammo can go below zero!");
 		
 		CurrentAmmo--;
 		EmitSignal(nameof(Fired));
