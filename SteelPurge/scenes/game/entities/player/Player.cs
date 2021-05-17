@@ -39,6 +39,7 @@ public class Player : KinematicEntity
 	private bool _aim = false;
 	public bool CanTakeDamage = true;
 	public bool CanAimDown = true;
+	public bool CanAimUp = true;
 	public bool CanSwapDirection = true;
 
 	public bool IsInvulnerable = false;
@@ -201,19 +202,26 @@ public class Player : KinematicEntity
 		_left = Input.IsActionPressed("left");
 		_right = Input.IsActionPressed("right");
 		_jump = Input.IsActionPressed("jump");
-		IsAimingUp = Input.IsActionPressed("aim_up");
+		IsAimingUp = Input.IsActionPressed("aim_up") && CanAimUp;
 
 		if (_canCancelSlide)
 		{
 			_slide = Input.IsActionPressed("slide");
 		}
-		
+
 		if (Input.IsActionJustPressed("aim_down") && CanAimDown)
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
 			IsAimingDown = !IsAimingDown;
 			if (IsAimingDown)
+			{
+				CanAimUp = false;
 				IsAimingUp = false;
+			}
+			else
+			{
+				CanAimUp = true;
+			}
 		}
 
 		if (Input.IsActionJustPressed("aim"))
@@ -222,7 +230,10 @@ public class Player : KinematicEntity
 			_aim = !_aim;
 			HorizontalLookingDirection = -HorizontalLookingDirection;
 			if (!IsJumping && IsAimingDown)
+			{
 				IsAimingDown = false;
+				CanAimUp = true;
+			}
 		}
 	}
 
@@ -246,7 +257,7 @@ public class Player : KinematicEntity
 	void Crouch()
 	{
 		_roofDetectorShape.SetDeferred("disabled", false);
-		var shape = (CapsuleShape2D)_bodyShape.Shape;
+		var shape = (CapsuleShape2D) _bodyShape.Shape;
 		shape.Height = 1;
 		_bodyShape.Position = new Vector2(0, 4.5f);
 	}
@@ -257,7 +268,7 @@ public class Player : KinematicEntity
 			return;
 		IsSliding = false;
 		_roofDetectorShape.SetDeferred("disabled", true);
-		var shape = (CapsuleShape2D)_bodyShape.Shape;
+		var shape = (CapsuleShape2D) _bodyShape.Shape;
 		shape.Height = 10;
 		_bodyShape.Position = new Vector2(0, 0);
 	}
@@ -398,7 +409,10 @@ public class Player : KinematicEntity
 		}
 
 		if (IsWalking)
+		{
 			IsAimingDown = false;
+			CanAimUp = true;
+		}
 
 		if (_jump)
 		{
@@ -426,6 +440,7 @@ public class Player : KinematicEntity
 				Stand();
 				_slideDurationTimer.Stop();
 			}
+
 			MoveY(-_currentJumpSpeed);
 		}
 	}
