@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public class Weapon : Node2D
@@ -146,6 +147,9 @@ public class Weapon : Node2D
 			return;
 		}
 
+		if (CurrentAmmo == 0)
+			throw new Exception("Ammo can go below zero!");
+		
 		CurrentAmmo--;
 		EmitSignal(nameof(Fired));
 		if (CurrentAmmo == 0)
