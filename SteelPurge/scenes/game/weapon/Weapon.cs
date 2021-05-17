@@ -15,6 +15,7 @@ public class Weapon : Node2D
 	[Export] public uint MeleeDamage = 80;
 	[Export] public uint RateOfFire;
 	[Export] public uint MaxAmmoCount = 6;
+	[Export] public uint ReloadCount = 1;
 	[Export] public bool AutoReloadEnabled = true;
 	[Export] public float HoverRecoilSpeed = 100;
 	[Export] public float MinFallSpeedForRecoilHovering = -20;
@@ -45,6 +46,8 @@ public class Weapon : Node2D
 	private bool _isFiring = false;
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
+	private bool _isReloading = false;
+	private bool _isRecharging = false;
 	public bool IsMeleeAttacking = false;
 	
 	public bool CanMelee = true;
@@ -72,6 +75,9 @@ public class Weapon : Node2D
 	private Timer _meleeDurationTimer;
 	private Label _ammoLabel;
 	private CollisionShape2D _meleeShape;
+	private Timer _reloadDelayTimer;
+	private Timer _individualReloadTimer;
+
 
 	public bool IsFiring
 	{
@@ -124,6 +130,8 @@ public class Weapon : Node2D
 	{
 		_meleeCooldownTimer = GetNode<Timer>("MeleeCooldownTimer");
 		_meleeDurationTimer = GetNode<Timer>("MeleeDurationTimer");
+		_reloadDelayTimer = GetNode<Timer>("ReloadDelayTimer");
+		_individualReloadTimer = GetNode<Timer>("IndividualReloadTimer");
 		_meleeShape = GetNode<CollisionShape2D>("MeleeArea/CollisionShape2D");
 		_ammoLabel = GetNode<Label>("CanvasLayer/AmmoLabel");
 		CurrentAmmo = MaxAmmoCount;
@@ -143,9 +151,17 @@ public class Weapon : Node2D
 		if (CurrentAmmo == 0)
 		{
 			_isFiring = false;
+			_isRecharging = true;
 			EmitSignal(nameof(CancelFire));
 		}
-		
+
+		if (_isReloading)
+		{
+			_isReloading = false;
+			_individualReloadTimer.Stop();
+		}
+
+		_reloadDelayTimer.Start();
 		if (!(OwnerPlayer.Velocity.y > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
 		OwnerPlayer.Velocity.y = -HoverRecoilSpeed;
 	}
@@ -178,7 +194,7 @@ public class Weapon : Node2D
 			Position = new Vector2(8 * Scale.x, 0);
 		}
 
-		if (_isHoldingTrigger && CanFire && CurrentAmmo > 0)
+		if (_isHoldingTrigger && CanFire && CurrentAmmo > 0 && !_isRecharging)
 		{
 			if (_isFiring) return;
 			_isFiring = true;
@@ -221,5 +237,24 @@ public class Weapon : Node2D
 		var item = world.Entities.SpawnEntityDeferred<WeaponCollectible>(WeaponCollectibleScene, position);
 		OwnerPlayer?.RemoveChild(this);
 		item.Weapon = this;
+	}
+	
+	private void _OnReloadShot()
+	{
+		CurrentAmmo += ReloadCount;
+		if (CurrentAmmo >= MaxAmmoCount)
+		{
+			CurrentAmmo = MaxAmmoCount;
+			_isReloading = false;
+			if (_isRecharging)
+				_isRecharging = false;
+			_individualReloadTimer.Stop();
+		}
+	}
+	
+	private void _OnReloadStart()
+	{
+		_individualReloadTimer.Start();
+		_OnReloadShot();
 	}
 }
