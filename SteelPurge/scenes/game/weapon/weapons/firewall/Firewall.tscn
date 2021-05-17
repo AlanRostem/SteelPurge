@@ -18,8 +18,9 @@ extents = Vector2( 64, 8 )
 DisplayName = "Firewall"
 CollectibleSprite = ExtResource( 2 )
 ClipSize = 12
-DamagePerShot = 11
-RateOfFire = 120
+DamagePerShot = 7
+RateOfFire = 200
+MaxAmmoCount = 8
 
 [node name="FlareFiringDevice" parent="." index="1" instance=ExtResource( 3 )]
 script = ExtResource( 4 )
