@@ -4,53 +4,88 @@ using Godot.Collections;
 
 public class DragonsBreathAbility : ResourceAbility
 {
-	private readonly Dictionary<ulong, VulnerableHitbox> _hitBoxes = new Dictionary<ulong, VulnerableHitbox>();
+    private readonly Dictionary<ulong, VulnerableHitbox> _hitBoxes = new Dictionary<ulong, VulnerableHitbox>();
 
-	[Export]
-	public uint DamagePerTick = 10;
-	
-	[Signal]
-	public delegate void TurnOn();
+    [Export] public uint DamagePerTick = 10;
 
-	[Signal]
-	public delegate void TurnOff();
+    [Signal]
+    public delegate void TurnOn();
 
-	public override void OnActivate()
-	{
-		EmitSignal(nameof(TurnOn));
-		GetWeapon().IsFiring = true;
-		GetWeapon().EmitSignal(nameof(Weapon.CancelFire));
-	}
+    [Signal]
+    public delegate void TurnOff();
 
-	public override void OnDeActivate()
-	{
-		EmitSignal(nameof(TurnOff));
-		GetWeapon().OwnerPlayer.IsGravityEnabled = true;
-		_hitBoxes.Clear();
-		GetWeapon().IsFiring = false;
-	}
+    private FireArea _fireArea;
 
-	public override void OnTick()
-	{
-		var player = GetWeapon().OwnerPlayer;		
-		if (player.Velocity.y > 0 && player.IsAimingDown)
-			player.Velocity.y *= 0.2f;
-		foreach (var pair in _hitBoxes)
-		{
-			var hitBox = pair.Value;
-			hitBox.TakeHit(DamagePerTick, Vector2.Zero);
-		}
-	}
+    public override void _Ready()
+    {
+        base._Ready();
+        _fireArea = GetNode<FireArea>("FireArea");
+    }
 
-	private void _HitBoxEnteredFire(object area)
-	{
-		var hitBox = (VulnerableHitbox) area;
-		_hitBoxes[hitBox.GetInstanceId()] = hitBox;
-	}
-	
-	private void _HitBoxLeftFire(object area)
-	{
-		var hitBox = (VulnerableHitbox)area;
-		_hitBoxes.Remove(hitBox.GetInstanceId());
-	}
+    public override void OnActivate()
+    {
+        EmitSignal(nameof(TurnOn));
+        GetWeapon().IsFiring = true;
+        GetWeapon().EmitSignal(nameof(Weapon.CancelFire));
+    }
+
+    public override void OnDeActivate()
+    {
+        EmitSignal(nameof(TurnOff));
+        GetWeapon().OwnerPlayer.IsGravityEnabled = true;
+        _hitBoxes.Clear();
+        GetWeapon().IsFiring = false;
+    }
+
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+
+        if (GetWeapon().OwnerPlayer.IsAimingDown)
+        {
+            _fireArea.RotationDegrees = 90;
+            return;
+        }
+        
+        if (GetWeapon().OwnerPlayer.IsAimingUp)
+        {
+            _fireArea.RotationDegrees = -90;
+            return;
+        }
+        
+        _fireArea.Rotation = 0;
+
+        if (GetWeapon().OwnerPlayer.HorizontalLookingDirection < 0)
+        {
+            _fireArea.Scale = new Vector2(-1, 1);
+        }
+        else
+        {
+            _fireArea.Scale = new Vector2(1, 1);
+        }
+    }
+
+    public override void OnTick()
+    {
+        var player = GetWeapon().OwnerPlayer;
+        if (player.Velocity.y > 0 && player.IsAimingDown)
+            player.Velocity.y *= 0.2f;
+        foreach (var pair in _hitBoxes)
+        {
+            var hitBox = pair.Value;
+            hitBox.TakeHit(DamagePerTick, Vector2.Zero);
+        }
+    }
+
+    private void _HitBoxEnteredFire(object area)
+    {
+        var hitBox = (VulnerableHitbox) area;
+        _hitBoxes[hitBox.GetInstanceId()] = hitBox;
+    }
+
+    private void _HitBoxLeftFire(object area)
+    {
+        var hitBox = (VulnerableHitbox) area;
+        _hitBoxes.Remove(hitBox.GetInstanceId());
+    }
 }
