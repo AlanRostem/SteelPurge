@@ -178,9 +178,9 @@ public class Weapon : Node2D
 			Position = new Vector2(8 * Scale.x, 0);
 		}
 
-		if (_isHoldingTrigger && CanFire)
+		if (_isHoldingTrigger && CanFire && CurrentAmmo > 0)
 		{
-			if (_isFiring || CurrentAmmo == 0) return;
+			if (_isFiring) return;
 			_isFiring = true;
 			Fire();
 			EmitSignal(nameof(TriggerFire));

@@ -22,15 +22,10 @@ public class TalconFiringDevice : FiringDevice
 	
 	public override void OnFire()
 	{
-		if (GetWeapon().CurrentAmmo > 0)
-		{
-			var talon = (Talon)FireProjectile(TalonScene);
-			Talons.Add(talon);
-		}
+		var talon = (Talon)FireProjectile(TalonScene);
+		Talons.Add(talon);
 
 		if (GetWeapon().CurrentAmmo == 0)
-		{
 			GetWeapon().CanFire = false;
-		}
 	}
 }
