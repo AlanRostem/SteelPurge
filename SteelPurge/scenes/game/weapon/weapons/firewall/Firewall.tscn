@@ -21,7 +21,7 @@ WeaponType = 1
 ClipSize = 12
 DamagePerShot = 7
 RateOfFire = 200
-MaxAmmoCount = 8
+MaxAmmoCount = 5
 HoverRecoilSpeed = 75.0
 
 [node name="FlareFiringDevice" parent="." index="1" instance=ExtResource( 3 )]

@@ -68,6 +68,7 @@ public class WeaponWheel : Control
 			if (_buttons[_selectedWeaponIndex].Disabled)
 				_selectedWeaponIndex++;
 			_buttons[_selectedWeaponIndex].Pressed = true;
+			// TODO: Loop to find the next valid button
 		}
 	}
 
