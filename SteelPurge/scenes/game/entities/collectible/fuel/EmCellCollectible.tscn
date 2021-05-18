@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/texture/ui/icon/xe_slug.png" type="Texture" id=2]
+
+[node name="EmCellCollectible" instance=ExtResource( 1 )]
+FuelType = 1
+
+[node name="Sprite" parent="." index="2"]
+texture = ExtResource( 2 )

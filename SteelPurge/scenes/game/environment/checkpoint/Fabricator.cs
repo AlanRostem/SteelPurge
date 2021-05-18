@@ -18,10 +18,16 @@ public class Fabricator : Area2D
 	{
 		new FuelShopItem("Gasoline", 2,
 			"res://assets/texture/ui/icon/gas.png",
-			"res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn"),
+			"res://scenes/game/entities/collectible/fuel/GasCanCollectible.tscn"),
+		new FuelShopItem("EM-Cells", 2,
+			"res://assets/texture/ui/icon/xe_slug.png",
+			"res://scenes/game/entities/collectible/fuel/EmCellCollectible.tscn"),
 		new WeaponShopItem("Firewall", 5,
 			"res://assets/texture/weapon/firewall/firewall.png",
 			Inventory.InventoryWeapon.Firewall),
+		new WeaponShopItem("Joule", 5,
+			"res://assets/texture/weapon/ke_6_swarm/ke_6_swarm.png",
+			Inventory.InventoryWeapon.Joule),
 	};
 
 	private uint _totalPurchasePrice = 0;

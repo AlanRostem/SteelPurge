@@ -5,7 +5,7 @@ public class FuelCollectible : FallingCollectible
 {
 
 	[Export] public uint Count = 20;
-	[Export] public  Inventory.OrdinanceFuelType FuelType = Inventory.OrdinanceFuelType.Gasoline;
+	[Export] public Inventory.OrdinanceFuelType FuelType = Inventory.OrdinanceFuelType.Gasoline;
 	
 	public override void OnCollected(Player player)
 	{

@@ -71,9 +71,7 @@ public class Inventory : Node2D
 			// Update UI
 		}
 		
-		// TODO: Remove this after testing weapon wheel
 		AddWeapon(InventoryWeapon.Falcon);
-		AddWeapon(InventoryWeapon.Joule);
 		
 		// TODO: When implementing save files, make sure to change this
 		SwitchWeapon(InventoryWeapon.Falcon);
