@@ -12,7 +12,7 @@ public class Fabricator : Area2D
 	private bool _isPlayerNearShop = false;
 	public Player PlayerCustomer { get; private set; }
 	
-	public bool HasWeaponInCart { get; private set; }
+
 
 	private ShopItem[] _availableItems = //TODO: Some items can only be bought once. Consider it in the future
 	{
@@ -35,6 +35,7 @@ public class Fabricator : Area2D
 	public uint TotalPurchasePrice => _totalPurchasePrice;
 
 	private readonly List<Purchase> _cart = new List<Purchase>();
+	private bool[] _weaponInCart = new bool[(int) Inventory.InventoryWeapon.Count];
 
 	private ShopMenu _shopMenu;
 
@@ -70,6 +71,21 @@ public class Fabricator : Area2D
 		}
 	}
 
+	public bool HasWeaponInCart(Inventory.InventoryWeapon weapon)
+	{
+		return _weaponInCart[(int) weapon];
+	}
+
+	private void AddWeaponToCart(Inventory.InventoryWeapon weapon)
+	{
+		_weaponInCart[(int) weapon] = true;
+	}
+	
+	private void RemoveWeaponFromCart(Inventory.InventoryWeapon weapon)
+	{
+		_weaponInCart[(int) weapon] = false;
+	}
+	
 	public void AddItemToCart(ShopItem item, out Purchase purchase, uint quantity = 1)
 	{
 		if (quantity > item.MaxCount)
@@ -78,7 +94,7 @@ public class Fabricator : Area2D
 			return;
 		}
 
-		if (item.Type == ShopItem.ItemType.Weapon) HasWeaponInCart = true;
+		if (item.Type == ShopItem.ItemType.Weapon) AddWeaponToCart(((WeaponShopItem)item).WeaponType);
 		_cart.Add(purchase = new Purchase(item, quantity));
 		_totalPurchasePrice += item.Price;
 	}
@@ -86,7 +102,7 @@ public class Fabricator : Area2D
 	public void RemoveItemFromCart(Purchase purchase)
 	{
 		// TODO: May need to consider quantity soon
-		if (purchase.Item.Type == ShopItem.ItemType.Weapon) HasWeaponInCart = false;
+		if (purchase.Item.Type == ShopItem.ItemType.Weapon) RemoveWeaponFromCart((((WeaponShopItem)purchase.Item).WeaponType));
 		_cart.Remove(purchase);
 		_totalPurchasePrice -= purchase.Item.Price;
 	}
@@ -117,7 +133,7 @@ public class Fabricator : Area2D
 
 	public void CancelShopping()
 	{
-		HasWeaponInCart = false;
+		_weaponInCart = new bool[(int) Inventory.InventoryWeapon.Count];
 		_totalPurchasePrice = 0;
 		_cart.Clear();
 	}

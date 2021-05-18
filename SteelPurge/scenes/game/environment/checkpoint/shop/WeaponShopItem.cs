@@ -24,6 +24,6 @@ public class WeaponShopItem : ShopItem
 
 	public override bool Validate(Player player, Fabricator fabricator)
 	{
-		return player.PlayerInventory.EquippedWeapon.DisplayName != Name && !fabricator.HasWeaponInCart;
+		return player.PlayerInventory.EquippedWeapon.WeaponType != WeaponType && !fabricator.HasWeaponInCart(WeaponType) && !player.PlayerInventory.HasWeapon(WeaponType);
 	}
 }

@@ -9,6 +9,7 @@ public class Weapon : Node2D
 	[Export] public string DisplayName = "Weapon";
 
 	[Export] public Texture CollectibleSprite;
+	[Export] public Inventory.InventoryWeapon WeaponType;
 
 	[Export] public uint ClipSize;
 
