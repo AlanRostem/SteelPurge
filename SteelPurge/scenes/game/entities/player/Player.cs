@@ -405,6 +405,11 @@ public class Player : KinematicEntity
 		if (!isOnFloor)
 		{
 			GravityVector = DefaultGravity;
+			if (IsRamSliding)
+			{
+				IsRamSliding = false;
+				PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
+			}
 			return;
 		}
 
