@@ -7,12 +7,6 @@ public class Game : Node2D
 
 	// private Dictionary<string, object> _saveData = new Dictionary<string, object>();
 
-	[Signal]
-	private delegate void Paused();
-	
-	[Signal]
-	private delegate void OpenInventory();
-	
 	public PlayerStats PlayerStats { get; private set; }
 
 	private bool _isPaused = false;
@@ -40,7 +34,6 @@ public class Game : Node2D
 			{
 				GetTree().Paused = true;
 				_isPaused = true;
-				EmitSignal(nameof(Paused));				
 			}
 
 			if (_isJustUnPaused)
