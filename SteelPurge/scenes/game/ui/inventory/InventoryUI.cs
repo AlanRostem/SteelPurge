@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class InventoryUI : Control
 {
@@ -8,10 +7,15 @@ public class InventoryUI : Control
 		Visible = false;
 	}
 
+	private PauseObject _pauseObject = new PauseObject();
+
 	public override void _Process(float delta)
 	{
-		if (Input.IsActionJustPressed("inventory") && !GetTree().Paused)
-			Visible = !Visible; // TODO: Remove temporary solution
+		if (Input.IsActionJustPressed("inventory"))
+		{
+			_pauseObject.PauseOrUnpause(GetTree());
+			Visible = _pauseObject.IsPaused;
+		}
 	}
 
 	private void _OnOpen()

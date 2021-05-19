@@ -12,7 +12,8 @@ public class ShopMenu : Control
 	private ShopItemList _weapons;
 	private CartContainer _cartContainer;
 	private Label _totalLabel;
-	
+	private PauseObject _pauseObject = new PauseObject();
+
 	private Fabricator _parent;
 	
 	public override void _Ready()
@@ -26,14 +27,14 @@ public class ShopMenu : Control
 
 	public void Open()
 	{
-		Visible = true;
-		GetTree().Paused = true;
+		_pauseObject.TryToPause(GetTree());
+		Visible = _pauseObject.IsPaused;
 	}
 
 	public void Close()
 	{
-		Visible = false;
-		GetTree().Paused = false;		
+		_pauseObject.TryToUnpause(GetTree());
+		Visible = _pauseObject.IsPaused;
 	}
 
 	public void AddFuelItemUi(ShopItem item)
