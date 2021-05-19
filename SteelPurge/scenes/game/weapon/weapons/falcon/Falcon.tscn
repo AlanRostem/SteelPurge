@@ -11,9 +11,9 @@
 [node name="Falcon" instance=ExtResource( 1 )]
 DisplayName = "Falcon"
 CollectibleSprite = ExtResource( 7 )
-DamagePerShot = 52
+DamagePerShot = 34
 MeleeDamage = 30
-RateOfFire = 150
+RateOfFire = 220
 MaxAmmoCount = 4
 AutoReloadEnabled = false
 HoverRecoilSpeed = 60.0

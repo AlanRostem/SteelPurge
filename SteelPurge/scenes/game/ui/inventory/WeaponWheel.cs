@@ -14,6 +14,7 @@ public class WeaponWheel : Control
 	private GridContainer _gridContainer;
 	private readonly Array<WeaponButton> _buttons = new Array<WeaponButton>();
 	private Inventory _parent;
+	private PauseObject _pauseObject = new PauseObject();
 
 	public override void _Ready()
 	{
@@ -31,18 +32,15 @@ public class WeaponWheel : Control
 	{
 		if (Input.IsActionJustPressed("weapon_wheel"))
 		{
-			if (!GetTree().Paused)
-			{
-				GetTree().Paused = true;
-				Visible = true;
-			}
+			_pauseObject.TryToPause(GetTree());
+			Visible = _pauseObject.IsPaused;
 		}
 
 		if (Input.IsActionJustReleased("weapon_wheel"))
 		{
-			if (GetTree().Paused)
+			if (_pauseObject.IsPaused)
 			{
-				GetTree().Paused = false;
+				_pauseObject.TryToUnpause(GetTree());
 				Visible = false;
 				_parent.SwitchWeapon((Inventory.InventoryWeapon) _selectedWeaponIndex);
 			}
