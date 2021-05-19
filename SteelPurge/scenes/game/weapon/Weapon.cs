@@ -96,6 +96,8 @@ public class Weapon : Node2D
 		SetProcess(false);
 		if (TacticalEnhancement != null && TacticalEnhancement.IsActive)
 			TacticalEnhancement.DeActivate();
+		if (FiringDevice != null)
+			FiringDevice.OnSwap();
 		Equipped = false;
 	}
 

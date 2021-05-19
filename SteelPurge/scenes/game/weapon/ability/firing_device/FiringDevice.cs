@@ -1,11 +1,24 @@
 using Godot;
 using System;
 
-public class FiringDevice : WeaponAbility
+public class FiringDevice : Node2D
 {
+	private Weapon _weapon;
+	
+	public T GetWeapon<T>() where T : Weapon
+	{
+		return (T)_weapon;
+	}
+
+	public Weapon GetWeapon()
+	{
+		return _weapon;
+	}
+	
 	public override void _Ready()
 	{
 		base._Ready();
+		_weapon = GetParent<Weapon>();
 		GetWeapon().Connect(nameof(Weapon.Fired), this, nameof(OnFire));
 		GetWeapon().FiringDevice = this;
 	}
@@ -44,5 +57,10 @@ public class FiringDevice : WeaponAbility
 	public virtual void OnFire()
 	{
 
+	}
+
+	public virtual void OnSwap()
+	{
+		
 	}
 }
