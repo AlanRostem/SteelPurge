@@ -15,6 +15,9 @@ public class Game : Node2D
 	
 	public PlayerStats PlayerStats { get; private set; }
 
+	private bool _isPaused = false;
+	private bool _isJustUnPaused = false;
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -26,14 +29,22 @@ public class Game : Node2D
 	{
 		if (Input.IsActionJustPressed("pause"))
 		{
-			GetTree().Paused = !GetTree().Paused;
-			EmitSignal(nameof(Paused));
-		}
-		
-		if (Input.IsActionJustPressed("inventory"))
-		{
-			GetTree().Paused = !GetTree().Paused;
-			EmitSignal(nameof(OpenInventory));
+			if (_isPaused)
+			{
+				GetTree().Paused = false;
+				_isPaused = false;
+				_isJustUnPaused = true;
+			}
+			
+			if (!GetTree().Paused && !_isJustUnPaused)
+			{
+				GetTree().Paused = true;
+				_isPaused = true;
+				EmitSignal(nameof(Paused));				
+			}
+
+			if (_isJustUnPaused)
+				_isJustUnPaused = false;
 		}
 	}
 }

@@ -10,7 +10,7 @@ public class InventoryUI : Control
 
 	public override void _Process(float delta)
 	{
-		if (Input.IsActionJustPressed("inventory"))
+		if (Input.IsActionJustPressed("inventory") && !GetTree().Paused)
 			Visible = !Visible; // TODO: Remove temporary solution
 	}
 
