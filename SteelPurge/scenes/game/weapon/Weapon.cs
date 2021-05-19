@@ -96,8 +96,7 @@ public class Weapon : Node2D
 		SetProcess(false);
 		if (TacticalEnhancement != null && TacticalEnhancement.IsActive)
 			TacticalEnhancement.DeActivate();
-		if (FiringDevice != null)
-			FiringDevice.OnSwap();
+		FiringDevice?.OnSwap();
 		Equipped = false;
 	}
 
@@ -105,8 +104,6 @@ public class Weapon : Node2D
 	{
 		Visible = true;
 		SetProcess(true);
-		if (Scale.x != OwnerPlayer.HorizontalLookingDirection)
-			Scale = new Vector2(OwnerPlayer.HorizontalLookingDirection, 1);
 		Equipped = true;
 	}
 
