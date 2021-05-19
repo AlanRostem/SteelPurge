@@ -10,7 +10,7 @@
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/FireRateTimer.cs" type="Script" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
-height = 12.0
+height = 4.0
 
 [node name="AR43Executor" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -20,17 +20,22 @@ BaseHitPoints = 225
 PlayerDetectionRange = 160.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
+position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="CriticalHitbox" parent="." index="1"]
 position = Vector2( 0, -16 )
 CriticalHitMultiplier = 3.0
 
+[node name="CriticalShape" parent="CriticalHitbox" index="0"]
+position = Vector2( 0, 8 )
+
 [node name="ExecutorSprite" type="Sprite" parent="." index="2"]
 texture = ExtResource( 2 )
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="ApproachIntervalTimer" type="Timer" parent="." index="4"]
@@ -62,7 +67,6 @@ collision_mask = 2
 polygon = PoolVector2Array( -24, 16, 0, -8, 24, 16 )
 
 [node name="VisibilityEnabler2D" parent="." index="10"]
-position = Vector2( -4.76837e-07, 2.38419e-07 )
 scale = Vector2( 4, 1.6 )
 [connection signal="TriggerApproach" from="." to="ApproachIntervalTimer" method="_OnTrigger"]
 [connection signal="TriggerApproach" from="." to="FireRateTimer" method="_OnCancel"]
