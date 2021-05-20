@@ -35,6 +35,7 @@ public class World : Node2D
 
 	public void SwitchToNextSegment()
 	{
+		PlayerNode.PlayerInventory?.EquippedWeapon.OnSwap();
 		LoadSegment(++_currentSegmentIndex);
 		PlayerNode.Position = CurrentSegment.InitialSpawnPoint;
 	}

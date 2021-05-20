@@ -17,6 +17,7 @@ public class TalconFiringDevice : FiringDevice
 		}
 
 		GetWeapon().CanFire = true;
+		GetWeapon().CurrentAmmo = GetWeapon().MaxAmmoCount;
 		Talons.Clear();
 	}
 	
