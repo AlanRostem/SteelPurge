@@ -63,7 +63,6 @@ public class Weapon : Node2D
 		}
 	}
 
-
 	private uint _currentAmmo;
 
 	public bool MeleeHitBoxEnabled
@@ -88,15 +87,16 @@ public class Weapon : Node2D
 
 	public void OnSwap()
 	{
+		// Visible = false;
+		// SetProcess(false);
+		// Equipped = false;
+
 		_isFiring = false;
 		EmitSignal(nameof(CancelFire));
 		EmitSignal(nameof(Swapped));
-		Visible = false;
-		SetProcess(false);
 		if (TacticalEnhancement != null && TacticalEnhancement.IsActive)
 			TacticalEnhancement.DeActivate();
 		FiringDevice?.OnSwap();
-		Equipped = false;
 	}
 
 	public void OnEquip()
@@ -111,7 +111,6 @@ public class Weapon : Node2D
 
 	[Signal]
 	public delegate void TriggerFire();
-
 
 	[Signal]
 	public delegate void CancelFire();
@@ -145,7 +144,7 @@ public class Weapon : Node2D
 			EmitSignal(nameof(CancelFire));
 			return;
 		}
-		
+
 		CurrentAmmo--;
 		EmitSignal(nameof(Fired));
 		if (CurrentAmmo == 0)
@@ -237,7 +236,6 @@ public class Weapon : Node2D
 
 	public void Drop(World world, Vector2 position)
 	{
-		// var collectible = 
 		var item = world.Entities.SpawnEntityDeferred<WeaponCollectible>(WeaponCollectibleScene, position);
 		OwnerPlayer?.RemoveChild(this);
 		item.Weapon = this;
