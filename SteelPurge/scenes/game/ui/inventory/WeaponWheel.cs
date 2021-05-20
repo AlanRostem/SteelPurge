@@ -50,24 +50,36 @@ public class WeaponWheel : Control
 
 		if (Input.IsActionJustPressed("ui_left"))
 		{
-			_buttons[_selectedWeaponIndex].Pressed = false;
-			if (_selectedWeaponIndex - 1 == -1) _selectedWeaponIndex = _buttons.Count - 1;
-			else _selectedWeaponIndex--;
-			if (_buttons[_selectedWeaponIndex].Disabled)
-				_selectedWeaponIndex--;
-			_buttons[_selectedWeaponIndex].Pressed = true;
+			MoveInWheel(-1);
 		}
 
 		if (Input.IsActionJustPressed("ui_right"))
 		{
-			_buttons[_selectedWeaponIndex].Pressed = false;
-			if (_selectedWeaponIndex + 1 == _buttons.Count) _selectedWeaponIndex = 0;
-			else _selectedWeaponIndex++;
-			if (_buttons[_selectedWeaponIndex].Disabled)
-				_selectedWeaponIndex++;
-			_buttons[_selectedWeaponIndex].Pressed = true;
-			// TODO: Loop to find the next valid button
+			MoveInWheel(1);
 		}
+	}
+
+	private void MoveInWheel(int direction)
+	{
+		var i = _selectedWeaponIndex + direction;
+		if (i == -1)
+			i = _buttons.Count - 1;
+		if (i == _buttons.Count)
+			i = 0;
+
+		while (!_buttons[i].Disabled)
+		{
+			if (i == 0 && direction == -1)
+				i = _buttons.Count - 1;
+			if (i == _buttons.Count - 1 && direction == 1)
+				i = 0;
+			i += direction;
+		}
+
+		if (i == _selectedWeaponIndex) return;
+		_buttons[_selectedWeaponIndex].Pressed = false;
+		_selectedWeaponIndex = i;
+		_buttons[_selectedWeaponIndex].Pressed = true;
 	}
 
 	public void SelectWeapon(Inventory.InventoryWeapon weapon)
