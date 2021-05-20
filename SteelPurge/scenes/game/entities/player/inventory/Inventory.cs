@@ -141,6 +141,8 @@ public class Inventory : Node2D
 
 	public bool HasWeapon(InventoryWeapon weapon)
 	{
+		if (weapon == InventoryWeapon.Count)
+			return false;
 		return _weaponContainer[(int) weapon];
 	}
 	

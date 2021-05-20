@@ -66,13 +66,19 @@ public class WeaponWheel : Control
 			i = _buttons.Count - 1;
 		if (i == _buttons.Count)
 			i = 0;
-
-		while (!_buttons[i].Disabled)
+		
+		while (_buttons[i].Disabled)
 		{
 			if (i == 0 && direction == -1)
+			{
 				i = _buttons.Count - 1;
+				continue;
+			}
 			if (i == _buttons.Count - 1 && direction == 1)
+			{
 				i = 0;
+				continue;
+			}
 			i += direction;
 		}
 
