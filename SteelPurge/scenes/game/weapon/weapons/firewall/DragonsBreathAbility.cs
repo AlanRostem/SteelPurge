@@ -44,11 +44,13 @@ public class DragonsBreathAbility : ResourceAbility
         if (GetWeapon().OwnerPlayer.IsAimingDown)
         {
             _fireArea.RotationDegrees = 90;
+            _fireArea.Scale = new Vector2(1, 1);
             return;
         }
         
         if (GetWeapon().OwnerPlayer.IsAimingUp)
         {
+            _fireArea.Scale = new Vector2(1, 1);
             _fireArea.RotationDegrees = -90;
             return;
         }
