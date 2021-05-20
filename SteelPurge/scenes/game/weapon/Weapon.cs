@@ -11,7 +11,6 @@ public class Weapon : Node2D
 	[Export] public Texture CollectibleSprite;
 	[Export] public Inventory.InventoryWeapon WeaponType;
 
-	[Export] public uint ClipSize;
 
 	[Export] public uint DamagePerShot;
 	[Export] public uint MeleeDamage = 80;
