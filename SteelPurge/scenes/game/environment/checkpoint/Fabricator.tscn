@@ -22,5 +22,6 @@ shape = SubResource( 1 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ShopMenu" parent="CanvasLayer" instance=ExtResource( 3 )]
+visible = false
 [connection signal="body_entered" from="." to="." method="_OnPlayerEnter"]
 [connection signal="body_exited" from="." to="." method="_OnPlayerLeave"]

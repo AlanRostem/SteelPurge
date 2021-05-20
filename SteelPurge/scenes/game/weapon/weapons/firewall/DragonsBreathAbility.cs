@@ -32,7 +32,6 @@ public class DragonsBreathAbility : ResourceAbility
     public override void OnDeActivate()
     {
         EmitSignal(nameof(TurnOff));
-        GetWeapon().OwnerPlayer.IsGravityEnabled = true;
         _hitBoxes.Clear();
         GetWeapon().IsFiring = false;
     }

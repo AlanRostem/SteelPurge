@@ -344,7 +344,7 @@ public class Player : KinematicEntity
 			if (PlayerInventory.EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
 				CurrentMaxSpeed = MaxWalkSpeedFiring;
 			else if (PlayerInventory.EquippedWeapon.IsMeleeAttacking && isOnFloor)
-				Velocity.x = 0;
+				StopMovingX();
 			else
 				CurrentMaxSpeed = MaxWalkSpeed;
 			if (velX > CurrentMaxSpeed && IsOnFloor())
