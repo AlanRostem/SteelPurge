@@ -25,7 +25,7 @@ shape = SubResource( 1 )
 position = Vector2( 832, 128 )
 
 [node name="XWFrontRogue" parent="EntityPool" index="1" instance=ExtResource( 3 )]
-position = Vector2( 336, 136 )
+position = Vector2( 280, 96 )
 
 [node name="AR43Executor2" parent="EntityPool" index="2" instance=ExtResource( 2 )]
 position = Vector2( 1616, 96 )

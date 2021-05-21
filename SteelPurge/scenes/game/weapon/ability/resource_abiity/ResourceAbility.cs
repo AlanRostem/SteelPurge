@@ -11,6 +11,8 @@ public class ResourceAbility : WeaponAbility
 
 	private float _currentDrainTime = 0;
 
+	private TextureProgress _abilityBar;
+
 	[Signal]
 	public delegate void Linger();
 
@@ -18,6 +20,8 @@ public class ResourceAbility : WeaponAbility
 	{
 		base._Ready();
 		GetWeapon().TacticalEnhancement = this;
+		_abilityBar = GetNode<TextureProgress>("AbilityBar");
+		_abilityBar.Visible = false;
 	}
 
 	public override void _Process(float delta)
@@ -37,6 +41,7 @@ public class ResourceAbility : WeaponAbility
 				_currentDrainTime = 0;
 				player.PlayerInventory.DrainFuel(FuelType, DrainPerTick);
 				OnTick();
+				_abilityBar.Value = fuels[type];
 			}
 		}
 		
@@ -55,6 +60,9 @@ public class ResourceAbility : WeaponAbility
 			{
 				IsActive = true;
 				OnActivate();
+				_abilityBar.MaxValue = fuels[type];
+				_abilityBar.Value = fuels[type];
+				_abilityBar.Visible = true;
 			}
 		}
 	}
@@ -80,5 +88,6 @@ public class ResourceAbility : WeaponAbility
 		_currentDrainTime = 0;
 		IsActive = false;
 		OnDeActivate();
+		_abilityBar.Visible = false;
 	}
 }
