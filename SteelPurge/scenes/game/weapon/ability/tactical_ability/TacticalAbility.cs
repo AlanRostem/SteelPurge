@@ -52,6 +52,8 @@ public class TacticalAbility : WeaponAbility
 		IsOnCoolDown = true;
 		_cooldownTimer.Start();
 		_durationTimer.Stop();
+		_abilityBar.MaxValue = CoolDown * 1000;
+		_abilityBar.Value = 0;
 		OnEnd();
 	}
 
