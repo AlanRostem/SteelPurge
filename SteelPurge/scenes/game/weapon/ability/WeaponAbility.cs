@@ -33,4 +33,9 @@ public class WeaponAbility : Node2D
 	{
 		
 	}
+
+	public virtual void OnWeaponSwapped()
+	{
+		
+	}
 }

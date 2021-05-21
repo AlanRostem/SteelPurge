@@ -13,6 +13,7 @@ public class TacticalAbility : WeaponAbility
 
 	private Timer _cooldownTimer;
 	private Timer _durationTimer;
+	private TextureProgress _abilityBar;
 
 	[Signal]
 	public delegate void TriggerDurationTimer();
@@ -25,7 +26,9 @@ public class TacticalAbility : WeaponAbility
 		base._Ready();
 		_cooldownTimer = GetNode<Timer>("CoolDownTimer");
 		_durationTimer = GetNode<Timer>("DurationTimer");
+		_abilityBar = GetNode<TextureProgress>("AbilityBar");
 		GetWeapon().TacticalEnhancement = this;
+		_abilityBar.Visible = false;
 	}
 
 	public virtual void OnActivate()
@@ -65,6 +68,9 @@ public class TacticalAbility : WeaponAbility
 				OnActivate();
 				_durationTimer.Start();
 				GetWeapon().OwnerPlayer.PlayerInventory.DrainFuel(FuelType, FuelRequirement);
+				_abilityBar.Visible = true;
+				_abilityBar.MaxValue = Duration * 1000;
+				_abilityBar.Value = Duration * 1000;
 			}
 			else
 			{
@@ -73,12 +79,20 @@ public class TacticalAbility : WeaponAbility
 		}
 		
 		if (IsActive)
+		{
 			OnUpdate();
+			_abilityBar.Value -= delta * 1000;
+		}
+		else if (IsOnCoolDown)
+		{
+			_abilityBar.Value += delta * 1000;
+		}
 	}
 	
 	private void _OnCoolDownFinished()
 	{
 		IsOnCoolDown = false;
+		_abilityBar.Visible = false;
 	}
 	
 	private void _OnStartCoolDown()
@@ -86,6 +100,13 @@ public class TacticalAbility : WeaponAbility
 		IsActive = false;
 		IsOnCoolDown = true;
 		_cooldownTimer.Start();
+		_abilityBar.MaxValue = CoolDown * 1000;
+		_abilityBar.Value = 0;
 		OnEnd();
+	}
+
+	public override void OnWeaponSwapped()
+	{
+		_abilityBar.Visible = false;
 	}
 }

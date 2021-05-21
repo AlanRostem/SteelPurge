@@ -95,7 +95,10 @@ public class Weapon : Node2D
 		EmitSignal(nameof(CancelFire));
 		EmitSignal(nameof(Swapped));
 		if (TacticalEnhancement != null && TacticalEnhancement.IsActive)
+		{
 			TacticalEnhancement.DeActivate();
+			TacticalEnhancement.OnWeaponSwapped();
+		}
 		FiringDevice?.OnSwap();
 	}
 

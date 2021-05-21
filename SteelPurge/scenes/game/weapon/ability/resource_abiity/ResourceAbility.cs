@@ -90,4 +90,9 @@ public class ResourceAbility : WeaponAbility
 		OnDeActivate();
 		_abilityBar.Visible = false;
 	}
+
+	public override void OnWeaponSwapped()
+	{
+		_abilityBar.Visible = false;
+	}
 }
