@@ -452,7 +452,7 @@ public class Player : KinematicEntity
 
 	public override void _OnCollision(KinematicCollision2D collider)
 	{
-		if (collider.Normal.y != -1 && IsOnFloor() && !IsSliding)
+		if (IsOnSlope && !IsSliding)
 		{
 			GravityVector = -collider.Normal;
 		}

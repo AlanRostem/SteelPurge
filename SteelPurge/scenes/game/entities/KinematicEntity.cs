@@ -97,7 +97,7 @@ public class KinematicEntity : KinematicBody2D
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
 			var collision = GetSlideCollision(i);
-			if (IsOnWall() && collision.Normal.y != -1)
+			if (IsOnFloor() && collision.Normal.y != -1)
 				IsOnSlope = true;
 			_OnCollision(collision);
 		}
