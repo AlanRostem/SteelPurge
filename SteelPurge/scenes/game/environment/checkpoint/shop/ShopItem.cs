@@ -5,7 +5,6 @@ public class ShopItem : Godot.Object
 {
 	public enum ItemType
 	{
-		Weapon,
 		Fuel,
 	}
 	

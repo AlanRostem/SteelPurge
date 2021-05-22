@@ -42,9 +42,6 @@ public class Fabricator : Area2D
 		{
 			switch (item.Type)
 			{
-				case ShopItem.ItemType.Weapon:
-					_shopMenu.AddWeaponItemUi(item);
-					break;
 				case ShopItem.ItemType.Fuel:
 					_shopMenu.AddFuelItemUi(item);
 					break;

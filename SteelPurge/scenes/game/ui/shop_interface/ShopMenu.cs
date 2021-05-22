@@ -9,7 +9,6 @@ public class ShopMenu : Control
 		GD.Load<PackedScene>("res://scenes/game/ui/shop_interface/PurchaseWidget.tscn");
 
 	private ShopItemList _fuels;
-	private ShopItemList _weapons;
 	private CartContainer _cartContainer;
 	private Label _totalLabel;
 	private PauseObject _pauseObject = new PauseObject();
@@ -20,7 +19,6 @@ public class ShopMenu : Control
 	{
 		_parent = GetParent().GetParent<Fabricator>();
 		_fuels = GetNode<ShopItemList>("Tabs/CustomTabContainer/Fuels");
-		_weapons = GetNode<ShopItemList>("Tabs/CustomTabContainer/Weapons");
 		_cartContainer = GetNode<CartContainer>("CartContainer");
 		_totalLabel = GetNode<Label>("TotalLabelCount");
 	}
@@ -44,13 +42,6 @@ public class ShopMenu : Control
 		_fuels.AddItem(widget);
 	}
 	
-	public void AddWeaponItemUi(ShopItem item)
-	{
-		var widget = (ShopItemWidget)ItemWidgetScene.Instance();
-		widget.Init(item, this);
-		_weapons.AddItem(widget);
-	}
-
 	public void AddPurchaseUi(Purchase purchase)
 	{
 		var widget = (PurchaseWidget) PurchaseWidgetScene.Instance();
