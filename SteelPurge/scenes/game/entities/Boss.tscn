@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/game/entities/Enemy.tscn" type="PackedScene" id=1]
+
+[node name="Boss" instance=ExtResource( 1 )]
+KnockBackSpeed = 0.0
+
+[node name="EnemyHPLabel" parent="." index="2"]
+visible = false

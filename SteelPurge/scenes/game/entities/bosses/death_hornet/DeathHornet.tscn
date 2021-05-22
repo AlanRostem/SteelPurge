@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/game/entities/Boss.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/texture/death-hornet.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46, 21 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 38, 27 )
+
+[node name="DeathHornet" instance=ExtResource( 1 )]
+ScrapDropKilled = 3500
+BaseHitPoints = 5000
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+position = Vector2( 0, -32 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
+shape = SubResource( 1 )
+
+[node name="CriticalShape" parent="CriticalHitbox" index="0"]
+position = Vector2( 0, -24 )
+
+[node name="VisibilityEnabler2D" parent="." index="4"]
+position = Vector2( 0, 4 )
+scale = Vector2( 4.9, 2.8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="6"]
+position = Vector2( 0, 5 )
+shape = SubResource( 2 )
