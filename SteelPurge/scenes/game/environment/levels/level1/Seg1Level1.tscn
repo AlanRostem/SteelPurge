@@ -37,6 +37,10 @@ position = Vector2( 1064, 128 )
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 96, 80 )
 
-[node name="DeadSoldier" parent="." index="3" instance=ExtResource( 4 )]
+[node name="DeadSoldierWithFirewall" parent="." index="3" instance=ExtResource( 4 )]
 position = Vector2( 400, 118 )
 Weapon = 1
+
+[node name="DeadSoldierWithJoule" parent="." index="4" instance=ExtResource( 4 )]
+position = Vector2( 1216, 54 )
+Weapon = 2
