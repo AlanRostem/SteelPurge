@@ -185,3 +185,6 @@ ui_back={
 2d_physics/layer_6="obstacle"
 2d_physics/layer_7="player_hitbox"
 2d_physics/layer_8="critical_hitbox"
+2d_physics/layer_9="custom_boss_hitbox_0"
+2d_physics/layer_10="custom_boss_hitbox_1"
+2d_physics/layer_11="custom_boss_hitbox_2"

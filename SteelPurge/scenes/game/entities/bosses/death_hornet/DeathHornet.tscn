@@ -35,6 +35,8 @@ position = Vector2( 0, 5 )
 shape = SubResource( 2 )
 
 [node name="RogueDamageArea" type="Area2D" parent="." index="7"]
+collision_layer = 0
+collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RogueDamageArea" index="0"]
 position = Vector2( 0, 29 )
