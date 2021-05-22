@@ -7,9 +7,8 @@ using System.Collections.Generic;
 /// which these are stacked in the Node Tree determines their
 /// checkpoint order. 
 /// </summary>
-public class Fabricator : Area2D
+public class Fabricator : Node2D
 {
-	private bool _isPlayerNearShop = false;
 	public Player PlayerCustomer { get; private set; }
 	
 
@@ -51,16 +50,6 @@ public class Fabricator : Area2D
 		}
 	}
 
-	public override void _Process(float delta)
-	{
-		if (!_isPlayerNearShop) return;
-		if (Input.IsActionJustPressed("interact"))
-		{
-			if (!_shopMenu.Visible)
-				_shopMenu.Open();
-		}
-	}
-
 	public void AddItemToCart(ShopItem item, out Purchase purchase, uint quantity = 1)
 	{
 		if (quantity > item.MaxCount)
@@ -91,21 +80,16 @@ public class Fabricator : Area2D
 		_cart.Clear();
 	}
 
-
-	private void _OnPlayerEnter(object body)
-	{
-		_isPlayerNearShop = true;
-		PlayerCustomer = (Player) body;
-	}
-
-	private void _OnPlayerLeave(object body)
-	{
-		_isPlayerNearShop = false;
-	}
-
 	public void CancelShopping()
 	{
 		_totalPurchasePrice = 0;
 		_cart.Clear();
+	}
+	
+	private void _OnInteract(Player player)
+	{
+		PlayerCustomer = player;
+		if (!_shopMenu.Visible)
+			_shopMenu.Open();
 	}
 }
