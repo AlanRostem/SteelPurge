@@ -10,8 +10,8 @@
 [node name="KE6Swarm" instance=ExtResource( 1 )]
 DisplayName = "Joule"
 WeaponType = 2
-DamagePerShot = 35
-RateOfFire = 80
+DamagePerShot = 10
+RateOfFire = 130
 HoverRecoilSpeed = 10.0
 
 [node name="OrbFiringDevice" parent="." index="1" instance=ExtResource( 3 )]
