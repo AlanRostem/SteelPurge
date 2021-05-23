@@ -7,6 +7,7 @@ public class DeathHornet : Boss
 	{
 		Rush,
 		KamikazeRogues,
+		Flight,
 	}
 	
 	private static readonly PackedScene RogueScene
@@ -121,6 +122,8 @@ public class DeathHornet : Boss
 			case AttackMode.KamikazeRogues:
 				_rogueSpawnTimer.Stop();
 				break;
+			case AttackMode.Flight:
+				break;
 		}
 		
 		// Init stuff for when changing to new mode
@@ -130,6 +133,9 @@ public class DeathHornet : Boss
 				_rushStartDelayTimer.Start();
 				break;
 			case AttackMode.KamikazeRogues:
+				_rogueSpawnTimer.Start();
+				break;
+			case AttackMode.Flight:
 				_rogueSpawnTimer.Start();
 				break;
 		}
@@ -164,7 +170,7 @@ public class DeathHornet : Boss
 	private void StartPhaseTwo()
 	{
 		Velocity.y = -RiseSpeed;
-		_rogueSpawnTimer.Stop();
+		ChangeAttackMode(AttackMode.Flight);
 	}
 
 	private void PhaseTwo(float delta)
