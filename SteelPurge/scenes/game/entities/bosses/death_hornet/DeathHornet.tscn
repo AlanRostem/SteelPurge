@@ -28,6 +28,9 @@ texture = ExtResource( 2 )
 position = Vector2( 0, 5 )
 shape = SubResource( 1 )
 
+[node name="CriticalHitbox" parent="." index="2"]
+CriticalHitMultiplier = 20.0
+
 [node name="CriticalShape" parent="CriticalHitbox" index="0"]
 position = Vector2( 0, -24 )
 

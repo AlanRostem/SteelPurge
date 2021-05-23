@@ -8,8 +8,8 @@
 [ext_resource path="res://scenes/game/components/CriticalHitbox.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SegmentShape2D" id=1]
-a = Vector2( -5, 0 )
-b = Vector2( 5, 0 )
+a = Vector2( -21, 0 )
+b = Vector2( 22, 0 )
 
 [node name="Enemy" instance=ExtResource( 1 )]
 collision_layer = 8

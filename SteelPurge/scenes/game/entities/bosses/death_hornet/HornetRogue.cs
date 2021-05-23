@@ -31,11 +31,12 @@ public class HornetRogue : Enemy
 
 	public override void TakeDamage(uint damage, Vector2 direction)
 	{
-		base.TakeDamage(damage, direction);
 		if (direction.y != 0)
 		{
+			Velocity.y = 0;
 			IsGravityEnabled = false;
 		}
+		base.TakeDamage(damage, direction);
 	}
 
 	private void _OnPlayerEnterExplosiveArea(Player player)
