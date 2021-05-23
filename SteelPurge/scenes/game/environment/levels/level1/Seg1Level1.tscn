@@ -16,7 +16,15 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 [node name="Fabricator" parent="Environment" index="1"]
 position = Vector2( 224, 160 )
 
-[node name="TransferArea" parent="Environment" index="2"]
+[node name="DeadSoldierWithFirewall" parent="Environment" index="2" instance=ExtResource( 4 )]
+position = Vector2( 400, 118 )
+Weapon = 1
+
+[node name="DeadSoldierWithJoule" parent="Environment" index="3" instance=ExtResource( 4 )]
+position = Vector2( 1216, 54 )
+Weapon = 2
+
+[node name="TransferArea" parent="Environment" index="4"]
 position = Vector2( 2104, 256 )
 
 [node name="CollisionShape2D" parent="Environment/TransferArea" index="0"]
@@ -36,11 +44,3 @@ position = Vector2( 1064, 128 )
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 96, 80 )
-
-[node name="DeadSoldierWithFirewall" parent="." index="3" instance=ExtResource( 4 )]
-position = Vector2( 400, 118 )
-Weapon = 1
-
-[node name="DeadSoldierWithJoule" parent="." index="4" instance=ExtResource( 4 )]
-position = Vector2( 1216, 54 )
-Weapon = 2
