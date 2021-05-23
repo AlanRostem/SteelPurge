@@ -1,20 +1,46 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game/entities/StaticEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/texture/death_hornet_fire_beam_trigger.png" type="Texture" id=2]
+[ext_resource path="res://assets/texture/death_hornet_fire_stream.png" type="Texture" id=3]
+[ext_resource path="res://scenes/game/entities/bosses/death_hornet/FireBeamSpot.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 4 )
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 32 )
+
 [node name="FireBeamSpot" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
 
 [node name="TriggerArea" type="Area2D" parent="." index="0"]
 collision_layer = 0
 collision_mask = 256
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" index="0"]
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="Sprite" type="Sprite" parent="TriggerArea" index="0"]
 position = Vector2( 0, -4 )
 texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" index="1"]
+shape = SubResource( 1 )
+
+[node name="FireArea" type="Area2D" parent="." index="1"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireArea" index="0"]
+visible = false
+position = Vector2( 0, -40 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="Sprite" type="Sprite" parent="FireArea/CollisionShape2D" index="0"]
+texture = ExtResource( 3 )
+
+[node name="FireDurationTimer" type="Timer" parent="." index="2"]
+wait_time = 5.0
+one_shot = true
+[connection signal="body_entered" from="TriggerArea" to="." method="_OnRogueEnterTrigger"]
+[connection signal="body_entered" from="FireArea" to="." method="_OnPlayerEnterFire"]
+[connection signal="timeout" from="FireDurationTimer" to="." method="_OnFireEnd"]
