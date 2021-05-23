@@ -11,7 +11,7 @@ extents = Vector2( 45, 27 )
 extents = Vector2( 38, 27 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 41, 6 )
+extents = Vector2( 20, 6 )
 
 [node name="DeathHornet" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
