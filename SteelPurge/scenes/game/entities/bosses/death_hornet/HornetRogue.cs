@@ -6,6 +6,7 @@ public class HornetRogue : Enemy
 	[Export] public uint DamagePerHit = 45;
 	[Export] public int Direction = -1;
 	private AnimatedSprite _sprite;
+	public bool Fly = false;
 
 	public override void _Ready()
 	{
@@ -19,7 +20,7 @@ public class HornetRogue : Enemy
 		base._OnMovement(delta);
 		if (IsOnFloor())
 			Velocity.x = Direction * 110;
-		else
+		else if (!Fly)
 			Velocity.x = 0;
 	}
 
