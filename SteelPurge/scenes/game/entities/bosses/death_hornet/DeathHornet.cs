@@ -7,11 +7,14 @@ public class DeathHornet : Boss
 	{
 		Rush,
 		KamikazeRogues,
+		Fireballs,
 		Flight,
+		FlightWithFireballs,
 	}
-	
+
 	private static readonly PackedScene RogueScene
 		= GD.Load<PackedScene>("res://scenes/game/entities/bosses/death_hornet/HornetRogue.tscn");
+
 	private static readonly PackedScene FireballScene
 		= GD.Load<PackedScene>("res://scenes/game/entities/bosses/death_hornet/FireballProjectile.tscn");
 
@@ -32,6 +35,8 @@ public class DeathHornet : Boss
 	private Timer _rogueSpawnTimer;
 	private Timer _rushWaitTimer;
 	private Timer _rushStartDelayTimer;
+	private Timer _reloadTimer;
+	private Timer _firingTimer;
 	private uint _shotsFired = 0;
 	private bool _playerAlreadyInsideLethalArea = false;
 	private bool _isRushing = false;
@@ -46,6 +51,8 @@ public class DeathHornet : Boss
 		_rightRogueSpawnPoint = GetNode<Position2D>("RightRogueSpawnPoint");
 		_rogueSpawnTimer = GetNode<Timer>("RogueSpawnTimer");
 		_rushWaitTimer = GetNode<Timer>("RushWaitTimer");
+		_reloadTimer = GetNode<Timer>("ReloadTimer");
+		_firingTimer = GetNode<Timer>("FiringTimer");
 		_rushStartDelayTimer = GetNode<Timer>("RushStartDelayTimer");
 
 		// TODO: Remove this test later
@@ -58,7 +65,7 @@ public class DeathHornet : Boss
 		{
 			DetectedPlayer.TakeDamage(PlayerDamage, new Vector2(LookingDirection, 0));
 		}
-		
+
 		var phaseTwoHp = 0.50f * BaseHitPoints;
 		var phaseThreeHp = 0.25f * BaseHitPoints;
 
@@ -93,8 +100,8 @@ public class DeathHornet : Boss
 				break;
 		}
 	}
-	
-	/*
+
+
 	private void ShootFireball()
 	{
 		if (_shotsFired >= MaxFireballShotsPerInterval)
@@ -102,14 +109,15 @@ public class DeathHornet : Boss
 			_reloadTimer.Start();
 			return;
 		}
-		
-		var fireball = ParentWorld.Entities.SpawnEntityDeferred<FireballProjectile>(FireballScene, _fireballSpawnPoint.Position + Position);
+
+		var fireball =
+			ParentWorld.Entities.SpawnEntityDeferred<FireballProjectile>(FireballScene,
+				_fireballSpawnPoint.Position + Position);
 		fireball.DamageDirection = LookingDirection;
 		fireball.InitWithHorizontalVelocity();
 		_shotsFired++;
-		GD.Print("huh");
 	}
-	*/
+
 
 	private void ChangeAttackMode(AttackMode mode)
 	{
@@ -124,8 +132,15 @@ public class DeathHornet : Boss
 				break;
 			case AttackMode.Flight:
 				break;
+			case AttackMode.Fireballs:
+				_firingTimer.Stop();
+				break;
+			case AttackMode.FlightWithFireballs:
+				break;
+			default:
+				throw new ArgumentOutOfRangeException();
 		}
-		
+
 		// Init stuff for when changing to new mode
 		switch (mode)
 		{
@@ -138,33 +153,48 @@ public class DeathHornet : Boss
 			case AttackMode.Flight:
 				_rogueSpawnTimer.Start();
 				break;
+			case AttackMode.Fireballs:
+				ShootFireball();
+				_firingTimer.Start();
+				break;
+			case AttackMode.FlightWithFireballs:
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
 		}
 
 		_currentAttackMode = mode;
 	}
-	
+
 	private void StartPhaseOne()
 	{
 		_rogueSpawnTimer.Start();
 		_rushWaitTimer.Start();
 	}
-	
+
 	private void PhaseOne(float delta)
 	{
-		switch (_currentAttackMode)
+		if (_currentAttackMode == AttackMode.Rush)
 		{
-			case AttackMode.Rush:
-				if (_isRushing && IsOnWall())
-				{
-					_isRushing = false;
-					LookingDirection *= -1;
-					ChangeAttackMode(AttackMode.KamikazeRogues);
-				}
-				break;
-			case AttackMode.KamikazeRogues:
-				break;
-		}
+			if (!_isRushing || !IsOnWall()) return;
+			_isRushing = false;
+			LookingDirection *= -1;
+			ChangeAttackMode(AttackMode.KamikazeRogues);
 
+			return;
+		}
+		
+		var verticalDirection = Mathf.Sign(ParentWorld.PlayerNode.Position.y - Position.y);
+		if (verticalDirection < 0)
+		{
+			if (_currentAttackMode != AttackMode.Fireballs)
+				ChangeAttackMode(AttackMode.Fireballs);
+		}
+		else if (verticalDirection > 0)
+		{
+			if (_currentAttackMode != AttackMode.KamikazeRogues)
+				ChangeAttackMode(AttackMode.KamikazeRogues);
+		}
 	}
 
 	private void StartPhaseTwo()
@@ -193,9 +223,8 @@ public class DeathHornet : Boss
 
 	private void StartPhaseThree()
 	{
-		
 	}
-	
+
 	private void PhaseThree(float delta)
 	{
 	}
@@ -232,27 +261,33 @@ public class DeathHornet : Boss
 
 		DropRogueFromBelow();
 	}
-	
+
 	private void _OnAttackPlayer(Player player)
 	{
 		if (_playerAlreadyInsideLethalArea) return;
 		player.TakeDamage(PlayerDamage, new Vector2(LookingDirection, 0));
 		_playerAlreadyInsideLethalArea = true;
 	}
-	
+
 	private void _OnPlayerExitLethalArea(Player body)
 	{
 		_playerAlreadyInsideLethalArea = false;
 	}
-	
+
 	private void _OnRushStart()
 	{
 		ChangeAttackMode(AttackMode.Rush);
 	}
-	
+
 	private void _OnPerformRush()
 	{
 		_isRushing = true;
 		Velocity.x = RushSpeed * LookingDirection;
+	}
+
+	private void _OnCanFire()
+	{
+		_shotsFired = 0;
+		_firingTimer.Start();
 	}
 }
