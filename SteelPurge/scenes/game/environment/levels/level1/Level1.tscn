@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scenes/game/environment/levels/level1/Seg1Level1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/environment/levels/level1/Seg2Level1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/Game.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/texture/background.png" type="Texture" id=7]
@@ -8,7 +7,7 @@
 [node name="Level1" instance=ExtResource( 6 )]
 
 [node name="World" parent="." index="0"]
-SegmentScenes = [ ExtResource( 1 ), ExtResource( 2 ) ]
+SegmentScenes = [ ExtResource( 2 ) ]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="World" index="0"]
 
