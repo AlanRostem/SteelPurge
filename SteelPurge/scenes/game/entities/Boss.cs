@@ -9,6 +9,7 @@ public class Boss : Enemy
 		_hpBar = GetNode<TextureProgress>("CanvasLayer/BossHPBar");
 		_hpBar.MaxValue = BaseHitPoints;
 		_hpBar.Value = BaseHitPoints;
+		CanBeKnockedBack = false;
 		base._Ready();
 	}
 	

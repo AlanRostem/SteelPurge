@@ -30,7 +30,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="6"]
 frames = ExtResource( 2 )
 animation = "walk"
-frame = 1
 playing = true
 
 [node name="ExplosiveArea" type="Area2D" parent="." index="7"]
