@@ -8,7 +8,7 @@ public class DeathHornet : Boss
 
 	[Export] public uint CriticalDamageByRogue = 400u;
 	[Export] public float RiseSpeed = 100;
-	[Export] public float FlightStrafeSpeed = 80;
+	[Export] public float FlightStrafeSpeed = 60;
 
 	public int StrafeDirection = -1;
 	public float StrafeMargin = 48;
