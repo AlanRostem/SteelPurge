@@ -11,12 +11,7 @@ public class HornetRogue : Enemy
 	{
 		base._Ready();
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
-	}
-
-	public override void _Process(float delta)
-	{
-		base._Process(delta);
-		_sprite.FlipH = Velocity.x < 0;
+		_sprite.FlipH = Direction < 0;
 	}
 
 	protected override void _OnMovement(float delta)
@@ -24,6 +19,8 @@ public class HornetRogue : Enemy
 		base._OnMovement(delta);
 		if (IsOnFloor())
 			Velocity.x = Direction * 110;
+		else
+			Velocity.x = 0;
 	}
 
 	public override void _OnCollision(KinematicCollision2D collider)
