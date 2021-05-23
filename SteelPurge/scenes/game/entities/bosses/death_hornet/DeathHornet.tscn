@@ -51,4 +51,13 @@ shape = SubResource( 3 )
 margin_left = -68.0
 margin_right = 68.0
 text = "Death Hornet X-08"
+
+[node name="BottomRogueSpawnPoint" type="Position2D" parent="." index="9"]
+position = Vector2( 0, 51 )
+
+[node name="LeftRogueSpawnPoint" type="Position2D" parent="." index="10"]
+position = Vector2( -68, 0 )
+
+[node name="RightRogueSpawnPoint" type="Position2D" parent="." index="11"]
+position = Vector2( 68, 0 )
 [connection signal="body_entered" from="RogueDamageArea" to="." method="_OnRogueHit"]
