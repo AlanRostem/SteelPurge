@@ -228,12 +228,7 @@ public class DeathHornet : Boss
 	private void ShootRogueFromSide(int direction)
 	{
 		var position = direction < 0 ? _leftRogueSpawnPoint.Position : _rightRogueSpawnPoint.Position;
-		
 		var rogue = ParentWorld.Entities.SpawnEntityDeferred<HornetRogue>(RogueScene, position + Position);
-		var angle = position.AngleTo(ParentWorld.PlayerNode.Position);
-		
-		rogue.Fly = true;
-		rogue.Velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 110f;
 		rogue.Direction = direction;
 	}
 
