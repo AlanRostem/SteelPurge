@@ -26,9 +26,16 @@ public class FireBeamSpot : StaticEntity
 		rogue.QueueFree();
 	}
 	
-	private void _OnPlayerEnterFire(Player player)
+	private void _OnPlayerEnterFire(object body)
 	{
+		GD.Print("huh");
+		var player = (Player) body;
 		player.TakeDamage(FireDamage, new Vector2(-player.HorizontalLookingDirection, 0));
+	}
+
+	private void _OnPlayerLeaveFireArea(Player body)
+	{
+		
 	}
 
 	private void _OnFireEnd()
