@@ -39,9 +39,8 @@ disabled = true
 texture = ExtResource( 3 )
 
 [node name="FireDurationTimer" type="Timer" parent="." index="2"]
-wait_time = 2.0
+wait_time = 5.0
 one_shot = true
 [connection signal="body_entered" from="TriggerArea" to="." method="_OnRogueEnterTrigger"]
 [connection signal="body_entered" from="FireArea" to="." method="_OnPlayerEnterFire"]
-[connection signal="body_exited" from="FireArea" to="." method="_OnPlayerLeaveFireArea"]
 [connection signal="timeout" from="FireDurationTimer" to="." method="_OnFireEnd"]
