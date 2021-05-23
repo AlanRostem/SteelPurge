@@ -10,7 +10,7 @@ extents = Vector2( 6, 8 )
 [sub_resource type="RectangleShape2D" id=2]
 
 [node name="HornetRogue" instance=ExtResource( 1 )]
-collision_mask = 2147483953
+collision_layer = 264
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
