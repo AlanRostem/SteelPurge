@@ -60,4 +60,8 @@ position = Vector2( -68, 0 )
 
 [node name="RightRogueSpawnPoint" type="Position2D" parent="." index="11"]
 position = Vector2( 68, 0 )
+
+[node name="RogueSpawnTimer" type="Timer" parent="." index="12"]
+wait_time = 2.0
 [connection signal="body_entered" from="RogueDamageArea" to="." method="_OnRogueHit"]
+[connection signal="timeout" from="RogueSpawnTimer" to="." method="_OnSpawnRogue"]

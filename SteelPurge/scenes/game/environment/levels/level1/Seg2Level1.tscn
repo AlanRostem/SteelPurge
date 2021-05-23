@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/game/entities/bosses/death_hornet/HornetRogue.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/entities/bosses/death_hornet/DeathHornet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/environment/dead_soldier/DeadSoldier.tscn" type="PackedScene" id=4]
 
@@ -21,6 +20,3 @@ Weapon = 2
 [node name="DeathHornet" parent="EntityPool" index="0" instance=ExtResource( 3 )]
 position = Vector2( 176, 72 )
 CanBeKnockedBack = true
-
-[node name="HornetRogue" parent="EntityPool" index="1" instance=ExtResource( 2 )]
-position = Vector2( 352, 176 )
