@@ -86,7 +86,6 @@ public class Enemy : KinematicEntity
 	public void KnockBack(Vector2 direction, float speed)
 	{
 		if (!CanBeKnockedBack) return;
-		GD.Print(CanBeKnockedBack);
 		ApplyForce(direction * speed);
 		CanMove = false;
 		_isKnockedBack = true;
