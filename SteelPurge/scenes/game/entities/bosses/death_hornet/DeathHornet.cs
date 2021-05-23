@@ -48,7 +48,10 @@ public class DeathHornet : Boss
 		if (Health <= phaseThreeHp)
 		{
 			if (CurrentPhase == BossPhase.Two)
+			{
 				CurrentPhase = BossPhase.Three;
+				StartPhaseThree();
+			}
 		}
 
 		switch (CurrentPhase)
@@ -61,8 +64,6 @@ public class DeathHornet : Boss
 				break;
 			case BossPhase.Three:
 				PhaseThree(delta);
-				break;
-			case BossPhase.Four:
 				break;
 		}
 	}
@@ -97,6 +98,11 @@ public class DeathHornet : Boss
 		Velocity.x = StrafeDirection * FlightStrafeSpeed;
 	}
 
+	private void StartPhaseThree()
+	{
+		
+	}
+	
 	private void PhaseThree(float delta)
 	{
 	}
