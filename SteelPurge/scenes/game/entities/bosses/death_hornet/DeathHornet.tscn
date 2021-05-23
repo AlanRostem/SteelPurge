@@ -57,7 +57,7 @@ margin_right = 68.0
 text = "Death Hornet X-08"
 
 [node name="FireballSpawnPoint" type="Position2D" parent="." index="9"]
-position = Vector2( 0, -51 )
+position = Vector2( 0, -20 )
 
 [node name="BottomRogueSpawnPoint" type="Position2D" parent="." index="10"]
 position = Vector2( 0, 51 )
@@ -73,6 +73,15 @@ wait_time = 2.0
 
 [node name="FiringTimer" type="Timer" parent="." index="14"]
 wait_time = 0.6
+
+[node name="LethalArea" type="Area2D" parent="." index="15"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LethalArea" index="0"]
+position = Vector2( 0, 5 )
+shape = SubResource( 1 )
 [connection signal="body_entered" from="RogueDamageArea" to="." method="_OnRogueHit"]
 [connection signal="timeout" from="RogueSpawnTimer" to="." method="_OnSpawnRogue"]
 [connection signal="timeout" from="FiringTimer" to="." method="_OnSpawnRogue"]
+[connection signal="body_entered" from="LethalArea" to="." method="_OnAttackPlayer"]
