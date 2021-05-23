@@ -21,6 +21,7 @@ public class DeathHornet : Boss
 	private Timer _rogueSpawnTimer;
 	private Timer _firingTimer;
 	private uint _shotsFired = 0;
+	private bool _playerAlreadyInsideLethalArea = false;
 
 	public override void _Ready()
 	{
@@ -37,6 +38,11 @@ public class DeathHornet : Boss
 
 	protected override void _OnMovement(float delta)
 	{
+		if (_playerAlreadyInsideLethalArea)
+		{
+			DetectedPlayer.TakeDamage(PlayerDamage, new Vector2(LookingDirection, 0));
+		}
+		
 		var phaseTwoHp = 0.75f * BaseHitPoints;
 		var phaseThreeHp = 0.50f * BaseHitPoints;
 
@@ -140,7 +146,7 @@ public class DeathHornet : Boss
 	{
 		if (CurrentPhase == BossPhase.One)
 		{
-			ShootRogueFromSide(Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x));
+			ShootRogueFromSide(LookingDirection);
 			return;
 		}
 
@@ -149,6 +155,13 @@ public class DeathHornet : Boss
 	
 	private void _OnAttackPlayer(Player player)
 	{
+		if (_playerAlreadyInsideLethalArea) return;
 		player.TakeDamage(PlayerDamage, new Vector2(LookingDirection, 0));
+		_playerAlreadyInsideLethalArea = true;
+	}
+	
+	private void _OnPlayerExitLethalArea(Player body)
+	{
+		_playerAlreadyInsideLethalArea = false;
 	}
 }
