@@ -42,9 +42,9 @@ disabled = true
 [node name="AmmoLabel" parent="CanvasLayer" instance=ExtResource( 3 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 22.0
+margin_left = 13.0
 margin_top = -23.0
-margin_right = 62.0
+margin_right = 53.0
 margin_bottom = -9.0
 text = "6 / 6"
 [connection signal="CancelFire" from="." to="FireTimer" method="_OnWeaponCancelFire"]
