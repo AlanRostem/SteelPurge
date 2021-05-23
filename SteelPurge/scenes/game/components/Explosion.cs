@@ -9,10 +9,10 @@ public class Explosion : Area2D
 	{
 		var hitBox = (VulnerableHitbox)area;
 		hitBox.TakeHit(Damage, Vector2.Zero);
-		if (hitBox.GetParent() is KinematicEntity entity)
+		if (hitBox.GetParent() is Enemy entity)
 		{
 			var angle = Position.AngleToPoint(entity.Position);
-			entity.ApplyForce(new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce * GetPhysicsProcessDeltaTime());
+			entity.KnockBack(new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)), KnockBackForce * GetPhysicsProcessDeltaTime());
 		}
 	}
 	

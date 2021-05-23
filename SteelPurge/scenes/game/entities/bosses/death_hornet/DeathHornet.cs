@@ -3,6 +3,16 @@ using System;
 
 public class DeathHornet : Boss
 {
+	private void ShootRogueFromSide(int direction)
+	{
+		
+	}
+	
+	private void DropRogueFromBelow()
+	{
+		
+	}
+	
 	private void _OnRogueHit(HornetRogue body)
 	{
 		var damage = 5000u; // Change back to 500u

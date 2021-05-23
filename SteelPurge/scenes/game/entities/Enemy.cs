@@ -14,6 +14,8 @@ public class Enemy : KinematicEntity
 	[Export] public uint BaseHitPoints = 45;
 	[Export] public float PlayerDetectionRange = 1000;
 	[Export] public float KnockBackSpeed = 300;
+	[Export] public bool CanBeKnockedBack = true;
+
 	
 	private bool _isDead;
 	private bool _dropScrap;
@@ -76,12 +78,23 @@ public class Enemy : KinematicEntity
 			Health -= damage;
 			if (direction.x != 0 || direction.y != 0)
 			{
-				ApplyForce(direction * KnockBackSpeed);
-				CanMove = false;
-				_isKnockedBack = true;
-				_meleeAffectedKnockBackTimer.Start();
+				KnockBack(direction);
 			}
 		}
+	}
+
+	public void KnockBack(Vector2 direction, float speed)
+	{
+		if (!CanBeKnockedBack) return;
+		ApplyForce(direction * speed);
+		CanMove = false;
+		_isKnockedBack = true;
+		_meleeAffectedKnockBackTimer.Start();
+	}
+	
+	public void KnockBack(Vector2 direction)
+	{
+		KnockBack(direction, KnockBackSpeed);
 	}
 
 	private void _OnVulnerableHitboxHit(uint damage, Vector2 knockBackDirection)
