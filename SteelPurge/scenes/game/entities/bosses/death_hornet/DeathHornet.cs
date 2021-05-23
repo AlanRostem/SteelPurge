@@ -117,7 +117,8 @@ public class DeathHornet : Boss
 		fireball.InitWithHorizontalVelocity();
 		_shotsFired++;
 	}
-	
+
+
 	private void ChangeAttackMode(AttackMode mode)
 	{
 		// Clear up things from the previous mode
