@@ -7,9 +7,10 @@ public class DeathHornet : Boss
 		= GD.Load<PackedScene>("res://scenes/game/entities/bosses/death_hornet/HornetRogue.tscn");
 
 	[Export] public uint CriticalDamageByRogue = 400u;
-
 	[Export] public float RiseSpeed = 100;
+	[Export] public float FlightStrafeSpeed = 80;
 
+	public int StrafeDirection = -1;
 	private Position2D _bottomRogueSpawnPoint;
 	private Position2D _leftRogueSpawnPoint;
 	private Position2D _rightRogueSpawnPoint;
@@ -81,7 +82,17 @@ public class DeathHornet : Boss
 	private void PhaseTwo(float delta)
 	{
 		if (IsOnCeiling())
+		{
 			Velocity.y = 0;
+			StrafeDirection =  Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
+		}
+
+		if (IsOnWall())
+		{
+			StrafeDirection *= -1;
+		}
+
+		Velocity.x = StrafeDirection * FlightStrafeSpeed;
 	}
 
 	private void PhaseThree(float delta)

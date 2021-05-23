@@ -19,4 +19,7 @@ Weapon = 2
 
 [node name="DeathHornet" parent="EntityPool" index="0" instance=ExtResource( 3 )]
 position = Vector2( 312, 160 )
+collision_layer = 8
+collision_mask = 2147483697
 CanBeKnockedBack = true
+[connection signal="HealthChanged" from="EntityPool/DeathHornet" to="EntityPool/DeathHornet/EnemyHPLabel" method="_OnEnemyHealthChanged"]
