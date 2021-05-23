@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/game/entities/projectile/HostileProjectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/texture/fire_ball.png" type="Texture" id=2]
+[ext_resource path="res://scenes/game/entities/bosses/death_hornet/FireballProjectile.cs" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="FireballProjectile" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetectionArea" index="0"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="3"]
+texture = ExtResource( 2 )

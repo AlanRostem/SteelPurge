@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/entities/platform/MovingPlatform.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/entities/bosses/death_hornet/DeathHornet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/environment/dead_soldier/DeadSoldier.tscn" type="PackedScene" id=4]
 
@@ -19,7 +20,7 @@ Weapon = 2
 
 [node name="DeathHornet" parent="EntityPool" index="0" instance=ExtResource( 3 )]
 position = Vector2( 312, 160 )
-collision_layer = 8
-collision_mask = 2147483697
 CanBeKnockedBack = true
-[connection signal="HealthChanged" from="EntityPool/DeathHornet" to="EntityPool/DeathHornet/EnemyHPLabel" method="_OnEnemyHealthChanged"]
+
+[node name="MovingPlatform" parent="EntityPool" index="1" instance=ExtResource( 2 )]
+position = Vector2( 200, 160 )

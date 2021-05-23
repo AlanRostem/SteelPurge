@@ -7,6 +7,7 @@ public class DeathHornet : Boss
 		= GD.Load<PackedScene>("res://scenes/game/entities/bosses/death_hornet/HornetRogue.tscn");
 
 	[Export] public uint CriticalDamageByRogue = 400u;
+	[Export] public uint MaxFireballShotsPerInterval = 3u;
 	[Export] public float RiseSpeed = 100;
 	[Export] public float FlightStrafeSpeed = 60;
 
@@ -17,6 +18,7 @@ public class DeathHornet : Boss
 	private Position2D _rightRogueSpawnPoint;
 	private Timer _rogueSpawnTimer;
 	private Timer _firingTimer;
+	private uint _shotsFired = 0;
 
 	public override void _Ready()
 	{
@@ -79,6 +81,8 @@ public class DeathHornet : Boss
 	private void StartPhaseTwo()
 	{
 		Velocity.y = -RiseSpeed;
+		_rogueSpawnTimer.Stop();
+		_firingTimer.Stop();
 	}
 
 	private void PhaseTwo(float delta)
@@ -87,6 +91,7 @@ public class DeathHornet : Boss
 		{
 			Velocity.y = 0;
 			StrafeDirection = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
+			_rogueSpawnTimer.Start();
 		}
 
 		var distance = ParentWorld.PlayerNode.Position.x - Position.x;

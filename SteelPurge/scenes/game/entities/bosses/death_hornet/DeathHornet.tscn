@@ -56,19 +56,22 @@ margin_left = -68.0
 margin_right = 68.0
 text = "Death Hornet X-08"
 
-[node name="BottomRogueSpawnPoint" type="Position2D" parent="." index="9"]
+[node name="FireballSpawnPoint" type="Position2D" parent="." index="9"]
+position = Vector2( 0, -51 )
+
+[node name="BottomRogueSpawnPoint" type="Position2D" parent="." index="10"]
 position = Vector2( 0, 51 )
 
-[node name="LeftRogueSpawnPoint" type="Position2D" parent="." index="10"]
+[node name="LeftRogueSpawnPoint" type="Position2D" parent="." index="11"]
 position = Vector2( -68, 0 )
 
-[node name="RightRogueSpawnPoint" type="Position2D" parent="." index="11"]
+[node name="RightRogueSpawnPoint" type="Position2D" parent="." index="12"]
 position = Vector2( 68, 0 )
 
-[node name="RogueSpawnTimer" type="Timer" parent="." index="12"]
+[node name="RogueSpawnTimer" type="Timer" parent="." index="13"]
 wait_time = 2.0
 
-[node name="FiringTimer" type="Timer" parent="." index="13"]
+[node name="FiringTimer" type="Timer" parent="." index="14"]
 wait_time = 0.6
 [connection signal="body_entered" from="RogueDamageArea" to="." method="_OnRogueHit"]
 [connection signal="timeout" from="RogueSpawnTimer" to="." method="_OnSpawnRogue"]
