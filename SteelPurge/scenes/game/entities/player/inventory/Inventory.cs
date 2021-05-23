@@ -46,8 +46,8 @@ public class Inventory : Node2D
 
 	public readonly uint[] OrdinanceFuels =
 	{
-		40,
-		40
+		4000,
+		4000
 	};
 
 	private readonly bool[] _weaponContainer = new bool[(int) InventoryWeapon.Count];

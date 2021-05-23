@@ -24,7 +24,7 @@ public class Boss : Enemy
 		CanBeKnockedBack = false;
 		base._Ready();
 	}
-	
+
 	private void _OnBossHealthChanged(uint health)
 	{
 		_hpBar.Value = health;
