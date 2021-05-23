@@ -8,6 +8,7 @@
 
 [node name="FireballProjectile" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+MaxVelocity = 165.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetectionArea" index="0"]
 shape = SubResource( 1 )

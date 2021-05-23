@@ -69,12 +69,17 @@ position = Vector2( -68, 0 )
 position = Vector2( 68, 0 )
 
 [node name="RogueSpawnTimer" type="Timer" parent="." index="13"]
-wait_time = 2.0
+wait_time = 1.4
 
-[node name="FiringTimer" type="Timer" parent="." index="14"]
-wait_time = 0.6
+[node name="RushWaitTimer" type="Timer" parent="." index="14"]
+wait_time = 5.0
+one_shot = true
 
-[node name="LethalArea" type="Area2D" parent="." index="15"]
+[node name="RushStartDelayTimer" type="Timer" parent="." index="15"]
+wait_time = 0.8
+one_shot = true
+
+[node name="LethalArea" type="Area2D" parent="." index="16"]
 collision_layer = 0
 collision_mask = 2
 
@@ -83,6 +88,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 1 )
 [connection signal="body_entered" from="RogueDamageArea" to="." method="_OnRogueHit"]
 [connection signal="timeout" from="RogueSpawnTimer" to="." method="_OnSpawnRogue"]
-[connection signal="timeout" from="FiringTimer" to="." method="_OnSpawnRogue"]
+[connection signal="timeout" from="RushWaitTimer" to="." method="_OnRushStart"]
+[connection signal="timeout" from="RushStartDelayTimer" to="." method="_OnPerformRush"]
 [connection signal="body_entered" from="LethalArea" to="." method="_OnAttackPlayer"]
 [connection signal="body_exited" from="LethalArea" to="." method="_OnPlayerExitLethalArea"]
