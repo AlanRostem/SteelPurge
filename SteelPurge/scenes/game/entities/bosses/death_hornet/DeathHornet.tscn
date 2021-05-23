@@ -18,7 +18,7 @@ script = ExtResource( 3 )
 IsGravityEnabled = false
 ScrapDropHit = 4
 ScrapDropKilled = 2500
-BaseHitPoints = 4500
+BaseHitPoints = 5500
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 position = Vector2( 0, -32 )
@@ -46,4 +46,9 @@ collision_mask = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RogueDamageArea" index="0"]
 position = Vector2( 0, 29 )
 shape = SubResource( 3 )
+
+[node name="NameLabel" parent="CanvasLayer" index="1"]
+margin_left = -68.0
+margin_right = 68.0
+text = "Death Hornet X-08"
 [connection signal="body_entered" from="RogueDamageArea" to="." method="_OnRogueHit"]
