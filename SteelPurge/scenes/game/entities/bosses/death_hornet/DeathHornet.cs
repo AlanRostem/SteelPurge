@@ -11,6 +11,7 @@ public class DeathHornet : Boss
 	[Export] public float FlightStrafeSpeed = 80;
 
 	public int StrafeDirection = -1;
+	public float StrafeMargin = 48;
 	private Position2D _bottomRogueSpawnPoint;
 	private Position2D _leftRogueSpawnPoint;
 	private Position2D _rightRogueSpawnPoint;
@@ -84,13 +85,14 @@ public class DeathHornet : Boss
 		if (IsOnCeiling())
 		{
 			Velocity.y = 0;
-			StrafeDirection =  Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
+			StrafeDirection = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
 		}
 
-		if (IsOnWall())
-		{
-			StrafeDirection *= -1;
-		}
+		var distance = ParentWorld.PlayerNode.Position.x - Position.x;
+		if (distance < -StrafeMargin)
+			StrafeDirection = -1;
+		else if (distance > StrafeMargin)
+			StrafeDirection = 1;
 
 		Velocity.x = StrafeDirection * FlightStrafeSpeed;
 	}
