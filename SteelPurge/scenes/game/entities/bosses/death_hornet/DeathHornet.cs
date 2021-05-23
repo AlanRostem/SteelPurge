@@ -67,7 +67,7 @@ public class DeathHornet : Boss
 		}
 
 		var phaseTwoHp = 0.50f * BaseHitPoints;
-		var phaseThreeHp = 0.25f * BaseHitPoints;
+		var phaseThreeHp = 0f * BaseHitPoints; // 0.25f
 
 		if (Health <= phaseTwoHp)
 		{
