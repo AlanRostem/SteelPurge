@@ -11,10 +11,14 @@ extents = Vector2( 45, 27 )
 extents = Vector2( 38, 27 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 29, 6 )
+extents = Vector2( 41, 6 )
 
 [node name="DeathHornet" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+IsGravityEnabled = false
+ScrapDropHit = 4
+ScrapDropKilled = 2500
+BaseHitPoints = 4500
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 position = Vector2( 0, -32 )
@@ -42,3 +46,4 @@ collision_mask = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RogueDamageArea" index="0"]
 position = Vector2( 0, 29 )
 shape = SubResource( 3 )
+[connection signal="body_entered" from="RogueDamageArea" to="." method="_OnRogueHit"]

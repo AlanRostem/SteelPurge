@@ -5,7 +5,7 @@ using Object = Godot.Object;
 
 public class Enemy : KinematicEntity
 {
-	private static readonly PackedScene ScrapScene =
+	protected static readonly PackedScene ScrapScene =
 		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
 
 	[Export] public uint ScrapDropHit = 2;

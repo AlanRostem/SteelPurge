@@ -7,4 +7,13 @@ public class DeathHornet : Boss
 	{
 		base._Ready();
 	}
+	
+	private void _OnRogueHit(HornetRogue body)
+	{
+		var damage = 5000u; // Change back to 500u
+		TakeDamage(damage, Vector2.Zero);
+		body.QueueFree();
+		var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, body.Position);
+		scrap.Count = body.ScrapDropKilled;
+	}
 }
