@@ -23,6 +23,7 @@ public class DeathHornet : Boss
 	public int StrafeDirection = -1;
 	public int LookingDirection = -1;
 	public float StrafeMargin = 48;
+	private CollisionShape2D _criticalShape;
 	private Position2D _bottomRogueSpawnPoint;
 	private Position2D _leftRogueSpawnPoint;
 	private Position2D _rightRogueSpawnPoint;
@@ -36,6 +37,7 @@ public class DeathHornet : Boss
 	public override void _Ready()
 	{
 		base._Ready();
+		_criticalShape = GetNode<CollisionShape2D>("CriticalHitbox/CriticalShape");
 		_bottomRogueSpawnPoint = GetNode<Position2D>("BottomRogueSpawnPoint");
 		_leftRogueSpawnPoint = GetNode<Position2D>("LeftRogueSpawnPoint");
 		_rightRogueSpawnPoint = GetNode<Position2D>("RightRogueSpawnPoint");
@@ -97,7 +99,8 @@ public class DeathHornet : Boss
 		switch (_currentAttackMode)
 		{
 			case AttackMode.Rush:
-				_rushWaitTimer.Start();
+				_rushWaitTimer.Start(); // IDK why I do this
+				_criticalShape.SetDeferred("disabled", true);
 				break;
 			case AttackMode.KamikazeRogues:
 				_rogueSpawnTimer.Stop();
@@ -244,5 +247,6 @@ public class DeathHornet : Boss
 	{
 		_isRushing = true;
 		Velocity.x = RushSpeed * LookingDirection;
+		_criticalShape.SetDeferred("disabled", false);
 	}
 }

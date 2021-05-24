@@ -34,6 +34,7 @@ CriticalHitMultiplier = 20.0
 
 [node name="CriticalShape" parent="CriticalHitbox" index="0"]
 position = Vector2( 0, -24 )
+disabled = true
 
 [node name="VisibilityEnabler2D" parent="." index="4"]
 position = Vector2( 0, 4 )
