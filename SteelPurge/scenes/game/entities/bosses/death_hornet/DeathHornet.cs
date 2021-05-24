@@ -90,7 +90,6 @@ public class DeathHornet : Boss
 				break;
 		}
 	}
-	
 
 
 	private void ChangeAttackMode(AttackMode mode)
@@ -136,16 +135,23 @@ public class DeathHornet : Boss
 
 	private void PhaseOne(float delta)
 	{
-		if (_currentAttackMode == AttackMode.Rush)
+		switch (_currentAttackMode)
 		{
-			if (!_isRushing || !IsOnWall()) return;
-			_isRushing = false;
-			LookingDirection *= -1;
-			ChangeAttackMode(AttackMode.KamikazeRogues);
+			case AttackMode.Rush:
 
-			// return;
+				if (_isRushing && IsOnWall())
+				{
+					_isRushing = false;
+					LookingDirection *= -1;
+					ChangeAttackMode(AttackMode.KamikazeRogues);
+				}
+
+				break;
+			case AttackMode.KamikazeRogues:
+				
+				break;
 		}
-		
+
 		/*
 		var verticalDirection = Mathf.Sign(ParentWorld.PlayerNode.Position.y - Position.y);
 		if (verticalDirection < 0)
