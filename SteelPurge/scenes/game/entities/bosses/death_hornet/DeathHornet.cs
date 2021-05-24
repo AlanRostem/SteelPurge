@@ -6,6 +6,7 @@ public class DeathHornet : Boss
 	private enum AttackMode
 	{
 		Rush,
+		SlowMelee,
 		KamikazeRogues,
 		Flight,
 		RogueBombardment,
@@ -32,6 +33,7 @@ public class DeathHornet : Boss
 	private Timer _rushStartDelayTimer;
 	private bool _playerAlreadyInsideLethalArea = false;
 	private bool _isRushing = false;
+	private float _kamikazeRogueModeStrafeAmount = 0;
 	private AttackMode _currentAttackMode = AttackMode.KamikazeRogues;
 
 	public override void _Ready()
@@ -102,12 +104,17 @@ public class DeathHornet : Boss
 				_criticalShape.SetDeferred("disabled", true);
 				break;
 			case AttackMode.KamikazeRogues:
+				Velocity.x = -LookingDirection * FlightStrafeSpeed;
 				_rogueSpawnTimer.Stop();
 				break;
 			case AttackMode.Flight:
 				break;
 			case AttackMode.RogueBombardment:
 				break;
+			case AttackMode.SlowMelee:
+				break;
+			default:
+				throw new ArgumentOutOfRangeException();
 		}
 
 		// Init stuff for when changing to new mode
@@ -122,6 +129,10 @@ public class DeathHornet : Boss
 				break;
 			case AttackMode.RogueBombardment:
 				break;
+			case AttackMode.SlowMelee:
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
 		}
 
 		_currentAttackMode = mode;
@@ -148,7 +159,16 @@ public class DeathHornet : Boss
 
 				break;
 			case AttackMode.KamikazeRogues:
-				
+				Velocity.x = StrafeDirection * FlightStrafeSpeed;
+				_kamikazeRogueModeStrafeAmount += Velocity.x * delta;
+				if (_kamikazeRogueModeStrafeAmount > StrafeMargin && StrafeDirection > 0)
+				{
+					StrafeDirection = -1;
+				}
+				else if (_kamikazeRogueModeStrafeAmount < -StrafeMargin && StrafeDirection < 0)
+				{
+					StrafeDirection = 1;
+				}
 				break;
 		}
 
