@@ -56,37 +56,27 @@ margin_left = -68.0
 margin_right = 68.0
 text = "Death Hornet X-08"
 
-[node name="FireballSpawnPoint" type="Position2D" parent="." index="9"]
-position = Vector2( 0, -20 )
-
-[node name="BottomRogueSpawnPoint" type="Position2D" parent="." index="10"]
+[node name="BottomRogueSpawnPoint" type="Position2D" parent="." index="9"]
 position = Vector2( 0, 51 )
 
-[node name="LeftRogueSpawnPoint" type="Position2D" parent="." index="11"]
+[node name="LeftRogueSpawnPoint" type="Position2D" parent="." index="10"]
 position = Vector2( -68, 0 )
 
-[node name="RightRogueSpawnPoint" type="Position2D" parent="." index="12"]
+[node name="RightRogueSpawnPoint" type="Position2D" parent="." index="11"]
 position = Vector2( 68, 0 )
 
-[node name="RogueSpawnTimer" type="Timer" parent="." index="13"]
+[node name="RogueSpawnTimer" type="Timer" parent="." index="12"]
 wait_time = 1.4
 
-[node name="FiringTimer" type="Timer" parent="." index="14"]
-wait_time = 0.2
-
-[node name="ReloadTimer" type="Timer" parent="." index="15"]
-wait_time = 0.6
-one_shot = true
-
-[node name="RushWaitTimer" type="Timer" parent="." index="16"]
+[node name="RushWaitTimer" type="Timer" parent="." index="13"]
 wait_time = 5.0
 one_shot = true
 
-[node name="RushStartDelayTimer" type="Timer" parent="." index="17"]
+[node name="RushStartDelayTimer" type="Timer" parent="." index="14"]
 wait_time = 0.8
 one_shot = true
 
-[node name="LethalArea" type="Area2D" parent="." index="18"]
+[node name="LethalArea" type="Area2D" parent="." index="15"]
 collision_layer = 0
 collision_mask = 2
 
@@ -95,8 +85,6 @@ position = Vector2( 0, 5 )
 shape = SubResource( 1 )
 [connection signal="body_entered" from="RogueDamageArea" to="." method="_OnRogueHit"]
 [connection signal="timeout" from="RogueSpawnTimer" to="." method="_OnSpawnRogue"]
-[connection signal="timeout" from="FiringTimer" to="." method="ShootFireball"]
-[connection signal="timeout" from="ReloadTimer" to="." method="_OnCanFire"]
 [connection signal="timeout" from="RushWaitTimer" to="." method="_OnRushStart"]
 [connection signal="timeout" from="RushStartDelayTimer" to="." method="_OnPerformRush"]
 [connection signal="body_entered" from="LethalArea" to="." method="_OnAttackPlayer"]

@@ -7,20 +7,15 @@ public class DeathHornet : Boss
 	{
 		Rush,
 		KamikazeRogues,
-		Fireballs,
 		Flight,
-		FlightWithFireballs,
+		RogueBombardment,
 	}
 
 	private static readonly PackedScene RogueScene
 		= GD.Load<PackedScene>("res://scenes/game/entities/bosses/death_hornet/HornetRogue.tscn");
 
-	private static readonly PackedScene FireballScene
-		= GD.Load<PackedScene>("res://scenes/game/entities/bosses/death_hornet/FireballProjectile.tscn");
-
 	[Export] public uint CriticalDamageByRogue = 400u;
 	[Export] public uint PlayerDamage = 65u;
-	[Export] public uint MaxFireballShotsPerInterval = 3u;
 	[Export] public float RiseSpeed = 100;
 	[Export] public float FlightStrafeSpeed = 60;
 	[Export] public float RushSpeed = 180;
@@ -28,16 +23,12 @@ public class DeathHornet : Boss
 	public int StrafeDirection = -1;
 	public int LookingDirection = -1;
 	public float StrafeMargin = 48;
-	private Position2D _fireballSpawnPoint;
 	private Position2D _bottomRogueSpawnPoint;
 	private Position2D _leftRogueSpawnPoint;
 	private Position2D _rightRogueSpawnPoint;
 	private Timer _rogueSpawnTimer;
 	private Timer _rushWaitTimer;
 	private Timer _rushStartDelayTimer;
-	private Timer _reloadTimer;
-	private Timer _firingTimer;
-	private uint _shotsFired = 0;
 	private bool _playerAlreadyInsideLethalArea = false;
 	private bool _isRushing = false;
 	private AttackMode _currentAttackMode = AttackMode.KamikazeRogues;
@@ -45,14 +36,11 @@ public class DeathHornet : Boss
 	public override void _Ready()
 	{
 		base._Ready();
-		_fireballSpawnPoint = GetNode<Position2D>("FireballSpawnPoint");
 		_bottomRogueSpawnPoint = GetNode<Position2D>("BottomRogueSpawnPoint");
 		_leftRogueSpawnPoint = GetNode<Position2D>("LeftRogueSpawnPoint");
 		_rightRogueSpawnPoint = GetNode<Position2D>("RightRogueSpawnPoint");
 		_rogueSpawnTimer = GetNode<Timer>("RogueSpawnTimer");
 		_rushWaitTimer = GetNode<Timer>("RushWaitTimer");
-		_reloadTimer = GetNode<Timer>("ReloadTimer");
-		_firingTimer = GetNode<Timer>("FiringTimer");
 		_rushStartDelayTimer = GetNode<Timer>("RushStartDelayTimer");
 
 		// TODO: Remove this test later
@@ -100,23 +88,7 @@ public class DeathHornet : Boss
 				break;
 		}
 	}
-
-
-	private void ShootFireball()
-	{
-		if (_shotsFired >= MaxFireballShotsPerInterval)
-		{
-			_reloadTimer.Start();
-			return;
-		}
-
-		var fireball =
-			ParentWorld.Entities.SpawnEntityDeferred<FireballProjectile>(FireballScene,
-				_fireballSpawnPoint.Position + Position);
-		fireball.DamageDirection = LookingDirection;
-		fireball.InitWithHorizontalVelocity();
-		_shotsFired++;
-	}
+	
 
 
 	private void ChangeAttackMode(AttackMode mode)
@@ -132,10 +104,7 @@ public class DeathHornet : Boss
 				break;
 			case AttackMode.Flight:
 				break;
-			case AttackMode.Fireballs:
-				_firingTimer.Stop();
-				break;
-			case AttackMode.FlightWithFireballs:
+			case AttackMode.RogueBombardment:
 				break;
 		}
 
@@ -149,11 +118,7 @@ public class DeathHornet : Boss
 			case AttackMode.Flight:
 				_rogueSpawnTimer.Start();
 				break;
-			case AttackMode.Fireballs:
-				ShootFireball();
-				_firingTimer.Start();
-				break;
-			case AttackMode.FlightWithFireballs:
+			case AttackMode.RogueBombardment:
 				break;
 		}
 
@@ -279,11 +244,5 @@ public class DeathHornet : Boss
 	{
 		_isRushing = true;
 		Velocity.x = RushSpeed * LookingDirection;
-	}
-
-	private void _OnCanFire()
-	{
-		_shotsFired = 0;
-		_firingTimer.Start();
 	}
 }
