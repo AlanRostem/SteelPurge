@@ -16,9 +16,11 @@ public class DeathHornet : Boss
 		= GD.Load<PackedScene>("res://scenes/game/entities/bosses/death_hornet/HornetRogue.tscn");
 
 	[Export] public uint CriticalDamageByRogue = 400u;
+	[Export] public uint MaxRoguesShotOnKamikazeMode = 3;
 	[Export] public uint PlayerDamage = 65u;
 	[Export] public float RiseSpeed = 100;
 	[Export] public float FlightStrafeSpeed = 60;
+	[Export] public float GroundStrafeSpeed = 40;
 	[Export] public float RushSpeed = 180;
 
 	public int StrafeDirection = -1;
@@ -34,6 +36,7 @@ public class DeathHornet : Boss
 	private bool _playerAlreadyInsideLethalArea = false;
 	private bool _isRushing = false;
 	private float _kamikazeRogueModeStrafeAmount = 0;
+	private uint _kamikazeRogueModeRoguesLaunched = 0;
 	private AttackMode _currentAttackMode = AttackMode.KamikazeRogues;
 
 	public override void _Ready()
@@ -104,8 +107,8 @@ public class DeathHornet : Boss
 				_criticalShape.SetDeferred("disabled", true);
 				break;
 			case AttackMode.KamikazeRogues:
-				Velocity.x = -LookingDirection * FlightStrafeSpeed;
 				_rogueSpawnTimer.Stop();
+				_kamikazeRogueModeRoguesLaunched = 0;
 				break;
 			case AttackMode.Flight:
 				break;
@@ -159,6 +162,11 @@ public class DeathHornet : Boss
 
 				break;
 			case AttackMode.KamikazeRogues:
+				if (_kamikazeRogueModeRoguesLaunched == MaxRoguesShotOnKamikazeMode)
+				{
+					Velocity.x = -LookingDirection * FlightStrafeSpeed;
+					break;
+				}
 				Velocity.x = StrafeDirection * FlightStrafeSpeed;
 				_kamikazeRogueModeStrafeAmount += Velocity.x * delta;
 				if (_kamikazeRogueModeStrafeAmount > StrafeMargin && StrafeDirection > 0)
@@ -224,6 +232,9 @@ public class DeathHornet : Boss
 		var position = direction < 0 ? _leftRogueSpawnPoint.Position : _rightRogueSpawnPoint.Position;
 		var rogue = ParentWorld.Entities.SpawnEntityDeferred<HornetRogue>(RogueScene, position + Position);
 		rogue.Direction = direction;
+		if (_currentAttackMode != AttackMode.KamikazeRogues) return;
+		_kamikazeRogueModeRoguesLaunched++;
+		if (_kamikazeRogueModeRoguesLaunched == MaxRoguesShotOnKamikazeMode) _rogueSpawnTimer.Stop();
 	}
 
 	private void DropRogueFromBelow()

@@ -70,7 +70,7 @@ position = Vector2( 68, 0 )
 wait_time = 1.4
 
 [node name="RushWaitTimer" type="Timer" parent="." index="13"]
-wait_time = 5.0
+wait_time = 5.6
 one_shot = true
 
 [node name="RushStartDelayTimer" type="Timer" parent="." index="14"]

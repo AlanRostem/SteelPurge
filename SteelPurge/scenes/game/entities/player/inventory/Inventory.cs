@@ -26,8 +26,6 @@ public class Inventory : Node2D
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn"),
 	};
 	
-	private static readonly uint MaxGuns = 8;
-
 	[Export]
 	public InventoryWeapon DefaultGun = InventoryWeapon.Falcon;
 	
