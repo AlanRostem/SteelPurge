@@ -29,8 +29,7 @@ public class Inventory : Node2D
 	private static readonly uint MaxGuns = 8;
 
 	[Export]
-	public PackedScene DefaultGunScene
-		= GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn");
+	public InventoryWeapon DefaultGun = InventoryWeapon.Falcon;
 	
 	public Weapon EquippedWeapon => _weapon;
 	public InventoryWeapon EquippedWeaponEnum => _weaponId;
@@ -71,10 +70,10 @@ public class Inventory : Node2D
 			// Update UI
 		}
 		
-		AddWeapon(InventoryWeapon.Falcon);
+		AddWeapon(DefaultGun);
 		
 		// TODO: When implementing save files, make sure to change this
-		SwitchWeapon(InventoryWeapon.Falcon);
+		SwitchWeapon(DefaultGun);
 		_weaponWheel.SelectWeapon(_weaponId);
 	}
 
