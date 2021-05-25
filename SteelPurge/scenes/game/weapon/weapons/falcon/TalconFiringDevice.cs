@@ -17,7 +17,7 @@ public class TalconFiringDevice : FiringDevice
 		}
 
 		GetWeapon().CanFire = true;
-		GetWeapon().CurrentAmmo = GetWeapon().MaxAmmoCount;
+		GetWeapon().CurrentRecoilHoverAmmo = GetWeapon().MaxRecoilHoverShots;
 		Talons.Clear();
 	}
 	
@@ -26,7 +26,7 @@ public class TalconFiringDevice : FiringDevice
 		var talon = (Talon)FireProjectile(TalonScene);
 		Talons.Add(talon);
 
-		if (GetWeapon().CurrentAmmo == 0)
+		if (GetWeapon().CurrentRecoilHoverAmmo == 0)
 			GetWeapon().CanFire = false;
 	}
 }

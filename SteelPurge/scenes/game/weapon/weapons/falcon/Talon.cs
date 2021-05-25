@@ -41,9 +41,9 @@ public class Talon : Projectile
 		{
 			var player = (Player) body;
 			var firingDevice = (TalconFiringDevice) player.PlayerInventory.EquippedWeapon.FiringDevice;
-			player.PlayerInventory.EquippedWeapon.CurrentAmmo++;
+			player.PlayerInventory.EquippedWeapon.CurrentRecoilHoverAmmo++;
 			firingDevice.Talons.Remove(this);
-			if (player.PlayerInventory.EquippedWeapon.CurrentAmmo == player.PlayerInventory.EquippedWeapon.MaxAmmoCount)
+			if (player.PlayerInventory.EquippedWeapon.CurrentRecoilHoverAmmo == player.PlayerInventory.EquippedWeapon.MaxRecoilHoverShots)
 			{
 				firingDevice.GetWeapon().CanFire = true;
 			}

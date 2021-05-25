@@ -68,7 +68,9 @@ public class Inventory : Node2D
 			// Update UI
 		}
 		
-		AddWeapon(DefaultGun);
+		AddWeapon(InventoryWeapon.Falcon);
+		AddWeapon(InventoryWeapon.Firewall);
+		AddWeapon(InventoryWeapon.Joule);
 		
 		// TODO: When implementing save files, make sure to change this
 		SwitchWeapon(DefaultGun);
