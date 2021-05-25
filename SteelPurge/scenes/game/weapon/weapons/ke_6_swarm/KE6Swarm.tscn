@@ -12,7 +12,8 @@ DisplayName = "Joule"
 WeaponType = 2
 DamagePerShot = 10
 RateOfFire = 130
-HoverRecoilSpeed = 10.0
+MaxRecoilHoverShots = 2
+HoverRecoilSpeed = 115.0
 
 [node name="OrbFiringDevice" parent="." index="1" instance=ExtResource( 3 )]
 script = ExtResource( 4 )
