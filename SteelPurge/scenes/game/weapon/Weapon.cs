@@ -56,7 +56,6 @@ public class Weapon : Node2D
 		get => _currentRecoilHoverAmmo;
 		set
 		{
-			_ammoLabel.Text = value + " / " + MaxRecoilHoverShots;
 			_currentRecoilHoverAmmo = value;
 		}
 	}
@@ -71,7 +70,6 @@ public class Weapon : Node2D
 
 	private Timer _meleeCooldownTimer;
 	private Timer _meleeDurationTimer;
-	private Label _ammoLabel;
 	private CollisionShape2D _meleeShape;
 
 
@@ -129,7 +127,6 @@ public class Weapon : Node2D
 		_meleeCooldownTimer = GetNode<Timer>("MeleeCooldownTimer");
 		_meleeDurationTimer = GetNode<Timer>("MeleeDurationTimer");
 		_meleeShape = GetNode<CollisionShape2D>("MeleeArea/CollisionShape2D");
-		_ammoLabel = GetNode<Label>("CanvasLayer/AmmoLabel");
 		CurrentRecoilHoverAmmo = MaxRecoilHoverShots;
 	}
 
