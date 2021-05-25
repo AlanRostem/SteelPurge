@@ -25,7 +25,7 @@ public class TalconFiringDevice : FiringDevice
 	{
 		var talon = (Talon)FireProjectile(TalonScene);
 		Talons.Add(talon);
-
+		GetWeapon().CurrentRecoilHoverAmmo--;
 		if (GetWeapon().CurrentRecoilHoverAmmo == 0)
 			GetWeapon().CanFire = false;
 	}

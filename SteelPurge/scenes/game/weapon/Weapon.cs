@@ -16,8 +16,8 @@ public class Weapon : Node2D
 	[Export] public uint MeleeDamage = 80;
 	[Export] public uint RateOfFire;
 	[Export] public uint MaxRecoilHoverShots = 3;
-	[Export] public uint RecoilHoverReloadCount = 1;
-	[Export] public bool AutoReloadEnabled = true;
+	[Export] public bool ReloadOnFloor = true;
+	[Export] public bool LoseAmmoOnHover = true;
 	[Export] public float HoverRecoilSpeed = 100;
 	[Export] public float MinFallSpeedForRecoilHovering = -20;
 	[Export] public SpriteFrames PlayerSpriteFrames;
@@ -145,11 +145,9 @@ public class Weapon : Node2D
 		EmitSignal(nameof(Fired));
 
 		if (!(OwnerPlayer.Velocity.y > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
-		if (CurrentRecoilHoverAmmo != 0)
-		{
-			CurrentRecoilHoverAmmo--;
-			OwnerPlayer.Velocity.y = -HoverRecoilSpeed;
-		}
+		if (CurrentRecoilHoverAmmo == 0) return;
+		if (LoseAmmoOnHover) CurrentRecoilHoverAmmo--;
+		OwnerPlayer.Velocity.y = -HoverRecoilSpeed;
 	}
 
 
@@ -182,7 +180,7 @@ public class Weapon : Node2D
 			Position = new Vector2(8 * Scale.x, 0);
 		}
 
-		if (OwnerPlayer.IsOnFloor() && CurrentRecoilHoverAmmo < MaxRecoilHoverShots)
+		if (OwnerPlayer.IsOnFloor() && CurrentRecoilHoverAmmo < MaxRecoilHoverShots && ReloadOnFloor)
 			CurrentRecoilHoverAmmo = MaxRecoilHoverShots;
 		
 		if (_isHoldingTrigger && CanFire)
