@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/resources/PlayerSpriteAnimNoWeapon.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/game/weapon/Weapon.cs" type="Script" id=2]
+[ext_resource path="res://scenes/game/weapon/RecoilHoverBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/weapon/FireTimer.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -20,6 +21,8 @@ one_shot = true
 [node name="MeleeDurationTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="RecoilHoverBar" parent="." instance=ExtResource( 3 )]
 
 [node name="MeleeArea" type="Area2D" parent="."]
 collision_layer = 0
