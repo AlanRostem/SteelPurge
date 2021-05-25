@@ -23,8 +23,8 @@ wait_time = 0.1
 one_shot = true
 
 [node name="RecoilHoverBar" parent="." instance=ExtResource( 3 )]
-margin_top = 16.0
-margin_bottom = 16.0
+margin_top = -16.0
+margin_bottom = -16.0
 
 [node name="MeleeArea" type="Area2D" parent="."]
 collision_layer = 0
