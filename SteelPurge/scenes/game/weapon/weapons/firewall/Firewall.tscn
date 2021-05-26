@@ -30,7 +30,7 @@ SpreadAngle = 20.0
 [node name="DragonsBreathAbility" parent="." index="2" instance=ExtResource( 5 )]
 script = ExtResource( 6 )
 DrainInterval = 0.07
-DamagePerTick = 15
+DamagePerTick = 25
 
 [node name="FireArea" type="Area2D" parent="DragonsBreathAbility" index="1"]
 collision_layer = 0
