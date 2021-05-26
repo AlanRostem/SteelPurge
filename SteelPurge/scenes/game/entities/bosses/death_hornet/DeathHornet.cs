@@ -26,18 +26,19 @@ public class DeathHornet : Boss
 	public int StrafeDirection = -1;
 	public int LookingDirection = -1;
 	public float StrafeMargin = 48;
-	
+
 	private CollisionShape2D _criticalShape;
-	
+
 	private Position2D _bottomRogueSpawnPoint;
 	private Position2D _leftRogueSpawnPoint;
 	private Position2D _rightRogueSpawnPoint;
-	
+
 	private Timer _rogueSpawnTimer;
 	private Timer _rushWaitTimer;
 	private Timer _rushStartDelayTimer;
 	private Timer _rushRecoveryTimer;
-	
+	private Timer _flightDurationTimer;
+
 	private bool _playerAlreadyInsideLethalArea = false;
 	private bool _isRushing = false;
 	private float _kamikazeRogueModeStrafeAmount = 0;
@@ -55,6 +56,7 @@ public class DeathHornet : Boss
 		_rushWaitTimer = GetNode<Timer>("RushWaitTimer");
 		_rushStartDelayTimer = GetNode<Timer>("RushStartDelayTimer");
 		_rushRecoveryTimer = GetNode<Timer>("RushRecoveryTimer");
+		_flightDurationTimer = GetNode<Timer>("FlightDurationTimer");
 
 		// TODO: Remove this test later
 		StartPhaseOne();
@@ -109,7 +111,6 @@ public class DeathHornet : Boss
 		switch (_currentAttackMode)
 		{
 			case AttackMode.Rush:
-				_rushWaitTimer.Start(); // IDK why I do this
 				_criticalShape.SetDeferred("disabled", true);
 				break;
 			case AttackMode.KamikazeRogues:
@@ -133,8 +134,12 @@ public class DeathHornet : Boss
 				_rushStartDelayTimer.Start();
 				break;
 			case AttackMode.KamikazeRogues:
+				_rushWaitTimer.Start();
+				_rogueSpawnTimer.Start();
+				break;
 			case AttackMode.Flight:
 				_rogueSpawnTimer.Start();
+				_flightDurationTimer.Start();
 				break;
 			case AttackMode.RogueBombardment:
 				break;
@@ -173,6 +178,7 @@ public class DeathHornet : Boss
 					Velocity.x = -LookingDirection * FlightStrafeSpeed;
 					break;
 				}
+
 				Velocity.x = StrafeDirection * FlightStrafeSpeed;
 				_kamikazeRogueModeStrafeAmount += Velocity.x * delta;
 				if (_kamikazeRogueModeStrafeAmount > StrafeMargin && StrafeDirection > 0)
@@ -183,6 +189,7 @@ public class DeathHornet : Boss
 				{
 					StrafeDirection = 1;
 				}
+
 				break;
 		}
 
@@ -209,20 +216,27 @@ public class DeathHornet : Boss
 
 	private void PhaseTwo(float delta)
 	{
-		if (IsOnCeiling())
+		switch (_currentAttackMode)
 		{
-			Velocity.y = 0;
-			StrafeDirection = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
-			_rogueSpawnTimer.Start();
+			case AttackMode.Flight:
+				if (IsOnCeiling())
+				{
+					Velocity.y = 0;
+					StrafeDirection = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
+					_rogueSpawnTimer.Start();
+				}
+
+				if (Velocity.y != 0) break;
+
+				var distance = ParentWorld.PlayerNode.Position.x - Position.x;
+				if (distance < -StrafeMargin)
+					StrafeDirection = -1;
+				else if (distance > StrafeMargin)
+					StrafeDirection = 1;
+
+				Velocity.x = StrafeDirection * FlightStrafeSpeed;
+				break;
 		}
-
-		var distance = ParentWorld.PlayerNode.Position.x - Position.x;
-		if (distance < -StrafeMargin)
-			StrafeDirection = -1;
-		else if (distance > StrafeMargin)
-			StrafeDirection = 1;
-
-		Velocity.x = StrafeDirection * FlightStrafeSpeed;
 	}
 
 	private void StartPhaseThree()
@@ -292,7 +306,7 @@ public class DeathHornet : Boss
 		Velocity.x = RushSpeed * LookingDirection;
 		_criticalShape.SetDeferred("disabled", false);
 	}
-	
+
 	private void _OnRecoveredFromRush()
 	{
 		ChangeAttackMode(AttackMode.KamikazeRogues);
