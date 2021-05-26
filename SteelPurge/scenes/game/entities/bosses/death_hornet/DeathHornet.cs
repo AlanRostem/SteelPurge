@@ -26,13 +26,18 @@ public class DeathHornet : Boss
 	public int StrafeDirection = -1;
 	public int LookingDirection = -1;
 	public float StrafeMargin = 48;
+	
 	private CollisionShape2D _criticalShape;
+	
 	private Position2D _bottomRogueSpawnPoint;
 	private Position2D _leftRogueSpawnPoint;
 	private Position2D _rightRogueSpawnPoint;
+	
 	private Timer _rogueSpawnTimer;
 	private Timer _rushWaitTimer;
 	private Timer _rushStartDelayTimer;
+	private Timer _rushRecoveryTimer;
+	
 	private bool _playerAlreadyInsideLethalArea = false;
 	private bool _isRushing = false;
 	private float _kamikazeRogueModeStrafeAmount = 0;
@@ -49,6 +54,7 @@ public class DeathHornet : Boss
 		_rogueSpawnTimer = GetNode<Timer>("RogueSpawnTimer");
 		_rushWaitTimer = GetNode<Timer>("RushWaitTimer");
 		_rushStartDelayTimer = GetNode<Timer>("RushStartDelayTimer");
+		_rushRecoveryTimer = GetNode<Timer>("RushRecoveryTimer");
 
 		// TODO: Remove this test later
 		StartPhaseOne();
@@ -157,7 +163,7 @@ public class DeathHornet : Boss
 				{
 					_isRushing = false;
 					LookingDirection *= -1;
-					ChangeAttackMode(AttackMode.KamikazeRogues);
+					_rushRecoveryTimer.Start();
 				}
 
 				break;
@@ -285,5 +291,10 @@ public class DeathHornet : Boss
 		_isRushing = true;
 		Velocity.x = RushSpeed * LookingDirection;
 		_criticalShape.SetDeferred("disabled", false);
+	}
+	
+	private void _OnRecoveredFromRush()
+	{
+		ChangeAttackMode(AttackMode.KamikazeRogues);
 	}
 }

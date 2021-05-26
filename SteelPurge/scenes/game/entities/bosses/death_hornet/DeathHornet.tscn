@@ -77,7 +77,11 @@ one_shot = true
 wait_time = 0.8
 one_shot = true
 
-[node name="LethalArea" type="Area2D" parent="." index="15"]
+[node name="RushRecoveryTimer" type="Timer" parent="." index="15"]
+wait_time = 2.5
+one_shot = true
+
+[node name="LethalArea" type="Area2D" parent="." index="16"]
 collision_layer = 0
 collision_mask = 2
 
@@ -88,5 +92,6 @@ shape = SubResource( 1 )
 [connection signal="timeout" from="RogueSpawnTimer" to="." method="_OnSpawnRogue"]
 [connection signal="timeout" from="RushWaitTimer" to="." method="_OnRushStart"]
 [connection signal="timeout" from="RushStartDelayTimer" to="." method="_OnPerformRush"]
+[connection signal="timeout" from="RushRecoveryTimer" to="." method="_OnRecoveredFromRush"]
 [connection signal="body_entered" from="LethalArea" to="." method="_OnAttackPlayer"]
 [connection signal="body_exited" from="LethalArea" to="." method="_OnPlayerExitLethalArea"]
