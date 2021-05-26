@@ -117,6 +117,8 @@ public class DeathHornet : Boss
 				_criticalShape.SetDeferred("disabled", true);
 				break;
 			case AttackMode.KamikazeRogues:
+				if (!_rushWaitTimer.IsStopped())
+					_rushWaitTimer.Stop();
 				_rogueSpawnTimer.Stop();
 				_kamikazeRogueModeRoguesLaunched = 0;
 				break;
