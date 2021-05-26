@@ -235,11 +235,12 @@ public class DeathHornet : Boss
 
 				if (_flightModeIsDescending)
 				{
+					Velocity.x = 0;
 					if (IsOnFloor())
 					{
 						// TODO: End the attack mode
 						Velocity.y = 0;
-						// ChangeAttackMode(AttackMode.RogueBombardment);
+						ChangeAttackMode(AttackMode.RogueBombardment);
 						_rogueSpawnTimer.Start();
 						_flightModeIsDescending = false;
 					}
