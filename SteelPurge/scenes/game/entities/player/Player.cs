@@ -60,7 +60,7 @@ public class Player : KinematicEntity
 	private Timer _respawnTimer;
 	private Timer _slideDurationTimer;
 	public Inventory PlayerInventory;
-
+	private Camera2D _camera;
 
 	public override void _Ready()
 	{
@@ -68,6 +68,7 @@ public class Player : KinematicEntity
 		Health = 100;
 		PlayerInventory = GetNode<Inventory>("Inventory");
 		_bodyShape = GetNode<CollisionShape2D>("BodyShape");
+		_camera = GetNode<Camera2D>("PlayerCamera");
 		_roofDetectorShape = GetNode<CollisionShape2D>("RoofDetector/UpperBodyShape");
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
 		_slideDurationTimer = GetNode<Timer>("SlideDurationTimer");
@@ -522,5 +523,14 @@ public class Player : KinematicEntity
 	private void _OnCanCancelSlide()
 	{
 		_canCancelSlide = true;
+	}
+
+	public void SetCameraBounds(Rect2 bounds)
+	{
+		_camera.LimitLeft = (int)bounds.Position.x;
+		_camera.LimitTop = (int)bounds.Position.y;
+		_camera.LimitRight = (int)bounds.Size.x;
+		_camera.LimitBottom = (int)bounds.Size.y;
+		GD.Print(bounds);
 	}
 }

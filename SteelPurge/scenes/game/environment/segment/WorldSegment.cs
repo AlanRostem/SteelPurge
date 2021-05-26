@@ -22,11 +22,17 @@ public class WorldSegment : Node2D
 	public EntityPool Entities { get; private set; }
 
 	private World _parentWorld;
+	private CustomTileMap _tileMap;
 	
 	public override void _Ready()
 	{
 		Entities = GetNode<EntityPool>("EntityPool");
 		_parentWorld = GetParent<World>();
+		_tileMap = GetNode<CustomTileMap>("Environment/CustomTileMap");
+		var rect = _tileMap.GetUsedRect();
+		rect.Position *= CustomTileMap.Size;
+		rect.Size *= CustomTileMap.Size;
+		_parentWorld.PlayerNode.SetCameraBounds(rect);
 	}
 	
 	private void _OnTransferAreaPlayerEntered(object body)
