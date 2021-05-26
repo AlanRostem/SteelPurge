@@ -6,7 +6,6 @@ public class DeathHornet : Boss
 	private enum AttackMode
 	{
 		Rush,
-		SlowMelee,
 		KamikazeRogues,
 		Flight,
 		RogueBombardment,
@@ -43,6 +42,8 @@ public class DeathHornet : Boss
 	private bool _isRushing = false;
 	private float _kamikazeRogueModeStrafeAmount = 0;
 	private uint _kamikazeRogueModeRoguesLaunched = 0;
+	private bool _flightModeIsAscending = false;
+	private bool _flightModeIsDescending = false;
 	private AttackMode _currentAttackMode = AttackMode.KamikazeRogues;
 
 	public override void _Ready()
@@ -111,6 +112,8 @@ public class DeathHornet : Boss
 		switch (_currentAttackMode)
 		{
 			case AttackMode.Rush:
+				if (!_rushWaitTimer.IsStopped())
+					_rushWaitTimer.Stop();
 				_criticalShape.SetDeferred("disabled", true);
 				break;
 			case AttackMode.KamikazeRogues:
@@ -118,10 +121,9 @@ public class DeathHornet : Boss
 				_kamikazeRogueModeRoguesLaunched = 0;
 				break;
 			case AttackMode.Flight:
+
 				break;
 			case AttackMode.RogueBombardment:
-				break;
-			case AttackMode.SlowMelee:
 				break;
 			default:
 				throw new ArgumentOutOfRangeException();
@@ -140,10 +142,10 @@ public class DeathHornet : Boss
 			case AttackMode.Flight:
 				_rogueSpawnTimer.Start();
 				_flightDurationTimer.Start();
+				_flightModeIsAscending = true;
+				Velocity.y = -RiseSpeed;
 				break;
 			case AttackMode.RogueBombardment:
-				break;
-			case AttackMode.SlowMelee:
 				break;
 			default:
 				throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
@@ -210,7 +212,6 @@ public class DeathHornet : Boss
 
 	private void StartPhaseTwo()
 	{
-		Velocity.y = -RiseSpeed;
 		ChangeAttackMode(AttackMode.Flight);
 	}
 
@@ -219,14 +220,33 @@ public class DeathHornet : Boss
 		switch (_currentAttackMode)
 		{
 			case AttackMode.Flight:
-				if (IsOnCeiling())
+				if (_flightModeIsAscending)
 				{
-					Velocity.y = 0;
-					StrafeDirection = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
-					_rogueSpawnTimer.Start();
+					if (IsOnCeiling())
+					{
+						Velocity.y = 0;
+						StrafeDirection = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
+						_rogueSpawnTimer.Start();
+						_flightModeIsAscending = false;
+					}
+
+					break;
 				}
 
-				if (Velocity.y != 0) break;
+				if (_flightModeIsDescending)
+				{
+					if (IsOnFloor())
+					{
+						// TODO: End the attack mode
+						Velocity.y = 0;
+						// ChangeAttackMode(AttackMode.RogueBombardment);
+						_rogueSpawnTimer.Start();
+						_flightModeIsDescending = false;
+					}
+					
+					break;
+				}
+
 
 				var distance = ParentWorld.PlayerNode.Position.x - Position.x;
 				if (distance < -StrafeMargin)
@@ -274,7 +294,7 @@ public class DeathHornet : Boss
 
 	private void _OnSpawnRogue()
 	{
-		if (CurrentPhase == BossPhase.One)
+		if (_currentAttackMode != AttackMode.Flight)
 		{
 			ShootRogueFromSide(LookingDirection);
 			return;
@@ -311,4 +331,12 @@ public class DeathHornet : Boss
 	{
 		ChangeAttackMode(AttackMode.KamikazeRogues);
 	}
+	
+	private void _OnFlightEnd()
+	{
+		Velocity.y = 500;
+		_rogueSpawnTimer.Stop();
+		_flightModeIsDescending = true;
+	}
+	
 }
