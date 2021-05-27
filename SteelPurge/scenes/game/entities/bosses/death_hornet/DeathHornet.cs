@@ -22,6 +22,8 @@ public class DeathHornet : Boss
 	[Export] public float FlightStrafeSpeed = 60;
 	[Export] public float GroundStrafeSpeed = 40;
 	[Export] public float RushSpeed = 180;
+	[Export] public float RegularRogueSpawnTime = 1.4f;
+	[Export] public float FastRogueSpawnTime = 0.6f;
 
 	public int StrafeDirection = -1;
 	public int LookingDirection = -1;
@@ -29,6 +31,7 @@ public class DeathHornet : Boss
 
 	private CollisionShape2D _criticalShape;
 
+	private Position2D _topRogueSpawnPoint;
 	private Position2D _bottomRogueSpawnPoint;
 	private Position2D _leftRogueSpawnPoint;
 	private Position2D _rightRogueSpawnPoint;
@@ -38,6 +41,7 @@ public class DeathHornet : Boss
 	private Timer _rushStartDelayTimer;
 	private Timer _rushRecoveryTimer;
 	private Timer _flightDurationTimer;
+	private Timer _bombardmentDurationTimer;
 
 	private bool _playerAlreadyInsideLethalArea = false;
 	private bool _isRushing = false;
@@ -52,6 +56,7 @@ public class DeathHornet : Boss
 	{
 		base._Ready();
 		_criticalShape = GetNode<CollisionShape2D>("CriticalHitbox/CriticalShape");
+		_topRogueSpawnPoint = GetNode<Position2D>("TopRogueSpawnPoint");
 		_bottomRogueSpawnPoint = GetNode<Position2D>("BottomRogueSpawnPoint");
 		_leftRogueSpawnPoint = GetNode<Position2D>("LeftRogueSpawnPoint");
 		_rightRogueSpawnPoint = GetNode<Position2D>("RightRogueSpawnPoint");
@@ -60,6 +65,7 @@ public class DeathHornet : Boss
 		_rushStartDelayTimer = GetNode<Timer>("RushStartDelayTimer");
 		_rushRecoveryTimer = GetNode<Timer>("RushRecoveryTimer");
 		_flightDurationTimer = GetNode<Timer>("FlightDurationTimer");
+		_bombardmentDurationTimer = GetNode<Timer>("BombardmentDurationTimer");
 
 		// TODO: Remove this test later
 		StartPhaseOne();
@@ -127,6 +133,9 @@ public class DeathHornet : Boss
 			case AttackMode.Flight:
 				break;
 			case AttackMode.RogueBombardment:
+				Velocity.x = 0;
+				_rogueSpawnTimer.Stop();
+				_rogueSpawnTimer.WaitTime = RegularRogueSpawnTime;
 				break;
 		}
 
@@ -147,6 +156,9 @@ public class DeathHornet : Boss
 				Velocity.y = -RiseSpeed;
 				break;
 			case AttackMode.RogueBombardment:
+				_rogueSpawnTimer.WaitTime = FastRogueSpawnTime;
+				_rogueSpawnTimer.Start();
+				_bombardmentDurationTimer.Start();
 				break;
 		}
 
@@ -164,7 +176,6 @@ public class DeathHornet : Boss
 		switch (_currentAttackMode)
 		{
 			case AttackMode.Rush:
-
 				if (_isRushing && IsOnWall())
 				{
 					_isRushing = false;
@@ -237,10 +248,8 @@ public class DeathHornet : Boss
 					Velocity.x = 0;
 					if (IsOnFloor())
 					{
-						// TODO: End the attack mode
 						Velocity.y = 0;
 						ChangeAttackMode(AttackMode.RogueBombardment);
-						_rogueSpawnTimer.Start();
 						_flightModeIsDescending = false;
 					}
 					
@@ -255,6 +264,9 @@ public class DeathHornet : Boss
 					StrafeDirection = 1;
 
 				Velocity.x = StrafeDirection * FlightStrafeSpeed;
+				break;
+			case AttackMode.RogueBombardment:
+				Velocity.x = LookingDirection * FlightStrafeSpeed;
 				break;
 		}
 	}
@@ -298,6 +310,12 @@ public class DeathHornet : Boss
 
 	private void _OnSpawnRogue()
 	{
+		if (_currentAttackMode == AttackMode.RogueBombardment)
+		{
+			ShootRogueFromTop(LookingDirection = -LookingDirection);
+			return;
+		}
+		
 		if (_currentAttackMode != AttackMode.Flight)
 		{
 			ShootRogueFromSide(LookingDirection);
@@ -305,6 +323,12 @@ public class DeathHornet : Boss
 		}
 
 		DropRogueFromBelow();
+	}
+
+	private void ShootRogueFromTop(int direction)
+	{
+		var rogue = ParentWorld.Entities.SpawnEntityDeferred<HornetRogue>(RogueScene, _topRogueSpawnPoint.Position + Position);
+		rogue.Direction = direction;
 	}
 
 	private void _OnAttackPlayer(Player player)
@@ -344,4 +368,8 @@ public class DeathHornet : Boss
 		_rogueHitsTakenInFlightMode = 0;
 	}
 	
+	private void _OnBombardmentEnd()
+	{
+		ChangeAttackMode(AttackMode.Flight);
+	}
 }
