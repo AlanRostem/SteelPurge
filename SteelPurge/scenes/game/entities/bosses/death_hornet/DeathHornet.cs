@@ -158,7 +158,6 @@ public class DeathHornet : Boss
 				_flightDurationTimer.Start();
 				_flightModeIsAscending = true;
 				Velocity.y = -RiseSpeed;
-				_rogueDamageShape.SetDeferred("disabled", false);
 				break;
 			case AttackMode.RogueBombardment:
 				_rogueSpawnTimer.WaitTime = FastRogueSpawnTime;
@@ -243,6 +242,7 @@ public class DeathHornet : Boss
 						StrafeDirection = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
 						_rogueSpawnTimer.Start();
 						_flightModeIsAscending = false;
+						_rogueDamageShape.SetDeferred("disabled", false);
 					}
 
 					break;
