@@ -30,6 +30,7 @@ public class DeathHornet : Boss
 	public float StrafeMargin = 48;
 
 	private CollisionShape2D _criticalShape;
+	private CollisionShape2D _rogueDamageShape;
 
 	private Position2D _topRogueSpawnPoint;
 	private Position2D _bottomRogueSpawnPoint;
@@ -56,6 +57,7 @@ public class DeathHornet : Boss
 	{
 		base._Ready();
 		_criticalShape = GetNode<CollisionShape2D>("CriticalHitbox/CriticalShape");
+		_rogueDamageShape = GetNode<CollisionShape2D>("RogueDamageArea/CollisionShape2D");
 		_topRogueSpawnPoint = GetNode<Position2D>("TopRogueSpawnPoint");
 		_bottomRogueSpawnPoint = GetNode<Position2D>("BottomRogueSpawnPoint");
 		_leftRogueSpawnPoint = GetNode<Position2D>("LeftRogueSpawnPoint");
@@ -131,6 +133,7 @@ public class DeathHornet : Boss
 				_kamikazeRogueModeRoguesLaunched = 0;
 				break;
 			case AttackMode.Flight:
+				_rogueDamageShape.SetDeferred("disabled", true);
 				break;
 			case AttackMode.RogueBombardment:
 				Velocity.x = 0;
@@ -154,6 +157,7 @@ public class DeathHornet : Boss
 				_flightDurationTimer.Start();
 				_flightModeIsAscending = true;
 				Velocity.y = -RiseSpeed;
+				_rogueDamageShape.SetDeferred("disabled", false);
 				break;
 			case AttackMode.RogueBombardment:
 				_rogueSpawnTimer.WaitTime = FastRogueSpawnTime;
