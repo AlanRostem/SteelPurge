@@ -16,6 +16,7 @@ public class DeathHornet : Boss
 
 	[Export] public uint CriticalDamageByRogue = 400u;
 	[Export] public uint MaxRoguesShotOnKamikazeMode = 3;
+	[Export] public uint MaxRoguesHitsOnFlightMode = 2;
 	[Export] public uint PlayerDamage = 65u;
 	[Export] public float RiseSpeed = 100;
 	[Export] public float FlightStrafeSpeed = 60;
@@ -44,6 +45,7 @@ public class DeathHornet : Boss
 	private uint _kamikazeRogueModeRoguesLaunched = 0;
 	private bool _flightModeIsAscending = false;
 	private bool _flightModeIsDescending = false;
+	private uint _rogueHitsTakenInFlightMode = 0;
 	private AttackMode _currentAttackMode = AttackMode.KamikazeRogues;
 
 	public override void _Ready()
@@ -123,12 +125,9 @@ public class DeathHornet : Boss
 				_kamikazeRogueModeRoguesLaunched = 0;
 				break;
 			case AttackMode.Flight:
-
 				break;
 			case AttackMode.RogueBombardment:
 				break;
-			default:
-				throw new ArgumentOutOfRangeException();
 		}
 
 		// Init stuff for when changing to new mode
@@ -149,8 +148,6 @@ public class DeathHornet : Boss
 				break;
 			case AttackMode.RogueBombardment:
 				break;
-			default:
-				throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
 		}
 
 		_currentAttackMode = mode;
@@ -293,6 +290,10 @@ public class DeathHornet : Boss
 		body.QueueFree();
 		var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, body.Position);
 		scrap.Count = body.ScrapDropKilled;
+		_rogueHitsTakenInFlightMode++;
+		if (_rogueHitsTakenInFlightMode != MaxRoguesHitsOnFlightMode) return;
+		_flightDurationTimer.Stop();
+		_OnFlightEnd();
 	}
 
 	private void _OnSpawnRogue()
@@ -340,6 +341,7 @@ public class DeathHornet : Boss
 		Velocity.y = 500;
 		_rogueSpawnTimer.Stop();
 		_flightModeIsDescending = true;
+		_rogueHitsTakenInFlightMode = 0;
 	}
 	
 }
