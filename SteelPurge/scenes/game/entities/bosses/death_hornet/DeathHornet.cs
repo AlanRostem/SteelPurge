@@ -370,7 +370,7 @@ public class DeathHornet : Boss
 
 	private void _OnFlightEnd()
 	{
-		Velocity.y = 500;
+		Velocity.y = 300;
 		_rogueSpawnTimer.Stop();
 		_flightModeIsDescending = true;
 		_rogueHitsTakenInFlightMode = 0;
