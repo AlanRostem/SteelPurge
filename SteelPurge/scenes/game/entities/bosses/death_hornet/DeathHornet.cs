@@ -124,6 +124,7 @@ public class DeathHornet : Boss
 			case AttackMode.Rush:
 				if (!_rushWaitTimer.IsStopped())
 					_rushWaitTimer.Stop();
+				_rushStartDelayTimer.Stop();
 				_criticalShape.SetDeferred("disabled", true);
 				break;
 			case AttackMode.KamikazeRogues:
