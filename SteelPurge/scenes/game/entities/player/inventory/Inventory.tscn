@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/entities/player/inventory/Inventory.cs" type="Script" id=1]
+[ext_resource path="res://assets/texture/ui/hud/kill_icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/game/ui/inventory/InventoryUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/texture/ui/icon/scrap.png" type="Texture" id=5]
@@ -61,3 +62,21 @@ __meta__ = {
 
 [node name="WeaponWheel" parent="CanvasLayer" instance=ExtResource( 8 )]
 visible = false
+
+[node name="KillsIcon" type="TextureRect" parent="CanvasLayer"]
+margin_left = 344.0
+margin_top = 182.0
+margin_right = 368.0
+margin_bottom = 206.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KillLabel" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_left = 368.0
+margin_top = 190.0
+margin_right = 400.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 1 )
+text = "x??"
