@@ -68,9 +68,14 @@ public class Enemy : KinematicEntity
 	{
 		if (damage >= Health)
 		{
-			OnDie();
-			_isDead = true;
-			Health = 0;
+			if (!_isDead)
+			{
+				OnDie();
+				// Assuming the player gave damage to the enemy
+				ParentWorld.PlayerNode.PlayerInventory.IncrementKillCount();
+				_isDead = true;
+				Health = 0;
+			}
 		}
 		else
 		{

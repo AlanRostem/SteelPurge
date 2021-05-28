@@ -38,8 +38,10 @@ public class Inventory : Node2D
 	private Player _player;
 	private Label _scrapLabel;
 	private Label _fuelLabel;
+	private Label _killLabel;
 	
 	public uint ScrapCount = 0;
+	public uint KillCount = 0;
 
 	public readonly uint[] OrdinanceFuels =
 	{
@@ -58,6 +60,7 @@ public class Inventory : Node2D
 		_player = GetParent<Player>();
 		_scrapLabel = GetNode<Label>("CanvasLayer/ScrapLabel");
 		_fuelLabel = GetNode<Label>("CanvasLayer/FuelLabel");
+		_killLabel = GetNode<Label>("CanvasLayer/KillLabel");
 		_weaponWheel = GetNode<WeaponWheel>("CanvasLayer/WeaponWheel");
 		
 		_scrapLabel.Text = "x" + ScrapCount;
@@ -150,5 +153,11 @@ public class Inventory : Node2D
 		OrdinanceFuels[(int) fuelType] -= drainPerTick;
 		if (_displayedFuel == fuelType)
 			_fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
+	}
+
+	public void IncrementKillCount()
+	{
+		KillCount++;
+		_killLabel.Text = "x" + KillCount;
 	}
 }
