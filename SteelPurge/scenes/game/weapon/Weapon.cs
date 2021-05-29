@@ -6,6 +6,8 @@ public class Weapon : Node2D
 	private static PackedScene WeaponCollectibleScene
 		= GD.Load<PackedScene>("res://scenes/game/entities/collectible/weapon/WeaponCollectible.tscn");
 
+	private static float DashSpeed = 300;
+	
 	[Export] public string DisplayName = "Weapon";
 
 	[Export] public Texture CollectibleSprite;
@@ -31,6 +33,7 @@ public class Weapon : Node2D
 	public FiringDevice FiringDevice { get; set; }
 
 	private bool _canFire = true;
+	private bool _canDash = true;
 
 	public bool CanFire
 	{
@@ -71,6 +74,7 @@ public class Weapon : Node2D
 
 	private Timer _meleeCooldownTimer;
 	private Timer _meleeDurationTimer;
+	private Timer _firingDashTimer;
 	private CollisionShape2D _meleeShape;
 	private RecoilHoverBar _recoilHoverBar;
 
@@ -105,6 +109,9 @@ public class Weapon : Node2D
 	}
 
 	[Signal]
+	public delegate void DashFire();
+	
+	[Signal]
 	public delegate void Fired();
 
 	[Signal]
@@ -127,6 +134,7 @@ public class Weapon : Node2D
 	{
 		_meleeCooldownTimer = GetNode<Timer>("MeleeCooldownTimer");
 		_meleeDurationTimer = GetNode<Timer>("MeleeDurationTimer");
+		_firingDashTimer = GetNode<Timer>("FiringDashTimer");
 		_meleeShape = GetNode<CollisionShape2D>("MeleeArea/CollisionShape2D");
 		_recoilHoverBar = GetNode<RecoilHoverBar>("RecoilHoverBar");
 		CurrentRecoilHoverAmmo = MaxRecoilHoverShots;
@@ -153,8 +161,9 @@ public class Weapon : Node2D
 	public override void _Process(float delta)
 	{
 		if (OwnerPlayer is null) return;
-
+		
 		_isHoldingTrigger = Input.IsActionPressed("fire");
+		var isHoldingMelee = Input.IsActionJustPressed("melee");
 
 		if (Mathf.Sign(_meleeShape.Position.x) != OwnerPlayer.HorizontalLookingDirection)
 		{
@@ -163,12 +172,35 @@ public class Weapon : Node2D
 					_meleeShape.Position.y);
 		}
 
+		if (_isHoldingTrigger && _canDash && isHoldingMelee && _currentRecoilHoverAmmo > 0)
+		{
+			_canDash = false;
+			if (!OwnerPlayer.IsAimingDown && !OwnerPlayer.IsAimingUp)
+			{
+				OwnerPlayer.ApplyForce(new Vector2(-OwnerPlayer.HorizontalLookingDirection * DashSpeed, 0));
+				OwnerPlayer.Velocity.y = -HoverRecoilSpeed;
+			}
+			else if (OwnerPlayer.IsAimingDown)
+			{
+				OwnerPlayer.ApplyForce(new Vector2(0, -OwnerPlayer.HorizontalLookingDirection * DashSpeed));
+			}
+			else if (OwnerPlayer.IsAimingUp)
+			{
+				OwnerPlayer.ApplyForce(new Vector2(0, OwnerPlayer.HorizontalLookingDirection * DashSpeed));
+			}
+
+			CurrentRecoilHoverAmmo = 0;
+			_firingDashTimer.Start();
+			EmitSignal(nameof(DashFire));
+		}
+
+
 		if (IsMeleeAttacking)
 		{
 			return;
 		}
 
-		if (Input.IsActionJustPressed("melee") && CanMelee && !OwnerPlayer.IsRamSliding)
+		if (isHoldingMelee && CanMelee && !OwnerPlayer.IsRamSliding)
 		{
 			IsMeleeAttacking = true;
 			_meleeShape.Disabled = false;
@@ -224,5 +256,10 @@ public class Weapon : Node2D
 		var item = world.Entities.SpawnEntityDeferred<WeaponCollectible>(WeaponCollectibleScene, position);
 		OwnerPlayer?.RemoveChild(this);
 		item.Weapon = this;
+	}
+	
+	private void _OnCanDash()
+	{
+		_canDash = true;
 	}
 }
