@@ -188,3 +188,4 @@ ui_back={
 2d_physics/layer_9="custom_boss_hitbox_0"
 2d_physics/layer_10="custom_boss_hitbox_1"
 2d_physics/layer_11="custom_boss_hitbox_2"
+2d_physics/layer_12="friendly_protective_hitbox"
