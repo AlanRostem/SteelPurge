@@ -50,9 +50,7 @@ public class Weapon : Node2D
 	private bool _isFiring = false;
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
-	public bool IsMeleeAttacking = false;
 
-	public bool CanMelee = true;
 
 	public uint CurrentRecoilHoverAmmo
 	{
@@ -172,7 +170,7 @@ public class Weapon : Node2D
 					_meleeShape.Position.y);
 		}
 
-		if (_isHoldingTrigger && _canDash && isHoldingMelee && _currentRecoilHoverAmmo > 0)
+		if (isHoldingMelee && _canDash && _currentRecoilHoverAmmo > 0)
 		{
 			_canDash = false;
 			if (!OwnerPlayer.IsAimingDown && !OwnerPlayer.IsAimingUp)
@@ -193,23 +191,7 @@ public class Weapon : Node2D
 			_firingDashTimer.Start();
 			EmitSignal(nameof(DashFire));
 		}
-
-
-		if (IsMeleeAttacking)
-		{
-			return;
-		}
-
-		if (isHoldingMelee && CanMelee && !OwnerPlayer.IsRamSliding)
-		{
-			IsMeleeAttacking = true;
-			_meleeShape.Disabled = false;
-			_meleeCooldownTimer.Start();
-			_meleeDurationTimer.Start();
-
-			// TODO: Remove this after adding animations
-			Position = new Vector2(8 * Scale.x, 0);
-		}
+		
 
 		if (OwnerPlayer.IsOnFloor() && CurrentRecoilHoverAmmo < MaxRecoilHoverShots && ReloadOnFloor)
 			CurrentRecoilHoverAmmo = MaxRecoilHoverShots;
@@ -222,12 +204,7 @@ public class Weapon : Node2D
 			EmitSignal(nameof(TriggerFire));
 		}
 	}
-
-	private void _OnMeleeCooldownTimerTimeout()
-	{
-		IsMeleeAttacking = false;
-	}
-
+	
 	private void _OnMeleeDurationTimerTimeout()
 	{
 		_meleeShape.Disabled = true;

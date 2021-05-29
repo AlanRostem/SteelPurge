@@ -344,8 +344,6 @@ public class Player : KinematicEntity
 		{
 			if (PlayerInventory.EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
 				CurrentMaxSpeed = MaxWalkSpeedFiring;
-			else if (PlayerInventory.EquippedWeapon.IsMeleeAttacking && isOnFloor)
-				StopMovingX();
 			else
 				CurrentMaxSpeed = MaxWalkSpeed;
 			if (velX > CurrentMaxSpeed && IsOnFloor())
@@ -396,7 +394,7 @@ public class Player : KinematicEntity
 
 		if (IsRamSliding && !IsMovingFast())
 		{
-			if (PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled && !PlayerInventory.EquippedWeapon.IsMeleeAttacking)
+			if (PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled)
 			{
 				IsRamSliding = false;
 				PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;

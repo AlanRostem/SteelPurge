@@ -20,6 +20,7 @@ public class FiringDevice : Node2D
 		base._Ready();
 		_weapon = GetParent<Weapon>();
 		GetWeapon().Connect(nameof(Weapon.Fired), this, nameof(OnFire));
+		GetWeapon().Connect(nameof(Weapon.DashFire), this, nameof(OnDashFire));
 		GetWeapon().FiringDevice = this;
 	}
 
@@ -58,6 +59,12 @@ public class FiringDevice : Node2D
 	{
 
 	}
+	
+	public virtual void OnDashFire()
+	{
+
+	}
+
 
 	public virtual void OnSwap()
 	{
