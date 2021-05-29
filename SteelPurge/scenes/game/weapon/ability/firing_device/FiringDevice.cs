@@ -20,7 +20,7 @@ public class FiringDevice : Node2D
 		base._Ready();
 		_weapon = GetParent<Weapon>();
 		GetWeapon().Connect(nameof(Weapon.Fired), this, nameof(OnFire));
-		GetWeapon().Connect(nameof(Weapon.DashFire), this, nameof(OnDashFire));
+		GetWeapon().Connect(nameof(Weapon.DashFire), this, nameof(_DashFire));
 		GetWeapon().FiringDevice = this;
 	}
 
@@ -51,6 +51,7 @@ public class FiringDevice : Node2D
 
 		projectile.Position = player.Position;
 		projectile.InitWithAngularVelocity(GetWeapon());
+		projectile.Damage = GetWeapon().DamagePerShot;
 		return projectile;
 	}
 	
@@ -58,6 +59,14 @@ public class FiringDevice : Node2D
 	public virtual void OnFire()
 	{
 
+	}
+
+	private void _DashFire()
+	{
+		var oldDmg = _weapon.DamagePerShot;
+		_weapon.DamagePerShot /= 2;
+		OnDashFire();
+		_weapon.DamagePerShot = oldDmg;
 	}
 	
 	public virtual void OnDashFire()

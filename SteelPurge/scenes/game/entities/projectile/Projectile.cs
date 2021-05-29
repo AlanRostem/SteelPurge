@@ -9,11 +9,11 @@ public class Projectile : KinematicEntity
 	[Export] public bool DeleteOnTileMapHit = true;
 	[Export] public float CriticalRaySize = 5f;
 	[Export] public float VisualAngle = 0f;
+	[Export] public uint Damage;
 	private bool _hasDisappeared = false;
 
 	public Weapon OwnerWeapon { get; private set; }
 	public float DirectionSign = 1;
-
 
 	private RayCast2D _criticalHitRayCast;
 
@@ -55,8 +55,8 @@ public class Projectile : KinematicEntity
 
 	private void _OnCriticalHitBoxEntered(CriticalHitbox hitbox)
 	{
-		hitbox.TakeHit(OwnerWeapon.DamagePerShot);
-		OwnerWeapon.EmitSignal(nameof(Weapon.CriticalDamageDealt), OwnerWeapon.DamagePerShot, hitbox);
+		hitbox.TakeHit(Damage);
+		OwnerWeapon.EmitSignal(nameof(Weapon.CriticalDamageDealt), Damage, hitbox);
 		_OnHit();
 		if (!_hasDisappeared && DeleteOnEnemyHit)
 		{
@@ -69,8 +69,8 @@ public class Projectile : KinematicEntity
 	private void _OnVulnerableHitBoxEntered(object area)
 	{
 		var hitBox = (VulnerableHitbox) area;
-		hitBox.TakeHit(OwnerWeapon.DamagePerShot, Vector2.Zero);
-		OwnerWeapon.EmitSignal(nameof(Weapon.DamageDealt), OwnerWeapon.DamagePerShot, hitBox);
+		hitBox.TakeHit(Damage, Vector2.Zero);
+		OwnerWeapon.EmitSignal(nameof(Weapon.DamageDealt), Damage, hitBox);
 		_OnHit();
 		if (!_hasDisappeared && DeleteOnEnemyHit)
 		{
