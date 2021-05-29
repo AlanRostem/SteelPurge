@@ -78,6 +78,6 @@ scale = Vector2( 4, 1.6 )
 [connection signal="body_entered" from="MeleeArea" to="." method="_OnPlayerMelee"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="StandIntervalTimer" method="_OnTrigger"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="FireRateTimer" method="_OnTrigger"]
-[connection signal="screen_exited" from="VisibilityEnabler2D" to="ApproachIntervalTimer" method="_OnCancel"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="StandIntervalTimer" method="_OnCancel"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="ApproachIntervalTimer" method="_OnCancel"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="FireRateTimer" method="_OnCancel"]

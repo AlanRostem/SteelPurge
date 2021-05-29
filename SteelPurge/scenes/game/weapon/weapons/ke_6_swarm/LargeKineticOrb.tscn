@@ -5,10 +5,11 @@
 [ext_resource path="res://scenes/game/weapon/weapons/ke_6_swarm/LargeKineticOrb.cs" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 8.0
+radius = 16.0
 
 [node name="LargeKineticOrb" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+MaxVelocity = 180.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

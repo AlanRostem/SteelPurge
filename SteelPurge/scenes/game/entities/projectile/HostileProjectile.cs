@@ -44,10 +44,22 @@ public class HostileProjectile : KinematicEntity
 			QueueFree();
 		}
 	}
-
+	
+	private void _OnAreaHit(object area)
+	{
+		if (!_hasDisappeared)
+		{
+			_hasDisappeared = true;
+			_OnDisappear();
+			QueueFree();
+		}
+	}
 
 	public virtual void _OnDisappear()
 	{
 		QueueFree();
 	}
 }
+
+
+
