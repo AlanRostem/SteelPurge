@@ -180,11 +180,11 @@ public class Weapon : Node2D
 			}
 			else if (OwnerPlayer.IsAimingDown)
 			{
-				OwnerPlayer.ApplyForce(new Vector2(0, -OwnerPlayer.HorizontalLookingDirection * DashSpeed));
+				OwnerPlayer.ApplyForce(new Vector2(0, -DashSpeed));
 			}
 			else if (OwnerPlayer.IsAimingUp)
 			{
-				OwnerPlayer.ApplyForce(new Vector2(0, OwnerPlayer.HorizontalLookingDirection * DashSpeed));
+				OwnerPlayer.ApplyForce(new Vector2(0,  DashSpeed));
 			}
 
 			CurrentRecoilHoverAmmo = 0;
@@ -203,13 +203,6 @@ public class Weapon : Node2D
 			Fire();
 			EmitSignal(nameof(TriggerFire));
 		}
-	}
-	
-	private void _OnMeleeDurationTimerTimeout()
-	{
-		_meleeShape.Disabled = true;
-		// TODO: Remove this after adding animations
-		Position = new Vector2(0, 0);
 	}
 
 	private void _OnMeleeAreaHitBoxEntered(object area)
