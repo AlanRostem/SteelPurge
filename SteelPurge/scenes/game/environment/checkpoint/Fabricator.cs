@@ -29,36 +29,17 @@ public class Fabricator : Node2D
 
 	private readonly List<Purchase> _cart = new List<Purchase>();
 
-	private ShopMenu _shopMenu;
 
 	public bool CanBuy => _totalPurchasePrice <= PlayerCustomer.PlayerInventory.ScrapCount && PlayerCustomer.PlayerInventory.ScrapCount > 0;
 
-	public override void _Ready()
-	{
-		_shopMenu = GetNode<ShopMenu>("CanvasLayer/ShopMenu");
-		_shopMenu.Visible = false;
-		foreach (var item in _availableItems)
-		{
-			switch (item.Type)
-			{
-				case ShopItem.ItemType.Fuel:
-					_shopMenu.AddFuelItemUi(item);
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
-		}
-	}
-
-	public void AddItemToCart(ShopItem item, out Purchase purchase, uint quantity = 1)
+	public void AddItemToCart(ShopItem item, uint quantity = 1)
 	{
 		if (quantity > item.MaxCount)
 		{
-			purchase = null;
-			return;
+			// return;
 		}
 
-		_cart.Add(purchase = new Purchase(item, quantity));
+		_cart.Add(new Purchase(item, quantity));
 		_totalPurchasePrice += item.Price;
 	}
 
@@ -89,7 +70,13 @@ public class Fabricator : Node2D
 	private void _OnInteract(Player player)
 	{
 		PlayerCustomer = player;
-		if (!_shopMenu.Visible)
-			_shopMenu.Open();
+		foreach (var item in _availableItems)
+			AddItemToCart(item);
+		if (_totalPurchasePrice > player.PlayerInventory.ScrapCount)
+		{
+			CancelShopping();
+			return;
+		}
+		BuyAllItems();
 	}
 }
