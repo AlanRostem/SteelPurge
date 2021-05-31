@@ -20,12 +20,12 @@ public class ProjectileShotGunFiringDevice : FiringDevice
 		var offsetAngle = startAngle - spread / 2;
 		for (int i = 0; i < pelletCount; i++)
 		{
-			var projectile =  FireProjectile(projectileScene, offsetAngle);
+			var projectile = FireProjectile(projectileScene, offsetAngle);
 			OnProjectileShot(projectile);
 			offsetAngle += spread / pelletCount;
 		}
 	}
-	
+
 	// Override this to your liking. Will default to the FireProjectileInShotgunPattern() function
 	public override void OnFire()
 	{

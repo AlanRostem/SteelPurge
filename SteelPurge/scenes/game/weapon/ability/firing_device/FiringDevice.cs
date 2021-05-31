@@ -32,17 +32,17 @@ public class FiringDevice : Node2D
 		var projectile = world.SpawnEntityDeferred<Projectile>(projectileScene, player.Position);
 		
 		projectile.DirectionAngle = Mathf.Rad2Deg(angle);
-		projectile.VisualAngle = Mathf.Rad2Deg(angle);
+		projectile.VisualAngle = 0;
 		projectile.DirectionSign = GetWeapon().Scale.x;
 		if (player.IsAimingDown)
 		{
 			projectile.DirectionAngle += 90;
-			projectile.VisualAngle += Mathf.Rad2Deg(90);
+			projectile.VisualAngle += 90;
 		}
 		else if (player.IsAimingUp)
 		{
 			projectile.DirectionAngle -= 90;
-			projectile.VisualAngle -= Mathf.Rad2Deg(90);
+			projectile.VisualAngle -= 90;
 		}
 		else if (player.HorizontalLookingDirection < 0)
 		{

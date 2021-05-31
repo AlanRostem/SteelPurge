@@ -7,10 +7,7 @@ public class ProjectileSprite : Sprite
 	{
 		_parent = GetParent<Projectile>();
 		var angle = Mathf.Deg2Rad(_parent.VisualAngle);
-		if (Rotation != angle)
-		{
-			Rotation = angle;
-		}
+		Rotation = angle;
 
 		if (Scale.x != _parent.DirectionSign)
 		{
