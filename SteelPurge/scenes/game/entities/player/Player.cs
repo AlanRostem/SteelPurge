@@ -31,12 +31,10 @@ public class Player : KinematicEntity
 	public float CurrentSlideMagnitude = MaxSlideMagnitude;
 
 	public float CurrentMaxSpeed = MaxWalkSpeed;
-	private bool _hasJumpedOnSlide = false;
-
 	private bool _left = false;
 	private bool _right = false;
 	private bool _jump = false;
-	private bool _aim = false;
+	
 	public bool CanTakeDamage = true;
 	public bool CanAimDown = true;
 	public bool CanAimUp = true;
@@ -224,18 +222,6 @@ public class Player : KinematicEntity
 				CanAimUp = true;
 			}
 		}
-
-		if (Input.IsActionJustPressed("aim"))
-		{
-			EmitSignal(nameof(TriggerAimSwap));
-			_aim = !_aim;
-			HorizontalLookingDirection = -HorizontalLookingDirection;
-			if (!IsJumping && IsAimingDown)
-			{
-				IsAimingDown = false;
-				CanAimUp = true;
-			}
-		}
 	}
 
 	private void Walk(int direction, bool canSwapDirOnMove, float delta)
@@ -276,189 +262,12 @@ public class Player : KinematicEntity
 
 	protected override void _OnMovement(float delta)
 	{
-		bool isOnFloor = IsOnFloor();
+		var isOnFloor = IsOnFloor();
+		var isOnWall = IsOnWall();
+		var isOnCeiling = IsOnCeiling();
 		_ProcessInput();
-
-		var canSwapDirOnMove = !PlayerInventory.EquippedWeapon.IsFiring && !_aim || IsAimingUp || IsAimingDown;
-		canSwapDirOnMove = canSwapDirOnMove && CanSwapDirection;
-		var velX = Mathf.Abs(Velocity.x);
-
-		if (_slide)
-		{
-			if (!IsSliding && isOnFloor)
-			{
-				if (velX > 0)
-				{
-					CurrentMaxSpeed = CurrentSlideMagnitude;
-					if (CurrentSlideMagnitude > MaxCrouchSpeed)
-					{
-						CurrentSlideMagnitude -= SlideDecreasePerSlide;
-						_canCancelSlide = false;
-						_slideDurationTimer.Start();
-					}
-					else
-					{
-						CurrentSlideMagnitude = MaxCrouchSpeed;
-					}
-				}
-				else
-					CurrentMaxSpeed = MaxCrouchSpeed;
-
-				IsSliding = true;
-				Crouch();
-			}
-		}
-		else
-		{
-			if (IsSliding && IsOnFloor())
-				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * MaxWalkSpeed, 0.99f);
-			if (IsSliding)
-				Stand();
-		}
-
-
-		if (isOnFloor && !IsSliding)
-		{
-			if (CurrentSlideMagnitude < MaxSlideMagnitude)
-			{
-				CurrentSlideMagnitude += SlideIncreasePerSecond * delta;
-			}
-			else
-			{
-				CurrentSlideMagnitude = MaxSlideMagnitude;
-			}
-		}
-
-		StopOnSlope = !IsSliding;
-
-		// Affects speed when player is attacking
-		if (IsSliding && isOnFloor)
-		{
-			CurrentMaxSpeed = Mathf.Lerp(CurrentMaxSpeed, MaxCrouchSpeed, SlideFriction);
-			if (velX < MaxCrouchSpeed + 0.1)
-				Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
-			else
-				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFriction);
-		}
-		else
-		{
-			if (PlayerInventory.EquippedWeapon.IsFiring && isOnFloor && !IsAimingUp && !IsAimingDown)
-				CurrentMaxSpeed = MaxWalkSpeedFiring;
-			else
-				CurrentMaxSpeed = MaxWalkSpeed;
-			if (velX > CurrentMaxSpeed && IsOnFloor())
-				Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFriction);
-		}
-
-		if (_left && !_right)
-		{
-			Walk(-1, canSwapDirOnMove, delta);
-		}
-		else if (_right && !_left)
-		{
-			Walk(1, canSwapDirOnMove, delta);
-		}
-		else
-		{
-			if (isOnFloor)
-			{
-				if (!IsSliding)
-				{
-					if (velX <= MaxWalkSpeed + 0.1f)
-						Velocity.x = Mathf.Lerp(Velocity.x, 0, WalkFriction);
-					else
-						Velocity.x = Mathf.Lerp(Velocity.x, 0, SlideFriction);
-				}
-			}
-
-			IsWalking = false;
-		}
-
-		IsJumping = !isOnFloor;
-
-		Velocity.x = Mathf.Clamp(-MaxMovementSpeed, Velocity.x, MaxMovementSpeed);
-		Velocity.y = Mathf.Clamp(-MaxMovementSpeed, Velocity.y, MaxMovementSpeed);
-
-		if (Velocity.y < -_minJumpSpeed && Input.IsActionJustReleased("jump"))
-			MoveY(-_minJumpSpeed);
-
-		// Slide melee if the player has enough momentum
-		if (IsSliding)
-		{
-			if (!PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled && IsMovingFast() && isOnFloor && !IsRamSliding)
-			{
-				PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = true;
-				IsRamSliding = true;
-			}
-		}
-
-		if (IsRamSliding && !IsMovingFast())
-		{
-			if (PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled)
-			{
-				IsRamSliding = false;
-				PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
-			}
-		}
-
-		if (!isOnFloor)
-		{
-			GravityVector = DefaultGravity;
-			if (IsRamSliding)
-			{
-				IsRamSliding = false;
-				PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
-			}
-			return;
-		}
-
-		if (IsWalking)
-		{
-			IsAimingDown = false;
-			CanAimUp = true;
-		}
-
-		if (_jump)
-		{
-			if (velX > MaxWalkSpeed)
-			{
-				if (!IsSliding)
-					Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFrictionJump);
-				else
-				{
-					if (!_hasJumpedOnSlide)
-					{
-						_hasJumpedOnSlide = true;
-					}
-					else
-					{
-						Velocity.x = Mathf.Lerp(Velocity.x, MovingDirection * CurrentMaxSpeed, SlideFrictionJump);
-						_hasJumpedOnSlide = false;
-					}
-				}
-			}
-
-			if (IsSliding)
-			{
-				_canCancelSlide = true;
-				Stand();
-				_slideDurationTimer.Stop();
-			}
-
-			MoveY(-_currentJumpSpeed);
-		}
-	}
-
-	public override void _OnCollision(KinematicCollision2D collider)
-	{
-		if (IsOnSlope && !IsSliding)
-		{
-			GravityVector = -collider.Normal;
-		}
-		else
-		{
-			GravityVector = DefaultGravity;
-		}
+		
+		
 	}
 
 	private void _OnRegen()
@@ -472,11 +281,6 @@ public class Player : KinematicEntity
 			Health = 100;
 			EmitSignal(nameof(CancelRegen));
 		}
-	}
-
-	private void _OnSwapTimeOver()
-	{
-		_aim = false;
 	}
 
 	private void _OnCanTakeDamage()
