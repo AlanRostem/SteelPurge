@@ -10,43 +10,43 @@ public class Player : KinematicEntity
 		Airborne,
 		Dash
 	}
-	
+
 	public static uint ScrapDepletionPerDeath = 50;
 	public static readonly uint HealthRegenCount = 15;
 
 	private static readonly float KnockBackSpeed = 100;
-	private static readonly float MaxMovementSpeed = 250;
+	// private static readonly float MaxMovementSpeed = 250;
 
-	private static readonly float MaxWalkSpeed = 100;
+	private static readonly float WalkSpeed = 100;
 	private static readonly float WalkSpeedGround = 360;
-	private static readonly float MaxWalkSpeedFiring = 35;
+	// private static readonly float WalkSpeedAir = 60;
+	// private static readonly float MaxWalkSpeedFiring = 35;
 	private static float DashSpeed = 300;
 
 	private static readonly float JumpSpeed = 200;
 
-	private static readonly float SlideFriction = 0.1f;
-	private static readonly float SlideFrictionJump = 0.85f;
+	// private static readonly float SlideFriction = 0.1f;
+	// private static readonly float SlideFrictionJump = 0.85f;
 	private static readonly float WalkFriction = 0.95f;
 
-	private static readonly float MaxCrouchSpeed = 20;
+	// private static readonly float MaxCrouchSpeed = 20;
 	private static readonly float MaxSlideMagnitude = 460;
-	private static readonly float SlideDecreasePerSlide = 120;
-	private static readonly float SlideIncreasePerSecond = 280;
+	// private static readonly float SlideDecreasePerSlide = 120;
+	// private static readonly float SlideIncreasePerSecond = 280;
 
 	public float CurrentSlideMagnitude = MaxSlideMagnitude;
 
-	public float CurrentMaxSpeed = MaxWalkSpeed;
 	private bool _left = false;
 	private bool _right = false;
 	private bool _jump = false;
 	private bool _dash = false;
-	
+
 	public bool CanTakeDamage = true;
 	public bool CanAimDown = true;
 	public bool CanAimUp = true;
 	public bool CanSwapDirection = true;
 	public MovementState CurrentMovementState { get; private set; }
-	
+
 	public bool IsInvulnerable = false;
 	public bool IsAimingUp = false;
 	public bool IsAimingDown = false;
@@ -81,18 +81,6 @@ public class Player : KinematicEntity
 
 	[Signal]
 	public delegate void WeaponEquipped(Weapon weapon);
-
-	[Signal]
-	public delegate void WeaponAddedToInventory(Weapon weapon);
-
-	[Signal]
-	public delegate void ScrapCountChanged(uint count);
-
-	[Signal]
-	public delegate void OrdinanceFuelCountChanged(uint count, Inventory.OrdinanceFuelType type);
-
-	[Signal]
-	private delegate void TriggerAimSwap();
 
 	[Signal]
 	private delegate void TriggerRegenCooldown();
@@ -230,7 +218,7 @@ public class Player : KinematicEntity
 
 	private void Walk(int direction, bool canSwapDirOnMove, float delta)
 	{
-		AccelerateX(direction * WalkSpeedGround, CurrentMaxSpeed, delta);
+		AccelerateX(direction * WalkSpeedGround, WalkSpeed, delta);
 		MovingDirection = direction;
 		if (canSwapDirOnMove)
 		{
@@ -279,21 +267,26 @@ public class Player : KinematicEntity
 			_StopWalking();
 		}
 	}
-	
+
 	private void _SlideMode(float delta)
 	{
-		
 	}
 
 	private void _AirborneMode(float delta)
 	{
 		if (_left && !_right)
 		{
-			Walk(-1, CanSwapDirection, delta);
+			if (IsMovingFast())
+				Walk(-1, CanSwapDirection, delta);
+			else
+				MoveX(-WalkSpeed);
 		}
 		else if (!_left && _right)
 		{
-			Walk(1, CanSwapDirection, delta);
+			if (IsMovingFast())
+				Walk(1, CanSwapDirection, delta);
+			else
+				MoveX(WalkSpeed);
 		}
 	}
 
@@ -305,15 +298,15 @@ public class Player : KinematicEntity
 			PlayerInventory.EquippedWeapon.PowerDash();
 		}
 	}
-	
+
 	protected override void _OnMovement(float delta)
 	{
 		_ProcessInput();
-		
+
 		if (IsOnFloor())
 		{
 			CurrentMovementState = MovementState.Walk;
-			
+
 			IsJumping = false;
 			if (_jump)
 			{
@@ -324,7 +317,7 @@ public class Player : KinematicEntity
 		{
 			CurrentMovementState = MovementState.Airborne;
 		}
-		
+
 		switch (CurrentMovementState)
 		{
 			case MovementState.Walk:
@@ -361,14 +354,15 @@ public class Player : KinematicEntity
 		}
 		else if (IsAimingUp)
 		{
-			ApplyForce(new Vector2(0,  DashSpeed));
+			ApplyForce(new Vector2(0, DashSpeed));
 		}
 	}
-	
+
 	private void _Jump()
 	{
 		Velocity.y = -JumpSpeed;
 		IsJumping = true;
+		CurrentMovementState = MovementState.Airborne;
 	}
 
 	private void _OnRegen()
@@ -419,7 +413,7 @@ public class Player : KinematicEntity
 
 	public bool IsMovingFast()
 	{
-		return Mathf.Abs(Velocity.x) >= MaxWalkSpeed - 0.1f;
+		return Mathf.Abs(Velocity.x) >= WalkSpeed - 0.1f;
 	}
 
 
@@ -430,10 +424,10 @@ public class Player : KinematicEntity
 
 	public void SetCameraBounds(Rect2 bounds)
 	{
-		_camera.LimitLeft = (int)bounds.Position.x;
-		_camera.LimitTop = (int)bounds.Position.y;
-		_camera.LimitRight = (int)bounds.Size.x;
-		_camera.LimitBottom = (int)bounds.Size.y;
+		_camera.LimitLeft = (int) bounds.Position.x;
+		_camera.LimitTop = (int) bounds.Position.y;
+		_camera.LimitRight = (int) bounds.Size.x;
+		_camera.LimitBottom = (int) bounds.Size.y;
 		GD.Print(bounds);
 	}
 }
