@@ -11,13 +11,9 @@ public class Player : KinematicEntity
 	private static readonly float MaxWalkSpeed = 100;
 	private static readonly float WalkSpeedGround = 360;
 	private static readonly float MaxWalkSpeedFiring = 35;
+	private static float DashSpeed = 300;
 
-	private static readonly float MaxJumpHeight = CustomTileMap.Size * 6;
-	private static readonly float MinJumpHeight = CustomTileMap.Size;
-	private static readonly float JumpDuration = .5f;
-
-	private float _currentJumpSpeed;
-	private float _minJumpSpeed;
+	private static readonly float JumpSpeed = 200;
 
 	private static readonly float SlideFriction = 0.1f;
 	private static readonly float SlideFrictionJump = 0.85f;
@@ -34,6 +30,7 @@ public class Player : KinematicEntity
 	private bool _left = false;
 	private bool _right = false;
 	private bool _jump = false;
+	private bool _dash = false;
 	
 	public bool CanTakeDamage = true;
 	public bool CanAimDown = true;
@@ -70,10 +67,6 @@ public class Player : KinematicEntity
 		_roofDetectorShape = GetNode<CollisionShape2D>("RoofDetector/UpperBodyShape");
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
 		_slideDurationTimer = GetNode<Timer>("SlideDurationTimer");
-
-		Gravity = 2 * MaxJumpHeight / Mathf.Pow(JumpDuration, 2);
-		_currentJumpSpeed = Mathf.Sqrt(2 * Gravity * MaxJumpHeight);
-		_minJumpSpeed = Mathf.Sqrt(2 * Gravity * MinJumpHeight);
 	}
 
 	[Signal]
@@ -148,7 +141,7 @@ public class Player : KinematicEntity
 		{
 			if (direction.x != 0 || direction.y != 0)
 			{
-				Velocity = (new Vector2(KnockBackSpeed * direction.x, -_currentJumpSpeed / 2));
+				Velocity = (new Vector2(KnockBackSpeed * direction.x, -JumpSpeed / 2));
 				if (!CanTakeDamage) return;
 
 				if (PlayerInventory.EquippedWeapon.TacticalEnhancement.IsActive)
@@ -200,7 +193,8 @@ public class Player : KinematicEntity
 
 		_left = Input.IsActionPressed("left");
 		_right = Input.IsActionPressed("right");
-		_jump = Input.IsActionPressed("jump");
+		_jump = Input.IsActionJustPressed("jump");
+		_dash = Input.IsActionJustPressed("dash");
 		IsAimingUp = Input.IsActionPressed("aim_up") && CanAimUp;
 
 		if (_canCancelSlide)
@@ -266,8 +260,63 @@ public class Player : KinematicEntity
 		var isOnWall = IsOnWall();
 		var isOnCeiling = IsOnCeiling();
 		_ProcessInput();
+		if (_left && !_right)
+		{
+			Walk(-1, CanSwapDirection, delta);
+		}
+		else if (!_left && _right)
+		{
+			Walk(1, CanSwapDirection, delta);
+		}
+		else if (isOnFloor)
+		{
+			_StopWalking();
+		}
+
+		if (isOnFloor)
+		{
+			IsJumping = false;
+		}
 		
-		
+		if (_jump && isOnFloor && !IsJumping)
+		{
+			_Jump();
+		}
+
+		if (_dash && PlayerInventory.EquippedWeapon.CanDash)
+		{
+			_Dash();
+			PlayerInventory.EquippedWeapon.PowerDash();
+		}
+	}
+
+	private void _StopWalking()
+	{
+		IsWalking = false;
+		Velocity.x = Mathf.Lerp(Velocity.x, 0, WalkFriction);
+	}
+
+	private void _Dash()
+	{
+		if (!IsAimingDown && !IsAimingUp)
+		{
+			ApplyForce(new Vector2(-HorizontalLookingDirection * DashSpeed, 0));
+			Velocity.y = -PlayerInventory.EquippedWeapon.HoverRecoilSpeed;
+		}
+		else if (IsAimingDown)
+		{
+			ApplyForce(new Vector2(0, -DashSpeed));
+		}
+		else if (IsAimingUp)
+		{
+			ApplyForce(new Vector2(0,  DashSpeed));
+		}
+	}
+	
+	private void _Jump()
+	{
+		Velocity.y = -JumpSpeed;
+		IsJumping = true;
 	}
 
 	private void _OnRegen()

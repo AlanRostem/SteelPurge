@@ -5,8 +5,6 @@ public class Weapon : Node2D
 {
 	private static PackedScene WeaponCollectibleScene
 		= GD.Load<PackedScene>("res://scenes/game/entities/collectible/weapon/WeaponCollectible.tscn");
-
-	private static float DashSpeed = 300;
 	
 	[Export] public string DisplayName = "Weapon";
 
@@ -34,6 +32,7 @@ public class Weapon : Node2D
 
 	private bool _canFire = true;
 	private bool _canDash = true;
+	public bool CanDash => _canDash && _currentRecoilHoverAmmo > 0;
 
 	public bool CanFire
 	{
@@ -155,13 +154,22 @@ public class Weapon : Node2D
 		OwnerPlayer.Velocity.y = -HoverRecoilSpeed;
 	}
 
+	public void PowerDash()
+	{
+		if (_canDash && _currentRecoilHoverAmmo > 0)
+		{
+			_canDash = false;
+			CurrentRecoilHoverAmmo = 0;
+			_firingDashTimer.Start();
+			EmitSignal(nameof(DashFire));
+		}
+	}
 
 	public override void _Process(float delta)
 	{
 		if (OwnerPlayer is null) return;
 		
 		_isHoldingTrigger = Input.IsActionPressed("fire");
-		var isHoldingMelee = Input.IsActionJustPressed("melee");
 
 		if (Mathf.Sign(_meleeShape.Position.x) != OwnerPlayer.HorizontalLookingDirection)
 		{
@@ -170,28 +178,6 @@ public class Weapon : Node2D
 					_meleeShape.Position.y);
 		}
 
-		if (isHoldingMelee && _canDash && _currentRecoilHoverAmmo > 0)
-		{
-			_canDash = false;
-			if (!OwnerPlayer.IsAimingDown && !OwnerPlayer.IsAimingUp)
-			{
-				OwnerPlayer.ApplyForce(new Vector2(-OwnerPlayer.HorizontalLookingDirection * DashSpeed, 0));
-				OwnerPlayer.Velocity.y = -HoverRecoilSpeed;
-			}
-			else if (OwnerPlayer.IsAimingDown)
-			{
-				OwnerPlayer.ApplyForce(new Vector2(0, -DashSpeed));
-			}
-			else if (OwnerPlayer.IsAimingUp)
-			{
-				OwnerPlayer.ApplyForce(new Vector2(0,  DashSpeed));
-			}
-
-			CurrentRecoilHoverAmmo = 0;
-			_firingDashTimer.Start();
-			EmitSignal(nameof(DashFire));
-		}
-		
 
 		if (OwnerPlayer.IsOnFloor() && CurrentRecoilHoverAmmo < MaxRecoilHoverShots && ReloadOnFloor)
 			CurrentRecoilHoverAmmo = MaxRecoilHoverShots;
