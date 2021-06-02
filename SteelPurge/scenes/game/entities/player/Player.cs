@@ -1,7 +1,16 @@
+using System;
 using Godot;
 
 public class Player : KinematicEntity
 {
+	public enum MovementState
+	{
+		Walk,
+		Slide,
+		Airborne,
+		Dash
+	}
+	
 	public static uint ScrapDepletionPerDeath = 50;
 	public static readonly uint HealthRegenCount = 15;
 
@@ -36,7 +45,8 @@ public class Player : KinematicEntity
 	public bool CanAimDown = true;
 	public bool CanAimUp = true;
 	public bool CanSwapDirection = true;
-
+	public MovementState CurrentMovementState { get; private set; }
+	
 	public bool IsInvulnerable = false;
 	public bool IsAimingUp = false;
 	public bool IsAimingDown = false;
@@ -254,12 +264,8 @@ public class Player : KinematicEntity
 		_bodyShape.Position = new Vector2(0, 0);
 	}
 
-	protected override void _OnMovement(float delta)
+	private void _WalkMode(float delta)
 	{
-		var isOnFloor = IsOnFloor();
-		var isOnWall = IsOnWall();
-		var isOnCeiling = IsOnCeiling();
-		_ProcessInput();
 		if (_left && !_right)
 		{
 			Walk(-1, CanSwapDirection, delta);
@@ -268,25 +274,71 @@ public class Player : KinematicEntity
 		{
 			Walk(1, CanSwapDirection, delta);
 		}
-		else if (isOnFloor)
+		else if (IsOnFloor())
 		{
 			_StopWalking();
 		}
-
-		if (isOnFloor)
-		{
-			IsJumping = false;
-		}
+	}
+	
+	private void _SlideMode(float delta)
+	{
 		
-		if (_jump && isOnFloor && !IsJumping)
-		{
-			_Jump();
-		}
+	}
 
-		if (_dash && PlayerInventory.EquippedWeapon.CanDash)
+	private void _AirborneMode(float delta)
+	{
+		if (_left && !_right)
+		{
+			Walk(-1, CanSwapDirection, delta);
+		}
+		else if (!_left && _right)
+		{
+			Walk(1, CanSwapDirection, delta);
+		}
+	}
+
+	private void _DashMode(float delta)
+	{
+		if (PlayerInventory.EquippedWeapon.CanDash)
 		{
 			_Dash();
 			PlayerInventory.EquippedWeapon.PowerDash();
+		}
+	}
+	
+	protected override void _OnMovement(float delta)
+	{
+		_ProcessInput();
+		
+		if (IsOnFloor())
+		{
+			CurrentMovementState = MovementState.Walk;
+			
+			IsJumping = false;
+			if (_jump)
+			{
+				_Jump();
+			}
+		}
+		else
+		{
+			CurrentMovementState = MovementState.Airborne;
+		}
+		
+		switch (CurrentMovementState)
+		{
+			case MovementState.Walk:
+				_WalkMode(delta);
+				break;
+			case MovementState.Slide:
+				_SlideMode(delta);
+				break;
+			case MovementState.Airborne:
+				_AirborneMode(delta);
+				break;
+			case MovementState.Dash:
+				_DashMode(delta);
+				break;
 		}
 	}
 
