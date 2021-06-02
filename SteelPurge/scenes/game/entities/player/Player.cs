@@ -18,7 +18,9 @@ public class Player : KinematicEntity
 	// private static readonly float MaxMovementSpeed = 250;
 
 	private static readonly float WalkSpeed = 100;
+
 	private static readonly float WalkSpeedGround = 360;
+
 	// private static readonly float WalkSpeedAir = 60;
 	// private static readonly float MaxWalkSpeedFiring = 35;
 	private static float DashSpeed = 300;
@@ -216,18 +218,20 @@ public class Player : KinematicEntity
 		}
 	}
 
-	private void Walk(int direction, bool canSwapDirOnMove, float delta)
+	private void Walk(int direction, float delta)
 	{
 		AccelerateX(direction * WalkSpeedGround, WalkSpeed, delta);
 		MovingDirection = direction;
-		if (canSwapDirOnMove)
+		if (!PlayerInventory.EquippedWeapon.IsFiring && CanSwapDirection || IsAimingDown || IsAimingUp)
 		{
-			if (!IsSliding && IsOnFloor() && Mathf.Sign(Velocity.x) != direction)
-			{
-				Velocity.x *= -1;
-			}
-
 			HorizontalLookingDirection = direction;
+			if (IsOnFloor())
+				IsAimingDown = false;
+		}
+
+		if (!IsSliding && IsOnFloor() && Mathf.Sign(Velocity.x) != direction && !IsMovingFast())
+		{
+			Velocity.x *= -1;
 		}
 
 		IsWalking = true;
@@ -256,11 +260,11 @@ public class Player : KinematicEntity
 	{
 		if (_left && !_right)
 		{
-			Walk(-1, CanSwapDirection, delta);
+			Walk(-1, delta);
 		}
 		else if (!_left && _right)
 		{
-			Walk(1, CanSwapDirection, delta);
+			Walk(1, delta);
 		}
 		else if (IsOnFloor())
 		{
@@ -277,14 +281,14 @@ public class Player : KinematicEntity
 		if (_left && !_right)
 		{
 			if (IsMovingFast())
-				Walk(-1, CanSwapDirection, delta);
+				Walk(-1, delta);
 			else
 				MoveX(-WalkSpeed);
 		}
 		else if (!_left && _right)
 		{
 			if (IsMovingFast())
-				Walk(1, CanSwapDirection, delta);
+				Walk(1, delta);
 			else
 				MoveX(WalkSpeed);
 		}
@@ -309,9 +313,7 @@ public class Player : KinematicEntity
 
 			IsJumping = false;
 			if (_jump)
-			{
 				_Jump();
-			}
 		}
 		else
 		{
