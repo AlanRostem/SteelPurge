@@ -229,9 +229,9 @@ public class Player : KinematicEntity
 				IsAimingDown = false;
 		}
 
-		if (!IsSliding && IsOnFloor() && Mathf.Sign(Velocity.x) != direction && !IsMovingFast())
+		if (!IsSliding && IsOnFloor() && Mathf.Sign(Velocity.x) != direction && !IsMovingFast() && CurrentMovementState == MovementState.Walk)
 		{
-			Velocity.x *= -1;
+			_StopWalking();
 		}
 
 		IsWalking = true;
