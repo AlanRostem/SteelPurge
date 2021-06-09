@@ -8,6 +8,7 @@ extents = Vector2( 4, 6 )
 [node name="FallingCollectible" type="KinematicBody2D"]
 collision_layer = 0
 script = ExtResource( 1 )
+PerspectiveDownVector = Vector2( 0, 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

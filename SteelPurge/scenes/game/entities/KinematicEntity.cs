@@ -31,6 +31,7 @@ public class KinematicEntity : KinematicBody2D
 
 	public static readonly Vector2 DefaultPerspectiveDownVector = Vector2.Down;
 
+	[Export]
 	public Vector2 PerspectiveDownVector
 	{
 		get => _perspectiveDownVector;
@@ -41,7 +42,7 @@ public class KinematicEntity : KinematicBody2D
 		}
 	}
 	
-	private Vector2 _perspectiveDownVector = DefaultPerspectiveDownVector;
+	private Vector2 _perspectiveDownVector;
 	private float _perspectiveAngle = 0;
 
 	[Export] public bool IsGravityEnabled = true;
@@ -64,14 +65,14 @@ public class KinematicEntity : KinematicBody2D
 	public Vector2 Velocity { get => _velocity; protected set => _velocity = value.Rotated(_perspectiveAngle); }
 	public float VelocityX 
 	{ 
-		get => _velocity.x; 
-		set => _velocity.x = value; 
+		get => _velocity.Rotated(_perspectiveAngle).x; 
+		set => _velocity = new Vector2(value, VelocityY).Rotated(_perspectiveAngle); 
 	}
 
 	public float VelocityY
 	{
-		get => _velocity.y; 
-		set => _velocity.y = value;
+		get => _velocity.Rotated(_perspectiveAngle).y; 
+		set => _velocity = new Vector2(VelocityX, value).Rotated(_perspectiveAngle); 
 	}
 
 	[Signal]
@@ -117,7 +118,7 @@ public class KinematicEntity : KinematicBody2D
 	{
 		if (IsGravityEnabled)
 			_velocity += PerspectiveDownVector * Gravity * delta;
-		_velocity = MoveAndSlide(_velocity, Vector2.Up, StopOnSlope);
+		_velocity = MoveAndSlide(_velocity, -PerspectiveDownVector, StopOnSlope);
 		IsOnSlope = false;
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
