@@ -29,8 +29,20 @@ public class KinematicEntity : KinematicBody2D
 
 	[Export] public bool CanMove = true;
 
-	public static readonly Vector2 DefaultGravity = Vector2.Down;
-	public Vector2 GravityVector = DefaultGravity;
+	public static readonly Vector2 DefaultPerspectiveDownVector = Vector2.Down;
+
+	public Vector2 PerspectiveDownVector
+	{
+		get => _perspectiveDownVector;
+		set
+		{
+			_perspectiveDownVector = value;
+			_perspectiveAngle = new Vector2(DefaultPerspectiveDownVector).AngleTo(_perspectiveDownVector);
+		}
+	}
+	
+	private Vector2 _perspectiveDownVector = DefaultPerspectiveDownVector;
+	private float _perspectiveAngle = 0;
 
 	[Export] public bool IsGravityEnabled = true;
 
@@ -49,9 +61,18 @@ public class KinematicEntity : KinematicBody2D
 
 	private Vector2 _velocity;
 	// TODO: Edit these to modify values based on gravity vector rotation
-	public Vector2 Velocity { get => _velocity; protected set => _velocity = value; }
-	public float VelocityX { get => _velocity.x; set => _velocity.x = value; }
-	public float VelocityY { get => _velocity.y; set => _velocity.y = value; }
+	public Vector2 Velocity { get => _velocity; protected set => _velocity = value.Rotated(_perspectiveAngle); }
+	public float VelocityX 
+	{ 
+		get => _velocity.x; 
+		set => _velocity.x = value; 
+	}
+
+	public float VelocityY
+	{
+		get => _velocity.y; 
+		set => _velocity.y = value;
+	}
 
 	[Signal]
 	public delegate void HealthChanged(uint health);
@@ -95,7 +116,7 @@ public class KinematicEntity : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		if (IsGravityEnabled)
-			_velocity += GravityVector * Gravity * delta;
+			_velocity += PerspectiveDownVector * Gravity * delta;
 		_velocity = MoveAndSlide(_velocity, Vector2.Up, StopOnSlope);
 		IsOnSlope = false;
 		for (var i = 0; i < GetSlideCount(); i++)
