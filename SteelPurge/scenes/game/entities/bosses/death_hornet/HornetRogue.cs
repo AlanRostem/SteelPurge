@@ -19,9 +19,9 @@ public class HornetRogue : Enemy
 	{
 		base._OnMovement(delta);
 		if (IsOnFloor())
-			Velocity.x = Direction * 110;
+			VelocityX = Direction * 110;
 		else if (!Fly)
-			Velocity.x = 0;
+			VelocityX = 0;
 	}
 
 	public override void _OnCollision(KinematicCollision2D collider)
@@ -34,7 +34,7 @@ public class HornetRogue : Enemy
 	{
 		if (direction.y != 0)
 		{
-			Velocity.y = 0;
+			VelocityY = 0;
 			IsGravityEnabled = false;
 		}
 		base.TakeDamage(damage, direction);

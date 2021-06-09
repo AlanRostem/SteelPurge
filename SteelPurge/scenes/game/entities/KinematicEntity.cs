@@ -47,7 +47,11 @@ public class KinematicEntity : KinematicBody2D
 
 	private uint _health = 100;
 
-	public Vector2 Velocity;
+	private Vector2 _velocity;
+	// TODO: Edit these to modify values based on gravity vector rotation
+	public Vector2 Velocity { get => _velocity; protected set => _velocity = value; }
+	public float VelocityX { get => _velocity.x; set => _velocity.x = value; }
+	public float VelocityY { get => _velocity.y; set => _velocity.y = value; }
 
 	[Signal]
 	public delegate void HealthChanged(uint health);
@@ -91,8 +95,8 @@ public class KinematicEntity : KinematicBody2D
 	public override void _PhysicsProcess(float delta)
 	{
 		if (IsGravityEnabled)
-			Velocity += GravityVector * Gravity * delta;
-		Velocity = MoveAndSlide(Velocity, Vector2.Up, StopOnSlope);
+			_velocity += GravityVector * Gravity * delta;
+		_velocity = MoveAndSlide(_velocity, Vector2.Up, StopOnSlope);
 		IsOnSlope = false;
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
@@ -112,15 +116,15 @@ public class KinematicEntity : KinematicBody2D
 	public void StopMovingX()
 	{
 		if (CanMove)
-			Velocity.x = 0;
+			VelocityX = 0;
 	}
 	
 	public void AccelerateX(float x, float maxSpeed, float delta)
 	{
 		if (!CanMove) return;
 		var movement = x * delta;
-		var result = Mathf.Abs(Velocity.x + movement);
-		var differingDir = Mathf.Sign(movement) != Mathf.Sign(Velocity.x);
+		var result = Mathf.Abs(VelocityX + movement);
+		var differingDir = Mathf.Sign(movement) != Mathf.Sign(VelocityX);
 
 		if (!_canAccelerate)
 		{
@@ -134,25 +138,25 @@ public class KinematicEntity : KinematicBody2D
 		if (result > maxSpeed && !differingDir)
 		{
 			movement = (result - maxSpeed) * delta * Mathf.Sign(x);
-			result = Mathf.Abs(Velocity.x + movement);
+			result = Mathf.Abs(VelocityX + movement);
 			if (result > maxSpeed)
 				movement = 0;
 			_canAccelerate = false;
 		}
 
-		Velocity.x += movement;
+		VelocityX += movement;
 	}
 
 	public void MoveX(float x)
 	{
 		if (CanMove)
-			Velocity.x = x;
+			VelocityX = x;
 	}
 
 	public void MoveY(float y)
 	{
 		if (CanMove)
-			Velocity.y = y;
+			VelocityY = y;
 	}
 
 	public virtual void _OnCollision(KinematicCollision2D collider)

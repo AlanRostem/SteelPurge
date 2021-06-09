@@ -40,7 +40,7 @@ public class Projectile : KinematicEntity
 	public override void _PhysicsProcess(float delta)
 	{
 		if (IsGravityEnabled)
-			Velocity.y += Gravity * delta;
+			Velocity += Vector2.Down * Gravity * delta;
 		var angle = Velocity.Angle();
 		_criticalHitRayCast.CastTo = new Vector2(
 			CriticalRaySize * Mathf.Cos(angle),

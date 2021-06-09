@@ -340,7 +340,7 @@ public class Player : KinematicEntity
 	private void _StopWalking()
 	{
 		IsWalking = false;
-		Velocity.x = Mathf.Lerp(Velocity.x, 0, WalkFriction);
+		VelocityX = Mathf.Lerp(Velocity.x, 0, WalkFriction);
 	}
 
 	private void _Dash()
@@ -348,7 +348,7 @@ public class Player : KinematicEntity
 		if (!IsAimingDown && !IsAimingUp)
 		{
 			ApplyForce(new Vector2(-HorizontalLookingDirection * DashSpeed, 0));
-			Velocity.y = -PlayerInventory.EquippedWeapon.HoverRecoilSpeed;
+			VelocityX = -PlayerInventory.EquippedWeapon.HoverRecoilSpeed;
 		}
 		else if (IsAimingDown)
 		{
@@ -362,7 +362,7 @@ public class Player : KinematicEntity
 
 	private void _Jump()
 	{
-		Velocity.y = -JumpSpeed;
+		VelocityY = -JumpSpeed;
 		IsJumping = true;
 		CurrentMovementState = MovementState.Airborne;
 	}

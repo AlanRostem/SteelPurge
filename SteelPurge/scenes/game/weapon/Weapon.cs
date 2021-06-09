@@ -151,7 +151,7 @@ public class Weapon : Node2D
 		if (!(OwnerPlayer.Velocity.y > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
 		if (CurrentRecoilHoverAmmo == 0) return;
 		if (LoseAmmoOnHover) CurrentRecoilHoverAmmo--;
-		OwnerPlayer.Velocity.y = -HoverRecoilSpeed;
+		OwnerPlayer.VelocityY = -HoverRecoilSpeed;
 	}
 
 	public void PowerDash()

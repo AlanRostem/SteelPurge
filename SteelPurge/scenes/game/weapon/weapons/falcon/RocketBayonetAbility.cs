@@ -11,8 +11,8 @@ public class RocketBayonetAbility : TacticalAbility
 		weapon.CanFire = false;
 
 		var player = weapon.OwnerPlayer;
-		player.Velocity.x = RocketSpeed * player.HorizontalLookingDirection;
-		player.Velocity.y = 0;
+		player.VelocityX = RocketSpeed * player.HorizontalLookingDirection;
+		player.VelocityY = 0;
 		player.IsGravityEnabled = false;
 		player.IsRamSliding = false;
 		player.CanMove = false;
@@ -27,7 +27,7 @@ public class RocketBayonetAbility : TacticalAbility
 		if (player.IsOnWall() || player.IsOnSlope)
 		{
 			DeActivate();
-			player.Velocity.x = 0;
+			player.VelocityX = 0;
 		}
 	}
 
@@ -50,6 +50,6 @@ public class RocketBayonetAbility : TacticalAbility
 		hitBox.TakeHit(BayonetDamage, new Vector2(GetWeapon().OwnerPlayer.HorizontalLookingDirection, 0));
 		DeActivate();
 		var player = GetWeapon().OwnerPlayer;
-		player.Velocity.x = 0;
+		player.VelocityX = 0;
 	}
 }

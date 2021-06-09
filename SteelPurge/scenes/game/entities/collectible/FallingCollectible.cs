@@ -26,7 +26,7 @@ public class FallingCollectible : KinematicEntity
 	protected override void _OnMovement(float delta)
 	{
 		if (IsOnFloor())
-			Velocity.x = 0;
+			VelocityX = 0;
 
 
 		if (!InteractToPickUp) return;

@@ -138,7 +138,7 @@ public class DeathHornet : Boss
 					_rogueDamageShape.SetDeferred("disabled", true);
 				break;
 			case AttackMode.RogueBombardment:
-				Velocity.x = 0;
+				VelocityX = 0;
 				_rogueSpawnTimer.Stop();
 				_rogueSpawnTimer.WaitTime = RegularRogueSpawnTime;
 				break;
@@ -158,7 +158,7 @@ public class DeathHornet : Boss
 				_rogueSpawnTimer.Start();
 				_flightDurationTimer.Start();
 				_flightModeIsAscending = true;
-				Velocity.y = -RiseSpeed;
+				VelocityY = -RiseSpeed;
 				break;
 			case AttackMode.RogueBombardment:
 				_rogueSpawnTimer.WaitTime = FastRogueSpawnTime;
@@ -192,11 +192,11 @@ public class DeathHornet : Boss
 			case AttackMode.KamikazeRogues:
 				if (_kamikazeRogueModeRoguesLaunched == MaxRoguesShotOnKamikazeMode)
 				{
-					Velocity.x = -LookingDirection * FlightStrafeSpeed;
+					VelocityX = -LookingDirection * FlightStrafeSpeed;
 					break;
 				}
 
-				Velocity.x = StrafeDirection * FlightStrafeSpeed;
+				VelocityX = StrafeDirection * FlightStrafeSpeed;
 				_kamikazeRogueModeStrafeAmount += Velocity.x * delta;
 				if (_kamikazeRogueModeStrafeAmount > StrafeMargin && StrafeDirection > 0)
 				{
@@ -239,7 +239,7 @@ public class DeathHornet : Boss
 				{
 					if (IsOnCeiling())
 					{
-						Velocity.y = 0;
+						VelocityY = 0;
 						StrafeDirection = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
 						_rogueSpawnTimer.Start();
 						_flightModeIsAscending = false;
@@ -251,10 +251,10 @@ public class DeathHornet : Boss
 
 				if (_flightModeIsDescending)
 				{
-					Velocity.x = 0;
+					VelocityX = 0;
 					if (IsOnFloor())
 					{
-						Velocity.y = 0;
+						VelocityY = 0;
 						ChangeAttackMode(AttackMode.RogueBombardment);
 						_flightModeIsDescending = false;
 						_rogueHitsTakenInFlightMode = 0;
@@ -270,10 +270,10 @@ public class DeathHornet : Boss
 				else if (distance > StrafeMargin)
 					StrafeDirection = 1;
 
-				Velocity.x = StrafeDirection * FlightStrafeSpeed;
+				VelocityX = StrafeDirection * FlightStrafeSpeed;
 				break;
 			case AttackMode.RogueBombardment:
-				Velocity.x = LookingDirection * FlightStrafeSpeed;
+				VelocityX = LookingDirection * FlightStrafeSpeed;
 				break;
 		}
 	}
@@ -359,7 +359,7 @@ public class DeathHornet : Boss
 	private void _OnPerformRush()
 	{
 		_isRushing = true;
-		Velocity.x = RushSpeed * LookingDirection;
+		VelocityX = RushSpeed * LookingDirection;
 		_criticalShape.SetDeferred("disabled", false);
 	}
 
@@ -370,7 +370,7 @@ public class DeathHornet : Boss
 
 	private void _OnFlightEnd()
 	{
-		Velocity.y = 300;
+		VelocityY = 300;
 		_rogueSpawnTimer.Stop();
 		_flightModeIsDescending = true;
 		_rogueHitsTakenInFlightMode = 0;
