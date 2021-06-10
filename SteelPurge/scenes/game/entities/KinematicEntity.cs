@@ -1,10 +1,19 @@
+using System;
 using Godot;
 using Godot.Collections;
 
 public class KinematicEntity : KinematicBody2D
 {
+	public enum CollisionMode
+	{
+		Move,
+		Slide,
+		Snap,
+	}
+	
 	public float Gravity = 600;
 
+	[Export] public CollisionMode CurrentCollisionMode = CollisionMode.Snap;
 	[Export] public bool CanReceiveStatusEffect = true;
 
 	private bool _canAccelerate = true;
@@ -130,7 +139,20 @@ public class KinematicEntity : KinematicBody2D
 	{
 		if (IsGravityEnabled)
 			_velocity += PerspectiveDownVector * Gravity * delta;
-		_velocity.y = MoveAndSlideWithSnap(_velocity, _snapVector * CustomTileMap.Size, -_perspectiveDownVector, true).y;
+
+		switch (CurrentCollisionMode)
+		{
+			case CollisionMode.Move:
+				MoveAndCollide(_velocity);
+				break;
+			case CollisionMode.Slide:
+				_velocity = MoveAndSlide(_velocity, -_perspectiveDownVector);
+				break;
+			case CollisionMode.Snap:
+				_velocity.y = MoveAndSlideWithSnap(_velocity, _snapVector * CustomTileMap.Size, -_perspectiveDownVector, true).y;
+				break;
+		}
+		
 		IsOnSlope = false;
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
