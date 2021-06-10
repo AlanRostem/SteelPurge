@@ -5,7 +5,6 @@ public class KinematicEntity : KinematicBody2D
 {
 	public float Gravity = 600;
 
-	[Export] public bool StopOnSlope = true;
 	[Export] public bool CanReceiveStatusEffect = true;
 
 	private bool _canAccelerate = true;
@@ -131,7 +130,7 @@ public class KinematicEntity : KinematicBody2D
 	{
 		if (IsGravityEnabled)
 			_velocity += PerspectiveDownVector * Gravity * delta;
-		_velocity.y = MoveAndSlideWithSnap(_velocity, _snapVector, -_perspectiveDownVector, StopOnSlope).y;
+		_velocity.y = MoveAndSlideWithSnap(_velocity, _snapVector * CustomTileMap.Size, -_perspectiveDownVector, true).y;
 		IsOnSlope = false;
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
