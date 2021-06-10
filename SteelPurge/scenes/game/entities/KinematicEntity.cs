@@ -39,10 +39,12 @@ public class KinematicEntity : KinematicBody2D
 		{
 			_perspectiveDownVector = value;
 			_perspectiveAngle = new Vector2(DefaultPerspectiveDownVector).AngleTo(_perspectiveDownVector);
+			_snapVector = new Vector2(_perspectiveDownVector);
 		}
 	}
-	
+
 	private Vector2 _perspectiveDownVector;
+	private Vector2 _snapVector;
 	private float _perspectiveAngle = 0;
 
 	[Export] public bool IsGravityEnabled = true;
@@ -61,18 +63,29 @@ public class KinematicEntity : KinematicBody2D
 	private uint _health = 100;
 
 	private Vector2 _velocity;
+
 	// TODO: Edit these to modify values based on gravity vector rotation
-	public Vector2 Velocity { get => _velocity; protected set => _velocity = value.Rotated(_perspectiveAngle); }
-	public float VelocityX 
-	{ 
-		get => _velocity.Rotated(_perspectiveAngle).x; 
-		set => _velocity = new Vector2(value, VelocityY).Rotated(_perspectiveAngle); 
+	public Vector2 Velocity
+	{
+		get => _velocity;
+		protected set => _velocity = value.Rotated(_perspectiveAngle);
+	}
+
+	public float VelocityX
+	{
+		get => _velocity.Rotated(_perspectiveAngle).x;
+		set => _velocity = new Vector2(value, VelocityY).Rotated(_perspectiveAngle);
 	}
 
 	public float VelocityY
 	{
-		get => _velocity.Rotated(_perspectiveAngle).y; 
-		set => _velocity = new Vector2(VelocityX, value).Rotated(_perspectiveAngle); 
+		get => _velocity.Rotated(_perspectiveAngle).y;
+		set
+		{
+			_velocity = new Vector2(VelocityX, value).Rotated(_perspectiveAngle); 
+			if (value < 0f)
+				_snapVector = Vector2.Zero;
+		}
 	}
 
 	[Signal]
@@ -118,7 +131,7 @@ public class KinematicEntity : KinematicBody2D
 	{
 		if (IsGravityEnabled)
 			_velocity += PerspectiveDownVector * Gravity * delta;
-		_velocity.y = MoveAndSlide(_velocity, -PerspectiveDownVector, StopOnSlope).y;
+		_velocity.y = MoveAndSlideWithSnap(_velocity, _snapVector, -_perspectiveDownVector, StopOnSlope).y;
 		IsOnSlope = false;
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
@@ -127,6 +140,9 @@ public class KinematicEntity : KinematicBody2D
 				IsOnSlope = true;
 			_OnCollision(collision);
 		}
+
+		if (IsOnFloor())
+			_snapVector = new Vector2(_perspectiveDownVector);
 
 		_OnMovement(delta);
 	}
@@ -140,7 +156,7 @@ public class KinematicEntity : KinematicBody2D
 		if (CanMove)
 			VelocityX = 0;
 	}
-	
+
 	public void AccelerateX(float x, float maxSpeed, float delta)
 	{
 		if (!CanMove) return;
