@@ -148,7 +148,7 @@ public class Weapon : Node2D
 		
 		EmitSignal(nameof(Fired));
 
-		if (!(OwnerPlayer.Velocity.y > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
+		if (!(OwnerPlayer.VelocityY > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
 		if (CurrentRecoilHoverAmmo == 0) return;
 		if (LoseAmmoOnHover) CurrentRecoilHoverAmmo--;
 		OwnerPlayer.VelocityY = -HoverRecoilSpeed;

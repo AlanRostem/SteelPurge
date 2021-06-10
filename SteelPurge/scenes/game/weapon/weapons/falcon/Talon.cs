@@ -10,8 +10,8 @@ public class Talon : Projectile
 		if (_followPlayer)
 		{
 			var angle = OwnerWeapon.OwnerPlayer.Position.AngleToPoint(Position);
-			VelocityX = Mathf.Lerp(Velocity.x, MaxVelocity * 1.5f * Mathf.Cos(angle), 0.14f);
-			VelocityY = Mathf.Lerp(Velocity.y, MaxVelocity * 1.5f * Mathf.Sin(angle), 0.14f);
+			VelocityX = Mathf.Lerp(VelocityX, MaxVelocity * 1.5f * Mathf.Cos(angle), 0.14f);
+			VelocityY = Mathf.Lerp(VelocityY, MaxVelocity * 1.5f * Mathf.Sin(angle), 0.14f);
 		}
 
 		base._PhysicsProcess(delta);

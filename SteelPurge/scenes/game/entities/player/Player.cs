@@ -340,7 +340,7 @@ public class Player : KinematicEntity
 	private void _StopWalking()
 	{
 		IsWalking = false;
-		VelocityX = Mathf.Lerp(Velocity.x, 0, WalkFriction);
+		VelocityX = Mathf.Lerp(VelocityX, 0, WalkFriction);
 	}
 
 	private void _Dash()
@@ -415,7 +415,7 @@ public class Player : KinematicEntity
 
 	public bool IsMovingFast()
 	{
-		return Mathf.Abs(Velocity.x) >= WalkSpeed - 0.1f;
+		return Mathf.Abs(VelocityX) >= WalkSpeed - 0.1f;
 	}
 
 
