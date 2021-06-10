@@ -136,6 +136,8 @@ public class KinematicEntity : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
+		_OnMovement(delta);
+		
 		if (IsGravityEnabled)
 			_velocity += PerspectiveDownVector * Gravity * delta;
 
@@ -164,7 +166,7 @@ public class KinematicEntity : KinematicBody2D
 		if (IsOnFloor())
 			_snapVector = new Vector2(_perspectiveDownVector);
 
-		_OnMovement(delta);
+		
 	}
 
 
