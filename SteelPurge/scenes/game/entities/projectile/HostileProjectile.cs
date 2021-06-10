@@ -9,6 +9,11 @@ public class HostileProjectile : KinematicEntity
 	[Export] public uint Damage = 15;
 	private bool _hasDisappeared = false;
 
+	public override void _Ready()
+	{
+		base._Ready();
+		CurrentCollisionMode = CollisionMode.Move;
+	}
 
 	public void InitWithAngularVelocity()
 	{
@@ -22,13 +27,6 @@ public class HostileProjectile : KinematicEntity
 	{
 		Velocity = new Vector2(DamageDirection * MaxVelocity, 0);
 	}
-
-
-	public override void _PhysicsProcess(float delta)
-	{
-		MoveAndCollide(Velocity * delta);
-	}
-
 
 	private void _OnBodyHit(object body)
 	{
