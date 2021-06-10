@@ -20,6 +20,7 @@ public class Projectile : KinematicEntity
 	public override void _Ready()
 	{
 		_criticalHitRayCast = GetNode<RayCast2D>("CriticalHitRayCast");
+		CurrentCollisionMode = CollisionMode.Move;
 	}
 
 	public void InitWithAngularVelocity(Weapon owner)
@@ -37,15 +38,12 @@ public class Projectile : KinematicEntity
 		OwnerWeapon = owner;
 	}
 
-	public override void _PhysicsProcess(float delta)
+	protected override void _OnMovement(float delta)
 	{
-		if (IsGravityEnabled)
-			Velocity += Vector2.Down * Gravity * delta;
 		var angle = Velocity.Angle();
 		_criticalHitRayCast.CastTo = new Vector2(
 			CriticalRaySize * Mathf.Cos(angle),
 			CriticalRaySize * Mathf.Sin(angle));
-		MoveAndCollide(Velocity * delta);
 		if (_criticalHitRayCast.IsColliding())
 		{
 			var criticalHitBox = _criticalHitRayCast.GetCollider();

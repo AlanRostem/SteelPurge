@@ -143,7 +143,7 @@ public class KinematicEntity : KinematicBody2D
 		switch (CurrentCollisionMode)
 		{
 			case CollisionMode.Move:
-				MoveAndCollide(_velocity);
+				MoveAndCollide(_velocity * delta);
 				break;
 			case CollisionMode.Slide:
 				_velocity = MoveAndSlide(_velocity, -_perspectiveDownVector);
