@@ -316,6 +316,10 @@ public class Player : KinematicEntity
 			IsJumping = false;
 			if (_jump)
 				_Jump();
+			else if (_slide)
+				_Slide();
+			else if (IsSliding)
+				_StopSliding();
 		}
 		else
 		{
@@ -367,6 +371,22 @@ public class Player : KinematicEntity
 		VelocityY = -JumpSpeed;
 		IsJumping = true;
 		CurrentMovementState = MovementState.Airborne;
+	}
+
+	private void _Slide()
+	{
+		IsSliding = true;
+		Crouch();
+		CurrentMovementState = MovementState.Slide;
+		CurrentCollisionMode = CollisionMode.Slide;
+	}
+
+	private void _StopSliding()
+	{
+		IsSliding = false;
+		Stand();
+		CurrentMovementState = MovementState.Walk;
+		CurrentCollisionMode = CollisionMode.Snap;
 	}
 
 	private void _OnRegen()
