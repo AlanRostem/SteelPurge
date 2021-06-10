@@ -27,16 +27,15 @@ public class Player : KinematicEntity
 
 	private static readonly float JumpSpeed = 200;
 
-	// private static readonly float SlideFriction = 0.1f;
+	private static readonly float SlideFriction = 0.02f;
 	// private static readonly float SlideFrictionJump = 0.85f;
 	private static readonly float WalkFriction = 0.95f;
 
 	// private static readonly float MaxCrouchSpeed = 20;
-	private static readonly float MaxSlideMagnitude = 460;
+	private static readonly float SlideMagnitude = 230;// 460;
 	// private static readonly float SlideDecreasePerSlide = 120;
 	// private static readonly float SlideIncreasePerSecond = 280;
 
-	public float CurrentSlideMagnitude = MaxSlideMagnitude;
 
 	private bool _left = false;
 	private bool _right = false;
@@ -275,6 +274,8 @@ public class Player : KinematicEntity
 
 	private void _SlideMode(float delta)
 	{
+		if (IsOnFloor())
+			VelocityX = Mathf.Lerp(VelocityX, 0, SlideFriction);
 	}
 
 	private void _AirborneMode(float delta)
@@ -375,6 +376,8 @@ public class Player : KinematicEntity
 
 	private void _Slide()
 	{
+		if (!IsSliding)
+			VelocityX = SlideMagnitude * HorizontalLookingDirection;
 		IsSliding = true;
 		Crouch();
 		CurrentMovementState = MovementState.Slide;
