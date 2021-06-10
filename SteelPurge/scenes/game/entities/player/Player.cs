@@ -319,7 +319,7 @@ public class Player : KinematicEntity
 		{
 			CurrentMovementState = MovementState.Airborne;
 		}
-
+		
 		switch (CurrentMovementState)
 		{
 			case MovementState.Walk:
