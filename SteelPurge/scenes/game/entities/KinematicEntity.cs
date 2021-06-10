@@ -116,7 +116,7 @@ public class KinematicEntity : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		if (IsGravityEnabled && !IsOnFloor())
+		if (IsGravityEnabled)
 			_velocity += PerspectiveDownVector * Gravity * delta;
 		_velocity = MoveAndSlide(_velocity, -PerspectiveDownVector, StopOnSlope);
 		IsOnSlope = false;
