@@ -136,7 +136,8 @@ public class KinematicEntity : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		_OnMovement(delta);
+		if (CanMove)
+			_OnMovement(delta);
 		
 		if (IsGravityEnabled)
 			_velocity += PerspectiveDownVector * Gravity * delta;
@@ -158,7 +159,7 @@ public class KinematicEntity : KinematicBody2D
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
 			var collision = GetSlideCollision(i);
-			if (IsOnFloor() && collision.Normal.y != -1)
+			if (IsOnFloor() && collision.Normal.Rotated(_perspectiveAngle).y != -PerspectiveDownVector.y)
 				IsOnSlope = true;
 			_OnCollision(collision);
 		}

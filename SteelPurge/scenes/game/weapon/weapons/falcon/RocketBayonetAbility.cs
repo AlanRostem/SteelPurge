@@ -25,7 +25,7 @@ public class RocketBayonetAbility : TacticalAbility
 	{
 		var player = GetWeapon().OwnerPlayer;
 		// TODO: Detect when player is on a slope and stop the ability
-		if (player.IsOnWall() /* || player.IsOnSlope*/)
+		if (player.IsOnWall() || player.IsOnSlope)
 		{
 			DeActivate();
 			player.VelocityX = 0;
