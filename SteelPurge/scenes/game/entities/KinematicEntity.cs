@@ -118,7 +118,7 @@ public class KinematicEntity : KinematicBody2D
 	{
 		if (IsGravityEnabled)
 			_velocity += PerspectiveDownVector * Gravity * delta;
-		_velocity = MoveAndSlide(_velocity, -PerspectiveDownVector, StopOnSlope);
+		_velocity.y = MoveAndSlide(_velocity, -PerspectiveDownVector, StopOnSlope).y;
 		IsOnSlope = false;
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
