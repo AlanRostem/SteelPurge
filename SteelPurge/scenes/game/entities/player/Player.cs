@@ -229,7 +229,8 @@ public class Player : KinematicEntity
 				IsAimingDown = false;
 		}
 
-		if (!IsSliding && IsOnFloor() && Mathf.Sign(VelocityX) != direction && !IsMovingFast() && CurrentMovementState == MovementState.Walk)
+		if (!IsSliding && IsOnFloor() && Mathf.Sign(VelocityX) != direction && !IsMovingFast() &&
+			CurrentMovementState == MovementState.Walk)
 		{
 			_StopWalking();
 		}
@@ -309,7 +310,8 @@ public class Player : KinematicEntity
 
 		if (IsOnFloor())
 		{
-			CurrentMovementState = MovementState.Walk;
+			if (CurrentMovementState == MovementState.Airborne)
+				CurrentMovementState = MovementState.Walk;
 
 			IsJumping = false;
 			if (_jump)
@@ -319,7 +321,7 @@ public class Player : KinematicEntity
 		{
 			CurrentMovementState = MovementState.Airborne;
 		}
-		
+
 		switch (CurrentMovementState)
 		{
 			case MovementState.Walk:
