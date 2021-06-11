@@ -278,6 +278,10 @@ public class Player : KinematicEntity
 	{
 		if (IsOnFloor())
 			VelocityX = Mathf.Lerp(VelocityX, 0, SlideFriction);
+		else
+		{
+			_AirborneMode(delta);
+		}
 	}
 
 	private void _AirborneMode(float delta)
@@ -327,15 +331,16 @@ public class Player : KinematicEntity
 			IsJumping = false;
 			if (_jump)
 				_Jump();
-			else if (_slide)
-				_Slide();
-			else if (IsSliding)
-				_StopSliding();
 		}
 		else if (CurrentMovementState != MovementState.Slide)
 		{
 			CurrentMovementState = MovementState.Airborne;
 		}
+		
+		if (_slide)
+			_Slide();
+		else if (IsSliding)
+			_StopSliding();
 
 		switch (CurrentMovementState)
 		{
@@ -387,6 +392,7 @@ public class Player : KinematicEntity
 
 	private void _Slide()
 	{
+		if (IsSliding) return;
 		if (!IsOnSlope && (IsMovingFast() || Mathf.Abs(VelocityX) < CrouchSpeed || !IsOnFloor())) return;
 		if (!IsSliding && !IsOnSlope)
 			VelocityX = SlideSpeed * HorizontalLookingDirection;
