@@ -379,8 +379,8 @@ public class Player : KinematicEntity
 
 	private void _Slide()
 	{
-		if (IsMovingFast() || Mathf.Abs(VelocityX) < CrouchSpeed) return;
-		if (!IsSliding)
+		if (!IsOnSlope && (IsMovingFast() || Mathf.Abs(VelocityX) < CrouchSpeed || !IsOnFloor())) return;
+		if (!IsSliding && !IsOnSlope)
 			VelocityX = SlideSpeed * HorizontalLookingDirection;
 		IsSliding = true;
 		Crouch();
@@ -445,7 +445,8 @@ public class Player : KinematicEntity
 
 	public bool IsMovingFast()
 	{
-		return Mathf.Abs(VelocityX) >= WalkSpeed - 0.1f;
+		const float margin = 0.1f;
+		return Mathf.Abs(VelocityX) >= WalkSpeed + margin;
 	}
 
 
