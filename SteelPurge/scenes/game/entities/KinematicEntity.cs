@@ -103,6 +103,8 @@ public class KinematicEntity : KinematicBody2D
 	public override void _Ready()
 	{
 		ParentWorld = GetParent().GetParent().GetParent<World>();
+		// TODO: Figure out why this gets set to (0, 0) in scene instancing
+		PerspectiveDownVector = Vector2.Down;
 	}
 
 	public void ApplyStatusEffect(StatusEffectType type)
