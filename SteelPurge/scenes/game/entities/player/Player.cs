@@ -524,6 +524,5 @@ public class Player : KinematicEntity
 		_camera.LimitTop = (int) bounds.Position.y;
 		_camera.LimitRight = (int) bounds.Size.x;
 		_camera.LimitBottom = (int) bounds.Size.y;
-		GD.Print(bounds);
 	}
 }

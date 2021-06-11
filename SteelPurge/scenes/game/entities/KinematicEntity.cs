@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Godot.Collections;
 
@@ -37,8 +38,7 @@ public class KinematicEntity : KinematicBody2D
 	[Export] public bool CanMove = true;
 
 	public static readonly Vector2 DefaultPerspectiveDownVector = Vector2.Down;
-
-	[Export]
+	
 	public Vector2 PerspectiveDownVector
 	{
 		get => _perspectiveDownVector;
@@ -47,11 +47,13 @@ public class KinematicEntity : KinematicBody2D
 			_perspectiveDownVector = value;
 			_perspectiveAngle = new Vector2(DefaultPerspectiveDownVector).AngleTo(_perspectiveDownVector);
 			_snapVector = new Vector2(_perspectiveDownVector);
+			//if (value.Length() != 1)
+			//	throw new Exception();
 		}
 	}
 
-	private Vector2 _perspectiveDownVector;
-	private Vector2 _snapVector;
+	private Vector2 _perspectiveDownVector = Vector2.Down;
+	private Vector2 _snapVector = Vector2.Down;
 	private float _perspectiveAngle = 0;
 
 	[Export] public bool IsGravityEnabled = true;
