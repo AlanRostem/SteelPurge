@@ -19,6 +19,7 @@ public class RocketBayonetAbility : TacticalAbility
 		player.IsAimingDown = false;
 		player.CanAimDown = false;
 		player.CanSwapDirection = false;
+		player.CurrentCollisionMode = KinematicEntity.CollisionMode.Slide;
 	}
 
 	public override void OnUpdate()
@@ -43,6 +44,7 @@ public class RocketBayonetAbility : TacticalAbility
 		player.CanMove = true;
 		player.CanAimDown = true;
 		player.CanSwapDirection = true;
+		player.CurrentCollisionMode = KinematicEntity.CollisionMode.Snap;
 	}
 	
 	private void _OnFalconOnMeleeHit(VulnerableHitbox hitBox)
