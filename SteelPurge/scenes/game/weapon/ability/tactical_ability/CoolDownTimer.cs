@@ -11,11 +11,6 @@ public class CoolDownTimer : Timer
 		WaitTime = _parent.CoolDown;
 	}
 
-	public override void _Process(float delta)
-	{
-		_parent.CurrentCoolDown = TimeLeft;
-	}
-
 	private void _OnTrigger()
 	{
 		Start();

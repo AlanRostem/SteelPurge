@@ -11,11 +11,6 @@ public class DurationTimer : Timer
 		WaitTime = _parent.Duration;
 	}
 
-	public override void _Process(float delta)
-	{
-		_parent.CurrentDuration = TimeLeft;
-	}
-
 	private void _OnTrigger()
 	{
 		Start();
