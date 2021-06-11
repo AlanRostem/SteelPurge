@@ -56,12 +56,13 @@ public class Player : KinematicEntity
 	public bool IsRamSliding = false;
 	private bool _isStunned = false;
 	public float HorizontalLookingDirection = 1;
-	public float MovingDirection = 1;
 	public float AimAngle = 0;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
 	public bool IsSliding = false;
 	private bool _isRoofAbove = false;
+	
+	public int MovingDirection { get; private set; }
 
 	private CollisionShape2D _bodyShape;
 	private CollisionShape2D _roofDetectorShape;
@@ -282,6 +283,18 @@ public class Player : KinematicEntity
 		{
 			_AirborneMode(delta);
 		}
+
+		if (IsMovingFast())
+		{
+			if (_left && !_right)
+			{
+				
+			}
+			else if (!_left && _right)
+			{
+				
+			}
+		}
 	}
 
 	private void _AirborneMode(float delta)
@@ -294,6 +307,7 @@ public class Player : KinematicEntity
 			{
 				if (!PlayerInventory.EquippedWeapon.IsFiring)
 					HorizontalLookingDirection = -1;
+				if (CanMove) MovingDirection = -1;
 				MoveX(-WalkSpeed);
 			}
 		}
@@ -305,6 +319,7 @@ public class Player : KinematicEntity
 			{
 				if (!PlayerInventory.EquippedWeapon.IsFiring)
 					HorizontalLookingDirection = 1;
+				if (CanMove) MovingDirection = 1;
 				MoveX(WalkSpeed);
 			}
 		}
@@ -316,7 +331,7 @@ public class Player : KinematicEntity
 		{
 			_Dash();
 			PlayerInventory.EquippedWeapon.PowerDash();
-		}
+		} 
 	}
 
 	protected override void _OnMovement(float delta)
@@ -393,7 +408,7 @@ public class Player : KinematicEntity
 	{
 		if (!IsOnSlope && (Mathf.Abs(VelocityX) < CrouchSpeed || !IsOnFloor())) return;
 		if (!IsSliding && !IsOnSlope && !IsMovingFast())
-			VelocityX = SlideSpeed * HorizontalLookingDirection;
+			VelocityX = SlideSpeed * MovingDirection;
 		IsSliding = true;
 		Crouch();
 		CurrentMovementState = MovementState.Slide;
