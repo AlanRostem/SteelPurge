@@ -60,8 +60,9 @@ public class Player : KinematicEntity
 	public bool IsWalking = false;
 	public bool IsJumping = false;
 	public bool IsSliding = false;
+	public bool IsCrouching = false;
 	private bool _isRoofAbove = false;
-	
+
 	public int MovingDirection { get; private set; }
 
 	private CollisionShape2D _bodyShape;
@@ -243,6 +244,30 @@ public class Player : KinematicEntity
 	private void NegateSlide(int direction, float delta)
 	{
 		AccelerateX(direction * WalkAcceleration, SlideSpeed, delta);
+		if (!IsMovingFast())
+		{
+			IsSliding = false;
+		}
+	}
+
+	private void Sneak(int direction, float delta)
+	{
+		MoveX(direction * CrouchSpeed);
+		MovingDirection = direction;
+		if (!PlayerInventory.EquippedWeapon.IsFiring && CanSwapDirection || IsAimingDown || IsAimingUp)
+		{
+			HorizontalLookingDirection = direction;
+			if (IsOnFloor())
+				IsAimingDown = false;
+		}
+
+		if (IsOnFloor() && Mathf.Sign(VelocityX) != direction && !IsMovingFast() &&
+			CurrentMovementState == MovementState.Slide)
+		{
+			_StopWalking();
+		}
+
+		IsCrouching = true;
 	}
 
 	void Crouch()
@@ -289,17 +314,22 @@ public class Player : KinematicEntity
 			_AirborneMode(delta);
 		}
 
-		if (IsSliding && IsMovingFast())
+		/*
+		if (_left && !_right)
 		{
-			if (_left && !_right && MovingDirection > 0)
-			{
+			if (IsMovingFast() && MovingDirection > 0)
 				NegateSlide(-1, delta);
-			}
-			else if (!_left && _right && MovingDirection < 0)
-			{
-				NegateSlide(1, delta);
-			}
+			else if (!IsSliding)
+				Sneak(-1, delta);
 		}
+		else if (!_left && _right)
+		{
+			if (IsMovingFast() && MovingDirection < 0)
+				NegateSlide(1, delta);
+			else if (!IsSliding)
+				Sneak(1, delta);
+		}
+		*/
 	}
 
 	private void _AirborneMode(float delta)
@@ -336,7 +366,7 @@ public class Player : KinematicEntity
 		{
 			_Dash();
 			PlayerInventory.EquippedWeapon.PowerDash();
-		} 
+		}
 	}
 
 	protected override void _OnMovement(float delta)
@@ -356,7 +386,7 @@ public class Player : KinematicEntity
 		{
 			CurrentMovementState = MovementState.Airborne;
 		}
-		
+
 		if (_slide)
 			_Slide();
 		else if (IsSliding)
@@ -389,7 +419,8 @@ public class Player : KinematicEntity
 	{
 		if (!IsAimingDown && !IsAimingUp)
 		{
-			Velocity = new Vector2(-HorizontalLookingDirection * DashSpeed, -PlayerInventory.EquippedWeapon.HoverRecoilSpeed);
+			Velocity = new Vector2(-HorizontalLookingDirection * DashSpeed,
+				-PlayerInventory.EquippedWeapon.HoverRecoilSpeed);
 		}
 		else if (IsAimingDown)
 		{
