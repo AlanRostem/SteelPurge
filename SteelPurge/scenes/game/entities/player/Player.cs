@@ -19,7 +19,7 @@ public class Player : KinematicEntity
 
 	private static readonly float WalkSpeed = 100;
 
-	private static readonly float WalkSpeedGround = 360;
+	private static readonly float WalkAcceleration = 360;
 
 	// private static readonly float WalkSpeedAir = 60;
 	// private static readonly float MaxWalkSpeedFiring = 35;
@@ -222,7 +222,7 @@ public class Player : KinematicEntity
 
 	private void Walk(int direction, float delta)
 	{
-		AccelerateX(direction * WalkSpeedGround, WalkSpeed, delta);
+		AccelerateX(direction * WalkAcceleration, WalkSpeed, delta);
 		MovingDirection = direction;
 		if (!PlayerInventory.EquippedWeapon.IsFiring && CanSwapDirection || IsAimingDown || IsAimingUp)
 		{
@@ -238,6 +238,11 @@ public class Player : KinematicEntity
 		}
 
 		IsWalking = true;
+	}
+
+	private void NegateSlide(int direction, float delta)
+	{
+		AccelerateX(direction * WalkAcceleration, SlideSpeed, delta);
 	}
 
 	void Crouch()
@@ -284,15 +289,15 @@ public class Player : KinematicEntity
 			_AirborneMode(delta);
 		}
 
-		if (IsMovingFast())
+		if (IsSliding && IsMovingFast())
 		{
-			if (_left && !_right)
+			if (_left && !_right && MovingDirection > 0)
 			{
-				
+				NegateSlide(-1, delta);
 			}
-			else if (!_left && _right)
+			else if (!_left && _right && MovingDirection < 0)
 			{
-				
+				NegateSlide(1, delta);
 			}
 		}
 	}
