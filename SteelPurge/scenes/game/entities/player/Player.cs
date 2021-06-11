@@ -369,16 +369,15 @@ public class Player : KinematicEntity
 	{
 		if (!IsAimingDown && !IsAimingUp)
 		{
-			ApplyForce(new Vector2(-HorizontalLookingDirection * DashSpeed, 0));
-			VelocityX = -PlayerInventory.EquippedWeapon.HoverRecoilSpeed;
+			Velocity = new Vector2(-HorizontalLookingDirection * DashSpeed, -PlayerInventory.EquippedWeapon.HoverRecoilSpeed);
 		}
 		else if (IsAimingDown)
 		{
-			ApplyForce(new Vector2(0, -DashSpeed));
+			Velocity = new Vector2(0, -DashSpeed);
 		}
 		else if (IsAimingUp)
 		{
-			ApplyForce(new Vector2(0, DashSpeed));
+			Velocity = new Vector2(0, DashSpeed);
 		}
 	}
 
