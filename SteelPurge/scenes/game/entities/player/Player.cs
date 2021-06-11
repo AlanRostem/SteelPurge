@@ -287,14 +287,22 @@ public class Player : KinematicEntity
 			if (IsMovingFast())
 				Walk(-1, delta);
 			else
+			{
+				if (!PlayerInventory.EquippedWeapon.IsFiring)
+					HorizontalLookingDirection = -1;
 				MoveX(-WalkSpeed);
+			}
 		}
 		else if (!_left && _right)
 		{
 			if (IsMovingFast())
 				Walk(1, delta);
 			else
+			{
+				if (!PlayerInventory.EquippedWeapon.IsFiring)
+					HorizontalLookingDirection = 1;
 				MoveX(WalkSpeed);
+			}
 		}
 	}
 
