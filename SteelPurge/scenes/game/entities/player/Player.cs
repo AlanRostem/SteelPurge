@@ -392,9 +392,8 @@ public class Player : KinematicEntity
 
 	private void _Slide()
 	{
-		if (IsSliding) return;
-		if (!IsOnSlope && (IsMovingFast() || Mathf.Abs(VelocityX) < CrouchSpeed || !IsOnFloor())) return;
-		if (!IsSliding && !IsOnSlope)
+		if (!IsOnSlope && (Mathf.Abs(VelocityX) < CrouchSpeed || !IsOnFloor())) return;
+		if (!IsSliding && !IsOnSlope && !IsMovingFast())
 			VelocityX = SlideSpeed * HorizontalLookingDirection;
 		IsSliding = true;
 		Crouch();
