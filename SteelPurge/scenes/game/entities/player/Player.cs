@@ -23,7 +23,7 @@ public class Player : KinematicEntity
 
 	// private static readonly float WalkSpeedAir = 60;
 	// private static readonly float MaxWalkSpeedFiring = 35;
-	private static float DashSpeed = 300;
+	private static float DashSpeed = 250;
 
 	private static readonly float JumpSpeed = 220;
 
@@ -334,15 +334,15 @@ public class Player : KinematicEntity
 			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
 			return;
 		}
-
+		
 		if (_left && !_right)
 		{
-			if (IsMovingFasterThanCrouch() && MovingDirection > 0)
+			if (IsMovingFasterThanCrouch() && VelocityX > 0)
 				NegateSlide(-1, delta);
 		}
 		else if (!_left && _right)
 		{
-			if (IsMovingFasterThanCrouch() && MovingDirection < 0)
+			if (IsMovingFasterThanCrouch() && VelocityX < 0)
 				NegateSlide(1, delta);
 		}
 	}
@@ -398,6 +398,9 @@ public class Player : KinematicEntity
 		if (_dash)
 			_Dash();
 		
+		if (IsMovingTooFast() && CurrentMovementState != MovementState.Slide)
+			_Slide();
+		
 		if (IsOnFloor())
 		{
 			if (CurrentMovementState == MovementState.Airborne)
@@ -414,7 +417,7 @@ public class Player : KinematicEntity
 				else
 					_ActivateCrouchMode();
 			}
-			else if (IsSliding || IsCrouching)
+			else if (!IsMovingTooFast() && (IsSliding || IsCrouching))
 			{
 				_StopSliding();
 			}
