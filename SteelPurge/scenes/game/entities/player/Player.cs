@@ -206,7 +206,7 @@ public class Player : KinematicEntity
 			_slide = Input.IsActionPressed("slide");
 		}
 
-		if (Input.IsActionJustPressed("aim_down") && CanAimDown)
+		if (Input.IsActionJustPressed("aim_down") && CanAimDown && !IsSliding)
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
 			IsAimingDown = !IsAimingDown;
@@ -230,7 +230,10 @@ public class Player : KinematicEntity
 		{
 			HorizontalLookingDirection = direction;
 			if (IsOnFloor())
+			{
+				CanAimUp = true;
 				IsAimingDown = false;
+			}
 		}
 
 		if (!IsSliding && IsOnFloor() && Mathf.Sign(VelocityX) != direction && !IsMovingTooFast() &&
@@ -255,7 +258,10 @@ public class Player : KinematicEntity
 		{
 			HorizontalLookingDirection = direction;
 			if (IsOnFloor())
+			{
+				CanAimUp = true;
 				IsAimingDown = false;
+			}
 		}
 
 		if (IsOnFloor() && Mathf.Sign(VelocityX) != direction && !IsMovingTooFast() &&
@@ -334,7 +340,7 @@ public class Player : KinematicEntity
 				Walk(-1, delta);
 			else
 			{
-				if (!PlayerInventory.EquippedWeapon.IsFiring)
+				if (!PlayerInventory.EquippedWeapon.IsFiring || IsAimingDown)
 					HorizontalLookingDirection = -1;
 				if (CanMove) MovingDirection = -1;
 				MoveX(-WalkSpeed);
@@ -346,7 +352,7 @@ public class Player : KinematicEntity
 				Walk(1, delta);
 			else
 			{
-				if (!PlayerInventory.EquippedWeapon.IsFiring)
+				if (!PlayerInventory.EquippedWeapon.IsFiring || IsAimingDown)
 					HorizontalLookingDirection = 1;
 				if (CanMove) MovingDirection = 1;
 				MoveX(WalkSpeed);
@@ -466,6 +472,9 @@ public class Player : KinematicEntity
 			VelocityX = SlideSpeed * MovingDirection;
 		IsSliding = true;
 		IsCrouching = false;
+		IsAimingDown = false;
+		CanAimUp = true;
+		CanAimDown = false;
 		Crouch();
 		CurrentMovementState = MovementState.Slide;
 		CurrentCollisionMode = CollisionMode.Slide;
@@ -476,6 +485,7 @@ public class Player : KinematicEntity
 		if (IsCrouching) return;
 		IsCrouching = true;
 		IsSliding = false;
+		CanAimDown = true;
 		Crouch();
 		CurrentMovementState = MovementState.Crouch;
 		CurrentCollisionMode = CollisionMode.Snap;
@@ -484,6 +494,7 @@ public class Player : KinematicEntity
 	private void _StopSliding()
 	{
 		if (IsMovingTooFast()) return;
+		CanAimDown = true;
 		if (_isRoofAbove)
 		{
 			CurrentMovementState = MovementState.Crouch;
