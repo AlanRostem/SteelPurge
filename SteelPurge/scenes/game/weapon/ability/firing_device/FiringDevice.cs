@@ -29,7 +29,7 @@ public class FiringDevice : Node2D
 		var player = GetWeapon().OwnerPlayer;
 		var world = player.ParentWorld.Entities;
 		
-		var projectile = world.SpawnEntityDeferred<Projectile>(projectileScene, player.Position);
+		var projectile = world.SpawnEntityDeferred<Projectile>(projectileScene, player.Position + GetWeapon().Position);
 		
 		projectile.DirectionAngle = Mathf.Rad2Deg(angle);
 		projectile.VisualAngle = 0;
@@ -49,7 +49,6 @@ public class FiringDevice : Node2D
 			projectile.DirectionAngle = 180 - projectile.DirectionAngle;
 		}
 
-		projectile.Position = player.Position;
 		projectile.InitWithAngularVelocity(GetWeapon());
 		projectile.Damage = GetWeapon().DamagePerShot;
 		return projectile;
