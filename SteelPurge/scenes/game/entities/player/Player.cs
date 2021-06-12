@@ -309,6 +309,7 @@ public class Player : KinematicEntity
 		else
 		{
 			_AirborneMode(delta);
+			return;
 		}
 
 		if (_left && !_right)
@@ -464,6 +465,7 @@ public class Player : KinematicEntity
 		if (!IsSliding && !IsOnSlope && !IsMovingTooFast())
 			VelocityX = SlideSpeed * MovingDirection;
 		IsSliding = true;
+		IsCrouching = false;
 		Crouch();
 		CurrentMovementState = MovementState.Slide;
 		CurrentCollisionMode = CollisionMode.Slide;
