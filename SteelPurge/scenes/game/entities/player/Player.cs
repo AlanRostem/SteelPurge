@@ -273,6 +273,7 @@ public class Player : KinematicEntity
 		var shape = (CapsuleShape2D) _bodyShape.Shape;
 		shape.Height = 1;
 		_bodyShape.Position = new Vector2(0, 4.5f);
+		PlayerInventory.EquippedWeapon.Position = new Vector2(0, 4);
 	}
 
 	void Stand()
@@ -284,6 +285,7 @@ public class Player : KinematicEntity
 		var shape = (CapsuleShape2D) _bodyShape.Shape;
 		shape.Height = 10;
 		_bodyShape.Position = new Vector2(0, 0);
+		PlayerInventory.EquippedWeapon.Position = new Vector2(0, 0);
 	}
 
 	private void _WalkMode(float delta)
@@ -425,8 +427,6 @@ public class Player : KinematicEntity
 				_CrouchMode(delta);
 				break;
 		}
-
-		GD.Print(CurrentMovementState);
 	}
 
 	private void _StopWalking()
