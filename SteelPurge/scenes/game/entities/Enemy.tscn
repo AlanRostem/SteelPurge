@@ -15,6 +15,7 @@ b = Vector2( 22, 0 )
 collision_layer = 8
 collision_mask = 2147483697
 script = ExtResource( 2 )
+CurrentCollisionMode = 1
 
 [node name="VulnerableHitbox" parent="." index="0" instance=ExtResource( 3 )]
 
