@@ -28,6 +28,7 @@ public class Player : KinematicEntity
 	private static readonly float JumpSpeed = 220;
 
 	private static readonly float SlideFriction = 0.02f;
+	private static readonly float AirFriction = 0.01f;
 
 	// private static readonly float SlideFrictionJump = 0.85f;
 	private static readonly float WalkFriction = 0.95f;
@@ -349,6 +350,7 @@ public class Player : KinematicEntity
 
 	private void _AirborneMode(float delta)
 	{
+		VelocityX = Mathf.Lerp(VelocityX, 0, AirFriction);
 		if (_left && !_right)
 		{
 			if (IsMovingTooFast())
@@ -358,7 +360,7 @@ public class Player : KinematicEntity
 				if (!PlayerInventory.EquippedWeapon.IsFiring || IsAimingDown)
 					HorizontalLookingDirection = -1;
 				if (CanMove) MovingDirection = -1;
-				MoveX(-WalkSpeed);
+				Walk(-1, delta);
 			}
 		}
 		else if (!_left && _right)
@@ -370,7 +372,7 @@ public class Player : KinematicEntity
 				if (!PlayerInventory.EquippedWeapon.IsFiring || IsAimingDown)
 					HorizontalLookingDirection = 1;
 				if (CanMove) MovingDirection = 1;
-				MoveX(WalkSpeed);
+				Walk(1, delta);
 			}
 		}
 	}
