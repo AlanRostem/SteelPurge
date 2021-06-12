@@ -198,7 +198,7 @@ public class Weapon : Node2D
 
 		var hitBox = (VulnerableHitbox) area;
 		var direction = new Vector2(OwnerPlayer.HorizontalLookingDirection, 0);
-		if (OwnerPlayer.IsSliding && OwnerPlayer.IsMovingTooFast())
+		if (OwnerPlayer.IsRamSliding)
 		{
 			direction = Vector2.Up;
 		}
