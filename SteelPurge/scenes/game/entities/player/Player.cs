@@ -206,7 +206,7 @@ public class Player : KinematicEntity
 			_slide = Input.IsActionPressed("slide");
 		}
 
-		if (Input.IsActionJustPressed("aim_down") && CanAimDown && !IsSliding)
+		if (Input.IsActionJustPressed("aim_down") && CanAimDown)
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
 			IsAimingDown = !IsAimingDown;
@@ -317,6 +317,7 @@ public class Player : KinematicEntity
 		else
 		{
 			_AirborneMode(delta);
+			CanAimDown = true;
 			return;
 		}
 
