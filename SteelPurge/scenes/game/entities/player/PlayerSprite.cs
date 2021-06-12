@@ -27,6 +27,11 @@ public class PlayerSprite : AnimatedSprite
 			Animation = "slide";
 		}
 		
+		if (_player.IsCrouching && _player.IsOnFloor())
+		{
+			Animation = "crouch";
+		}
+		
 		_player.Modulate = new Color(Modulate)
 		{
 			a = !_player.IsInvulnerable ? 1f : .5f
