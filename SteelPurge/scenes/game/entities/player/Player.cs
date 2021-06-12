@@ -26,7 +26,7 @@ public class Player : KinematicEntity
 	// private static readonly float MaxWalkSpeedFiring = 35;
 	private static float DashSpeed = 300;
 
-	private static readonly float JumpSpeed = 200;
+	private static readonly float JumpSpeed = 220;
 
 	private static readonly float SlideFriction = 0.02f;
 
