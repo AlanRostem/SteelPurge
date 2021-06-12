@@ -7,6 +7,7 @@ public class Player : KinematicEntity
 	{
 		Walk,
 		Slide,
+		Crouch,
 		Airborne,
 		Dash
 	}
@@ -232,7 +233,7 @@ public class Player : KinematicEntity
 				IsAimingDown = false;
 		}
 
-		if (!IsSliding && IsOnFloor() && Mathf.Sign(VelocityX) != direction && !IsMovingFast() &&
+		if (!IsSliding && IsOnFloor() && Mathf.Sign(VelocityX) != direction && !IsMovingTooFast() &&
 			CurrentMovementState == MovementState.Walk)
 		{
 			_StopWalking();
@@ -244,10 +245,6 @@ public class Player : KinematicEntity
 	private void NegateSlide(int direction, float delta)
 	{
 		AccelerateX(direction * WalkAcceleration, SlideSpeed, delta);
-		if (!IsMovingFast())
-		{
-			IsSliding = false;
-		}
 	}
 
 	private void Sneak(int direction, float delta)
@@ -261,7 +258,7 @@ public class Player : KinematicEntity
 				IsAimingDown = false;
 		}
 
-		if (IsOnFloor() && Mathf.Sign(VelocityX) != direction && !IsMovingFast() &&
+		if (IsOnFloor() && Mathf.Sign(VelocityX) != direction && !IsMovingTooFast() &&
 			CurrentMovementState == MovementState.Slide)
 		{
 			_StopWalking();
@@ -314,29 +311,23 @@ public class Player : KinematicEntity
 			_AirborneMode(delta);
 		}
 
-		/*
 		if (_left && !_right)
 		{
-			if (IsMovingFast() && MovingDirection > 0)
+			if (IsMovingTooFast() && MovingDirection > 0)
 				NegateSlide(-1, delta);
-			else if (!IsSliding)
-				Sneak(-1, delta);
 		}
 		else if (!_left && _right)
 		{
-			if (IsMovingFast() && MovingDirection < 0)
+			if (IsMovingTooFast() && MovingDirection < 0)
 				NegateSlide(1, delta);
-			else if (!IsSliding)
-				Sneak(1, delta);
 		}
-		*/
 	}
 
 	private void _AirborneMode(float delta)
 	{
 		if (_left && !_right)
 		{
-			if (IsMovingFast())
+			if (IsMovingTooFast())
 				Walk(-1, delta);
 			else
 			{
@@ -348,7 +339,7 @@ public class Player : KinematicEntity
 		}
 		else if (!_left && _right)
 		{
-			if (IsMovingFast())
+			if (IsMovingTooFast())
 				Walk(1, delta);
 			else
 			{
@@ -357,6 +348,18 @@ public class Player : KinematicEntity
 				if (CanMove) MovingDirection = 1;
 				MoveX(WalkSpeed);
 			}
+		}
+	}
+
+	private void _CrouchMode(float delta)
+	{
+		if (_left && !_right)
+		{
+			Sneak(-1, delta);
+		}
+		else if (!_left && _right)
+		{
+			Sneak(1, delta);
 		}
 	}
 
@@ -381,16 +384,23 @@ public class Player : KinematicEntity
 			IsJumping = false;
 			if (_jump)
 				_Jump();
+
+			if (_slide)
+			{
+				if (IsOnSlope || IsMovingFasterThanCrouch())
+					_Slide();
+				else
+					_ActivateCrouchMode();
+			}
+			else if (IsSliding || IsCrouching)
+			{
+				_StopSliding();
+			}
 		}
 		else if (CurrentMovementState != MovementState.Slide)
 		{
 			CurrentMovementState = MovementState.Airborne;
 		}
-
-		if (_slide)
-			_Slide();
-		else if (IsSliding)
-			_StopSliding();
 
 		switch (CurrentMovementState)
 		{
@@ -406,7 +416,12 @@ public class Player : KinematicEntity
 			case MovementState.Dash:
 				_DashMode(delta);
 				break;
+			case MovementState.Crouch:
+				_CrouchMode(delta);
+				break;
 		}
+
+		GD.Print(CurrentMovementState);
 	}
 
 	private void _StopWalking()
@@ -442,8 +457,7 @@ public class Player : KinematicEntity
 
 	private void _Slide()
 	{
-		if (!IsOnSlope && (Mathf.Abs(VelocityX) < CrouchSpeed || !IsOnFloor())) return;
-		if (!IsSliding && !IsOnSlope && !IsMovingFast())
+		if (!IsSliding && !IsOnSlope && !IsMovingTooFast())
 			VelocityX = SlideSpeed * MovingDirection;
 		IsSliding = true;
 		Crouch();
@@ -451,10 +465,20 @@ public class Player : KinematicEntity
 		CurrentCollisionMode = CollisionMode.Slide;
 	}
 
+	private void _ActivateCrouchMode()
+	{
+		if (IsCrouching) return;
+		IsCrouching = true;
+		Crouch();
+		CurrentMovementState = MovementState.Crouch;
+		CurrentCollisionMode = CollisionMode.Snap;
+	}
+
 	private void _StopSliding()
 	{
-		if (IsMovingFast()) return;
+		if (IsMovingTooFast()) return;
 		IsSliding = false;
+		IsCrouching = false;
 		Stand();
 		CurrentMovementState = MovementState.Walk;
 		CurrentCollisionMode = CollisionMode.Snap;
@@ -506,12 +530,17 @@ public class Player : KinematicEntity
 		CanMove = true;
 	}
 
-	public bool IsMovingFast()
+	public bool IsMovingTooFast()
 	{
 		const float margin = 0.1f;
 		return Mathf.Abs(VelocityX) >= WalkSpeed + margin;
 	}
 
+	public bool IsMovingFasterThanCrouch()
+	{
+		const float margin = 0.1f;
+		return Mathf.Abs(VelocityX) >= CrouchSpeed + margin;
+	}
 
 	private void _OnCanCancelSlide()
 	{
