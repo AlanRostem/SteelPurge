@@ -463,11 +463,11 @@ public class Player : KinematicEntity
 		}
 		else if (IsAimingDown)
 		{
-			Velocity = new Vector2(0, -DashSpeed);
+			VelocityY = -DashSpeed;
 		}
 		else if (IsAimingUp)
 		{
-			Velocity = new Vector2(0, DashSpeed);
+			VelocityY = DashSpeed;
 		}
 	}
 
