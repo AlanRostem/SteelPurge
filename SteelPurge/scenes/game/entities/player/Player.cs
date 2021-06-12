@@ -9,7 +9,6 @@ public class Player : KinematicEntity
 		Slide,
 		Crouch,
 		Airborne,
-		Dash
 	}
 
 	public static uint ScrapDepletionPerDeath = 50;
@@ -392,19 +391,13 @@ public class Player : KinematicEntity
 		}
 	}
 
-	private void _DashMode(float delta)
-	{
-		if (PlayerInventory.EquippedWeapon.CanDash)
-		{
-			_Dash();
-			PlayerInventory.EquippedWeapon.PowerDash();
-		}
-	}
-
 	protected override void _OnMovement(float delta)
 	{
 		_ProcessInput();
 
+		if (_dash)
+			_Dash();
+		
 		if (IsOnFloor())
 		{
 			if (CurrentMovementState == MovementState.Airborne)
@@ -442,9 +435,6 @@ public class Player : KinematicEntity
 			case MovementState.Airborne:
 				_AirborneMode(delta);
 				break;
-			case MovementState.Dash:
-				_DashMode(delta);
-				break;
 			case MovementState.Crouch:
 				_CrouchMode(delta);
 				break;
@@ -459,6 +449,10 @@ public class Player : KinematicEntity
 
 	private void _Dash()
 	{
+		if (!PlayerInventory.EquippedWeapon.CanDash) return;		
+		
+		PlayerInventory.EquippedWeapon.PowerDash();
+
 		if (!IsAimingDown && !IsAimingUp)
 		{
 			Velocity = new Vector2(-HorizontalLookingDirection * DashSpeed,

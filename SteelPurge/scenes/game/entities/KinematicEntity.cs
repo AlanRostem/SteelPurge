@@ -10,7 +10,7 @@ public class KinematicEntity : KinematicBody2D
 		Slide,
 		Snap,
 	}
-	
+
 	public float Gravity = 600;
 
 	[Export] public CollisionMode CurrentCollisionMode = CollisionMode.Snap;
@@ -38,7 +38,7 @@ public class KinematicEntity : KinematicBody2D
 	[Export] public bool CanMove = true;
 
 	public static readonly Vector2 DefaultPerspectiveDownVector = Vector2.Down;
-	
+
 	public Vector2 PerspectiveDownVector
 	{
 		get => _perspectiveDownVector;
@@ -77,7 +77,12 @@ public class KinematicEntity : KinematicBody2D
 	public Vector2 Velocity
 	{
 		get => _velocity;
-		protected set => _velocity = value.Rotated(_perspectiveAngle);
+		protected set
+		{
+			_velocity = value.Rotated(_perspectiveAngle);
+			if (value.y < 0)
+				_snapVector = Vector2.Zero;
+		}
 	}
 
 	public float VelocityX
@@ -91,7 +96,7 @@ public class KinematicEntity : KinematicBody2D
 		get => _velocity.Rotated(_perspectiveAngle).y;
 		set
 		{
-			_velocity = new Vector2(VelocityX, value).Rotated(_perspectiveAngle); 
+			_velocity = new Vector2(VelocityX, value).Rotated(_perspectiveAngle);
 			if (value < 0f)
 				_snapVector = Vector2.Zero;
 		}
@@ -142,7 +147,7 @@ public class KinematicEntity : KinematicBody2D
 	{
 		if (CanMove)
 			_OnMovement(delta);
-		
+
 		if (IsGravityEnabled)
 			_velocity += PerspectiveDownVector * Gravity * delta;
 
@@ -155,10 +160,11 @@ public class KinematicEntity : KinematicBody2D
 				_velocity = MoveAndSlide(_velocity, -_perspectiveDownVector);
 				break;
 			case CollisionMode.Snap:
-				_velocity.y = MoveAndSlideWithSnap(_velocity, _snapVector * CustomTileMap.Size, -_perspectiveDownVector, true).y;
+				_velocity.y = MoveAndSlideWithSnap(_velocity, _snapVector * CustomTileMap.Size, -_perspectiveDownVector,
+					true).y;
 				break;
 		}
-		
+
 		IsOnSlope = false;
 		for (var i = 0; i < GetSlideCount(); i++)
 		{
@@ -170,8 +176,6 @@ public class KinematicEntity : KinematicBody2D
 
 		if (IsOnFloor())
 			_snapVector = new Vector2(_perspectiveDownVector);
-
-		
 	}
 
 
