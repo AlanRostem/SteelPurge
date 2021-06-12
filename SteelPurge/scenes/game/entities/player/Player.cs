@@ -314,12 +314,12 @@ public class Player : KinematicEntity
 
 		if (_left && !_right)
 		{
-			if (IsMovingTooFast() && MovingDirection > 0)
+			if (IsMovingFasterThanCrouch() && MovingDirection > 0)
 				NegateSlide(-1, delta);
 		}
 		else if (!_left && _right)
 		{
-			if (IsMovingTooFast() && MovingDirection < 0)
+			if (IsMovingFasterThanCrouch() && MovingDirection < 0)
 				NegateSlide(1, delta);
 		}
 	}
