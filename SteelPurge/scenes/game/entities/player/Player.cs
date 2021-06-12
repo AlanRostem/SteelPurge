@@ -361,6 +361,10 @@ public class Player : KinematicEntity
 		{
 			Sneak(1, delta);
 		}
+		else
+		{
+			_StopWalking();
+		}
 	}
 
 	private void _DashMode(float delta)
@@ -477,6 +481,12 @@ public class Player : KinematicEntity
 	private void _StopSliding()
 	{
 		if (IsMovingTooFast()) return;
+		if (_isRoofAbove)
+		{
+			CurrentMovementState = MovementState.Crouch;
+			CurrentCollisionMode = CollisionMode.Snap;
+			return;
+		}
 		IsSliding = false;
 		IsCrouching = false;
 		Stand();
