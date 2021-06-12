@@ -473,6 +473,7 @@ public class Player : KinematicEntity
 	{
 		if (IsCrouching) return;
 		IsCrouching = true;
+		IsSliding = false;
 		Crouch();
 		CurrentMovementState = MovementState.Crouch;
 		CurrentCollisionMode = CollisionMode.Snap;
