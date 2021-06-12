@@ -312,12 +312,27 @@ public class Player : KinematicEntity
 
 	private void _SlideMode(float delta)
 	{
+		if (!IsMovingTooFast() && IsRamSliding)
+		{
+			IsRamSliding = false;
+			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
+		}
+		
 		if (IsOnFloor())
+		{
 			VelocityX = Mathf.Lerp(VelocityX, 0, SlideFriction);
+			if (IsMovingTooFast())
+			{
+				IsRamSliding = true;
+				PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = true;
+			}
+		}
 		else
 		{
 			_AirborneMode(delta);
 			CanAimDown = true;
+			IsRamSliding = false;
+			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
 			return;
 		}
 
@@ -470,7 +485,11 @@ public class Player : KinematicEntity
 	private void _Slide()
 	{
 		if (!IsSliding && !IsOnSlope && !IsMovingTooFast())
+		{
+			IsRamSliding = true;
+			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = true;
 			VelocityX = SlideSpeed * MovingDirection;
+		}
 		IsSliding = true;
 		IsCrouching = false;
 		IsAimingDown = false;
@@ -507,6 +526,11 @@ public class Player : KinematicEntity
 		Stand();
 		CurrentMovementState = MovementState.Walk;
 		CurrentCollisionMode = CollisionMode.Snap;
+		if (IsRamSliding)
+		{
+			IsRamSliding = false;
+			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
+		}
 	}
 
 	private void _OnRegen()
