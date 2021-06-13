@@ -17,7 +17,7 @@ public class Player : KinematicEntity
 	private static readonly float KnockBackSpeed = 100;
 	// private static readonly float MaxMovementSpeed = 250;
 
-	private static readonly float WalkSpeed = 100;
+	private static readonly float WalkSpeed = 120;
 
 	private static readonly float WalkAcceleration = 360;
 
@@ -317,7 +317,7 @@ public class Player : KinematicEntity
 			IsRamSliding = false;
 			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
 		}
-		
+
 		if (IsOnFloor())
 		{
 			VelocityX = Mathf.Lerp(VelocityX, 0, SlideFriction);
@@ -335,7 +335,7 @@ public class Player : KinematicEntity
 			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
 			return;
 		}
-		
+
 		if (_left && !_right)
 		{
 			if (IsMovingFasterThanCrouch() && VelocityX > 0)
@@ -350,7 +350,8 @@ public class Player : KinematicEntity
 
 	private void _AirborneMode(float delta)
 	{
-		VelocityX = Mathf.Lerp(VelocityX, 0, AirFriction);
+		if (!IsMovingTooFast())
+			VelocityX = Mathf.Lerp(VelocityX, 0, AirFriction);
 		if (_left && !_right)
 		{
 			if (IsMovingTooFast())
@@ -399,10 +400,10 @@ public class Player : KinematicEntity
 
 		if (_dash)
 			_Dash();
-		
+
 		if (IsMovingTooFast() && CurrentMovementState != MovementState.Slide)
 			_Slide();
-		
+
 		if (IsOnFloor())
 		{
 			if (CurrentMovementState == MovementState.Airborne)
@@ -454,8 +455,8 @@ public class Player : KinematicEntity
 
 	private void _Dash()
 	{
-		if (!PlayerInventory.EquippedWeapon.CanDash) return;		
-		
+		if (!PlayerInventory.EquippedWeapon.CanDash) return;
+
 		PlayerInventory.EquippedWeapon.PowerDash();
 
 		if (!IsAimingDown && !IsAimingUp)
@@ -489,6 +490,7 @@ public class Player : KinematicEntity
 			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = true;
 			VelocityX = SlideSpeed * MovingDirection;
 		}
+
 		IsSliding = true;
 		IsCrouching = false;
 		IsAimingDown = false;
@@ -520,6 +522,7 @@ public class Player : KinematicEntity
 			CurrentCollisionMode = CollisionMode.Snap;
 			return;
 		}
+
 		IsSliding = false;
 		IsCrouching = false;
 		Stand();
