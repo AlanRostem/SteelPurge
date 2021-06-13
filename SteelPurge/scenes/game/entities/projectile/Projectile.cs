@@ -14,11 +14,8 @@ public class Projectile : KinematicEntity
 	public Weapon OwnerWeapon { get; private set; }
 	public float DirectionSign = 1;
 
-	private RayCast2D _criticalHitRayCast;
-
 	public override void _Ready()
 	{
-		_criticalHitRayCast = GetNode<RayCast2D>("CriticalHitRayCast");
 		CurrentCollisionMode = CollisionMode.Move;
 	}
 
@@ -37,21 +34,18 @@ public class Projectile : KinematicEntity
 		OwnerWeapon = owner;
 	}
 
-	protected override void _OnMovement(float delta)
-	{
-		var angle = Velocity.Angle();
-		_criticalHitRayCast.CastTo = new Vector2(
-			CriticalRaySize * Mathf.Cos(angle),
-			CriticalRaySize * Mathf.Sin(angle));
-		if (_criticalHitRayCast.IsColliding())
-		{
-			var criticalHitBox = _criticalHitRayCast.GetCollider();
-			_OnCriticalHitBoxEntered((CriticalHitbox) criticalHitBox);
-		}
-	}
-
 	private void _OnCriticalHitBoxEntered(CriticalHitbox hitbox)
 	{
+		var directionalAngle = Mathf.Rad2Deg(Velocity.Angle());
+		var targetAngle = Mathf.Rad2Deg(hitbox.CriticalHitDirection.Angle());
+		var angleDiff = (directionalAngle - targetAngle + 180 + 360) % 360 - 180;
+
+		GD.Print("PROJ: " + directionalAngle);
+		GD.Print("CRIT: " + targetAngle);
+		GD.Print("DIFF: " + angleDiff);
+		
+		if (angleDiff > hitbox.CriticalHitAngularMargin || angleDiff < -hitbox.CriticalHitAngularMargin) return;
+		
 		hitbox.TakeHit(Damage);
 		OwnerWeapon.EmitSignal(nameof(Weapon.CriticalDamageDealt), Damage, hitbox);
 		_OnHit();
@@ -65,6 +59,12 @@ public class Projectile : KinematicEntity
 
 	private void _OnVulnerableHitBoxEntered(object area)
 	{
+		if (area is CriticalHitbox criticalHitbox)
+		{
+			_OnCriticalHitBoxEntered(criticalHitbox);
+			return;
+		}
+		
 		var hitBox = (VulnerableHitbox) area;
 		hitBox.TakeHit(Damage, Vector2.Zero);
 		OwnerWeapon.EmitSignal(nameof(Weapon.DamageDealt), Damage, hitBox);
@@ -99,4 +99,4 @@ public class Projectile : KinematicEntity
 	{
 		QueueFree();
 	}
-}
+}	

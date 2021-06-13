@@ -3,6 +3,8 @@ using Godot;
 
 public class CriticalHitbox : Area2D
 {
+	[Export] public Vector2 CriticalHitDirection = Vector2.Down;
+	[Export] public float CriticalHitAngularMargin = 15;
 	[Export] public float CriticalHitMultiplier = 1.5f;
 
 	[Signal]
