@@ -40,9 +40,9 @@ public class Projectile : KinematicEntity
 		var targetAngle = Mathf.Rad2Deg(hitbox.CriticalHitDirection.Angle());
 		var angleDiff = (directionalAngle - targetAngle + 180 + 360) % 360 - 180;
 
-		GD.Print("PROJ: " + directionalAngle);
-		GD.Print("CRIT: " + targetAngle);
-		GD.Print("DIFF: " + angleDiff);
+		// GD.Print("PROJ: " + directionalAngle);
+		// GD.Print("CRIT: " + targetAngle);
+		// GD.Print("DIFF: " + angleDiff);
 		
 		if (angleDiff > hitbox.CriticalHitAngularMargin || angleDiff < -hitbox.CriticalHitAngularMargin) return;
 		
