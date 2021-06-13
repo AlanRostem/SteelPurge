@@ -25,7 +25,8 @@ public class Player : KinematicEntity
 	// private static readonly float MaxWalkSpeedFiring = 35;
 	private static float DashSpeed = 250;
 
-	private static readonly float JumpSpeed = 220;
+	private static readonly float JumpSpeed = 255;
+	private static readonly float MinJumpSpeed = 100;
 
 	private static readonly float SlideFriction = 0.02f;
 	private static readonly float AirFriction = 0.01f;
@@ -43,6 +44,7 @@ public class Player : KinematicEntity
 	private bool _left = false;
 	private bool _right = false;
 	private bool _jump = false;
+	private bool _notJump = false;
 	private bool _dash = false;
 
 	public bool CanTakeDamage = true;
@@ -198,6 +200,7 @@ public class Player : KinematicEntity
 		_left = Input.IsActionPressed("left");
 		_right = Input.IsActionPressed("right");
 		_jump = Input.IsActionJustPressed("jump");
+		_notJump = Input.IsActionJustReleased("jump");
 		_dash = Input.IsActionJustPressed("dash");
 		IsAimingUp = Input.IsActionPressed("aim_up") && CanAimUp;
 
@@ -350,6 +353,12 @@ public class Player : KinematicEntity
 
 	private void _AirborneMode(float delta)
 	{
+		if (_notJump && IsJumping && VelocityY < -MinJumpSpeed)
+		{
+			VelocityY = -MinJumpSpeed;
+			IsJumping = false;
+		}
+		
 		if (!IsMovingTooFast())
 			VelocityX = Mathf.Lerp(VelocityX, 0, AirFriction);
 		if (_left && !_right)
