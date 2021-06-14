@@ -6,27 +6,19 @@ using System.Collections.Generic;
 public class TalconFiringDevice : FiringDevice
 {
 	private readonly PackedScene
-		TalonScene = GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/Talon.tscn");
-	public Array<Talon> Talons = new Array<Talon>();
-
-	private void _OnSwap()
-	{
-		foreach (var talon in Talons)
-		{
-			talon.QueueFree();
-		}
-
-		GetWeapon().CanFire = true;
-		GetWeapon().CurrentRecoilHoverAmmo = GetWeapon().MaxRecoilHoverShots;
-		Talons.Clear();
-	}
+		WindSliceScene = GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/WindSlice.tscn");
 	
 	public override void OnFire()
 	{
-		var talon = (Talon)FireProjectile(TalonScene);
-		Talons.Add(talon);
-		GetWeapon().CurrentRecoilHoverAmmo--;
-		if (GetWeapon().CurrentRecoilHoverAmmo == 0)
-			GetWeapon().CanFire = false;
+		if (GetWeapon().OwnerPlayer.IsOnFloor())
+		{
+			var slice = FireProjectile(WindSliceScene);
+			slice.Position = GetWeapon().OwnerPlayer.Position;
+			slice.Scale = new Vector2(GetWeapon().OwnerPlayer.HorizontalLookingDirection, 1);
+		}
+		else
+		{
+			
+		}
 	}
 }
