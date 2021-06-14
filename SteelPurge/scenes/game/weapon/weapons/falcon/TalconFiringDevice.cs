@@ -12,7 +12,8 @@ public class TalconFiringDevice : FiringDevice
 	
 	public override void OnFire()
 	{
-		if (GetWeapon().OwnerPlayer.IsOnFloor())
+		var player = GetWeapon().OwnerPlayer;
+		if (player.IsOnFloor() && !player.IsAimingDown && !player.IsAimingUp)
 		{
 			var slice = FireProjectile(WindSliceScene);
 			slice.Position = GetWeapon().OwnerPlayer.Position;

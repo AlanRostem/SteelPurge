@@ -87,6 +87,14 @@ public class Projectile : KinematicEntity
 		}
 	}
 
+	public void Disappear()
+	{
+		if (_hasDisappeared || !DeleteOnEnemyHit) return;
+		_hasDisappeared = true;
+		_OnDisappear();
+		QueueFree();
+	}
+	
 	public virtual void _OnHit()
 	{
 	}

@@ -14,9 +14,7 @@ CollectibleSprite = ExtResource( 7 )
 DamagePerShot = 34
 MeleeDamage = 30
 RateOfFire = 160
-MaxRecoilHoverShots = 4
-ReloadOnFloor = false
-LoseAmmoOnHover = false
+MaxRecoilHoverShots = 6
 HoverRecoilSpeed = 60.0
 PlayerSpriteFrames = ExtResource( 3 )
 
