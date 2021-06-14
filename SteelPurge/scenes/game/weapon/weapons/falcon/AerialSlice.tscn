@@ -7,5 +7,5 @@
 CurrentCollisionMode = 0
 IsGravityEnabled = false
 
-[node name="ProjectileSprite" parent="." index="3"]
+[node name="ProjectileSprite" parent="." index="4"]
 texture = ExtResource( 1 )

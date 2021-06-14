@@ -1,10 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game/weapon/weapons/ke_6_swarm/KineticOrb.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/texture/weapon/ke_6_swarm/large_orb.png" type="Texture" id=2]
 [ext_resource path="res://scenes/game/weapon/weapons/ke_6_swarm/LargeKineticOrb.cs" type="Script" id=3]
 
+[sub_resource type="CircleShape2D" id=3]
+radius = 3.0
+
 [sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 16.0
 
 [node name="LargeKineticOrb" instance=ExtResource( 1 )]
@@ -14,7 +20,16 @@ MaxVelocity = 180.0
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
 
-[node name="VisibilityNotifier2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" parent="WorldHitDetectionArea" index="0"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="EnemyHitDetectionArea" index="0"]
+shape = SubResource( 2 )
+
+[node name="VisibilityNotifier2D" parent="." index="4"]
 position = Vector2( 0, 0 )
 scale = Vector2( 1.6, 1.6 )
 
@@ -23,4 +38,4 @@ collision_layer = 2048
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HostileProjectileProtectiveArea" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
