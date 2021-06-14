@@ -5,7 +5,7 @@ public class Weapon : Node2D
 {
 	private static PackedScene WeaponCollectibleScene
 		= GD.Load<PackedScene>("res://scenes/game/entities/collectible/weapon/WeaponCollectible.tscn");
-	
+
 	[Export] public string DisplayName = "Weapon";
 
 	[Export] public Texture CollectibleSprite;
@@ -95,6 +95,7 @@ public class Weapon : Node2D
 			TacticalEnhancement.DeActivate();
 			TacticalEnhancement.OnWeaponSwapped();
 		}
+
 		FiringDevice?.OnSwap();
 	}
 
@@ -107,7 +108,7 @@ public class Weapon : Node2D
 
 	[Signal]
 	public delegate void DashFire();
-	
+
 	[Signal]
 	public delegate void Fired();
 
@@ -145,7 +146,7 @@ public class Weapon : Node2D
 			EmitSignal(nameof(CancelFire));
 			return;
 		}
-		
+
 		EmitSignal(nameof(Fired));
 
 		if (!(OwnerPlayer.VelocityY > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
@@ -159,7 +160,8 @@ public class Weapon : Node2D
 		if (_canDash && _currentRecoilHoverAmmo > 0)
 		{
 			_canDash = false;
-			CurrentRecoilHoverAmmo = 0;
+			if (LoseAmmoOnHover)
+				CurrentRecoilHoverAmmo = 0;
 			_firingDashTimer.Start();
 			EmitSignal(nameof(DashFire));
 		}
@@ -168,7 +170,7 @@ public class Weapon : Node2D
 	public override void _Process(float delta)
 	{
 		if (OwnerPlayer is null) return;
-		
+
 		_isHoldingTrigger = Input.IsActionPressed("fire");
 
 		if (Mathf.Sign(_meleeShape.Position.x) != OwnerPlayer.HorizontalLookingDirection)
@@ -181,7 +183,7 @@ public class Weapon : Node2D
 
 		if (OwnerPlayer.IsOnFloor() && CurrentRecoilHoverAmmo < MaxRecoilHoverShots && ReloadOnFloor)
 			CurrentRecoilHoverAmmo = MaxRecoilHoverShots;
-		
+
 		if (_isHoldingTrigger && CanFire)
 		{
 			if (_isFiring) return;
@@ -213,7 +215,7 @@ public class Weapon : Node2D
 		OwnerPlayer?.RemoveChild(this);
 		item.Weapon = this;
 	}
-	
+
 	private void _OnCanDash()
 	{
 		_canDash = true;
