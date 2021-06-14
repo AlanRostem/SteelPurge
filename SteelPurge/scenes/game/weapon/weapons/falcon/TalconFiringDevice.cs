@@ -5,8 +5,10 @@ using System.Collections.Generic;
 
 public class TalconFiringDevice : FiringDevice
 {
-	private readonly PackedScene
+	private static readonly PackedScene
 		WindSliceScene = GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/WindSlice.tscn");
+	private static readonly PackedScene
+		AerialSliceScene = GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/AerialSlice.tscn");
 	
 	public override void OnFire()
 	{
@@ -18,7 +20,8 @@ public class TalconFiringDevice : FiringDevice
 		}
 		else
 		{
-			
+			var slice = FireProjectile(AerialSliceScene);
+			slice.Scale = new Vector2(GetWeapon().OwnerPlayer.HorizontalLookingDirection, 1);
 		}
 	}
 }
