@@ -48,7 +48,6 @@ public class Projectile : KinematicEntity
 		
 		hitbox.TakeHit(Damage);
 		OwnerWeapon.EmitSignal(nameof(Weapon.CriticalDamageDealt), Damage, hitbox);
-		_OnHit();
 		if (!_hasDisappeared && DeleteOnEnemyHit)
 		{
 			_hasDisappeared = true;
@@ -68,7 +67,7 @@ public class Projectile : KinematicEntity
 		var hitBox = (VulnerableHitbox) area;
 		hitBox.TakeHit(Damage, Vector2.Zero);
 		OwnerWeapon.EmitSignal(nameof(Weapon.DamageDealt), Damage, hitBox);
-		_OnHit();
+		_OnHit(hitBox);
 		if (!_hasDisappeared && DeleteOnEnemyHit)
 		{
 			_hasDisappeared = true;
@@ -95,7 +94,7 @@ public class Projectile : KinematicEntity
 		QueueFree();
 	}
 	
-	public virtual void _OnHit()
+	public virtual void _OnHit(VulnerableHitbox subject)
 	{
 	}
 
