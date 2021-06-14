@@ -9,6 +9,7 @@ public class RocketBayonetAbility : TacticalAbility
 		var weapon = GetWeapon();
 		weapon.MeleeHitBoxEnabled = true;
 		weapon.CanFire = false;
+		weapon.CurrentRecoilHoverAmmo = weapon.MaxRecoilHoverShots;
 
 		var player = weapon.OwnerPlayer;
 		player.VelocityX = RocketSpeed * player.HorizontalLookingDirection;
