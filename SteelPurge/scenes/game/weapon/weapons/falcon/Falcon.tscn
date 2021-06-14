@@ -9,11 +9,11 @@
 [ext_resource path="res://assets/texture/weapon/falcon/falcon.png" type="Texture" id=7]
 
 [node name="Falcon" instance=ExtResource( 1 )]
+RateOfFire = 90
 DisplayName = "Falcon"
 CollectibleSprite = ExtResource( 7 )
-DamagePerShot = 34
+DamagePerShot = 65
 MeleeDamage = 30
-RateOfFire = 160
 MaxRecoilHoverShots = 6
 HoverRecoilSpeed = 60.0
 PlayerSpriteFrames = ExtResource( 3 )
