@@ -35,7 +35,7 @@ public class Projectile : KinematicEntity
 		OwnerWeapon = owner;
 	}
 
-	private void _OnCriticalHitBoxEntered(CriticalHitbox hitbox)
+	private bool _OnCriticalHitBoxEntered(CriticalHitbox hitbox)
 	{
 		var directionalAngle = Mathf.Rad2Deg(Velocity.Angle());
 		var targetAngle = Mathf.Rad2Deg(hitbox.CriticalHitDirection.Angle());
@@ -45,7 +45,7 @@ public class Projectile : KinematicEntity
 		// GD.Print("CRIT: " + targetAngle);
 		// GD.Print("DIFF: " + angleDiff);
 
-		if (angleDiff > hitbox.CriticalHitAngularMargin || angleDiff < -hitbox.CriticalHitAngularMargin) return;
+		if (angleDiff > hitbox.CriticalHitAngularMargin || angleDiff < -hitbox.CriticalHitAngularMargin) return false;
 
 		hitbox.TakeHit(Damage);
 		OwnerWeapon?.EmitSignal(nameof(Weapon.CriticalDamageDealt), Damage, hitbox);
@@ -55,15 +55,14 @@ public class Projectile : KinematicEntity
 			_OnDisappear();
 			QueueFree();
 		}
+
+		return true;
 	}
 
 	private void _OnVulnerableHitBoxEntered(object area)
 	{
-		if (area is CriticalHitbox criticalHitbox)
-		{
-			_OnCriticalHitBoxEntered(criticalHitbox);
+		if (area is CriticalHitbox criticalHitbox && _OnCriticalHitBoxEntered(criticalHitbox))
 			return;
-		}
 
 		var hitBox = (VulnerableHitbox) area;
 		hitBox.TakeHit(Damage, Vector2.Zero);
