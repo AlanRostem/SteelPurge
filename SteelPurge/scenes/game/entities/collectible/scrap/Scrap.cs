@@ -12,7 +12,11 @@ public class Scrap : FallingCollectible
 			if (heal == 0)
 				heal = 1;
 			player.Health += heal;
-			if (player.Health != player.MaxHealth) return;
+			if (player.Health != player.MaxHealth)
+			{
+				player.PlayerInventory.PickUpScrap(heal);
+				return;
+			}
 			var diff = player.MaxHealth - player.Health;
 			player.PlayerInventory.PickUpScrap(diff);
 		}
