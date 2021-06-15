@@ -5,7 +5,7 @@ using Object = Godot.Object;
 
 public class Enemy : KinematicEntity
 {
-	private static readonly Vector2 DamageNumberOffsetPos = new Vector2(-12, -16);
+	private static readonly Vector2 DamageNumberOffsetPos = new Vector2(-12, -20);
 	protected static readonly PackedScene ScrapScene =
 		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
 
