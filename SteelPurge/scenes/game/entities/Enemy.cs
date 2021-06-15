@@ -5,6 +5,7 @@ using Object = Godot.Object;
 
 public class Enemy : KinematicEntity
 {
+	private static readonly Vector2 DamageNumberOffsetPos = new Vector2(-12, -16);
 	protected static readonly PackedScene ScrapScene =
 		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
 
@@ -78,7 +79,7 @@ public class Enemy : KinematicEntity
 				// Assuming the player gave damage to the enemy
 				ParentWorld.PlayerNode.PlayerInventory.IncrementKillCount();
 				_isDead = true;
-				_damageNumberGenerator.ShowDamageNumber(Health, Position, ParentWorld);
+				_damageNumberGenerator.ShowDamageNumber(Health, Position + DamageNumberOffsetPos, ParentWorld);
 				Health = 0;
 			}
 		}
@@ -87,7 +88,7 @@ public class Enemy : KinematicEntity
 			
 			_dropScrap = true;
 			Health -= damage;
-			_damageNumberGenerator.ShowDamageNumber(damage, Position, ParentWorld);
+			_damageNumberGenerator.ShowDamageNumber(damage, Position + DamageNumberOffsetPos, ParentWorld);
 			Modulate = new Color(255, 0, 0);
 			_damageIndicationTimer.Start();
 			if (direction.x != 0 || direction.y != 0)
