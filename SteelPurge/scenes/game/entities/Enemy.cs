@@ -5,8 +5,6 @@ using Object = Godot.Object;
 
 public class Enemy : KinematicEntity
 {
-	private static readonly Vector2 DamageNumberOffsetPos = new Vector2(-12, -20);
-
 	protected static readonly PackedScene ScrapScene =
 		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
 
@@ -18,11 +16,10 @@ public class Enemy : KinematicEntity
 	[Export] public float KnockBackSpeed = 300;
 	[Export] public bool CanBeKnockedBack = true;
 
-
 	private bool _isDead;
 	private bool _dropScrap;
 	private bool _isKnockedBack;
-	public Player DetectedPlayer { get; private set; }
+	protected Player DetectedPlayer { get; private set; }
 	private Timer _meleeAffectedKnockBackTimer;
 	private Timer _damageIndicationTimer;
 	private DamageNumberGenerator _damageNumberGenerator;
@@ -80,7 +77,7 @@ public class Enemy : KinematicEntity
 				// Assuming the player gave damage to the enemy
 				ParentWorld.PlayerNode.PlayerInventory.IncrementKillCount();
 				_isDead = true;
-				_damageNumberGenerator.ShowDamageNumber(Health, Position + DamageNumberOffsetPos, ParentWorld, Colors.Red);
+				_damageNumberGenerator.ShowDamageNumber(Health, Position, ParentWorld, Colors.Red);
 				Health = 0;
 			}
 		}
@@ -88,7 +85,7 @@ public class Enemy : KinematicEntity
 		{
 			_dropScrap = true;
 			Health -= damage;
-			_damageNumberGenerator.ShowDamageNumber(damage, Position + DamageNumberOffsetPos, ParentWorld);
+			_damageNumberGenerator.ShowDamageNumber(damage, Position, ParentWorld);
 			Modulate = !isCritical ? new Color(255, 255, 255) : new Color(255, 0, 0);
 			_damageIndicationTimer.Start();
 			if (direction.x != 0 || direction.y != 0)

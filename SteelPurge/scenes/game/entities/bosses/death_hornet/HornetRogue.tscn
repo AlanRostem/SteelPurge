@@ -38,4 +38,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosiveArea" index="0"]
 shape = SubResource( 2 )
+
+[node name="DamageNumberGenerator" parent="." index="8"]
+position = Vector2( 0, -16 )
 [connection signal="body_entered" from="ExplosiveArea" to="." method="_OnPlayerEnterExplosiveArea"]

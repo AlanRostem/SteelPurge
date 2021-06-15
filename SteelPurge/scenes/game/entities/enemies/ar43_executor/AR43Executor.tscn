@@ -68,8 +68,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="MeleeArea" index="0"]
 polygon = PoolVector2Array( -24, 16, 0, -8, 24, 16 )
-[connection signal="TriggerApproach" from="." to="FireRateTimer" method="_OnCancel"]
+
+[node name="DamageNumberGenerator" parent="." index="12"]
+position = Vector2( 0, -16 )
 [connection signal="TriggerApproach" from="." to="ApproachIntervalTimer" method="_OnTrigger"]
+[connection signal="TriggerApproach" from="." to="FireRateTimer" method="_OnCancel"]
 [connection signal="TriggerStand" from="." to="StandIntervalTimer" method="_OnTrigger"]
 [connection signal="TriggerStand" from="." to="FireRateTimer" method="_OnTrigger"]
 [connection signal="timeout" from="ApproachIntervalTimer" to="." method="_OnApproach"]
@@ -77,7 +80,7 @@ polygon = PoolVector2Array( -24, 16, 0, -8, 24, 16 )
 [connection signal="timeout" from="FireRateTimer" to="." method="_OnFire"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="StandIntervalTimer" method="_OnTrigger"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="FireRateTimer" method="_OnTrigger"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="ApproachIntervalTimer" method="_OnCancel"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="StandIntervalTimer" method="_OnCancel"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="FireRateTimer" method="_OnCancel"]
-[connection signal="screen_exited" from="VisibilityEnabler2D" to="ApproachIntervalTimer" method="_OnCancel"]
 [connection signal="body_entered" from="MeleeArea" to="." method="_OnPlayerMelee"]

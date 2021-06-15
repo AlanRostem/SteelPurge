@@ -70,8 +70,11 @@ one_shot = true
 position = Vector2( 0, -10 )
 CriticalHitMultiplier = 100.0
 
-[node name="VisibilityEnabler2D" parent="." index="8"]
+[node name="VisibilityEnabler2D" parent="." index="7"]
 position = Vector2( 0, -1 )
+
+[node name="DamageNumberGenerator" parent="." index="10"]
+position = Vector2( 0, -16 )
 [connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
 [connection signal="body_entered" from="XWFrontRogueMeleeArea" to="." method="_OnPlayerEnterMeleeArea"]
 [connection signal="timeout" from="XWFrontRogueTrackCooldownTimer" to="." method="_OnCanSwap"]

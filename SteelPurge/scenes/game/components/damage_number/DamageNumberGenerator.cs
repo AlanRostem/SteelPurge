@@ -22,7 +22,7 @@ public class DamageNumberGenerator : Node2D
 		{
 			var number = (DamageNumber) DamageNumberScene.Instance();
 			number.Damage = damage;
-			number.RectPosition = position;
+			number.RectPosition = position + Position - number.RectSize / 2;
 			number.Modulate = color;
 			parentWorld.AddChild(number);
 			_damageNumber = number;
@@ -32,7 +32,7 @@ public class DamageNumberGenerator : Node2D
 		{
 			if (_damageNumber.Modulate != color)
 				_damageNumber.Modulate = color;
-			_damageNumber.RectPosition = position;
+			_damageNumber.RectPosition = position + Position - _damageNumber.RectSize / 2;
 			_damageNumber.Damage += damage;
 		}
 	}
