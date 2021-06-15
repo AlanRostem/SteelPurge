@@ -17,7 +17,7 @@ public class VulnerableHitbox : Area2D
 	[Signal]
 	public delegate void Hit(uint damage, Vector2 knockBackDirection);
 
-	public void TakeHit(uint damage, Vector2 knockBackDirection)
+	public virtual void TakeHit(uint damage, Vector2 knockBackDirection)
 	{
 		EmitSignal(nameof(Hit), damage, knockBackDirection);
 		if (GetParent() is KinematicEntity entity) // TODO: Consider further cases
