@@ -20,6 +20,11 @@ public class VulnerableHitbox : Area2D
 	public virtual void TakeHit(uint damage, Vector2 knockBackDirection)
 	{
 		EmitSignal(nameof(Hit), damage, knockBackDirection);
+		ShowDamageNumber(damage);
+	}
+
+	public void ShowDamageNumber(uint damage)
+	{
 		if (GetParent() is KinematicEntity entity) // TODO: Consider further cases
 		{
 			if (_damageNumber is null)
