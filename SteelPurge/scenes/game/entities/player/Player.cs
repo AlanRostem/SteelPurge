@@ -78,7 +78,7 @@ public class Player : KinematicEntity
 	public override void _Ready()
 	{
 		ParentWorld = GetParent<World>();
-		Health = 100;
+		Health = MaxHealth;
 		PlayerInventory = GetNode<Inventory>("Inventory");
 		_bodyShape = GetNode<CollisionShape2D>("BodyShape");
 		_camera = GetNode<Camera2D>("PlayerCamera");
@@ -89,13 +89,7 @@ public class Player : KinematicEntity
 
 	[Signal]
 	public delegate void WeaponEquipped(Weapon weapon);
-
-	[Signal]
-	private delegate void TriggerRegenCooldown();
-
-	[Signal]
-	private delegate void CancelRegen();
-
+	
 	[Signal]
 	private delegate void TriggerDamageReceptionCooldown();
 
@@ -166,10 +160,7 @@ public class Player : KinematicEntity
 		}
 
 		if (!CanTakeDamage) return;
-
-		EmitSignal(nameof(CancelRegen));
-		EmitSignal(nameof(TriggerRegenCooldown));
-
+		
 		if (damage >= Health)
 		{
 			Health = 0;
@@ -541,19 +532,6 @@ public class Player : KinematicEntity
 		{
 			IsRamSliding = false;
 			PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = false;
-		}
-	}
-
-	private void _OnRegen()
-	{
-		if (HealthRegenCount + Health < 100)
-		{
-			Health += HealthRegenCount;
-		}
-		else
-		{
-			Health = 100;
-			EmitSignal(nameof(CancelRegen));
 		}
 	}
 

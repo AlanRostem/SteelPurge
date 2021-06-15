@@ -19,8 +19,8 @@ public class Boss : Enemy
 	public override void _Ready()
 	{
 		_hpBar = GetNode<TextureProgress>("CanvasLayer/BossHPBar");
-		_hpBar.MaxValue = BaseHitPoints;
-		_hpBar.Value = BaseHitPoints;
+		_hpBar.MaxValue = MaxHealth;
+		_hpBar.Value = MaxHealth;
 		CanBeKnockedBack = false;
 		base._Ready();
 	}

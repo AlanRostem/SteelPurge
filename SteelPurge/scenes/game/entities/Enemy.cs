@@ -11,7 +11,6 @@ public class Enemy : KinematicEntity
 	[Export] public uint ScrapDropHit = 2;
 	[Export] public uint ScrapDropKilled = 25;
 
-	[Export] public uint BaseHitPoints = 45;
 	[Export] public float PlayerDetectionRange = 1000;
 	[Export] public float KnockBackSpeed = 300;
 	[Export] public bool CanBeKnockedBack = true;
@@ -27,7 +26,6 @@ public class Enemy : KinematicEntity
 	public override void _Ready()
 	{
 		base._Ready();
-		Health = BaseHitPoints;
 		_meleeAffectedKnockBackTimer = GetNode<Timer>("MeleeAffectedKnockBackTimer");
 		_damageIndicationTimer = GetNode<Timer>("DamageIndicationTimer");
 		_damageNumberGenerator = GetNode<DamageNumberGenerator>("DamageNumberGenerator");

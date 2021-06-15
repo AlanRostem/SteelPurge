@@ -15,6 +15,7 @@ public class KinematicEntity : KinematicBody2D
 
 	[Export] public CollisionMode CurrentCollisionMode = CollisionMode.Snap;
 	[Export] public bool CanReceiveStatusEffect = true;
+	[Export] public uint MaxHealth = 100;
 
 	private bool _canAccelerate = true;
 	public bool IsOnSlope { get; private set; }
@@ -64,7 +65,10 @@ public class KinematicEntity : KinematicBody2D
 
 		set
 		{
+			
 			_health = value;
+			if (_health > MaxHealth)
+				_health = MaxHealth;
 			EmitSignal(nameof(HealthChanged), _health);
 		}
 	}
@@ -110,6 +114,7 @@ public class KinematicEntity : KinematicBody2D
 		ParentWorld = GetParent().GetParent().GetParent<World>();
 		// TODO: Figure out why this gets set to (0, 0) in scene instancing
 		PerspectiveDownVector = Vector2.Down;
+		Health = MaxHealth;
 	}
 
 	public void ApplyStatusEffect(StatusEffectType type)

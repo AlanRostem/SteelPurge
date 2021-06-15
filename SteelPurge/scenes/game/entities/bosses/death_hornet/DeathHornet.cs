@@ -80,8 +80,8 @@ public class DeathHornet : Boss
 			DetectedPlayer.TakeDamage(PlayerDamage, new Vector2(LookingDirection, 0));
 		}
 
-		var phaseTwoHp = 0.50f * BaseHitPoints;
-		var phaseThreeHp = 0f * BaseHitPoints; // 0.25f
+		var phaseTwoHp = 0.50f * MaxHealth;
+		var phaseThreeHp = 0f * MaxHealth; // 0.25f
 
 		if (Health <= phaseTwoHp)
 		{

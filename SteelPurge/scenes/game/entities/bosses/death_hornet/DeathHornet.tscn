@@ -15,6 +15,7 @@ extents = Vector2( 41, 6 )
 
 [node name="DeathHornet" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+MaxHealth = 5500
 IsGravityEnabled = false
 ScrapDropHit = 4
 ScrapDropKilled = 2500
