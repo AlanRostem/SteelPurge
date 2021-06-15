@@ -22,12 +22,14 @@ public class Enemy : KinematicEntity
 	private bool _isKnockedBack;
 	public Player DetectedPlayer {get; private set; }
 	private Timer _meleeAffectedKnockBackTimer;
+	private Timer _damageIndicationTimer;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		Health = BaseHitPoints;
 		_meleeAffectedKnockBackTimer = GetNode<Timer>("MeleeAffectedKnockBackTimer");
+		_damageIndicationTimer = GetNode<Timer>("DamageIndicationTimer");
 	}
 
 	public virtual void OnDie()
@@ -81,6 +83,8 @@ public class Enemy : KinematicEntity
 		{
 			_dropScrap = true;
 			Health -= damage;
+			Modulate = new Color(255, 0, 0);
+			_damageIndicationTimer.Start();
 			if (direction.x != 0 || direction.y != 0)
 			{
 				KnockBack(direction);
@@ -125,5 +129,10 @@ public class Enemy : KinematicEntity
 		}
 		
 		_isKnockedBack = false;
+	}
+	
+	private void _OnDamageIndicationTimeout()
+	{
+		Modulate = new Color(1, 1, 1);
 	}
 }
