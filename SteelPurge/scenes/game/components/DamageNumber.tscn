@@ -4,6 +4,7 @@
 [ext_resource path="res://scenes/game/components/DamageNumber.cs" type="Script" id=2]
 
 [node name="DamageNumber" instance=ExtResource( 1 )]
+text = "-/-"
 script = ExtResource( 2 )
 
 [node name="ExistenceTimer" type="Timer" parent="." index="0"]
