@@ -25,7 +25,7 @@ public class DamageNumberGenerator : Node2D
 			number.RectPosition = position + Position - number.RectSize / 2;
 			number.Modulate = color;
 			parentWorld.AddChild(number);
-			_damageNumber = number;
+			_damageNumber = number;  
 			number.Connect(nameof(DamageNumber.Disappear), this, nameof(_OnDamageNumberDisappear));
 		}
 		else

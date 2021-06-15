@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public class Projectile : KinematicEntity
@@ -43,11 +44,11 @@ public class Projectile : KinematicEntity
 		// GD.Print("PROJ: " + directionalAngle);
 		// GD.Print("CRIT: " + targetAngle);
 		// GD.Print("DIFF: " + angleDiff);
-		
+
 		if (angleDiff > hitbox.CriticalHitAngularMargin || angleDiff < -hitbox.CriticalHitAngularMargin) return;
-		
+
 		hitbox.TakeHit(Damage);
-		OwnerWeapon.EmitSignal(nameof(Weapon.CriticalDamageDealt), Damage, hitbox);
+		OwnerWeapon?.EmitSignal(nameof(Weapon.CriticalDamageDealt), Damage, hitbox);
 		if (!_hasDisappeared && DeleteOnEnemyHit)
 		{
 			_hasDisappeared = true;
@@ -63,10 +64,10 @@ public class Projectile : KinematicEntity
 			_OnCriticalHitBoxEntered(criticalHitbox);
 			return;
 		}
-		
+
 		var hitBox = (VulnerableHitbox) area;
 		hitBox.TakeHit(Damage, Vector2.Zero);
-		OwnerWeapon.EmitSignal(nameof(Weapon.DamageDealt), Damage, hitBox);
+		OwnerWeapon?.EmitSignal(nameof(Weapon.DamageDealt), Damage, hitBox);
 		_OnHit(hitBox);
 		if (!_hasDisappeared && DeleteOnEnemyHit)
 		{
@@ -93,7 +94,7 @@ public class Projectile : KinematicEntity
 		_OnDisappear();
 		QueueFree();
 	}
-	
+
 	public virtual void _OnHit(VulnerableHitbox subject)
 	{
 	}
@@ -105,5 +106,10 @@ public class Projectile : KinematicEntity
 	public virtual void _OnLostVisual()
 	{
 		QueueFree();
+	}
+
+	public void _OnParentWeaponLost()
+	{
+		OwnerWeapon = null;
 	}
 }

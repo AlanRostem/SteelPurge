@@ -51,6 +51,8 @@ public class FiringDevice : Node2D
 
 		projectile.InitWithAngularVelocity(GetWeapon());
 		projectile.Damage = GetWeapon().DamagePerShot;
+
+		GetWeapon().Connect("tree_exited", projectile, nameof(projectile._OnParentWeaponLost));
 		return projectile;
 	}
 	
