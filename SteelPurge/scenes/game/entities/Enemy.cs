@@ -23,6 +23,7 @@ public class Enemy : KinematicEntity
 	public Player DetectedPlayer {get; private set; }
 	private Timer _meleeAffectedKnockBackTimer;
 	private Timer _damageIndicationTimer;
+	private DamageNumberGenerator _damageNumberGenerator;
 
 	public override void _Ready()
 	{
@@ -30,6 +31,7 @@ public class Enemy : KinematicEntity
 		Health = BaseHitPoints;
 		_meleeAffectedKnockBackTimer = GetNode<Timer>("MeleeAffectedKnockBackTimer");
 		_damageIndicationTimer = GetNode<Timer>("DamageIndicationTimer");
+		_damageNumberGenerator = GetNode<DamageNumberGenerator>("DamageNumberGenerator");
 	}
 
 	public virtual void OnDie()
@@ -66,7 +68,7 @@ public class Enemy : KinematicEntity
 		}
 	}
 
-	public override void TakeDamage(uint damage, Vector2 direction)
+	public override void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
 	{
 		if (damage >= Health)
 		{
@@ -76,13 +78,16 @@ public class Enemy : KinematicEntity
 				// Assuming the player gave damage to the enemy
 				ParentWorld.PlayerNode.PlayerInventory.IncrementKillCount();
 				_isDead = true;
+				_damageNumberGenerator.ShowDamageNumber(Health, Position, ParentWorld);
 				Health = 0;
 			}
 		}
 		else
 		{
+			
 			_dropScrap = true;
 			Health -= damage;
+			_damageNumberGenerator.ShowDamageNumber(damage, Position, ParentWorld);
 			Modulate = new Color(255, 0, 0);
 			_damageIndicationTimer.Start();
 			if (direction.x != 0 || direction.y != 0)

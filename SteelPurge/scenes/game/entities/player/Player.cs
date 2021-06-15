@@ -141,7 +141,7 @@ public class Player : KinematicEntity
 		_respawnTimer.Start();
 	}
 
-	public override void TakeDamage(uint damage, Vector2 direction)
+	public override void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
 	{
 		if (!IsInvulnerable)
 		{

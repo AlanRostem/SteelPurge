@@ -138,7 +138,7 @@ public class KinematicEntity : KinematicBody2D
 		}
 	}
 
-	public virtual void TakeDamage(uint damage, Vector2 direction)
+	public virtual void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
 	{
 		Health -= damage;
 	}
