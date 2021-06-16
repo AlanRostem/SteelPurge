@@ -26,7 +26,7 @@ public class DamageNumberGenerator : Node2D
 			number.Modulate = color;
 			parentWorld.AddChild(number);
 			_damageNumber = number;  
-			number.Connect(nameof(DamageNumber.Disappear), this, nameof(_OnDamageNumberDisappear));
+			number.Connect(nameof(FloatingTempText.Disappear), this, nameof(_OnDamageNumberDisappear));
 		}
 		else
 		{

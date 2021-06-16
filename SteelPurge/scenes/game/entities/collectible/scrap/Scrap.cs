@@ -30,7 +30,6 @@ public class Scrap : FallingCollectible
 	{
 		if (body is Scrap scrap && body != this && IsOnFloor())
 		{
-			GD.Print("Scoop!");
 			Count += scrap.Count;
 			scrap.QueueFree();
 		}
