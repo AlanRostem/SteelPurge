@@ -14,6 +14,7 @@ public class Enemy : KinematicEntity
 	[Export] public float PlayerDetectionRange = 1000;
 	[Export] public float KnockBackSpeed = 300;
 	[Export] public bool CanBeKnockedBack = true;
+	[Export] public bool DropScrapWhenDamaged = true;
 
 	private bool _isDead;
 	private bool _dropScrap;
@@ -48,8 +49,11 @@ public class Enemy : KinematicEntity
 		if (_dropScrap)
 		{
 			_dropScrap = false;
-			var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
-			scrap.Count = ScrapDropHit;
+			if (DropScrapWhenDamaged)
+			{
+				var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
+				scrap.Count = ScrapDropHit;
+			}
 		}
 
 		var distance = Mathf.Abs(ParentWorld.PlayerNode.Position.x - Position.x);

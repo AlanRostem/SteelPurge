@@ -9,9 +9,7 @@
 [node name="Boss" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 CanBeKnockedBack = false
-
-[node name="EnemyHPLabel" parent="." index="2"]
-visible = false
+DropScrapWhenDamaged = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="5"]
 
