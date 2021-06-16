@@ -24,8 +24,8 @@ visible = false
 [node name="ScrapLabel" parent="CanvasLayer" instance=ExtResource( 4 )]
 margin_left = 24.0
 margin_top = 191.0
-margin_right = 64.0
-margin_bottom = 205.0
+margin_right = 48.0
+margin_bottom = 200.0
 text = "x??"
 
 [node name="ScrapIcon" type="TextureRect" parent="CanvasLayer"]

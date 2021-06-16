@@ -19,6 +19,9 @@ public class Inventory : Node2D
 		Count
 	}
 
+	private static readonly PackedScene FloatingNumberScene =
+		GD.Load<PackedScene>("res://scenes/game/ui/FloatingTempText.tscn");
+	
 	private static readonly PackedScene[] WeaponScenes =
 	{
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/Falcon.tscn"),
@@ -39,6 +42,8 @@ public class Inventory : Node2D
 	private Label _scrapLabel;
 	private Label _fuelLabel;
 	private Label _killLabel;
+	private CanvasLayer _canvas;
+	private FloatingTempText _scrapAddedNumber;
 	
 	public uint ScrapCount = 0;
 	public uint KillCount = 0;
@@ -62,6 +67,7 @@ public class Inventory : Node2D
 		_fuelLabel = GetNode<Label>("CanvasLayer/FuelLabel");
 		_killLabel = GetNode<Label>("CanvasLayer/KillLabel");
 		_weaponWheel = GetNode<WeaponWheel>("CanvasLayer/WeaponWheel");
+		_canvas = GetNode<CanvasLayer>("CanvasLayer");
 		
 		_scrapLabel.Text = "x" + ScrapCount;
 		// _fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
@@ -90,6 +96,21 @@ public class Inventory : Node2D
 	{
 		ScrapCount += count;
 		_scrapLabel.Text = "x" + ScrapCount;
+		if (_scrapAddedNumber is null)
+		{
+			var number = (FloatingTempText) FloatingNumberScene.Instance();
+			number.Text = "+ " + count;
+			number.RectPosition = _scrapLabel.RectPosition + new Vector2(_scrapLabel.RectSize.x - number.RectSize.x, -_scrapLabel.RectSize.y);
+			_canvas.AddChild(number);
+			number.Connect(nameof(FloatingTempText.Disappear), this, nameof(_ScrapAddedNumberDisappeared));
+			_scrapAddedNumber = number;
+		}
+		else
+		{
+			_scrapAddedNumber.Text = "+ " + count;
+			_scrapAddedNumber.RectPosition = _scrapLabel.RectPosition + new Vector2(_scrapLabel.RectSize.x - _scrapAddedNumber.RectSize.x, -_scrapLabel.RectSize.y);
+			_scrapAddedNumber.ExistenceTimer.Start();
+		}
 	}
 	
 	public void LoseScrap(uint count)
@@ -159,5 +180,10 @@ public class Inventory : Node2D
 	{
 		KillCount++;
 		_killLabel.Text = "x" + KillCount;
+	}
+
+	private void _ScrapAddedNumberDisappeared()
+	{
+		_scrapAddedNumber = null;
 	}
 }
