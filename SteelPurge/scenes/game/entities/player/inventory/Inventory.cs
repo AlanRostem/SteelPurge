@@ -111,7 +111,6 @@ public class Inventory : Node2D
 			_scrapAddedNumber.Text = "+" + count;
 			_scrapAddedNumber.RectPosition = _scrapLabel.RectPosition + new Vector2(_scrapLabel.RectSize.x - _scrapAddedNumber.RectSize.x, -_scrapLabel.RectSize.y);
 			_scrapAddedNumber.ExistenceTimer.Start();
-			GD.Print(_scrapAddedNumber.RectSize);
 		}
 	}
 	
