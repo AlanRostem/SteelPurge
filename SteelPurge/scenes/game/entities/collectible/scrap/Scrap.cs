@@ -25,4 +25,14 @@ public class Scrap : FallingCollectible
 			player.PlayerInventory.PickUpScrap(Count);
 		}
 	}
+	
+	private void _OnScrapEntered(object body)
+	{
+		if (body is Scrap scrap && body != this && IsOnFloor())
+		{
+			GD.Print("Scoop!");
+			Count += scrap.Count;
+			scrap.QueueFree();
+		}
+	}
 }
