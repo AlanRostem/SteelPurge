@@ -99,6 +99,7 @@ public class Inventory : Node2D
 		if (_scrapAddedNumber is null)
 		{
 			var number = (FloatingTempText) FloatingNumberScene.Instance();
+			number.RectSize = Vector2.Zero;
 			number.Text = "+" + count;
 			_canvas.AddChild(number);
 			number.RectPosition = _scrapLabel.RectPosition + new Vector2(_scrapLabel.RectSize.x - number.RectSize.x, -_scrapLabel.RectSize.y);
@@ -110,6 +111,7 @@ public class Inventory : Node2D
 			_scrapAddedNumber.Text = "+" + count;
 			_scrapAddedNumber.RectPosition = _scrapLabel.RectPosition + new Vector2(_scrapLabel.RectSize.x - _scrapAddedNumber.RectSize.x, -_scrapLabel.RectSize.y);
 			_scrapAddedNumber.ExistenceTimer.Start();
+			GD.Print(_scrapAddedNumber.RectSize);
 		}
 	}
 	

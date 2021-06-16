@@ -19,7 +19,6 @@ MaxHealth = 5500
 IsGravityEnabled = false
 ScrapDropHit = 4
 ScrapDropKilled = 2500
-BaseHitPoints = 5500
 PlayerDetectionRange = 10000.0
 
 [node name="Sprite" type="Sprite" parent="." index="0"]

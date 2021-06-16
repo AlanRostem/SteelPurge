@@ -4,6 +4,7 @@
 [ext_resource path="res://scenes/game/ui/FloatingTempText.cs" type="Script" id=2]
 
 [node name="FloatingTempText" instance=ExtResource( 1 )]
+margin_right = 0.0
 script = ExtResource( 2 )
 
 [node name="ExistenceTimer" type="Timer" parent="." index="0"]
