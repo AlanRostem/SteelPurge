@@ -9,6 +9,12 @@ public class FloatingTempText : Label
 	[Export] public float RiseSpeed = 10;
 	public Timer ExistenceTimer { get; private set; }
 
+	public Vector2 Position
+	{
+		get => RectPosition + RectSize / 2;
+		set => RectPosition = value - RectSize / 2;
+	}
+
 	public override void _Ready()
 	{
 		ExistenceTimer = GetNode<Timer>("ExistenceTimer");
