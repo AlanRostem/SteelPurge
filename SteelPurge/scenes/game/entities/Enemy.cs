@@ -49,11 +49,8 @@ public class Enemy : KinematicEntity
 		if (_dropScrap)
 		{
 			_dropScrap = false;
-			if (DropScrapWhenDamaged)
-			{
-				var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
-				scrap.Count = ScrapDropHit;
-			}
+			var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
+			scrap.Count = ScrapDropHit;
 		}
 
 		var distance = Mathf.Abs(ParentWorld.PlayerNode.Position.x - Position.x);
@@ -85,7 +82,8 @@ public class Enemy : KinematicEntity
 		}
 		else
 		{
-			_dropScrap = true;
+			if (DropScrapWhenDamaged)
+				_dropScrap = true;
 			Health -= damage;
 			_damageNumberGenerator.ShowDamageNumber(damage, Position, ParentWorld);
 			Modulate = !isCritical ? new Color(255, 255, 255) : new Color(255, 0, 0);
@@ -115,8 +113,8 @@ public class Enemy : KinematicEntity
 	{
 		TakeDamage(damage, knockBackDirection);
 	}
-	
-	
+
+
 	private void _OnCriticalHitboxHit(uint damage, Vector2 knockBackDirection)
 	{
 		TakeDamage(damage, knockBackDirection, true);
