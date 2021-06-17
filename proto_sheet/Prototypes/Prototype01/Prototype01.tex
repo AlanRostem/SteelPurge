@@ -12,17 +12,18 @@ The game is going to be a 2D action platformer in a tile-based world. The player
 
 \subsubsection{Health}
 
-The player has a total of 100 health. When the player takes damage, a timer will start which, when completed, starts a health regeneration process. The regeneration process is very slow and should only work out of combat. 
+The player has a total of 100 health and can lose an arbitrary amount when taking damage from enemies. The player can regenerate health by picking up Scrap.
 
 \subsubsection{Weapon mechanics}
 
-Weapons can fire automatically by holding down a button or key. Weapons can shoot to the left, right or downwards. Firing downwards produces recoil which can propel the player upwards. Weapons can also be used to melee and they each have special damage numbers. They have special abilities which can be powered using unique fuels that can be crafted or found. 
+Weapons can fire automatically by holding down a button or key. Weapons can shoot to the left, right, up or downwards. Firing downwards produces recoil which can propel the player upwards. Weapons can also be used to melee while sliding. They have special abilities which can be powered using Energy Cells
 
 \subsubsection{Weapons}
 
 The following weapons from the ideas document will be implemented in Prototype 1:
 
 \begin{itemize}
+	\item H-28 Dual Blasters
 	\item Firewall
 	\item Joule
 	\item Neostar
@@ -34,7 +35,7 @@ The player will be able to slide on the ground to increase their speed shortly o
 
 \subsubsection{Enemies}
 
- There will be two enemies and one boss at the end of the first level. When enemies are killed to hit, they drop scrap metal for the player. Enemies usually have a critical hit area on top of their head, meaning hits on this area will deal extra damage to them. 
+There will be two enemies and one boss at the end of the first level. When enemies are killed to hit, they drop scrap metal for the player. Enemies usually have a critical hit area on top of their head, meaning hits on this area will deal extra damage to them. 
 
 \paragraph{}
 The first enemy is the "XW Rush-Rogue", which is a small enemy with a high health pool. As soon as it sees the player, the enemy will rush towards the player. If the enemy hits the player, then it will explode dealing massive damage, almost killing the player. Since it has so much health and rushes towards the player, the enemy can receive massive critical hit damage that instantly kills it.
@@ -44,15 +45,12 @@ The second enemy is the "AR43 Executor". This enemy shoots three metal rods at a
 
 \paragraph{}
 
-The first boss, called Death Hornet X-09, is a spider-like boss that moves on the ground in its first form. At 75\% health it will turn into its second form and start flying above the player. For its first form, it can melee the player and drop XW Rush-Rogue enemies on the player. It also has a critical hit-box on top of its head. When it reaches its second form, it will start flying left to right and drop XW Rush-Rogues from the air. The player can still shoot at the boss by aiming up, but the damage will be minimal. The key is to ram-slide into the Rogues in order to uppercut them into the boss to deal even more critical damage since they explode on the boss. Three Rogue hits is enough to kill it from this point, but when it is only one hit left to kill it, the boss will move faster. 
+The first boss, called Death Hornet X-08, is a spider-like boss that moves on the ground in its first form. The boss shoots mini versions of the XW Rush Rogue and moves back and forth. The boss has no critical hitbox, but it will rush the player sometimes and in this sequence the critical hitbox is enabled. On the map, there will be a platform at the center which the player can stand on, but the boss will try to attack the player sometimes if they stay on it for too long. This platform is here so that when the boss rushes the player (just like the rogues), they can jump over it to either land a critical hit or survive the damage by jumping over the boss. The boss will shoot three rogues at the player before rushing and will perform this attack until it reaches 50\% health. At lower than 50\% health, it will start flying left to right and drop XW Rush-Rogues from the air. The player can still shoot at the boss by aiming up, but the damage will be minimal. The key is to Ram-Slide into the Rogues in order to uppercut them into the boss to deal even more critical damage since they explode on the boss. The player will only have time to hit two Rogues on the boss, then the boss will slam to the ground and unleash a mayhem of Rogues for a moment until it start flying up again.
 
 \subsubsection{Scrap}
 
-Scrap is a material/currency which can be used to create/buy weapons and fuel. 
+Scrap is a collectible that can heal the player. It is also used as currency to refill the weapon fuels at the checkpoints. 
 
-\subsubsection{Pickable items}
-
-Steel Purge will have several items the player can pick up. For this prototype, there will only be scrap and weapons that can be picked up. The fuels must be crafted from scrap only.
 
 \subsection{Levels}
 
@@ -66,11 +64,11 @@ Completing a level in Prototype 1 will be simple and sufficient for MVP standard
 
 \subsubsection{Checkpoints and crafting stations}
 
-The checkpoints on the level will also serve as crafting stations. The player can craft respective fuels for their weapon they can craft using the scrap they collected from enemies
+The checkpoints on the level will also serve as crafting stations. The player can refill their weapon fuels or fully regenerate their health.
 
 \subsection{Reward systems}
 
-At the end of a level, the kill-count and scrap gained is displayed to the player. There should also be an indicator of how many possible kills there are on the level. Currently, there is no reward for killing all the enemies, but there should be an indicator to show that the player is good at killing all the enemies. Additionally, killing enemies will display a label showing "Purged [Enemy Name] x[Scrap Count On Death]" with a good-feeling sound. This should give the player the feeling of accomplishment since the main point of the game is to "purge steel". Aside from scrap and kills, there is currently no other reward systems.
+At the end of a level, the kill-count and scrap gained is displayed to the player. There should also be an indicator of how many possible kills there are on the level. Currently, there is no reward for killing all the enemies, but there should be an indicator to show that the player is good at killing all the enemies. 
 
 \subsection{User interface}
 
