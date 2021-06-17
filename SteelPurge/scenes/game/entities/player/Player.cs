@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public class Player : KinematicEntity
@@ -10,10 +9,7 @@ public class Player : KinematicEntity
 		Crouch,
 		Airborne,
 	}
-
-	public static uint ScrapDepletionPerDeath = 50;
-	public static readonly uint HealthRegenCount = 15;
-
+	
 	private static readonly float KnockBackSpeed = 100;
 	// private static readonly float MaxMovementSpeed = 250;
 
@@ -111,7 +107,7 @@ public class Player : KinematicEntity
 
 	public void ResetAllStates()
 	{
-		Health = 100;
+		Health = MaxHealth;
 		Velocity = new Vector2();
 		ClearStatusEffects();
 
