@@ -26,10 +26,8 @@ public class ResourceAbility : WeaponAbility
 
 	public override void _Process(float delta)
 	{
-		var type = (int) FuelType;
 		var player = GetWeapon().OwnerPlayer;
 		if (player is null) return;
-		var fuels = player.PlayerInventory.OrdinanceFuels;
 
 		if (IsActive)
 		{
@@ -39,13 +37,13 @@ public class ResourceAbility : WeaponAbility
 			if (_currentDrainTime >= DrainInterval)
 			{
 				_currentDrainTime = 0;
-				player.PlayerInventory.DrainFuel(FuelType, DrainPerTick);
+				player.PlayerInventory.DrainFuel(DrainPerTick);
 				OnTick();
-				_abilityBar.Value = fuels[type];
+				_abilityBar.Value = player.PlayerInventory.OrdinanceFuel;
 			}
 		}
 		
-		if (fuels[type] < DrainPerTick && IsActive)
+		if (player.PlayerInventory.OrdinanceFuel < DrainPerTick && IsActive)
 		{
 			_LingerStopped();
 			return;
@@ -53,15 +51,15 @@ public class ResourceAbility : WeaponAbility
 
 		var pressed = Input.IsActionPressed("tactical_ability") && GetWeapon().Equipped;
 
-		if (pressed && fuels[type] > DrainPerTick)
+		if (pressed && player.PlayerInventory.OrdinanceFuel > DrainPerTick)
 		{
 			EmitSignal(nameof(Linger));
 			if (!IsActive)
 			{
 				IsActive = true;
 				OnActivate();
-				_abilityBar.MaxValue = fuels[type];
-				_abilityBar.Value = fuels[type];
+				_abilityBar.MaxValue = player.PlayerInventory.OrdinanceFuel;
+				_abilityBar.Value = player.PlayerInventory.OrdinanceFuel;
 				_abilityBar.Visible = true;
 			}
 		}

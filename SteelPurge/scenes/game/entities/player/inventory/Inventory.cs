@@ -12,13 +12,6 @@ public class Inventory : Node2D
 		Count,
 	}
 
-	public enum OrdinanceFuelType
-	{
-		Gasoline,
-		EmCell,
-		Count
-	}
-
 	private static readonly PackedScene FloatingNumberScene =
 		GD.Load<PackedScene>("res://scenes/game/ui/FloatingTempText.tscn");
 	
@@ -48,16 +41,10 @@ public class Inventory : Node2D
 	public uint ScrapCount = 0;
 	public uint KillCount = 0;
 
-	public readonly uint[] OrdinanceFuels =
-	{
-		4000,
-		4000
-	};
+	public uint OrdinanceFuel = 4000;
 
 	private readonly bool[] _weaponContainer = new bool[(int) InventoryWeapon.Count];
-
-	private OrdinanceFuelType _displayedFuel = OrdinanceFuelType.Gasoline;
-
+	
 	private WeaponWheel _weaponWheel;
 	
 	public override void _Ready()
@@ -70,12 +57,7 @@ public class Inventory : Node2D
 		_canvas = GetNode<CanvasLayer>("CanvasLayer");
 		
 		_scrapLabel.Text = "x" + ScrapCount;
-		// _fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
-		
-		for (var i = 0; i < (int) OrdinanceFuelType.Count; i++)
-		{
-			// Update UI
-		}
+		_fuelLabel.Text = "x" + OrdinanceFuel;
 		
 		AddWeapon(InventoryWeapon.Falcon);
 		AddWeapon(InventoryWeapon.Firewall);
@@ -84,12 +66,6 @@ public class Inventory : Node2D
 		// TODO: When implementing save files, make sure to change this
 		SwitchWeapon(DefaultGun);
 		_weaponWheel.SelectWeapon(_weaponId);
-	}
-
-	private void KnowEquippedWeaponFuelType()
-	{
-		_displayedFuel = _weapon.TacticalEnhancement.FuelType;
-		_fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
 	}
 
 	public void PickUpScrap(uint count)
@@ -129,11 +105,10 @@ public class Inventory : Node2D
 	}
 
 
-	public void AddOrdinanceFuel(uint count, OrdinanceFuelType type)
+	public void AddOrdinanceFuel(uint count)
 	{
-		OrdinanceFuels[(int)type] += count;
-		if (_displayedFuel == type)
-			_fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
+		OrdinanceFuel += count;
+		_fuelLabel.Text = "x" + OrdinanceFuel;
 	}
 
 	public void SwitchWeapon(InventoryWeapon weapon)
@@ -154,7 +129,6 @@ public class Inventory : Node2D
 		_weaponWheel.SelectWeapon(_weaponId);
 
 		CallDeferred("add_child", _weapon);
-		CallDeferred(nameof(KnowEquippedWeaponFuelType));
 		_player.EmitSignal(nameof(Player.WeaponEquipped), newWeapon);
 	}
 
@@ -171,11 +145,10 @@ public class Inventory : Node2D
 		return _weaponContainer[(int) weapon];
 	}
 	
-	public void DrainFuel(OrdinanceFuelType fuelType, uint drainPerTick)
+	public void DrainFuel(uint drainPerTick)
 	{
-		OrdinanceFuels[(int) fuelType] -= drainPerTick;
-		if (_displayedFuel == fuelType)
-			_fuelLabel.Text = "x" + OrdinanceFuels[(int)_displayedFuel];
+		OrdinanceFuel -= drainPerTick;
+		_fuelLabel.Text = "x" + OrdinanceFuel;
 	}
 
 	public void IncrementKillCount()

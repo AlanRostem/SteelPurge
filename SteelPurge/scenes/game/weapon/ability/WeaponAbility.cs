@@ -4,7 +4,6 @@ using System;
 public class WeaponAbility : Node2D
 {
 	[Export] public Texture Icon;
-	[Export] public Inventory.OrdinanceFuelType FuelType = Inventory.OrdinanceFuelType.Gasoline;
 	public bool IsActive = false;
 	
 	private Weapon _weapon;

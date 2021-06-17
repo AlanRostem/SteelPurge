@@ -62,14 +62,13 @@ public class TacticalAbility : WeaponAbility
 		base._Process(delta);
 		if (Input.IsActionJustPressed("tactical_ability") && GetWeapon().Equipped)
 		{
-			var fuels = GetWeapon().OwnerPlayer.PlayerInventory.OrdinanceFuels;
-			var count = fuels[(int) FuelType];
+			var count = GetWeapon().OwnerPlayer.PlayerInventory.OrdinanceFuel;
 			if (!IsOnCoolDown && !IsActive && count >= FuelRequirement)
 			{
 				IsActive = true;
 				OnActivate();
 				_durationTimer.Start();
-				GetWeapon().OwnerPlayer.PlayerInventory.DrainFuel(FuelType, FuelRequirement);
+				GetWeapon().OwnerPlayer.PlayerInventory.DrainFuel(FuelRequirement);
 				_abilityBar.Visible = true;
 				_abilityBar.MaxValue = Duration * 1000;
 				_abilityBar.Value = Duration * 1000;
