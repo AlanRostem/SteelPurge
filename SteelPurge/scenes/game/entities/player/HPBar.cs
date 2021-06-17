@@ -4,12 +4,12 @@ using System;
 public class HPBar : TextureProgress
 {
 	private Timer _flashTimer;
-	private readonly Texture GainTexture = GD.Load<Texture>("res://assets/texture/ui/hud/hp_bar_over_gain.png");
-	private readonly Texture LossTexture = GD.Load<Texture>("res://assets/texture/ui/hud/hp_bar_over_loss.png");
-	private readonly Texture DefaultTexture = GD.Load<Texture>("res://assets/texture/ui/hud/hp_bar_over.png");
+	private static readonly Texture GainTexture = GD.Load<Texture>("res://assets/texture/ui/hud/hp_bar_over_gain.png");
+	private static readonly Texture LossTexture = GD.Load<Texture>("res://assets/texture/ui/hud/hp_bar_over_loss.png");
+	private static readonly Texture DefaultTexture = GD.Load<Texture>("res://assets/texture/ui/hud/hp_bar_over.png");
 
-	private float _gainTime = 0.1f;
-	private float _lossTime = 0.2f;
+	private const float GainTime = 0.1f;
+	private const float LossTime = 0.2f;
 	
 	public override void _Ready()
 	{
@@ -21,12 +21,12 @@ public class HPBar : TextureProgress
 		if (health < Value)
 		{
 			TextureOver = LossTexture;
-			_flashTimer.WaitTime = _lossTime;
+			_flashTimer.WaitTime = LossTime;
 		}
 		else
 		{
 			TextureOver = GainTexture;
-			_flashTimer.WaitTime = _gainTime;
+			_flashTimer.WaitTime = GainTime;
 		}
 		
 		Value = health;

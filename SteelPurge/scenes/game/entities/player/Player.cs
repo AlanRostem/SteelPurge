@@ -104,14 +104,9 @@ public class Player : KinematicEntity
 		EmitSignal(nameof(Died));
 		// TODO: Implement additional functionality after Prototype 1
 
-		var oldPos = new Vector2(Position);
 		Position = ParentWorld.CurrentSegment.ReSpawnPoint;
 		ResetAllStates();
 		InitiateRespawnSequence();
-
-		var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(EntityPool.ScrapScene, oldPos);
-		scrap.Count = ScrapDepletionPerDeath;
-		PlayerInventory.LoseScrap(ScrapDepletionPerDeath);
 	}
 
 	public void ResetAllStates()
