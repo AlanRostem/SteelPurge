@@ -95,6 +95,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FlashTimer" type="Timer" parent="CanvasLayer/HPBar" index="0"]
+wait_time = 0.05
+one_shot = true
+
 [node name="BodyShape" type="CollisionShape2D" parent="." index="10"]
 shape = SubResource( 2 )
 [connection signal="HealthChanged" from="." to="CanvasLayer/HPBar" method="_OnPlayerHealthChanged"]
@@ -108,3 +112,4 @@ shape = SubResource( 2 )
 [connection signal="body_entered" from="RoofDetector" to="." method="_OnRoofDetectorBodyEntered"]
 [connection signal="body_exited" from="RoofDetector" to="." method="_OnRoofDetectorBodyExited"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_EndRespawnSequence"]
+[connection signal="timeout" from="CanvasLayer/HPBar/FlashTimer" to="CanvasLayer/HPBar" method="_OnFlashTimeout"]
