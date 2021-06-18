@@ -20,18 +20,17 @@ public class Scrap : FallingCollectible
 	{
 		if (player.Health < player.MaxHealth)
 		{
-			var heal = Count / 2;
-			if (heal == 0)
-				heal = 1;
-			player.Health += heal;
-			if (player.Health != player.MaxHealth)
+			var diff = player.MaxHealth - player.Health;
+			var halfCount = Count / 2;
+			if (halfCount <= diff)
 			{
-				player.PlayerInventory.PickUpScrap(heal);
+				player.Health += halfCount;
+				player.PlayerInventory.PickUpScrap(halfCount);
 				return;
 			}
 
-			var diff = player.MaxHealth - player.Health;
-			player.PlayerInventory.PickUpScrap(diff);
+			player.Health = player.MaxHealth;
+			player.PlayerInventory.PickUpScrap(Count - diff);
 		}
 		else
 		{
