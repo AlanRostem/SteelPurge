@@ -48,12 +48,12 @@ public class WeaponWheel : Control
 
 		if (!Visible) return;
 
-		if (Input.IsActionJustPressed("ui_left"))
+		if (Input.IsActionJustPressed("weapon_wheel_left"))
 		{
 			MoveInWheel(-1);
 		}
 
-		if (Input.IsActionJustPressed("ui_right"))
+		if (Input.IsActionJustPressed("weapon_wheel_right"))
 		{
 			MoveInWheel(1);
 		}
