@@ -46,13 +46,14 @@ public class Scrap : FallingCollectible
 
 	private void EvaluateSprite()
 	{
-		if (Count >= CountLevel4)
+		var halfCount = Count / 2;
+		if (halfCount >= CountLevel4)
 			IconSprite.SetDeferred("texture", IconLevel4);
-		else if (Count >= CountLevel3)
+		else if (halfCount >= CountLevel3)
 			IconSprite.SetDeferred("texture", IconLevel3);
-		else if (Count >= CountLevel2)
+		else if (halfCount >= CountLevel2)
 			IconSprite.SetDeferred("texture", IconLevel2);
-		else if (Count >= CountLevel1)
+		else if (halfCount >= CountLevel1)
 			IconSprite.SetDeferred("texture", IconLevel1);
 		else
 			IconSprite.SetDeferred("texture", IconLevel0);
