@@ -42,7 +42,7 @@ public class Enemy : KinematicEntity
 		if (_isDead)
 		{
 			var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
-			scrap.Count = ScrapDropKilled;
+			scrap.SetCount(ScrapDropKilled);
 			QueueFree();
 		}
 
@@ -50,7 +50,7 @@ public class Enemy : KinematicEntity
 		{
 			_dropScrap = false;
 			var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
-			scrap.Count = ScrapDropHit;
+			scrap.SetCount(ScrapDropHit);
 		}
 
 		var distance = Mathf.Abs(ParentWorld.PlayerNode.Position.x - Position.x);

@@ -9,7 +9,7 @@ public class FallingCollectible : KinematicEntity
 	[Export] public bool InteractToPickUp = false;
 
 	private Player _player;
-
+	public Sprite IconSprite { get; private set; }
 	public override void _Ready()
 	{
 		base._Ready();
@@ -17,6 +17,9 @@ public class FallingCollectible : KinematicEntity
 			Rng.RandfRange(-1, 1) * LungeSpeed,
 			Rng.Randf() * -LungeSpeed
 		);
+		
+		IconSprite = GetNode<Sprite>("Sprite");
+		GD.Print(IconSprite);
 	}
 
 	public virtual void OnCollected(Player player)
