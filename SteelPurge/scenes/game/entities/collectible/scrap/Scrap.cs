@@ -56,7 +56,7 @@ public class Scrap : FallingCollectible
 		else if (Count >= CountLevel1)
 			IconSprite.SetDeferred("texture", IconLevel1);
 		else
-			IconSprite.SetDeferred("texture", IconLevel1);
+			IconSprite.SetDeferred("texture", IconLevel0);
 	}
 
 	private void _OnScrapEntered(object body)

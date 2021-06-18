@@ -19,7 +19,6 @@ public class FallingCollectible : KinematicEntity
 		);
 		
 		IconSprite = GetNode<Sprite>("Sprite");
-		GD.Print(IconSprite);
 	}
 
 	public virtual void OnCollected(Player player)
