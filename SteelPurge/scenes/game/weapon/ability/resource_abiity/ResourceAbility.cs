@@ -58,7 +58,7 @@ public class ResourceAbility : WeaponAbility
 			{
 				IsActive = true;
 				OnActivate();
-				_abilityBar.MaxValue = player.PlayerInventory.OrdinanceFuel;
+				_abilityBar.MaxValue = player.PlayerInventory.MaxOrdinanceFuel;
 				_abilityBar.Value = player.PlayerInventory.OrdinanceFuel;
 				_abilityBar.Visible = true;
 			}

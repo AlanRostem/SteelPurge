@@ -19,6 +19,12 @@ public class Fabricator : Node2D
 			player.Health += diffHealth;
 			player.PlayerInventory.LoseScrap(diffHealth);
 		}
+		else
+		{
+			player.Health += player.PlayerInventory.ScrapCount;
+			player.PlayerInventory.LoseScrap(player.PlayerInventory.ScrapCount);
+			return;
+		}
 		
 		if (diffFuel < player.PlayerInventory.ScrapCount)
 		{
