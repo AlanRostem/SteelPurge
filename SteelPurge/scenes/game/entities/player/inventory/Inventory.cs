@@ -41,7 +41,8 @@ public class Inventory : Node2D
 	public uint ScrapCount = 0;
 	public uint KillCount = 0;
 
-	public uint OrdinanceFuel = 4000;
+	public uint MaxOrdinanceFuel = 125;
+	public uint OrdinanceFuel = 125;
 
 	private readonly bool[] _weaponContainer = new bool[(int) InventoryWeapon.Count];
 	
