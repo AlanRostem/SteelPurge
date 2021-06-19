@@ -20,6 +20,7 @@ DisplayName = "Firewall"
 CollectibleSprite = ExtResource( 2 )
 WeaponType = 1
 DamagePerShot = 7
+RecoilDashDamagePerShot = 4
 RateOfFire = 200
 HoverRecoilSpeed = 75.0
 

@@ -26,11 +26,15 @@ public class FiringDevice : Node2D
 
 	public Projectile FireProjectile(PackedScene projectileScene, float angle = 0)
 	{
+		return FireProjectile(projectileScene, _weapon.DamagePerShot, angle);
+	}
+	public Projectile FireProjectile(PackedScene projectileScene, uint damage, float angle = 0)
+	{
 		var player = GetWeapon().OwnerPlayer;
 		var world = player.ParentWorld.Entities;
 		
 		var projectile = world.SpawnEntityDeferred<Projectile>(projectileScene, player.Position + GetWeapon().Position);
-		
+
 		projectile.DirectionAngle = Mathf.Rad2Deg(angle);
 		projectile.VisualAngle = 0;
 		projectile.DirectionSign = GetWeapon().Scale.x;
@@ -50,7 +54,7 @@ public class FiringDevice : Node2D
 		}
 
 		projectile.InitWithAngularVelocity(GetWeapon());
-		projectile.Damage = GetWeapon().DamagePerShot;
+		projectile.Damage = damage;
 
 		GetWeapon().Connect("tree_exited", projectile, nameof(projectile._OnParentWeaponLost));
 		return projectile;
@@ -64,10 +68,7 @@ public class FiringDevice : Node2D
 
 	private void _DashFire()
 	{
-		var oldDmg = _weapon.DamagePerShot;
-		_weapon.DamagePerShot /= 2;
 		OnDashFire();
-		_weapon.DamagePerShot = oldDmg;
 	}
 	
 	public virtual void OnDashFire()

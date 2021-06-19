@@ -16,11 +16,17 @@ public class ProjectileShotGunFiringDevice : FiringDevice
 	public void FireProjectileInShotgunPattern(PackedScene projectileScene, float startAngle, float spreadAngle,
 		float pelletCount)
 	{
+		FireProjectileInShotgunPattern(projectileScene, startAngle, spreadAngle, pelletCount, GetWeapon().DamagePerShot);
+	}
+	
+	public void FireProjectileInShotgunPattern(PackedScene projectileScene, float startAngle, float spreadAngle, float pelletCount, uint damage)
+	{
 		var spread = Mathf.Deg2Rad(spreadAngle);
 		var offsetAngle = startAngle - spread / 2;
 		for (int i = 0; i < pelletCount; i++)
 		{
 			var projectile = FireProjectile(projectileScene, offsetAngle);
+			projectile.Damage = damage;
 			OnProjectileShot(projectile);
 			offsetAngle += spread / pelletCount;
 		}

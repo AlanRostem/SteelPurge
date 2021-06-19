@@ -13,6 +13,6 @@ public class FlareFiringDevice : ProjectileShotGunFiringDevice
 
 	public override void OnDashFire()
 	{
-		FireProjectileInShotgunPattern(ProjectileScene, 0, SpreadAngle * 2, PelletCount * 3);
+		FireProjectileInShotgunPattern(ProjectileScene, 0, SpreadAngle * 2, PelletCount * 3, GetWeapon().RecoilDashDamagePerShot);
 	}
 }

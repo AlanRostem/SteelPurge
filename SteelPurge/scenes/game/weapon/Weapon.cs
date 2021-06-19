@@ -13,6 +13,7 @@ public class Weapon : Node2D
 
 
 	[Export] public uint DamagePerShot;
+	[Export] public uint RecoilDashDamagePerShot;
 	[Export] public uint MeleeDamage = 80;
 	[Export] public uint RateOfFire;
 	[Export] public uint MaxRecoilHoverShots = 3;

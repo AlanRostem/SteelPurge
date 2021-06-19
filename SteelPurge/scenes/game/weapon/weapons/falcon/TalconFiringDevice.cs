@@ -18,7 +18,7 @@ public class TalconFiringDevice : FiringDevice
 
 	public override void OnDashFire()
 	{
-		var slice = FireProjectile(LargeWindSliceScene);
+		var slice = FireProjectile(LargeWindSliceScene, GetWeapon().RecoilDashDamagePerShot);
 		slice.Scale = new Vector2(GetWeapon().OwnerPlayer.HorizontalLookingDirection, 1);
 	}
 }
