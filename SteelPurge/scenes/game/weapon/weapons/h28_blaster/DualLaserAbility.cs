@@ -21,7 +21,6 @@ public class DualLaserAbility : TacticalAbility
 		_shotDelayTimer.Start();
 		if (GetWeapon().OwnerPlayer.IsMovingTooFast())
 			GetWeapon().OwnerPlayer.VelocityX = Mathf.Sign(GetWeapon().OwnerPlayer.VelocityX) * Player.WalkSpeed;
-		GetWeapon().OwnerPlayer.IsAimingDown = false;
 	}
 
 	public override void OnUpdate()
@@ -43,7 +42,12 @@ public class DualLaserAbility : TacticalAbility
 	{
 		var laser = (LaserShot) LaserShotScene.Instance();
 		laser.Position = GetWeapon().OwnerPlayer.Position;
-		laser.Scale = new Vector2(GetWeapon().OwnerPlayer.HorizontalLookingDirection, 1);
+		if (GetWeapon().OwnerPlayer.IsAimingDown)
+			laser.RotationDegrees = 90;
+		else if (GetWeapon().OwnerPlayer.IsAimingUp)
+			laser.RotationDegrees = -90;
+		else 
+			laser.Scale = new Vector2(GetWeapon().OwnerPlayer.HorizontalLookingDirection, 1);
 		GetWeapon().OwnerPlayer.ParentWorld.AddChild(laser);
 		_shotsFired++;
 		GetWeapon().OwnerPlayer.IsGravityEnabled = true;
