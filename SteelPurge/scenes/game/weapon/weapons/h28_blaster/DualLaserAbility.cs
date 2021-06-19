@@ -41,7 +41,7 @@ public class DualLaserAbility : TacticalAbility
 	private void _OnShoot()
 	{
 		var laser = (LaserShot) LaserShotScene.Instance();
-		if (_shotsFired > 0)
+		if (_shotsFired > 0 && !GetWeapon().OwnerPlayer.IsAimingDown && !GetWeapon().OwnerPlayer.IsAimingUp)
 			laser.Position = GetWeapon().OwnerPlayer.Position + new Vector2(0, 7);
 		else 
 			laser.Position = GetWeapon().OwnerPlayer.Position;
