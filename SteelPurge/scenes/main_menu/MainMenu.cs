@@ -19,6 +19,11 @@ public class MainMenu : Control
 		PlayLevel("res://scenes/game/environment/levels/level1/Level1.tscn");
 	}
 
+	private void _OnTestButtonPressed()
+	{
+		PlayLevel("res://scenes/game/environment/levels/test_level/TestLevel.tscn");
+	}
+
 	private void _OnQuitButtonPressed()
 	{
 		GetTree().Quit();
