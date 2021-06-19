@@ -37,7 +37,7 @@ public class FiringDevice : Node2D
 
 		projectile.DirectionAngle = Mathf.Rad2Deg(angle);
 		projectile.VisualAngle = 0;
-		projectile.DirectionSign = GetWeapon().Scale.x;
+		projectile.DirectionSign = GetWeapon().OwnerPlayer.HorizontalLookingDirection;
 		if (player.IsAimingDown)
 		{
 			projectile.DirectionAngle += 90;
