@@ -9,6 +9,7 @@ public class Inventory : Node2D
 		H28,
 		Firewall,
 		Joule,
+		Falcon,
 		Count,
 	}
 
@@ -20,6 +21,7 @@ public class Inventory : Node2D
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/h28_blaster/H28Blaster.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/Firewall.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/falcon.tscn"),
 	};
 	
 	[Export]
@@ -63,6 +65,7 @@ public class Inventory : Node2D
 		AddWeapon(InventoryWeapon.H28);
 		AddWeapon(InventoryWeapon.Firewall);
 		AddWeapon(InventoryWeapon.Joule);
+		AddWeapon(InventoryWeapon.Falcon);
 		
 		// TODO: When implementing save files, make sure to change this
 		SwitchWeapon(DefaultGun);

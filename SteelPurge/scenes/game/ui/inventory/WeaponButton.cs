@@ -5,9 +5,10 @@ public class WeaponButton : TextureButton
 {
 	private static Texture[] _weaponIcons =
 	{
-		GD.Load<Texture>("res://assets/texture/ui/icon/falcon_weapon_inventory.png"),
+		GD.Load<Texture>("res://assets/texture/ui/icon/h28_weapon_inventory.png"),
 		GD.Load<Texture>("res://assets/texture/ui/icon/firewall_weapon_inventory.png"),
 		GD.Load<Texture>("res://assets/texture/ui/icon/joule_weapon_inventory.png"),
+		GD.Load<Texture>("res://assets/texture/ui/icon/falcon_weapon_inventory.png"),
 	};
 
 	private TextureRect _iconTextureRect;
