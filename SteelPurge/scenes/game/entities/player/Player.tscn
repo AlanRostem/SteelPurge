@@ -36,7 +36,6 @@ playing = true
 script = ExtResource( 4 )
 
 [node name="Inventory" parent="." index="1" instance=ExtResource( 5 )]
-DefaultGun = 1
 
 [node name="PlayerCamera" type="Camera2D" parent="." index="2"]
 current = true
