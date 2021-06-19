@@ -23,5 +23,5 @@ texture = ExtResource( 3 )
 script = ExtResource( 7 )
 
 [node name="ShotDelayTimer" type="Timer" parent="DualLaserAbility" index="3"]
-wait_time = 0.1
+wait_time = 0.4
 [connection signal="timeout" from="DualLaserAbility/ShotDelayTimer" to="DualLaserAbility" method="_OnShoot"]

@@ -13,7 +13,7 @@ public class Player : KinematicEntity
 	private static readonly float KnockBackSpeed = 100;
 	// private static readonly float MaxMovementSpeed = 250;
 
-	private static readonly float WalkSpeed = 120;
+	public static readonly float WalkSpeed = 120;
 
 	private static readonly float WalkAcceleration = 360;
 

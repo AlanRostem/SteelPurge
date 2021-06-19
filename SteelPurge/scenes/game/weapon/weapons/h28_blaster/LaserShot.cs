@@ -15,7 +15,7 @@ public class LaserShot : Area2D
 
 	public override void _Process(float delta)
 	{
-		Modulate = new Color(255, 255, 255, Modulate.a - delta);
+		Modulate = new Color(1, 1, 1, Modulate.a - delta);
 	}
 
 	private void _OnExistenceTimeout()

@@ -19,13 +19,24 @@ public class DualLaserAbility : TacticalAbility
 	{
 		GetWeapon().IsFiring = true;
 		_shotDelayTimer.Start();
-		if (!GetWeapon().OwnerPlayer.IsOnFloor())
-			GetWeapon().OwnerPlayer.IsGravityEnabled = false;
+		if (GetWeapon().OwnerPlayer.IsMovingTooFast())
+			GetWeapon().OwnerPlayer.VelocityX = Mathf.Sign(GetWeapon().OwnerPlayer.VelocityX) * Player.WalkSpeed;
+		GetWeapon().OwnerPlayer.IsAimingDown = false;
+	}
+
+	public override void OnUpdate()
+	{
+		if (GetWeapon().OwnerPlayer.VelocityY > 0)
+		{
+			GetWeapon().OwnerPlayer.VelocityY = GetWeapon().OwnerPlayer.Gravity / 10;
+		}
 	}
 
 	public override void OnEnd()
 	{
 		GetWeapon().IsFiring = false;
+		_shotsFired = 0;
+		GetWeapon().OwnerPlayer.CanMove = true;
 	}
 
 	private void _OnShoot()
