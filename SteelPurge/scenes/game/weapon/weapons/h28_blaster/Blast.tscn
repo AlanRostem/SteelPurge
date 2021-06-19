@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/texture/weapon/h_28_blaster/blast.png" type="Texture" id=1]
+[ext_resource path="res://scenes/game/entities/projectile/Projectile.tscn" type="PackedScene" id=2]
+
+[node name="Projectile" instance=ExtResource( 2 )]
+IsGravityEnabled = false
+
+[node name="ProjectileSprite" parent="." index="4"]
+texture = ExtResource( 1 )

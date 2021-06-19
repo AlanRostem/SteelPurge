@@ -6,7 +6,7 @@ public class Inventory : Node2D
 
 	public enum InventoryWeapon
 	{
-		Falcon,
+		H28,
 		Firewall,
 		Joule,
 		Count,
@@ -17,13 +17,13 @@ public class Inventory : Node2D
 	
 	private static readonly PackedScene[] WeaponScenes =
 	{
-		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/Falcon.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/h28_blaster/H28Blaster.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/Firewall.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn"),
 	};
 	
 	[Export]
-	public InventoryWeapon DefaultGun = InventoryWeapon.Falcon;
+	public InventoryWeapon DefaultGun = InventoryWeapon.H28;
 	
 	public Weapon EquippedWeapon => _weapon;
 	public InventoryWeapon EquippedWeaponEnum => _weaponId;
@@ -60,7 +60,7 @@ public class Inventory : Node2D
 		_scrapLabel.Text = "x" + ScrapCount;
 		_fuelLabel.Text = "x" + OrdinanceFuel;
 		
-		AddWeapon(InventoryWeapon.Falcon);
+		AddWeapon(InventoryWeapon.H28);
 		AddWeapon(InventoryWeapon.Firewall);
 		AddWeapon(InventoryWeapon.Joule);
 		
