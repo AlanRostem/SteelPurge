@@ -8,8 +8,8 @@ public class ProjectileSprite : Sprite
 		_parent = GetParent<Projectile>();
 		var angle = Mathf.Deg2Rad(_parent.VisualAngle);
 		Rotation = angle;
-
-		if (Scale.x != _parent.DirectionSign)
+		var sign = Mathf.Sign(_parent.VelocityX);
+		if (Scale.x != sign)
 		{
 			Scale = new Vector2(_parent.DirectionSign, Scale.y);
 		}
