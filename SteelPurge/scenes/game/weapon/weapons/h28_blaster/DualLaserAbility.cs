@@ -41,7 +41,10 @@ public class DualLaserAbility : TacticalAbility
 	private void _OnShoot()
 	{
 		var laser = (LaserShot) LaserShotScene.Instance();
-		laser.Position = GetWeapon().OwnerPlayer.Position;
+		if (_shotsFired > 0)
+			laser.Position = GetWeapon().OwnerPlayer.Position + new Vector2(0, 7);
+		else 
+			laser.Position = GetWeapon().OwnerPlayer.Position;
 		if (GetWeapon().OwnerPlayer.IsAimingDown)
 			laser.RotationDegrees = 90;
 		else if (GetWeapon().OwnerPlayer.IsAimingUp)
@@ -55,7 +58,6 @@ public class DualLaserAbility : TacticalAbility
 		if (_shotsFired >= 2)
 		{
 			_shotDelayTimer.Stop();
-			DeActivate();
 		}
 	}
 }
