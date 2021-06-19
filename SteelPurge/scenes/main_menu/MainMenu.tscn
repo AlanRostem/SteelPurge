@@ -29,9 +29,9 @@ __meta__ = {
 
 [node name="PlayButton" type="Button" parent="."]
 margin_left = 168.472
-margin_top = 113.416
+margin_top = 90.4158
 margin_right = 244.472
-margin_bottom = 135.416
+margin_bottom = 112.416
 custom_fonts/font = SubResource( 1 )
 text = "Play"
 flat = true
@@ -42,13 +42,12 @@ __meta__ = {
 
 [node name="TestButton" type="Button" parent="."]
 margin_left = 168.0
-margin_top = 85.5716
+margin_top = 115.572
 margin_right = 244.0
-margin_bottom = 107.572
+margin_bottom = 137.572
 custom_fonts/font = SubResource( 1 )
 text = "Test"
 flat = true
-script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
