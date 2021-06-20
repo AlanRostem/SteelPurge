@@ -21,7 +21,7 @@ public class Inventory : Node2D
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/h28_blaster/H28Blaster.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/Firewall.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn"),
-		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/falcon.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/Falcon.tscn"),
 	};
 	
 	[Export]
