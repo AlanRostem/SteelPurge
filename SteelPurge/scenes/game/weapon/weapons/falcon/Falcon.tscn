@@ -12,10 +12,10 @@
 [node name="Falcon" instance=ExtResource( 1 )]
 DisplayName = "Falcon"
 CollectibleSprite = ExtResource( 7 )
-DamagePerShot = 35
+DamagePerShot = 15
 MeleeDamage = 30
-RateOfFire = 80
-MaxRecoilHoverShots = 5
+RateOfFire = 70
+MaxRecoilHoverShots = 8
 HoverRecoilSpeed = 60.0
 PlayerSpriteFrames = ExtResource( 3 )
 
@@ -28,6 +28,7 @@ CoolDown = 2.0
 script = ExtResource( 6 )
 
 [node name="BurstFireTimer" parent="TalconFiringDevice" index="0" instance=ExtResource( 8 )]
+RateOfFire = 550
 BurstCount = 4
 
 [node name="CollisionShape2D" parent="MeleeArea" index="0"]
