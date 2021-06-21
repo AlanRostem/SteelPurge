@@ -9,9 +9,9 @@ script = ExtResource( 3 )
 IsGravityEnabled = false
 ExplosiveDamage = 30
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-texture = ExtResource( 2 )
-
-[node name="VisibilityNotifier2D" parent="." index="4"]
+[node name="VisibilityNotifier2D" parent="." index="3"]
 position = Vector2( -2.38419e-07, 2.38419e-07 )
 scale = Vector2( 0.525, 0.525 )
+
+[node name="ProjectileSprite" parent="." index="4"]
+texture = ExtResource( 2 )
