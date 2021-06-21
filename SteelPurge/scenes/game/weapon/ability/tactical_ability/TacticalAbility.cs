@@ -6,9 +6,10 @@ public class TacticalAbility : WeaponAbility
 	[Export] public uint FuelRequirement = 10;
 	[Export] public float CoolDown = 6;
 	[Export] public float Duration = 1;
+	[Export] public bool ShowBarWhenInUse = true;
 	public float CurrentDuration => _durationTimer.TimeLeft;
 	public float CurrentCoolDown => _cooldownTimer.TimeLeft;
-	
+
 	public bool IsOnCoolDown = false;
 
 	private Timer _cooldownTimer;
@@ -33,17 +34,14 @@ public class TacticalAbility : WeaponAbility
 
 	public virtual void OnActivate()
 	{
-
 	}
 
 	public virtual void OnUpdate()
 	{
-
 	}
 
 	public virtual void OnEnd()
 	{
-
 	}
 
 	public override void DeActivate()
@@ -69,7 +67,8 @@ public class TacticalAbility : WeaponAbility
 				OnActivate();
 				_durationTimer.Start();
 				GetWeapon().OwnerPlayer.PlayerInventory.DrainFuel(FuelRequirement);
-				_abilityBar.Visible = true;
+				if (ShowBarWhenInUse)
+					_abilityBar.Visible = true;
 				_abilityBar.MaxValue = Duration * 1000;
 				_abilityBar.Value = Duration * 1000;
 			}
@@ -78,7 +77,7 @@ public class TacticalAbility : WeaponAbility
 				// TODO: Play sound and flash red on icon
 			}
 		}
-		
+
 		if (IsActive)
 		{
 			OnUpdate();
@@ -89,13 +88,13 @@ public class TacticalAbility : WeaponAbility
 			_abilityBar.Value += delta * 1000;
 		}
 	}
-	
+
 	private void _OnCoolDownFinished()
 	{
 		IsOnCoolDown = false;
 		_abilityBar.Visible = false;
 	}
-	
+
 	private void _OnStartCoolDown()
 	{
 		IsActive = false;

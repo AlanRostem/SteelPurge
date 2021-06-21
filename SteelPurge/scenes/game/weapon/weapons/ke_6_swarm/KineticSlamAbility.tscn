@@ -5,3 +5,11 @@
 
 [node name="KineticSlamAbility" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+FuelRequirement = 20
+Duration = 3600.0
+ShowBarWhenInUse = false
+
+[node name="JumpTimer" type="Timer" parent="." index="3"]
+wait_time = 0.4
+one_shot = true
+[connection signal="timeout" from="JumpTimer" to="." method="_OnJumpEnd"]
