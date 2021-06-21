@@ -6,7 +6,7 @@ public class ShotGunFiringDevice : HitScanFiringDevice
 	[Export] public uint PelletCount = 12;
 	[Export] public float SpreadAngle = 16;
 
-	public override void OnFire()
+	public override void OnFireOutput()
 	{
 		var spread = Mathf.Deg2Rad(SpreadAngle);
 		var offsetAngle = -spread / 2;

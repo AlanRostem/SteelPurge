@@ -10,7 +10,7 @@ public class TalconFiringDevice : FiringDevice
 	private static readonly PackedScene
 		LargeWindSliceScene = GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/LargeWindSlice.tscn");
 	
-	public override void OnFire()
+	public override void OnFireOutput()
 	{
 		FireProjectile(AerialSliceScene);
 	}

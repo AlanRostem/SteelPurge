@@ -13,7 +13,7 @@ public class HitScanFiringDevice : FiringDevice
 		EmitSignal(nameof(Scanned), GetWeapon().DamagePerShot, DamageRange, angle);
 	}
 	
-	public override void OnFire()
+	public override void OnFireOutput()
 	{
 		ScanHit(0);
 	}

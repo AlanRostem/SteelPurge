@@ -33,7 +33,7 @@ public class ProjectileShotGunFiringDevice : FiringDevice
 	}
 
 	// Override this to your liking. Will default to the FireProjectileInShotgunPattern() function
-	public override void OnFire()
+	public override void OnFireOutput()
 	{
 		FireProjectileInShotgunPattern(ProjectileScene, 0, SpreadAngle, PelletCount);
 	}
