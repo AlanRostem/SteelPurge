@@ -28,7 +28,7 @@ public class ResourceAbility : WeaponAbility
 	{
 		var player = GetWeapon().OwnerPlayer;
 		if (player is null) return;
-
+		var equippedWeaponEnum = player.PlayerInventory.EquippedWeaponEnum;
 		if (IsActive)
 		{
 			OnUpdate();
@@ -37,13 +37,13 @@ public class ResourceAbility : WeaponAbility
 			if (_currentDrainTime >= DrainInterval)
 			{
 				_currentDrainTime = 0;
-				player.PlayerInventory.DrainFuel(DrainPerTick);
+				player.PlayerInventory.DecreaseOrdinanceFuel(equippedWeaponEnum, DrainPerTick);
 				OnTick();
-				_abilityBar.Value = player.PlayerInventory.OrdinanceFuel;
+				_abilityBar.Value = player.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum);
 			}
 		}
 		
-		if (player.PlayerInventory.OrdinanceFuel < DrainPerTick && IsActive)
+		if (player.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum) < DrainPerTick && IsActive)
 		{
 			_LingerStopped();
 			return;
@@ -51,7 +51,7 @@ public class ResourceAbility : WeaponAbility
 
 		var pressed = Input.IsActionPressed("tactical_ability") && GetWeapon().Equipped;
 
-		if (pressed && player.PlayerInventory.OrdinanceFuel > DrainPerTick)
+		if (pressed && player.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum) > DrainPerTick)
 		{
 			EmitSignal(nameof(Linger));
 			if (!IsActive)
@@ -59,7 +59,7 @@ public class ResourceAbility : WeaponAbility
 				IsActive = true;
 				OnActivate();
 				_abilityBar.MaxValue = player.PlayerInventory.MaxOrdinanceFuel;
-				_abilityBar.Value = player.PlayerInventory.OrdinanceFuel;
+				_abilityBar.Value = player.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum);
 				_abilityBar.Visible = true;
 			}
 		}

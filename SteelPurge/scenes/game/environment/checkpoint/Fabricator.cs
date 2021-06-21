@@ -12,7 +12,7 @@ public class Fabricator : Node2D
 	private void _OnInteract(Player player)
 	{
 		var diffHealth = player.MaxHealth - player.Health;
-		var diffFuel = player.PlayerInventory.MaxOrdinanceFuel - player.PlayerInventory.OrdinanceFuel;
+		var diffFuel = player.PlayerInventory.MaxOrdinanceFuel - player.PlayerInventory.GetOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum);
 
 		if (diffHealth < player.PlayerInventory.ScrapCount)
 		{
@@ -28,7 +28,7 @@ public class Fabricator : Node2D
 		
 		if (diffFuel < player.PlayerInventory.ScrapCount)
 		{
-			player.PlayerInventory.AddOrdinanceFuel(diffFuel);
+			player.PlayerInventory.IncreaseOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum, diffFuel);
 			player.PlayerInventory.LoseScrap(diffFuel);
 		}
 	}

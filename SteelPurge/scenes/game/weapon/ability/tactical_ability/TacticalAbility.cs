@@ -62,13 +62,14 @@ public class TacticalAbility : WeaponAbility
 		base._Process(delta);
 		if (Input.IsActionJustPressed("tactical_ability") && GetWeapon().Equipped)
 		{
-			var count = GetWeapon().OwnerPlayer.PlayerInventory.OrdinanceFuel;
+			var equippedWeaponEnum = GetWeapon().OwnerPlayer.PlayerInventory.EquippedWeaponEnum;
+			var count = GetWeapon().OwnerPlayer.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum);
 			if (!IsOnCoolDown && !IsActive && count >= FuelRequirement)
 			{
 				IsActive = true;
 				OnActivate();
 				_durationTimer.Start();
-				GetWeapon().OwnerPlayer.PlayerInventory.DrainFuel(FuelRequirement);
+				GetWeapon().OwnerPlayer.PlayerInventory.DecreaseOrdinanceFuel(equippedWeaponEnum, FuelRequirement);
 				if (ShowBarWhenInUse)
 					_abilityBar.Visible = true;
 				_abilityBar.MaxValue = Duration * 1000;

@@ -44,7 +44,14 @@ public class Inventory : Node2D
 	public uint KillCount = 0;
 
 	public uint MaxOrdinanceFuel = 125;
-	public uint OrdinanceFuel = 125;
+	
+	private uint[] _ordinanceFuels =
+	{
+		125,
+		125,
+		125,
+		125
+	};
 
 	private readonly bool[] _weaponContainer = new bool[(int) InventoryWeapon.Count];
 	
@@ -60,7 +67,6 @@ public class Inventory : Node2D
 		_canvas = GetNode<CanvasLayer>("CanvasLayer");
 		
 		_scrapLabel.Text = "x" + ScrapCount;
-		_fuelLabel.Text = "x" + OrdinanceFuel;
 		
 		AddWeapon(InventoryWeapon.H28);
 		AddWeapon(InventoryWeapon.Firewall);
@@ -69,9 +75,37 @@ public class Inventory : Node2D
 		
 		// TODO: When implementing save files, make sure to change this
 		SwitchWeapon(DefaultGun);
+		_fuelLabel.Text = "x" + GetOrdinanceFuel(EquippedWeaponEnum);
+
 		_weaponWheel.SelectWeapon(_weaponId);
 	}
 
+	public uint GetOrdinanceFuel(InventoryWeapon weapon)
+	{
+		return _ordinanceFuels[(int) weapon];
+	}
+	
+	public void IncreaseOrdinanceFuel(InventoryWeapon weapon, uint amount)
+	{
+		_ordinanceFuels[(int) weapon] += amount;
+		if (_ordinanceFuels[(int) weapon] > MaxOrdinanceFuel)
+			_ordinanceFuels[(int) weapon] = MaxOrdinanceFuel;
+		
+		if (weapon == EquippedWeaponEnum)
+			_fuelLabel.Text = "x" + _ordinanceFuels[(int)weapon];
+	}
+	
+	public void DecreaseOrdinanceFuel(InventoryWeapon weapon, uint amount)
+	{
+		if (amount < _ordinanceFuels[(int) weapon])
+			_ordinanceFuels[(int) weapon] -= amount;
+		else
+			_ordinanceFuels[(int) weapon] = 0;
+		
+		if (weapon == EquippedWeaponEnum)
+			_fuelLabel.Text = "x" + _ordinanceFuels[(int)weapon];
+	}
+	
 	public void PickUpScrap(uint count)
 	{
 		ScrapCount += count;
@@ -108,13 +142,6 @@ public class Inventory : Node2D
 		_scrapLabel.Text = "x" + ScrapCount;
 	}
 
-
-	public void AddOrdinanceFuel(uint count)
-	{
-		OrdinanceFuel += count;
-		_fuelLabel.Text = "x" + OrdinanceFuel;
-	}
-
 	public void SwitchWeapon(InventoryWeapon weapon)
 	{
 		if (!HasWeapon(weapon) || weapon == _weaponId) return;
@@ -128,10 +155,11 @@ public class Inventory : Node2D
 		_weapon.OwnerPlayer = _player;
 		_weapon.OnEquip();
 
-		
 		_weaponId = weapon;
 		_weaponWheel.SelectWeapon(_weaponId);
 
+		_fuelLabel.Text = "x" + GetOrdinanceFuel(_weaponId);
+		
 		CallDeferred("add_child", _weapon);
 		_player.EmitSignal(nameof(Player.WeaponEquipped), newWeapon);
 	}
@@ -147,12 +175,6 @@ public class Inventory : Node2D
 		if (weapon == InventoryWeapon.Count)
 			return false;
 		return _weaponContainer[(int) weapon];
-	}
-	
-	public void DrainFuel(uint drainPerTick)
-	{
-		OrdinanceFuel -= drainPerTick;
-		_fuelLabel.Text = "x" + OrdinanceFuel;
 	}
 
 	public void IncrementKillCount()
