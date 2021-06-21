@@ -46,6 +46,8 @@ public class TacticalAbility : WeaponAbility
 
 	public override void DeActivate()
 	{
+		if (!ShowBarWhenInUse)
+			_abilityBar.Visible = true;
 		IsActive = false;
 		IsOnCoolDown = true;
 		_cooldownTimer.Start();
@@ -97,6 +99,8 @@ public class TacticalAbility : WeaponAbility
 
 	private void _OnStartCoolDown()
 	{
+		if (!ShowBarWhenInUse)
+			_abilityBar.Visible = true;
 		IsActive = false;
 		IsOnCoolDown = true;
 		_cooldownTimer.Start();
