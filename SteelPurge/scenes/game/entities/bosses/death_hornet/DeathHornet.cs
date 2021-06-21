@@ -77,7 +77,7 @@ public class DeathHornet : Boss
 	{
 		if (_playerAlreadyInsideLethalArea)
 		{
-			DetectedPlayer.TakeDamage(PlayerDamage, new Vector2(LookingDirection, 0));
+			AttackPlayer(PlayerDamage, DetectedPlayer, new Vector2(LookingDirection, 0));
 		}
 
 		var phaseTwoHp = 0.50f * MaxHealth;
@@ -342,7 +342,7 @@ public class DeathHornet : Boss
 	private void _OnAttackPlayer(Player player)
 	{
 		if (_playerAlreadyInsideLethalArea) return;
-		player.TakeDamage(PlayerDamage, new Vector2(LookingDirection, 0));
+		AttackPlayer(PlayerDamage, player, new Vector2(LookingDirection, 0));
 		_playerAlreadyInsideLethalArea = true;
 	}
 

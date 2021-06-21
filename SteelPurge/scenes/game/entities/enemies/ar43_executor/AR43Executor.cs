@@ -62,6 +62,6 @@ public class AR43Executor : Enemy
 	private void _OnPlayerMelee(object body)
 	{
 		var player = (Player)body;
-		player.TakeDamage(MeleeDamage, new Vector2(Direction, 0));
+		AttackPlayer(MeleeDamage, player, new Vector2(Direction, 0));
 	}
 }

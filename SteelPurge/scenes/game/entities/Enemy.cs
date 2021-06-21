@@ -15,6 +15,7 @@ public class Enemy : KinematicEntity
 	[Export] public float KnockBackSpeed = 300;
 	[Export] public bool CanBeKnockedBack = true;
 	[Export] public bool DropScrapWhenDamaged = true;
+	public bool IsCurrentlyLethal = true;
 
 	private bool _isDead;
 	private bool _dropScrap;
@@ -36,6 +37,12 @@ public class Enemy : KinematicEntity
 	{
 	}
 
+	public void AttackPlayer(uint damage, Player player, Vector2 knockBackDirection)
+	{
+		if (!IsCurrentlyLethal) return;
+		player.TakeDamage(damage, knockBackDirection);
+	}
+	
 	public override void _Process(float delta)
 	{
 		base._Process(delta);

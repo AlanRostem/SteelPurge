@@ -80,7 +80,7 @@ public class XWFrontRogue : Enemy
 
 	private void _OnPlayerEnterMeleeArea(object body)
 	{
-		((Player)body).TakeDamage(DamagePerHit, new Vector2(Direction, 0));
+		AttackPlayer(DamagePerHit, ((Player)body), new Vector2(Direction, 0));
 		_isRushing = false;
 		QueueFree();
 	}

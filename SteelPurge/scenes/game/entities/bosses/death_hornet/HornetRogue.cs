@@ -42,7 +42,7 @@ public class HornetRogue : Enemy
 
 	private void _OnPlayerEnterExplosiveArea(Player player)
 	{
-		player.TakeDamage(DamagePerHit, new Vector2(Direction, 0));
+		AttackPlayer(DamagePerHit, player, new Vector2(Direction, 0));
 		QueueFree();
 	}
 }

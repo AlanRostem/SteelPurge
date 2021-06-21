@@ -31,6 +31,7 @@ public class HostileProjectile : KinematicEntity
 	{
 		if (body is Player player)
 		{
+			// TODO: Consider checking the enemy's lethality
 			player.TakeDamage(Damage, new Vector2(DamageDirection, 0));
 		}
 
