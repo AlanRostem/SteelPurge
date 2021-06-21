@@ -10,29 +10,29 @@ public class Player : KinematicEntity
 		Airborne,
 	}
 	
-	private static readonly float KnockBackSpeed = 100;
+	public static readonly float KnockBackSpeed = 100;
 	// private static readonly float MaxMovementSpeed = 250;
 
 	public static readonly float WalkSpeed = 120;
 
-	private static readonly float WalkAcceleration = 360;
+	public static readonly float WalkAcceleration = 360;
 
 	// private static readonly float WalkSpeedAir = 60;
 	// private static readonly float MaxWalkSpeedFiring = 35;
-	private static float DashSpeed = 250;
+	public static float DashSpeed = 250;
 
-	private static readonly float JumpSpeed = 255;
-	private static readonly float MinJumpSpeed = 100;
+	public static readonly float JumpSpeed = 255;
+	public static readonly float MinJumpSpeed = 100;
 
-	private static readonly float SlideFriction = 0.02f;
-	private static readonly float AirFriction = 0.01f;
+	public static readonly float SlideFriction = 0.02f;
+	public static readonly float AirFriction = 0.01f;
 
 	// private static readonly float SlideFrictionJump = 0.85f;
-	private static readonly float WalkFriction = 0.95f;
+	public static readonly float WalkFriction = 0.95f;
 
-	private static readonly float CrouchSpeed = 20;
+	public static readonly float CrouchSpeed = 20;
 
-	private static readonly float SlideSpeed = 230; // 460;
+	public static readonly float SlideSpeed = 230; // 460;
 	// private static readonly float SlideDecreasePerSlide = 120;
 	// private static readonly float SlideIncreasePerSecond = 280;
 

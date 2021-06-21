@@ -3,7 +3,6 @@ using System;
 
 public class KineticSlamAbility : TacticalAbility
 {
-	public float JumpSpeed = 300;
 	public float SlamSpeed = 300;
 
 	private bool _isJumping = false;
@@ -28,7 +27,8 @@ public class KineticSlamAbility : TacticalAbility
 		else
 		{
 			_isJumping = true;
-			player.VelocityY = -JumpSpeed;
+			player.VelocityY = -Player.JumpSpeed;
+			_jumpTimer.Start();
 		}
 	}
 
@@ -43,6 +43,10 @@ public class KineticSlamAbility : TacticalAbility
 	public override void OnUpdate()
 	{
 		var player = GetWeapon().OwnerPlayer;
+
+		if (player.IsOnCeiling() && !player.IsOnFloor())
+			Slam();
+		
 		if (!_isJumping && _isSlamming && player.IsOnFloor())
 		{
 			DeActivate();
