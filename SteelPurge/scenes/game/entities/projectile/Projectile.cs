@@ -7,17 +7,18 @@ public class Projectile : KinematicEntity
 	[Export] public float MaxVelocity = 250;
 	[Export] public bool DeleteOnEnemyHit = true;
 	[Export] public bool DeleteOnTileMapHit = true;
-	[Export] public float CriticalRaySize = 5f;
 	[Export] public float VisualAngle = 0f;
 	[Export] public uint Damage;
 	private bool _hasDisappeared = false;
 
 	public Weapon OwnerWeapon { get; private set; }
+	public Vector2 SpritePosition;
 	public float DirectionSign = 1;
 
 	public override void _Ready()
 	{
 		CurrentCollisionMode = CollisionMode.Move;
+		GetNode<Sprite>("ProjectileSprite").Position = SpritePosition;
 	}
 
 	public void InitWithAngularVelocity(Weapon owner)

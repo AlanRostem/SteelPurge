@@ -3,6 +3,10 @@ using System;
 
 public class FiringDevice : Node2D
 {
+	private float _alternationOffset = 2f;
+	
+	[Export] public bool AreProjectilesAlternatingInOffsets = true;
+	
 	private Weapon _weapon;
 	
 	public T GetWeapon<T>() where T : Weapon
@@ -51,6 +55,11 @@ public class FiringDevice : Node2D
 		else if (player.HorizontalLookingDirection < 0)
 		{
 			projectile.DirectionAngle = 180 - projectile.DirectionAngle;
+		}
+
+		if (AreProjectilesAlternatingInOffsets && !player.IsAimingDown && !player.IsAimingUp)
+		{
+			projectile.SpritePosition = new Vector2(0, _alternationOffset *= -1);
 		}
 
 		projectile.InitWithAngularVelocity(GetWeapon());
