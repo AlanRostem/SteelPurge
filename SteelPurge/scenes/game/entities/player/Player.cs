@@ -135,8 +135,9 @@ public class Player : KinematicEntity
 				Velocity = (new Vector2(KnockBackSpeed * direction.x, -JumpSpeed / 2));
 				if (!CanTakeDamage) return;
 
-				if (PlayerInventory.EquippedWeapon.TacticalEnhancement.IsActive)
-					PlayerInventory.EquippedWeapon.TacticalEnhancement.DeActivate();
+				var ability = PlayerInventory.EquippedWeapon.TacticalEnhancement;
+				if (ability != null && ability.IsActive)
+					ability.DeActivate();
 
 				IsInvulnerable = true;
 				_isStunned = true;
