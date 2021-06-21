@@ -10,20 +10,24 @@ public class Fabricator : Node2D
 	private void _OnInteract(Player player)
 	{
 		var diffHealth = player.MaxHealth - player.Health;
-		var diffFuel = player.PlayerInventory.MaxOrdinanceFuel - player.PlayerInventory.GetOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum);
+		var diffFuel = player.PlayerInventory.MaxOrdinanceFuel -
+					   player.PlayerInventory.GetOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum);
 
-		if (diffHealth < player.PlayerInventory.ScrapCount)
+		if (diffHealth != 0)
 		{
-			player.Health += diffHealth;
-			player.PlayerInventory.LoseScrap(diffHealth);
+			if (diffHealth < player.PlayerInventory.ScrapCount)
+			{
+				player.Health += diffHealth;
+				player.PlayerInventory.LoseScrap(diffHealth);
+			}
+			else
+			{
+				player.Health += player.PlayerInventory.ScrapCount;
+				player.PlayerInventory.LoseScrap(player.PlayerInventory.ScrapCount);
+				return;
+			}
 		}
-		else
-		{
-			player.Health += player.PlayerInventory.ScrapCount;
-			player.PlayerInventory.LoseScrap(player.PlayerInventory.ScrapCount);
-			return;
-		}
-		
+
 		if (diffFuel < player.PlayerInventory.ScrapCount)
 		{
 			player.PlayerInventory.IncreaseOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum, diffFuel);
@@ -31,7 +35,8 @@ public class Fabricator : Node2D
 		}
 		else
 		{
-			player.PlayerInventory.IncreaseOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum, player.PlayerInventory.ScrapCount);
+			player.PlayerInventory.IncreaseOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum,
+				player.PlayerInventory.ScrapCount);
 			player.PlayerInventory.LoseScrap(player.PlayerInventory.ScrapCount);
 		}
 	}

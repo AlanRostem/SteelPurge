@@ -45,7 +45,7 @@ public class Inventory : Node2D
 
 	public uint MaxOrdinanceFuel = 125;
 	
-	private uint[] _ordinanceFuels =
+	private readonly uint[] _ordinanceFuels =
 	{
 		125,
 		125,
