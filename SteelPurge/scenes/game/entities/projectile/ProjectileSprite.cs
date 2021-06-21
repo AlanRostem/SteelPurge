@@ -13,5 +13,9 @@ public class ProjectileSprite : Sprite
 		{
 			Scale = new Vector2(_parent.DirectionSign, Scale.y);
 		}
+		else
+		{
+			Scale = new Vector2(Scale.x, _parent.DirectionSign);
+		}
 	}
 }
