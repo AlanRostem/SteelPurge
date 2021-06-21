@@ -12,6 +12,7 @@
 [node name="Falcon" instance=ExtResource( 1 )]
 DisplayName = "Falcon"
 CollectibleSprite = ExtResource( 7 )
+WeaponType = 3
 DamagePerShot = 15
 MeleeDamage = 30
 RateOfFire = 70
