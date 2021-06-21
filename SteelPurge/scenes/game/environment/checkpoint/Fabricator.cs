@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 
 /// <summary>
-/// Serves as a checkpoint and crafting station. The order in
-/// which these are stacked in the Node Tree determines their
-/// checkpoint order. 
+/// Serves as a checkpoint and crafting station
 /// </summary>
 public class Fabricator : Node2D
 {
@@ -30,6 +28,11 @@ public class Fabricator : Node2D
 		{
 			player.PlayerInventory.IncreaseOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum, diffFuel);
 			player.PlayerInventory.LoseScrap(diffFuel);
+		}
+		else
+		{
+			player.PlayerInventory.IncreaseOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum, player.PlayerInventory.ScrapCount);
+			player.PlayerInventory.LoseScrap(player.PlayerInventory.ScrapCount);
 		}
 	}
 }
