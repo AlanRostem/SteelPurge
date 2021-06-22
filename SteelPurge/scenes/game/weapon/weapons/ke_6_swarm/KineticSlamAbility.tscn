@@ -10,6 +10,7 @@ script = ExtResource( 2 )
 FuelRequirement = 20
 Duration = 3600.0
 ShowBarWhenInUse = false
+DirectHitBaseDamage = 25
 
 [node name="JumpTimer" type="Timer" parent="." index="3"]
 wait_time = 0.2
