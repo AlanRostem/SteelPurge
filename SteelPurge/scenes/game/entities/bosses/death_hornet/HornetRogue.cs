@@ -30,7 +30,7 @@ public class HornetRogue : Enemy
 			QueueFree();
 	}
 
-	public override void TakeDamage(uint damage, Vector2 direction, bool isCritical)
+	public override void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
 	{
 		if (direction.y != 0)
 		{
