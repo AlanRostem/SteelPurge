@@ -3,6 +3,9 @@ using System;
 
 public class KineticSlamAbility : TacticalAbility
 {
+	private static readonly PackedScene BlastScene =
+		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/SeismicBlast.tscn"); 
+	
 	[Export] public uint DirectHitBaseDamage = 110;
 	
 	public float SlamSpeed = 300;
@@ -63,7 +66,9 @@ public class KineticSlamAbility : TacticalAbility
 		var player = GetWeapon().OwnerPlayer;
 		player.CanMove = true;
 		_slamAreaShape.SetDeferred("disabled", true);
-		// TODO: Perform AOE damage and stun
+		var blast = (SeismicBlast)BlastScene.Instance();
+		blast.Position = player.Position;
+		player.ParentWorld.AddChild(blast);
 	}
 
 	private void _OnJumpEnd()
@@ -77,6 +82,10 @@ public class KineticSlamAbility : TacticalAbility
 		if (area is CriticalHitbox criticalHitbox)
 		{
 			criticalHitbox.TakeHit(DirectHitBaseDamage);
+			if (criticalHitbox.GetParent() is Enemy)
+			{
+				// TODO: Perform AOE damage and stun
+			}
 			// return;
 		}
 
