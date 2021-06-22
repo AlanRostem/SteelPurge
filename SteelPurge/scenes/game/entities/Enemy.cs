@@ -17,6 +17,23 @@ public class Enemy : KinematicEntity
 	[Export] public bool DropScrapWhenDamaged = true;
 	public bool IsCurrentlyLethal = true;
 
+	public bool IsAiEnabled
+	{
+		get => _isAiEnabled;
+		set
+		{
+			_isAiEnabled = value;
+			IsCurrentlyLethal = value;
+			CanMove = value;
+			
+			if (value)
+				OnEnableAi();
+			else
+				OnDisableAi();
+		}
+	}
+
+	private bool _isAiEnabled = true;
 	private bool _isDead;
 	private bool _dropScrap;
 	private bool _isKnockedBack;
@@ -60,6 +77,7 @@ public class Enemy : KinematicEntity
 			scrap.SetCount(ScrapDropHit);
 		}
 
+		if (!_isAiEnabled) return;
 		var distance = Mathf.Abs(ParentWorld.PlayerNode.Position.x - Position.x);
 		if (distance < PlayerDetectionRange)
 		{
@@ -151,12 +169,20 @@ public class Enemy : KinematicEntity
 		Modulate = new Color(1, 1, 1);
 	}
 
-	public virtual void EnableAi()
+	/// <summary>
+	/// Called when AI is enabled. Recommend all Enemy derived scenes/classes
+	/// override this for consistent behaviour.
+	/// </summary>
+	public virtual void OnEnableAi()
 	{
 		
 	}
 	
-	public virtual void DisableAi()
+	/// <summary>
+	/// Called when AI is disabled. Recommend all Enemy derived scenes/classes
+	/// override this for consistent behaviour.
+	/// </summary>
+	public virtual void OnDisableAi()
 	{
 		
 	}

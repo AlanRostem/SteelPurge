@@ -16,12 +16,27 @@ public class XWFrontRogue : Enemy
 	private bool _canRush = false;
 
 	private Timer _rushDelayTimer;
+	private Timer _trackCooldownTimer;
 
 	[Signal]
 	public delegate void TriggerDirSwapCooldown();
 	
 	[Signal]
 	public delegate void OnRush();
+
+	public override void OnEnableAi()
+	{
+		_trackCooldownTimer.Start();
+	}
+
+	public override void OnDisableAi()
+	{
+		_isRushing = false;
+		_rushDelayTimer.Stop();
+		_canRush = false;
+		_trackCooldownTimer.Stop();
+		_canSwapDir = false;
+	}
 
 	private void _OnCanSwap()
 	{
@@ -32,6 +47,7 @@ public class XWFrontRogue : Enemy
 	{
 		base._Ready();
 		_rushDelayTimer = GetNode<Timer>("XWFrontRogueRushDelayTimer");
+		_trackCooldownTimer = GetNode<Timer>("XWFrontRogueTrackCooldownTimer");
 	}
 
 	protected override void _ProcessWhenPlayerDetected(Player player)

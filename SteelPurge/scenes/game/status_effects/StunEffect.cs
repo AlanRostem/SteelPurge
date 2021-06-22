@@ -10,7 +10,7 @@ public class StunEffect : StatusEffect
 		if (subject is Enemy enemy)
 		{
 			enemy.IsCurrentlyLethal = false;
-			enemy.DisableAi();
+			enemy.IsAiEnabled = false;
 		}
 	}
 
@@ -20,7 +20,7 @@ public class StunEffect : StatusEffect
 		if (subject is Enemy enemy)
 		{
 			enemy.IsCurrentlyLethal = true;
-			enemy.EnableAi();
+			enemy.IsAiEnabled = true;
 		}
 	}
 }
