@@ -12,6 +12,9 @@ public class AR43Executor : Enemy
 	private RayCast2D _groundScanner;
 
 	private bool _startWalking = false;
+	private Timer _approachIntervalTimer;
+	private Timer _standIntervalTimer;
+	private Timer _fireRateTimer;
 	
 	[Signal]
 	public delegate void TriggerApproach();
@@ -19,11 +22,28 @@ public class AR43Executor : Enemy
 	[Signal]
 	public delegate void TriggerStand();
 
+	public override void OnEnableAi()
+	{
+		_fireRateTimer.Start();
+		_standIntervalTimer.Start();
+	}
+
+	public override void OnDisableAi()
+	{
+		_approachIntervalTimer.Stop();
+		_standIntervalTimer.Stop();
+		_fireRateTimer.Stop();
+		_startWalking = false;
+	}
+
 	public override void _Ready()
 	{
 		base._Ready();
 		PlayerDetectionRange = 160;
 		_groundScanner = GetNode<RayCast2D>("GroundScanner");
+		_approachIntervalTimer = GetNode<Timer>("ApproachIntervalTimer");
+		_standIntervalTimer = GetNode<Timer>("StandIntervalTimer");
+		_fireRateTimer = GetNode<Timer>("FireRateTimer");
 	}
 	
 	protected override void _ProcessWhenPlayerDetected(Player player)
