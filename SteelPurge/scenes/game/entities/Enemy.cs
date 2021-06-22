@@ -151,13 +151,13 @@ public class Enemy : KinematicEntity
 		Modulate = new Color(1, 1, 1);
 	}
 
-	public void EnableAi()
+	public virtual void EnableAi()
 	{
-		throw new NotImplementedException();
+		
 	}
 	
-	public void DisableAi()
+	public virtual void DisableAi()
 	{
-		throw new NotImplementedException();
+		
 	}
 }
