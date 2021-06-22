@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game/status_effects/StatusEffect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/status_effects/StunEffect.cs" type="Script" id=2]
+
+[node name="StunEffect" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+Type = 1
+Duration = 3.0
+[connection signal="End" from="." to="." method="_OnEnd"]
+[connection signal="Start" from="." to="." method="_OnStart"]

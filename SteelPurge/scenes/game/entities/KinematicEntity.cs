@@ -23,12 +23,14 @@ public class KinematicEntity : KinematicBody2D
 	public enum StatusEffectType
 	{
 		Burn,
+		Stun,
 		None,
 	}
 
 	private static readonly PackedScene[] StatusEffectScenes =
 	{
-		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/BurnEffect.tscn")
+		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/BurnEffect.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/status_effects/StunEffect.tscn"),
 	};
 
 	private readonly Dictionary<StatusEffectType, StatusEffect> _effects =
@@ -131,6 +133,7 @@ public class KinematicEntity : KinematicBody2D
 
 
 		var newEffect = (StatusEffect) StatusEffectScenes[(int) type].Instance();
+		newEffect.EmitSignal(nameof(StatusEffect.Start), this);
 		_effects[type] = newEffect;
 		AddChild(newEffect);
 	}

@@ -16,6 +16,9 @@ public class StatusEffect : Node2D
 	}
 
 	[Signal]
+	public delegate void Start(KinematicEntity subject);
+	
+	[Signal]
 	public delegate void End(KinematicEntity subject);
 
 	[Signal]

@@ -150,4 +150,14 @@ public class Enemy : KinematicEntity
 	{
 		Modulate = new Color(1, 1, 1);
 	}
+
+	public void EnableAi()
+	{
+		throw new NotImplementedException();
+	}
+	
+	public void DisableAi()
+	{
+		throw new NotImplementedException();
+	}
 }

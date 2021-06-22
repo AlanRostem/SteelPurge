@@ -9,6 +9,7 @@ public class SeismicBlast : Area2D
 	private void _OnEnemyEntered(Enemy enemy)
 	{
 		enemy.TakeDamage(BlastDamage, Vector2.Zero);
+		enemy.ApplyStatusEffect(KinematicEntity.StatusEffectType.Stun);
 	}
 	
 	private void _OnExistenceTimerTimeout()
