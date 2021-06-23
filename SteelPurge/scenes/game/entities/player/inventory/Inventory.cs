@@ -29,6 +29,7 @@ public class Inventory : Node2D
 	
 	public Weapon EquippedWeapon => _weapon;
 	public InventoryWeapon EquippedWeaponEnum => _weaponId;
+	public bool WasWeaponAbilityOnCooldown = false;
 
 	private Weapon _weapon;
 	private InventoryWeapon _weaponId = InventoryWeapon.Count;

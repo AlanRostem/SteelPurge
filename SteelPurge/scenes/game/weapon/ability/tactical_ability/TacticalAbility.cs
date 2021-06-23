@@ -45,14 +45,15 @@ public class TacticalAbility : WeaponAbility
 
 	public override void DeActivate()
 	{
-		_abilityBar.Visible = true;
 		IsActive = false;
+		OnEnd();
+		
+		_abilityBar.Visible = true;
 		IsOnCoolDown = true;
 		_cooldownTimer.Start();
 		_durationTimer.Stop();
 		_abilityBar.MaxValue = CoolDown * 1000;
 		_abilityBar.Value = 0;
-		OnEnd();
 	}
 
 	public override void _Process(float delta)
@@ -95,21 +96,14 @@ public class TacticalAbility : WeaponAbility
 	private void _OnStartCoolDown()
 	{
 		_abilityBar.Visible = true;
-		IsActive = false;
 		IsOnCoolDown = true;
 		_cooldownTimer.Start();
 		_abilityBar.MaxValue = CoolDown * 1000;
 		_abilityBar.Value = 0;
-		OnEnd();
 	}
 
 	public override void OnWeaponSwapped()
 	{
 		_abilityBar.Visible = false;
-	}
-
-	public override void OnSwitchTo()
-	{
-		CallDeferred(nameof(_OnStartCoolDown));
 	}
 }

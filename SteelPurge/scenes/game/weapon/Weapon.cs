@@ -23,7 +23,6 @@ public class Weapon : Node2D
 	[Export] public float MinFallSpeedForRecoilHovering = -20;
 	[Export] public SpriteFrames PlayerSpriteFrames;
 	
-	public bool HasSwitched { get; private set; }
 
 	[Signal]
 	public delegate void Swapped();
@@ -112,8 +111,6 @@ public class Weapon : Node2D
 	public void OnSwitchTo()
 	{
 		OnEquip();
-		HasSwitched = true;
-		//SetDeferred(nameof(HasSwitched), false);
 	}
 
 	[Signal]

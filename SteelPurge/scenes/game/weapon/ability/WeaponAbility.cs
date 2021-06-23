@@ -11,8 +11,6 @@ public class WeaponAbility : Node2D
 	public override void _Ready()
 	{
 		_weapon = GetParent<Weapon>();
-		if (_weapon.HasSwitched)
-			OnSwitchTo();
 	}
 	
 	public T GetWeapon<T>() where T : Weapon
@@ -40,8 +38,4 @@ public class WeaponAbility : Node2D
 		
 	}
 
-	public virtual void OnSwitchTo()
-	{
-		
-	}
 }
