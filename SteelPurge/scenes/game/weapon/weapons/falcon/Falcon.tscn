@@ -35,4 +35,3 @@ BurstCount = 4
 [node name="CollisionShape2D" parent="MeleeArea" index="0"]
 position = Vector2( 24, 0 )
 [connection signal="OnMeleeHit" from="." to="RocketBayonetAbility" method="_OnFalconOnMeleeHit"]
-[connection signal="Swapped" from="." to="TalconFiringDevice" method="_OnSwap"]

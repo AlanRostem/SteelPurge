@@ -114,4 +114,9 @@ public class TacticalAbility : WeaponAbility
 	{
 		_abilityBar.Visible = false;
 	}
+
+	public override void OnSwitchTo()
+	{
+		_OnStartCoolDown();
+	}
 }

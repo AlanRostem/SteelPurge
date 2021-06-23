@@ -74,7 +74,7 @@ public class Inventory : Node2D
 		AddWeapon(InventoryWeapon.Falcon);
 		
 		// TODO: When implementing save files, make sure to change this
-		SwitchWeapon(DefaultGun);
+		EquipWeapon(DefaultGun);
 		_fuelLabel.Text = "x" + GetOrdinanceFuel(EquippedWeaponEnum);
 
 		_weaponWheel.SelectWeapon(_weaponId);
@@ -142,6 +142,26 @@ public class Inventory : Node2D
 		_scrapLabel.Text = "x" + ScrapCount;
 	}
 
+	public void EquipWeapon(InventoryWeapon weapon)
+	{
+		if (_weapon != null) 
+			throw new Exception("Cannot equip weapon: Player already has one!");
+		
+		var newWeapon = (Weapon)WeaponScenes[(int)weapon].Instance();
+		
+		_weapon = newWeapon;
+		_weapon.OwnerPlayer = _player;
+		_weapon.OnEquip();
+
+		_weaponId = weapon;
+		_weaponWheel.SelectWeapon(_weaponId);
+
+		_fuelLabel.Text = "x" + GetOrdinanceFuel(_weaponId);
+		
+		CallDeferred("add_child", _weapon);
+		_player.EmitSignal(nameof(Player.WeaponEquipped), newWeapon);
+	}
+
 	public void SwitchWeapon(InventoryWeapon weapon)
 	{
 		if (!HasWeapon(weapon) || weapon == _weaponId) return;
@@ -153,7 +173,7 @@ public class Inventory : Node2D
 		
 		_weapon = newWeapon;
 		_weapon.OwnerPlayer = _player;
-		_weapon.OnEquip();
+		_weapon.OnSwitchTo();
 
 		_weaponId = weapon;
 		_weaponWheel.SelectWeapon(_weaponId);

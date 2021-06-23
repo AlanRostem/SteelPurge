@@ -11,6 +11,7 @@ public class WeaponAbility : Node2D
 	public override void _Ready()
 	{
 		_weapon = GetParent<Weapon>();
+		_weapon.Connect(nameof(Weapon.SwitchedTo), this, nameof(OnSwitchTo));
 	}
 	
 	public T GetWeapon<T>() where T : Weapon
@@ -34,6 +35,11 @@ public class WeaponAbility : Node2D
 	}
 
 	public virtual void OnWeaponSwapped()
+	{
+		
+	}
+
+	public virtual void OnSwitchTo()
 	{
 		
 	}

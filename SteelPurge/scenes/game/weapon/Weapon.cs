@@ -107,8 +107,17 @@ public class Weapon : Node2D
 		Equipped = true;
 	}
 
+	public void OnSwitchTo()
+	{
+		OnEquip();
+		CallDeferred("emit_signal", nameof(SwitchedTo));
+	}
+
 	[Signal]
 	public delegate void DashFire();
+	
+	[Signal]
+	public delegate void SwitchedTo();
 
 	[Signal]
 	public delegate void Fired();
