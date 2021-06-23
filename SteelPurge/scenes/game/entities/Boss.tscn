@@ -8,6 +8,7 @@
 
 [node name="Boss" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+EffectsImmuneTo = [ 1 ]
 CanBeKnockedBack = false
 DropScrapWhenDamaged = false
 

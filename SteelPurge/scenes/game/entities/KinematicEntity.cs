@@ -16,6 +16,7 @@ public class KinematicEntity : KinematicBody2D
 	[Export] public CollisionMode CurrentCollisionMode = CollisionMode.Snap;
 	[Export] public bool CanReceiveStatusEffect = true;
 	[Export] public uint MaxHealth = 100;
+	[Export] private Array<StatusEffectType> EffectsImmuneTo = new Array<StatusEffectType>();
 
 	private bool _canAccelerate = true;
 	public bool IsOnSlope { get; private set; }
@@ -123,6 +124,7 @@ public class KinematicEntity : KinematicBody2D
 	{
 		if (type == StatusEffectType.None || !CanReceiveStatusEffect)
 			return;
+		if (EffectsImmuneTo.Contains(type)) return;
 
 		if (_effects.ContainsKey(type))
 		{
