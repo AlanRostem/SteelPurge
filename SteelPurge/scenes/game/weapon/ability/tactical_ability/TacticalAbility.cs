@@ -6,7 +6,6 @@ public class TacticalAbility : WeaponAbility
 	[Export] public uint FuelRequirement = 10;
 	[Export] public float CoolDown = 6;
 	[Export] public float Duration = 1;
-	[Export] public bool ShowBarWhenInUse = true;
 	public float CurrentDuration => _durationTimer.TimeLeft;
 	public float CurrentCoolDown => _cooldownTimer.TimeLeft;
 
@@ -46,8 +45,7 @@ public class TacticalAbility : WeaponAbility
 
 	public override void DeActivate()
 	{
-		if (!ShowBarWhenInUse)
-			_abilityBar.Visible = true;
+		_abilityBar.Visible = true;
 		IsActive = false;
 		IsOnCoolDown = true;
 		_cooldownTimer.Start();
@@ -70,10 +68,6 @@ public class TacticalAbility : WeaponAbility
 				OnActivate();
 				_durationTimer.Start();
 				GetWeapon().OwnerPlayer.PlayerInventory.DecreaseOrdinanceFuel(equippedWeaponEnum, FuelRequirement);
-				if (ShowBarWhenInUse)
-					_abilityBar.Visible = true;
-				_abilityBar.MaxValue = Duration * 1000;
-				_abilityBar.Value = Duration * 1000;
 			}
 			else
 			{
@@ -100,8 +94,7 @@ public class TacticalAbility : WeaponAbility
 
 	private void _OnStartCoolDown()
 	{
-		if (!ShowBarWhenInUse)
-			_abilityBar.Visible = true;
+		_abilityBar.Visible = true;
 		IsActive = false;
 		IsOnCoolDown = true;
 		_cooldownTimer.Start();
@@ -117,6 +110,6 @@ public class TacticalAbility : WeaponAbility
 
 	public override void OnSwitchTo()
 	{
-		_OnStartCoolDown();
+		CallDeferred(nameof(_OnStartCoolDown));
 	}
 }
