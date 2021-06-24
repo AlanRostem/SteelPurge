@@ -130,6 +130,11 @@ public class KinematicEntity : KinematicBody2D
 		ApplyStatusEffect(type, effect => {});
 	}
 	
+	protected virtual void OnStatusEffectApplied(StatusEffectType type, StatusEffect effect)
+	{
+		
+	}
+	
 	public void ApplyStatusEffect(StatusEffectType type, StatusEffectInitializer callback)
 	{
 		if (type == StatusEffectType.None || !CanReceiveStatusEffect)
@@ -142,6 +147,7 @@ public class KinematicEntity : KinematicBody2D
 			effect.ResetTime();
 			callback(effect);
 			effect.EmitSignal(nameof(StatusEffect.Start), this);
+			OnStatusEffectApplied(type, effect);
 			return;
 		}
 
@@ -151,6 +157,7 @@ public class KinematicEntity : KinematicBody2D
 		newEffect.EmitSignal(nameof(StatusEffect.Start), this);
 		_effects[type] = newEffect;
 		AddChild(newEffect);
+		OnStatusEffectApplied(type, newEffect);
 	}
 
 	public void ClearStatusEffects()
