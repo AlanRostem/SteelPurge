@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entities/platform/MovingPlatform.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/entities/bosses/death_hornet/DeathHornet.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 32 )
 
 [node name="Seg2Level1" instance=ExtResource( 1 )]
 
@@ -14,6 +17,8 @@ position = Vector2( 64, 81 )
 
 [node name="DeathHornet" parent="EntityPool" index="0" instance=ExtResource( 3 )]
 position = Vector2( 312, 160 )
+collision_mask = 2147483697
+CurrentCollisionMode = 1
 CanBeKnockedBack = true
 
 [node name="MovingPlatform" parent="EntityPool" index="1" instance=ExtResource( 2 )]
@@ -21,3 +26,27 @@ position = Vector2( 200, 160 )
 
 [node name="MovingPlatform2" parent="EntityPool" index="2" instance=ExtResource( 2 )]
 position = Vector2( 64, 101 )
+
+[node name="LeftBossWallHitDetectionArea" type="Area2D" parent="." index="3"]
+position = Vector2( 16, 160 )
+collision_layer = 0
+collision_mask = 512
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBossWallHitDetectionArea" index="0"]
+shape = SubResource( 1 )
+
+[node name="RightBossWallHitDetectionArea2" type="Area2D" parent="." index="4"]
+position = Vector2( 384, 160 )
+collision_layer = 0
+collision_mask = 512
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBossWallHitDetectionArea2" index="0"]
+shape = SubResource( 1 )
+[connection signal="body_entered" from="LeftBossWallHitDetectionArea" to="EntityPool/DeathHornet" method="_OnHitLeftWall"]
+[connection signal="body_entered" from="RightBossWallHitDetectionArea2" to="EntityPool/DeathHornet" method="_OnHitRightWall"]

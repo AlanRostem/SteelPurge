@@ -180,15 +180,6 @@ public class DeathHornet : Boss
 	{
 		switch (_currentAttackMode)
 		{
-			case AttackMode.Rush:
-				if (_isRushing && IsOnWall())
-				{
-					_isRushing = false;
-					LookingDirection *= -1;
-					_rushRecoveryTimer.Start();
-				}
-
-				break;
 			case AttackMode.KamikazeRogues:
 				if (_kamikazeRogueModeRoguesLaunched == MaxRoguesShotOnKamikazeMode)
 				{
@@ -380,5 +371,26 @@ public class DeathHornet : Boss
 	private void _OnBombardmentEnd()
 	{
 		ChangeAttackMode(AttackMode.Flight);
+	}
+
+
+	private void _OnHitLeftWall(object body)
+	{
+		if (_isRushing && VelocityX < 0)
+		{
+			_isRushing = false;
+			LookingDirection *= -1;
+			_rushRecoveryTimer.Start();
+		}
+	}
+
+	private void _OnHitRightWall(object body)
+	{
+		if (_isRushing && VelocityX > 0)
+		{
+			_isRushing = false;
+			LookingDirection *= -1;
+			_rushRecoveryTimer.Start();
+		}
 	}
 }

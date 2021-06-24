@@ -100,6 +100,7 @@ public class TacticalAbility : WeaponAbility
 		_cooldownTimer.Start();
 		_abilityBar.MaxValue = CoolDown * 1000;
 		_abilityBar.Value = 0;
+		OnEnd();
 	}
 
 	public override void OnWeaponSwapped()
