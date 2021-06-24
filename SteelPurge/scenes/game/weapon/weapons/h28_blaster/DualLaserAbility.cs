@@ -58,6 +58,7 @@ public class DualLaserAbility : TacticalAbility
 		if (_shotsFired >= 2)
 		{
 			_shotDelayTimer.Stop();
+			DeActivate();
 		}
 	}
 }
