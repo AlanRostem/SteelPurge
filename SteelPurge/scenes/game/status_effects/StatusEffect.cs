@@ -24,6 +24,21 @@ public class StatusEffect : Node2D
 	[Signal]
 	public delegate void Reset();
 
+	public override void _PhysicsProcess(float delta)
+	{
+		OnUpdate(delta);
+	}
+
+	public virtual void OnUpdate(float delta)
+	{
+		
+	}
+
+	public void EndEffect()
+	{
+		OnEnd();
+	}
+
 	private void OnEnd()
 	{
 		Subject.RemoveStatusEffect(Type);

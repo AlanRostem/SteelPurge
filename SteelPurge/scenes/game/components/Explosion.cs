@@ -12,7 +12,13 @@ public class Explosion : Area2D
 		if (hitBox.GetParent() is Enemy entity)
 		{
 			var angle = Position.AngleToPoint(entity.Position);
-			entity.KnockBack(new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)), KnockBackForce * GetPhysicsProcessDeltaTime());
+			entity.ApplyStatusEffect(KinematicEntity.StatusEffectType.KnockBack, effect =>
+			{
+				var knockBackEffect = (KnockBackEffect) effect;
+				knockBackEffect.KnockBackForce = new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce *
+												 GetPhysicsProcessDeltaTime();
+				knockBackEffect.DisableEntityMovement = true;
+			});
 		}
 	}
 	

@@ -6,3 +6,6 @@
 [node name="KnockBackEffect" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 Type = 2
+Duration = 0.1
+[connection signal="End" from="." to="." method="_OnEnd"]
+[connection signal="Start" from="." to="." method="_OnStart"]
