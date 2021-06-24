@@ -79,7 +79,6 @@ public class TacticalAbility : WeaponAbility
 		if (IsActive)
 		{
 			OnUpdate();
-			_abilityBar.Value -= delta * 1000;
 		}
 		else if (IsOnCoolDown)
 		{
@@ -97,6 +96,7 @@ public class TacticalAbility : WeaponAbility
 	{
 		_abilityBar.Visible = true;
 		IsOnCoolDown = true;
+		IsActive = false;
 		_cooldownTimer.Start();
 		_abilityBar.MaxValue = CoolDown * 1000;
 		_abilityBar.Value = 0;
