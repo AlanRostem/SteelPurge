@@ -8,6 +8,7 @@ public class KinematicEntity : KinematicBody2D
 	{
 		Move,
 		Slide,
+		KnockBack,
 		Snap,
 	}
 
@@ -25,6 +26,7 @@ public class KinematicEntity : KinematicBody2D
 	{
 		Burn,
 		Stun,
+		KnockBack,
 		None,
 	}
 
@@ -32,6 +34,7 @@ public class KinematicEntity : KinematicBody2D
 	{
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/BurnEffect.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/status_effects/StunEffect.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/status_effects/KnockBackEffect.tscn"),
 	};
 
 	private readonly Dictionary<StatusEffectType, StatusEffect> _effects =
@@ -120,7 +123,14 @@ public class KinematicEntity : KinematicBody2D
 		Health = MaxHealth;
 	}
 
+	public delegate void StatusEffectInitializer(StatusEffect effect);
+
 	public void ApplyStatusEffect(StatusEffectType type)
+	{
+		ApplyStatusEffect(type, effect => {});
+	}
+	
+	public void ApplyStatusEffect(StatusEffectType type, StatusEffectInitializer callback)
 	{
 		if (type == StatusEffectType.None || !CanReceiveStatusEffect)
 			return;
@@ -130,11 +140,14 @@ public class KinematicEntity : KinematicBody2D
 		{
 			var effect = _effects[type];
 			effect.ResetTime();
+			callback(effect);
+			effect.EmitSignal(nameof(StatusEffect.Start), this);
 			return;
 		}
 
 
 		var newEffect = (StatusEffect) StatusEffectScenes[(int) type].Instance();
+		callback(newEffect);
 		newEffect.EmitSignal(nameof(StatusEffect.Start), this);
 		_effects[type] = newEffect;
 		AddChild(newEffect);

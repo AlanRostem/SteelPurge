@@ -24,7 +24,11 @@ public class Explosion : Area2D
 			var angle = Position.AngleToPoint(player.Position);
 			var force = new Vector2(-Mathf.Cos(angle) * 0.2f, -Mathf.Sin(angle)) * KnockBackForce *
 						GetPhysicsProcessDeltaTime();
-			player.ApplyForce(force);
+			player.ApplyStatusEffect(KinematicEntity.StatusEffectType.KnockBack, effect =>
+			{
+				var knockBackEffect = (KnockBackEffect)effect;
+				knockBackEffect.KnockBackForce = force;
+			});
 		}
 	}
 
