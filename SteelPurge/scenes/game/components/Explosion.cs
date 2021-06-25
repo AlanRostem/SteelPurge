@@ -3,7 +3,7 @@ using Godot;
 public class Explosion : StaticEntity
 {
 	[Export] public uint Damage = 30;
-	[Export] public float KnockBackForce = 100;
+	[Export] public float KnockBackForce = 300;
 	
 	private void _OnVulnerableHitBoxHit(object area)
 	{
@@ -15,8 +15,7 @@ public class Explosion : StaticEntity
 			entity.ApplyStatusEffect(KinematicEntity.StatusEffectType.KnockBack, effect =>
 			{
 				var knockBackEffect = (KnockBackEffect) effect;
-				knockBackEffect.KnockBackForce = new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce *
-												 GetPhysicsProcessDeltaTime();
+				knockBackEffect.KnockBackForce = new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce;
 				knockBackEffect.DisableEntityMovement = true;
 			});
 		}
@@ -28,8 +27,7 @@ public class Explosion : StaticEntity
 		if (body is Player player)
 		{
 			var angle = Position.AngleToPoint(player.Position);
-			var force = new Vector2(-Mathf.Cos(angle) * 0.2f, -Mathf.Sin(angle)) * KnockBackForce *
-						GetPhysicsProcessDeltaTime();
+			var force = new Vector2(-Mathf.Cos(angle) * 0.2f, -Mathf.Sin(angle)) * KnockBackForce;
 			player.ApplyStatusEffect(KinematicEntity.StatusEffectType.KnockBack, effect =>
 			{
 				var knockBackEffect = (KnockBackEffect)effect;
