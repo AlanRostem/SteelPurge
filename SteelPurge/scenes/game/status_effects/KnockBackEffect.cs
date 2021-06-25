@@ -8,7 +8,6 @@ public class KnockBackEffect : StatusEffect
 
 	private void _OnStart(KinematicEntity subject)
 	{
-		
 		if (Mathf.Abs(subject.VelocityX) < Mathf.Abs(KnockBackForce.x))
 			subject.VelocityX = KnockBackForce.x;
 		

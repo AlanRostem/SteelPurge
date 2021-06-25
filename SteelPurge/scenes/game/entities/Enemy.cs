@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using Object = Godot.Object;
 
-public class Enemy : KinematicEntity
+public class Enemy : LivingEntity
 {
 	protected static readonly PackedScene ScrapScene =
 		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");

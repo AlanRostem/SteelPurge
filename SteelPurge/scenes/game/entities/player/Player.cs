@@ -1,6 +1,6 @@
 using Godot;
 
-public class Player : KinematicEntity
+public class Player : LivingEntity
 {
 	public enum MovementState
 	{

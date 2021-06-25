@@ -38,7 +38,7 @@ one_shot = true
 
 [node name="DamageNumberGenerator" parent="." index="5" instance=ExtResource( 4 )]
 [connection signal="Hit" from="VulnerableHitbox" to="." method="_OnVulnerableHitboxHit"]
-[connection signal="Hit" from="CriticalHitbox" to="." method="_OnCriticalHitboxHit"]
 [connection signal="Hit" from="CriticalHitbox" to="." method="_OnVulnerableHitboxHit"]
+[connection signal="Hit" from="CriticalHitbox" to="." method="_OnCriticalHitboxHit"]
 [connection signal="timeout" from="MeleeAffectedKnockBackTimer" to="." method="_OnKnockBackEnd"]
 [connection signal="timeout" from="DamageIndicationTimer" to="." method="_OnDamageIndicationTimeout"]
