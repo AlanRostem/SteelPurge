@@ -22,7 +22,7 @@ public class KnockBackEffect : StatusEffect
 	public override void OnUpdate(float delta)
 	{
 		if (!DisableEntityMovement) return;
-		Subject.VelocityX = Mathf.Lerp(Subject.VelocityX, 0, 0.1f);
+		Subject.VelocityX = Mathf.Lerp(Subject.VelocityX, 0, 0.3f);
 	}
 
 	private void _OnEnd(KinematicEntity subject)
