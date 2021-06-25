@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class LaserShot : Area2D
+public class LaserShot : StaticEntity
 {
 	[Export] public uint Damage = 80;
 	

@@ -40,18 +40,20 @@ public class DualLaserAbility : TacticalAbility
 
 	private void _OnShoot()
 	{
-		var laser = (LaserShot) LaserShotScene.Instance();
+		Vector2 position;
 		if (_shotsFired > 0 && !GetWeapon().OwnerPlayer.IsAimingDown && !GetWeapon().OwnerPlayer.IsAimingUp)
-			laser.Position = GetWeapon().OwnerPlayer.Position + new Vector2(0, 7);
+			position = GetWeapon().OwnerPlayer.Position + new Vector2(0, 7);
 		else 
-			laser.Position = GetWeapon().OwnerPlayer.Position;
+			position = GetWeapon().OwnerPlayer.Position;
+		
+		var laser = GetWeapon().OwnerPlayer.ParentWorld.Entities.SpawnStaticEntityDeferred<LaserShot>(LaserShotScene, position);
+		
 		if (GetWeapon().OwnerPlayer.IsAimingDown)
 			laser.RotationDegrees = 90;
 		else if (GetWeapon().OwnerPlayer.IsAimingUp)
 			laser.RotationDegrees = -90;
 		else 
 			laser.Scale = new Vector2(GetWeapon().OwnerPlayer.HorizontalLookingDirection, 1);
-		GetWeapon().OwnerPlayer.ParentWorld.AddChild(laser);
 		_shotsFired++;
 		GetWeapon().OwnerPlayer.IsGravityEnabled = true;
 		GetWeapon().OwnerPlayer.VelocityY = -GetWeapon().HoverRecoilSpeed;
