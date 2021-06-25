@@ -9,7 +9,7 @@ public class SeismicBlast : StaticEntity
 	private void _OnEnemyEntered(Enemy enemy)
 	{
 		enemy.TakeDamage(BlastDamage, Vector2.Zero);
-		enemy.ApplyStatusEffect(KinematicEntity.StatusEffectType.Stun);
+		enemy.ApplyStatusEffect(LivingEntity.StatusEffectType.Stun);
 	}
 	
 	private void _OnExistenceTimerTimeout()

@@ -82,7 +82,7 @@ public class KineticSlamAbility : TacticalAbility
 			criticalHitbox.TakeHit(DirectHitBaseDamage);
 			if (criticalHitbox.GetParent() is Enemy enemy)
 			{
-				enemy.ApplyStatusEffect(KinematicEntity.StatusEffectType.Stun);
+				enemy.ApplyStatusEffect(LivingEntity.StatusEffectType.Stun);
 			}
 			// return;
 		}

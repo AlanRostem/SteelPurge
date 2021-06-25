@@ -8,7 +8,6 @@ public class KinematicEntity : KinematicBody2D
 	{
 		Move,
 		Slide,
-		KnockBack,
 		Snap,
 	}
 
@@ -17,29 +16,10 @@ public class KinematicEntity : KinematicBody2D
 	[Export] public CollisionMode CurrentCollisionMode = CollisionMode.Snap;
 	[Export] public bool CanReceiveStatusEffect = true;
 	[Export] public uint MaxHealth = 100;
-	[Export] private Array<StatusEffectType> EffectsImmuneTo = new Array<StatusEffectType>();
 
 	private bool _canAccelerate = true;
 	public bool IsOnSlope { get; private set; }
-
-	public enum StatusEffectType
-	{
-		Burn,
-		Stun,
-		KnockBack,
-		None,
-	}
-
-	private static readonly PackedScene[] StatusEffectScenes =
-	{
-		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/BurnEffect.tscn"),
-		GD.Load<PackedScene>("res://scenes/game/status_effects/StunEffect.tscn"),
-		GD.Load<PackedScene>("res://scenes/game/status_effects/KnockBackEffect.tscn"),
-	};
-
-	private readonly Dictionary<StatusEffectType, StatusEffect> _effects =
-		new Dictionary<StatusEffectType, StatusEffect>();
-
+	
 	public World ParentWorld { get; protected set; }
 
 	[Export] public bool CanMove = true;
@@ -64,22 +44,6 @@ public class KinematicEntity : KinematicBody2D
 	private float _perspectiveAngle = 0;
 
 	[Export] public bool IsGravityEnabled = true;
-
-	public uint Health
-	{
-		get => _health;
-
-		set
-		{
-			
-			_health = value;
-			if (_health > MaxHealth)
-				_health = MaxHealth;
-			EmitSignal(nameof(HealthChanged), _health);
-		}
-	}
-
-	private uint _health = 100;
 
 	private Vector2 _velocity;
 
@@ -120,59 +84,9 @@ public class KinematicEntity : KinematicBody2D
 		ParentWorld = GetParent().GetParent().GetParent<World>();
 		// TODO: Figure out why this gets set to (0, 0) in scene instancing
 		PerspectiveDownVector = Vector2.Down;
-		Health = MaxHealth;
 	}
 
-	public delegate void StatusEffectInitializer(StatusEffect effect);
-
-	public void ApplyStatusEffect(StatusEffectType type)
-	{
-		ApplyStatusEffect(type, effect => {});
-	}
 	
-	protected virtual void OnStatusEffectApplied(StatusEffectType type, StatusEffect effect)
-	{
-		
-	}
-	
-	public void ApplyStatusEffect(StatusEffectType type, StatusEffectInitializer callback)
-	{
-		if (type == StatusEffectType.None || !CanReceiveStatusEffect)
-			return;
-		if (EffectsImmuneTo.Contains(type)) return;
-
-		if (_effects.ContainsKey(type))
-		{
-			var effect = _effects[type];
-			effect.ResetTime();
-			callback(effect);
-			effect.EmitSignal(nameof(StatusEffect.Start), this);
-			OnStatusEffectApplied(type, effect);
-			return;
-		}
-
-
-		var newEffect = (StatusEffect) StatusEffectScenes[(int) type].Instance();
-		callback(newEffect);
-		newEffect.EmitSignal(nameof(StatusEffect.Start), this);
-		_effects[type] = newEffect;
-		AddChild(newEffect);
-		OnStatusEffectApplied(type, newEffect);
-	}
-
-	public void ClearStatusEffects()
-	{
-		foreach (var effect in _effects)
-		{
-			effect.Value.EmitSignal(nameof(StatusEffect.End));
-		}
-	}
-
-	public virtual void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
-	{
-		Health -= damage;
-	}
-
 	public override void _PhysicsProcess(float delta)
 	{
 		if (CanMove)
@@ -265,12 +179,7 @@ public class KinematicEntity : KinematicBody2D
 	protected virtual void _OnMovement(float delta)
 	{
 	}
-
-	public void RemoveStatusEffect(StatusEffectType type)
-	{
-		_effects.Remove(type);
-	}
-
+	
 	public void ApplyForce(Vector2 knockBackForce)
 	{
 		if (!CanMove) return;

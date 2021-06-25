@@ -12,7 +12,7 @@ public class Explosion : StaticEntity
 		if (hitBox.GetParent() is Enemy entity)
 		{
 			var angle = Position.AngleToPoint(entity.Position);
-			entity.ApplyStatusEffect(KinematicEntity.StatusEffectType.KnockBack, effect =>
+			entity.ApplyStatusEffect(LivingEntity.StatusEffectType.KnockBack, effect =>
 			{
 				var knockBackEffect = (KnockBackEffect) effect;
 				knockBackEffect.KnockBackForce = new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce;
@@ -28,7 +28,7 @@ public class Explosion : StaticEntity
 		{
 			var angle = Position.AngleToPoint(player.Position);
 			var force = new Vector2(-Mathf.Cos(angle) * 0.2f, -Mathf.Sin(angle)) * KnockBackForce;
-			player.ApplyStatusEffect(KinematicEntity.StatusEffectType.KnockBack, effect =>
+			player.ApplyStatusEffect(LivingEntity.StatusEffectType.KnockBack, effect =>
 			{
 				var knockBackEffect = (KnockBackEffect)effect;
 				knockBackEffect.KnockBackForce = force;

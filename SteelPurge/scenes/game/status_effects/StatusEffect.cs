@@ -3,15 +3,15 @@ using System;
 
 public class StatusEffect : Node2D
 {
-	[Export] public KinematicEntity.StatusEffectType Type = KinematicEntity.StatusEffectType.None;
+	[Export] public LivingEntity.StatusEffectType Type = LivingEntity.StatusEffectType.None;
 	[Export] public float Duration = 1;
-	public KinematicEntity Subject { get; private set; }
+	public LivingEntity Subject { get; private set; }
 
 	public override void _Ready()
 	{
-		Subject = GetParent<KinematicEntity>();
+		Subject = GetParent<LivingEntity>();
 
-		if (OS.IsDebugBuild() && Type == KinematicEntity.StatusEffectType.None)
+		if (OS.IsDebugBuild() && Type == LivingEntity.StatusEffectType.None)
 			throw new Exception("StatusEffectType cannot have None type");
 	}
 
