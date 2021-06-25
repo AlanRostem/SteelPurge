@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class SeismicBlast : Area2D
+public class SeismicBlast : StaticEntity
 {
 	// TODO: Add sprite that shows the blast
 	public static uint BlastDamage = 80;

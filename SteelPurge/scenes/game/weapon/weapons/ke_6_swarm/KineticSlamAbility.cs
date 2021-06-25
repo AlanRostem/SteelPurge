@@ -66,9 +66,7 @@ public class KineticSlamAbility : TacticalAbility
 		var player = GetWeapon().OwnerPlayer;
 		player.CanMove = true;
 		_slamAreaShape.SetDeferred("disabled", true);
-		var blast = (SeismicBlast)BlastScene.Instance();
-		blast.Position = player.Position;
-		player.ParentWorld.AddChild(blast);
+		player.ParentWorld.Entities.SpawnStaticEntityDeferred<SeismicBlast>(BlastScene, player.Position);
 	}
 
 	private void _OnJumpEnd()
