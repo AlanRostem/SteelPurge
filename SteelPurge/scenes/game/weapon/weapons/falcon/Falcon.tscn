@@ -18,6 +18,7 @@ MeleeDamage = 30
 RateOfFire = 70
 MaxRecoilHoverShots = 2
 HoverRecoilSpeed = 65.0
+MinFallSpeedForRecoilHovering = -50.0
 PlayerSpriteFrames = ExtResource( 3 )
 
 [node name="RocketBayonetAbility" parent="." index="4" instance=ExtResource( 4 )]

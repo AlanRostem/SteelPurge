@@ -1,6 +1,6 @@
 using Godot;
 
-public class Explosion : Area2D
+public class Explosion : StaticEntity
 {
 	[Export] public uint Damage = 30;
 	[Export] public float KnockBackForce = 100;
