@@ -6,6 +6,7 @@ public class BurstFireTimer : Node
 	[Export] public uint RateOfFire = 400;
 	[Export] public uint BurstCount = 3;
 	[Export] public bool RecoilHover = true;
+	[Export] public bool LoseAmmoPerBurstFire = true;
 
 	private FiringDevice _device;
 	private Timer _timer;
@@ -33,7 +34,9 @@ public class BurstFireTimer : Node
 	private void _OnFire()
 	{
 		if (RecoilHover)
-			_device.GetWeapon().ProduceRecoilToHover();
+			_device.GetWeapon().ProduceRecoilToHoverOnly();
+		if (LoseAmmoPerBurstFire)
+			_device.GetWeapon().CurrentRecoilHoverAmmo--;
 		_device.OnFireOutput();
 		_currentBurstCount++;
 		if (_currentBurstCount >= BurstCount)

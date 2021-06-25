@@ -156,10 +156,16 @@ public class Weapon : Node2D
 
 		EmitSignal(nameof(Fired));
 
-		ProduceRecoilToHover();
+		ProduceRecoilToHoverAndLoseBoosts();
 	}
 
-	public void ProduceRecoilToHover()
+	public void ProduceRecoilToHoverOnly()
+	{
+		if (!(OwnerPlayer.VelocityY > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
+		OwnerPlayer.VelocityY = -HoverRecoilSpeed;
+	}
+	
+	public void ProduceRecoilToHoverAndLoseBoosts()
 	{
 		if (!(OwnerPlayer.VelocityY > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
 		if (CurrentRecoilHoverAmmo == 0) return;

@@ -16,7 +16,7 @@ WeaponType = 3
 DamagePerShot = 15
 MeleeDamage = 30
 RateOfFire = 70
-MaxRecoilHoverShots = 8
+MaxRecoilHoverShots = 2
 HoverRecoilSpeed = 65.0
 PlayerSpriteFrames = ExtResource( 3 )
 
@@ -31,6 +31,7 @@ script = ExtResource( 6 )
 [node name="BurstFireTimer" parent="TalconFiringDevice" index="0" instance=ExtResource( 8 )]
 RateOfFire = 550
 BurstCount = 4
+LoseAmmoPerBurstFire = false
 
 [node name="CollisionShape2D" parent="MeleeArea" index="0"]
 position = Vector2( 24, 0 )
