@@ -14,8 +14,6 @@ public class KinematicEntity : KinematicBody2D
 	public float Gravity = 600;
 
 	[Export] public CollisionMode CurrentCollisionMode = CollisionMode.Snap;
-	[Export] public bool CanReceiveStatusEffect = true;
-	[Export] public uint MaxHealth = 100;
 
 	private bool _canAccelerate = true;
 	public bool IsOnSlope { get; private set; }

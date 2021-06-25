@@ -24,7 +24,9 @@ public class LivingEntity : KinematicEntity
 	private readonly Dictionary<StatusEffectType, StatusEffect> _effects =
 		new Dictionary<StatusEffectType, StatusEffect>();
 
-	[Export] private Array<StatusEffectType> EffectsImmuneTo = new Array<StatusEffectType>();
+	[Export] public Array<StatusEffectType> EffectsImmuneTo = new Array<StatusEffectType>();
+	[Export] public bool CanReceiveStatusEffect = true;
+	[Export] public uint MaxHealth = 100;
 
 	public uint Health
 	{
