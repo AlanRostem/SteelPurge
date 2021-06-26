@@ -70,6 +70,7 @@ public class Player : LivingEntity
 	private Timer _slideDurationTimer;
 	public Inventory PlayerInventory;
 	private Camera2D _camera;
+	private DoubleTapDetector _doubleTapDetector = new DoubleTapDetector();
 
 	public override void _Ready()
 	{
@@ -184,7 +185,7 @@ public class Player : LivingEntity
 		_right = Input.IsActionPressed("right");
 		_jump = Input.IsActionJustPressed("jump");
 		_notJump = Input.IsActionJustReleased("jump");
-		_dash = Input.IsActionJustPressed("dash");
+		_dash = _doubleTapDetector.IsInputActionDoubleTapped("fire", GetPhysicsProcessDeltaTime());
 		IsAimingUp = Input.IsActionPressed("aim_up") && CanAimUp;
 
 		if (_canCancelSlide)
