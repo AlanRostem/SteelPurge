@@ -122,6 +122,7 @@ public class Player : LivingEntity
 		_bodyShape.SetDeferred("disabled", true);
 		IsGravityEnabled = false;
 		CanMove = false;
+		PlayerInventory.EquippedWeapon.CanFire = false;
 		_respawnTimer.Start();
 	}
 
@@ -562,6 +563,7 @@ public class Player : LivingEntity
 		_bodyShape.SetDeferred("disabled", false);
 		IsGravityEnabled = true;
 		CanMove = true;
+		PlayerInventory.EquippedWeapon.CanFire = true;
 	}
 
 	public bool IsMovingTooFast()
