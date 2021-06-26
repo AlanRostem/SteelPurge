@@ -13,8 +13,8 @@ extents = Vector2( 6, 8 )
 collision_layer = 264
 script = ExtResource( 3 )
 MaxHealth = 220
-BaseHitPoints = 220
 PlayerDetectionRange = 10000.0
+DropTeCells = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
 shape = SubResource( 1 )
@@ -31,6 +31,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="6"]
 frames = ExtResource( 2 )
 animation = "walk"
+frame = 1
 playing = true
 
 [node name="ExplosiveArea" type="Area2D" parent="." index="7"]

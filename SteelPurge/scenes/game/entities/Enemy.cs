@@ -18,6 +18,7 @@ public class Enemy : LivingEntity
 	[Export] public float KnockBackSpeed = 300;
 	[Export] public bool CanBeKnockedBack = true;
 	[Export] public bool DropScrapWhenDamaged = true;
+	[Export] public bool DropTeCells = true;
 	public bool IsCurrentlyLethal = true;
 
 	public bool IsAiEnabled
@@ -114,7 +115,6 @@ public class Enemy : LivingEntity
 				_isDead = true;
 				_damageNumberGenerator.ShowDamageNumber(Health, Position, ParentWorld, Colors.Red);
 				Health = 0;
-				_dropTeCell = true;
 			}
 		}
 		else
@@ -130,7 +130,7 @@ public class Enemy : LivingEntity
 				KnockBack(direction);
 			}
 
-			if (isCritical)
+			if (isCritical && DropTeCells)
 			{
 				_dropTeCell = true;
 			}
