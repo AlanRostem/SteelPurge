@@ -63,6 +63,7 @@ public class KineticSlamAbility : TacticalAbility
 			if (!_isProtected)
 				DeActivate();
 			SpawnSeismicBlast();
+			_isSlamming = false;
 		}
 	}
 
