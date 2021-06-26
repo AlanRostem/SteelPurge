@@ -90,4 +90,9 @@ public class DragonsBreathAbility : ResourceAbility
 		var hitBox = (VulnerableHitbox) area;
 		_hitBoxes.Remove(hitBox.GetInstanceId());
 	}
+		
+	private void _OnHostileProjectileHitFireArea(HostileProjectile body)
+	{
+		body._OnDisappear();
+	}
 }

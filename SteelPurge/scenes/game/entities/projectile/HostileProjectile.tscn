@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/game/entities/projectile/HostileProjectile.cs" type="Script" id=1]
 
 [node name="HostileProjectile" type="KinematicBody2D"]
-collision_layer = 0
+collision_layer = 4096
 collision_mask = 0
 script = ExtResource( 1 )
 CurrentCollisionMode = 0
