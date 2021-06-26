@@ -193,6 +193,11 @@ public class Player : LivingEntity
 			_slide = Input.IsActionPressed("slide");
 		}
 
+		if (Input.IsActionJustPressed("swap_aim") && CanSwapDirection)
+		{
+			HorizontalLookingDirection *= -1;
+ 		}
+		
 		if (Input.IsActionJustPressed("aim_down") && CanAimDown)
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
