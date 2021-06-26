@@ -44,4 +44,9 @@ public class World : Node2D
 	{
 		GetTree().Paused = paused;
 	}
+	
+	private void _OnPlayerDied()
+	{
+		LoadSegment(_currentSegmentIndex);
+	}
 }
