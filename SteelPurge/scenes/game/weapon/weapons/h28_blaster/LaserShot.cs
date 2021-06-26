@@ -3,7 +3,7 @@ using System;
 
 public class LaserShot : StaticEntity
 {
-	[Export] public uint Damage = 80;
+	[Export] public uint Damage = 40;
 	[Export] public uint PlayerHealCount = 20;
 	
 	private void _OnVulnerableHitBoxHit(object area)

@@ -7,9 +7,12 @@ public class Enemy : LivingEntity
 {
 	protected static readonly PackedScene ScrapScene =
 		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
+	protected static readonly PackedScene TeCellScene =
+		GD.Load<PackedScene>("res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn");
 
 	[Export] public uint ScrapDropHit = 2;
 	[Export] public uint ScrapDropKilled = 25;
+	[Export] public uint TeCellDrop = 25;
 
 	[Export] public float PlayerDetectionRange = 1000;
 	[Export] public float KnockBackSpeed = 300;
@@ -36,6 +39,7 @@ public class Enemy : LivingEntity
 	private bool _isAiEnabled = true;
 	private bool _isDead;
 	private bool _dropScrap;
+	private bool _dropTeCell;
 	private bool _isKnockedBack;
 	protected Player DetectedPlayer { get; private set; }
 	private Timer _meleeAffectedKnockBackTimer;
@@ -77,6 +81,13 @@ public class Enemy : LivingEntity
 			scrap.SetCount(ScrapDropHit);
 		}
 
+		if (_dropTeCell)
+		{
+			_dropTeCell = false;
+			var cell = ParentWorld.Entities.SpawnEntityDeferred<FuelCollectible>(TeCellScene, Position);
+			cell.Count = TeCellDrop;
+		}
+
 		if (!_isAiEnabled) return;
 		var distance = Mathf.Abs(ParentWorld.PlayerNode.Position.x - Position.x);
 		if (distance < PlayerDetectionRange)
@@ -103,6 +114,7 @@ public class Enemy : LivingEntity
 				_isDead = true;
 				_damageNumberGenerator.ShowDamageNumber(Health, Position, ParentWorld, Colors.Red);
 				Health = 0;
+				_dropTeCell = true;
 			}
 		}
 		else
@@ -116,6 +128,11 @@ public class Enemy : LivingEntity
 			if (direction.x != 0 || direction.y != 0)
 			{
 				KnockBack(direction);
+			}
+
+			if (isCritical)
+			{
+				_dropTeCell = true;
 			}
 		}
 	}

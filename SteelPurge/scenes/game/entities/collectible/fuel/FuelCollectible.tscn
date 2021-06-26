@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/game/entities/collectible/FallingCollectible.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entities/collectible/fuel/FuelCollectible.cs" type="Script" id=2]
-[ext_resource path="res://assets/texture/gas.png" type="Texture" id=3]
+[ext_resource path="res://assets/texture/te_cell.png" type="Texture" id=3]
 
 [node name="FuelCollectible" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
