@@ -98,7 +98,7 @@ public class XWFrontRogue : Enemy
 	{
 		AttackPlayer(DamagePerHit, ((Player)body), new Vector2(Direction, 0));
 		_isRushing = false;
-		QueueFree();
+		if (IsCurrentlyLethal) QueueFree();
 	}
 	
 	private void _OnCanRush()

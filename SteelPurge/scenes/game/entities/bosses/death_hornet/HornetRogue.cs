@@ -43,6 +43,6 @@ public class HornetRogue : Enemy
 	private void _OnPlayerEnterExplosiveArea(Player player)
 	{
 		AttackPlayer(DamagePerHit, player, new Vector2(Direction, 0));
-		QueueFree();
+		if (IsCurrentlyLethal) QueueFree();
 	}
 }
