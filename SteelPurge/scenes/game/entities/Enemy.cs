@@ -115,6 +115,10 @@ public class Enemy : LivingEntity
 				_isDead = true;
 				_damageNumberGenerator.ShowDamageNumber(Health, Position, ParentWorld, Colors.Red);
 				Health = 0;
+				if (isCritical && DropTeCells)
+				{
+					_dropTeCell = true;
+				}
 			}
 		}
 		else
