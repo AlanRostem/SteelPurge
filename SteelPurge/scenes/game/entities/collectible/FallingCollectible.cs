@@ -35,8 +35,11 @@ public class FallingCollectible : KinematicEntity
 
 		if (Input.IsActionJustPressed("interact") && _player != null)
 		{
-			OnCollected(_player);
-			QueueFree();
+			if (CollectionCondition(_player))
+			{
+				OnCollected(_player);
+				QueueFree();
+			}
 		}
 	}
 
@@ -48,12 +51,20 @@ public class FallingCollectible : KinematicEntity
 			return;
 		}
 
-		OnCollected((Player) body);
-		QueueFree();
+		if (CollectionCondition((Player) body))
+		{
+			OnCollected((Player) body);
+			QueueFree();
+		}
 	}
 
 	private void _OnPlayerExit(object body)
 	{
 		_player = null;
+	}
+
+	public virtual bool CollectionCondition(Player player)
+	{
+		return true;
 	}
 }
