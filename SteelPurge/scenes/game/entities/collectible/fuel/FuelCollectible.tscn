@@ -10,3 +10,13 @@ script = ExtResource( 2 )
 [node name="Sprite" parent="." index="2"]
 position = Vector2( 0, -2 )
 texture = ExtResource( 3 )
+
+[node name="FadeAlternationTimer" type="Timer" parent="." index="3"]
+wait_time = 0.2
+
+[node name="ExistenceTimer" type="Timer" parent="." index="4"]
+wait_time = 10.0
+one_shot = true
+autostart = true
+[connection signal="timeout" from="FadeAlternationTimer" to="." method="_OnFadeAlternation"]
+[connection signal="timeout" from="ExistenceTimer" to="." method="_OnStartFadingAway"]
