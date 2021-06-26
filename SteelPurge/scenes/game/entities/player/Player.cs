@@ -572,7 +572,7 @@ public class Player : LivingEntity
 
 	public bool IsMovingFasterThanCrouch()
 	{
-		const float margin = 0.1f;
+		const float margin = 0.5f;
 		return Mathf.Abs(VelocityX) >= CrouchSpeed + margin;
 	}
 
