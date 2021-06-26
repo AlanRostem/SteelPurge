@@ -9,7 +9,6 @@
 script = ExtResource( 2 )
 FuelRequirement = 20
 Duration = 3600.0
-ShowBarWhenInUse = false
 DirectHitBaseDamage = 25
 
 [node name="JumpTimer" type="Timer" parent="." index="3"]
@@ -27,5 +26,10 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlamHitDetectionArea" index="0"]
 shape = SubResource( 1 )
 disabled = true
+
+[node name="ProtectionTimer" type="Timer" parent="." index="5"]
+wait_time = 3.0
+one_shot = true
 [connection signal="timeout" from="JumpTimer" to="." method="_OnJumpEnd"]
 [connection signal="area_entered" from="SlamHitDetectionArea" to="." method="_OnSlamHitDetectionAreaHitBoxEntered"]
+[connection signal="timeout" from="ProtectionTimer" to="." method="_OnProtectionEnd"]
