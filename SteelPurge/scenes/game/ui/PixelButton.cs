@@ -7,12 +7,16 @@ public class PixelButton : Button
 	public override void _Ready()
 	{
 		if (IsFocusedOnReady)
+		{
 			GrabFocus();
+		}
 	}
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+	
+	private void _OnVisibilityChanged()
+	{
+		if (IsFocusedOnReady && Visible)
+		{
+			GrabFocus();
+		}
+	}
 }
