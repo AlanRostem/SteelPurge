@@ -2,7 +2,7 @@
 
 public class DoubleTapDetector
 {
-    private const float PressIntervalTime = 0.7f;
+    private const float PressIntervalTime = 0.2f;
     private bool _pressedOnce = false;
     private float _currentPressTime = 0f;
 
