@@ -67,10 +67,9 @@ public class Player : LivingEntity
 	private CollisionShape2D _bodyShape;
 	private CollisionShape2D _roofDetectorShape;
 	private Timer _respawnTimer;
-	private Timer _slideDurationTimer;
 	public Inventory PlayerInventory;
 	private Camera2D _camera;
-	private DoubleTapDetector _doubleTapDetector = new DoubleTapDetector();
+	private readonly DoubleTapDetector _doubleTapDetector = new DoubleTapDetector();
 
 	public override void _Ready()
 	{
@@ -81,7 +80,6 @@ public class Player : LivingEntity
 		_camera = GetNode<Camera2D>("PlayerCamera");
 		_roofDetectorShape = GetNode<CollisionShape2D>("RoofDetector/UpperBodyShape");
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
-		_slideDurationTimer = GetNode<Timer>("SlideDurationTimer");
 	}
 
 	[Signal]
