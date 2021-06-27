@@ -74,10 +74,9 @@ public class AR43Executor : Enemy
 	
 	private void _OnFire()
 	{
-		if (DetectedPlayer is null) return;
 		var bullet = ParentWorld.Entities.SpawnEntityDeferred<HostileProjectile>(BulletScene, Position);
 		bullet.DamageDirection = Direction;
-		var angle = DetectedPlayer.Position.AngleToPoint(Position);
+		var angle = ParentWorld.PlayerNode.Position.AngleToPoint(Position);
 		bullet.DirectionAngle = Mathf.Rad2Deg(angle);
 		bullet.Rotation = angle;
 		bullet.InitWithAngularVelocity();
