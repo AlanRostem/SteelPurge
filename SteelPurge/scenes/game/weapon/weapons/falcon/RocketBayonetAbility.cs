@@ -23,17 +23,6 @@ public class RocketBayonetAbility : TacticalAbility
 		player.CurrentCollisionMode = KinematicEntity.CollisionMode.Slide;
 	}
 
-	public override void OnUpdate()
-	{
-		var player = GetWeapon().OwnerPlayer;
-		// TODO: Detect when player is on a slope and stop the ability
-		if (player.IsOnWall())
-		{
-			DeActivate();
-			player.VelocityX = 0;
-		}
-	}
-
 	public override void OnEnd()
 	{
 		var weapon = GetWeapon();
@@ -55,5 +44,12 @@ public class RocketBayonetAbility : TacticalAbility
 		DeActivate();
 		var player = GetWeapon().OwnerPlayer;
 		player.VelocityX = 0;
+	}
+	
+	private void _OnHitObstacle(object body)
+	{
+		if (!IsActive) return;
+		DeActivate();
+		GetWeapon().OwnerPlayer.VelocityX = 0;
 	}
 }
