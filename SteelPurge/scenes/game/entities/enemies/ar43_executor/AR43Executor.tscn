@@ -14,10 +14,11 @@ height = 4.0
 
 [node name="AR43Executor" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-MaxHealth = 225
+MaxHealth = 325
 ScrapDropHit = 3
 ScrapDropKilled = 60
 PlayerDetectionRange = 160.0
+WalkSpeed = 80.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
 position = Vector2( 0, 4 )
@@ -71,8 +72,8 @@ polygon = PoolVector2Array( -24, 16, 0, -8, 24, 16 )
 
 [node name="DamageNumberGenerator" parent="." index="12"]
 position = Vector2( 0, -16 )
-[connection signal="TriggerApproach" from="." to="ApproachIntervalTimer" method="_OnTrigger"]
 [connection signal="TriggerApproach" from="." to="FireRateTimer" method="_OnCancel"]
+[connection signal="TriggerApproach" from="." to="ApproachIntervalTimer" method="_OnTrigger"]
 [connection signal="TriggerStand" from="." to="StandIntervalTimer" method="_OnTrigger"]
 [connection signal="TriggerStand" from="." to="FireRateTimer" method="_OnTrigger"]
 [connection signal="timeout" from="ApproachIntervalTimer" to="." method="_OnApproach"]
@@ -80,7 +81,7 @@ position = Vector2( 0, -16 )
 [connection signal="timeout" from="FireRateTimer" to="." method="_OnFire"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="StandIntervalTimer" method="_OnTrigger"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="FireRateTimer" method="_OnTrigger"]
-[connection signal="screen_exited" from="VisibilityEnabler2D" to="ApproachIntervalTimer" method="_OnCancel"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="StandIntervalTimer" method="_OnCancel"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="FireRateTimer" method="_OnCancel"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="ApproachIntervalTimer" method="_OnCancel"]
 [connection signal="body_entered" from="MeleeArea" to="." method="_OnPlayerMelee"]
