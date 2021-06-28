@@ -8,7 +8,7 @@ public class Explosion : StaticEntity
 	private void _OnVulnerableHitBoxHit(object area)
 	{
 		var hitBox = (VulnerableHitbox)area;
-		hitBox.TakeHit(Damage, Vector2.Zero);
+		hitBox.TakeHit(Damage, Vector2.Zero, VulnerableHitbox.DamageType.Explosive);
 		if (hitBox.GetParent() is Enemy entity)
 		{
 			var angle = Position.AngleToPoint(entity.Position);

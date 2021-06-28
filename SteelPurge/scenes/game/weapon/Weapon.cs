@@ -223,7 +223,7 @@ public class Weapon : Node2D
 			direction = Vector2.Up;
 		}
 
-		hitBox.TakeHit(MeleeDamage, direction);
+		hitBox.TakeHit(MeleeDamage, direction, VulnerableHitbox.DamageType.Melee);
 		EmitSignal(nameof(OnMeleeHit), hitBox);
 	}
 

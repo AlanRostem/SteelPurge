@@ -48,7 +48,7 @@ public class Projectile : KinematicEntity
 
 		if (angleDiff > hitbox.CriticalHitAngularMargin || angleDiff < -hitbox.CriticalHitAngularMargin) return;
 
-		hitbox.TakeHit(Damage);
+		hitbox.TakeHit(Damage, VulnerableHitbox.DamageType.Projectile);
 		OwnerWeapon?.EmitSignal(nameof(Weapon.CriticalDamageDealt), Damage, hitbox);
 		if (!_hasDisappeared && DeleteOnEnemyHit)
 		{
@@ -67,7 +67,7 @@ public class Projectile : KinematicEntity
 		}
 
 		var hitBox = (VulnerableHitbox) area;
-		hitBox.TakeHit(Damage, Vector2.Zero);
+		hitBox.TakeHit(Damage, Vector2.Zero, VulnerableHitbox.DamageType.Projectile);
 		OwnerWeapon?.EmitSignal(nameof(Weapon.DamageDealt), Damage, hitBox);
 		_OnHit(hitBox);
 		if (!_hasDisappeared && DeleteOnEnemyHit)

@@ -9,7 +9,7 @@ public class LaserShot : StaticEntity
 	private void _OnVulnerableHitBoxHit(object area)
 	{
 		var hitBox = (VulnerableHitbox) area;
-		hitBox.TakeHit(Damage, Vector2.Zero);
+		hitBox.TakeHit(Damage, Vector2.Zero, VulnerableHitbox.DamageType.Projectile);
 		ParentWorld.PlayerNode.Health += PlayerHealCount;
 		// TODO: Possible that this call is needed
 		// OwnerWeapon?.EmitSignal(nameof(Weapon.DamageDealt), Damage, hitBox);

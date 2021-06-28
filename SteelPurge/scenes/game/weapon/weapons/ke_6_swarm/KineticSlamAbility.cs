@@ -90,7 +90,7 @@ public class KineticSlamAbility : TacticalAbility
 	{
 		if (area is CriticalHitbox criticalHitbox)
 		{
-			criticalHitbox.TakeHit(DirectHitBaseDamage);
+			criticalHitbox.TakeHit(DirectHitBaseDamage, VulnerableHitbox.DamageType.Melee);
 			if (criticalHitbox.GetParent() is Enemy enemy)
 			{
 				enemy.ApplyStatusEffect(LivingEntity.StatusEffectType.Stun);
