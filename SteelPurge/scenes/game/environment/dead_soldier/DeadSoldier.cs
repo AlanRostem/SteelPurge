@@ -8,6 +8,7 @@ public class DeadSoldier : Node2D
 		null, // H28
 		GD.Load<Texture>("res://assets/texture/dead_soldier_with_firewall.png"), // Firewall
 		GD.Load<Texture>("res://assets/texture/dead_soldier_with_joule.png"), // Joule
+		null, // Falcon
 		GD.Load<Texture>("res://assets/texture/dead_soldier.png"), // Count (Basically none)
 	};
 	

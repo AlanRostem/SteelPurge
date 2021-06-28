@@ -92,9 +92,9 @@ public class Player : LivingEntity
 	private delegate void TriggerInvincibility();
 
 	[Signal]
-	private delegate void Died();
+	public delegate void Died();
 
-	private void _Die()
+	public void Die()
 	{
 		EmitSignal(nameof(Died));
 		// TODO: Implement additional functionality after Prototype 1
@@ -156,7 +156,7 @@ public class Player : LivingEntity
 		if (damage >= Health)
 		{
 			Health = 0;
-			_Die();
+			Die();
 		}
 		else
 		{

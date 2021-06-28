@@ -70,9 +70,6 @@ public class Inventory : Node2D
 		_scrapLabel.Text = "x" + ScrapCount;
 		
 		AddWeapon(InventoryWeapon.H28);
-		AddWeapon(InventoryWeapon.Firewall);
-		AddWeapon(InventoryWeapon.Joule);
-		AddWeapon(InventoryWeapon.Falcon);
 		
 		// TODO: When implementing save files, make sure to change this
 		EquipWeapon(DefaultGun);

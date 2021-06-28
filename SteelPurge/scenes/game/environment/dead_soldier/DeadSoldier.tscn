@@ -8,13 +8,14 @@
 script = ExtResource( 2 )
 
 [node name="InteractionIndicator" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -2 )
 DisableOnInteract = true
 
 [node name="CollisionShape2D" parent="InteractionIndicator" index="1"]
 position = Vector2( 1, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -6 )
+position = Vector2( 0, -8 )
 texture = ExtResource( 3 )
 [connection signal="Interacted" from="InteractionIndicator" to="." method="_OnInteract"]
 
