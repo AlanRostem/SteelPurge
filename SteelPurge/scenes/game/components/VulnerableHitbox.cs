@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 /// <summary>
 /// Hitbox component with signals tied to projectiles or hit-scan
@@ -19,8 +20,7 @@ public class VulnerableHitbox : Area2D
 	[Signal]
 	public delegate void Hit(uint damage, Vector2 knockBackDirection, DamageType type);
 
-	[Export] public bool TakeSlideHits = true;
-	[Export] public bool TakeProjectileHits = true;
+	[Export] public Array<DamageType> ImmuneDamageTypes = new Array<DamageType>();
 	
 	public void TakeHit(uint damage, DamageType damageType)
 	{
@@ -29,6 +29,7 @@ public class VulnerableHitbox : Area2D
 	
 	public virtual void TakeHit(uint damage, Vector2 knockBackDirection, DamageType damageType)
 	{
+		if (ImmuneDamageTypes.Contains(damageType)) return;
 		EmitSignal(nameof(Hit), damage, knockBackDirection, damageType);
 	}
 }

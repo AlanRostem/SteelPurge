@@ -221,9 +221,13 @@ public class Weapon : Node2D
 		if (OwnerPlayer.IsRamSliding)
 		{
 			direction = Vector2.Up;
+			hitBox.TakeHit(MeleeDamage, direction, VulnerableHitbox.DamageType.RamSlide);
+		}
+		else
+		{
+			hitBox.TakeHit(MeleeDamage, direction, VulnerableHitbox.DamageType.Melee);
 		}
 
-		hitBox.TakeHit(MeleeDamage, direction, VulnerableHitbox.DamageType.Melee);
 		EmitSignal(nameof(OnMeleeHit), hitBox);
 	}
 

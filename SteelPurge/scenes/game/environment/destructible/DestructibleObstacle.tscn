@@ -9,4 +9,5 @@ collision_mask = 10
 script = ExtResource( 2 )
 
 [node name="VulnerableHitbox" parent="." instance=ExtResource( 1 )]
+ImmuneDamageTypes = [ 3 ]
 [connection signal="Hit" from="VulnerableHitbox" to="." method="OnHit"]
