@@ -8,7 +8,7 @@ public class DestructibleObstacle : StaticBody2D
 	[Signal]
 	public delegate void Destroyed();
 	
-	private void OnHit(uint damage, int direction)
+	private void OnHit(uint damage, Vector2 knockBack, VulnerableHitbox.DamageType damageType)
 	{
 		if (damage >= Health)
 		{

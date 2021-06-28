@@ -17,7 +17,7 @@ public class VulnerableHitbox : Area2D
 	}
 	
 	[Signal]
-	public delegate void Hit(uint damage, Vector2 knockBackDirection);
+	public delegate void Hit(uint damage, Vector2 knockBackDirection, DamageType type);
 
 	[Export] public bool TakeSlideHits = true;
 	[Export] public bool TakeProjectileHits = true;
@@ -29,6 +29,6 @@ public class VulnerableHitbox : Area2D
 	
 	public virtual void TakeHit(uint damage, Vector2 knockBackDirection, DamageType damageType)
 	{
-		EmitSignal(nameof(Hit), damage, knockBackDirection);
+		EmitSignal(nameof(Hit), damage, knockBackDirection, damageType);
 	}
 }
