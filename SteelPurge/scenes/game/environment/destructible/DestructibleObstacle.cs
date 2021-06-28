@@ -3,7 +3,7 @@ using System;
 
 public class DestructibleObstacle : StaticBody2D
 {
-	[Export] public uint Health = 1000;
+	[Export] public uint Health = 200;
 
 	[Signal]
 	public delegate void Destroyed();

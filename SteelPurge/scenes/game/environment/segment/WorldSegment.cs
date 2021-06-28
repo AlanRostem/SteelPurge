@@ -3,21 +3,9 @@ using System;
 
 public class WorldSegment : Node2D
 {
-	public Vector2 ReSpawnPoint
-	{
-		get
-		{
-			return GetNode<Fabricator>("Environment/Fabricator").Position;
-		}
-	}
+	public Vector2 ReSpawnPoint => GetNode<Position2D>("SpawnPoint").Position;
 
-	public Vector2 InitialSpawnPoint
-	{
-		get
-		{
-			return GetNode<Position2D>("SpawnPoint").Position;
-		}
-	}
+	public Vector2 InitialSpawnPoint => GetNode<Position2D>("SpawnPoint").Position;
 
 	public EntityPool Entities { get; private set; }
 
