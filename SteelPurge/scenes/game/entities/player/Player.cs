@@ -9,7 +9,7 @@ public class Player : LivingEntity
 		Crouch,
 		Airborne,
 	}
-	
+
 	public static readonly float KnockBackSpeed = 100;
 	// private static readonly float MaxMovementSpeed = 250;
 
@@ -84,7 +84,7 @@ public class Player : LivingEntity
 
 	[Signal]
 	public delegate void WeaponEquipped(Weapon weapon);
-	
+
 	[Signal]
 	private delegate void TriggerDamageReceptionCooldown();
 
@@ -101,7 +101,7 @@ public class Player : LivingEntity
 		Position = ParentWorld.CurrentSegment.ReSpawnPoint;
 		ResetAllStates();
 		InitiateRespawnSequence();
-		
+
 		EmitSignal(nameof(Died));
 	}
 
@@ -153,7 +153,7 @@ public class Player : LivingEntity
 		}
 
 		if (!CanTakeDamage) return;
-		
+
 		if (damage >= Health)
 		{
 			Health = 0;
@@ -196,12 +196,13 @@ public class Player : LivingEntity
 		if (Input.IsActionJustPressed("swap_aim") && CanSwapDirection)
 		{
 			HorizontalLookingDirection *= -1;
- 		}
-		
+		}
+
 		if (Input.IsActionJustPressed("aim_down") && CanAimDown)
 		{
 			//IsAimingUp = IsActionPressed("aim_up");
-			IsAimingDown = !IsAimingDown;
+			if (!IsOnFloor())
+				IsAimingDown = !IsAimingDown;
 			if (IsAimingDown)
 			{
 				CanAimUp = false;
@@ -221,11 +222,6 @@ public class Player : LivingEntity
 		if (!PlayerInventory.EquippedWeapon.IsFiring && CanSwapDirection || IsAimingDown || IsAimingUp)
 		{
 			HorizontalLookingDirection = direction;
-			if (IsOnFloor())
-			{
-				CanAimUp = true;
-				IsAimingDown = false;
-			}
 		}
 
 		if (!IsSliding && IsOnFloor() && Mathf.Sign(VelocityX) != direction && !IsMovingTooFast() &&
@@ -300,6 +296,12 @@ public class Player : LivingEntity
 		{
 			_StopWalking();
 		}
+		
+		if (IsOnFloor())
+		{
+			CanAimUp = true;
+			IsAimingDown = false;
+		}
 	}
 
 	private void _SlideMode(float delta)
@@ -347,7 +349,7 @@ public class Player : LivingEntity
 			VelocityY = -MinJumpSpeed;
 			IsJumping = false;
 		}
-		
+
 		if (!IsMovingTooFast())
 			VelocityX = Mathf.Lerp(VelocityX, 0, AirFriction);
 		if (_left && !_right)
@@ -390,6 +392,12 @@ public class Player : LivingEntity
 		{
 			_StopWalking();
 		}
+		
+		if (IsOnFloor())
+		{
+			CanAimUp = true;
+			IsAimingDown = false;
+		}
 	}
 
 	protected override void _OnMovement(float delta)
@@ -418,7 +426,8 @@ public class Player : LivingEntity
 				else if (!_isRoofAbove)
 					_ActivateCrouchMode();
 			}
-			else if (!IsMovingTooFast() && (IsSliding || IsCrouching) && !_isRoofAbove || _isRoofAbove && !IsMovingFasterThanCrouch()) 
+			else if (!IsMovingTooFast() && (IsSliding || IsCrouching) && !_isRoofAbove ||
+					 _isRoofAbove && !IsMovingFasterThanCrouch())
 			{
 				_StopSliding();
 			}
@@ -449,6 +458,7 @@ public class Player : LivingEntity
 	{
 		IsWalking = false;
 		VelocityX = Mathf.Lerp(VelocityX, 0, WalkFriction);
+		
 	}
 
 	private void _Dash()
