@@ -42,3 +42,4 @@ public class DamageNumberGenerator : Node2D
 		_damageNumber = null;
 	}
 }
+	

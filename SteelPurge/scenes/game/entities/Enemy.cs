@@ -44,15 +44,15 @@ public class Enemy : LivingEntity
 	private bool _isKnockedBack;
 	protected Player DetectedPlayer { get; private set; }
 	private Timer _meleeAffectedKnockBackTimer;
-	private Timer _damageIndicationTimer;
 	private DamageNumberGenerator _damageNumberGenerator;
+	private DamageIndicator _damageIndicator;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		_meleeAffectedKnockBackTimer = GetNode<Timer>("MeleeAffectedKnockBackTimer");
-		_damageIndicationTimer = GetNode<Timer>("DamageIndicationTimer");
 		_damageNumberGenerator = GetNode<DamageNumberGenerator>("DamageNumberGenerator");
+		_damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
 	}
 
 	public virtual void OnDie()
@@ -127,8 +127,8 @@ public class Enemy : LivingEntity
 				_dropScrap = true;
 			Health -= damage;
 			_damageNumberGenerator.ShowDamageNumber(damage, Position, ParentWorld);
-			Modulate = !isCritical ? new Color(255, 255, 255) : new Color(255, 0, 0);
-			_damageIndicationTimer.Start();
+			var color = !isCritical ? new Color(255, 255, 255) : new Color(255, 0, 0);
+			_damageIndicator.Indicate(color);
 			if (direction.x != 0 || direction.y != 0)
 			{
 				KnockBack(direction);
