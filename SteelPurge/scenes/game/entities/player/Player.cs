@@ -320,6 +320,9 @@ public class Player : LivingEntity
 				IsRamSliding = true;
 				PlayerInventory.EquippedWeapon.MeleeHitBoxEnabled = true;
 			}
+			
+			CanAimUp = true;
+			IsAimingDown = false;
 		}
 		else
 		{
