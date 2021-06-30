@@ -418,7 +418,7 @@ public class Player : LivingEntity
 				else if (!_isRoofAbove)
 					_ActivateCrouchMode();
 			}
-			else if (!IsMovingTooFast() && (IsSliding || IsCrouching) && !_isRoofAbove)
+			else if (!IsMovingTooFast() && (IsSliding || IsCrouching) && !_isRoofAbove) // TODO: Enable crouch when !IsMovingFasterThanCrouch
 			{
 				_StopSliding();
 			}
