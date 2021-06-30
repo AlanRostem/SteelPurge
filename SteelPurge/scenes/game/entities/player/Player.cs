@@ -25,7 +25,7 @@ public class Player : LivingEntity
 	public static readonly float MinJumpSpeed = 100;
 
 	public static readonly float SlideFriction = 0.02f;
-	public static readonly float AirFriction = 0.01f;
+	public static readonly float AirFriction = 0.006f;
 
 	// private static readonly float SlideFrictionJump = 0.85f;
 	public static readonly float WalkFriction = 0.95f;
