@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entities/hazards/DeathZone.tscn" type="PackedScene" id=2]
@@ -7,13 +7,12 @@
 [ext_resource path="res://scenes/game/environment/destructible/rock_bundle/RockBundle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogue.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/environment/checkpoint/Fabricator.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/game/environment/destructible/DestructibleObstacle.cs" type="Script" id=8]
 [ext_resource path="res://assets/texture/big_rock_cracked.png" type="Texture" id=9]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 104 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1152, 16 )
 
 [node name="Seg1Level1" instance=ExtResource( 1 )]
@@ -25,14 +24,14 @@ tile_data = PoolIntArray( 0, 18, 0, 3, 27, 0, 4, 27, 0, 5, 27, 0, 6, 27, 0, 7, 2
 position = Vector2( 2328, 104 )
 
 [node name="CollisionShape2D" parent="Environment/TransferArea" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="DeathZone" parent="EntityPool" index="0" instance=ExtResource( 2 )]
 position = Vector2( 496, 288 )
 
 [node name="CollisionShape2D" parent="EntityPool/DeathZone/Area2D" index="0"]
 position = Vector2( 656, -16 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="AR43Executor" parent="EntityPool" index="1" instance=ExtResource( 3 )]
 position = Vector2( 1040, 144 )
@@ -46,12 +45,10 @@ Health = 100
 
 [node name="BigRock" parent="EntityPool" index="4" instance=ExtResource( 4 )]
 position = Vector2( 1376, 111 )
-script = ExtResource( 8 )
 Health = 75
 
 [node name="CrackedRock" parent="EntityPool" index="5" instance=ExtResource( 4 )]
 position = Vector2( 1376, 138 )
-script = ExtResource( 8 )
 Health = 25
 
 [node name="Sprite" parent="EntityPool/CrackedRock" index="0"]
@@ -59,7 +56,6 @@ texture = ExtResource( 9 )
 
 [node name="CrackedRock2" parent="EntityPool" index="6" instance=ExtResource( 4 )]
 position = Vector2( 1376, 165 )
-script = ExtResource( 8 )
 Health = 25
 
 [node name="Sprite" parent="EntityPool/CrackedRock2" index="0"]
@@ -68,7 +64,6 @@ texture = ExtResource( 9 )
 [node name="CrackedRock3" parent="EntityPool" index="7" instance=ExtResource( 4 )]
 position = Vector2( 1376, 192 )
 scale = Vector2( 0.975903, 1 )
-script = ExtResource( 8 )
 Health = 25
 
 [node name="Sprite" parent="EntityPool/CrackedRock3" index="0"]
@@ -80,9 +75,6 @@ IsCheckPoint = true
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 128, 96 )
-[connection signal="Hit" from="EntityPool/CrackedRock/VulnerableHitbox" to="EntityPool/CrackedRock" method="OnHit"]
-[connection signal="Hit" from="EntityPool/CrackedRock2/VulnerableHitbox" to="EntityPool/CrackedRock2" method="OnHit"]
-[connection signal="Hit" from="EntityPool/CrackedRock3/VulnerableHitbox" to="EntityPool/CrackedRock3" method="OnHit"]
 
 [editable path="EntityPool/DeathZone"]
 
