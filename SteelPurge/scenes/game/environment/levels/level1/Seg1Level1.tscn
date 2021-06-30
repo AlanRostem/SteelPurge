@@ -40,6 +40,7 @@ position = Vector2( 1379, 192 )
 
 [node name="Fabricator" parent="EntityPool" index="5" instance=ExtResource( 7 )]
 position = Vector2( 1536, 192 )
+IsCheckPoint = true
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 128, 96 )
