@@ -20,16 +20,16 @@ public class DestructibleObstacle : StaticEntity
 
 	private void OnHit(uint damage, Vector2 knockBack, VulnerableHitbox.DamageType damageType)
 	{
+		_damageIndicator.Indicate(new Color(255, 255, 255));
 		if (damage >= Health)
 		{
-			_damageNumberGenerator.ShowDamageNumber(damage, -new Vector2(0, 16), ParentWorld, Colors.Red);
+			_damageNumberGenerator.ShowDamageNumber(damage, Position + new Vector2(0, -16), ParentWorld, Colors.Red);
 			EmitSignal(nameof(Destroyed));
 			QueueFree();
 			return;
 		}
 
-		_damageNumberGenerator.ShowDamageNumber(damage, -new Vector2(0, 16), ParentWorld);
-		_damageIndicator.Indicate(Colors.White);
+		_damageNumberGenerator.ShowDamageNumber(damage, Position + new Vector2(0, -16), ParentWorld);
 		Health -= damage;
 	}
 }
