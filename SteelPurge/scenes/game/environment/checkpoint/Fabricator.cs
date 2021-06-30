@@ -5,8 +5,10 @@ using System.Collections.Generic;
 /// <summary>
 /// Serves as a checkpoint and crafting station
 /// </summary>
-public class Fabricator : Node2D
+public class Fabricator : StaticEntity
 {
+	[Export] public bool IsCheckPoint = false;
+
 	private void _OnInteract(Player player)
 	{
 		var diffHealth = player.MaxHealth - player.Health;
@@ -39,5 +41,12 @@ public class Fabricator : Node2D
 				player.PlayerInventory.ScrapCount);
 			player.PlayerInventory.LoseScrap(player.PlayerInventory.ScrapCount);
 		}
+	}
+
+
+	private void _OnEnterScreen()
+	{
+		if (!IsCheckPoint) return;
+		ParentWorld.CurrentSegment.ReSpawnPoint = Position;
 	}
 }

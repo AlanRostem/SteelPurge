@@ -96,12 +96,13 @@ public class Player : LivingEntity
 
 	public void Die()
 	{
-		EmitSignal(nameof(Died));
 		// TODO: Implement additional functionality after Prototype 1
 
 		Position = ParentWorld.CurrentSegment.ReSpawnPoint;
 		ResetAllStates();
 		InitiateRespawnSequence();
+		
+		EmitSignal(nameof(Died));
 	}
 
 	public void ResetAllStates()

@@ -7,6 +7,14 @@ public class EntityPool : Node2D
 		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
 
 
+	public WorldSegment ParentWorldSegment { get; private set;  }
+
+	public override void _Ready()
+	{
+		base._Ready();
+		ParentWorldSegment = GetParent<WorldSegment>();
+	}
+
 	// TODO: Separate what type of entity that can be spawned (kinematic, static, other)
 	public T SpawnEntityDeferred<T>(PackedScene scene, Vector2 position) where T : KinematicEntity
 	{
