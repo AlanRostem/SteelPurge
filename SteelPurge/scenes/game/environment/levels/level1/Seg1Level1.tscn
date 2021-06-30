@@ -34,11 +34,25 @@ position = Vector2( 2240, 160 )
 
 [node name="RockBundle" parent="EntityPool" index="3" instance=ExtResource( 5 )]
 position = Vector2( 704, 112 )
+Health = 100
 
 [node name="BigRock" parent="EntityPool" index="4" instance=ExtResource( 4 )]
-position = Vector2( 1379, 192 )
+position = Vector2( 1376, 192 )
+Health = 25
 
-[node name="Fabricator" parent="EntityPool" index="5" instance=ExtResource( 7 )]
+[node name="BigRock2" parent="EntityPool" index="5" instance=ExtResource( 4 )]
+position = Vector2( 1376, 165 )
+Health = 25
+
+[node name="BigRock3" parent="EntityPool" index="6" instance=ExtResource( 4 )]
+position = Vector2( 1376, 138 )
+Health = 25
+
+[node name="BigRock4" parent="EntityPool" index="7" instance=ExtResource( 4 )]
+position = Vector2( 1376, 112 )
+Health = 75
+
+[node name="Fabricator" parent="EntityPool" index="8" instance=ExtResource( 7 )]
 position = Vector2( 1536, 192 )
 IsCheckPoint = true
 
