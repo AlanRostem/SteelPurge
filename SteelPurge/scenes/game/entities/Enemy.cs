@@ -161,7 +161,7 @@ public class Enemy : LivingEntity
 	}
 
 
-	private void _OnCriticalHitboxHit(uint damage, Vector2 knockBackDirection)
+	private void _OnCriticalHitboxHit(uint damage, Vector2 knockBackDirection, VulnerableHitbox.DamageType damageType)
 	{
 		TakeDamage(damage, knockBackDirection, true);
 	}
