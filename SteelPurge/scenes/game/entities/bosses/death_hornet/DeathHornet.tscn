@@ -16,9 +16,10 @@ extents = Vector2( 41, 6 )
 
 [node name="DeathHornet" instance=ExtResource( 1 )]
 collision_layer = 520
+collision_mask = 2147483697
 script = ExtResource( 3 )
-MaxHealth = 5500
 IsGravityEnabled = false
+MaxHealth = 5500
 ScrapDropHit = 4
 ScrapDropKilled = 2500
 PlayerDetectionRange = 10000.0
@@ -41,6 +42,9 @@ disabled = true
 [node name="VisibilityEnabler2D" parent="." index="3"]
 position = Vector2( 0, 4 )
 scale = Vector2( 4.9, 2.8 )
+
+[node name="DamageNumberGenerator" parent="." index="5"]
+position = Vector2( 0, -32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="6"]
 position = Vector2( 0, 5 )
@@ -103,9 +107,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LethalArea" index="0"]
 position = Vector2( 0, 12 )
 shape = SubResource( 1 )
-
-[node name="DamageNumberGenerator" parent="." index="20"]
-position = Vector2( 0, -32 )
 [connection signal="body_entered" from="RogueDamageArea" to="." method="_OnRogueHit"]
 [connection signal="timeout" from="RogueSpawnTimer" to="." method="_OnSpawnRogue"]
 [connection signal="timeout" from="FlightDurationTimer" to="." method="_OnFlightEnd"]

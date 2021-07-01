@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/environment/checkpoint/Fabricator.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/game/environment/Blockade.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game/Blockade.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/entities/hazards/DeathZone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/AR43Executor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/environment/dead_soldier/DeadSoldier.tscn" type="PackedScene" id=7]
@@ -11,6 +11,9 @@
 extents = Vector2( 16, 96 )
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 96 )
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 808, 8 )
 
 [node name="Seg2Level1" instance=ExtResource( 1 )]
@@ -27,6 +30,12 @@ tile_data = PoolIntArray( 4, 18, 0, 5, 26, 0, 6, 26, 0, 7, 26, 0, 8, 26, 0, 9, 2
 [node name="ShootingIgnoredTileMap" parent="Environment" index="2"]
 tile_data = PoolIntArray( 327728, 0, 0, 327729, 1, 0, 327730, 1, 0, 327731, 1, 0, 327732, 2, 0, 327737, 0, 0, 327738, 1, 0, 327739, 1, 0, 327740, 1, 0, 327741, 2, 0 )
 
+[node name="TransferArea" parent="Environment" index="3"]
+position = Vector2( 1552, 96 )
+
+[node name="CollisionShape2D" parent="Environment/TransferArea" index="0"]
+shape = SubResource( 2 )
+
 [node name="Fabricator" parent="EntityPool" index="0" instance=ExtResource( 2 )]
 position = Vector2( 64, 176 )
 IsCheckPoint = true
@@ -35,7 +44,7 @@ IsCheckPoint = true
 position = Vector2( 808, 264 )
 
 [node name="CollisionShape2D" parent="EntityPool/DeathZone/Area2D" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="AR43Executor" parent="EntityPool" index="2" instance=ExtResource( 5 )]
 position = Vector2( 728, 144 )
