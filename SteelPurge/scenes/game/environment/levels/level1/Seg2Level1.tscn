@@ -98,7 +98,7 @@ position = Vector2( 616, 72 )
 Weapon = 1
 
 [node name="XWFrontRogue" parent="EntityPool" index="18" instance=ExtResource( 8 )]
-position = Vector2( 1864, 184 )
+position = Vector2( 1800, 184 )
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 16, 176 )
