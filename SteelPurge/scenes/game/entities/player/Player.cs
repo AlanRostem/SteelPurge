@@ -63,6 +63,7 @@ public class Player : LivingEntity
 	private bool _isRoofAbove = false;
 
 	public int MovingDirection { get; private set; }
+	public bool IsRespawning { get; private set; }
 
 	private CollisionShape2D _bodyShape;
 	private CollisionShape2D _roofDetectorShape;
@@ -120,11 +121,12 @@ public class Player : LivingEntity
 	/// </summary>
 	public void InitiateRespawnSequence()
 	{
-		_bodyShape.SetDeferred("disabled", true);
 		IsGravityEnabled = false;
 		CanMove = false;
 		PlayerInventory.EquippedWeapon.CanFire = false;
+		IsInvulnerable = true;
 		_respawnTimer.Start();
+		IsRespawning = true;
 	}
 
 	public override void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
@@ -574,10 +576,11 @@ public class Player : LivingEntity
 
 	private void _EndRespawnSequence()
 	{
-		_bodyShape.SetDeferred("disabled", false);
 		IsGravityEnabled = true;
 		CanMove = true;
 		PlayerInventory.EquippedWeapon.CanFire = true;
+		IsRespawning = false;
+		IsInvulnerable = false;
 	}
 
 	public bool IsMovingTooFast()
