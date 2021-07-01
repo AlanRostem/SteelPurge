@@ -16,7 +16,9 @@ margin_left = -26.4583
 margin_top = -33.8604
 margin_right = 29.5417
 margin_bottom = -19.8604
-text = "Inspect"
+text = "Inspect
+[F]"
+align = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

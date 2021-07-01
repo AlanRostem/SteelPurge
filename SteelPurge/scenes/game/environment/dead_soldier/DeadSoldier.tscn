@@ -11,6 +11,10 @@ script = ExtResource( 2 )
 position = Vector2( 0, -2 )
 DisableOnInteract = true
 
+[node name="PixelTextLabel" parent="InteractionIndicator" index="0"]
+text = "Pick up
+[F]"
+
 [node name="CollisionShape2D" parent="InteractionIndicator" index="1"]
 position = Vector2( 1, 0 )
 
