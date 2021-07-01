@@ -37,6 +37,9 @@ WalkSpeed = 45.0
 RushSpeed = 120.0
 DamagePerHit = 100
 
+[node name="VulnerableHitbox" parent="." index="0"]
+ImmuneDamageTypes = [ 1 ]
+
 [node name="BodyShape" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
 shape = SubResource( 1 )
 
@@ -48,6 +51,7 @@ position = Vector2( 0, -3 )
 scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 4 )
 animation = "walk"
+frame = 1
 playing = true
 script = ExtResource( 1 )
 
