@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/environment/checkpoint/Fabricator.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/Blockade.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/entities/hazards/DeathZone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/AR43Executor.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/game/environment/destructible/crate/SmallCrate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/environment/dead_soldier/DeadSoldier.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -56,9 +55,6 @@ position = Vector2( 1032, 144 )
 [node name="DeadSoldierWithFirewall" parent="EntityPool" index="4" instance=ExtResource( 7 )]
 position = Vector2( 616, 72 )
 Weapon = 1
-
-[node name="SmallCrate" parent="EntityPool" index="5" instance=ExtResource( 6 )]
-position = Vector2( 1400, 184 )
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 16, 176 )
