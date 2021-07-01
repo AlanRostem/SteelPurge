@@ -4,9 +4,13 @@
 [ext_resource path="res://assets/texture/magma_spikes.png" type="Texture" id=2]
 
 [node name="MagmaSpikes" instance=ExtResource( 1 )]
+Damage = 25
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2( 0, -1 )
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
-texture = ExtResource( 2 )
+[node name="CollisionShape2D" parent="StaticBody2D" index="0"]
+position = Vector2( 0, -2 )

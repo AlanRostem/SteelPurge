@@ -4,9 +4,9 @@ using System;
 public class Hazard : StaticEntity
 {
 	[Export] public uint Damage = 50;
-	
-	private void _OnPlayerTouch(Player player)
+
+	protected virtual void _OnEntityTouch(LivingEntity entity)
 	{
-		player.TakeDamage(Damage, new Vector2(-player.HorizontalLookingDirection, 0));
+		entity.TakeDamage(Damage, Vector2.Zero);
 	}
 }
