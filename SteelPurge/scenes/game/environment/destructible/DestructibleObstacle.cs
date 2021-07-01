@@ -23,7 +23,7 @@ public class DestructibleObstacle : StaticEntity
 		_damageIndicator.Indicate(new Color(255, 255, 255));
 		if (damage >= Health)
 		{
-			_damageNumberGenerator.ShowDamageNumber(damage, Position + new Vector2(0, -16), ParentWorld, Colors.Red);
+			_damageNumberGenerator.ShowDamageNumber(Health, Position + new Vector2(0, -16), ParentWorld, Colors.Red);
 			EmitSignal(nameof(Destroyed));
 			QueueFree();
 			return;
