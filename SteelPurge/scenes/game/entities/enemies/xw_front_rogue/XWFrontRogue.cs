@@ -94,9 +94,10 @@ public class XWFrontRogue : Enemy
 		MoveX(WalkSpeed * Direction);
 	}
 
-	private void _OnPlayerEnterMeleeArea(object body)
+	private void _OnPlayerEnterMeleeArea(Player player)
 	{
-		AttackPlayer(DamagePerHit, ((Player)body), new Vector2(Direction, 0));
+		if (player.IsInvulnerable) return;
+		AttackPlayer(DamagePerHit, player, new Vector2(Direction, 0));
 		_isRushing = false;
 		if (IsCurrentlyLethal) QueueFree();
 	}

@@ -8,6 +8,8 @@ public class World : Node2D
 
 	public EntityPool Entities => CurrentSegment.Entities;
 
+	public Vector2 CurrentReSpawnPoint;
+
 	[Export] public Array<PackedScene> SegmentScenes = new Array<PackedScene>();
 	
 	public WorldSegment CurrentSegment { get; private set; }

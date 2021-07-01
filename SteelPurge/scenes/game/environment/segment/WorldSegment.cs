@@ -3,8 +3,6 @@ using System;
 
 public class WorldSegment : Node2D
 {
-	public Vector2 ReSpawnPoint;
-
 	public Vector2 InitialSpawnPoint => GetNode<Position2D>("SpawnPoint").Position;
 
 	public EntityPool Entities { get; private set; }
@@ -21,7 +19,10 @@ public class WorldSegment : Node2D
 		rect.Position *= CustomTileMap.Size;
 		rect.Size *= CustomTileMap.Size;
 		ParentWorld.PlayerNode.SetCameraBounds(rect);
-		ReSpawnPoint = new Vector2(InitialSpawnPoint);
+		
+		// TODO: Reevaluate if this hard coded fix won't fuck me over later
+		if (!ParentWorld.PlayerNode.IsRespawning)
+			ParentWorld.CurrentReSpawnPoint = new Vector2(InitialSpawnPoint);
 	}
 	
 	private void _OnTransferAreaPlayerEntered(object body)

@@ -57,6 +57,6 @@ public class Fabricator : StaticEntity
 		text.Modulate = Colors.Lime;
 		ParentWorld.AddChild(text);
 		text.Position = Position + new Vector2(0, -36);
-		ParentWorld.CurrentSegment.ReSpawnPoint = Position;
+		ParentWorld.CurrentReSpawnPoint = Position;
 	}
 }

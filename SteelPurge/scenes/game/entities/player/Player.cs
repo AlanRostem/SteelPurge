@@ -99,7 +99,7 @@ public class Player : LivingEntity
 	{
 		// TODO: Implement additional functionality after Prototype 1
 
-		Position = ParentWorld.CurrentSegment.ReSpawnPoint;
+		Position = new Vector2(ParentWorld.CurrentReSpawnPoint);
 		ResetAllStates();
 		InitiateRespawnSequence();
 
