@@ -20,12 +20,7 @@ margin_right = 44.0
 margin_bottom = -16.0
 text = "Heal/Refill
 [F]"
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -1.43051e-06, 2.38419e-07 )
-scale = Vector2( 2.4, 1.6 )
 [connection signal="Interacted" from="InteractionIndicator" to="." method="_OnInteract"]
 [connection signal="body_entered" from="InteractionIndicator" to="." method="_OnPlayerEntered"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_OnEnterScreen"]
 
 [editable path="InteractionIndicator"]

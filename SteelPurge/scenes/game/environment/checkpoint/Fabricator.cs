@@ -47,13 +47,6 @@ public class Fabricator : StaticEntity
 		}
 	}
 
-
-	private void _OnEnterScreen()
-	{
-		if (!IsCheckPoint) return;
-		ParentWorld.CurrentSegment.ReSpawnPoint = Position;
-	}
-	
 	private void _OnPlayerEntered(Player player)
 	{
 		if (player.IsRespawning) _touchedCheckPoint = true;
@@ -64,5 +57,6 @@ public class Fabricator : StaticEntity
 		text.Modulate = Colors.Lime;
 		ParentWorld.AddChild(text);
 		text.Position = Position + new Vector2(0, -36);
+		ParentWorld.CurrentSegment.ReSpawnPoint = Position;
 	}
 }

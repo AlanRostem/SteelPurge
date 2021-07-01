@@ -7,6 +7,6 @@ public class Hazard : StaticEntity
 
 	protected virtual void _OnEntityTouch(LivingEntity entity)
 	{
-		entity.TakeDamage(Damage, Vector2.Zero);
+		entity.TakeDamage(Damage, new Vector2(-Mathf.Sign(entity.VelocityX), 0));
 	}
 }
