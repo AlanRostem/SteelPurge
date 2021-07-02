@@ -3,7 +3,7 @@ using System;
 
 public class AR43Executor : Enemy
 {
-	private readonly PackedScene BulletScene =
+	private static readonly PackedScene BulletScene =
 		GD.Load<PackedScene>("res://scenes/game/entities/enemies/ar43_executor/ExecutorBullet.tscn");
 
 	public int Direction = -1;
@@ -50,12 +50,18 @@ public class AR43Executor : Enemy
 
 	protected override void OnPlayerDetected(Player player)
 	{
-		OnEnableAi();
+		_fireRateTimer.Start();
+		_standIntervalTimer.Start();
+		_approachIntervalTimer.Stop();
+		_startWalking = false;
 	}
 
 	protected override void OnPlayerVisualLost(Player player)
 	{
-		OnDisableAi();
+		_fireRateTimer.Stop();
+		_approachIntervalTimer.Stop();
+		_standIntervalTimer.Stop();
+		_startWalking = false;
 	}
 
 	protected override void _ProcessWhenPlayerNotSeen()
@@ -67,14 +73,14 @@ public class AR43Executor : Enemy
 	{
 		_startWalking = false;
 		_standIntervalTimer.Start();
-		_fireRateTimer.Stop();
+		_fireRateTimer.Start();
 	}
 	
 	private void _OnStand()
 	{
 		_startWalking = true;
 		_approachIntervalTimer.Start();
-		_fireRateTimer.Start();
+		_fireRateTimer.Stop();
 	}
 	
 	private void _OnFire()
