@@ -39,13 +39,12 @@ public class AR43Executor : Enemy
 	public override void _Ready()
 	{
 		base._Ready();
-		PlayerDetectionRange = 160;
 		_groundScanner = GetNode<RayCast2D>("GroundScanner");
 		_approachIntervalTimer = GetNode<Timer>("ApproachIntervalTimer");
 		_standIntervalTimer = GetNode<Timer>("StandIntervalTimer");
 		_fireRateTimer = GetNode<Timer>("FireRateTimer");
 	}
-	
+
 	protected override void _ProcessWhenPlayerDetected(Player player)
 	{
 		Direction = Mathf.Sign(player.Position.x - Position.x);
@@ -53,6 +52,16 @@ public class AR43Executor : Enemy
 		StopMovingX();
 		if (_startWalking && _groundScanner.IsColliding())
 			MoveX(Direction * WalkSpeed);
+	}
+
+	protected override void OnPlayerDetected(Player player)
+	{
+		OnEnableAi();
+	}
+
+	protected override void OnPlayerVisualLost(Player player)
+	{
+		OnDisableAi();
 	}
 
 	protected override void _ProcessWhenPlayerNotSeen()

@@ -18,7 +18,7 @@ CurrentCollisionMode = 2
 MaxHealth = 200
 ScrapDropHit = 3
 ScrapDropKilled = 60
-PlayerDetectionRange = 160.0
+PlayerDetectionRange = 200.0
 WalkSpeed = 80.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]
@@ -73,6 +73,7 @@ polygon = PoolVector2Array( -24, 16, 0, -8, 24, 16 )
 
 [node name="DamageNumberGenerator" parent="." index="11"]
 position = Vector2( 0, -16 )
+
 [connection signal="TriggerApproach" from="." to="ApproachIntervalTimer" method="_OnTrigger"]
 [connection signal="TriggerApproach" from="." to="FireRateTimer" method="_OnCancel"]
 [connection signal="TriggerStand" from="." to="StandIntervalTimer" method="_OnTrigger"]

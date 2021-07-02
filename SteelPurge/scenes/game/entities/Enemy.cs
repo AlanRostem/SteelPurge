@@ -42,6 +42,7 @@ public class Enemy : LivingEntity
 	private bool _dropScrap;
 	private bool _dropTeCell;
 	private bool _isKnockedBack;
+	private bool _isPlayerDetected = false;
 	protected Player DetectedPlayer { get; private set; }
 	private Timer _meleeAffectedKnockBackTimer;
 	private DamageNumberGenerator _damageNumberGenerator;
@@ -95,12 +96,32 @@ public class Enemy : LivingEntity
 		{
 			if (DetectedPlayer is null)
 				DetectedPlayer = ParentWorld.PlayerNode;
+			if (!_isPlayerDetected)
+			{
+				OnPlayerDetected(DetectedPlayer);
+				_isPlayerDetected = true;
+			}
 			_ProcessWhenPlayerDetected(ParentWorld.PlayerNode);
 		}
 		else
 		{
+			if (_isPlayerDetected)
+			{
+				OnPlayerVisualLost(DetectedPlayer);
+				_isPlayerDetected = false;
+			}
 			_ProcessWhenPlayerNotSeen();
 		}
+	}
+
+	protected virtual void OnPlayerDetected(Player player)
+	{
+		
+	}
+	
+	protected virtual void OnPlayerVisualLost(Player player)
+	{
+		
 	}
 
 	public override void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
