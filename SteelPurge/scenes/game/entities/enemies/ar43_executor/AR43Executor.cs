@@ -16,12 +16,6 @@ public class AR43Executor : Enemy
 	private Timer _standIntervalTimer;
 	private Timer _fireRateTimer;
 	
-	[Signal]
-	public delegate void TriggerApproach();
-
-	[Signal]
-	public delegate void TriggerStand();
-
 	public override void OnEnableAi()
 	{
 		_fireRateTimer.Start();
@@ -72,13 +66,15 @@ public class AR43Executor : Enemy
 	private void _OnApproach()
 	{
 		_startWalking = false;
-		EmitSignal(nameof(TriggerStand));
+		_standIntervalTimer.Start();
+		_fireRateTimer.Stop();
 	}
 	
 	private void _OnStand()
 	{
 		_startWalking = true;
-		EmitSignal(nameof(TriggerApproach));
+		_approachIntervalTimer.Start();
+		_fireRateTimer.Start();
 	}
 	
 	private void _OnFire()
