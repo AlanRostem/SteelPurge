@@ -74,7 +74,7 @@ public class DragonsBreathAbility : ResourceAbility
 		foreach (var pair in _hitBoxes)
 		{
 			var hitBox = pair.Value;
-			hitBox.TakeHit(DamagePerTick, Vector2.Zero, VulnerableHitbox.DamageType.Standard);
+			hitBox.TakeHit(DamagePerTick, Vector2.Zero, VulnerableHitbox.DamageType.Heat);
 			GetWeapon().EmitSignal(nameof(Weapon.DamageDealt), DamagePerTick, hitBox);
 		}
 	}

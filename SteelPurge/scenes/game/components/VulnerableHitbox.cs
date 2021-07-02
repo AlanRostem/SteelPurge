@@ -15,6 +15,7 @@ public class VulnerableHitbox : Area2D
 		RamSlide,
 		Melee,
 		Explosive,
+		Heat,
 	}
 	
 	[Signal]
