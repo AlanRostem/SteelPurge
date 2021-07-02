@@ -15,7 +15,7 @@ CurrentCollisionMode = 2
 MaxHealth = 200
 ScrapDropHit = 3
 ScrapDropKilled = 60
-PlayerDetectionRange = 200.0
+PlayerDetectionRange = 240.0
 WalkSpeed = 80.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableHitbox" index="0"]

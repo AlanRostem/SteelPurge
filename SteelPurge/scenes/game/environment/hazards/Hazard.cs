@@ -15,6 +15,10 @@ public class Hazard : StaticEntity
 		if (InstaKill)
 		{
 			entity.TakeDamage(entity.MaxHealth, Vector2.Zero);
+			if (entity is Player player)
+			{
+				player.Die();
+			}
 			return;
 		}
 		
