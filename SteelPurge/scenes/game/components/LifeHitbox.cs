@@ -16,9 +16,7 @@ public class LifeHitbox : VulnerableHitbox
 	[Signal]
 	public delegate void Death();
 	
-	[Export] public uint MaxHealth;
-	
-	public uint Health;
+	[Export] public uint Health = 100;
 
 	private DamageIndicator _damageIndicator;
 	private DamageNumberGenerator _damageNumberGenerator;
