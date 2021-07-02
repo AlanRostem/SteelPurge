@@ -23,6 +23,7 @@ margin_bottom = 24.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="focus_entered" from="." to="." method="_OnGetFocus"]
 [connection signal="focus_exited" from="." to="." method="_OnLoseFocus"]
 [connection signal="pressed" from="." to="." method="_OnPressed"]

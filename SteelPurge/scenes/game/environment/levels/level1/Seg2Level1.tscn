@@ -104,5 +104,4 @@ position = Vector2( 1800, 184 )
 position = Vector2( 16, 176 )
 
 [editable path="Environment/Blockade"]
-
 [editable path="EntityPool/DeathZone"]
