@@ -95,7 +95,7 @@ public class Player : LivingEntity
 	[Signal]
 	public delegate void Died();
 
-	public void Die()
+	public override void Die()
 	{
 		// TODO: Implement additional functionality after Prototype 1
 

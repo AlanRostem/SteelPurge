@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entities/hazards/DeathZone.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/AR43Executor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/environment/dead_soldier/DeadSoldier.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/game/environment/checkpoint/Fabricator.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/game/environment/destructible/DestructibleObstacle.cs" type="Script" id=9]
 [ext_resource path="res://scenes/game/environment/destructible/rock_bundle/BigRock.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -44,15 +45,15 @@ position = Vector2( -1, 0 )
 
 [node name="BigRock2" parent="EntityPool" index="0" instance=ExtResource( 10 )]
 position = Vector2( 1633, 161 )
-Health = 100
+script = ExtResource( 9 )
 
 [node name="BigRock3" parent="EntityPool" index="1" instance=ExtResource( 10 )]
 position = Vector2( 1665, 161 )
-Health = 100
+script = ExtResource( 9 )
 
 [node name="BigRock5" parent="EntityPool" index="2" instance=ExtResource( 10 )]
 position = Vector2( 1697, 161 )
-Health = 100
+script = ExtResource( 9 )
 
 [node name="DeathZone" parent="EntityPool" index="3" instance=ExtResource( 2 )]
 position = Vector2( 1129, 256 )

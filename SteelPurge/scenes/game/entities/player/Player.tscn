@@ -91,6 +91,7 @@ one_shot = true
 
 [node name="BodyShape" type="CollisionShape2D" parent="." index="8"]
 shape = SubResource( 2 )
+
 [connection signal="HealthChanged" from="." to="CanvasLayer/HPBar" method="_OnPlayerHealthChanged"]
 [connection signal="TriggerDamageReceptionCooldown" from="." to="DamageReceptionCooldownTimer" method="_on_Player_TriggerDamageReceptionCooldown"]
 [connection signal="TriggerInvincibility" from="." to="InvincibilityCooldownTimer" method="_OnTrigger"]

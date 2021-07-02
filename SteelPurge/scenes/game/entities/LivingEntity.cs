@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using Godot.Collections;
 
 public class LivingEntity : KinematicEntity
@@ -59,6 +58,11 @@ public class LivingEntity : KinematicEntity
 	{
 		
 	}
+
+	public virtual void Die()
+	{
+		QueueFree();
+	}
 	
 	public void ApplyStatusEffect(StatusEffectType type, StatusEffectInitializer callback)
 	{
@@ -100,13 +104,13 @@ public class LivingEntity : KinematicEntity
 	
 	public virtual void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType, bool isCritical = false)
 	{
+		if (damage >= Health)
+			Die();
 		Health -= damage;
 	}
 
 	public void RemoveStatusEffect(StatusEffectType type)
 	{
 		_effects.Remove(type);
-	}
-
-	
+	}	
 }
