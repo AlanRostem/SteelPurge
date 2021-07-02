@@ -156,6 +156,9 @@ public class Enemy : LivingEntity
 				KnockBack(direction);
 			}
 
+			if (damageType == VulnerableHitbox.DamageType.RamSlide)
+				VelocityX = 0;
+
 			if (isCritical && DropTeCells)
 			{
 				_dropTeCell = true;

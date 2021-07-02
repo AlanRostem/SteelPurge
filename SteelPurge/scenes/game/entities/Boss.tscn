@@ -12,6 +12,9 @@ EffectsImmuneTo = [ 1, 2 ]
 CanBeKnockedBack = false
 DropScrapWhenDamaged = false
 
+[node name="VulnerableHitbox" parent="." index="0"]
+ImmuneDamageTypes = [ 3 ]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="5"]
 
 [node name="BossHPBar" type="TextureProgress" parent="CanvasLayer" index="0"]
@@ -36,4 +39,5 @@ margin_right = 36.0
 margin_bottom = 20.0
 text = "Boss name"
 align = 1
+
 [connection signal="HealthChanged" from="." to="." method="_OnBossHealthChanged"]
