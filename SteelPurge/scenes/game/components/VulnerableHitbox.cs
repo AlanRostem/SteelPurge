@@ -30,7 +30,12 @@ public class VulnerableHitbox : Area2D
 	
 	public virtual void TakeHit(uint damage, Vector2 knockBackDirection, DamageType damageType)
 	{
-		if (ImmuneDamageTypes.Contains(damageType)) return;
+		if (IsImmuneToDamageType(damageType)) return;
 		EmitSignal(nameof(Hit), damage, knockBackDirection, damageType);
+	}
+
+	public bool IsImmuneToDamageType(DamageType damageType)
+	{
+		return ImmuneDamageTypes.Contains(damageType);
 	}
 }

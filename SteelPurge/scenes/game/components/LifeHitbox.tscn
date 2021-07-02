@@ -7,8 +7,9 @@
 
 [node name="LifeHitbox" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-ImmuneDamageTypes = [  ]
 
 [node name="DamageIndicator" parent="." index="0" instance=ExtResource( 4 )]
 
 [node name="DamageNumberGenerator" parent="." index="1" instance=ExtResource( 3 )]
+
+[connection signal="Hit" from="." to="." method="_OnHit"]

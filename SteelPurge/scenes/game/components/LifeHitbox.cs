@@ -15,13 +15,13 @@ public class LifeHitbox : VulnerableHitbox
 {
 	[Signal]
 	public delegate void Death();
-	
+
 	[Export] public uint Health = 100;
 
 	private DamageIndicator _damageIndicator;
 	private DamageNumberGenerator _damageNumberGenerator;
 	private StaticEntity _parent;
-	
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -29,20 +29,20 @@ public class LifeHitbox : VulnerableHitbox
 		_damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
 		_damageNumberGenerator = GetNode<DamageNumberGenerator>("DamageNumberGenerator");
 	}
-	
-	public override void TakeHit(uint damage, Vector2 knockBackDirection, DamageType damageType)
+
+	private void _OnHit(uint damage, Vector2 knockBackDirection, DamageType damageType)
 	{
-		_damageIndicator.Indicate(new Color(255, 255, 255));
-		base.TakeHit(damage, knockBackDirection, damageType);
+		_damageIndicator.Indicate(new Color(255, 255, 255), _parent);
 		if (damage >= Health)
 		{
 			EmitSignal(nameof(Death));
 			GetParent().QueueFree();
-			_damageNumberGenerator.ShowDamageNumber(Health, Position + new Vector2(0, -16), _parent.ParentWorld, Colors.Red);
+			_damageNumberGenerator.ShowDamageNumber(Health, _parent.Position + new Vector2(0, -16), _parent.ParentWorld,
+				Colors.Red);
 			return;
 		}
 
-		_damageNumberGenerator.ShowDamageNumber(damage, Position + new Vector2(0, -16), _parent.ParentWorld);
+		_damageNumberGenerator.ShowDamageNumber(damage, _parent.Position + new Vector2(0, -16), _parent.ParentWorld);
 		Health -= damage;
 	}
 }
