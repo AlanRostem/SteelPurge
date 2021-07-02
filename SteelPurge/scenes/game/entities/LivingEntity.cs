@@ -93,7 +93,12 @@ public class LivingEntity : KinematicEntity
 		}
 	}
 
-	public virtual void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
+	public void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
+	{
+		TakeDamage(damage, direction, VulnerableHitbox.DamageType.Standard, isCritical);
+	}
+	
+	public virtual void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType, bool isCritical = false)
 	{
 		Health -= damage;
 	}

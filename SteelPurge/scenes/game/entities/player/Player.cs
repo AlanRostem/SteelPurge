@@ -129,7 +129,8 @@ public class Player : LivingEntity
 		IsRespawning = true;
 	}
 
-	public override void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
+	public override void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType,
+		bool isCritical = false)
 	{
 		if (!IsInvulnerable)
 		{

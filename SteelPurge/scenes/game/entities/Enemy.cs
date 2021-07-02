@@ -124,7 +124,8 @@ public class Enemy : LivingEntity
 		
 	}
 
-	public override void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
+	public override void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType,
+		bool isCritical = false)
 	{
 		if (damage >= Health)
 		{
@@ -178,13 +179,13 @@ public class Enemy : LivingEntity
 
 	private void _OnVulnerableHitboxHit(uint damage, Vector2 knockBackDirection, VulnerableHitbox.DamageType damageType)
 	{
-		TakeDamage(damage, knockBackDirection);
+		TakeDamage(damage, knockBackDirection, damageType);
 	}
 
 
 	private void _OnCriticalHitboxHit(uint damage, Vector2 knockBackDirection, VulnerableHitbox.DamageType damageType)
 	{
-		TakeDamage(damage, knockBackDirection, true);
+		TakeDamage(damage, knockBackDirection, damageType, true);
 	}
 
 

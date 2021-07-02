@@ -30,14 +30,15 @@ public class HornetRogue : Enemy
 			QueueFree();
 	}
 
-	public override void TakeDamage(uint damage, Vector2 direction, bool isCritical = false)
+	public override void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType,
+		bool isCritical = false)
 	{
 		if (direction.y != 0)
 		{
 			VelocityY = 0;
 			IsGravityEnabled = false;
 		}
-		base.TakeDamage(damage, direction, isCritical);
+		base.TakeDamage(damage, direction, damageType, isCritical);
 	}
 
 	private void _OnPlayerEnterExplosiveArea(Player player)
