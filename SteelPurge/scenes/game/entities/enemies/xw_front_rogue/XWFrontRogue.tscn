@@ -31,7 +31,6 @@ extents = Vector2( 8, 10 )
 
 [node name="XWFrontRogue" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
-EffectsImmuneTo = [ 0 ]
 MaxHealth = 300
 PlayerDetectionRange = 200.0
 WalkSpeed = 45.0
