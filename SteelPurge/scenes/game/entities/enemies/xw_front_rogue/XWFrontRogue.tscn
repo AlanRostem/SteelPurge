@@ -35,7 +35,7 @@ EffectsImmuneTo = [ 0 ]
 MaxHealth = 300
 PlayerDetectionRange = 200.0
 WalkSpeed = 45.0
-RushSpeed = 120.0
+RushSpeed = 175.0
 DamagePerHit = 100
 
 [node name="VulnerableHitbox" parent="." index="0"]

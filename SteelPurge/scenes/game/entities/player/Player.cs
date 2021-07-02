@@ -428,10 +428,10 @@ public class Player : LivingEntity
 			{
 				if (IsOnSlope || IsMovingFasterThanCrouch())
 					_Slide();
-				else if (!_isRoofAbove)
+				else
 					_ActivateCrouchMode();
 			}
-			else if (!IsMovingTooFast() && (IsSliding || IsCrouching) && !_isRoofAbove ||
+			else if (!IsMovingTooFast() && (IsSliding || IsCrouching) ||
 					 _isRoofAbove && !IsMovingFasterThanCrouch())
 			{
 				_StopSliding();
