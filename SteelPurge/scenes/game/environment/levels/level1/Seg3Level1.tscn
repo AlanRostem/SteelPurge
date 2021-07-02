@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entities/hazards/DeathZone.tscn" type="PackedScene" id=2]
@@ -14,8 +14,11 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 32 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 96 )
+
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1359, 16 )
+extents = Vector2( 103, 16 )
 
 [node name="Seg3Level1" instance=ExtResource( 1 )]
 
@@ -30,6 +33,12 @@ tile_data = PoolIntArray( 0, 26, 0, 1, 26, 0, 2, 26, 0, 3, 26, 0, 4, 26, 0, 5, 2
 
 [node name="ShootingIgnoredTileMap" parent="Environment" index="2"]
 tile_data = PoolIntArray( 458790, 0, 0, 458791, 1, 0, 458792, 2, 0, 589868, 0, 0, 589869, 1, 0, 589870, 2, 0 )
+
+[node name="TransferArea" parent="Environment" index="3"]
+position = Vector2( 1880, 96 )
+
+[node name="CollisionShape2D" parent="Environment/TransferArea" index="0"]
+shape = SubResource( 3 )
 
 [node name="EntityPool" parent="." index="1"]
 position = Vector2( -1, 0 )
@@ -59,7 +68,7 @@ position = Vector2( 1694, 149 )
 Health = 100
 
 [node name="DeathZone" parent="EntityPool" index="6" instance=ExtResource( 2 )]
-position = Vector2( 1361, 272 )
+position = Vector2( 1129, 256 )
 
 [node name="CollisionShape2D" parent="EntityPool/DeathZone/Area2D" index="0"]
 position = Vector2( 1, 0 )
