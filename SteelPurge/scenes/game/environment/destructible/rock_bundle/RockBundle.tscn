@@ -7,6 +7,7 @@
 extents = Vector2( 16, 14 )
 
 [node name="RockBundle" instance=ExtResource( 1 )]
+Health = 100
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
