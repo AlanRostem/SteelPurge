@@ -65,3 +65,5 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="2"]
 frames = SubResource( 6 )
+
+[connection signal="HealthChanged" from="LifeHitbox" to="." method="_OnHealthChanged"]

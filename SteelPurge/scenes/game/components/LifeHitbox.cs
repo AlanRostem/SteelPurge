@@ -14,7 +14,7 @@ using System;
 public class LifeHitbox : VulnerableHitbox
 {
 	[Signal]
-	public delegate void HealthChanged();
+	public delegate void HealthChanged(uint health);
 	
 	[Signal]
 	public delegate void Death();
@@ -34,7 +34,7 @@ public class LifeHitbox : VulnerableHitbox
 		set
 		{
 			_currentHealth = value;
-			EmitSignal(nameof(HealthChanged), value);
+			CallDeferred("emit_signal", nameof(HealthChanged), value);
 		}
 	}
 
