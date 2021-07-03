@@ -32,6 +32,7 @@ ProjectileScene = ExtResource( 11 )
 
 [node name="DragonsBreathAbility" parent="." index="2" instance=ExtResource( 5 )]
 script = ExtResource( 6 )
+DrainPerTick = 2
 DrainInterval = 0.07
 DamagePerTick = 25
 
@@ -50,6 +51,7 @@ texture = ExtResource( 8 )
 
 [node name="WeaponTestSprite" parent="." index="5" instance=ExtResource( 9 )]
 texture = ExtResource( 10 )
+
 [connection signal="DamageDealt" from="." to="FlareFiringDevice" method="_OnDamageDealt"]
 [connection signal="TurnOff" from="DragonsBreathAbility" to="DragonsBreathAbility/FireArea" method="_OnDisabled"]
 [connection signal="TurnOn" from="DragonsBreathAbility" to="DragonsBreathAbility/FireArea" method="_OnEnabled"]
