@@ -11,6 +11,7 @@ extents = Vector2( 15, 13 )
 [node name="LargeRock" instance=ExtResource( 1 )]
 collision_layer = 32
 script = ExtResource( 4 )
+CurrentCollisionMode = 1
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
