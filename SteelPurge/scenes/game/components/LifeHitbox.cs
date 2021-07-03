@@ -39,12 +39,7 @@ public class LifeHitbox : VulnerableHitbox
 
 	private void _OnHit(uint damage, Vector2 knockBackDirection, DamageType damageType)
 	{
-		World parentWorld;
-
-		if (_staticParent != null)
-			parentWorld = _staticParent.ParentWorld;
-		else
-			parentWorld = _kinematicParent.ParentWorld;
+		World parentWorld = _staticParent != null ? _staticParent.ParentWorld : _kinematicParent.ParentWorld;
 		
 		var parent = GetParent<Node2D>();
 		_damageIndicator.Indicate(new Color(255, 255, 255), parent);
