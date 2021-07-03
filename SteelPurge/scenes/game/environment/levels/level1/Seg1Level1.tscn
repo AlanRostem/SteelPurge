@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entities/hazards/DeathZone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/AR43Executor.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/game/environment/destructible/rock_bundle/BigRock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/game/environment/destructible/rock_bundle/RockBundle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/game/environment/destructible/rock_bundle/LargeRock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/environment/checkpoint/Fabricator.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/texture/big_rock_cracked.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 104 )
@@ -41,52 +40,30 @@ collision_mask = 2147483697
 
 [node name="RockBundle" parent="EntityPool" index="2" instance=ExtResource( 5 )]
 position = Vector2( 704, 112 )
-Health = 100
 
 [node name="RockBundle2" parent="EntityPool" index="3" instance=ExtResource( 5 )]
 position = Vector2( 1376, 33 )
 
-[node name="BigRock" parent="EntityPool" index="4" instance=ExtResource( 4 )]
-position = Vector2( 1376, 111 )
-Health = 75
-
-[node name="BigRock2" parent="EntityPool" index="5" instance=ExtResource( 4 )]
-position = Vector2( 1304, 32 )
-Health = 75
-
-[node name="CrackedRock" parent="EntityPool" index="6" instance=ExtResource( 4 )]
-position = Vector2( 1376, 138 )
-Health = 25
-
-[node name="Sprite" parent="EntityPool/CrackedRock" index="0"]
-texture = ExtResource( 9 )
-
-[node name="CrackedRock2" parent="EntityPool" index="7" instance=ExtResource( 4 )]
-position = Vector2( 1376, 165 )
-Health = 25
-
-[node name="Sprite" parent="EntityPool/CrackedRock2" index="0"]
-texture = ExtResource( 9 )
-
-[node name="CrackedRock3" parent="EntityPool" index="8" instance=ExtResource( 4 )]
-position = Vector2( 1376, 192 )
-scale = Vector2( 0.975903, 1 )
-Health = 25
-
-[node name="Sprite" parent="EntityPool/CrackedRock3" index="0"]
-texture = ExtResource( 9 )
-
-[node name="Fabricator" parent="EntityPool" index="9" instance=ExtResource( 7 )]
+[node name="Fabricator" parent="EntityPool" index="4" instance=ExtResource( 7 )]
 position = Vector2( 1536, 192 )
 IsCheckPoint = true
+
+[node name="LargeRock" parent="EntityPool" index="5" instance=ExtResource( 6 )]
+position = Vector2( 1376, 192 )
+
+[node name="LargeRock5" parent="EntityPool" index="6" instance=ExtResource( 6 )]
+position = Vector2( 1304, 32 )
+
+[node name="LargeRock2" parent="EntityPool" index="7" instance=ExtResource( 6 )]
+position = Vector2( 1376, 166 )
+
+[node name="LargeRock3" parent="EntityPool" index="8" instance=ExtResource( 6 )]
+position = Vector2( 1376, 140 )
+
+[node name="LargeRock4" parent="EntityPool" index="9" instance=ExtResource( 6 )]
+position = Vector2( 1376, 114 )
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 128, 96 )
 
 [editable path="EntityPool/DeathZone"]
-
-[editable path="EntityPool/CrackedRock"]
-
-[editable path="EntityPool/CrackedRock2"]
-
-[editable path="EntityPool/CrackedRock3"]
