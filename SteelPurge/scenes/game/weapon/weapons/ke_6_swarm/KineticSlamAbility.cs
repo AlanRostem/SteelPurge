@@ -98,10 +98,11 @@ public class KineticSlamAbility : TacticalAbility
 				OnEnd();
 			}
 
-			// return;
+			return;
 		}
 
-		// var hitBox = (VulnerableHitbox) area;
+		var hitBox = (VulnerableHitbox) area;
+		hitBox.TakeHit(DirectHitBaseDamage, VulnerableHitbox.DamageType.Melee);
 	}
 
 

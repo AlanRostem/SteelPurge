@@ -15,7 +15,12 @@ public class LargeRock : KinematicEntity
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
 		_lifeHitbox.CurrentHealth = Health;
 	}
-	
+
+	protected override void _OnMovement(float delta)
+	{
+		VelocityX = 0;
+	}
+
 	private void _OnHealthChanged(uint health)
 	{
 		var percentage = (float) health / _lifeHitbox.Health;

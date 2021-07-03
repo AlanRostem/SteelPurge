@@ -3,7 +3,7 @@ using Godot.Collections;
 
 public class Game : Node2D
 {
-	private World _world;
+	public World GameWorld { get; private set; }
 
 	// private Dictionary<string, object> _saveData = new Dictionary<string, object>();
 	private static readonly string MainMenuScenePath = "res://scenes/main_menu/MainMenu.tscn";
@@ -15,8 +15,7 @@ public class Game : Node2D
 	
 	public override void _Ready()
 	{
-		base._Ready();
-		_world = GetNode<World>("World");
+		GameWorld = GetNode<World>("World");
 		_pauseMenu = GetNode<PauseMenu>("CanvasLayer/PauseMenu");
 		PlayerStats = new PlayerStats();
 	}
