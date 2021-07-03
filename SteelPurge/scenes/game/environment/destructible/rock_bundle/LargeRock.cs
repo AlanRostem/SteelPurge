@@ -3,6 +3,8 @@ using System;
 
 public class LargeRock : KinematicEntity
 {
+	[Export] public uint Health = 100;
+	
 	private LifeHitbox _lifeHitbox;
 	private AnimatedSprite _sprite;
 	
@@ -11,6 +13,7 @@ public class LargeRock : KinematicEntity
 		base._Ready();
 		_lifeHitbox = GetNode<LifeHitbox>("LifeHitbox");
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
+		_lifeHitbox.CurrentHealth = Health;
 	}
 	
 	private void _OnHealthChanged(uint health)
