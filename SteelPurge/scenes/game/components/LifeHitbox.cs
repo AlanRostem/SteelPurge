@@ -20,29 +20,44 @@ public class LifeHitbox : VulnerableHitbox
 
 	private DamageIndicator _damageIndicator;
 	private DamageNumberGenerator _damageNumberGenerator;
-	private StaticEntity _parent;
+	private StaticEntity _staticParent;
+	private KinematicEntity _kinematicParent;
 
 	public override void _Ready()
 	{
 		base._Ready();
-		_parent = GetParent<StaticEntity>();
+		
+		if (GetParent() is StaticEntity sEntity)
+			_staticParent = sEntity;
+		
+		else if (GetParent() is KinematicEntity kEntity)
+			_kinematicParent = kEntity;
+
 		_damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
 		_damageNumberGenerator = GetNode<DamageNumberGenerator>("DamageNumberGenerator");
 	}
 
 	private void _OnHit(uint damage, Vector2 knockBackDirection, DamageType damageType)
 	{
-		_damageIndicator.Indicate(new Color(255, 255, 255), _parent);
+		World parentWorld;
+
+		if (_staticParent != null)
+			parentWorld = _staticParent.ParentWorld;
+		else
+			parentWorld = _kinematicParent.ParentWorld;
+		
+		var parent = GetParent<Node2D>();
+		_damageIndicator.Indicate(new Color(255, 255, 255), parent);
 		if (damage >= Health)
 		{
 			EmitSignal(nameof(Death));
 			GetParent().QueueFree();
-			_damageNumberGenerator.ShowDamageNumber(Health, _parent.Position + new Vector2(0, -16), _parent.ParentWorld,
+			_damageNumberGenerator.ShowDamageNumber(Health, parent.Position + new Vector2(0, -16), parentWorld,
 				Colors.Red);
 			return;
 		}
 
-		_damageNumberGenerator.ShowDamageNumber(damage, _parent.Position + new Vector2(0, -16), _parent.ParentWorld);
+		_damageNumberGenerator.ShowDamageNumber(damage, parent.Position + new Vector2(0, -16), parentWorld);
 		Health -= damage;
 	}
 }
