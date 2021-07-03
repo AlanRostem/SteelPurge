@@ -56,15 +56,15 @@ Health = 25
 position = Vector2( 1304, 32 )
 
 [node name="LargeRock2" parent="EntityPool" index="7" instance=ExtResource( 6 )]
-position = Vector2( 1376, 166 )
+position = Vector2( 1376, 165 )
 Health = 25
 
 [node name="LargeRock3" parent="EntityPool" index="8" instance=ExtResource( 6 )]
-position = Vector2( 1376, 140 )
+position = Vector2( 1376, 138 )
 Health = 25
 
 [node name="LargeRock4" parent="EntityPool" index="9" instance=ExtResource( 6 )]
-position = Vector2( 1376, 114 )
+position = Vector2( 1376, 111 )
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 128, 96 )
