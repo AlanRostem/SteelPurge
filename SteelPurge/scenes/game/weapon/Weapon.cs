@@ -3,6 +3,8 @@ using Godot;
 
 public class Weapon : Node2D
 {
+	public const uint MeleeDamage = 80;
+
 	private static PackedScene WeaponCollectibleScene
 		= GD.Load<PackedScene>("res://scenes/game/entities/collectible/weapon/WeaponCollectible.tscn");
 
@@ -14,7 +16,6 @@ public class Weapon : Node2D
 
 	[Export] public uint DamagePerShot;
 	[Export] public uint RecoilDashDamagePerShot;
-	[Export] public uint MeleeDamage = 80;
 	[Export] public uint RateOfFire;
 	[Export] public uint MaxRecoilHoverShots = 3;
 	[Export] public bool ReloadOnFloor = true;
@@ -22,8 +23,9 @@ public class Weapon : Node2D
 	[Export] public float HoverRecoilSpeed = 100;
 	[Export] public float MinFallSpeedForRecoilHovering = -20;
 	[Export] public SpriteFrames PlayerSpriteFrames;
-	
+	[Export] public uint Ammo = 100;
 
+	
 	[Signal]
 	public delegate void Swapped();
 
@@ -147,7 +149,7 @@ public class Weapon : Node2D
 
 	private void Fire()
 	{
-		if (!_isHoldingTrigger)
+		if (!_isHoldingTrigger && Ammo == 0)
 		{
 			_isFiring = false;
 			EmitSignal(nameof(CancelFire));
@@ -155,8 +157,18 @@ public class Weapon : Node2D
 		}
 
 		EmitSignal(nameof(Fired));
-
+		RemoveAmmo();
 		ProduceRecoilToHoverAndLoseBoosts();
+	}
+
+	public void AddAmmo(uint amount)
+	{
+		Ammo += amount;
+	}
+	
+	public void RemoveAmmo(uint amount = 1)
+	{
+		Ammo -= amount;
 	}
 
 	public void ProduceRecoilToHoverOnly()
