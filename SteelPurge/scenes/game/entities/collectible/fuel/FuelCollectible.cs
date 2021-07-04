@@ -25,7 +25,7 @@ public class FuelCollectible : FallingCollectible
 
 	public override void OnCollected(Player player)
 	{
-		player.PlayerInventory.IncreaseOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum, Count);
+		// player.PlayerInventory.IncreaseOrdinanceFuel(player.PlayerInventory.EquippedWeaponEnum, Count);
 	}
 	
 	private void _OnStartFadingAway()

@@ -25,16 +25,16 @@ public class Scrap : FallingCollectible
 			if (halfCount <= diff)
 			{
 				player.Health += halfCount;
-				player.PlayerInventory.PickUpScrap(halfCount);
+				// player.PlayerInventory.PickUpScrap(halfCount);
 				return;
 			}
 
 			player.Health = player.MaxHealth;
-			player.PlayerInventory.PickUpScrap(Count - diff);
+			// player.PlayerInventory.PickUpScrap(Count - diff);
 		}
 		else
 		{
-			player.PlayerInventory.PickUpScrap(Count);
+			// player.PlayerInventory.PickUpScrap(Count);
 		}
 	}
 

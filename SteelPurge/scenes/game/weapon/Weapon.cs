@@ -23,8 +23,9 @@ public class Weapon : Node2D
 	[Export] public float HoverRecoilSpeed = 100;
 	[Export] public float MinFallSpeedForRecoilHovering = -20;
 	[Export] public SpriteFrames PlayerSpriteFrames;
-	[Export] public uint Ammo = 100;
-
+	[Export] public uint MaxAmmo = 100;
+	
+	private uint _ammo = 0;
 	
 	[Signal]
 	public delegate void Swapped();
@@ -145,11 +146,12 @@ public class Weapon : Node2D
 		_meleeShape = GetNode<CollisionShape2D>("MeleeArea/CollisionShape2D");
 		_recoilHoverBar = GetNode<RecoilHoverBar>("RecoilHoverBar");
 		CurrentRecoilHoverAmmo = MaxRecoilHoverShots;
+		RefillAmmo();
 	}
 
 	private void Fire()
 	{
-		if (!_isHoldingTrigger && Ammo == 0)
+		if (!_isHoldingTrigger || _ammo == 0)
 		{
 			_isFiring = false;
 			EmitSignal(nameof(CancelFire));
@@ -161,14 +163,19 @@ public class Weapon : Node2D
 		ProduceRecoilToHoverAndLoseBoosts();
 	}
 
+	public void RefillAmmo()
+	{
+		_ammo = MaxAmmo;
+	}
+
 	public void AddAmmo(uint amount)
 	{
-		Ammo += amount;
+		_ammo += amount;
 	}
 	
 	public void RemoveAmmo(uint amount = 1)
 	{
-		Ammo -= amount;
+		_ammo -= amount;
 	}
 
 	public void ProduceRecoilToHoverOnly()

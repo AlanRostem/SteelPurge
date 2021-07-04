@@ -68,7 +68,6 @@ public class TacticalAbility : WeaponAbility
 				IsActive = true;
 				OnActivate();
 				_durationTimer.Start();
-				GetWeapon().OwnerPlayer.PlayerInventory.DecreaseOrdinanceFuel(equippedWeaponEnum, FuelRequirement);
 			}
 			else
 			{

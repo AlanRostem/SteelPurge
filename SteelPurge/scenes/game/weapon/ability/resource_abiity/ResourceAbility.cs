@@ -37,7 +37,7 @@ public class ResourceAbility : WeaponAbility
 			if (_currentDrainTime >= DrainInterval)
 			{
 				_currentDrainTime = 0;
-				player.PlayerInventory.DecreaseOrdinanceFuel(equippedWeaponEnum, DrainPerTick);
+				// TODO: Drain the resource meter
 				OnTick();
 				_abilityBar.Value = player.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum);
 			}
