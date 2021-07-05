@@ -3,6 +3,9 @@ using Godot.Collections;
 
 public class LivingEntity : KinematicEntity
 {
+	[Signal]
+	public delegate void OnTakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType, bool isCritical = false);
+
 	public delegate void StatusEffectInitializer(StatusEffect effect);
 
 	public enum StatusEffectType
@@ -33,7 +36,6 @@ public class LivingEntity : KinematicEntity
 
 		set
 		{
-			
 			_health = value;
 			if (_health > MaxHealth)
 				_health = MaxHealth;
@@ -42,7 +44,7 @@ public class LivingEntity : KinematicEntity
 	}
 
 	private uint _health = 100;
-	
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -51,19 +53,18 @@ public class LivingEntity : KinematicEntity
 
 	public void ApplyStatusEffect(StatusEffectType type)
 	{
-		ApplyStatusEffect(type, effect => {});
+		ApplyStatusEffect(type, effect => { });
 	}
-	
+
 	protected virtual void OnStatusEffectApplied(StatusEffectType type, StatusEffect effect)
 	{
-		
 	}
 
 	public virtual void Die()
 	{
 		QueueFree();
 	}
-	
+
 	public void ApplyStatusEffect(StatusEffectType type, StatusEffectInitializer callback)
 	{
 		if (type == StatusEffectType.None || !CanReceiveStatusEffect)
@@ -101,16 +102,18 @@ public class LivingEntity : KinematicEntity
 	{
 		TakeDamage(damage, direction, VulnerableHitbox.DamageType.Standard, isCritical);
 	}
-	
-	public virtual void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType, bool isCritical = false)
+
+	public virtual void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType,
+		bool isCritical = false)
 	{
 		if (damage >= Health)
 			Die();
 		Health -= damage;
+		EmitSignal(nameof(OnTakeDamage), damage, direction, damageType, isCritical);
 	}
 
 	public void RemoveStatusEffect(StatusEffectType type)
 	{
 		_effects.Remove(type);
-	}	
+	}
 }

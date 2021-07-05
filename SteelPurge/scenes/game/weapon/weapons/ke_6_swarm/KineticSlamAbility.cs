@@ -108,7 +108,6 @@ public class KineticSlamAbility : TacticalAbility
 
 	private void EnableProtection()
 	{
-		
 		_isProtected = true;
 		GetWeapon().OwnerPlayer.CanTakeDamage = false;
 		Update();

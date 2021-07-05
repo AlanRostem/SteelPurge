@@ -135,15 +135,24 @@ public class Player : LivingEntity
 	{
 		TakeDamage(1, direction, damageType, isCritical);
 	}
+
+	public void BecomeInvincible()
+	{
+		IsInvulnerable = true;
+		EmitSignal(nameof(TriggerDamageReceptionCooldown));
+		EmitSignal(nameof(TriggerInvincibility));
+	}
 	
 	public override void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType,
 		bool isCritical = false)
 	{
+		EmitSignal(nameof(OnTakeDamage), damage, direction, damageType, isCritical);
+
 		if (!IsInvulnerable)
 		{
 			if (direction.x != 0 || direction.y != 0)
 			{
-				Velocity = (new Vector2(KnockBackSpeed * direction.x, -JumpSpeed / 2));
+				Velocity = new Vector2(KnockBackSpeed * direction.x, -JumpSpeed / 2);
 				if (!CanTakeDamage) return;
 
 				var ability = PlayerInventory.EquippedWeapon.TacticalEnhancement;
@@ -173,6 +182,7 @@ public class Player : LivingEntity
 		{
 			Health -= damage;
 		}
+		
 	}
 
 	private bool _slide = false;
