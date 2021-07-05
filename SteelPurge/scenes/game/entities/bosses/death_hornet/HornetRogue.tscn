@@ -14,7 +14,6 @@ extents = Vector2( 6, 8 )
 collision_layer = 264
 collision_mask = 2147483697
 script = ExtResource( 3 )
-MaxHealth = 220
 PlayerDetectionRange = 10000.0
 DropTeCells = false
 

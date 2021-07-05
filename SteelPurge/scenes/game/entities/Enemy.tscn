@@ -16,6 +16,7 @@ collision_layer = 8
 collision_mask = 2147491889
 script = ExtResource( 2 )
 CurrentCollisionMode = 1
+MaxHealth = 10
 
 [node name="VulnerableHitbox" parent="." index="0" instance=ExtResource( 3 )]
 
@@ -36,7 +37,8 @@ one_shot = true
 [node name="DamageNumberGenerator" parent="." index="4" instance=ExtResource( 4 )]
 
 [node name="DamageIndicator" parent="." index="5" instance=ExtResource( 5 )]
+
 [connection signal="Hit" from="VulnerableHitbox" to="." method="_OnVulnerableHitboxHit"]
-[connection signal="Hit" from="CriticalHitbox" to="." method="_OnCriticalHitboxHit"]
 [connection signal="Hit" from="CriticalHitbox" to="." method="_OnVulnerableHitboxHit"]
+[connection signal="Hit" from="CriticalHitbox" to="." method="_OnCriticalHitboxHit"]
 [connection signal="timeout" from="MeleeAffectedKnockBackTimer" to="." method="_OnKnockBackEnd"]

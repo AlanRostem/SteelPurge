@@ -6,6 +6,8 @@ using Object = Godot.Object;
 public class Enemy : LivingEntity
 {
 
+	public const uint StandardHealth = 10;
+	
 	[Export] public float PlayerDetectionRange = 1000;
 	[Export] public float KnockBackSpeed = 300;
 	[Export] public bool CanBeKnockedBack = true;

@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/game/weapon/weapons/h28_blaster/DualLaserAbility.cs" type="Script" id=7]
 
 [node name="H28Blaster" instance=ExtResource( 2 )]
-DamagePerShot = 25
+DamagePerShot = 4
 RateOfFire = 180
 HoverRecoilSpeed = 75.0
 
@@ -24,4 +24,5 @@ script = ExtResource( 7 )
 
 [node name="ShotDelayTimer" type="Timer" parent="DualLaserAbility" index="3"]
 wait_time = 0.2
+
 [connection signal="timeout" from="DualLaserAbility/ShotDelayTimer" to="DualLaserAbility" method="_OnShoot"]

@@ -12,9 +12,6 @@ height = 4.0
 [node name="AR43Executor" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 CurrentCollisionMode = 2
-MaxHealth = 200
-ScrapDropHit = 3
-ScrapDropKilled = 60
 PlayerDetectionRange = 240.0
 WalkSpeed = 80.0
 

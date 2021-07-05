@@ -4,7 +4,7 @@ using System;
 public class SeismicBlast : StaticEntity
 {
 	// TODO: Add sprite that shows the blast
-	public static uint BlastDamage = 80;
+	public static uint BlastDamage = 5;
 
 	private void _OnExistenceTimerTimeout()
 	{

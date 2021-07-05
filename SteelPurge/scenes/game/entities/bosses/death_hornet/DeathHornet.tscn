@@ -19,9 +19,7 @@ collision_layer = 520
 collision_mask = 2147483697
 script = ExtResource( 3 )
 IsGravityEnabled = false
-MaxHealth = 5500
-ScrapDropHit = 4
-ScrapDropKilled = 2500
+MaxHealth = 220
 PlayerDetectionRange = 10000.0
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
@@ -107,6 +105,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LethalArea" index="0"]
 position = Vector2( 0, 12 )
 shape = SubResource( 1 )
+
 [connection signal="body_entered" from="RogueDamageArea" to="." method="_OnRogueHit"]
 [connection signal="timeout" from="RogueSpawnTimer" to="." method="_OnSpawnRogue"]
 [connection signal="timeout" from="FlightDurationTimer" to="." method="_OnFlightEnd"]

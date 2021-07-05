@@ -12,7 +12,7 @@ Damage = 25
 
 [node name="LifeHitbox" parent="." index="0" instance=ExtResource( 3 )]
 ImmuneDamageTypes = [ 0, 1, 2, 3, 4, 6 ]
-Health = 50
+Health = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LifeHitbox" index="2"]
 shape = SubResource( 1 )

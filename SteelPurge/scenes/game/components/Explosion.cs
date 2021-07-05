@@ -26,12 +26,13 @@ public class Explosion : StaticEntity
 	{
 		if (body is Player player)
 		{
+			player.TakeDamage(Vector2.Zero);
 			var angle = Position.AngleToPoint(player.Position);
-			var force = new Vector2(-Mathf.Cos(angle) * 0.2f, -Mathf.Sin(angle)) * KnockBackForce;
 			player.ApplyStatusEffect(LivingEntity.StatusEffectType.KnockBack, effect =>
 			{
-				var knockBackEffect = (KnockBackEffect)effect;
-				knockBackEffect.KnockBackForce = force;
+				var knockBackEffect = (KnockBackEffect) effect;
+				knockBackEffect.KnockBackForce = new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce;
+				knockBackEffect.DisableEntityMovement = true;
 			});
 		}
 	}

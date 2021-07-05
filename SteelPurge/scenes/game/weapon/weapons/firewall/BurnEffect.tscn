@@ -7,3 +7,4 @@
 script = ExtResource( 1 )
 Type = 0
 Duration = 6.0
+DamagePerTick = 1

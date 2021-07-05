@@ -10,7 +10,7 @@
 [node name="KE6Swarm" instance=ExtResource( 1 )]
 DisplayName = "Joule"
 WeaponType = 2
-DamagePerShot = 10
+DamagePerShot = 4
 RateOfFire = 130
 MaxRecoilHoverShots = 2
 HoverRecoilSpeed = 115.0
@@ -19,6 +19,7 @@ HoverRecoilSpeed = 115.0
 script = ExtResource( 4 )
 
 [node name="KineticSlamAbility" parent="." index="2" instance=ExtResource( 5 )]
+DirectHitBaseDamage = 20
 
 [node name="WeaponTestSprite" parent="." index="5" instance=ExtResource( 2 )]
 texture = ExtResource( 6 )

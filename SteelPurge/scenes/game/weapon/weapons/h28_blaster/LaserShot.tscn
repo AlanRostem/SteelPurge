@@ -9,6 +9,8 @@ extents = Vector2( 200, 4 )
 
 [node name="LaserShot" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
+Damage = 5
+PlayerHealCount = 1
 
 [node name="HitBox" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -25,5 +27,6 @@ shape = SubResource( 1 )
 [node name="ExistenceTimer" type="Timer" parent="HitBox" index="2"]
 one_shot = true
 autostart = true
+
 [connection signal="area_entered" from="HitBox" to="." method="_OnVulnerableHitBoxHit"]
 [connection signal="timeout" from="HitBox/ExistenceTimer" to="." method="_OnExistenceTimeout"]
