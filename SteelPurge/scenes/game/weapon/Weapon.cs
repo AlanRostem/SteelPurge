@@ -3,7 +3,7 @@ using Godot;
 
 public class Weapon : Node2D
 {
-	public const uint MeleeDamage = 80;
+	public const uint MeleeDamage = 6;
 
 	private static PackedScene WeaponCollectibleScene
 		= GD.Load<PackedScene>("res://scenes/game/entities/collectible/weapon/WeaponCollectible.tscn");
