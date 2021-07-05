@@ -55,7 +55,6 @@ public class Player : LivingEntity
 	public bool IsRamSliding = false;
 	private bool _isStunned = false;
 	public float HorizontalLookingDirection = 1;
-	public float AimAngle = 0;
 	public bool IsWalking = false;
 	public bool IsJumping = false;
 	public bool IsSliding = false;
@@ -132,6 +131,12 @@ public class Player : LivingEntity
 		IsRespawning = true;
 	}
 
+	public void TakeDamage(Vector2 direction, VulnerableHitbox.DamageType damageType = VulnerableHitbox.DamageType.Standard,
+		bool isCritical = false)
+	{
+		TakeDamage(1, direction, damageType, isCritical);
+	}
+	
 	public override void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType,
 		bool isCritical = false)
 	{

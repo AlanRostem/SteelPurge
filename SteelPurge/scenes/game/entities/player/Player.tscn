@@ -26,6 +26,7 @@ z_index = 1000
 collision_layer = 2
 collision_mask = 8225
 script = ExtResource( 2 )
+MaxHealth = 3
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="." index="0"]
 position = Vector2( 7.10543e-15, -9 )
@@ -72,12 +73,15 @@ one_shot = true
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="7"]
 
 [node name="HPBar" type="TextureProgress" parent="CanvasLayer" index="0"]
-anchor_top = 0.5
-anchor_bottom = 0.5
+anchor_left = -0.0075
+anchor_top = 0.491667
+anchor_right = -0.0075
+anchor_bottom = 0.491667
 margin_left = 275.0
 margin_top = -110.0
 margin_right = 383.0
 margin_bottom = -98.0
+max_value = 3.0
 texture_under = ExtResource( 8 )
 texture_over = ExtResource( 11 )
 texture_progress = ExtResource( 9 )

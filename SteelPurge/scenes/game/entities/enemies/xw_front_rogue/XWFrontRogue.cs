@@ -8,7 +8,6 @@ public class XWFrontRogue : Enemy
 {
 	[Export] public float WalkSpeed = 32;
 	[Export] public float RushSpeed = 110;
-	[Export] public uint DamagePerHit = 90;
 	[Export] public float PlayerVisualLossRange = 3 * CustomTileMap.Size;
 	public int Direction = 1;
 	private bool _canSwapDir = true;
@@ -97,7 +96,7 @@ public class XWFrontRogue : Enemy
 	private void _OnPlayerEnterMeleeArea(Player player)
 	{
 		if (player.IsInvulnerable) return;
-		AttackPlayer(DamagePerHit, player, new Vector2(Direction, 0));
+		AttackPlayer(player, new Vector2(Direction, 0));
 		_isRushing = false;
 		if (IsCurrentlyLethal) QueueFree();
 	}

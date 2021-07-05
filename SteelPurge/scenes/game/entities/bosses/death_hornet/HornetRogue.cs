@@ -3,7 +3,6 @@ using System;
 
 public class HornetRogue : Enemy
 {
-	[Export] public uint DamagePerHit = 45;
 	[Export] public int Direction = -1;
 	private AnimatedSprite _sprite;
 	public bool Fly = false;
@@ -43,7 +42,7 @@ public class HornetRogue : Enemy
 
 	private void _OnPlayerEnterExplosiveArea(Player player)
 	{
-		AttackPlayer(DamagePerHit, player, new Vector2(Direction, 0));
+		AttackPlayer(player, new Vector2(Direction, 0));
 		if (IsCurrentlyLethal) QueueFree();
 	}
 }

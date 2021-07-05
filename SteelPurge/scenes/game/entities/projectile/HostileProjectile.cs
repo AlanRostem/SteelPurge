@@ -5,7 +5,6 @@ public class HostileProjectile : KinematicEntity
 	[Export] public float DirectionAngle = 0;
 	[Export] public int DamageDirection = 0;
 	[Export] public float MaxVelocity = 250;
-	[Export] public uint Damage = 15;
 	private bool _hasDisappeared = false;
 
 	public override void _Ready()
@@ -32,7 +31,7 @@ public class HostileProjectile : KinematicEntity
 		if (body is Player player)
 		{
 			// TODO: Consider checking the enemy's lethality
-			player.TakeDamage(Damage, new Vector2(DamageDirection, 0));
+			player.TakeDamage(new Vector2(DamageDirection, 0));
 		}
 
 		if (!_hasDisappeared)

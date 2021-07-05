@@ -59,6 +59,12 @@ public class Enemy : LivingEntity
 	public virtual void OnDie()
 	{
 	}
+	
+	public void AttackPlayer(Player player, Vector2 knockBackDirection)
+	{
+		if (!IsCurrentlyLethal) return;
+		player.TakeDamage(1, knockBackDirection);
+	}
 
 	public void AttackPlayer(uint damage, Player player, Vector2 knockBackDirection)
 	{

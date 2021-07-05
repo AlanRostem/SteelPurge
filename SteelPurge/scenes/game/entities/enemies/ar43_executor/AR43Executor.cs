@@ -8,7 +8,6 @@ public class AR43Executor : Enemy
 
 	public int Direction = -1;
 	[Export] public float WalkSpeed = 57;
-	[Export] public uint MeleeDamage = 40;
 	private RayCast2D _groundScanner;
 
 	private bool _startWalking = false;
@@ -96,6 +95,6 @@ public class AR43Executor : Enemy
 	private void _OnPlayerMelee(object body)
 	{
 		var player = (Player)body;
-		AttackPlayer(MeleeDamage, player, new Vector2(Direction, 0));
+		AttackPlayer(player, new Vector2(Direction, 0));
 	}
 }
