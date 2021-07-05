@@ -10,9 +10,4 @@ public class DurationTimer : Timer
 		_parent = GetParent<TacticalAbility>();
 		WaitTime = _parent.Duration;
 	}
-
-	private void _OnTrigger()
-	{
-		Start();
-	}
 }

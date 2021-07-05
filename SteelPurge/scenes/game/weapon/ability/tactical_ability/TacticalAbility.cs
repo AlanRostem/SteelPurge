@@ -3,23 +3,14 @@ using System;
 
 public class TacticalAbility : WeaponAbility
 {
-	[Export] public uint FuelRequirement = 10;
 	[Export] public float CoolDown = 6;
 	[Export] public float Duration = 1;
-	public float CurrentDuration => _durationTimer.TimeLeft;
-	public float CurrentCoolDown => _cooldownTimer.TimeLeft;
 
 	public bool IsOnCoolDown = false;
 
 	private Timer _cooldownTimer;
 	private Timer _durationTimer;
 	private TextureProgress _abilityBar;
-
-	[Signal]
-	public delegate void TriggerDurationTimer();
-
-	[Signal]
-	public delegate void TriggerCoolDownTimer();
 
 	public override void _Ready()
 	{
@@ -61,9 +52,7 @@ public class TacticalAbility : WeaponAbility
 		base._Process(delta);
 		if (Input.IsActionJustPressed("tactical_ability") && GetWeapon().Equipped)
 		{
-			var equippedWeaponEnum = GetWeapon().OwnerPlayer.PlayerInventory.EquippedWeaponEnum;
-			var count = GetWeapon().OwnerPlayer.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum);
-			if (!IsOnCoolDown && !IsActive && count >= FuelRequirement)
+			if (!IsOnCoolDown && !IsActive)
 			{
 				IsActive = true;
 				OnActivate();

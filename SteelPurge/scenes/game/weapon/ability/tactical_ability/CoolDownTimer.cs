@@ -10,9 +10,4 @@ public class CoolDownTimer : Timer
 		_parent = GetParent<TacticalAbility>();
 		WaitTime = _parent.CoolDown;
 	}
-
-	private void _OnTrigger()
-	{
-		Start();
-	}
 }

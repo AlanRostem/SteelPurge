@@ -3,8 +3,6 @@ using System;
 
 public class ResourceAbility : WeaponAbility
 {
-	[Export] public uint DrainPerTick = 1;
-
 	[Export] public float LingerDuration = 0.6f;
 
 	[Export] public float DrainInterval = 0.1f;
@@ -43,7 +41,7 @@ public class ResourceAbility : WeaponAbility
 			}
 		}
 		
-		if (player.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum) < DrainPerTick && IsActive)
+		if (IsActive)
 		{
 			_LingerStopped();
 			return;
@@ -51,7 +49,7 @@ public class ResourceAbility : WeaponAbility
 
 		var pressed = Input.IsActionPressed("tactical_ability") && GetWeapon().Equipped;
 
-		if (pressed && player.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum) > DrainPerTick)
+		if (pressed)
 		{
 			EmitSignal(nameof(Linger));
 			if (!IsActive)
