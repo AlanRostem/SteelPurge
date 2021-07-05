@@ -5,6 +5,8 @@ public class LargeRock : KinematicEntity
 {
 	[Export] public uint Health = 10;
 	
+	private const uint MaxHealth = 10;
+	
 	private LifeHitbox _lifeHitbox;
 	private AnimatedSprite _sprite;
 	
@@ -24,7 +26,7 @@ public class LargeRock : KinematicEntity
 
 	private void _OnHealthChanged(uint health)
 	{
-		var percentage = (float) health / _lifeHitbox.Health;
+		var percentage = (float) health / MaxHealth;
 		if (percentage <= .25f)
 			_sprite.Animation = "crack_2";
 		else if (percentage <= .50f)
