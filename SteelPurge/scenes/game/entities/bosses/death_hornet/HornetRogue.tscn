@@ -8,6 +8,7 @@
 extents = Vector2( 6, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6, 8 )
 
 [node name="HornetRogue" instance=ExtResource( 1 )]
 collision_layer = 264

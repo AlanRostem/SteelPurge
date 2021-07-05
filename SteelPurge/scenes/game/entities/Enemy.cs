@@ -5,14 +5,6 @@ using Object = Godot.Object;
 
 public class Enemy : LivingEntity
 {
-	protected static readonly PackedScene ScrapScene =
-		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
-	protected static readonly PackedScene TeCellScene =
-		GD.Load<PackedScene>("res://scenes/game/entities/collectible/fuel/FuelCollectible.tscn");
-
-	[Export] public uint ScrapDropHit = 2;
-	[Export] public uint ScrapDropKilled = 25;
-	[Export] public uint TeCellDrop = 25;
 
 	[Export] public float PlayerDetectionRange = 1000;
 	[Export] public float KnockBackSpeed = 300;
@@ -77,23 +69,7 @@ public class Enemy : LivingEntity
 		base._Process(delta);
 		if (_isDead)
 		{
-			var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
-			scrap.SetCount(ScrapDropKilled);
 			QueueFree();
-		}
-
-		if (_dropScrap)
-		{
-			_dropScrap = false;
-			var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
-			scrap.SetCount(ScrapDropHit);
-		}
-
-		if (_dropTeCell)
-		{
-			_dropTeCell = false;
-			var cell = ParentWorld.Entities.SpawnEntityDeferred<FuelCollectible>(TeCellScene, Position);
-			cell.Count = TeCellDrop;
 		}
 
 		if (!_isAiEnabled) return;
@@ -151,8 +127,6 @@ public class Enemy : LivingEntity
 		}
 		else
 		{
-			if (DropScrapWhenDamaged)
-				_dropScrap = true;
 			Health -= damage;
 			_damageNumberGenerator.ShowDamageNumber(damage, Position, ParentWorld);
 			var color = !isCritical ? new Color(255, 255, 255) : Colors.Red;
@@ -164,11 +138,6 @@ public class Enemy : LivingEntity
 
 			if (damageType == VulnerableHitbox.DamageType.RamSlide)
 				VelocityX = 0;
-
-			if (isCritical && DropTeCells)
-			{
-				_dropTeCell = true;
-			}
 		}
 	}
 

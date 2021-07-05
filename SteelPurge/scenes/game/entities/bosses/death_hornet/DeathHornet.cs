@@ -298,8 +298,6 @@ public class DeathHornet : Boss
 	{
 		TakeDamage(CriticalDamageByRogue, Vector2.Zero);
 		body.QueueFree();
-		var scrap = ParentWorld.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, body.Position);
-		scrap.SetCount(body.ScrapDropKilled);
 		_rogueHitsTakenInFlightMode++;
 		if (_rogueHitsTakenInFlightMode != MaxRoguesHitsOnFlightMode) return;
 		_flightDurationTimer.Stop();
