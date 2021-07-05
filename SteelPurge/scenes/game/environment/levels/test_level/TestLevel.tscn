@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/Game.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/game/environment/levels/level1/Seg4Level1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/environment/levels/test_level/Seg1TestLevel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/texture/background.png" type="Texture" id=3]
 [ext_resource path="res://scenes/game/environment/levels/test_level/TestLevel.cs" type="Script" id=4]
 

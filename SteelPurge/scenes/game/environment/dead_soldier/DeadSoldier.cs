@@ -3,7 +3,7 @@ using System;
 
 public class DeadSoldier : Node2D
 {
-	private static readonly Texture[] _weaponHeldTextures = new[]
+	private static readonly Texture[] _weaponHeldTextures =
 	{
 		null, // H28
 		GD.Load<Texture>("res://assets/texture/dead_soldier_with_firewall.png"), // Firewall

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/environment/destructible/rock_bundle/LargeRock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/environment/dead_soldier/DeadSoldier.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 48 )
@@ -22,3 +23,30 @@ position = Vector2( 136, 112 )
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 64, -8 )
+
+[node name="DeadSoldier" parent="." index="3" instance=ExtResource( 3 )]
+position = Vector2( 184, 152 )
+
+[node name="InteractionIndicator" parent="DeadSoldier" index="0"]
+DisableOnInteract = false
+
+[node name="DeadSoldier2" parent="." index="4" instance=ExtResource( 3 )]
+position = Vector2( 312, 152 )
+Weapon = 1
+
+[node name="InteractionIndicator" parent="DeadSoldier2" index="0"]
+DisableOnInteract = false
+
+[node name="DeadSoldier3" parent="." index="5" instance=ExtResource( 3 )]
+position = Vector2( 248, 152 )
+Weapon = 2
+
+[node name="InteractionIndicator" parent="DeadSoldier3" index="0"]
+DisableOnInteract = false
+
+[editable path="DeadSoldier"]
+[editable path="DeadSoldier/InteractionIndicator"]
+[editable path="DeadSoldier2"]
+[editable path="DeadSoldier2/InteractionIndicator"]
+[editable path="DeadSoldier3"]
+[editable path="DeadSoldier3/InteractionIndicator"]
