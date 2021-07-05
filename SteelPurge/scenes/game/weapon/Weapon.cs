@@ -79,6 +79,8 @@ public class Weapon : Node2D
 	private Timer _firingDashTimer;
 	private CollisionShape2D _meleeShape;
 	private RecoilHoverBar _recoilHoverBar;
+	private Label _weaponNameLabel;
+	private Label _ammoLabel;
 
 	public bool IsFiring
 	{
@@ -145,6 +147,9 @@ public class Weapon : Node2D
 		_firingDashTimer = GetNode<Timer>("FiringDashTimer");
 		_meleeShape = GetNode<CollisionShape2D>("MeleeArea/CollisionShape2D");
 		_recoilHoverBar = GetNode<RecoilHoverBar>("RecoilHoverBar");
+		_weaponNameLabel = GetNode<Label>("CanvasLayer/WeaponNameLabel");
+		_ammoLabel = GetNode<Label>("CanvasLayer/AmmoLabel");
+		_weaponNameLabel.Text = DisplayName;
 		CurrentRecoilHoverAmmo = MaxRecoilHoverShots;
 		RefillAmmo();
 	}
@@ -166,16 +171,19 @@ public class Weapon : Node2D
 	public void RefillAmmo()
 	{
 		_ammo = MaxAmmo;
+		_ammoLabel.Text = "x" + _ammo;
 	}
 
 	public void AddAmmo(uint amount)
 	{
 		_ammo += amount;
+		_ammoLabel.Text = "x" + _ammo;
 	}
 	
 	public void RemoveAmmo(uint amount = 1)
 	{
 		_ammo -= amount;
+		_ammoLabel.Text = "x" + _ammo;
 	}
 
 	public void ProduceRecoilToHoverOnly()

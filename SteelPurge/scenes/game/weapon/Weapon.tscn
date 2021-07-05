@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/resources/PlayerSpriteAnimNoWeapon.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/game/weapon/Weapon.cs" type="Script" id=2]
 [ext_resource path="res://scenes/game/weapon/RecoilHoverBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/weapon/FireTimer.cs" type="Script" id=4]
+[ext_resource path="res://scenes/game/ui/PixelTextLabel.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 10 )
@@ -38,6 +39,23 @@ collision_mask = 16
 position = Vector2( 16, 0 )
 shape = SubResource( 1 )
 disabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AmmoLabel" parent="CanvasLayer" instance=ExtResource( 5 )]
+margin_left = 16.0
+margin_top = 216.0
+margin_right = 56.0
+margin_bottom = 230.0
+text = "x100"
+
+[node name="WeaponNameLabel" parent="CanvasLayer" instance=ExtResource( 5 )]
+margin_left = 16.0
+margin_top = 200.0
+margin_right = 56.0
+margin_bottom = 214.0
+text = "Hamilton P336"
+
 [connection signal="CancelFire" from="." to="FireTimer" method="_OnWeaponCancelFire"]
 [connection signal="TriggerFire" from="." to="FireTimer" method="_OnWeaponTriggerFire"]
 [connection signal="timeout" from="FireTimer" to="." method="Fire"]

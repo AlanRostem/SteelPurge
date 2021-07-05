@@ -72,6 +72,7 @@ public class Inventory : Node2D
 		if (HasWeapon(weapon))
 		{
 			_weapon.RefillAmmo();
+			return;
 		}
 		
 		var newWeapon = (Weapon)WeaponScenes[(int)weapon].Instance();
@@ -91,7 +92,11 @@ public class Inventory : Node2D
 
 	public void SwitchWeapon(InventoryWeapon weapon)
 	{
-		if (!HasWeapon(weapon) || weapon == _weaponId) return;
+		if (HasWeapon(weapon))
+		{
+			_weapon.RefillAmmo();
+			return;
+		}
 		
 		_weapon?.OnSwap();
 		_weapon?.QueueFree();
