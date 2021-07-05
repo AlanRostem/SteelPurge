@@ -71,6 +71,8 @@ public class Player : LivingEntity
 	public Inventory PlayerInventory;
 	private Camera2D _camera;
 	private DoubleTapDetector _doubleTapDetector = new DoubleTapDetector();
+	private Label _speedometer;
+	private float _speedKmH = 0;
 
 	public override void _Ready()
 	{
@@ -81,6 +83,7 @@ public class Player : LivingEntity
 		_camera = GetNode<Camera2D>("PlayerCamera");
 		_roofDetectorShape = GetNode<CollisionShape2D>("RoofDetector/UpperBodyShape");
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
+		_speedometer = GetNode<Label>("CanvasLayer/Speedometer");
 	}
 
 	[Signal]
@@ -457,6 +460,13 @@ public class Player : LivingEntity
 			case MovementState.Crouch:
 				_CrouchMode(delta);
 				break;
+		}
+
+		var speedKmH = Mathf.Abs(VelocityX) / CustomTileMap.Size * 3.6f;
+		if (_speedKmH != speedKmH)
+		{
+			_speedKmH = speedKmH;
+			_speedometer.Text = (int)_speedKmH + " km/h";
 		}
 	}
 
