@@ -14,7 +14,7 @@ public class DeathHornet : Boss
 	private static readonly PackedScene RogueScene
 		= GD.Load<PackedScene>("res://scenes/game/entities/bosses/death_hornet/HornetRogue.tscn");
 
-	[Export] public uint CriticalDamageByRogue = 400u;
+	[Export] public uint CriticalDamageByRogue = 20;
 	[Export] public uint MaxRoguesShotOnKamikazeMode = 3;
 	[Export] public uint MaxRoguesHitsOnFlightMode = 2;
 	[Export] public uint PlayerDamage = 65u;

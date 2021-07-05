@@ -2,7 +2,7 @@ using Godot;
 
 public class Explosion : StaticEntity
 {
-	[Export] public uint Damage = 30;
+	[Export] public uint Damage = 1;
 	[Export] public float KnockBackForce = 300;
 	
 	private void _OnVulnerableHitBoxHit(object area)

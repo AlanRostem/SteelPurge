@@ -8,7 +8,6 @@ radius = 40.0
 
 [node name="Explosion" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-Damage = 1
 
 [node name="ExplosiveAreaHitBox" type="Area2D" parent="." index="0"]
 collision_layer = 0

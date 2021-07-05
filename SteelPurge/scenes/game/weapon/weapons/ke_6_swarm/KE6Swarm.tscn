@@ -10,7 +10,7 @@
 [node name="KE6Swarm" instance=ExtResource( 1 )]
 DisplayName = "Joule"
 WeaponType = 2
-DamagePerShot = 4
+DamagePerShot = 2
 RateOfFire = 130
 MaxRecoilHoverShots = 2
 HoverRecoilSpeed = 115.0
