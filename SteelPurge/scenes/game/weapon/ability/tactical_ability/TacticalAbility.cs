@@ -24,12 +24,10 @@ public class TacticalAbility : WeaponAbility
 
 	public override void ReCharge()
 	{
-		if (!IsActive)
-		{
-			IsOnCoolDown = false;
-			_abilityBar.Visible = false;
-			_cooldownTimer.Stop();
-		}
+		if (IsActive) return;
+		IsOnCoolDown = false;
+		_abilityBar.Visible = false;
+		_cooldownTimer.Stop();
 	}
 
 	public virtual void OnActivate()
