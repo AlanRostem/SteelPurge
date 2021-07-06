@@ -32,7 +32,7 @@ public class Explosion : StaticEntity
 			{
 				var knockBackEffect = (KnockBackEffect) effect;
 				knockBackEffect.KnockBackForce = new Vector2(-Mathf.Cos(angle), -Mathf.Sin(angle)) * KnockBackForce;
-				knockBackEffect.DisableEntityMovement = true;
+				knockBackEffect.StackForce = true;
 			});
 		}
 	}

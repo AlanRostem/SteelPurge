@@ -22,6 +22,11 @@ public class WeaponAbility : Node2D
 	{
 		return _weapon;
 	}
+	
+	public virtual void ReCharge()
+	{
+		
+	}
 
 	public virtual void Activate()
 	{

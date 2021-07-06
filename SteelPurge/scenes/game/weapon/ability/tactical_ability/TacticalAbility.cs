@@ -22,6 +22,16 @@ public class TacticalAbility : WeaponAbility
 		_abilityBar.Visible = false;
 	}
 
+	public override void ReCharge()
+	{
+		if (!IsActive)
+		{
+			IsOnCoolDown = false;
+			_abilityBar.Visible = false;
+			_cooldownTimer.Stop();
+		}
+	}
+
 	public virtual void OnActivate()
 	{
 	}
@@ -38,7 +48,7 @@ public class TacticalAbility : WeaponAbility
 	{
 		IsActive = false;
 		OnEnd();
-		
+
 		_abilityBar.Visible = true;
 		IsOnCoolDown = true;
 		_cooldownTimer.Start();
