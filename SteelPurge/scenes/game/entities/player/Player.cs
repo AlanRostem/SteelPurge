@@ -13,7 +13,7 @@ public class Player : LivingEntity
 	public static readonly float KnockBackSpeed = 100;
 	// private static readonly float MaxMovementSpeed = 250;
 
-	public static readonly float WalkSpeed = 120;
+	public static readonly float WalkSpeed = 140;
 
 	public static readonly float WalkAcceleration = 360;
 
@@ -32,7 +32,7 @@ public class Player : LivingEntity
 
 	public static readonly float CrouchSpeed = 20;
 
-	public static readonly float SlideSpeed = 230; // 460;
+	public static readonly float SlideSpeed = 260; // 460;
 	// private static readonly float SlideDecreasePerSlide = 120;
 	// private static readonly float SlideIncreasePerSecond = 280;
 
