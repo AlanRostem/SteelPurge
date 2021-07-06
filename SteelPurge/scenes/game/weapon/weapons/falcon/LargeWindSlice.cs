@@ -8,7 +8,12 @@ public class LargeWindSlice : Projectile
 	{
 		if (subject.GetParent() is Enemy enemy)
 		{
-			enemy.KnockBack(Velocity.Normalized(), KnockBackSpeed);
+			enemy.ApplyStatusEffect(LivingEntity.StatusEffectType.KnockBack, effect =>
+			{
+				var knockBackEffect = (KnockBackEffect) effect;
+				knockBackEffect.KnockBackForce = Velocity.Normalized() * KnockBackSpeed;
+				knockBackEffect.DisableEntityMovement = true;
+			});
 		}
 	}
 }

@@ -146,7 +146,14 @@ public class Enemy : LivingEntity
 	public void KnockBack(Vector2 direction, float speed)
 	{
 		if (!CanBeKnockedBack) return;
-		ApplyForce(direction * speed);
+		
+		ApplyStatusEffect(StatusEffectType.KnockBack, effect =>
+		{
+			var knockBackEffect = (KnockBackEffect) effect;
+			knockBackEffect.KnockBackForce = direction * speed;
+			knockBackEffect.DisableEntityMovement = true;
+		});
+		
 		CanMove = false;
 		_isKnockedBack = true;
 		_meleeAffectedKnockBackTimer.Start();

@@ -178,9 +178,9 @@ public class KinematicEntity : KinematicBody2D
 	{
 	}
 	
-	public void ApplyForce(Vector2 knockBackForce)
+	public void ApplyForce(Vector2 knockBackForce, float delta)
 	{
 		if (!CanMove) return;
-		Velocity += knockBackForce;
+		Velocity += knockBackForce * delta;
 	}
 }
