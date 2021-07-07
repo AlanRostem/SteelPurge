@@ -29,4 +29,5 @@ script = ExtResource( 4 )
 
 [node name="SpawnPoint" type="Position2D" parent="."]
 position = Vector2( 64, 128 )
+
 [connection signal="body_entered" from="Environment/TransferArea" to="." method="_OnTransferAreaPlayerEntered"]
