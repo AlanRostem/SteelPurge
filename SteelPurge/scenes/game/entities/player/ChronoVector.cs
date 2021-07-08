@@ -3,6 +3,9 @@ using System;
 
 public class ChronoVector : Node2D
 {
+	[Signal]
+	public delegate void Disappear();
+	
 	public override void _Ready()
 	{
 		Update();
@@ -16,5 +19,6 @@ public class ChronoVector : Node2D
 	private void _OnLifeTimeout()
 	{
 		QueueFree();
+		EmitSignal(nameof(Disappear));
 	}
 }

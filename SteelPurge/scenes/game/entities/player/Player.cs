@@ -44,6 +44,7 @@ public class Player : LivingEntity
 	private bool _jump = false;
 	private bool _notJump = false;
 	private bool _dash = false;
+	private bool _chronoDrift = false;
 
 	public bool CanTakeDamage = true;
 	public bool CanAimDown = true;
@@ -72,7 +73,9 @@ public class Player : LivingEntity
 	public Inventory PlayerInventory;
 	private Camera2D _camera;
 	private Label _speedometer;
-	private float _speedKmH = 0;
+	private int _speedKmH = 0;
+
+	private ChronoVector _currentChronoVector;
 
 	public override void _Ready()
 	{
@@ -207,6 +210,7 @@ public class Player : LivingEntity
 		_right = Input.IsActionPressed("right");
 		_jump = Input.IsActionJustPressed("jump");
 		_notJump = Input.IsActionJustReleased("jump");
+		_chronoDrift = Input.IsActionJustPressed("chrono_drift");
 		IsAimingUp = Input.IsActionPressed("aim_up") && CanAimUp;
 
 		if (_canCancelSlide)
@@ -423,6 +427,9 @@ public class Player : LivingEntity
 	{
 		_ProcessInput();
 
+		if (_chronoDrift)
+			ChronoDrift();
+		
 		if (_dash)
 			_Dash();
 
@@ -472,14 +479,35 @@ public class Player : LivingEntity
 				break;
 		}
 
-		var speedKmH = Mathf.Abs(VelocityX) / CustomTileMap.Size * 3.6f;
+		var speedKmH = (int)(Mathf.Abs(VelocityX) / CustomTileMap.Size * 3.6f);
 		if (_speedKmH != speedKmH)
 		{
 			_speedKmH = speedKmH;
-			_speedometer.Text = (int)_speedKmH + " km/h";
+			_speedometer.Text = _speedKmH + " km/h";
 		}
 	}
+	
+	public void ChronoDrift()
+	{
+		if (_currentChronoVector != null)
+		{
+			Position = new Vector2(_currentChronoVector.Position);
+			_currentChronoVector.QueueFree();
+			_currentChronoVector = null;
+			return;
+		}
+		
+		_currentChronoVector = (ChronoVector) ChronoVectorScene.Instance();
+		_currentChronoVector.Position = new Vector2(Position);
+		ParentWorld.CurrentSegment.Environment.AddChild(_currentChronoVector);
+		_currentChronoVector.Connect(nameof(ChronoVector.Disappear), this, nameof(_OnChronoVectorDisappear));
+	}
 
+	private void _OnChronoVectorDisappear()
+	{
+		_currentChronoVector = null;
+	}
+	
 	private void _StopWalking()
 	{
 		IsWalking = false;
