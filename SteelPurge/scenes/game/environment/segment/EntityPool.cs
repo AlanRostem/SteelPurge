@@ -29,6 +29,12 @@ public class EntityPool : Node2D
 		return entity;
 	}
 
+	public void ClearAllEntities()
+	{
+		foreach (Node2D entity in GetChildren())
+			entity.QueueFree();
+	}
+	
 	public Array<Dictionary<string, object>> ExportEntityData()
 	{
 		var data = new Array<Dictionary<string, object>>();
