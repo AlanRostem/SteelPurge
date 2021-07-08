@@ -184,13 +184,14 @@ public class KinematicEntity : KinematicBody2D
 		Velocity += knockBackForce;
 	}
 
-	public virtual void FeedEntityData(KinematicEntityData<KinematicEntity> data)
+	public virtual void FeedEntityData(Dictionary<string, object> data)
 	{
-		Velocity = data.Velocity;
-		Position = data.WorldPosition;
+		var entityData = new KinematicEntityData<KinematicEntity>(data);
+		Velocity = entityData.Velocity;
+		Position = entityData.WorldPosition;
 	}
 	
-	public virtual KinematicEntityData<KinematicEntity> ExportEntityData()
+	public virtual Dictionary<string, object> ExportEntityData()
 	{
 		return null;
 	}

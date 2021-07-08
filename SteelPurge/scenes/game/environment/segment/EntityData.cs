@@ -3,7 +3,7 @@ using Godot.Collections;
 
 public class EntityData<T> where T : Node2D
 {
-	private readonly Dictionary<string, object> _data = new Dictionary<string, object>();
+	private readonly Dictionary<string, object> _data;
 
 	public Vector2 WorldPosition
 	{
@@ -25,6 +25,7 @@ public class EntityData<T> where T : Node2D
 
 	protected EntityData(T entity)
 	{
+		_data = new Dictionary<string, object>();
 		ScenePath = entity.Filename;
 		WorldPosition = entity.Position;
 	}
@@ -32,6 +33,11 @@ public class EntityData<T> where T : Node2D
 	public EntityData(Dictionary<string, object> data)
 	{
 		_data = data;
+	}
+
+	public EntityData()
+	{
+		_data = new Dictionary<string, object>();
 	}
 
 	public Vector2 GetVector(string prop)

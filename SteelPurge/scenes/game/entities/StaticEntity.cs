@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public class StaticEntity : Node2D
 {
@@ -10,12 +11,13 @@ public class StaticEntity : Node2D
 		ParentWorld = GetParent().GetParent().GetParent<World>();
 	}
 	
-	public virtual void FeedEntityData(EntityData<KinematicEntity> data)
+	public virtual void FeedEntityData(Dictionary<string, object> data)
 	{
-		Position = data.WorldPosition;
+		var sData = new StaticEntityData<StaticEntity>(data);
+		Position = sData.WorldPosition;
 	}
 	
-	public virtual EntityData<KinematicEntity> ExportEntityData()
+	public virtual Dictionary<string, object> ExportEntityData()
 	{
 		return null;
 	}
