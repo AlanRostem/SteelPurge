@@ -25,15 +25,16 @@ public class EntityData
 	
 	public EntityData(KinematicEntity entity)
 	{
-		WorldPosition = entity.Position;
 		ScenePath = entity.Filename;
+		WorldPosition = entity.Position;
+		
 		Velocity = entity.Velocity;
 	}
 
 	public EntityData(StaticEntity entity)
 	{
-		WorldPosition = entity.Position;
 		ScenePath = entity.Filename;
+		WorldPosition = entity.Position;
 	}
 	
 	public Vector2 GetVector(string prop)
