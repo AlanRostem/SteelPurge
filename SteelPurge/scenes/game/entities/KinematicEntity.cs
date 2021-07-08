@@ -183,4 +183,9 @@ public class KinematicEntity : KinematicBody2D
 		if (!CanMove) return;
 		Velocity += knockBackForce;
 	}
+
+	public virtual EntityData ExportEntityData()
+	{
+		return null;
+	}
 }

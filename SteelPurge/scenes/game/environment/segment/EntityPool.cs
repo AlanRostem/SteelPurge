@@ -1,21 +1,17 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public class EntityPool : Node2D
 {
-	public static PackedScene ScrapScene =
-		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
-
-
 	public WorldSegment ParentWorldSegment { get; private set;  }
-
+	
 	public override void _Ready()
 	{
 		base._Ready();
 		ParentWorldSegment = GetParent<WorldSegment>();
 	}
 
-	// TODO: Separate what type of entity that can be spawned (kinematic, static, other)
 	public T SpawnEntityDeferred<T>(PackedScene scene, Vector2 position) where T : KinematicEntity
 	{
 		var entity = (T)scene.Instance();
@@ -30,5 +26,25 @@ public class EntityPool : Node2D
 		entity.Position = position;
 		CallDeferred("add_child", entity);
 		return entity;
+	}
+
+	public Array<Dictionary<string, object>> ExportEntityData()
+	{
+		var data = new Array<Dictionary<string, object>>();
+		foreach (Node2D entity in GetChildren())
+		{
+			switch (entity)
+			{
+				case KinematicEntity kEntity:
+					var kData = kEntity.ExportEntityData();
+					data.Add(kData is null ? new EntityData(kEntity).GetJson() : kData.GetJson());
+					break;
+				case StaticEntity sEntity:
+					var sData = sEntity.ExportEntityData();
+					data.Add(sData is null ? new EntityData(sEntity).GetJson() : sData.GetJson());
+					break;
+			}
+		}
+		return data;
 	}
 }

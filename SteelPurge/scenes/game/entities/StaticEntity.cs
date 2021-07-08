@@ -9,4 +9,9 @@ public class StaticEntity : Node2D
 	{
 		ParentWorld = GetParent().GetParent().GetParent<World>();
 	}
+	
+	public virtual EntityData ExportEntityData()
+	{
+		return null;
+	}
 }
