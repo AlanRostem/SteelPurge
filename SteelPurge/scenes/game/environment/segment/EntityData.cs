@@ -3,11 +3,20 @@ using Godot.Collections;
 
 public class EntityData
 {
-	private Dictionary<string, object> _data = new Dictionary<string, object>();
+	protected readonly Dictionary<string, object> Data = new Dictionary<string, object>();
 
 	public Vector2 WorldPosition
 	{
-		set => _data["position"] = new Dictionary()
+		set => Data["position"] = new Dictionary()
+		{
+			["x"] = value.x,
+			["y"] = value.y,
+		};
+	}
+
+	public Vector2 Velocity
+	{
+		set => Data["velocity"] = new Dictionary()
 		{
 			["x"] = value.x,
 			["y"] = value.y,
@@ -16,13 +25,14 @@ public class EntityData
 
 	public string ScenePath
 	{
-		set => _data["scenePath"] = value;
+		set => Data["scenePath"] = value;
 	}
 
 	public EntityData(KinematicEntity entity)
 	{
 		WorldPosition = entity.Position;
 		ScenePath = entity.Filename;
+		Velocity = entity.Velocity;
 	}
 
 	public EntityData(StaticEntity entity)
@@ -33,6 +43,6 @@ public class EntityData
 
 	public Dictionary<string, object> GetJson()
 	{
-		return _data;
+		return Data;
 	}
 }
