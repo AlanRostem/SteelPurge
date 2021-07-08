@@ -19,6 +19,6 @@ public class StaticEntity : Node2D
 	
 	public virtual Dictionary<string, object> ExportEntityData()
 	{
-		return null;
+		return new StaticEntityData<StaticEntity>(this).GetJson();
 	}
 }

@@ -38,13 +38,11 @@ public class EntityPool : Node2D
 			{
 				case KinematicEntity kEntity:
 					var kData = kEntity.ExportEntityData();
-					var kJson = kData ?? new KinematicEntityData<KinematicEntity>(kEntity).GetJson();
-					data.Add(kJson);
+					data.Add(kData);
 					break;
 				case StaticEntity sEntity:
 					var sData = sEntity.ExportEntityData();
-					var sJson = sData ?? new StaticEntityData<StaticEntity>(sEntity).GetJson();
-					data.Add(sJson);
+					data.Add(sData);
 					break;
 			}
 		}

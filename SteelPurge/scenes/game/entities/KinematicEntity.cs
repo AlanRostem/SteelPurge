@@ -193,6 +193,6 @@ public class KinematicEntity : KinematicBody2D
 	
 	public virtual Dictionary<string, object> ExportEntityData()
 	{
-		return null;
+		return new KinematicEntityData<KinematicEntity>(this).GetJson();
 	}
 }
