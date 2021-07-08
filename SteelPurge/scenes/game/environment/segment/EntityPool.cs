@@ -13,8 +13,6 @@ public class EntityPool : Node2D
 		GD.Print(JSON.Print(ExportEntityData()));
 	}
 	
-	
-
 	public T SpawnEntityDeferred<T>(PackedScene scene, Vector2 position) where T : KinematicEntity
 	{
 		var entity = (T)scene.Instance();
@@ -40,12 +38,12 @@ public class EntityPool : Node2D
 			{
 				case KinematicEntity kEntity:
 					var kData = kEntity.ExportEntityData();
-					var kJson = kData is null ? new EntityData(kEntity).GetJson() : kData.GetJson();
+					var kJson = kData is null ? new EntityData<KinematicEntity>(kEntity).GetJson() : kData.GetJson();
 					data.Add(kJson);
 					break;
 				case StaticEntity sEntity:
 					var sData = sEntity.ExportEntityData();
-					var sJson = sData is null ? new EntityData(sEntity).GetJson() : sData.GetJson();
+					var sJson = sData is null ? new EntityData<StaticEntity>(sEntity).GetJson() : sData.GetJson();
 					data.Add(sJson);
 					break;
 			}

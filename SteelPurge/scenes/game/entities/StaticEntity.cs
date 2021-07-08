@@ -10,12 +10,12 @@ public class StaticEntity : Node2D
 		ParentWorld = GetParent().GetParent().GetParent<World>();
 	}
 	
-	public virtual void FeedEntityData(EntityData data)
+	public virtual void FeedEntityData(EntityData<KinematicEntity> data)
 	{
 		Position = data.WorldPosition;
 	}
 	
-	public virtual EntityData ExportEntityData()
+	public virtual EntityData<KinematicEntity> ExportEntityData()
 	{
 		return null;
 	}
