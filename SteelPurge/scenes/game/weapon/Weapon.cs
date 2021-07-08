@@ -260,7 +260,7 @@ public class Weapon : Node2D
 
 	public void Drop(World world, Vector2 position)
 	{
-		var item = world.Entities.SpawnEntityDeferred<WeaponCollectible>(WeaponCollectibleScene, position);
+		var item = world.CurrentSegment.Entities.SpawnEntityDeferred<WeaponCollectible>(WeaponCollectibleScene, position);
 		OwnerPlayer?.RemoveChild(this);
 		item.Weapon = this;
 	}

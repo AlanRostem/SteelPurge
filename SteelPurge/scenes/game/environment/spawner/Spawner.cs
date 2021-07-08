@@ -28,6 +28,6 @@ public class Spawner : StaticEntity
 	
 	private void Spawn()
 	{
-		ParentWorld.Entities.SpawnEntityDeferred<KinematicEntity>(EntitySceneToSpawn, Position);
+		ParentWorld.CurrentSegment.Entities.SpawnEntityDeferred<KinematicEntity>(EntitySceneToSpawn, Position);
 	}
 }

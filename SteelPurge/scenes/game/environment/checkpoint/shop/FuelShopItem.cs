@@ -17,7 +17,7 @@ public class FuelShopItem : ShopItem
 
 	public override void OnPurchase(Fabricator fabricator, World world, Player player)
 	{
-		world.Entities.SpawnEntityDeferred<FallingCollectible>(
+		world.CurrentSegment.Entities.SpawnEntityDeferred<FallingCollectible>(
 			CollectibleScene,
 			fabricator.Position + new Vector2(0, -24));
 	}

@@ -35,7 +35,7 @@ public class FiringDevice : Node2D
 	public Projectile FireProjectile(PackedScene projectileScene, uint damage, float angle = 0)
 	{
 		var player = GetWeapon().OwnerPlayer;
-		var world = player.ParentWorld.Entities;
+		var world = player.ParentWorld.CurrentSegment.Entities;
 		
 		var projectile = world.SpawnEntityDeferred<Projectile>(projectileScene, player.Position + GetWeapon().Position);
 

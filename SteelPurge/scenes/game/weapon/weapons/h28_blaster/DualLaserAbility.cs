@@ -46,7 +46,7 @@ public class DualLaserAbility : TacticalAbility
 		else 
 			position = GetWeapon().OwnerPlayer.Position;
 		
-		var laser = GetWeapon().OwnerPlayer.ParentWorld.Entities.SpawnStaticEntityDeferred<LaserShot>(LaserShotScene, position);
+		var laser = GetWeapon().OwnerPlayer.ParentWorld.CurrentSegment.Entities.SpawnStaticEntityDeferred<LaserShot>(LaserShotScene, position);
 		
 		if (GetWeapon().OwnerPlayer.IsAimingDown)
 			laser.RotationDegrees = 90;

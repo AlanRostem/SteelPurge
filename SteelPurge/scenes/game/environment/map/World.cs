@@ -6,7 +6,6 @@ public class World : Node2D
 {
 	public Player PlayerNode { get; private set; }
 
-	public EntityPool Entities => CurrentSegment.Entities;
 
 	public Vector2 CurrentReSpawnPoint;
 

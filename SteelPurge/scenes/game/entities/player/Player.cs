@@ -10,6 +10,8 @@ public class Player : LivingEntity
 		Airborne,
 	}
 
+	private static readonly PackedScene ChronoVectorScene = GD.Load<PackedScene>("res://scenes/game/entities/player/ChronoVector.tscn");
+
 	public static readonly float KnockBackSpeed = 100;
 	// private static readonly float MaxMovementSpeed = 250;
 

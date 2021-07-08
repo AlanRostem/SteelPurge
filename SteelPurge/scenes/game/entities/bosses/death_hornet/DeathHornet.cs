@@ -280,7 +280,7 @@ public class DeathHornet : Boss
 	private void ShootRogueFromSide(int direction)
 	{
 		var position = direction < 0 ? _leftRogueSpawnPoint.Position : _rightRogueSpawnPoint.Position;
-		var rogue = ParentWorld.Entities.SpawnEntityDeferred<HornetRogue>(RogueScene, position + Position);
+		var rogue = ParentWorld.CurrentSegment.Entities.SpawnEntityDeferred<HornetRogue>(RogueScene, position + Position);
 		rogue.Direction = direction;
 		if (_currentAttackMode != AttackMode.KamikazeRogues) return;
 		_kamikazeRogueModeRoguesLaunched++;
@@ -289,7 +289,7 @@ public class DeathHornet : Boss
 
 	private void DropRogueFromBelow()
 	{
-		var rogue = ParentWorld.Entities.SpawnEntityDeferred<HornetRogue>(RogueScene,
+		var rogue = ParentWorld.CurrentSegment.Entities.SpawnEntityDeferred<HornetRogue>(RogueScene,
 			_bottomRogueSpawnPoint.Position + Position);
 		rogue.Direction = Mathf.Sign(ParentWorld.PlayerNode.Position.x - Position.x);
 	}
@@ -323,7 +323,7 @@ public class DeathHornet : Boss
 
 	private void ShootRogueFromTop(int direction)
 	{
-		var rogue = ParentWorld.Entities.SpawnEntityDeferred<HornetRogue>(RogueScene,
+		var rogue = ParentWorld.CurrentSegment.Entities.SpawnEntityDeferred<HornetRogue>(RogueScene,
 			_topRogueSpawnPoint.Position + Position);
 		rogue.Direction = direction;
 	}

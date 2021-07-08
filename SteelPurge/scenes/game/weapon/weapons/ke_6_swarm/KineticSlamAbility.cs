@@ -77,7 +77,7 @@ public class KineticSlamAbility : TacticalAbility
 	private void SpawnSeismicBlast()
 	{
 		var player = GetWeapon().OwnerPlayer;
-		player.ParentWorld.Entities.SpawnStaticEntityDeferred<SeismicBlast>(BlastScene, player.Position);
+		player.ParentWorld.CurrentSegment.Entities.SpawnStaticEntityDeferred<SeismicBlast>(BlastScene, player.Position);
 	}
 
 	private void _OnJumpEnd()

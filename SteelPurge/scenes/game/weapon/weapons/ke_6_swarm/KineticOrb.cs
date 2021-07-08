@@ -10,6 +10,6 @@ public class KineticOrb : Projectile
 	
 	public override void _OnDisappear()
 	{
-		OwnerWeapon?.OwnerPlayer.ParentWorld.Entities.SpawnStaticEntityDeferred<Explosion>(ExplosionScene, Position);
+		OwnerWeapon?.OwnerPlayer.ParentWorld.CurrentSegment.Entities.SpawnStaticEntityDeferred<Explosion>(ExplosionScene, Position);
 	}
 }
