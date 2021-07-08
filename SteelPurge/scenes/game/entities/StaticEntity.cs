@@ -10,6 +10,11 @@ public class StaticEntity : Node2D
 		ParentWorld = GetParent().GetParent().GetParent<World>();
 	}
 	
+	public virtual void FeedEntityData(EntityData data)
+	{
+		Position = data.WorldPosition;
+	}
+	
 	public virtual EntityData ExportEntityData()
 	{
 		return null;

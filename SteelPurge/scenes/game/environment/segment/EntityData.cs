@@ -3,52 +3,26 @@ using Godot.Collections;
 
 public class EntityData
 {
-	protected readonly Dictionary<string, object> Data = new Dictionary<string, object>();
+	private readonly Dictionary<string, object> _data = new Dictionary<string, object>();
 
 	public Vector2 WorldPosition
 	{
-		set => Data["position"] = new Dictionary
-		{
-			["x"] = value.x,
-			["y"] = value.y,
-		};
-
-		get
-		{
-			var pos = (Dictionary<string, object>) Data["position"];
-			return new Vector2()
-			{
-				x = (float)pos["x"],
-				y = (float)pos["y"],
-			};
-		}
+		set => SetVector("position", value);
+		get => GetVector("position");
 	}
 
 	public Vector2 Velocity
 	{
-		set => Data["velocity"] = new Dictionary
-		{
-			["x"] = value.x,
-			["y"] = value.y,
-		};
-		
-		get
-		{
-			var pos = (Dictionary<string, object>) Data["velocity"];
-			return new Vector2()
-			{
-				x = (float)pos["x"],
-				y = (float)pos["y"],
-			};
-		}
+		set => SetVector("velocity", value);
+		get => GetVector("velocity");
 	}
 
 	public string ScenePath
 	{
-		set => Data["scenePath"] = value;
-		get => (string)Data["scenePath"];
+		set => SetAny("scenePath", value);
+		get => GetAny<string>("scenePath");
 	}
-
+	
 	public EntityData(KinematicEntity entity)
 	{
 		WorldPosition = entity.Position;
@@ -61,9 +35,38 @@ public class EntityData
 		WorldPosition = entity.Position;
 		ScenePath = entity.Filename;
 	}
+	
+	public Vector2 GetVector(string prop)
+	{
+		var v = (Dictionary<string, object>) _data[prop];
+		return new Vector2
+		{
+			x = (float)v["x"],
+			y = (float)v["y"],
+		};
+	}
+
+	public void SetVector(string prop, Vector2 value)
+	{
+		_data[prop] = new Dictionary
+		{
+			["x"] = value.x,
+			["y"] = value.y,
+		};
+	}
+
+	public void SetAny(string prop, object value)
+	{
+		_data[prop] = value;
+	}
+	
+	public T GetAny<T>(string prop)
+	{
+		return (T) _data[prop];
+	}
 
 	public Dictionary<string, object> GetJson()
 	{
-		return Data;
+		return _data;
 	}
 }

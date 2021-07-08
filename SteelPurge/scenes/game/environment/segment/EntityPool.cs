@@ -10,7 +10,10 @@ public class EntityPool : Node2D
 	{
 		base._Ready();
 		ParentWorldSegment = GetParent<WorldSegment>();
+		GD.Print(JSON.Print(ExportEntityData()));
 	}
+	
+	
 
 	public T SpawnEntityDeferred<T>(PackedScene scene, Vector2 position) where T : KinematicEntity
 	{
