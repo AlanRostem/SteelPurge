@@ -8,6 +8,7 @@ public class WorldSegment : Node2D
 	public EntityPool Entities { get; private set; }
 
 	public World ParentWorld { get; private set; }
+	
 	private CustomTileMap _tileMap;
 	
 	public override void _Ready()
@@ -19,10 +20,7 @@ public class WorldSegment : Node2D
 		rect.Position *= CustomTileMap.Size;
 		rect.Size *= CustomTileMap.Size;
 		ParentWorld.PlayerNode.SetCameraBounds(rect);
-		
-		// TODO: Reevaluate if this hard coded fix won't fuck me over later
-		if (!ParentWorld.PlayerNode.IsRespawning)
-			ParentWorld.CurrentReSpawnPoint = new Vector2(InitialSpawnPoint);
+		ParentWorld.CurrentReSpawnPoint = new Vector2(InitialSpawnPoint);
 	}
 	
 	private void _OnTransferAreaPlayerEntered(object body)

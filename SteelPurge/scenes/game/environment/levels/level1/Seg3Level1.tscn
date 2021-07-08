@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entities/hazards/DeathZone.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogue.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/AR43Executor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/environment/dead_soldier/DeadSoldier.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/game/environment/checkpoint/Fabricator.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/game/environment/destructible/rock_bundle/LargeRock.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -94,54 +93,50 @@ rotation = 3.14159
 position = Vector2( 745, 56 )
 rotation = 1.5708
 
-[node name="Fabricator" parent="EntityPool" index="15" instance=ExtResource( 8 )]
-position = Vector2( 936, 144 )
-IsCheckPoint = true
-
-[node name="MagmaSpikes12" parent="EntityPool" index="16" instance=ExtResource( 4 )]
+[node name="MagmaSpikes12" parent="EntityPool" index="15" instance=ExtResource( 4 )]
 position = Vector2( 1409, 184 )
 rotation = 3.14159
 
-[node name="MagmaSpikes13" parent="EntityPool" index="17" instance=ExtResource( 4 )]
+[node name="MagmaSpikes13" parent="EntityPool" index="16" instance=ExtResource( 4 )]
 position = Vector2( 1441, 184 )
 rotation = 3.14159
 
-[node name="DeadSoldierWithJoule" parent="EntityPool" index="18" instance=ExtResource( 7 )]
+[node name="DeadSoldierWithJoule" parent="EntityPool" index="17" instance=ExtResource( 7 )]
 position = Vector2( 1536, 184 )
 Weapon = 2
 
-[node name="MagmaSpikes14" parent="EntityPool" index="19" instance=ExtResource( 4 )]
+[node name="MagmaSpikes14" parent="EntityPool" index="18" instance=ExtResource( 4 )]
 position = Vector2( 1633, 136 )
 
-[node name="MagmaSpikes15" parent="EntityPool" index="20" instance=ExtResource( 4 )]
+[node name="MagmaSpikes15" parent="EntityPool" index="19" instance=ExtResource( 4 )]
 position = Vector2( 1665, 136 )
 
-[node name="MagmaSpikes16" parent="EntityPool" index="21" instance=ExtResource( 4 )]
+[node name="MagmaSpikes16" parent="EntityPool" index="20" instance=ExtResource( 4 )]
 position = Vector2( 1697, 136 )
 
-[node name="MagmaSpikes17" parent="EntityPool" index="22" instance=ExtResource( 4 )]
+[node name="MagmaSpikes17" parent="EntityPool" index="21" instance=ExtResource( 4 )]
 position = Vector2( 1633, 184 )
 rotation = 3.14159
 
-[node name="MagmaSpikes18" parent="EntityPool" index="23" instance=ExtResource( 4 )]
+[node name="MagmaSpikes18" parent="EntityPool" index="22" instance=ExtResource( 4 )]
 position = Vector2( 1665, 184 )
 rotation = 3.14159
 
-[node name="MagmaSpikes19" parent="EntityPool" index="24" instance=ExtResource( 4 )]
+[node name="MagmaSpikes19" parent="EntityPool" index="23" instance=ExtResource( 4 )]
 position = Vector2( 1697, 184 )
 rotation = 3.14159
 
-[node name="MagmaSpikes20" parent="EntityPool" index="25" instance=ExtResource( 4 )]
+[node name="MagmaSpikes20" parent="EntityPool" index="24" instance=ExtResource( 4 )]
 position = Vector2( 1697, 184 )
 rotation = 3.14159
 
-[node name="LargeRock" parent="EntityPool" index="26" instance=ExtResource( 9 )]
+[node name="LargeRock" parent="EntityPool" index="25" instance=ExtResource( 9 )]
 position = Vector2( 1633, 160 )
 
-[node name="LargeRock2" parent="EntityPool" index="27" instance=ExtResource( 9 )]
+[node name="LargeRock2" parent="EntityPool" index="26" instance=ExtResource( 9 )]
 position = Vector2( 1665, 160 )
 
-[node name="LargeRock3" parent="EntityPool" index="28" instance=ExtResource( 9 )]
+[node name="LargeRock3" parent="EntityPool" index="27" instance=ExtResource( 9 )]
 position = Vector2( 1697, 160 )
 
 [node name="SpawnPoint" parent="." index="2"]
