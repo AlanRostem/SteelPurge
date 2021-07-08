@@ -11,12 +11,6 @@ public class EntityData<T> where T : Node2D
 		get => GetVector("position");
 	}
 
-	public Vector2 Velocity
-	{
-		set => SetVector("velocity", value);
-		get => GetVector("velocity");
-	}
-
 	public string ScenePath
 	{
 		set => SetAny("scenePath", value);
