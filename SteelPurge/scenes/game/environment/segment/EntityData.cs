@@ -7,25 +7,46 @@ public class EntityData
 
 	public Vector2 WorldPosition
 	{
-		set => Data["position"] = new Dictionary()
+		set => Data["position"] = new Dictionary
 		{
 			["x"] = value.x,
 			["y"] = value.y,
 		};
+
+		get
+		{
+			var pos = (Dictionary<string, object>) Data["position"];
+			return new Vector2()
+			{
+				x = (float)pos["x"],
+				y = (float)pos["y"],
+			};
+		}
 	}
 
 	public Vector2 Velocity
 	{
-		set => Data["velocity"] = new Dictionary()
+		set => Data["velocity"] = new Dictionary
 		{
 			["x"] = value.x,
 			["y"] = value.y,
 		};
+		
+		get
+		{
+			var pos = (Dictionary<string, object>) Data["velocity"];
+			return new Vector2()
+			{
+				x = (float)pos["x"],
+				y = (float)pos["y"],
+			};
+		}
 	}
 
 	public string ScenePath
 	{
 		set => Data["scenePath"] = value;
+		get => (string)Data["scenePath"];
 	}
 
 	public EntityData(KinematicEntity entity)
