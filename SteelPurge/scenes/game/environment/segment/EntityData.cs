@@ -36,7 +36,7 @@ public class EntityData<T> where T : Node2D
 
 	public Vector2 GetVector(string prop)
 	{
-		var v = (Dictionary<string, object>) _data[prop];
+		var v = (Dictionary) _data[prop];
 		return new Vector2
 		{
 			x = (float) v["x"],

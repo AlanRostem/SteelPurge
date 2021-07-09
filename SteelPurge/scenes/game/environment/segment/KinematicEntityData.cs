@@ -4,19 +4,19 @@ using Godot.Collections;
 
 public class KinematicEntityData<T> : EntityData<T> where T : KinematicEntity
 {
-    public Vector2 Velocity
-    {
-        set => SetVector("velocity", value);
-        get => GetVector("velocity");
-    }
-    
-    public KinematicEntityData(T entity) : base(entity)
-    {
-        Velocity = entity.Velocity;
-    }
+	public Vector2 Velocity
+	{
+		set => SetVector("velocity", value);
+		get => GetVector("velocity");
+	}
+	
+	public KinematicEntityData(T entity) : base(entity)
+	{
+		Velocity = entity.Velocity;
+	}
 
-    public KinematicEntityData(Dictionary<string, object> data) : base(data)
-    {
-        
-    }
+	public KinematicEntityData(Dictionary<string, object> data) : base(data)
+	{
+		
+	}
 }

@@ -25,22 +25,22 @@ position = Vector2( 2008, 72 )
 [node name="CollisionShape2D" parent="Environment/TransferArea" index="0"]
 shape = SubResource( 1 )
 
-[node name="DeathZone" parent="EntityPool" index="0" instance=ExtResource( 2 )]
+[node name="XWFrontRogue2" parent="EntityPool" index="0" instance=ExtResource( 4 )]
+position = Vector2( 904, 144 )
+
+[node name="DeathZone" parent="EntityPool" index="1" instance=ExtResource( 2 )]
 position = Vector2( 496, 288 )
 
 [node name="CollisionShape2D" parent="EntityPool/DeathZone/Area2D" index="0"]
 position = Vector2( 656, -16 )
 shape = SubResource( 2 )
 
-[node name="AR43Executor" parent="EntityPool" index="1" instance=ExtResource( 3 )]
+[node name="AR43Executor" parent="EntityPool" index="2" instance=ExtResource( 3 )]
 position = Vector2( 1248, 112 )
 collision_mask = 2147483697
 
-[node name="XWFrontRogue" parent="EntityPool" index="2" instance=ExtResource( 4 )]
+[node name="XWFrontRogue" parent="EntityPool" index="3" instance=ExtResource( 4 )]
 position = Vector2( 1024, 144 )
-
-[node name="XWFrontRogue2" parent="EntityPool" index="3" instance=ExtResource( 4 )]
-position = Vector2( 904, 144 )
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 128, 96 )

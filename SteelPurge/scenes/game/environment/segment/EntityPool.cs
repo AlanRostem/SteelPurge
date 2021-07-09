@@ -49,8 +49,7 @@ public class EntityPool : Node2D
 			{
 				scene = seenScenes[scenePath] = GD.Load<PackedScene>(scenePath);
 			}
-
-			GD.Print(pair.Value);
+			
 			
 			var entity = (Node2D) scene.Instance();
 			switch (entity)
@@ -65,6 +64,8 @@ public class EntityPool : Node2D
 			
 			AddChild(entity);
 		}
+		
+		_initialEntityDataPool = ExportEntityData();
 	}
 	
 	public Dictionary<ulong, Dictionary<string, object>> ExportEntityData()
