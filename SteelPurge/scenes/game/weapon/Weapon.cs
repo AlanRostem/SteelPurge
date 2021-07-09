@@ -21,7 +21,6 @@ public class Weapon : Node2D
 	[Export] public bool ReloadOnFloor = true;
 	[Export] public bool LoseAmmoOnHover = true;
 	[Export] public float HoverRecoilSpeed = 100;
-	[Export] public float MinFallSpeedForRecoilHovering = -20;
 	[Export] public SpriteFrames PlayerSpriteFrames;
 	[Export] public uint MaxAmmo = 100;
 	
@@ -188,13 +187,13 @@ public class Weapon : Node2D
 
 	public void ProduceRecoilToHoverOnly()
 	{
-		if (!(OwnerPlayer.VelocityY > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
+		if (OwnerPlayer.VelocityY <= -HoverRecoilSpeed || !OwnerPlayer.IsAimingDown) return;
 		OwnerPlayer.VelocityY = -HoverRecoilSpeed;
 	}
 	
 	public void ProduceRecoilToHoverAndLoseBoosts()
 	{
-		if (!(OwnerPlayer.VelocityY > MinFallSpeedForRecoilHovering) || !OwnerPlayer.IsAimingDown) return;
+		if (OwnerPlayer.VelocityY <= -HoverRecoilSpeed || !OwnerPlayer.IsAimingDown) return;
 		if (CurrentRecoilHoverAmmo == 0) return;
 		if (LoseAmmoOnHover) CurrentRecoilHoverAmmo--;
 		OwnerPlayer.VelocityY = -HoverRecoilSpeed;
