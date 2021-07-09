@@ -48,6 +48,6 @@ public class World : Node2D
 	
 	private void _OnPlayerDied()
 	{
-		LoadSegment(_currentSegmentIndex);
+		CurrentSegment.Entities.ResetEntityStates();
 	}
 }
