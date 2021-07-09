@@ -499,6 +499,7 @@ public class Player : LivingEntity
 			_currentChronoVector.QueueFree();
 			_currentChronoVector = null;
 			EmitSignal(nameof(ChronoDriftTriggered));
+			ParentWorld.CurrentSegment.Entities.ReturnToPreviouslyCapturedEntityStates();
 			return;
 		}
 		
@@ -506,6 +507,7 @@ public class Player : LivingEntity
 		_currentChronoVector.Position = new Vector2(Position);
 		ParentWorld.CurrentSegment.Environment.AddChild(_currentChronoVector);
 		_currentChronoVector.Connect(nameof(ChronoVector.Disappear), this, nameof(_OnChronoVectorDisappear));
+		ParentWorld.CurrentSegment.Entities.CaptureCurrentEntityStates();
 	}
 
 	private void _OnChronoVectorDisappear()

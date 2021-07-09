@@ -65,8 +65,7 @@ public class EntityPool : Node2D
 			{
 				scene = seenScenes[scenePath] = GD.Load<PackedScene>(scenePath);
 			}
-			
-			
+
 			var entity = (Node2D) scene.Instance();
 			switch (entity)
 			{
@@ -99,8 +98,7 @@ public class EntityPool : Node2D
 			{
 				scene = seenScenes[scenePath] = GD.Load<PackedScene>(scenePath);
 			}
-			
-			
+
 			var entity = (Node2D) scene.Instance();
 			switch (entity)
 			{
