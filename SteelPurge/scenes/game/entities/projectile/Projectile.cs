@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Godot.Collections;
 
 public class Projectile : KinematicEntity
 {
@@ -113,5 +114,20 @@ public class Projectile : KinematicEntity
 	public void _OnParentWeaponLost()
 	{
 		OwnerWeapon = null;
+	}
+
+	public override void FeedEntityData(Dictionary<string, object> data)
+	{
+		base.FeedEntityData(data);
+		VisualAngle = (float)data["visualAngle"];
+		DirectionSign = (float) data["directionSign"];
+	}
+
+	public override Dictionary<string, object> ExportEntityData()
+	{
+		var data =  base.ExportEntityData();
+		data["visualAngle"] = VisualAngle;
+		data["directionSign"] = DirectionSign;
+		return data;
 	}
 }
