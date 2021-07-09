@@ -243,7 +243,7 @@ public class Player : LivingEntity
 	{
 		AccelerateX(direction * WalkAcceleration, WalkSpeed, delta);
 		MovingDirection = direction;
-		if (!PlayerInventory.EquippedWeapon.IsFiring && CanSwapDirection || IsAimingDown || IsAimingUp)
+		if (CanSwapDirection || IsAimingDown || IsAimingUp)
 		{
 			HorizontalLookingDirection = direction;
 		}
