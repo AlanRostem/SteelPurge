@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-public class EntityData
+public sealed class EntityData
 {
 	private readonly Dictionary<string, object> _data;
 
