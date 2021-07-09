@@ -2,6 +2,21 @@ using Godot;
 
 public class Player : LivingEntity
 {
+	[Signal]
+	public delegate void WeaponEquipped(Weapon weapon);
+
+	[Signal]
+	private delegate void TriggerDamageReceptionCooldown();
+
+	[Signal]
+	private delegate void TriggerInvincibility();
+
+	[Signal]
+	public delegate void Died();
+	
+	[Signal]
+	public delegate void ChronoDriftTriggered();
+	
 	public enum MovementState
 	{
 		Walk,
@@ -89,17 +104,6 @@ public class Player : LivingEntity
 		_speedometer = GetNode<Label>("CanvasLayer/Speedometer");
 	}
 
-	[Signal]
-	public delegate void WeaponEquipped(Weapon weapon);
-
-	[Signal]
-	private delegate void TriggerDamageReceptionCooldown();
-
-	[Signal]
-	private delegate void TriggerInvincibility();
-
-	[Signal]
-	public delegate void Died();
 
 	public override void Die()
 	{
@@ -479,7 +483,7 @@ public class Player : LivingEntity
 				break;
 		}
 
-		var speedKmH = (int)(Mathf.Abs(VelocityX) / CustomTileMap.Size * 3.6f);
+		var speedKmH = Mathf.RoundToInt(Mathf.Abs(VelocityX) / CustomTileMap.Size * 3.6f);
 		if (_speedKmH != speedKmH)
 		{
 			_speedKmH = speedKmH;
@@ -494,6 +498,7 @@ public class Player : LivingEntity
 			Position = new Vector2(_currentChronoVector.Position);
 			_currentChronoVector.QueueFree();
 			_currentChronoVector = null;
+			EmitSignal(nameof(ChronoDriftTriggered));
 			return;
 		}
 		
