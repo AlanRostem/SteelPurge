@@ -11,17 +11,19 @@ public class Hazard : StaticEntity
 	{
 		if (!TargetEnemies && entity is Enemy)
 			return;
-		
+
 		if (InstaKill)
 		{
 			entity.TakeDamage(entity.MaxHealth, Vector2.Zero);
 			if (entity is Player player)
 			{
-				player.Die();
+				if (!player.IsRespawning)
+					player.Die();
 			}
+
 			return;
 		}
-		
+
 		entity.TakeDamage(Damage, new Vector2(-Mathf.Sign(entity.VelocityX), 0));
 	}
 }

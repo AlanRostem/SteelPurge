@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class DeadSoldier : Node2D
+public class DeadSoldier : StaticEntity
 {
 	private static readonly Texture[] _weaponHeldTextures =
 	{
