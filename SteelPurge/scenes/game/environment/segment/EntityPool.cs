@@ -64,8 +64,6 @@ public class EntityPool : Node2D
 			
 			CallDeferred("add_child", entity);
 		}
-		
-		_initialEntityDataPool = ExportEntityData();
 	}
 	
 	public Dictionary<ulong, Dictionary<string, object>> ExportEntityData()
