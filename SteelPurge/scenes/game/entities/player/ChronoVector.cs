@@ -13,7 +13,7 @@ public class ChronoVector : Node2D
 
 	public override void _Draw()
 	{
-		DrawCircle(Position, 4, Colors.Aqua);
+		DrawCircle(Vector2.Zero, 4, Colors.Aqua);
 	}
 	
 	private void _OnLifeTimeout()
