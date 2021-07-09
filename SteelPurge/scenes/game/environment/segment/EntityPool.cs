@@ -15,7 +15,7 @@ public class EntityPool : Node2D
 		ParentWorldSegment = GetParent<WorldSegment>();
 		_initialEntityDataPool = ExportEntityData();
 
-		GD.Print(JSON.Print(_initialEntityDataPool, "    "));
+		// GD.Print(JSON.Print(_initialEntityDataPool, "    "));
 	}
 	
 	public T SpawnEntityDeferred<T>(PackedScene scene, Vector2 position) where T : KinematicEntity
@@ -54,6 +54,7 @@ public class EntityPool : Node2D
 		_capturedEntityDataPool = ExportEntityData();
 	}
 
+	// TODO: Optimize in the future. 
 	public void ReturnToPreviouslyCapturedEntityStates()
 	{
 		ClearAllEntities();
@@ -79,6 +80,9 @@ public class EntityPool : Node2D
 			
 			CallDeferred("add_child", entity);
 		}
+		
+		// GD.Print(JSON.Print(_capturedEntityDataPool, "    "));
+		_capturedEntityDataPool.Clear();
 	}
 	
 	public void ClearAllEntities()
