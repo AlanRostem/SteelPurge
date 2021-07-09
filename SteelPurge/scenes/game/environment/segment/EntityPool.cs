@@ -35,7 +35,7 @@ public class EntityPool : Node2D
 	public void ClearAllEntities()
 	{
 		foreach (Node2D entity in GetChildren())
-			entity.QueueFree();
+			entity.CallDeferred("queue_free");
 	}
 	
 	public void ResetEntityStates()
@@ -62,7 +62,7 @@ public class EntityPool : Node2D
 					break;
 			}
 			
-			AddChild(entity);
+			CallDeferred("add_child", entity);
 		}
 		
 		_initialEntityDataPool = ExportEntityData();

@@ -5,11 +5,11 @@
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/AR43Executor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogue.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 104 )
-
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1152, 16 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24, 104 )
 
 [node name="Seg1Level1" instance=ExtResource( 1 )]
 
@@ -19,7 +19,13 @@ tile_data = PoolIntArray( 0, 18, 0, 1, 27, 0, 2, 27, 0, 3, 27, 0, 4, 27, 0, 5, 2
 [node name="ShootingIgnoredTileMap" parent="Environment" index="1"]
 tile_data = PoolIntArray( 196688, 0, 0, 196689, 1, 0, 196690, 2, 0, 196693, 0, 0, 196694, 1, 0, 721002, 0, 0, 721003, 1, 0, 721004, 1, 0, 721005, 2, 0 )
 
-[node name="TransferArea" parent="Environment" index="2"]
+[node name="DeathZone" parent="Environment" index="2" instance=ExtResource( 2 )]
+position = Vector2( 1048, 272 )
+
+[node name="CollisionShape2D" parent="Environment/DeathZone/Area2D" index="0"]
+shape = SubResource( 2 )
+
+[node name="TransferArea" parent="Environment" index="3"]
 position = Vector2( 2008, 72 )
 
 [node name="CollisionShape2D" parent="Environment/TransferArea" index="0"]
@@ -28,21 +34,14 @@ shape = SubResource( 1 )
 [node name="XWFrontRogue2" parent="EntityPool" index="0" instance=ExtResource( 4 )]
 position = Vector2( 904, 144 )
 
-[node name="DeathZone" parent="EntityPool" index="1" instance=ExtResource( 2 )]
-position = Vector2( 496, 288 )
-
-[node name="CollisionShape2D" parent="EntityPool/DeathZone/Area2D" index="0"]
-position = Vector2( 656, -16 )
-shape = SubResource( 2 )
-
-[node name="AR43Executor" parent="EntityPool" index="2" instance=ExtResource( 3 )]
+[node name="AR43Executor" parent="EntityPool" index="1" instance=ExtResource( 3 )]
 position = Vector2( 1248, 112 )
 collision_mask = 2147483697
 
-[node name="XWFrontRogue" parent="EntityPool" index="3" instance=ExtResource( 4 )]
+[node name="XWFrontRogue" parent="EntityPool" index="2" instance=ExtResource( 4 )]
 position = Vector2( 1024, 144 )
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 128, 96 )
 
-[editable path="EntityPool/DeathZone"]
+[editable path="Environment/DeathZone"]
