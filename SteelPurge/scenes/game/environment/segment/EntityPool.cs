@@ -7,14 +7,13 @@ public class EntityPool : Node2D
 	public WorldSegment ParentWorldSegment { get; private set;  }
 	
 	private Dictionary<ulong, Dictionary<string, object>> _initialEntityDataPool = new Dictionary<ulong, Dictionary<string, object>>();
-	private Dictionary<ulong, Dictionary<string, object>> _liveEntityDataPool = new Dictionary<ulong, Dictionary<string, object>>();
+	private Dictionary<ulong, Dictionary<string, object>> _capturedEntityDataPool;
 	
 	public override void _Ready()
 	{
 		base._Ready();
 		ParentWorldSegment = GetParent<WorldSegment>();
 		_initialEntityDataPool = ExportEntityData();
-		_liveEntityDataPool = new Dictionary<ulong, Dictionary<string, object>>(_initialEntityDataPool);
 
 		// GD.Print(JSON.Print(ExportEntityData(), "    "));
 	}
@@ -48,6 +47,39 @@ public class EntityPool : Node2D
 		}
 		
 		entity.QueueFree();
+	}
+
+	public void CaptureCurrentEntityStates()
+	{
+		_capturedEntityDataPool = ExportEntityData();
+	}
+
+	public void ReturnToPreviouslyCapturedEntityStates()
+	{
+		ClearAllEntities();
+		var seenScenes = new Dictionary<string, PackedScene>();
+		foreach (var pair in _capturedEntityDataPool)
+		{
+			var scenePath = (string)pair.Value["scenePath"];
+			if (!seenScenes.TryGetValue(scenePath, out var scene))
+			{
+				scene = seenScenes[scenePath] = GD.Load<PackedScene>(scenePath);
+			}
+			
+			
+			var entity = (Node2D) scene.Instance();
+			switch (entity)
+			{
+				case KinematicEntity kEntity:
+					kEntity.FeedEntityData(pair.Value);
+					break;
+				case StaticEntity sEntity:
+					sEntity.FeedEntityData(pair.Value);
+					break;
+			}
+			
+			CallDeferred("add_child", entity);
+		}
 	}
 	
 	public void ClearAllEntities()
