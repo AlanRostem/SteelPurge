@@ -186,14 +186,18 @@ public class KinematicEntity : KinematicBody2D
 
 	public virtual void FeedEntityData(Dictionary<string, object> data)
 	{
-		var entityData = new KinematicEntityData<KinematicEntity>(data);
-		Velocity = entityData.Velocity;
-		Position = entityData.WorldPosition;
+		var entityData = new EntityData(data);
+		Position = entityData.GetVector("position");
+		Velocity = entityData.GetVector("velocity");
 	}
 	
 	public virtual Dictionary<string, object> ExportEntityData()
 	{
-		return new KinematicEntityData<KinematicEntity>(this).GetJson();
+		var data = new EntityData();
+		data.SetAny("scenePath", Filename);
+		data.SetVector("position", Position);
+		data.SetVector("velocity", Velocity);
+		return data.GetJson();
 	}
 
 	public virtual void OnRemoved()

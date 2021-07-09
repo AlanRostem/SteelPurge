@@ -1,37 +1,18 @@
 using Godot;
 using Godot.Collections;
 
-public class EntityData<T> where T : Node2D
+public class EntityData
 {
 	private readonly Dictionary<string, object> _data;
 
-	public Vector2 WorldPosition
-	{
-		set => SetVector("position", value);
-		get => GetVector("position");
-	}
-
-	public string ScenePath
-	{
-		set => SetAny("scenePath", value);
-		get => GetAny<string>("scenePath");
-	}
-
-	protected EntityData(T entity)
+	public EntityData()
 	{
 		_data = new Dictionary<string, object>();
-		ScenePath = entity.Filename;
-		WorldPosition = entity.Position;
 	}
 	
 	public EntityData(Dictionary<string, object> data)
 	{
 		_data = data;
-	}
-
-	public EntityData()
-	{
-		_data = new Dictionary<string, object>();
 	}
 
 	public Vector2 GetVector(string prop)

@@ -15,7 +15,7 @@ public class EntityPool : Node2D
 		ParentWorldSegment = GetParent<WorldSegment>();
 		_initialEntityDataPool = ExportEntityData();
 
-		// GD.Print(JSON.Print(ExportEntityData(), "    "));
+		// GD.Print(JSON.Print(_initialEntityDataPool, "    "));
 	}
 	
 	public T SpawnEntityDeferred<T>(PackedScene scene, Vector2 position) where T : KinematicEntity

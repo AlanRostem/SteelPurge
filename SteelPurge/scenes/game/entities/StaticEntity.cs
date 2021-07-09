@@ -13,13 +13,16 @@ public class StaticEntity : Node2D
 	
 	public virtual void FeedEntityData(Dictionary<string, object> data)
 	{
-		var sData = new StaticEntityData<StaticEntity>(data);
-		Position = sData.WorldPosition;
+		var entityData = new EntityData(data);
+		Position = entityData.GetVector("position");
 	}
 	
 	public virtual Dictionary<string, object> ExportEntityData()
 	{
-		return new StaticEntityData<StaticEntity>(this).GetJson();
+		var data = new EntityData();
+		data.SetAny("scenePath", Filename);
+		data.SetVector("position", Position);
+		return data.GetJson();
 	}
 	
 	public virtual void OnRemoved()

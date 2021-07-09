@@ -119,15 +119,16 @@ public class Projectile : KinematicEntity
 	public override void FeedEntityData(Dictionary<string, object> data)
 	{
 		base.FeedEntityData(data);
-		VisualAngle = (float)data["visualAngle"];
-		DirectionSign = (float) data["directionSign"];
+		var eData = new EntityData(data);
+		VisualAngle = eData.GetAny<float>("visualAngle");
+		DirectionSign = eData.GetAny<float>("directionSign");
 	}
 
 	public override Dictionary<string, object> ExportEntityData()
 	{
-		var data =  base.ExportEntityData();
-		data["visualAngle"] = VisualAngle;
-		data["directionSign"] = DirectionSign;
-		return data;
+		var data =  new EntityData(base.ExportEntityData());
+		data.SetAny("visualAngle", VisualAngle);
+		data.SetAny("directionSign", DirectionSign);
+		return data.GetJson();
 	}
 }
