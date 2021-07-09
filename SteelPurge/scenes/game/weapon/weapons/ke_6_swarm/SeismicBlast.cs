@@ -8,7 +8,7 @@ public class SeismicBlast : StaticEntity
 
 	private void _OnExistenceTimerTimeout()
 	{
-		QueueFree();
+		ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 	
 	private void _OnVulnerableHitBoxEntered(VulnerableHitbox area)

@@ -61,8 +61,16 @@ public class LifeHitbox : VulnerableHitbox
 		_damageIndicator.Indicate(new Color(255, 255, 255), parent);
 		if (damage >= CurrentHealth)
 		{
-			EmitSignal(nameof(Death));
-			GetParent().QueueFree();
+			EmitSignal(nameof(Death));;
+			switch (parent)
+			{
+				case KinematicEntity kinematicEntity:
+					kinematicEntity.ParentWorld.CurrentSegment.Entities.RemoveEntity(kinematicEntity);
+					break;
+				case StaticEntity staticEntity:
+					staticEntity.ParentWorld.CurrentSegment.Entities.RemoveEntity(staticEntity);
+					break;
+			}
 			_damageNumberGenerator.ShowDamageNumber(CurrentHealth, parent.Position + new Vector2(0, -16), parentWorld,
 				Colors.Red);
 			return;

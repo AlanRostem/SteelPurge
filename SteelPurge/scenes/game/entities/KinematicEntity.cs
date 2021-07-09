@@ -195,4 +195,9 @@ public class KinematicEntity : KinematicBody2D
 	{
 		return new KinematicEntityData<KinematicEntity>(this).GetJson();
 	}
+
+	public virtual void OnRemoved()
+	{
+		
+	}
 }

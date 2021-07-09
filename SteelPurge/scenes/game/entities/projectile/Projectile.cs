@@ -17,6 +17,7 @@ public class Projectile : KinematicEntity
 
 	public override void _Ready()
 	{
+		base._Ready();
 		CurrentCollisionMode = CollisionMode.Move;
 		GetNode<Sprite>("ProjectileSprite").Position = SpritePosition;
 	}
@@ -54,7 +55,7 @@ public class Projectile : KinematicEntity
 		{
 			_hasDisappeared = true;
 			_OnDisappear();
-			QueueFree();
+			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 		}
 	}
 
@@ -74,7 +75,7 @@ public class Projectile : KinematicEntity
 		{
 			_hasDisappeared = true;
 			_OnDisappear();
-			QueueFree();
+			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 		}
 	}
 
@@ -84,7 +85,7 @@ public class Projectile : KinematicEntity
 		{
 			_hasDisappeared = true;
 			_OnDisappear();
-			QueueFree();
+			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 		}
 	}
 
@@ -93,7 +94,7 @@ public class Projectile : KinematicEntity
 		if (_hasDisappeared || !DeleteOnEnemyHit) return;
 		_hasDisappeared = true;
 		_OnDisappear();
-		QueueFree();
+		ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 
 	public virtual void _OnHit(VulnerableHitbox subject)
@@ -106,7 +107,7 @@ public class Projectile : KinematicEntity
 
 	public virtual void _OnLostVisual()
 	{
-		QueueFree();
+		ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 
 	public void _OnParentWeaponLost()

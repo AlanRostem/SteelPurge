@@ -25,7 +25,7 @@ public class DestructibleObstacle : StaticEntity
 		{
 			_damageNumberGenerator.ShowDamageNumber(Health, Position + new Vector2(0, -16), ParentWorld, Colors.Red);
 			EmitSignal(nameof(Destroyed));
-			QueueFree();
+			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 			return;
 		}
 

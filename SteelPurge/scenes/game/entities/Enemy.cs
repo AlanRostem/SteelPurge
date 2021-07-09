@@ -71,7 +71,7 @@ public class Enemy : LivingEntity
 		base._Process(delta);
 		if (_isDead)
 		{
-			QueueFree();
+			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 		}
 
 		if (!_isAiEnabled) return;

@@ -21,4 +21,9 @@ public class StaticEntity : Node2D
 	{
 		return new StaticEntityData<StaticEntity>(this).GetJson();
 	}
+	
+	public virtual void OnRemoved()
+	{
+		
+	}
 }

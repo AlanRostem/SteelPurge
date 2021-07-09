@@ -10,6 +10,7 @@ public class FallingCollectible : KinematicEntity
 
 	private Player _player;
 	public Sprite IconSprite { get; private set; }
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -17,7 +18,7 @@ public class FallingCollectible : KinematicEntity
 			Rng.RandfRange(-1, 1) * LungeSpeed,
 			Rng.Randf() * -LungeSpeed
 		);
-		
+
 		IconSprite = GetNode<Sprite>("Sprite");
 	}
 
@@ -38,7 +39,7 @@ public class FallingCollectible : KinematicEntity
 			if (CollectionCondition(_player))
 			{
 				OnCollected(_player);
-				QueueFree();
+				ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 			}
 		}
 	}
@@ -54,7 +55,7 @@ public class FallingCollectible : KinematicEntity
 		if (CollectionCondition((Player) body))
 		{
 			OnCollected((Player) body);
-			QueueFree();
+			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 		}
 	}
 

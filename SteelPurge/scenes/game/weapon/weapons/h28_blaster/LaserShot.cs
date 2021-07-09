@@ -22,6 +22,6 @@ public class LaserShot : StaticEntity
 
 	private void _OnExistenceTimeout()
 	{
-		QueueFree();
+		ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 }

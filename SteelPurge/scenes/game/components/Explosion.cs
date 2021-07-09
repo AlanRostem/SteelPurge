@@ -39,6 +39,6 @@ public class Explosion : StaticEntity
 
 	private void OnDisappear()
 	{
-		QueueFree();
+		ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 }

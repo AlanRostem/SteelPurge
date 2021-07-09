@@ -26,7 +26,7 @@ public class HornetRogue : Enemy
 	public override void _OnCollision(KinematicCollision2D collider)
 	{
 		if (IsOnWall() || IsOnCeiling())
-			QueueFree();
+			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 
 	public override void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType,
@@ -37,12 +37,13 @@ public class HornetRogue : Enemy
 			VelocityY = 0;
 			IsGravityEnabled = false;
 		}
+
 		base.TakeDamage(damage, direction, damageType, isCritical);
 	}
 
 	private void _OnPlayerEnterExplosiveArea(Player player)
 	{
 		AttackPlayer(player, new Vector2(Direction, 0));
-		if (IsCurrentlyLethal) QueueFree();
+		if (IsCurrentlyLethal) ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 }

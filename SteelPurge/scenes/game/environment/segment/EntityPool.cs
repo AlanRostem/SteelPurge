@@ -7,12 +7,15 @@ public class EntityPool : Node2D
 	public WorldSegment ParentWorldSegment { get; private set;  }
 	
 	private Dictionary<ulong, Dictionary<string, object>> _initialEntityDataPool = new Dictionary<ulong, Dictionary<string, object>>();
+	private Dictionary<ulong, Dictionary<string, object>> _liveEntityDataPool = new Dictionary<ulong, Dictionary<string, object>>();
 	
 	public override void _Ready()
 	{
 		base._Ready();
 		ParentWorldSegment = GetParent<WorldSegment>();
 		_initialEntityDataPool = ExportEntityData();
+		_liveEntityDataPool = new Dictionary<ulong, Dictionary<string, object>>(_initialEntityDataPool);
+
 		// GD.Print(JSON.Print(ExportEntityData(), "    "));
 	}
 	
@@ -32,6 +35,21 @@ public class EntityPool : Node2D
 		return entity;
 	}
 
+	public void RemoveEntity(Node2D entity)
+	{
+		switch (entity)
+		{
+			case KinematicEntity kEntity:
+				kEntity.OnRemoved();
+				break;
+			case StaticEntity sEntity:
+				sEntity.OnRemoved();
+				break;
+		}
+		
+		entity.QueueFree();
+	}
+	
 	public void ClearAllEntities()
 	{
 		foreach (Node2D entity in GetChildren())

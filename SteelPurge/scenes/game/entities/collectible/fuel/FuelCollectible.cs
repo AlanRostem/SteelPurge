@@ -38,6 +38,6 @@ public class FuelCollectible : FallingCollectible
 		SetDeferred("visible", !Visible);
 		_fades++;
 		if (_fades >= MaxFades)
-			QueueFree();
+			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 }

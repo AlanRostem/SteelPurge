@@ -98,7 +98,7 @@ public class XWFrontRogue : Enemy
 		if (player.IsInvulnerable) return;
 		AttackPlayer(player, new Vector2(Direction, 0));
 		_isRushing = false;
-		if (IsCurrentlyLethal) QueueFree();
+		if (IsCurrentlyLethal) ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 	
 	private void _OnCanRush()

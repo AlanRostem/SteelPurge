@@ -62,7 +62,7 @@ public class LivingEntity : KinematicEntity
 
 	public virtual void Die()
 	{
-		QueueFree();
+		ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 
 	public void ApplyStatusEffect(StatusEffectType type, StatusEffectInitializer callback)

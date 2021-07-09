@@ -64,7 +64,7 @@ public class Scrap : FallingCollectible
 		if (body is Scrap scrap && body != this && IsOnFloor())
 		{
 			Count += scrap.Count;
-			scrap.QueueFree();
+			scrap.ParentWorld.CurrentSegment.Entities.RemoveEntity(scrap);
 			EvaluateSprite();
 		}
 	}

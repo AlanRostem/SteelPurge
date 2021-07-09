@@ -38,7 +38,7 @@ public class HostileProjectile : KinematicEntity
 		{
 			_hasDisappeared = true;
 			_OnDisappear();
-			QueueFree();
+			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 		}
 	}
 	
@@ -48,13 +48,13 @@ public class HostileProjectile : KinematicEntity
 		{
 			_hasDisappeared = true;
 			_OnDisappear();
-			QueueFree();
+			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 		}
 	}
 
 	public virtual void _OnDisappear()
 	{
-		QueueFree();
+		ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 	}
 }
 
