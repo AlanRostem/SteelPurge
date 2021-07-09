@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 public class HostileProjectile : KinematicEntity
 {
@@ -55,6 +56,22 @@ public class HostileProjectile : KinematicEntity
 	public virtual void _OnDisappear()
 	{
 		ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
+	}
+
+	public override Dictionary<string, object> ExportEntityData()
+	{
+		var data = new EntityData(base.ExportEntityData());
+		data.SetAny(nameof(DirectionAngle), DirectionAngle);
+		data.SetAny(nameof(DamageDirection), DamageDirection);
+		return data.GetJson();
+	}
+
+	public override void FeedEntityData(Dictionary<string, object> data)
+	{
+		base.FeedEntityData(data);
+		var eData = new EntityData(data);
+		DirectionAngle = eData.GetAny<float>(nameof(DirectionAngle));
+		DamageDirection = eData.GetAny<int>(nameof(DamageDirection));
 	}
 }
 

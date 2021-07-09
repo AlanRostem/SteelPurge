@@ -14,14 +14,14 @@ public class StaticEntity : Node2D
 	public virtual void FeedEntityData(Dictionary<string, object> data)
 	{
 		var entityData = new EntityData(data);
-		Position = entityData.GetVector("position");
+		Position = entityData.GetVector(nameof(Position));
 	}
 	
 	public virtual Dictionary<string, object> ExportEntityData()
 	{
 		var data = new EntityData();
-		data.SetAny("scenePath", Filename);
-		data.SetVector("position", Position);
+		data.SetAny(nameof(Filename), Filename);
+		data.SetVector(nameof(Position), Position);
 		return data.GetJson();
 	}
 	

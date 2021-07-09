@@ -187,16 +187,16 @@ public class KinematicEntity : KinematicBody2D
 	public virtual void FeedEntityData(Dictionary<string, object> data)
 	{
 		var entityData = new EntityData(data);
-		Position = entityData.GetVector("position");
-		Velocity = entityData.GetVector("velocity");
+		Position = entityData.GetVector(nameof(Position));
+		Velocity = entityData.GetVector(nameof(Velocity));
 	}
 	
 	public virtual Dictionary<string, object> ExportEntityData()
 	{
 		var data = new EntityData();
-		data.SetAny("scenePath", Filename);
-		data.SetVector("position", Position);
-		data.SetVector("velocity", Velocity);
+		data.SetAny(nameof(Filename), Filename);
+		data.SetVector(nameof(Position), Position);
+		data.SetVector(nameof(Velocity), Velocity);
 		return data.GetJson();
 	}
 

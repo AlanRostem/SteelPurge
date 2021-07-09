@@ -120,15 +120,15 @@ public class Projectile : KinematicEntity
 	{
 		base.FeedEntityData(data);
 		var eData = new EntityData(data);
-		VisualAngle = eData.GetAny<float>("visualAngle");
-		DirectionSign = eData.GetAny<float>("directionSign");
+		VisualAngle = eData.GetAny<float>(nameof(VisualAngle));
+		DirectionSign = eData.GetAny<float>(nameof(DirectionSign));
 	}
 
 	public override Dictionary<string, object> ExportEntityData()
 	{
 		var data =  new EntityData(base.ExportEntityData());
-		data.SetAny("visualAngle", VisualAngle);
-		data.SetAny("directionSign", DirectionSign);
+		data.SetAny(nameof(VisualAngle), VisualAngle);
+		data.SetAny(nameof(DirectionSign), DirectionSign);
 		return data.GetJson();
 	}
 }

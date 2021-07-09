@@ -15,7 +15,7 @@ public class EntityPool : Node2D
 		ParentWorldSegment = GetParent<WorldSegment>();
 		_initialEntityDataPool = ExportEntityData();
 
-		// GD.Print(JSON.Print(_initialEntityDataPool, "    "));
+		GD.Print(JSON.Print(_initialEntityDataPool, "    "));
 	}
 	
 	public T SpawnEntityDeferred<T>(PackedScene scene, Vector2 position) where T : KinematicEntity
@@ -60,7 +60,7 @@ public class EntityPool : Node2D
 		var seenScenes = new Dictionary<string, PackedScene>();
 		foreach (var pair in _capturedEntityDataPool)
 		{
-			var scenePath = (string)pair.Value["scenePath"];
+			var scenePath = (string)pair.Value[nameof(Node2D.Filename)];
 			if (!seenScenes.TryGetValue(scenePath, out var scene))
 			{
 				scene = seenScenes[scenePath] = GD.Load<PackedScene>(scenePath);
@@ -93,7 +93,7 @@ public class EntityPool : Node2D
 		var seenScenes = new Dictionary<string, PackedScene>();
 		foreach (var pair in _initialEntityDataPool)
 		{
-			var scenePath = (string)pair.Value["scenePath"];
+			var scenePath = (string)pair.Value[nameof(Node2D.Filename)];
 			if (!seenScenes.TryGetValue(scenePath, out var scene))
 			{
 				scene = seenScenes[scenePath] = GD.Load<PackedScene>(scenePath);
