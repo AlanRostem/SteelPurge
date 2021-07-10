@@ -12,6 +12,7 @@ public class CustomTimer : Node
 
 	public float TimeElapsed => _currentTime;
 	public float TimeLeft => WaitTime - _currentTime;
+	public bool IsActive => !_done && !_paused;
 
 	private float _currentTime = 0;
 	private bool _done = true;

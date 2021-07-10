@@ -44,14 +44,16 @@ public sealed class EntityData
 		SetDict(prop, new Dictionary<string, object>
 		{
 			[nameof(timer.TimeElapsed)] = timer.TimeElapsed,
+			[nameof(timer.IsActive)] = timer.IsActive,
 		});
 	}
 
 	public void ConfigureTimer(string prop, CustomTimer timer)
 	{
-		var timeLeft = GetDictProp<float>(prop, nameof(CustomTimer.TimeElapsed));
-		if (timeLeft > 0)
-			timer.CallDeferred(nameof(CustomTimer.Start), timer.TimeElapsed);
+		var timeElapsed = GetDictProp<float>(prop, nameof(CustomTimer.TimeElapsed));
+		var isActive = GetDictProp<bool>(prop, nameof(CustomTimer.IsActive));
+		if (isActive)
+			timer.CallDeferred(nameof(CustomTimer.Start), timeElapsed);
 		else
 			timer.CallDeferred(nameof(CustomTimer.Stop));
 	}
