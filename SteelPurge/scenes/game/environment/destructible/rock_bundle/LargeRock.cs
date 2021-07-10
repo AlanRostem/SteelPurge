@@ -10,9 +10,9 @@ public class LargeRock : KinematicEntity
 	private LifeHitbox _lifeHitbox;
 	private AnimatedSprite _sprite;
 	
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		_lifeHitbox = GetNode<LifeHitbox>("LifeHitbox");
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
 		_lifeHitbox.CurrentHealth = Health;

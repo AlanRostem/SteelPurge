@@ -8,9 +8,9 @@ public class HostileProjectile : KinematicEntity
 	[Export] public float MaxVelocity = 250;
 	private bool _hasDisappeared = false;
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		CurrentCollisionMode = CollisionMode.Move;
 	}
 

@@ -42,9 +42,9 @@ public class XWFrontRogue : Enemy
 		_canSwapDir = true;
 	}
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		_rushDelayTimer = GetNode<Timer>("XWFrontRogueRushDelayTimer");
 		_trackCooldownTimer = GetNode<Timer>("XWFrontRogueTrackCooldownTimer");
 	}

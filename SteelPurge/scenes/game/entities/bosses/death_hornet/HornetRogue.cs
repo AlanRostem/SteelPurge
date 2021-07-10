@@ -7,9 +7,9 @@ public class HornetRogue : Enemy
 	private AnimatedSprite _sprite;
 	public bool Fly = false;
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		_sprite = GetNode<AnimatedSprite>("AnimatedSprite");
 		_sprite.FlipH = Direction < 0;
 	}

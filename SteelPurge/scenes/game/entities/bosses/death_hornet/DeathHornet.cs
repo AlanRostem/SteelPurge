@@ -53,9 +53,9 @@ public class DeathHornet : Boss
 	private uint _rogueHitsTakenInFlightMode = 0;
 	private AttackMode _currentAttackMode = AttackMode.KamikazeRogues;
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		_criticalShape = GetNode<CollisionShape2D>("CriticalHitbox/CriticalShape");
 		_rogueDamageShape = GetNode<CollisionShape2D>("RogueDamageArea/CollisionShape2D");
 		_topRogueSpawnPoint = GetNode<Position2D>("TopRogueSpawnPoint");

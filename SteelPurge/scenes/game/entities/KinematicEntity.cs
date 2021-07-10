@@ -80,16 +80,29 @@ public class KinematicEntity : KinematicBody2D
 	[Signal]
 	public delegate void HealthChanged(uint health);
 
-	public override void _Ready()
+
+	public sealed override void _Ready()
 	{
-		ParentWorld = GetParent().GetParent().GetParent<World>();
-		if (_needsEntityData)
-		{
-			CallDeferred(nameof(FeedEntityData), _entityData);
-			_needsEntityData = false;
-		}
+		var parent = GetParent().GetParent().GetParent();
+		if (parent is World world)
+			ParentWorld = world;
+		
 		// TODO: Figure out why this gets set to (0, 0) in scene instancing
 		PerspectiveDownVector = Vector2.Down;
+
+		_Init();
+		
+		if (_needsEntityData)
+		{
+			FeedEntityData(_entityData);
+			_needsEntityData = false;
+			_entityData = null;
+		}
+	}
+
+	public virtual void _Init()
+	{
+		
 	}
 
 	public void FeedEntityDataForLater(Dictionary<string, object> data)

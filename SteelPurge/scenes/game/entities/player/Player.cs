@@ -92,7 +92,7 @@ public class Player : LivingEntity
 
 	private ChronoVector _currentChronoVector;
 
-	public override void _Ready()
+	public override void _Init()
 	{
 		ParentWorld = GetParent<World>();
 		Health = MaxHealth;

@@ -16,13 +16,13 @@ public class Boss : Enemy
 	private TextureProgress _hpBar;
 	public BossPhase CurrentPhase = BossPhase.One;
 	
-	public override void _Ready()
+	public override void _Init()
 	{
 		_hpBar = GetNode<TextureProgress>("CanvasLayer/BossHPBar");
 		_hpBar.MaxValue = MaxHealth;
 		_hpBar.Value = MaxHealth;
 		CanBeKnockedBack = false;
-		base._Ready();
+		base._Init();
 	}
 
 	private void _OnBossHealthChanged(uint health)

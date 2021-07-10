@@ -11,9 +11,9 @@ public class FuelCollectible : FallingCollectible
 	private Timer _fadeAlternationTimer;
 	private uint _fades = 0;
 	
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		_fadeAlternationTimer = GetNode<Timer>("FadeAlternationTimer");
 	}
 

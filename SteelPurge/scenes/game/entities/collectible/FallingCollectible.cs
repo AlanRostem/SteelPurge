@@ -11,9 +11,9 @@ public class FallingCollectible : KinematicEntity
 	private Player _player;
 	public Sprite IconSprite { get; private set; }
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		Velocity = new Vector2(
 			Rng.RandfRange(-1, 1) * LungeSpeed,
 			Rng.Randf() * -LungeSpeed

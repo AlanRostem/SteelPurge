@@ -50,9 +50,9 @@ public class AR43Executor : Enemy
 		_startWalking = false;
 	}
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		_groundScanner = GetNode<RayCast2D>("GroundScanner");
 		_approachIntervalTimer = GetNode<Timer>("ApproachIntervalTimer");
 		_standIntervalTimer = GetNode<Timer>("StandIntervalTimer");

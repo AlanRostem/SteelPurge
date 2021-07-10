@@ -42,9 +42,9 @@ public class Enemy : LivingEntity
 	private DamageNumberGenerator _damageNumberGenerator;
 	private DamageIndicator _damageIndicator;
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		_meleeAffectedKnockBackTimer = GetNode<Timer>("MeleeAffectedKnockBackTimer");
 		_damageNumberGenerator = GetNode<DamageNumberGenerator>("DamageNumberGenerator");
 		_damageIndicator = GetNode<DamageIndicator>("DamageIndicator");

@@ -45,9 +45,9 @@ public class LivingEntity : KinematicEntity
 
 	private uint _health = 100;
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		Health = MaxHealth;
 	}
 

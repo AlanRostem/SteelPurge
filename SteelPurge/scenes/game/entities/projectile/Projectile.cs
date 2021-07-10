@@ -16,9 +16,9 @@ public class Projectile : KinematicEntity
 	public Vector2 SpritePosition;
 	public float DirectionSign = 1;
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		CurrentCollisionMode = CollisionMode.Move;
 		GetNode<Sprite>("ProjectileSprite").Position = SpritePosition;
 	}
