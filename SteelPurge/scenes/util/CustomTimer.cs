@@ -4,7 +4,7 @@ using System;
 public class CustomTimer : Node
 {
 	[Signal]
-	public delegate void TimeOut();
+	public delegate void Timeout();
 	
 	[Export] public float WaitTime = 1;
 	[Export] public bool AutoStart = false;
@@ -33,7 +33,7 @@ public class CustomTimer : Node
 		if (_currentTime >= WaitTime)
 		{
 			_done = true;
-			EmitSignal(nameof(TimeOut));
+			EmitSignal(nameof(Timeout));
 			if (!OneShot)
 				Start();
 		}
