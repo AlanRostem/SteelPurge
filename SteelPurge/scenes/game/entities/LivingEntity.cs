@@ -116,4 +116,18 @@ public class LivingEntity : KinematicEntity
 	{
 		_effects.Remove(type);
 	}
+
+	public override Dictionary<string, object> ExportEntityData()
+	{
+		var data = new EntityData(base.ExportEntityData());
+		data.SetAny(nameof(Health), Health);
+		return data.GetJson();
+	}
+
+	public override void FeedEntityData(Dictionary<string, object> data)
+	{
+		base.FeedEntityData(data);
+		var eData = new EntityData(data);
+		Health = (uint)eData.GetAny<int>(nameof(Health));
+	}
 }
