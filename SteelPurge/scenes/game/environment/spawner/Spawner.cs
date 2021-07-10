@@ -8,9 +8,9 @@ public class Spawner : StaticEntity
 
 	private Timer _spawnTimer;
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		_spawnTimer = GetNode<Timer>("SpawnTimer");
 		_spawnTimer.WaitTime = SpawnIntervalTime;
 	}

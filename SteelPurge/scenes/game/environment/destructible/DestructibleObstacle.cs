@@ -11,9 +11,9 @@ public class DestructibleObstacle : StaticEntity
 	private DamageIndicator _damageIndicator;
 	private DamageNumberGenerator _damageNumberGenerator;
 
-	public override void _Ready()
+	public override void _Init()
 	{
-		base._Ready();
+		base._Init();
 		_damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
 		_damageNumberGenerator = GetNode<DamageNumberGenerator>("DamageNumberGenerator");
 	}

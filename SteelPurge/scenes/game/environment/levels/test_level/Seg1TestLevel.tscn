@@ -21,32 +21,32 @@ position = Vector2( 664, 152 )
 EntitySceneToSpawn = ExtResource( 4 )
 SpawnIntervalTime = 7.0
 
-[node name="SpawnPoint" parent="." index="2"]
-position = Vector2( 64, -8 )
-
-[node name="DeadSoldier" parent="." index="3" instance=ExtResource( 3 )]
+[node name="DeadSoldier" parent="EntityPool" index="2" instance=ExtResource( 3 )]
 position = Vector2( 184, 184 )
 
-[node name="InteractionIndicator" parent="DeadSoldier" index="0"]
+[node name="InteractionIndicator" parent="EntityPool/DeadSoldier" index="0"]
 DisableOnInteract = false
 
-[node name="DeadSoldier2" parent="." index="4" instance=ExtResource( 3 )]
+[node name="DeadSoldier2" parent="EntityPool" index="3" instance=ExtResource( 3 )]
 position = Vector2( 312, 184 )
 Weapon = 1
 
-[node name="InteractionIndicator" parent="DeadSoldier2" index="0"]
+[node name="InteractionIndicator" parent="EntityPool/DeadSoldier2" index="0"]
 DisableOnInteract = false
 
-[node name="DeadSoldier3" parent="." index="5" instance=ExtResource( 3 )]
+[node name="DeadSoldier3" parent="EntityPool" index="4" instance=ExtResource( 3 )]
 position = Vector2( 248, 184 )
 Weapon = 2
 
-[node name="InteractionIndicator" parent="DeadSoldier3" index="0"]
+[node name="InteractionIndicator" parent="EntityPool/DeadSoldier3" index="0"]
 DisableOnInteract = false
 
-[editable path="DeadSoldier"]
-[editable path="DeadSoldier/InteractionIndicator"]
-[editable path="DeadSoldier2"]
-[editable path="DeadSoldier2/InteractionIndicator"]
-[editable path="DeadSoldier3"]
-[editable path="DeadSoldier3/InteractionIndicator"]
+[node name="SpawnPoint" parent="." index="2"]
+position = Vector2( 64, -8 )
+
+[editable path="EntityPool/DeadSoldier"]
+[editable path="EntityPool/DeadSoldier/InteractionIndicator"]
+[editable path="EntityPool/DeadSoldier2"]
+[editable path="EntityPool/DeadSoldier2/InteractionIndicator"]
+[editable path="EntityPool/DeadSoldier3"]
+[editable path="EntityPool/DeadSoldier3/InteractionIndicator"]

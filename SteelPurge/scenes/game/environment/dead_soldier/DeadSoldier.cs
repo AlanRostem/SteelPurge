@@ -16,7 +16,7 @@ public class DeadSoldier : StaticEntity
 
 	private Sprite _sprite;
 
-	public override void _Ready()
+	public override void _Init()
 	{
 		_sprite = GetNode<Sprite>("Sprite");
 		_sprite.Texture = _weaponHeldTextures[(int) Weapon];

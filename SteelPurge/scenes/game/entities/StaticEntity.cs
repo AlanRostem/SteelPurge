@@ -9,14 +9,20 @@ public class StaticEntity : Node2D
 	
 	public World ParentWorld { get; protected set; }
 	
-	public override void _Ready()
+	public sealed override void _Ready()
 	{
 		ParentWorld = GetParent().GetParent().GetParent<World>();
+		_Init();
 		if (_needsEntityData)
 		{
 			CallDeferred(nameof(FeedEntityData), _entityData);
 			_needsEntityData = false;
 		}
+	}
+
+	public virtual void _Init()
+	{
+		
 	}
 	
 	public void FeedEntityDataForLater(Dictionary<string, object> data)
