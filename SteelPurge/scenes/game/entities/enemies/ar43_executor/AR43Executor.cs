@@ -18,7 +18,6 @@ public class AR43Executor : Enemy
 
 	public override Dictionary<string, object> ExportEntityData()
 	{
-		return base.ExportEntityData();
 		var data = new EntityData(base.ExportEntityData());
 		data.SetTimer(nameof(_approachIntervalTimer), _approachIntervalTimer);
 		data.SetTimer(nameof(_standIntervalTimer), _standIntervalTimer);
@@ -30,7 +29,6 @@ public class AR43Executor : Enemy
 	public override void FeedEntityData(Dictionary<string, object> data)
 	{
 		base.FeedEntityData(data);
-		return;
 		var eData = new EntityData(data);
 		eData.ConfigureTimer(nameof(_approachIntervalTimer), _approachIntervalTimer);
 		eData.ConfigureTimer(nameof(_standIntervalTimer), _standIntervalTimer);

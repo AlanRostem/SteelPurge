@@ -74,10 +74,10 @@ public class EntityPool : Node2D
 			switch (entity)
 			{
 				case KinematicEntity kEntity:
-					kEntity.CallDeferred(nameof(KinematicEntity.FeedEntityData), pair.Value);
+					kEntity.FeedEntityDataForLater(pair.Value);
 					break;
 				case StaticEntity sEntity:
-					sEntity.CallDeferred(nameof(StaticEntity.FeedEntityData), pair.Value);
+					sEntity.FeedEntityDataForLater(pair.Value);
 					break;
 			}
 		}

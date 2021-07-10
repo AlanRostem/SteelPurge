@@ -11,6 +11,9 @@ public class KinematicEntity : KinematicBody2D
 		Snap,
 	}
 
+	private bool _needsEntityData = false;
+	private Dictionary<string, object> _entityData = null;
+
 	public float Gravity = 600;
 
 	[Export] public CollisionMode CurrentCollisionMode = CollisionMode.Snap;
@@ -80,10 +83,20 @@ public class KinematicEntity : KinematicBody2D
 	public override void _Ready()
 	{
 		ParentWorld = GetParent().GetParent().GetParent<World>();
+		if (_needsEntityData)
+		{
+			CallDeferred(nameof(FeedEntityData), _entityData);
+			_needsEntityData = false;
+		}
 		// TODO: Figure out why this gets set to (0, 0) in scene instancing
 		PerspectiveDownVector = Vector2.Down;
 	}
 
+	public void FeedEntityDataForLater(Dictionary<string, object> data)
+	{
+		_needsEntityData = true;
+		_entityData = data;
+	}
 	
 	public override void _PhysicsProcess(float delta)
 	{

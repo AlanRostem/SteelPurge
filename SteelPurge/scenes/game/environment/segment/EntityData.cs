@@ -9,7 +9,7 @@ public sealed class EntityData
 	{
 		_data = new Dictionary<string, object>();
 	}
-	
+
 	public EntityData(Dictionary<string, object> data)
 	{
 		_data = data;
@@ -54,10 +54,10 @@ public sealed class EntityData
 		var paused = GetDictProp<bool>(prop, nameof(Timer.Paused));
 		if (!paused)
 		{
-			timer.Start(timer.WaitTime - timeLeft);
+			timer.CallDeferred("start", timer.WaitTime - timeLeft);
 		}
 	}
-	
+
 	public void SetDict(string prop, Dictionary<string, object> dict)
 	{
 		_data[prop] = dict;
@@ -71,9 +71,9 @@ public sealed class EntityData
 	public T GetDictProp<T>(string prop, string propForDict)
 	{
 		var dict = (Dictionary) _data[prop];
-		return (T)dict[propForDict];
+		return (T) dict[propForDict];
 	}
-	
+
 	public T GetAny<T>(string prop)
 	{
 		return (T) _data[prop];
