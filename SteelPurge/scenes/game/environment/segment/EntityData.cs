@@ -39,7 +39,7 @@ public sealed class EntityData
 		_data[prop] = value;
 	}
 
-	public void SetTimer(string prop, Timer timer)
+	public void SetTimer(string prop, CustomTimer timer)
 	{
 		SetDict(prop, new Dictionary<string, object>
 		{
@@ -47,7 +47,7 @@ public sealed class EntityData
 		});
 	}
 
-	public void ConfigureTimer(string prop, Timer timer)
+	public void ConfigureTimer(string prop, CustomTimer timer)
 	{
 		var timeLeft = GetDictProp<float>(prop, nameof(Timer.TimeLeft));
 		if (timeLeft > 0)

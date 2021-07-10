@@ -12,9 +12,9 @@ public class AR43Executor : Enemy
 	private RayCast2D _groundScanner;
 
 	private bool _startWalking = false;
-	private Timer _approachIntervalTimer;
-	private Timer _standIntervalTimer;
-	private Timer _fireRateTimer;
+	private CustomTimer _approachIntervalTimer;
+	private CustomTimer _standIntervalTimer;
+	private CustomTimer _fireRateTimer;
 
 	public override Dictionary<string, object> ExportEntityData()
 	{
@@ -54,9 +54,9 @@ public class AR43Executor : Enemy
 	{
 		base._Init();
 		_groundScanner = GetNode<RayCast2D>("GroundScanner");
-		_approachIntervalTimer = GetNode<Timer>("ApproachIntervalTimer");
-		_standIntervalTimer = GetNode<Timer>("StandIntervalTimer");
-		_fireRateTimer = GetNode<Timer>("FireRateTimer");
+		_approachIntervalTimer = GetNode<CustomTimer>("ApproachIntervalTimer");
+		_standIntervalTimer = GetNode<CustomTimer>("StandIntervalTimer");
+		_fireRateTimer = GetNode<CustomTimer>("FireRateTimer");
 	}
 
 	protected override void _ProcessWhenPlayerDetected(Player player)
