@@ -122,6 +122,7 @@ public class Projectile : KinematicEntity
 		var eData = new EntityData(data);
 		VisualAngle = eData.GetAny<float>(nameof(VisualAngle));
 		DirectionSign = eData.GetAny<float>(nameof(DirectionSign));
+		GD.Print(VisualAngle);
 	}
 
 	public override Dictionary<string, object> ExportEntityData()

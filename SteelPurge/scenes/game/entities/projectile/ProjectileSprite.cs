@@ -6,6 +6,10 @@ public class ProjectileSprite : Sprite
 	public override void _Ready()
 	{
 		_parent = GetParent<Projectile>();
+	}
+
+	public override void _Process(float delta)
+	{
 		var angle = Mathf.Deg2Rad(_parent.VisualAngle);
 		Rotation = angle;
 		var sign = Mathf.Sign(_parent.VelocityX);
