@@ -38,7 +38,6 @@ shape = SubResource( 1 )
 [node name="ApproachIntervalTimer" parent="." index="4" instance=ExtResource( 5 )]
 WaitTime = 1.2
 OneShot = true
-Print = true
 
 [node name="StandIntervalTimer" parent="." index="5" instance=ExtResource( 5 )]
 WaitTime = 2.5
