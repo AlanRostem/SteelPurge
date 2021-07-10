@@ -5,7 +5,7 @@ public class CustomTimer : Node
 {
 	[Signal]
 	public delegate void Timeout();
-	
+
 	[Export] public float WaitTime = 1;
 	[Export] public bool AutoStart = false;
 	[Export] public bool OneShot = false;
@@ -14,9 +14,9 @@ public class CustomTimer : Node
 	public float TimeLeft => WaitTime - _currentTime;
 
 	private float _currentTime = 0;
-	private bool _done = false;
+	private bool _done = true;
 	private bool _paused = false;
-	
+
 	public override void _Ready()
 	{
 		if (AutoStart)
@@ -28,6 +28,10 @@ public class CustomTimer : Node
 		if (!_done && !_paused)
 		{
 			_currentTime += delta;
+		}
+		else
+		{
+			return;
 		}
 
 		if (_currentTime >= WaitTime)
