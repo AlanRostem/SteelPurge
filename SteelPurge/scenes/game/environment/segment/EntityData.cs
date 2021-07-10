@@ -34,7 +34,7 @@ public sealed class EntityData
 		};
 	}
 
-	public void SetAny(string prop, object value)
+	public void SetAny<T>(string prop, T value)
 	{
 		_data[prop] = value;
 	}
@@ -44,8 +44,18 @@ public sealed class EntityData
 		SetDict(prop, new Dictionary<string, object>
 		{
 			[nameof(timer.TimeLeft)] = timer.TimeLeft,
-			[nameof(timer.Paused)] = timer.TimeLeft
+			[nameof(timer.Paused)] = timer.Paused
 		});
+	}
+
+	public void ConfigureTimer(string prop, Timer timer)
+	{
+		var timeLeft = GetDictProp<float>(prop, nameof(Timer.TimeLeft));
+		var paused = GetDictProp<bool>(prop, nameof(Timer.Paused));
+		if (!paused)
+		{
+			timer.Start(timer.WaitTime - timeLeft);
+		}
 	}
 	
 	public void SetDict(string prop, Dictionary<string, object> dict)
@@ -53,14 +63,14 @@ public sealed class EntityData
 		_data[prop] = dict;
 	}
 
-	public Dictionary<string, object> GetDict(string prop)
+	public Dictionary GetDict(string prop)
 	{
-		return GetAny<Dictionary<string, object>>(prop);
+		return GetAny<Dictionary>(prop);
 	}
 
 	public T GetDictProp<T>(string prop, string propForDict)
 	{
-		var dict = (Dictionary<string, object>) _data[prop];
+		var dict = (Dictionary) _data[prop];
 		return (T)dict[propForDict];
 	}
 	

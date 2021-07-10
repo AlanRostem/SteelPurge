@@ -9,6 +9,7 @@ extents = Vector2( 16, 4 )
 
 [node name="ExecutorBullet" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+CurrentCollisionMode = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetectionArea" index="0"]
 shape = SubResource( 1 )
