@@ -52,6 +52,7 @@ public sealed class EntityData
 		var timeLeft = GetDictProp<float>(prop, nameof(Timer.TimeLeft));
 		if (timeLeft > 0)
 			timer.CallDeferred("start", timer.WaitTime - timeLeft);
+		// TODO: Find out how to reset the wait time back to what it originally is
 		else
 			timer.CallDeferred("stop");
 	}
