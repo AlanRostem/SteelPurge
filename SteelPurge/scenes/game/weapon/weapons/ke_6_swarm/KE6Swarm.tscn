@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/game/weapon/ability/firing_device/FiringDevice.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/weapon/weapons/ke_6_swarm/OrbFiringDevice.cs" type="Script" id=4]
 [ext_resource path="res://scenes/game/weapon/weapons/ke_6_swarm/KineticShieldAbility.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/texture/ui/icon/joule_weapon_inventory.png" type="Texture" id=6]
+[ext_resource path="res://assets/texture/weapon/ke_6_swarm/ke_6_swarm.png" type="Texture" id=6]
 
 [node name="KE6Swarm" instance=ExtResource( 1 )]
 DisplayName = "KE-6 Grenadier"
