@@ -14,14 +14,6 @@ public class DragonsBreathAbility : ResourceAbility
 	[Signal]
 	public delegate void TurnOff();
 
-	private FireArea _fireArea;
-
-	public override void _Ready()
-	{
-		base._Ready();
-		_fireArea = GetNode<FireArea>("FireArea");
-	}
-
 	public override void OnActivate()
 	{
 		EmitSignal(nameof(TurnOn));
@@ -44,27 +36,27 @@ public class DragonsBreathAbility : ResourceAbility
 
 		if (GetWeapon().OwnerPlayer.IsAimingDown)
 		{
-			_fireArea.RotationDegrees = 90;
-			_fireArea.Scale = new Vector2(1, 1);
+			RotationDegrees = 90;
+			Scale = new Vector2(1, 1);
 			return;
 		}
 		
 		if (GetWeapon().OwnerPlayer.IsAimingUp)
 		{
-			_fireArea.Scale = new Vector2(1, 1);
-			_fireArea.RotationDegrees = -90;
+			Scale = new Vector2(1, 1);
+			RotationDegrees = -90;
 			return;
 		}
 		
-		_fireArea.Rotation = 0;
+		Rotation = 0;
 
 		if (GetWeapon().OwnerPlayer.HorizontalLookingDirection < 0)
 		{
-			_fireArea.Scale = new Vector2(-1, 1);
+			Scale = new Vector2(-1, 1);
 		}
 		else
 		{
-			_fireArea.Scale = new Vector2(1, 1);
+			Scale = new Vector2(1, 1);
 		}
 	}
 
