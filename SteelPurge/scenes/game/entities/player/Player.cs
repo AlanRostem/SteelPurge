@@ -6,12 +6,6 @@ public class Player : LivingEntity
 	public delegate void WeaponEquipped(Weapon weapon);
 
 	[Signal]
-	private delegate void TriggerDamageReceptionCooldown();
-
-	[Signal]
-	private delegate void TriggerInvincibility();
-
-	[Signal]
 	public delegate void Died();
 	
 	[Signal]
@@ -85,6 +79,8 @@ public class Player : LivingEntity
 	private CollisionShape2D _bodyShape;
 	private CollisionShape2D _roofDetectorShape;
 	private Timer _respawnTimer;
+	private Timer _damageReceptionCooldownTimer;
+	private Timer _invincibilityCooldownTimer;
 	public Inventory PlayerInventory;
 	private Camera2D _camera;
 	private Label _speedometer;
@@ -101,14 +97,14 @@ public class Player : LivingEntity
 		_camera = GetNode<Camera2D>("PlayerCamera");
 		_roofDetectorShape = GetNode<CollisionShape2D>("RoofDetector/UpperBodyShape");
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
+		_damageReceptionCooldownTimer = GetNode<Timer>("DamageReceptionCooldownTimer");
+		_invincibilityCooldownTimer = GetNode<Timer>("InvincibilityCooldownTimer");
 		_speedometer = GetNode<Label>("CanvasLayer/Speedometer");
 	}
 
 
 	public override void Die()
 	{
-		// TODO: Implement additional functionality after Prototype 1
-
 		Position = new Vector2(ParentWorld.CurrentReSpawnPoint);
 		ResetAllStates();
 		InitiateRespawnSequence();
@@ -122,7 +118,6 @@ public class Player : LivingEntity
 		Health = MaxHealth;
 		Velocity = new Vector2();
 		ClearStatusEffects();
-
 		// TODO: Reset invulnerability 
 	}
 
@@ -149,8 +144,8 @@ public class Player : LivingEntity
 	public void BecomeInvincible()
 	{
 		IsInvulnerable = true;
-		EmitSignal(nameof(TriggerDamageReceptionCooldown));
-		EmitSignal(nameof(TriggerInvincibility));
+		_damageReceptionCooldownTimer.Start();
+		_invincibilityCooldownTimer.Start();
 	}
 	
 	public override void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType,
@@ -173,8 +168,8 @@ public class Player : LivingEntity
 				_isStunned = true;
 			}
 
-			EmitSignal(nameof(TriggerDamageReceptionCooldown));
-			EmitSignal(nameof(TriggerInvincibility));
+			_damageReceptionCooldownTimer.Start();
+			_invincibilityCooldownTimer.Start();
 		}
 		else
 		{
