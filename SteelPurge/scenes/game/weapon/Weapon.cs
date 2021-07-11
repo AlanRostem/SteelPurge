@@ -23,6 +23,7 @@ public class Weapon : Node2D
 	[Export] public float HoverRecoilSpeed = 100;
 	[Export] public SpriteFrames PlayerSpriteFrames;
 	[Export] public uint MaxAmmo = 100;
+	[Export] public bool InfiniteAmmo = false;
 	
 	private uint _ammo = 0;
 	
@@ -151,6 +152,8 @@ public class Weapon : Node2D
 		_weaponNameLabel.Text = DisplayName;
 		CurrentRecoilHoverAmmo = MaxRecoilHoverShots;
 		RefillAmmo();
+		if (InfiniteAmmo)
+			_ammoLabel.Text = "∞";
 	}
 
 	private void Fire()
@@ -169,18 +172,24 @@ public class Weapon : Node2D
 
 	public void RefillAmmo()
 	{
+		if (InfiniteAmmo)
+			return;
 		_ammo = MaxAmmo;
 		_ammoLabel.Text = "x" + _ammo;
 	}
 
 	public void AddAmmo(uint amount)
 	{
+		if (InfiniteAmmo)
+			return;
 		_ammo += amount;
 		_ammoLabel.Text = "x" + _ammo;
 	}
 	
 	public void RemoveAmmo(uint amount = 1)
 	{
+		if (InfiniteAmmo)
+			return;
 		_ammo -= amount;
 		_ammoLabel.Text = "x" + _ammo;
 	}

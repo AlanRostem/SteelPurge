@@ -8,4 +8,5 @@
 script = ExtResource( 2 )
 
 [node name="HitScanner" parent="." index="0" instance=ExtResource( 3 )]
+
 [connection signal="Scanned" from="." to="HitScanner" method="_OnScan"]

@@ -15,6 +15,21 @@ public class HitScanFiringDevice : FiringDevice
 	
 	public override void OnFireOutput()
 	{
-		ScanHit(0);
+		var player = GetWeapon().OwnerPlayer;
+		var angle = 0;
+		if (player.IsAimingDown)
+		{
+			angle = 90;
+		}
+		else if (player.IsAimingUp)
+		{
+			angle = -90;
+		}
+		if (player.HorizontalLookingDirection < 0)
+		{
+			angle = 180 - angle;
+		}
+
+		ScanHit(Mathf.Deg2Rad(angle));
 	}
 }

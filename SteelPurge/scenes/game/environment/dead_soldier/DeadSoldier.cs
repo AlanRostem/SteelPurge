@@ -13,7 +13,7 @@ public class DeadSoldier : StaticEntity
 		GD.Load<Texture>("res://assets/texture/dead_soldier.png"), // Count (Basically none)
 	};
 	
-	[Export] public Inventory.InventoryWeapon Weapon = Inventory.InventoryWeapon.H28;
+	[Export] public Inventory.InventoryWeapon Weapon = Inventory.InventoryWeapon.P336;
 
 	private Sprite _sprite;
 

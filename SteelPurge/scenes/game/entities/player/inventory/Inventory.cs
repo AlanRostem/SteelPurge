@@ -6,7 +6,7 @@ public class Inventory : Node2D
 
 	public enum InventoryWeapon
 	{
-		H28,
+		P336,
 		Firewall,
 		Joule,
 		Falcon,
@@ -18,14 +18,14 @@ public class Inventory : Node2D
 	
 	private static readonly PackedScene[] WeaponScenes =
 	{
-		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/h28_blaster/H28Blaster.tscn"),
+		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/hamilton_p336/HamitonP336.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/firewall/Firewall.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/ke_6_swarm/KE6Swarm.tscn"),
 		GD.Load<PackedScene>("res://scenes/game/weapon/weapons/falcon/Falcon.tscn"),
 	};
 	
 	[Export]
-	public InventoryWeapon DefaultGun = InventoryWeapon.H28;
+	public InventoryWeapon DefaultGun = InventoryWeapon.P336;
 	
 	public Weapon EquippedWeapon => _weapon;
 	public InventoryWeapon EquippedWeaponEnum => _weaponId;
