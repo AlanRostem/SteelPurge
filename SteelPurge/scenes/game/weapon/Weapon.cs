@@ -158,7 +158,7 @@ public class Weapon : Node2D
 
 	private void Fire()
 	{
-		if (!_isHoldingTrigger || _ammo == 0)
+		if (!_isHoldingTrigger || (_ammo == 0 && !InfiniteAmmo))
 		{
 			_isFiring = false;
 			EmitSignal(nameof(CancelFire));

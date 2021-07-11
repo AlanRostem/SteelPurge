@@ -7,10 +7,11 @@
 
 [node name="HamitonP336" instance=ExtResource( 1 )]
 DisplayName = "Hamiton P336"
-DamagePerShot = 2
+DamagePerShot = 1
 RateOfFire = 420
 MaxRecoilHoverShots = 5
 HoverRecoilSpeed = 50.0
+InfiniteAmmo = true
 
 [node name="HitScanFiringDevice" parent="." index="5" instance=ExtResource( 4 )]
 
