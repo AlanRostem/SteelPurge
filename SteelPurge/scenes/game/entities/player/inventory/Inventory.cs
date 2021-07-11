@@ -8,7 +8,7 @@ public class Inventory : Node2D
 	{
 		P336,
 		Firewall,
-		Joule,
+		KE6,
 		Falcon,
 		Count,
 	}

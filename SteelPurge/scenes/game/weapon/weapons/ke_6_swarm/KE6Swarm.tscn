@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/texture/ui/icon/joule_weapon_inventory.png" type="Texture" id=6]
 
 [node name="KE6Swarm" instance=ExtResource( 1 )]
-DisplayName = "Joule"
+DisplayName = "KE-6 Grenadier"
 WeaponType = 2
 DamagePerShot = 2
 RateOfFire = 130
