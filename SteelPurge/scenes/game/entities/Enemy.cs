@@ -1,13 +1,13 @@
 using Godot;
 using System;
 using System.Collections;
+using Godot.Collections;
 using Object = Godot.Object;
 
 public class Enemy : LivingEntity
 {
-
 	public const uint StandardHealth = 10;
-	
+
 	[Export] public float PlayerDetectionRange = 1000;
 	[Export] public float KnockBackSpeed = 300;
 	[Export] public bool CanBeKnockedBack = true;
@@ -23,7 +23,7 @@ public class Enemy : LivingEntity
 			_isAiEnabled = value;
 			IsCurrentlyLethal = value;
 			CanMove = value;
-			
+
 			if (value)
 				OnEnableAi();
 			else
@@ -50,10 +50,26 @@ public class Enemy : LivingEntity
 		_damageIndicator = GetNode<DamageIndicator>("DamageIndicator");
 	}
 
+	public override void FeedEntityData(Dictionary<string, object> data)
+	{
+		base.FeedEntityData(data);
+		var eData = new EntityData(data);
+		_isPlayerDetected = eData.GetAny<bool>(nameof(_isPlayerDetected));
+		if (_isPlayerDetected)
+			DetectedPlayer = ParentWorld.PlayerNode;
+	}
+
+	public override Dictionary<string, object> ExportEntityData()
+	{
+		var data = new EntityData(base.ExportEntityData());
+		data.SetAny(nameof(_isPlayerDetected), _isPlayerDetected);
+		return data.GetJson();
+	}
+
 	public virtual void OnDie()
 	{
 	}
-	
+
 	public void AttackPlayer(Player player, Vector2 knockBackDirection)
 	{
 		if (!IsCurrentlyLethal) return;
@@ -65,7 +81,7 @@ public class Enemy : LivingEntity
 		if (!IsCurrentlyLethal) return;
 		player.TakeDamage(damage, knockBackDirection);
 	}
-	
+
 	public override void _Process(float delta)
 	{
 		base._Process(delta);
@@ -85,6 +101,7 @@ public class Enemy : LivingEntity
 				OnPlayerDetected(DetectedPlayer);
 				_isPlayerDetected = true;
 			}
+
 			_ProcessWhenPlayerDetected(ParentWorld.PlayerNode);
 		}
 		else
@@ -94,18 +111,17 @@ public class Enemy : LivingEntity
 				OnPlayerVisualLost(DetectedPlayer);
 				_isPlayerDetected = false;
 			}
+
 			_ProcessWhenPlayerNotSeen();
 		}
 	}
 
 	protected virtual void OnPlayerDetected(Player player)
 	{
-		
 	}
-	
+
 	protected virtual void OnPlayerVisualLost(Player player)
 	{
-		
 	}
 
 	public override void TakeDamage(uint damage, Vector2 direction, VulnerableHitbox.DamageType damageType,
@@ -146,14 +162,14 @@ public class Enemy : LivingEntity
 	public void KnockBack(Vector2 direction, float speed)
 	{
 		if (!CanBeKnockedBack) return;
-		
+
 		ApplyStatusEffect(StatusEffectType.KnockBack, effect =>
 		{
 			var knockBackEffect = (KnockBackEffect) effect;
 			knockBackEffect.KnockBackForce = direction * speed;
 			knockBackEffect.DisableEntityMovement = true;
 		});
-		
+
 		CanMove = false;
 		_isKnockedBack = true;
 		_meleeAffectedKnockBackTimer.Start();
@@ -205,15 +221,13 @@ public class Enemy : LivingEntity
 	/// </summary>
 	public virtual void OnEnableAi()
 	{
-		
 	}
-	
+
 	/// <summary>
 	/// Called when AI is disabled. Recommend all Enemy derived scenes/classes
 	/// override this for consistent behaviour.
 	/// </summary>
 	public virtual void OnDisableAi()
 	{
-		
 	}
 }
