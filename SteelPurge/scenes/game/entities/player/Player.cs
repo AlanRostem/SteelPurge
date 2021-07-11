@@ -130,9 +130,12 @@ public class Player : LivingEntity
 		IsGravityEnabled = false;
 		CanMove = false;
 		PlayerInventory.EquippedWeapon.CanFire = false;
-		IsInvulnerable = true;
+		IsInvulnerable = false;
 		_respawnTimer.Start();
 		IsRespawning = true;
+		
+		_damageReceptionCooldownTimer.Stop();
+		_invincibilityCooldownTimer.Stop();
 	}
 
 	public void TakeDamage(Vector2 direction, VulnerableHitbox.DamageType damageType = VulnerableHitbox.DamageType.Standard,
