@@ -192,6 +192,8 @@ public class Weapon : Node2D
 			return;
 		_ammo -= amount;
 		_ammoLabel.Text = "x" + _ammo;
+		if (_ammo == 0)
+			OwnerPlayer.PlayerInventory.SwitchWeapon(Inventory.InventoryWeapon.P336);
 	}
 
 	public void ProduceRecoilToHoverOnly()
