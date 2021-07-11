@@ -8,7 +8,6 @@ public class XWFrontRogue : Enemy
 {
 	[Export] public float WalkSpeed = 32;
 	[Export] public float RushSpeed = 110;
-	[Export] public float PlayerVisualLossRange = 3 * CustomTileMap.Size;
 	public int Direction = 1;
 	private bool _canSwapDir = true;
 	private bool _isRushing = false;
@@ -21,11 +20,23 @@ public class XWFrontRogue : Enemy
 	{
 		base.FeedEntityData(data);
 		var eData = new EntityData(data);
+		eData.ConfigureTimer(nameof(_rushDelayTimer), _rushDelayTimer);
+		eData.ConfigureTimer(nameof(_trackCooldownTimer), _trackCooldownTimer);
+		_isRushing = eData.GetAny<bool>(nameof(_isRushing));
+		_canSwapDir = eData.GetAny<bool>(nameof(_canSwapDir));
+		_canRush = eData.GetAny<bool>(nameof(_canRush));
+		Direction = eData.GetAny<int>(nameof(Direction));
 	}
 
 	public override Godot.Collections.Dictionary<string, object> ExportEntityData()
 	{
 		var data = new EntityData(base.ExportEntityData());
+		data.SetTimer(nameof(_rushDelayTimer), _rushDelayTimer);
+		data.SetTimer(nameof(_trackCooldownTimer), _trackCooldownTimer);
+		data.SetAny(nameof(_isRushing), _isRushing);
+		data.SetAny(nameof(_canSwapDir), _canSwapDir);
+		data.SetAny(nameof(_canRush), _canRush);
+		data.SetAny(nameof(Direction), Direction);
 		return data.GetJson();
 	}
 
@@ -54,8 +65,6 @@ public class XWFrontRogue : Enemy
 		_rushDelayTimer = GetNode<CustomTimer>("RushDelayTimer");
 		_trackCooldownTimer = GetNode<CustomTimer>("TrackCooldownTimer");
 	}
-
-	
 	
 	protected override void _ProcessWhenPlayerDetected(Player player)
 	{
