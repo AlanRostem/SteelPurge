@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/game/environment/hazards/Hazard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/texture/magma_spikes.png" type="Texture" id=2]
 [ext_resource path="res://scenes/game/components/LifeHitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/game/environment/hazards/MagmaSpikes.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 7 )
 
 [node name="MagmaSpikes" instance=ExtResource( 1 )]
-Damage = 25
+script = ExtResource( 4 )
 
 [node name="LifeHitbox" parent="." index="0" instance=ExtResource( 3 )]
 ImmuneDamageTypes = [ 0, 1, 2, 3, 4, 6 ]

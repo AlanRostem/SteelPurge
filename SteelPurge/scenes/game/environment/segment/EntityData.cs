@@ -58,6 +58,20 @@ public sealed class EntityData
 			timer.CallDeferred(nameof(CustomTimer.Stop));
 	}
 
+	public void SetLifeHitbox(string prop, LifeHitbox hitbox)
+	{
+		SetDict(prop, new Dictionary<string, object>
+		{
+			[nameof(hitbox.CurrentHealth)] = hitbox.CurrentHealth,
+		});
+	}
+
+	public void ConfigureLifeHitbox(string prop, LifeHitbox hitbox)
+	{
+		var health = GetDictProp<int>(prop, nameof(hitbox.CurrentHealth));
+		hitbox.CurrentHealth = (uint)health;
+	}
+	
 	public void SetDict(string prop, Dictionary<string, object> dict)
 	{
 		_data[prop] = dict;
