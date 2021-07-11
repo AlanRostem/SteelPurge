@@ -21,6 +21,15 @@ public class HitScanner : RayCast2D
 			case TileMap tileMap:
 				break;
 			case VulnerableHitbox hitBox:
+				if (hitBox is CriticalHitbox criticalHitbox)
+				{
+					var directionalAngle = Mathf.Rad2Deg(angle);
+					var targetAngle = Mathf.Rad2Deg(criticalHitbox.CriticalHitDirection.Angle());
+					var angleDiff = (directionalAngle - targetAngle + 180 + 360) % 360 - 180;
+					if (angleDiff > criticalHitbox.CriticalHitAngularMargin ||
+						angleDiff < -criticalHitbox.CriticalHitAngularMargin) return;
+				}
+				
 				hitBox.TakeHit(damage, Vector2.Zero, VulnerableHitbox.DamageType.HitScan);
 				_parent.GetWeapon().EmitSignal(nameof(Weapon.DamageDealt), damage, hitBox);
 				break;

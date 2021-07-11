@@ -8,5 +8,6 @@
 script = ExtResource( 2 )
 
 [node name="HitScanner" parent="." index="0" instance=ExtResource( 3 )]
+collision_mask = 145
 
 [connection signal="Scanned" from="." to="HitScanner" method="_OnScan"]
