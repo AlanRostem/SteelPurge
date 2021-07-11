@@ -95,7 +95,7 @@ public class Inventory : Node2D
 		if (HasWeapon(weapon))
 		{
 			_weapon.RefillAmmo();
-			_weapon.TacticalEnhancement.ReCharge();
+			_weapon.TacticalEnhancement?.ReCharge();
 			return;
 		}
 		
