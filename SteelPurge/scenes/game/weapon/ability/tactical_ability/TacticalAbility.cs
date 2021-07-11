@@ -5,6 +5,7 @@ public class TacticalAbility : WeaponAbility
 {
 	[Export] public float CoolDown = 6;
 	[Export] public float Duration = 1;
+	[Export] public uint AmmoDrain = 5;
 
 	public bool IsOnCoolDown = false;
 
@@ -60,10 +61,11 @@ public class TacticalAbility : WeaponAbility
 		base._Process(delta);
 		if (Input.IsActionJustPressed("tactical_ability") && GetWeapon().Equipped)
 		{
-			if (!IsOnCoolDown && !IsActive)
+			if (!IsOnCoolDown && !IsActive && GetWeapon().Ammo >= AmmoDrain)
 			{
 				IsActive = true;
 				OnActivate();
+				GetWeapon().RemoveAmmo(AmmoDrain);
 				_durationTimer.Start();
 			}
 			else
