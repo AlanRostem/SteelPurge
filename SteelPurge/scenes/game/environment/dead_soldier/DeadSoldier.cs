@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public class DeadSoldier : StaticEntity
 {
@@ -19,6 +20,21 @@ public class DeadSoldier : StaticEntity
 	public override void _Init()
 	{
 		_sprite = GetNode<Sprite>("Sprite");
+		_sprite.Texture = _weaponHeldTextures[(int) Weapon];
+	}
+
+	public override Dictionary<string, object> ExportEntityData()
+	{
+		var data = new EntityData(base.ExportEntityData());
+		data.SetAny(nameof(Weapon), Weapon);
+		return data.GetJson();
+	}
+
+	public override void FeedEntityData(Dictionary<string, object> data)
+	{
+		base.FeedEntityData(data);
+		var eData = new EntityData(data);
+		Weapon = eData.GetAny<Inventory.InventoryWeapon>(nameof(Weapon));
 		_sprite.Texture = _weaponHeldTextures[(int) Weapon];
 	}
 
