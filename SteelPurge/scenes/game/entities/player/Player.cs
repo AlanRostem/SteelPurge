@@ -112,7 +112,8 @@ public class Player : LivingEntity
 		Position = new Vector2(ParentWorld.CurrentReSpawnPoint);
 		ResetAllStates();
 		InitiateRespawnSequence();
-
+		_currentChronoVector?.QueueFree();
+		_currentChronoVector = null;
 		EmitSignal(nameof(Died));
 	}
 
@@ -510,6 +511,11 @@ public class Player : LivingEntity
 		ParentWorld.CurrentSegment.Entities.CaptureCurrentEntityStates();
 	}
 
+	public void ClearChronoVector()
+	{
+		_currentChronoVector = null;
+	}
+	
 	private void _OnChronoVectorDisappear()
 	{
 		_currentChronoVector = null;
