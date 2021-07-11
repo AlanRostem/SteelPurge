@@ -6,13 +6,21 @@ public class DragonsBreathAbility : ResourceAbility
 {
 	private readonly Dictionary<ulong, VulnerableHitbox> _hitBoxes = new Dictionary<ulong, VulnerableHitbox>();
 
-	[Export] public uint DamagePerTick = 1;
+	[Export] public uint DamagePerTick = 4;
 
 	[Signal]
 	public delegate void TurnOn();
 
 	[Signal]
 	public delegate void TurnOff();
+
+	private FireArea _fireArea;
+
+	public override void _Ready()
+	{
+		base._Ready();
+		_fireArea = GetNode<FireArea>("FireArea");
+	}
 
 	public override void OnActivate()
 	{
@@ -36,27 +44,27 @@ public class DragonsBreathAbility : ResourceAbility
 
 		if (GetWeapon().OwnerPlayer.IsAimingDown)
 		{
-			RotationDegrees = 90;
-			Scale = new Vector2(1, 1);
+			_fireArea.RotationDegrees = 90;
+			_fireArea.Scale = new Vector2(1, 1);
 			return;
 		}
 		
 		if (GetWeapon().OwnerPlayer.IsAimingUp)
 		{
-			Scale = new Vector2(1, 1);
-			RotationDegrees = -90;
+			_fireArea.Scale = new Vector2(1, 1);
+			_fireArea.RotationDegrees = -90;
 			return;
 		}
 		
-		Rotation = 0;
+		_fireArea.Rotation = 0;
 
 		if (GetWeapon().OwnerPlayer.HorizontalLookingDirection < 0)
 		{
-			Scale = new Vector2(-1, 1);
+			_fireArea.Scale = new Vector2(-1, 1);
 		}
 		else
 		{
-			Scale = new Vector2(1, 1);
+			_fireArea.Scale = new Vector2(1, 1);
 		}
 	}
 

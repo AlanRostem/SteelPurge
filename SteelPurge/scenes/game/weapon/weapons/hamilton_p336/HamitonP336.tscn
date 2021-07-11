@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/game/weapon/ability/firing_device/hit_scan/HitScanFiringDevice.tscn" type="PackedScene" id=4]
 
 [node name="HamitonP336" instance=ExtResource( 1 )]
-DisplayName = "Hamiton P336"
+DisplayName = "Hamilton P336"
 DamagePerShot = 1
 RateOfFire = 420
 MaxRecoilHoverShots = 5

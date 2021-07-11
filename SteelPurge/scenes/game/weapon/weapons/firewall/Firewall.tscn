@@ -16,6 +16,7 @@ DamagePerShot = 2
 RecoilDashDamagePerShot = 1
 RateOfFire = 200
 HoverRecoilSpeed = 75.0
+MaxAmmo = 60
 
 [node name="FlareFiringDevice" parent="." index="1" instance=ExtResource( 3 )]
 script = ExtResource( 4 )
@@ -27,6 +28,7 @@ ProjectileScene = ExtResource( 11 )
 texture = ExtResource( 2 )
 
 [node name="DragonsBreathAbility" parent="." index="9" instance=ExtResource( 5 )]
-DamagePerTick = 1
+DrainInterval = 0.08
+AmmoDrainPerTick = 1
 
 [connection signal="DamageDealt" from="." to="FlareFiringDevice" method="_OnDamageDealt"]
