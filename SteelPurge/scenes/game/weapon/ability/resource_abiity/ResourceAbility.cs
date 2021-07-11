@@ -6,6 +6,7 @@ public class ResourceAbility : WeaponAbility
 	[Export] public float LingerDuration = 0.6f;
 
 	[Export] public float DrainInterval = 0.1f;
+	[Export] public uint AmmoDrainPerTick = 1;
 
 	private float _currentDrainTime = 0;
 
@@ -26,7 +27,6 @@ public class ResourceAbility : WeaponAbility
 	{
 		var player = GetWeapon().OwnerPlayer;
 		if (player is null) return;
-		var equippedWeaponEnum = player.PlayerInventory.EquippedWeaponEnum;
 		if (IsActive)
 		{
 			OnUpdate();
@@ -35,13 +35,13 @@ public class ResourceAbility : WeaponAbility
 			if (_currentDrainTime >= DrainInterval)
 			{
 				_currentDrainTime = 0;
-				// TODO: Drain the resource meter
+				GetWeapon().RemoveAmmo(AmmoDrainPerTick);
 				OnTick();
-				_abilityBar.Value = player.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum);
+				_abilityBar.Value = GetWeapon().Ammo;
 			}
 		}
 		
-		if (IsActive)
+		if (GetWeapon().Ammo < AmmoDrainPerTick && IsActive)
 		{
 			_LingerStopped();
 			return;
@@ -49,15 +49,15 @@ public class ResourceAbility : WeaponAbility
 
 		var pressed = Input.IsActionPressed("tactical_ability") && GetWeapon().Equipped;
 
-		if (pressed)
+		if (pressed && GetWeapon().Ammo >= AmmoDrainPerTick)
 		{
 			EmitSignal(nameof(Linger));
 			if (!IsActive)
 			{
 				IsActive = true;
 				OnActivate();
-				_abilityBar.MaxValue = player.PlayerInventory.MaxOrdinanceFuel;
-				_abilityBar.Value = player.PlayerInventory.GetOrdinanceFuel(equippedWeaponEnum);
+				_abilityBar.MaxValue = GetWeapon().MaxAmmo;
+				_abilityBar.Value = GetWeapon().Ammo;
 				_abilityBar.Visible = true;
 			}
 		}

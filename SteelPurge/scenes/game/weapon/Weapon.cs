@@ -26,6 +26,8 @@ public class Weapon : Node2D
 	[Export] public bool InfiniteAmmo = false;
 	
 	private uint _ammo = 0;
+
+	public uint Ammo => _ammo;
 	
 	[Signal]
 	public delegate void Swapped();

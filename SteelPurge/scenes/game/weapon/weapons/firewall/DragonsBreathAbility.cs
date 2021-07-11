@@ -6,7 +6,7 @@ public class DragonsBreathAbility : ResourceAbility
 {
 	private readonly Dictionary<ulong, VulnerableHitbox> _hitBoxes = new Dictionary<ulong, VulnerableHitbox>();
 
-	[Export] public uint DamagePerTick = 10;
+	[Export] public uint DamagePerTick = 1;
 
 	[Signal]
 	public delegate void TurnOn();
@@ -26,7 +26,7 @@ public class DragonsBreathAbility : ResourceAbility
 	{
 		EmitSignal(nameof(TurnOn));
 		GetWeapon().IsFiring = true;
-		GetWeapon().EmitSignal(nameof(Weapon.CancelFire));
+		GetWeapon().CanFire = false;
 	}
 
 	public override void OnDeActivate()
@@ -34,6 +34,8 @@ public class DragonsBreathAbility : ResourceAbility
 		EmitSignal(nameof(TurnOff));
 		_hitBoxes.Clear();
 		GetWeapon().IsFiring = false;
+		GetWeapon().CanFire = true;
+		GD.PrintStack();
 	}
 
 	public override void _Process(float delta)
