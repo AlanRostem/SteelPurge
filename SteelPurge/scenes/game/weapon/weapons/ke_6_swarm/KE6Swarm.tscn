@@ -10,10 +10,10 @@
 [node name="KE6Swarm" instance=ExtResource( 1 )]
 DisplayName = "KE-6 Grenadier"
 WeaponType = 2
-DamagePerShot = 2
-RateOfFire = 130
+DamagePerShot = 5
+RateOfFire = 90
 MaxRecoilHoverShots = 2
-HoverRecoilSpeed = 115.0
+HoverRecoilSpeed = 140.0
 
 [node name="OrbFiringDevice" parent="." index="1" instance=ExtResource( 3 )]
 script = ExtResource( 4 )

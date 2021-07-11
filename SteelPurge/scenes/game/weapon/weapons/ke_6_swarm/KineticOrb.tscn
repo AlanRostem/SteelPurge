@@ -7,6 +7,7 @@
 [node name="KineticOrb" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 IsGravityEnabled = false
+MaxVelocity = 360.0
 ExplosiveDamage = 30
 
 [node name="VisibilityNotifier2D" parent="." index="3"]
