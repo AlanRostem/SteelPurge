@@ -14,14 +14,20 @@ public class XWFrontRogue : Enemy
 	private bool _isRushing = false;
 	private bool _canRush = false;
 
-	private Timer _rushDelayTimer;
-	private Timer _trackCooldownTimer;
+	private CustomTimer _rushDelayTimer;
+	private CustomTimer _trackCooldownTimer;
 
-	[Signal]
-	public delegate void TriggerDirSwapCooldown();
-	
-	[Signal]
-	public delegate void OnRush();
+	public override void FeedEntityData(Godot.Collections.Dictionary<string, object> data)
+	{
+		base.FeedEntityData(data);
+		var eData = new EntityData(data);
+	}
+
+	public override Godot.Collections.Dictionary<string, object> ExportEntityData()
+	{
+		var data = new EntityData(base.ExportEntityData());
+		return data.GetJson();
+	}
 
 	public override void OnEnableAi()
 	{
@@ -45,10 +51,12 @@ public class XWFrontRogue : Enemy
 	public override void _Init()
 	{
 		base._Init();
-		_rushDelayTimer = GetNode<Timer>("XWFrontRogueRushDelayTimer");
-		_trackCooldownTimer = GetNode<Timer>("XWFrontRogueTrackCooldownTimer");
+		_rushDelayTimer = GetNode<CustomTimer>("RushDelayTimer");
+		_trackCooldownTimer = GetNode<CustomTimer>("TrackCooldownTimer");
 	}
 
+	
+	
 	protected override void _ProcessWhenPlayerDetected(Player player)
 	{
 		if (!_isRushing)
@@ -85,7 +93,7 @@ public class XWFrontRogue : Enemy
 		
 		if (_canSwapDir)
 		{
-			EmitSignal(nameof(TriggerDirSwapCooldown));
+			_trackCooldownTimer.Start();
 			_canSwapDir = false;
 			Direction = -Direction;
 		}

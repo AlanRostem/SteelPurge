@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/texture/enemy.png" type="Texture" id=3]
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogue.cs" type="Script" id=4]
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogueMeleeArea.cs" type="Script" id=5]
-[ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogueTrackCooldownTimer.cs" type="Script" id=7]
+[ext_resource path="res://scenes/util/CustomTimer.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 6 )
@@ -50,7 +50,6 @@ shape = SubResource( 1 )
 position = Vector2( 0, -3 )
 frames = SubResource( 4 )
 animation = "walk"
-frame = 1
 playing = true
 script = ExtResource( 1 )
 
@@ -63,13 +62,12 @@ script = ExtResource( 5 )
 position = Vector2( 8, -3 )
 shape = SubResource( 5 )
 
-[node name="XWFrontRogueTrackCooldownTimer" type="Timer" parent="." index="4"]
-autostart = true
-script = ExtResource( 7 )
+[node name="TrackCooldownTimer" parent="." index="4" instance=ExtResource( 6 )]
+AutoStart = true
 
-[node name="XWFrontRogueRushDelayTimer" type="Timer" parent="." index="5"]
-wait_time = 0.9
-one_shot = true
+[node name="RushDelayTimer" parent="." index="5" instance=ExtResource( 6 )]
+WaitTime = 0.9
+OneShot = true
 
 [node name="CriticalHitbox" parent="." index="6"]
 position = Vector2( 0, -10 )
@@ -81,7 +79,6 @@ position = Vector2( 0, -1 )
 [node name="DamageNumberGenerator" parent="." index="9"]
 position = Vector2( 0, -16 )
 
-[connection signal="TriggerDirSwapCooldown" from="." to="XWFrontRogueTrackCooldownTimer" method="_OnSwap"]
 [connection signal="body_entered" from="XWFrontRogueMeleeArea" to="." method="_OnPlayerEnterMeleeArea"]
-[connection signal="timeout" from="XWFrontRogueTrackCooldownTimer" to="." method="_OnCanSwap"]
-[connection signal="timeout" from="XWFrontRogueRushDelayTimer" to="." method="_OnCanRush"]
+[connection signal="Timeout" from="TrackCooldownTimer" to="." method="_OnCanSwap"]
+[connection signal="Timeout" from="RushDelayTimer" to="." method="_OnCanRush"]
