@@ -74,7 +74,7 @@ public class Weapon : Node2D
 	public bool MeleeHitBoxEnabled
 	{
 		get => !_meleeShape.Disabled;
-		set => _meleeShape.SetDeferred("disabled", !value);
+		set => _meleeShape?.SetDeferred("disabled", !value);
 	}
 
 	private Timer _meleeCooldownTimer;

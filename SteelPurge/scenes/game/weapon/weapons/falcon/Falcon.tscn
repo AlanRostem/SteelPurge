@@ -15,7 +15,6 @@ DamagePerShot = 5
 RateOfFire = 120
 MaxRecoilHoverShots = 4
 HoverRecoilSpeed = 65.0
-PlayerSpriteFrames = null
 
 [node name="RocketBayonetAbility" parent="." index="4" instance=ExtResource( 4 )]
 script = ExtResource( 5 )
@@ -31,6 +30,7 @@ collision_mask = 49
 position = Vector2( 24, 0 )
 
 [node name="WeaponTestSprite" parent="." index="8" instance=ExtResource( 3 )]
+position = Vector2( 0, 3 )
 texture = ExtResource( 7 )
 
 [node name="HitScanFiringDevice" parent="." index="9" instance=ExtResource( 2 )]
