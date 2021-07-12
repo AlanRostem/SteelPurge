@@ -13,6 +13,7 @@ public class IncendiaryBarrel : DestructibleObstacle
 			Disappear();
 			var explosion = ParentWorld.CurrentSegment.Entities.SpawnStaticEntityDeferred<Explosion>(ExplosionScene, Position);
 			explosion.Damage = Enemy.StandardHealth;
+			explosion.Radius = CustomTileMap.Size * 4f;
 		}
 	}
 }
