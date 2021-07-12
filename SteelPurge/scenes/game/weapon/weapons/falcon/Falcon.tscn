@@ -12,9 +12,10 @@ DisplayName = "Falcon SLR"
 CollectibleSprite = ExtResource( 7 )
 WeaponType = 3
 DamagePerShot = 5
-RateOfFire = 120
+RateOfFire = 210
 MaxRecoilHoverShots = 4
 HoverRecoilSpeed = 65.0
+MaxAmmo = 50
 
 [node name="RocketBayonetAbility" parent="." index="4" instance=ExtResource( 4 )]
 script = ExtResource( 5 )
