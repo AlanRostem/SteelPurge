@@ -13,6 +13,15 @@ public class WorldSegment : Node2D
 	
 	private CustomTileMap _tileMap;
 	
+	[Export] public float TimeLimitSeconds = 40;
+
+	private float _currentTimeLimit;
+	private int _currentTimeLimitInt;
+	
+	private float _capturedTimeLimit;
+	
+	private Label _timeLabel;
+	
 	public override void _Ready()
 	{
 		Entities = GetNode<EntityPool>("EntityPool");
@@ -24,10 +33,44 @@ public class WorldSegment : Node2D
 		rect.Size *= CustomTileMap.Size;
 		ParentWorld.PlayerNode.SetCameraBounds(rect);
 		ParentWorld.CurrentReSpawnPoint = new Vector2(InitialSpawnPoint);
+		_timeLabel = GetNode<Label>("CanvasLayer/TimeLabel");
+		ResetTimeLimit();
+		ParentWorld.PlayerNode.Connect(nameof(Player.Died), this, nameof(ResetTimeLimit));
 	}
-	
+
+	public override void _Process(float delta)
+	{
+		base._Process(delta);
+		_currentTimeLimit -= delta;
+		if (_currentTimeLimit <= 0)
+		{
+			ResetTimeLimit();
+			ParentWorld.PlayerNode.Die();
+		}
+		var time = Mathf.RoundToInt(_currentTimeLimit);
+		if (_currentTimeLimitInt == time) return;
+		_currentTimeLimitInt = time;
+		_timeLabel.Text = time + "s";
+	}
+
 	private void _OnTransferAreaPlayerEntered(object body)
 	{
 		ParentWorld.SwitchToNextSegment();
+	}
+
+	public void ResetTimeLimit()
+	{
+		_currentTimeLimit = TimeLimitSeconds;
+	}
+
+	public void CaptureTimeLimit()
+	{
+		_capturedTimeLimit = _currentTimeLimit;
+	}
+
+	public void ReturnToCapturedTimeLimit()
+	{
+		_currentTimeLimit = _capturedTimeLimit;
+		_timeLabel.Text = Mathf.RoundToInt(_currentTimeLimit) + "s";
 	}
 }

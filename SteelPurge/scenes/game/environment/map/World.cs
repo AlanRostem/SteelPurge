@@ -4,11 +4,12 @@ using Godot.Collections;
 
 public class World : Node2D
 {
+	
 	public Player PlayerNode { get; private set; }
-
 
 	public Vector2 CurrentReSpawnPoint;
 
+	
 	[Export] public Array<PackedScene> SegmentScenes = new Array<PackedScene>();
 	
 	public WorldSegment CurrentSegment { get; private set; }

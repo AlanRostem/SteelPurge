@@ -496,6 +496,7 @@ public class Player : LivingEntity
 			_currentChronoVector = null;
 			EmitSignal(nameof(ChronoDriftTriggered));
 			ParentWorld.CurrentSegment.Entities.ReturnToPreviouslyCapturedEntityStates();
+			ParentWorld.CurrentSegment.ReturnToCapturedTimeLimit();
 			return;
 		}
 		
@@ -504,6 +505,7 @@ public class Player : LivingEntity
 		ParentWorld.CurrentSegment.Environment.AddChild(_currentChronoVector);
 		_currentChronoVector.Connect(nameof(ChronoVector.Disappear), this, nameof(_OnChronoVectorDisappear));
 		ParentWorld.CurrentSegment.Entities.CaptureCurrentEntityStates();
+		ParentWorld.CurrentSegment.CaptureTimeLimit();
 	}
 
 	public void ClearChronoVector()
