@@ -41,9 +41,6 @@ public class RocketBayonetAbility : TacticalAbility
 	{
 		if (!IsActive) return;
 		hitBox.TakeHit(BayonetDamage, new Vector2(GetWeapon().OwnerPlayer.HorizontalLookingDirection, 0), VulnerableHitbox.DamageType.Melee);
-		DeActivate();
-		var player = GetWeapon().OwnerPlayer;
-		player.VelocityX = 0;
 	}
 	
 	private void _OnHitObstacle(object body)
