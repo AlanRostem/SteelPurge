@@ -35,7 +35,6 @@ public class DragonsBreathAbility : ResourceAbility
 		_hitBoxes.Clear();
 		GetWeapon().IsFiring = false;
 		GetWeapon().CanFire = true;
-		GD.PrintStack();
 	}
 
 	public override void _Process(float delta)
@@ -72,7 +71,7 @@ public class DragonsBreathAbility : ResourceAbility
 	{
 		var player = GetWeapon().OwnerPlayer;
 		if (player.VelocityY > 0 && player.IsAimingDown)
-			player.VelocityY *= 0.2f;
+			player.VelocityY = 0;
 		foreach (var pair in _hitBoxes)
 		{
 			var hitBox = pair.Value;

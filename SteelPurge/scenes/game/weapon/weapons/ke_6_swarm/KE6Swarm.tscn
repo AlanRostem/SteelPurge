@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/texture/weapon/ke_6_swarm/ke_6_swarm.png" type="Texture" id=6]
 
 [node name="KE6Swarm" instance=ExtResource( 1 )]
-DisplayName = "KE-6 Grenadier"
+DisplayName = "KE-6G"
 WeaponType = 2
 DamagePerShot = 5
 RateOfFire = 90
