@@ -12,6 +12,11 @@ public class Flare : Projectile
 		_lifeTimer = GetNode<CustomTimer>("LifeTimer");
 	}
 
+	protected override void OnDamageDealt(uint damage, VulnerableHitbox hitbox)
+	{
+		hitbox.TakeHit(0, VulnerableHitbox.DamageType.Heat);
+	}
+
 	public override Dictionary<string, object> ExportEntityData()
 	{
 		var data = new EntityData(base.ExportEntityData());

@@ -52,6 +52,7 @@ public class Projectile : KinematicEntity
 
 		hitbox.TakeHit(Damage, VulnerableHitbox.DamageType.Projectile);
 		OwnerWeapon?.EmitSignal(nameof(Weapon.CriticalDamageDealt), Damage, hitbox);
+		OnCriticalDamageDealt(Damage, hitbox);
 		if (!_hasDisappeared && DeleteOnEnemyHit)
 		{
 			_hasDisappeared = true;
@@ -70,6 +71,7 @@ public class Projectile : KinematicEntity
 
 		var hitBox = (VulnerableHitbox) area;
 		hitBox.TakeHit(Damage, Vector2.Zero, VulnerableHitbox.DamageType.Projectile);
+		OnDamageDealt(Damage, hitBox);
 		OwnerWeapon?.EmitSignal(nameof(Weapon.DamageDealt), Damage, hitBox);
 		_OnHit(hitBox);
 		if (!_hasDisappeared && DeleteOnEnemyHit)
@@ -78,6 +80,15 @@ public class Projectile : KinematicEntity
 			_OnDisappear();
 			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
 		}
+	}
+
+	protected virtual void OnDamageDealt(uint damage, VulnerableHitbox hitbox)
+	{
+		
+	}
+
+	protected virtual void OnCriticalDamageDealt(uint damage, CriticalHitbox hitbox)
+	{
 	}
 
 	private void _OnHitTileMap(object body)
@@ -126,7 +137,7 @@ public class Projectile : KinematicEntity
 
 	public override Dictionary<string, object> ExportEntityData()
 	{
-		var data =  new EntityData(base.ExportEntityData());
+		var data = new EntityData(base.ExportEntityData());
 		data.SetAny(nameof(VisualAngle), VisualAngle);
 		data.SetAny(nameof(DirectionSign), DirectionSign);
 		return data.GetJson();

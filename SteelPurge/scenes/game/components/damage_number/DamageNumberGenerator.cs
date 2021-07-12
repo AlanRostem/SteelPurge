@@ -18,6 +18,7 @@ public class DamageNumberGenerator : Node2D
 
 	public void ShowDamageNumber(uint damage, Vector2 position, World parentWorld, Color color)
 	{
+		if (damage == 0) return;
 		if (_damageNumber is null)
 		{
 			var number = (DamageNumber) DamageNumberScene.Instance();
