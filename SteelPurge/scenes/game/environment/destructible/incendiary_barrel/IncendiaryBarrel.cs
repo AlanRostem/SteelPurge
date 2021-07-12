@@ -8,11 +8,11 @@ public class IncendiaryBarrel : DestructibleObstacle
 	
 	protected override void OnTakeDamage(uint damage, VulnerableHitbox.DamageType damageType)
 	{
-		if (damageType is VulnerableHitbox.DamageType.Heat)
+		if (damageType is VulnerableHitbox.DamageType.Heat && !HasDisappeared)
 		{
-			EmitSignal(nameof(Destroyed));
-			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
-			ParentWorld.CurrentSegment.Entities.SpawnStaticEntityDeferred<Explosion>(ExplosionScene, Position);
+			Disappear();
+			var explosion = ParentWorld.CurrentSegment.Entities.SpawnStaticEntityDeferred<Explosion>(ExplosionScene, Position);
+			explosion.Damage = Enemy.StandardHealth;
 		}
 	}
 }

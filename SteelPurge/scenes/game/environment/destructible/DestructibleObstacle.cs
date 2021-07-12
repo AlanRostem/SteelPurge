@@ -10,6 +10,7 @@ public class DestructibleObstacle : StaticEntity
 
 	private DamageIndicator _damageIndicator;
 	private DamageNumberGenerator _damageNumberGenerator;
+	public bool HasDisappeared { get; private set; }
 
 	public override void _Init()
 	{
@@ -22,6 +23,14 @@ public class DestructibleObstacle : StaticEntity
 	{
 		
 	}
+
+	public void Disappear()
+	{
+		if (HasDisappeared) return;
+		HasDisappeared = true;
+		EmitSignal(nameof(Destroyed));
+		ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
+	}
 	
 	private void OnHit(uint damage, Vector2 knockBack, VulnerableHitbox.DamageType damageType)
 	{
@@ -29,8 +38,8 @@ public class DestructibleObstacle : StaticEntity
 		if (damage >= Health)
 		{
 			_damageNumberGenerator.ShowDamageNumber(Health, Position + new Vector2(0, -16), ParentWorld, Colors.Red);
-			EmitSignal(nameof(Destroyed));
-			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
+			Disappear();
+			OnTakeDamage(Health, damageType);
 			return;
 		}
 

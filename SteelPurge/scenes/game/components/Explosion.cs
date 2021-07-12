@@ -4,7 +4,16 @@ public class Explosion : StaticEntity
 {
 	[Export] public uint Damage = 1;
 	[Export] public float KnockBackForce = 300;
+	[Export] public float Radius = 24;
+
 	
+	public override void _Init()
+	{
+		base._Init();
+		var circle = (CircleShape2D) GetNode<CollisionShape2D>("ExplosiveAreaHitBox/CollisionShape2D").Shape;
+		circle.SetDeferred("radius", Radius);
+	}
+
 	private void _OnVulnerableHitBoxHit(object area)
 	{
 		var hitBox = (VulnerableHitbox)area;
