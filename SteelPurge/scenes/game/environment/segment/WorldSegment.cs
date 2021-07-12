@@ -6,22 +6,22 @@ public class WorldSegment : Node2D
 	public Vector2 InitialSpawnPoint => GetNode<Position2D>("SpawnPoint").Position;
 
 	public EntityPool Entities { get; private set; }
-	
+
 	public Node2D Environment { get; private set; }
 
 	public World ParentWorld { get; private set; }
-	
+
 	private CustomTileMap _tileMap;
-	
+
 	[Export] public float TimeLimitSeconds = 40;
 
 	private float _currentTimeLimit;
 	private int _currentTimeLimitInt;
-	
+
 	private float _capturedTimeLimit;
-	
+
 	private Label _timeLabel;
-	
+
 	public override void _Ready()
 	{
 		Entities = GetNode<EntityPool>("EntityPool");
@@ -47,10 +47,18 @@ public class WorldSegment : Node2D
 			ResetTimeLimit();
 			ParentWorld.PlayerNode.Die();
 		}
+
 		var time = Mathf.RoundToInt(_currentTimeLimit);
 		if (_currentTimeLimitInt == time) return;
 		_currentTimeLimitInt = time;
 		_timeLabel.Text = time + "s";
+		if (_currentTimeLimit / TimeLimitSeconds < 0.15f)
+		{
+			if (_timeLabel.Modulate != Colors.Red)
+				_timeLabel.Modulate = Colors.Red;
+		}
+		else if (_timeLabel.Modulate == Colors.Red)
+			_timeLabel.Modulate = Colors.White;
 	}
 
 	private void _OnTransferAreaPlayerEntered(object body)
