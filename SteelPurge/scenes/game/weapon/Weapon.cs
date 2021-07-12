@@ -54,6 +54,7 @@ public class Weapon : Node2D
 	}
 
 	private bool _isFiring = false;
+	private bool _removeOnFire = false;
 	public Player OwnerPlayer;
 	private bool _isHoldingTrigger = false;
 
@@ -160,6 +161,9 @@ public class Weapon : Node2D
 
 	private void Fire()
 	{
+		if (_removeOnFire)
+			OwnerPlayer.PlayerInventory.SwitchWeapon(Inventory.InventoryWeapon.P336);
+		
 		if (!_isHoldingTrigger || (_ammo == 0 && !InfiniteAmmo))
 		{
 			_isFiring = false;
@@ -198,6 +202,16 @@ public class Weapon : Node2D
 			OwnerPlayer.PlayerInventory.SwitchWeapon(Inventory.InventoryWeapon.P336);
 	}
 
+	public void RemoveAmmoButDontDisappear(uint amount = 1)
+	{
+		if (InfiniteAmmo)
+			return;
+		_ammo -= amount;
+		_ammoLabel.Text = "x" + _ammo;
+		if (_ammo == 0)
+			_removeOnFire = true;
+	}
+	
 	public void ProduceRecoilToHoverOnly()
 	{
 		if (OwnerPlayer.VelocityY <= -HoverRecoilSpeed || !OwnerPlayer.IsAimingDown) return;

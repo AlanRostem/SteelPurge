@@ -8,6 +8,7 @@ public class TacticalAbility : WeaponAbility
 	[Export] public uint AmmoDrain = 5;
 
 	public bool IsOnCoolDown = false;
+	private bool _removeWeaponOnEnd = false;
 
 	private Timer _cooldownTimer;
 	private Timer _durationTimer;
@@ -48,6 +49,13 @@ public class TacticalAbility : WeaponAbility
 		IsActive = false;
 		OnEnd();
 
+		if (_removeWeaponOnEnd)
+		{
+			GetWeapon().OwnerPlayer.PlayerInventory.SwitchWeapon(Inventory.InventoryWeapon.P336);
+			return;
+		}
+
+
 		_abilityBar.Visible = true;
 		IsOnCoolDown = true;
 		_cooldownTimer.Start();
@@ -65,7 +73,11 @@ public class TacticalAbility : WeaponAbility
 			{
 				IsActive = true;
 				OnActivate();
-				GetWeapon().RemoveAmmo(AmmoDrain);
+				GetWeapon().RemoveAmmoButDontDisappear(AmmoDrain);
+				if (GetWeapon().Ammo == 0)
+				{
+					_removeWeaponOnEnd = true;
+				}
 				_durationTimer.Start();
 			}
 			else
@@ -92,9 +104,15 @@ public class TacticalAbility : WeaponAbility
 
 	private void _OnStartCoolDown()
 	{
+		IsActive = false;
+		if (_removeWeaponOnEnd)
+		{
+			GetWeapon().OwnerPlayer.PlayerInventory.SwitchWeapon(Inventory.InventoryWeapon.P336);
+			return;
+		}
+		
 		_abilityBar.Visible = true;
 		IsOnCoolDown = true;
-		IsActive = false;
 		_cooldownTimer.Start();
 		_abilityBar.MaxValue = CoolDown * 1000;
 		_abilityBar.Value = 0;

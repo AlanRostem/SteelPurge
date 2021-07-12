@@ -10,7 +10,7 @@
 [node name="KE6Swarm" instance=ExtResource( 1 )]
 DisplayName = "KE-6G"
 WeaponType = 2
-DamagePerShot = 5
+DamagePerShot = 10
 RateOfFire = 90
 MaxRecoilHoverShots = 2
 HoverRecoilSpeed = 140.0
