@@ -13,7 +13,7 @@ public class WorldSegment : Node2D
 
 	private CustomTileMap _tileMap;
 
-	[Export] public float TimeLimitSeconds = 40;
+	[Export] public float TimeLimitSeconds = 400;
 
 	private float _currentTimeLimit;
 	private int _currentTimeLimitInt;
