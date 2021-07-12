@@ -14,6 +14,7 @@ position = Vector2( 424, 32 )
 
 [node name="DeadSoldier" parent="EntityPool" index="0" instance=ExtResource( 3 )]
 position = Vector2( 184, 184 )
+Weapon = 3
 
 [node name="InteractionIndicator" parent="EntityPool/DeadSoldier" index="0"]
 DisableOnInteract = false

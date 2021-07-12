@@ -1,43 +1,39 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game/weapon/Weapon.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/game/weapon/ability/firing_device/FiringDevice.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/resources/PlayerSpriteAnimFalcon.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://scenes/game/weapon/ability/firing_device/hit_scan/HitScanFiringDevice.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/weapon/WeaponTestSprite.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/weapon/ability/tactical_ability/TacticalAbility.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/game/weapon/weapons/falcon/RocketBayonetAbility.cs" type="Script" id=5]
-[ext_resource path="res://scenes/game/weapon/weapons/falcon/TalconFiringDevice.cs" type="Script" id=6]
 [ext_resource path="res://assets/texture/weapon/falcon/falcon.png" type="Texture" id=7]
-[ext_resource path="res://scenes/game/weapon/BurstFireTimer.tscn" type="PackedScene" id=8]
 
 [node name="Falcon" instance=ExtResource( 1 )]
 DisplayName = "Falcon"
 CollectibleSprite = ExtResource( 7 )
 WeaponType = 3
-DamagePerShot = 15
-MeleeDamage = 30
-RateOfFire = 70
-MaxRecoilHoverShots = 2
+DamagePerShot = 5
+RateOfFire = 120
+MaxRecoilHoverShots = 4
 HoverRecoilSpeed = 65.0
-MinFallSpeedForRecoilHovering = -50.0
-PlayerSpriteFrames = ExtResource( 3 )
+PlayerSpriteFrames = null
 
 [node name="RocketBayonetAbility" parent="." index="4" instance=ExtResource( 4 )]
 script = ExtResource( 5 )
-FuelRequirement = 30
-CoolDown = 2.0
+CoolDown = 1.0
+Duration = 0.2
+BayonetDamage = 100
+RocketSpeed = 300.0
 
-[node name="TalconFiringDevice" parent="." index="5" instance=ExtResource( 2 )]
-script = ExtResource( 6 )
-
-[node name="BurstFireTimer" parent="TalconFiringDevice" index="0" instance=ExtResource( 8 )]
-RateOfFire = 550
-BurstCount = 4
-LoseAmmoPerBurstFire = false
-
-[node name="MeleeArea" parent="." index="7"]
+[node name="MeleeArea" parent="." index="6"]
 collision_mask = 49
 
 [node name="CollisionShape2D" parent="MeleeArea" index="0"]
 position = Vector2( 24, 0 )
+
+[node name="WeaponTestSprite" parent="." index="8" instance=ExtResource( 3 )]
+texture = ExtResource( 7 )
+
+[node name="HitScanFiringDevice" parent="." index="9" instance=ExtResource( 2 )]
+
 [connection signal="OnMeleeHit" from="." to="RocketBayonetAbility" method="_OnFalconOnMeleeHit"]
 [connection signal="body_entered" from="MeleeArea" to="RocketBayonetAbility" method="_OnHitObstacle"]
