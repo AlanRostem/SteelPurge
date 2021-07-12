@@ -18,6 +18,11 @@ public class DestructibleObstacle : StaticEntity
 		_damageNumberGenerator = GetNode<DamageNumberGenerator>("DamageNumberGenerator");
 	}
 
+	protected virtual void OnTakeDamage(uint damage, VulnerableHitbox.DamageType damageType)
+	{
+		
+	}
+	
 	private void OnHit(uint damage, Vector2 knockBack, VulnerableHitbox.DamageType damageType)
 	{
 		_damageIndicator.Indicate(new Color(255, 255, 255));
@@ -31,5 +36,6 @@ public class DestructibleObstacle : StaticEntity
 
 		_damageNumberGenerator.ShowDamageNumber(damage, Position + new Vector2(0, -16), ParentWorld);
 		Health -= damage;
+		OnTakeDamage(damage, damageType);
 	}
 }
