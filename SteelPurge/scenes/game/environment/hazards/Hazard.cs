@@ -3,27 +3,44 @@ using System;
 
 public class Hazard : StaticEntity
 {
-	[Export] public uint Damage = 50;
+	[Export] public uint Damage = 10;
 	[Export] public bool InstaKill = true;
 	[Export] public bool TargetEnemies = true;
+
+	private Player _player;
+
+	public override void _Process(float delta)
+	{
+		if (_player != null && !_player.IsInvulnerable)
+			_player.TakeDamage(1, new Vector2(Mathf.Sign(_player.VelocityX), 0));
+	}
 
 	protected virtual void _OnEntityTouch(LivingEntity entity)
 	{
 		if (!TargetEnemies && entity is Enemy)
 			return;
 
+		if (entity is Player player)
+		{
+			_player = player;
+			player.TakeDamage(1, new Vector2(Mathf.Sign(player.VelocityX), 0));
+			if (!player.IsRespawning && InstaKill)
+				player.Die();
+		}
+
 		if (InstaKill)
 		{
 			entity.TakeDamage(entity.MaxHealth, Vector2.Zero);
-			if (entity is Player player)
-			{
-				if (!player.IsRespawning)
-					player.Die();
-			}
-
 			return;
 		}
 
 		entity.TakeDamage(Damage, new Vector2(-Mathf.Sign(entity.VelocityX), 0));
+	}
+
+
+	private void _OnEntityExit(object body)
+	{
+		if (body is Player)
+			_player = null;
 	}
 }

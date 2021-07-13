@@ -12,7 +12,7 @@ public class RocketBayonetAbility : TacticalAbility
 		weapon.CurrentRecoilHoverAmmo = weapon.MaxRecoilHoverShots;
 
 		var player = weapon.OwnerPlayer;
-		player.VelocityX = RocketSpeed * player.HorizontalLookingDirection;
+		player.VelocityX += RocketSpeed * player.HorizontalLookingDirection;
 		player.VelocityY = 0;
 		player.IsGravityEnabled = false;
 		player.IsRamSliding = false;

@@ -107,6 +107,7 @@ public class Player : LivingEntity
 	{
 		// Position = new Vector2(ParentWorld.CurrentReSpawnPoint);
 		ResetAllStates();
+		InitiateRespawnSequence();
 		// InitiateRespawnSequence();
 		_currentChronoVector?.QueueFree();
 		_currentChronoVector = null;
@@ -129,8 +130,6 @@ public class Player : LivingEntity
 	public void InitiateRespawnSequence()
 	{
 		// TODO: Swap back to weapon held from previous level
-		IsGravityEnabled = false;
-		CanMove = false;
 		// PlayerInventory.EquippedWeapon.CanFire = false;
 		IsInvulnerable = true;
 		_respawnTimer.Start();

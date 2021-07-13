@@ -54,7 +54,7 @@ public class World : Node2D
 		PlayerNode.PlayerInventory?.EquippedWeapon.OnSwap();
 		PlayerNode.ClearChronoVector();
 		LoadSegment(++_currentSegmentIndex);
-		PlayerNode.Position = CurrentSegment.InitialSpawnPoint;
+		PlayerNode.Position = new Vector2(CurrentSegment.InitialSpawnPoint);
 		UnPauseTimeLimit();
 	}
 
@@ -66,7 +66,10 @@ public class World : Node2D
 	private void _OnPlayerDied()
 	{
 		if (_currentSegmentIndex == 0)
+		{
 			CurrentSegment.Entities.ResetEntityStates();
+			PlayerNode.Position = new Vector2(CurrentSegment.InitialSpawnPoint);
+		}
 		else CreateFirstSegment();
 	}
 

@@ -11,6 +11,7 @@ extents = Vector2( 14, 6 )
 
 [node name="Hazard" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+InstaKill = false
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -24,4 +25,6 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 shape = SubResource( 2 )
+
 [connection signal="body_entered" from="Area2D" to="." method="_OnEntityTouch"]
+[connection signal="body_exited" from="Area2D" to="." method="_OnEntityExit"]
