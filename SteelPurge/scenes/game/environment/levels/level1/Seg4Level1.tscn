@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/game/environment/segment/WorldSegment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/Blockade.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/environment/hazards/MagmaSpikes.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/AR43Executor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/game/environment/destructible/incendiary_barrel/IncendiaryBarrel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/entities/hazards/DeathZone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogue.tscn" type="PackedScene" id=8]
 
@@ -37,49 +38,40 @@ position = Vector2( 1176, 160 )
 position = Vector2( 0, -6 )
 shape = SubResource( 2 )
 
-[node name="MagmaSpikes4" parent="EntityPool" index="0" instance=ExtResource( 3 )]
-position = Vector2( 176, 200 )
-rotation = 3.14159
-
-[node name="MagmaSpikes5" parent="EntityPool" index="1" instance=ExtResource( 3 )]
-position = Vector2( 208, 200 )
-rotation = 3.14159
-
-[node name="MagmaSpikes6" parent="EntityPool" index="2" instance=ExtResource( 3 )]
-position = Vector2( 240, 200 )
-rotation = 3.14159
-
-[node name="MagmaSpikes7" parent="EntityPool" index="3" instance=ExtResource( 3 )]
+[node name="MagmaSpikes7" parent="EntityPool" index="0" instance=ExtResource( 3 )]
 position = Vector2( 272, 200 )
 rotation = 3.14159
 
-[node name="MagmaSpikes8" parent="EntityPool" index="4" instance=ExtResource( 3 )]
+[node name="MagmaSpikes8" parent="EntityPool" index="1" instance=ExtResource( 3 )]
 position = Vector2( 304, 200 )
 rotation = 3.14159
 
-[node name="AR43Executor" parent="EntityPool" index="5" instance=ExtResource( 4 )]
+[node name="AR43Executor" parent="EntityPool" index="2" instance=ExtResource( 4 )]
 position = Vector2( 240, 128 )
 
-[node name="DeathZone" parent="EntityPool" index="6" instance=ExtResource( 7 )]
+[node name="DeathZone" parent="EntityPool" index="3" instance=ExtResource( 7 )]
 position = Vector2( 456, 256 )
 
 [node name="CollisionShape2D" parent="EntityPool/DeathZone/Area2D" index="0"]
 shape = SubResource( 3 )
 
-[node name="XWFrontRogue" parent="EntityPool" index="7" instance=ExtResource( 8 )]
+[node name="XWFrontRogue" parent="EntityPool" index="4" instance=ExtResource( 8 )]
 position = Vector2( 1056, 88 )
 
-[node name="AR43Executor2" parent="EntityPool" index="8" instance=ExtResource( 4 )]
+[node name="AR43Executor2" parent="EntityPool" index="5" instance=ExtResource( 4 )]
 position = Vector2( 784, 112 )
 
-[node name="MagmaSpikes" parent="EntityPool" index="9" instance=ExtResource( 3 )]
+[node name="MagmaSpikes" parent="EntityPool" index="6" instance=ExtResource( 3 )]
 position = Vector2( 688, 72 )
 
-[node name="MagmaSpikes2" parent="EntityPool" index="10" instance=ExtResource( 3 )]
+[node name="MagmaSpikes2" parent="EntityPool" index="7" instance=ExtResource( 3 )]
 position = Vector2( 656, 72 )
 
-[node name="MagmaSpikes3" parent="EntityPool" index="11" instance=ExtResource( 3 )]
+[node name="MagmaSpikes3" parent="EntityPool" index="8" instance=ExtResource( 3 )]
 position = Vector2( 624, 72 )
+
+[node name="IncendiaryBarrel" parent="EntityPool" index="9" instance=ExtResource( 5 )]
+position = Vector2( 240, 200 )
 
 [node name="SpawnPoint" parent="." index="2"]
 position = Vector2( 16, 176 )
