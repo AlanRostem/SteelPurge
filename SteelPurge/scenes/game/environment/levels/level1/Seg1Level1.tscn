@@ -5,10 +5,10 @@
 [ext_resource path="res://scenes/game/entities/enemies/ar43_executor/AR43Executor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/entities/enemies/xw_front_rogue/XWFrontRogue.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1152, 16 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 104 )
 
 [node name="Seg1Level1" instance=ExtResource( 1 )]
@@ -23,13 +23,13 @@ tile_data = PoolIntArray( 196688, 0, 0, 196689, 1, 0, 196690, 2, 0, 196693, 0, 0
 position = Vector2( 1048, 272 )
 
 [node name="CollisionShape2D" parent="Environment/DeathZone/Area2D" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="TransferArea" parent="Environment" index="3"]
 position = Vector2( 2008, 72 )
 
 [node name="CollisionShape2D" parent="Environment/TransferArea" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="XWFrontRogue2" parent="EntityPool" index="0" instance=ExtResource( 4 )]
 position = Vector2( 904, 144 )
