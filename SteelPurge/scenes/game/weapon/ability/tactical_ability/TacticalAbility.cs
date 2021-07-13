@@ -105,6 +105,7 @@ public class TacticalAbility : WeaponAbility
 	private void _OnStartCoolDown()
 	{
 		IsActive = false;
+		OnEnd();
 		if (_removeWeaponOnEnd)
 		{
 			GetWeapon().OwnerPlayer.PlayerInventory.SwitchWeapon(Inventory.InventoryWeapon.P336);
@@ -116,7 +117,6 @@ public class TacticalAbility : WeaponAbility
 		_cooldownTimer.Start();
 		_abilityBar.MaxValue = CoolDown * 1000;
 		_abilityBar.Value = 0;
-		OnEnd();
 	}
 
 	public override void OnWeaponSwapped()
