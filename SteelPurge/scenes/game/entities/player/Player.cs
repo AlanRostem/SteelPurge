@@ -115,6 +115,7 @@ public class Player : LivingEntity
 
 	public void ResetAllStates()
 	{
+		PlayerInventory.SwitchWeapon(Inventory.InventoryWeapon.P336);
 		Health = MaxHealth;
 		Velocity = new Vector2();
 		ClearStatusEffects();
@@ -128,7 +129,6 @@ public class Player : LivingEntity
 	public void InitiateRespawnSequence()
 	{
 		// TODO: Swap back to weapon held from previous level
-		PlayerInventory.SwitchWeapon(Inventory.InventoryWeapon.P336);
 		IsGravityEnabled = false;
 		CanMove = false;
 		// PlayerInventory.EquippedWeapon.CanFire = false;
