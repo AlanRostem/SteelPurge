@@ -3,7 +3,7 @@ using Godot;
 public class RocketBayonetAbility : TacticalAbility
 {
 	[Export] public uint BayonetDamage = 450;
-	[Export] public float RocketSpeed = 250;
+	[Export] public float RocketSpeed = 300;
 	public override void OnActivate()
 	{
 		var weapon = GetWeapon();
@@ -12,7 +12,7 @@ public class RocketBayonetAbility : TacticalAbility
 		weapon.CurrentRecoilHoverAmmo = weapon.MaxRecoilHoverShots;
 
 		var player = weapon.OwnerPlayer;
-		player.VelocityX += RocketSpeed * player.HorizontalLookingDirection;
+		player.VelocityX = RocketSpeed * player.HorizontalLookingDirection;
 		player.VelocityY = 0;
 		player.IsGravityEnabled = false;
 		player.IsRamSliding = false;
@@ -39,7 +39,6 @@ public class RocketBayonetAbility : TacticalAbility
 	
 	private void _OnFalconOnMeleeHit(VulnerableHitbox hitBox)
 	{
-		if (!IsActive) return;
 		hitBox.TakeHit(BayonetDamage, new Vector2(GetWeapon().OwnerPlayer.HorizontalLookingDirection, 0), VulnerableHitbox.DamageType.Melee);
 	}
 	
