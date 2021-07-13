@@ -105,9 +105,9 @@ public class Player : LivingEntity
 
 	public override void Die()
 	{
-		Position = new Vector2(ParentWorld.CurrentReSpawnPoint);
+		// Position = new Vector2(ParentWorld.CurrentReSpawnPoint);
 		ResetAllStates();
-		InitiateRespawnSequence();
+		// InitiateRespawnSequence();
 		_currentChronoVector?.QueueFree();
 		_currentChronoVector = null;
 		EmitSignal(nameof(Died));
@@ -127,9 +127,11 @@ public class Player : LivingEntity
 	/// </summary>
 	public void InitiateRespawnSequence()
 	{
+		// TODO: Swap back to weapon held from previous level
+		PlayerInventory.SwitchWeapon(Inventory.InventoryWeapon.P336);
 		IsGravityEnabled = false;
 		CanMove = false;
-		PlayerInventory.EquippedWeapon.CanFire = false;
+		// PlayerInventory.EquippedWeapon.CanFire = false;
 		IsInvulnerable = true;
 		_respawnTimer.Start();
 		IsRespawning = true;

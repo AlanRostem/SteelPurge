@@ -45,6 +45,7 @@ public class World : Node2D
 		ResetTimeLimit();
 		LoadSegment(0);
 		PlayerNode.Position = CurrentSegment.InitialSpawnPoint;
+		CurrentReSpawnPoint = new Vector2(CurrentSegment.InitialSpawnPoint);
 	}
 
 	public void SwitchToNextSegment()
@@ -64,7 +65,9 @@ public class World : Node2D
 
 	private void _OnPlayerDied()
 	{
-		CurrentSegment.Entities.ResetEntityStates();
+		if (_currentSegmentIndex == 0)
+			CurrentSegment.Entities.ResetEntityStates();
+		else CreateFirstSegment();
 	}
 
 	public override void _Process(float delta)

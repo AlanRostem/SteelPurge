@@ -23,7 +23,6 @@ public class WorldSegment : Node2D
 		rect.Position *= CustomTileMap.Size;
 		rect.Size *= CustomTileMap.Size;
 		ParentWorld.PlayerNode.SetCameraBounds(rect);
-		ParentWorld.CurrentReSpawnPoint = new Vector2(InitialSpawnPoint);
 	}
 	
 	
