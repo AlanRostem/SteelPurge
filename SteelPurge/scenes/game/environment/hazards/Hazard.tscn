@@ -11,7 +11,6 @@ extents = Vector2( 14, 6 )
 
 [node name="Hazard" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-InstaKill = false
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 collision_layer = 0

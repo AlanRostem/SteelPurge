@@ -4,7 +4,8 @@ using System;
 public class Hazard : StaticEntity
 {
 	[Export] public uint Damage = 10;
-	[Export] public bool InstaKill = true;
+	[Export] public bool InstaKillPlayer = false;
+	[Export] public bool InstaKillEnemy = true;
 	[Export] public bool TargetEnemies = true;
 
 	private Player _player;
@@ -17,18 +18,18 @@ public class Hazard : StaticEntity
 
 	protected virtual void _OnEntityTouch(LivingEntity entity)
 	{
-		if (!TargetEnemies && entity is Enemy)
-			return;
-
 		if (entity is Player player)
 		{
 			_player = player;
 			player.TakeDamage(1, new Vector2(Mathf.Sign(player.VelocityX), 0));
-			if (!player.IsRespawning && InstaKill)
+			if (!player.IsRespawning && InstaKillPlayer)
 				player.Die();
 		}
-
-		if (InstaKill)
+		
+		if (!TargetEnemies && entity is Enemy)
+			return;
+		
+		if (InstaKillEnemy)
 		{
 			entity.TakeDamage(entity.MaxHealth, Vector2.Zero);
 			return;

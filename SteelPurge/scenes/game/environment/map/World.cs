@@ -70,7 +70,11 @@ public class World : Node2D
 			CurrentSegment.Entities.ResetEntityStates();
 			PlayerNode.Position = new Vector2(CurrentSegment.InitialSpawnPoint);
 		}
-		else CreateFirstSegment();
+		else
+		{
+			CreateFirstSegment();
+			_currentSegmentIndex = 0;
+		}
 	}
 
 	public override void _Process(float delta)

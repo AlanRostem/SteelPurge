@@ -48,7 +48,7 @@ position = Vector2( 827, 184 )
 rotation = -3.14159
 
 [node name="SpawnPoint" parent="." index="2"]
-position = Vector2( 64, 16 )
+position = Vector2( 64, 63 )
 
 [editable path="EntityPool/DeadSoldier"]
 [editable path="EntityPool/DeadSoldier/InteractionIndicator"]
