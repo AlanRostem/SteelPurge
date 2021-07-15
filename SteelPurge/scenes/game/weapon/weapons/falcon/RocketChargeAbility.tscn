@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game/weapon/ability/resource_abiity/ResourceAbility.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/weapon/weapons/falcon/RocketChargeAbility.cs" type="Script" id=2]
+
+[node name="RocketChargeAbility" instance=ExtResource( 1 )]
+script = ExtResource( 2 )

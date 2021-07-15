@@ -1,6 +1,7 @@
 using Godot;
+using System;
 
-public class RocketBayonetAbility : TacticalAbility
+public class RocketChargeAbility : ResourceAbility
 {
 	[Export] public uint BayonetDamage = 20;
 	[Export] public float RocketSpeed = 300;
@@ -23,7 +24,7 @@ public class RocketBayonetAbility : TacticalAbility
 		player.CurrentCollisionMode = KinematicEntity.CollisionMode.Slide;
 	}
 
-	public override void OnEnd()
+	public override void OnDeActivate()
 	{
 		var weapon = GetWeapon();
 		weapon.MeleeHitBoxEnabled = false;
