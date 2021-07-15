@@ -45,7 +45,7 @@ public class RocketChargeAbility : ResourceAbility
 	
 	private void _OnHitObstacle(object body)
 	{
-		if (!IsActive) return;
+		if (!IsActive || !(body is TileMap)) return;
 		DeActivate();
 		GetWeapon().OwnerPlayer.VelocityX = 0;
 	}
