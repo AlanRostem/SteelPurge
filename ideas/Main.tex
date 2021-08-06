@@ -1,5 +1,4 @@
 \documentclass[12pt]{article}
-\usepackage{subfiles}
 
 \title{Ideas for Steel Purge}
 
@@ -9,10 +8,215 @@
 
 The following document contains information about the certain ideas for the game Steel Purge. These ideas will be categorized into different chapters.
 
-\subfile{Chapters/Chapter01}
-\subfile{Chapters/Chapter02}
-\subfile{Chapters/Chapter03}
-\subfile{Chapters/Chapter04}
-\subfile{Chapters/Chapter05}
+\section{Game Goal}
+
+The goal of the game is to complete it as fast as possible by moving as fast as possible using the given game mechanics. 
+
+\subsection{Reward system}
+
+The Steel Purge reward system will reward the player with killing enemies and completing the levels as fast as possible. More importantly, the game is about movement and speed, so there will be a speedometer on the player's HUD showing their current speed. Record-breaking speeds will show flashy animations to make the player feel rewarded for moving fast. 
+
+\section{Weapons}
+
+Weapons in Steel Purge are found around levels and they have a limited amount of ammo. The player will always spawn with the Hamilton P336 pistol which has infinite ammo, but can carry over the weapon from the previous level. If the player runs out of ammo on a specific weapon, they will throw it at an enemy to deal massive damage and switch back to the standard pistol. 
+
+\subsection{Weapons are unique}
+
+Each weapon fires automatically by holding down a button, but \emph{what} they shoot is always different and has a unique effect. 
+
+\subsection{Weapon ability}
+
+Weapons, in addition to firing, have a special ability. The ability is unique, but should at least allow for some mobility implicitly. Each ability will be put on a cool-down before the player can use it again, with the exception of the Hamilton P336. Additionally, this ability consumes extra ammo for the weapon.
+
+\subsection{Recoil hovering}
+
+By aiming downwards and shooting mid-air, the player can stay in the air longer by propelling themselves up using the recoil of the weapon. 
+
+\subsection{All Weapon Ideas}
+
+\paragraph{Hamilton P336} 
+
+Default pistol with infinite ammunition that fires rapidly. The damage is hit-scan based. It has no special ability but lets the player recoil-hover in the air without falling.
+
+\begin{itemize}
+	\item Ammo capacity: infinite
+	\item Damage: 1
+	\item Recoil-hover shots: 6
+\end{itemize}
+
+\paragraph{M7 Neostar}
+
+Rapid-fire magnetic gatling-gun. A quick charge up time is required for the weapon to fire, but it can be spammed to keep it at almost-max charge. It's special ability is called "Death Vortex". The ability is a close-range beam-type attack that does minimal damage, but if it kills an enemy, it adds 50 ammo back to the weapon. This ability can also be used to propel yourself off magnetic metal surfaces. There are no other ways to get ammo for the weapon other than the ability.
+
+\begin{itemize}
+	\item Ammo capacity: 200
+	\item Damage: 2
+	\item Recoil-hover shots: 6
+	\item Ability ammo cost: 20
+\end{itemize}
+
+
+\paragraph{KE-60}
+
+Explosive energy orb launcher that can propel any object, including the player. The propelling property of the orbs is meant to allow the player to rocket-jump and gain massive momentum at a cost for HP since it also damages the player. It's special ability is called "Kinetic Shield", which is a bubble of kinetic energy that protects the player against one hit, effectively giving it extra HP. This ability also meant to help the player rocket-jump. 
+
+\begin{itemize}
+	\item Ammo capacity: 30
+	\item Direct-hit Damage: 5
+	\item Explosive Damage: 5
+	\item Recoil-hover shots: 2
+	\item Ability ammo cost: 5
+	\item Ability Duration: 3 seconds
+\end{itemize} 
+
+
+\paragraph{Firewall .127}
+
+Flame shotgun that burns enemies over time. This is also the only weapon that can trigger explosive barrels, which do high damage to enemies and allows the player to rocket-jump on them. It's ability is called "Dragon's Breath". The ability lasts forever but uses ammo over time and faster. It is a deadly stream of fire that deals massive damage to enemies and can also be used to recoil-hover more effectively.
+
+\begin{itemize}
+	\item Ammo capacity: 50
+	\item Damage per Pellet: 2
+	\item Pellet count per shot: 5
+	\item Burn-damage per second: 2
+	\item Recoil-hover shots: 3
+	\item Ability ammo cost per second: 12
+\end{itemize} 
+
+\paragraph{Falcon SLR}
+
+Rifle with a rocket and bayonet attached. It shoots projectile bullets. It's ability is called "Rocket Charge". The ability lasts forever but uses ammo over time and faster. The ability lets the player fly horizontally and deal instant-kill damage to enemies when ramming into them.
+
+\begin{itemize}
+	\item Ammo capacity: 50
+	\item Damage: 5
+	\item Recoil-hover shots: 4
+	\item Ability ammo cost per second: 20
+\end{itemize} 
+
+
+\paragraph{Hadron Railgun}
+
+Triple burst laser rifle that instantly eliminates enemies if all lasers hit. It's ability is called "Quantum Path". The ability casts an infinitely long platform that makes the player constantly slide in the direction the path was cast in. The player can press the slide button to drop under the platform. If enemies touch this line, they take massive damage. 
+
+
+\begin{itemize}
+	\item Ammo capacity: 
+	\item Damage: 
+	\item Recoil-hover shots: 
+	\item Ability ammo cost: 
+	\item Ability duration: 
+\end{itemize}
+
+
+\paragraph{Nullshatter}
+
+Reality-shattering weapon that shoots Null-glass fragments which pass through objects except for enemies. It's ability is called "Null Rift". The weapon shoots a projectile that does instant-kill collateral damage to enemies and creates a portal shortly after disappearing. Running into this portal will transport the player to the Null Dimension to avoid all damage. Being in the Null Dimension also means passing through certain indicated objects. 
+
+\begin{itemize}
+	\item Ammo capacity: 
+	\item Damage: 
+	\item Recoil-hover shots: 
+	\item Ability ammo cost: 
+	\item Ability duration: 
+\end{itemize}
+
+\paragraph{Fusion .238}
+
+\begin{itemize}
+	\item Ammo capacity: 
+	\item Damage: 
+	\item Recoil-hover shots: 
+	\item Ability ammo cost: 
+	\item Ability duration: 
+\end{itemize}
+
+\section{Levels}
+
+\subsection{Level Style}
+
+The levels in Steel Purge are designed to be played bidirectionally. This means that it is possible to traverse the level from the ending of the level to the start and vice versa. Additionally, the levels are supposed to keep the flow of movement. 
+
+\subsection{Level Objective: Plant the Bomb}
+
+The player starts at the "end" of the level. He is brought down by a ship to start playing on the level from the right side. This means that the side-scrolling will unconventionally go to the left. In this state of the level, the player is carrying a bomb, called a "Storm Fuse", and has the potential to detonate it early if enemies damage it enough. This design is in place so the gameplay is focused on survival. Subsequently, risky mobility options, such as rocket-jumping, will be limited so that there is more focus on combat and survival. 
+
+\subsection{Level Objective: Evacuate}
+
+After the bomb is planted, a timer will start and all enemies and hazards respawn. If the player does not escape back to the ship in time, the level explodes and the player dies but will be put back to the start of planting the Storm Fuse. This time, the player can take more hits, but by default taking hits slows the player down, so this is not a significant advantage. 
+
+\subsection{Environment}
+
+Several elements in the level environment will provide a challenge for the player to traverse to the end of the level, such as hazards and enemies. However, with enough skill, these obstacles should provide the player an advantage as well, that advantage being speed and mobility. 
+
+\subsubsection{Enemies}
+
+\subsubsection{Mobility Enhancing Hazards}
+
+Some hazards can provide the player extra mobility, but they will damage him as well. These hazards do not deal high damage, just enough to be a high-risk-high-reward element in the gameplay. Such hazards may also not damage the player, but still pose a risk in certain designs of the level. 
+
+\paragraph{Incendiary Barrels} 
+
+These barrels are explosive barrels containing gasoline. They can only be exploded using heat-based damage. The Firewall is the only player-held weapon that can do this, but some enemies may do this depending on future designs. 
+
+\subsection{Worlds}
+
+Worlds are different thematic collections of levels. Here are some of the ideas for them.
+
+\subsubsection{Antarctic ice-bunker}
+
+\section{Player Traits}
+
+This section describes all the traits the player has regarding movement among other things.
+
+\subsection{Hit Points}
+
+The player can be hit by enemies or hazards up to three times before dying. In the lore, the player's suit can activate a protective shield every time they are hit. But, if they are hit all three times, it means the shield had no more energy left and thus the player died to the devastating damage. 
+
+
+\subsection{Health regeneration and invincibility}
+
+When the player is hit by an enemy, they are invulnerable for a short time. This will be displayed as a protective bubble around the player. This design's purpose is to tell the player that they can avoid damage for some time and use it to their speed-running advantage. Killing certain enemies can recharge your health, and this should be made apparent through the game art. 
+
+\subsection{Chrono-drift}
+
+Chrono-drift is an ability that lets the player travel back in time to a specific point quickly. The player must assign a position on the level for the ability to transport it back to that spot, but the position itself does not exist for long. In the lore, the player is stabbing reality with the Chronodagger: the dagger that gives him this ability. This ability should help newbie players get into speedrunning easier without it being too hard for them to learn the levels.
+
+\subsection{Movement}
+
+The player movement in Steel Purge is a standard platformer movement with walking and jumping. Due to the limited input the player will have, there are some twists on how he can move.
+
+\subsubsection{Gravity and Left-Right Movement + Jumping}
+
+The player character in Steel Purge falls and can walk from left to right and jump on top of obstacles.
+
+\subsubsection{Recoil-Hovering}
+
+By firing downwards the player can fall slower after each fire interval. The player has a limited amount of recoil-hover shots which is indicated by a bar on top of the player's head. 
+
+\subsubsection{Sliding}
+
+The player can slide on the ground and on slopes. Sliding allows the player to build up momentum and jump in order to keep that momentum. Combining this with \emph{recoil hovering} lets the player keep the high momentum for longer. Sliding into enemies also deals damage to them and knocks them up into the air. 
+
+\subsubsection{Ram-Sliding}
+
+Sliding into enemies with high enough momentum can knock enemies into the air and deal damage to them. 
+
+\subsubsection{Sliding-Jumping}
+
+When the player slides and gains momentum, he can jump to avoid the ground-friction and keep the momentum to move fast for longer.
+
+
+\section{Story}
+
+\subsection{World elements}
+
+\paragraph{X-Warb} 
+
+
+\subsection{The world's backstory}
+
+Planet HS-921 became the first habitable exo-planet in human history. This was a gigantic step for mankind! Shipping people and supplies to a planet light years away from the Home Base was not an easy task, though. Luckily, the humans were prepared with a fascinating piece of technology that accelerated their development! The mysterious, yet wonderful scientist, Dr. Hamilton created the "Fabricator": a giant machine that extracts metals from any planet's core and builds any technology on the spot! Hamilton programmed this machine to create helpful robots that carry the various heavy workloads required to build a home on HS-921. The Fabricator constantly crafted robots that gathered building materials, farmed foods and enforced laws on the Home Base. These helpful robots, called X-Warbs, were key to building a giant ship to safely transport people to HS-921 and build a home there. Eventually, the humans were successful in building the new home. However, there were several consequences to living on HS-921. Among other things, communications to the Home Base was nearly impossible, which meant that emergencies were more dangerous to the people of the new home. After some decades on HS-921, a strange electromagnetic burst hit the atmosphere temporarily shutting off all computer-based technology, including the ever helpful X-Warbs. This electromagnetism modified the X-Warbs' AI that caused them to attack any human in sight. A new apocalypse was born and with the lack of communications to the Home Base, there was no hope for support. One must act quickly before becoming prey to the metallic beasts that once helped the humans. Arm up soldier, we must fight this war swiftly. 
+
 
 \end{document}
