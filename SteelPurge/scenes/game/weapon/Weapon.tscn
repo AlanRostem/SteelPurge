@@ -17,9 +17,6 @@ MaxAmmo = 30
 [node name="FireTimer" type="Timer" parent="."]
 script = ExtResource( 4 )
 
-[node name="FiringDashTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="MeleeCooldownTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
@@ -60,7 +57,6 @@ text = "Hamilton P336"
 [connection signal="CancelFire" from="." to="FireTimer" method="_OnWeaponCancelFire"]
 [connection signal="TriggerFire" from="." to="FireTimer" method="_OnWeaponTriggerFire"]
 [connection signal="timeout" from="FireTimer" to="." method="Fire"]
-[connection signal="timeout" from="FiringDashTimer" to="." method="_OnCanDash"]
 [connection signal="timeout" from="MeleeCooldownTimer" to="." method="_OnMeleeCooldownTimerTimeout"]
 [connection signal="timeout" from="MeleeDurationTimer" to="." method="_OnMeleeDurationTimerTimeout"]
 [connection signal="area_entered" from="MeleeArea" to="." method="_OnMeleeAreaHitBoxEntered"]

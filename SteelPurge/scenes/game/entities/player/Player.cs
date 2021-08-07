@@ -30,7 +30,6 @@ public class Player : LivingEntity
 
 	// private static readonly float WalkSpeedAir = 60;
 	// private static readonly float MaxWalkSpeedFiring = 35;
-	public static float DashSpeed = 250;
 
 	public static readonly float JumpSpeed = 255;
 	public static readonly float MinJumpSpeed = 100;
@@ -52,7 +51,6 @@ public class Player : LivingEntity
 	private bool _right = false;
 	private bool _jump = false;
 	private bool _notJump = false;
-	private bool _dash = false;
 	private bool _chronoDrift = false;
 
 	public bool CanTakeDamage = true;
@@ -431,9 +429,6 @@ public class Player : LivingEntity
 		if (_chronoDrift)
 			ChronoDrift();
 		
-		if (_dash)
-			_Dash();
-
 		if (IsMovingTooFast() && CurrentMovementState != MovementState.Slide)
 			_Slide();
 
@@ -524,27 +519,6 @@ public class Player : LivingEntity
 		IsWalking = false;
 		VelocityX = Mathf.Lerp(VelocityX, 0, WalkFriction);
 		
-	}
-
-	private void _Dash()
-	{
-		if (!PlayerInventory.EquippedWeapon.CanDash) return;
-
-		PlayerInventory.EquippedWeapon.PowerDash();
-
-		if (!IsAimingDown && !IsAimingUp)
-		{
-			Velocity = new Vector2(-HorizontalLookingDirection * DashSpeed,
-				-PlayerInventory.EquippedWeapon.HoverRecoilSpeed);
-		}
-		else if (IsAimingDown)
-		{
-			VelocityY = -DashSpeed;
-		}
-		else if (IsAimingUp)
-		{
-			VelocityY = DashSpeed;
-		}
 	}
 
 	private void _Jump()

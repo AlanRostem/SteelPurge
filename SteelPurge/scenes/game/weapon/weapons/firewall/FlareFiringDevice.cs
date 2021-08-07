@@ -10,9 +10,4 @@ public class FlareFiringDevice : ProjectileShotGunFiringDevice
 			entity.ApplyStatusEffect(LivingEntity.StatusEffectType.Burn);
 		}
 	}
-
-	public override void OnDashFire()
-	{
-		FireProjectileInShotgunPattern(ProjectileScene, 0, SpreadAngle * 2, PelletCount * 3, GetWeapon().RecoilDashDamagePerShot);
-	}
 }

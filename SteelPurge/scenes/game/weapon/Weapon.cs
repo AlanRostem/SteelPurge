@@ -15,7 +15,6 @@ public class Weapon : Node2D
 
 
 	[Export] public uint DamagePerShot;
-	[Export] public uint RecoilDashDamagePerShot;
 	[Export] public uint RateOfFire;
 	[Export] public uint MaxRecoilHoverShots = 3;
 	[Export] public bool ReloadOnFloor = true;
@@ -38,8 +37,6 @@ public class Weapon : Node2D
 	public FiringDevice FiringDevice { get; set; }
 
 	private bool _canFire = true;
-	private bool _canDash = true;
-	public bool CanDash => _canDash && _currentRecoilHoverAmmo > 0;
 
 	public bool CanFire
 	{
@@ -76,10 +73,7 @@ public class Weapon : Node2D
 		get => !_meleeShape.Disabled;
 		set => _meleeShape?.SetDeferred("disabled", !value);
 	}
-
-	private Timer _meleeCooldownTimer;
-	private Timer _meleeDurationTimer;
-	private Timer _firingDashTimer;
+	
 	private CollisionShape2D _meleeShape;
 	private RecoilHoverBar _recoilHoverBar;
 	private Label _weaponNameLabel;
@@ -122,9 +116,6 @@ public class Weapon : Node2D
 	}
 
 	[Signal]
-	public delegate void DashFire();
-
-	[Signal]
 	public delegate void Fired();
 
 	[Signal]
@@ -145,9 +136,6 @@ public class Weapon : Node2D
 
 	public override void _Ready()
 	{
-		_meleeCooldownTimer = GetNode<Timer>("MeleeCooldownTimer");
-		_meleeDurationTimer = GetNode<Timer>("MeleeDurationTimer");
-		_firingDashTimer = GetNode<Timer>("FiringDashTimer");
 		_meleeShape = GetNode<CollisionShape2D>("MeleeArea/CollisionShape2D");
 		_recoilHoverBar = GetNode<RecoilHoverBar>("RecoilHoverBar");
 		_weaponNameLabel = GetNode<Label>("CanvasLayer/WeaponNameLabel");
@@ -225,18 +213,7 @@ public class Weapon : Node2D
 		if (LoseAmmoOnHover) CurrentRecoilHoverAmmo--;
 		OwnerPlayer.VelocityY = -HoverRecoilSpeed;
 	}
-
-	public void PowerDash()
-	{
-		if (_canDash && _currentRecoilHoverAmmo > 0)
-		{
-			_canDash = false;
-			if (LoseAmmoOnHover)
-				CurrentRecoilHoverAmmo = 0;
-			_firingDashTimer.Start();
-			EmitSignal(nameof(DashFire));
-		}
-	}
+	
 
 	public override void _Process(float delta)
 	{
@@ -289,10 +266,5 @@ public class Weapon : Node2D
 		var item = world.CurrentSegment.Entities.SpawnEntityDeferred<WeaponCollectible>(WeaponCollectibleScene, position);
 		OwnerPlayer?.RemoveChild(this);
 		item.Weapon = this;
-	}
-
-	private void _OnCanDash()
-	{
-		_canDash = true;
 	}
 }

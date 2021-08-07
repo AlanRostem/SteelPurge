@@ -9,9 +9,4 @@ public class BlasterDevice : FiringDevice
 	{
 		FireProjectile(BlastScene);
 	}
-
-	public override void OnDashFire()
-	{
-		FireProjectile(LargeBlastScene, GetWeapon().DamagePerShot * 2);
-	}
 }

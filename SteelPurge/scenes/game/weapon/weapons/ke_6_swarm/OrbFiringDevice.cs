@@ -13,9 +13,4 @@ public class OrbFiringDevice : FiringDevice
 	{
 		FireProjectile(OrbScene);
 	}
-
-	public override void OnDashFire()
-	{
-		FireProjectile(LargeOrbScene);
-	}
 }
