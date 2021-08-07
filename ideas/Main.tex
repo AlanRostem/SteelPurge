@@ -18,7 +18,7 @@ The Steel Purge reward system will reward the player with killing enemies and co
 
 \section{Weapons}
 
-Weapons in Steel Purge are found around levels and they have a limited amount of ammo. The player will always spawn with the Hamilton P336 pistol which has infinite ammo, but can carry over the weapon from the previous level. If the player runs out of ammo on a specific weapon, they will throw it at an enemy to deal massive damage and switch back to the standard pistol. 
+Weapons in Steel Purge are found around levels and they have a limited amount of ammo. The player will always spawn with the Hamilton M99 pistol which has infinite ammo, but can carry over the weapon from the previous level. If the player runs out of ammo on a specific weapon, they will throw it at an enemy to deal massive damage and switch back to the standard pistol. 
 
 \subsection{Weapons are unique}
 
@@ -26,7 +26,7 @@ Each weapon fires automatically by holding down a button, but \emph{what} they s
 
 \subsection{Weapon ability}
 
-Weapons, in addition to firing, have a special ability. The ability is unique, but should at least allow for some mobility implicitly. Each ability will be put on a cool-down before the player can use it again, with the exception of the Hamilton P336. Additionally, this ability consumes extra ammo for the weapon.
+Weapons, in addition to firing, have a special ability. The ability is unique, but should at least allow for some mobility implicitly. Each ability will be put on a cool-down before the player can use it again, with the exception of the Hamilton M99. Additionally, this ability consumes extra ammo for the weapon.
 
 \subsection{Recoil hovering}
 
@@ -34,14 +34,15 @@ By aiming downwards and shooting mid-air, the player can stay in the air longer 
 
 \subsection{All Weapon Ideas}
 
-\paragraph{Hamilton P336} 
+\paragraph{Hamilton M99} 
 
-Default pistol with infinite ammunition that fires rapidly. The damage is hit-scan based. It has no special ability but lets the player recoil-hover in the air without falling.
+Default pistol with infinite ammunition that fires rapidly. The damage is hit-scan based. It lets the player recoil-hover in the air without falling. The special ability for this pistol is called "Power Burst", which is a charge-up shot projectile dealing moderate damage good enough for finishing enemies off. 
 
 \begin{itemize}
 	\item Ammo capacity: infinite
 	\item Damage: 1
 	\item Recoil-hover shots: 6
+	\item Power Burst Damage: 5
 \end{itemize}
 
 \paragraph{M7 Neostar}
@@ -151,13 +152,27 @@ Several elements in the level environment will provide a challenge for the playe
 
 \subsubsection{Enemies}
 
+Enemies play an important role as an obstacle for the player. All enemies have a critical hit point on top of their head, so the player will almost always one-hit kill them when aiming downwards and shooting this critical hit point. Enemies also drop Scrap Metal on the ground each time they are hit or killed.
+
+\paragraph{Rush Rogue}
+
+Small enemy that holds a frontal shield blocking all projectile and hit-scan damage. It rushes really fast towards the player to perform a kamikaze attack. The enemy can be defeated instantly with a critical hit. 
+
+\paragraph{Executioner}
+
+Sentinel-type enemy that shoots two large rods towards the player and walks towards the player afterwards. This cycle is repeated.
+
+\subsubsection{Scrap Metal}
+
+Scrap Metal is an item dropped by enemies when killed or hit. The more you hit an enemy, the more Scrap Metal they drop. Picking up Scrap Metal heals the player. Subsequently, low-damage weapons will be effective for healing. There are four tiers of Scrap Metal healing different magnitudes of health for each pickup. 
+
 \subsubsection{Mobility Enhancing Hazards}
 
-Some hazards can provide the player extra mobility, but they will damage him as well. These hazards do not deal high damage, just enough to be a high-risk-high-reward element in the gameplay. Such hazards may also not damage the player, but still pose a risk in certain designs of the level. 
+Some hazards can provide the player extra mobility, but they will damage him as well. These hazards do not deal high damage, just enough to be a high-risk-high-reward element in the gameplay. Such hazards may also not damage the player, but still pose a risk in certain designs of the level.
 
 \paragraph{Incendiary Barrels} 
 
-These barrels are explosive barrels containing gasoline. They can only be exploded using heat-based damage. The Firewall is the only player-held weapon that can do this, but some enemies may do this depending on future designs. 
+These barrels are explosive barrels containing gasoline. They can only be exploded using heat-based damage. The Firewall is the only player-held weapon that can do this, but some enemies may do this depending on future designs. The explosion does minimal damage but propels entities far. 
 
 \paragraph{Magma Spikes}
 
