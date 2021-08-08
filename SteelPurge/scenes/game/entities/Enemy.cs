@@ -8,11 +8,14 @@ public class Enemy : LivingEntity
 {
 	public const uint StandardHealth = 10;
 
+	protected static readonly PackedScene ScrapScene =
+		GD.Load<PackedScene>("res://scenes/game/entities/collectible/scrap/Scrap.tscn");
+	
 	[Export] public float PlayerDetectionRange = 1000;
 	[Export] public float KnockBackSpeed = 300;
 	[Export] public bool CanBeKnockedBack = true;
 	[Export] public bool DropScrapWhenDamaged = true;
-	[Export] public bool DropTeCells = true;
+	[Export] public uint ScrapDroppedOnDamage = 1;
 	public bool IsCurrentlyLethal = true;
 
 	public bool IsAiEnabled
@@ -34,7 +37,6 @@ public class Enemy : LivingEntity
 	private bool _isAiEnabled = true;
 	private bool _isDead;
 	private bool _dropScrap;
-	private bool _dropTeCell;
 	private bool _isKnockedBack;
 	private bool _isPlayerDetected = false;
 	protected Player DetectedPlayer { get; private set; }
@@ -85,9 +87,15 @@ public class Enemy : LivingEntity
 	public override void _Process(float delta)
 	{
 		base._Process(delta);
+
 		if (_isDead)
-		{
 			ParentWorld.CurrentSegment.Entities.RemoveEntity(this);
+
+		if (_dropScrap)
+		{
+			_dropScrap = false;
+			var scrap = ParentWorld.CurrentSegment.Entities.SpawnEntityDeferred<Scrap>(ScrapScene, Position);
+			scrap.SetCount(ScrapDroppedOnDamage);
 		}
 
 		if (!_isAiEnabled) return;
@@ -137,10 +145,6 @@ public class Enemy : LivingEntity
 				_isDead = true;
 				_damageNumberGenerator.ShowDamageNumber(Health, Position, ParentWorld, Colors.Red);
 				Health = 0;
-				if (isCritical && DropTeCells)
-				{
-					_dropTeCell = true;
-				}
 			}
 		}
 		else
@@ -157,6 +161,8 @@ public class Enemy : LivingEntity
 			if (damageType == VulnerableHitbox.DamageType.RamSlide)
 				VelocityX = 0;
 		}
+		
+		_dropScrap = true;
 	}
 
 	public void KnockBack(Vector2 direction, float speed)

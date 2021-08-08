@@ -5,10 +5,10 @@ public class Scrap : FallingCollectible
 {
 	[Export] public uint Count = 10;
 
-	private const uint CountLevel1 = 12;
-	private const uint CountLevel2 = 25;
-	private const uint CountLevel3 = 50;
-	private const uint CountLevel4 = 75;
+	private const uint CountLevel1 = 1;
+	private const uint CountLevel2 = 2;
+	private const uint CountLevel3 = 3;
+	private const uint CountLevel4 = 4;
 
 	private static readonly Texture IconLevel0 = GD.Load<Texture>("res://assets/texture/scrap-drop.png");
 	private static readonly Texture IconLevel1 = GD.Load<Texture>("res://assets/texture/scrap_drop_bundle_1.png");
