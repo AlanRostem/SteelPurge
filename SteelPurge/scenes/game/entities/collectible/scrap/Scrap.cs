@@ -3,7 +3,7 @@ using System;
 
 public class Scrap : FallingCollectible
 {
-	[Export] public uint Count = 10;
+	[Export] public uint Count = 1;
 
 	private const uint CountLevel1 = 1;
 	private const uint CountLevel2 = 2;
@@ -20,21 +20,7 @@ public class Scrap : FallingCollectible
 	{
 		if (player.Health < player.MaxHealth)
 		{
-			var diff = player.MaxHealth - player.Health;
-			var halfCount = Count / 2;
-			if (halfCount <= diff)
-			{
-				player.Health += halfCount;
-				// player.PlayerInventory.PickUpScrap(halfCount);
-				return;
-			}
-
-			player.Health = player.MaxHealth;
-			// player.PlayerInventory.PickUpScrap(Count - diff);
-		}
-		else
-		{
-			// player.PlayerInventory.PickUpScrap(Count);
+			player.Health += Count;
 		}
 	}
 

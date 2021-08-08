@@ -14,6 +14,7 @@ public class HPBar : TextureProgress
 	public override void _Ready()
 	{
 		_flashTimer = GetNode<Timer>("FlashTimer");
+		MaxValue = GetParent().GetParent<Player>().MaxHealth;
 	}
 
 	private void _OnPlayerHealthChanged(uint health)

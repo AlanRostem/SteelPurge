@@ -175,6 +175,7 @@ public class Player : LivingEntity
 			return;
 		}
 
+
 		if (!CanTakeDamage) return;
 
 		if (damage >= Health)
