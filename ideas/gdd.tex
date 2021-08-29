@@ -11,7 +11,7 @@
 
 \subsection{Concept}
 
-Smooth high mobility platformer game with various types of weapons, levels, enemies and bosses. 
+Smooth high mobility platformer game with various types of guns, levels, enemies and puzzles. The game will feature multiple different objectives than the standard level completion of all platformers. 
 
 \subsection{Genre(s)}
 
@@ -49,7 +49,7 @@ Explain how the gameplay elements are connected to each other. Does it feel natu
 
 \subsection{Side-Challenge Structure}
 
-The side-challenges exist to motivate the player to complete the level fully to achieve a higher rank. At the end of a level, the player is given information on their performance for each side-challenge. Completing all side-challenges should grant the player a reward that will help them on the journey, but I have yet to figure out if that should be perk-points or something else. 
+The side-challenges exist to motivate the player to complete the level fully to achieve a higher rank, which is displayed on level completion. At the end of a level, the player is given information on their performance for each side-challenge. Completing all side-challenges should grant the player a reward that will help them on the journey, but I have yet to figure out if that should be perk-points or something else. 
 
 \subsubsection{Kill All Enemies}
 
@@ -69,17 +69,25 @@ This is a critical part of the design document. Emphasize this section when writ
 
 \subsubsection{Health}
 
+The player has a limited amount of health which, once depleted, kills the player. The health is divided into three segments. This means the player has, let's say, 120 health, but each segment is worth 40 health. When an enemy does damage to the player, they do 40 damage to deplete one segment of health. This exists so that the player can gradually heal when picking up scrap while maintaining a simple health structure. 
+
 \subsubsection{Scrap Loss on Death}
 
-\subsection{Moves}
-
-
+When the player dies, they lose a certain number of scrap. 
 
 \subsection{Interactions}
 
+\subsubsection{Enemy vs. Player Contact}
+
+If the player comes in contact with an enemy, the player will take a certain amount of damage
+
+\subsubsection{Player Sliding into Enemies}
+
+The player can slide into enemies to deal a small amount of damage and launch them up into the air. This is meant to let the player do one of two things: perform a "finishing move" to kill the enemy when the enemy's health is low, or to create crowd control. Additionally, this helps speedrunners complete ANY\% speedruns. 
+
 \subsection{Physics}
 
-Based on game genre and perspective (3D or 2D), define the basic physics structure.
+The game contains standard 2D kinematic non-realistic physics. Refer to the different game mechanics to know the specifics.
 
 \subsection{Economy}
 
@@ -87,7 +95,11 @@ Not strictly about currency, but about resource-management. For example, cooldow
 
 \subsubsection{Scrap}
 
-\subsubsection{Weapon Ammo}
+Scrap is a currency used call in supply drops that contain field- and standard weapons. Picking up scrap also heals you, but you store half  less scrap as you normally would when you have been damaged. 
+
+\subsubsection{Field-Weapon Ammo and Cooldowns}
+
+Field weapons have limited ammunition and some field weapon abilities are put on a cooldown when used. 
 
 \subsection{Movement}
 
