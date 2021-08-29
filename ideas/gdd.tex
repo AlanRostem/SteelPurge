@@ -73,7 +73,11 @@ The player has a limited amount of health which, once depleted, kills the player
 
 \subsubsection{Scrap Loss on Death}
 
-When the player dies, they lose a certain number of scrap. 
+When the player dies, they lose a certain number of scrap so that losing is discouraged.
+
+\subsubsection{Rush Energy}
+
+Rush Energy is a resource meter that allows the player to Power Slide, Recoil Boost and perform other Movement Perk abilities. Rush Energy gradually recharges when not used. 
 
 \subsection{Interactions}
 
@@ -104,6 +108,22 @@ Field weapons have limited ammunition and some field weapon abilities are put on
 \subsection{Movement}
 
 The player can move left and right just like any other 2D platformer. The walking is initially gradual but quick and seamless making it feel natural and easy to use. Jumping is also included in the character movement and the jump height is controllable.
+
+\subsubsection{Slip Jump}
+
+If the player jumps as soon as they change directions, the player receives a boost in momentum towards the new direction.
+
+\subsubsection{Crouch and Sliding}
+
+The player can crouch by pressing a button, making him slower, able to crawl under tight spaces and is harder to detect by enemies. When the player moves at full running speed on the ground, presses the crouch button and has enough Rush Energy, the player will slide on the ground with boosted momentum. The player cannot change movement direction when sliding on the ground, but can reduce the speed by attempting to change directions. The player can also slide as soon as they hit the ground, but the speed must be equal to or lower than the default running speed, otherwise the player will just continue to slip on the ground. Sliding can be used to keep as much momentum as possible when moving extremely fast since the player will experience less ground friction. 
+
+\subsubsection{Power Slide}
+
+Power Slide is a faster version of the standard slide that allows the player to ram into enemies to deal damage and knock them in the air. This is the default setting for sliding but require Rush Energy to activate. If the player has enough Rush Energy, they can Power Slide. Otherwise, sliding is only possible when the player already has momentum higher than the default running speed. 
+
+\subsubsection{Recoil Boosting}
+
+Firing a weapon while aiming downwards mid-air produces recoil that propels the player upwards so the player can stay in the air longer. Recoil Boosting depletes the Rush Energy meter.
 
 \subsection{Objects}
 
