@@ -39,7 +39,7 @@ After the player completes the "Plant the Storm Fuse", a timer for the bomb is s
 
 \subsubsection{Purge Mode}
 
-Purge Mode is an event the player can play on any level after finishing three (amount is arbitrary) levels in a row. In the lore, a level is invaded by a swarm of enemies and they can be optionally cleared out. The level will remain invaded until the player either chooses to play the Purge Mode event or choose to call a Storm Strike to clear the enemies out (this costs expensive Scrap). In this mode, the level will just serve as an arena for a wave-based survival mode where enemies constantly spawn for each wave. Completing a wave drops an orb floating in the air the player can choose to pick up or leave for ten seconds before the player automatically leaves the level. Picking it up starts another wave with stronger and more varied enemies. Once the player is finished with the waves or dies, they will be awarded with Cipher Cores corresponding to the amount of waves they cleared.
+Purge Mode is an event the player can play on any level after finishing three (amount is arbitrary) levels in a row. In the lore, a level is invaded by a swarm of enemies and they can be optionally cleared out. The level will remain invaded until the player either chooses to play the Purge Mode event or choose to call a Storm Strike to clear the enemies out (this costs expensive Evo Cores). In this mode, the level will just serve as an arena for a wave-based survival mode where enemies constantly spawn for each wave. Completing a wave drops an orb floating in the air the player can choose to pick up or leave for ten seconds before the player automatically leaves the level. Picking it up starts another wave with stronger and more varied enemies. Once the player is finished with the waves or dies, they will be awarded with Cipher Cores corresponding to the amount of waves they cleared.
 
 \paragraph{Purpose}
 
@@ -70,7 +70,7 @@ The player fully refills their equipped weapon's ammo and boosts its damage and 
 
 \subsubsection{Weapon Unlocks for Deployment}
 
-Completing a level while having a newly discovered weapon in your inventory gives you the opportunity to unlock that weapon and have the ability to call in a supply drop with that weapon in it. When back at the home base, the player can use a set amount of Cipher Cores to "research" the weapon and unlock it so that the player can deploy it any time. 
+Completing a level while having a newly discovered weapon in your inventory gives you the opportunity to unlock that weapon and have the ability to call in a supply drop with that weapon in it. It costs one Evo Core to deploy a weapon.
 
 \subsection{Play Flow}
 
@@ -110,10 +110,6 @@ This is a critical part of the design document. Emphasize this section when writ
 
 The player has a limited amount of health which, once depleted, kills the player. The health is divided into three segments. This means the player has, let's say, 120 health, but each segment is worth 40 health. When an enemy does damage to the player, they do 40 damage to deplete one segment of health. This exists so that the player can gradually heal when picking up scrap while maintaining a simple health structure. 
 
-\subsubsection{Scrap Loss on Death}
-
-When the player dies, they lose a certain number of scrap so that losing is discouraged.
-
 \subsubsection{Rush Energy}
 
 Rush Energy is a resource meter that allows the player to Power Slide, Recoil Boost and perform other Movement Perk abilities. Rush Energy gradually recharges when not used. 
@@ -136,13 +132,13 @@ The game contains standard 2D kinematic non-realistic physics. Refer to the diff
 
 Not strictly about currency, but about resource-management. For example, cooldowns on abilities or remaining items in inventory. 
 
-\subsubsection{Scrap}
+\subsubsection{Field-Weapon Ammo}
 
-Scrap is a currency used call in supply drops that contain field- and standard weapons. Picking up scrap also heals you, but you store half  less scrap as you normally would when you have been damaged. 
+Field weapons have limited ammunition. The player must conserve their ammo carefully.
 
-\subsubsection{Field-Weapon Ammo and Cooldowns}
+\subsubsection{Evo Cores}
 
-Field weapons have limited ammunition and some field weapon abilities are put on a cooldown when used. 
+Evo Cores are used to unlock Power-ups and open secret levels. These are only obtainable through level challenges, defeating (mini-)bosses and completing levels. 
 
 \subsection{Movement}
 
@@ -295,7 +291,7 @@ Reality-shattering inter-dimensional sniper rifle. Fires slowly and makes infini
 
 \subsubsection{Standard Weapons}
 
-Standard weapons are weaker than Field Weapons and are not equipped with a special ability. However, to balance this, these weapons can be unlocked using Scrap instead of Evo Cores and have infinite ammo.  These exist so that the player has a weapon to start with or have one at all when the player runs out of ammo on his Field Weapons. The reason standard weapons have infinite ammo is because they are powered by The Storm and shoot white Storm Lasers. 
+Standard weapons are weaker than Field Weapons and are not equipped with a special ability. These exist so that the player has a weapon to start with or have one at all when the player runs out of ammo on his Field Weapons. The reason standard weapons have infinite ammo is because they are powered by The Storm and shoot white Storm Lasers. 
 
 \paragraph{Hamilton M99} 
 
