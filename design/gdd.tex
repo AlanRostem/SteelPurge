@@ -19,7 +19,7 @@ Run n' gun, platformer, sidescroller, action, RPG.
 
 \subsection{Game Structure}
 
-The game is a 2D sidescroller where the primary level type will start from right to left in the first half of the level objective unlike standard sidescrollers. The first half of the level is about carrying an explosive to a point. Along the way, there will be several obstacles and enemies posing a challenge to the player. After reaching the point, the player plant's the explosive and a timer starts. The player must now go back to the initial spawn point of the level within the bomb time limit. The level design will be two-way, meaning the first half will go from right to left and be more slow-paced as opposed to the second half which is more fast-paced. Since this is the primary level type, there will be more ways to play the levels, but this is the main selling point. 
+The game is a 2D sidescroller where the primary level type will start from left to right in the first half of the level objective like standard sidescrollers. The first half of the level is about carrying an explosive to a point. Along the way, there will be several obstacles and enemies posing a challenge to the player. After reaching the point, the player plant's the explosive and a timer starts. The player must now go back to the initial spawn point of the level within the bomb time limit. The level design will be two-way, meaning the first half will go from left to right and be more slow-paced as opposed to the second half which is more fast-paced. Since this is the primary level type, there will be more ways to play the levels, but this is the main selling point. 
 
 \subsection{Look and Feel}
 
@@ -476,7 +476,19 @@ HM-4170 can hack several different computer-based devices, travel back in time a
 
 \subsection{General Structure}
 
+\subsubsection{Checkpoint Placement and Usage}
 
+Despite the fact that the player can make a checkpoint wherever they want using Chrono Drift, there will be "automatic" checkpoints placed throughout the level with extra functionality. These checkpoints are where the player will respawn if they die, hence why it was referred to as an automatic checkpoint. The player just needs to collide with the checkpoint to mark it as a respawn-point. Additionally, this type of checkpoint allows the player to use scrap to instantly refill ammo, heal up to full health and gain one power-up. Checkpoints also allow the player to change out their Field Weapon with one they already unlocked, but this requires an Evo Core. 
+
+\subsubsection{Objective Placement and Types}
+
+\paragraph{Planting Bomb at Objective}
+
+This objective type will be most common for the levels. At the very end of a level, there is a large Fabricator that the player must plant an explosive at (simply by pressing a button). This starts a timer before the explosive detonates so that the player has room to escape the level before the detonation. At the objective point, there will be enemies guarding it. Depending on the level's design and difficulty, there will be either regular enemies (small minions) or mini-bosses guarding it, so the player must defeat them before proceeding. Escaping the level successfully (returning to the start of the level) within the timer means completing the level. 
+
+\paragraph{Boss Fights}
+
+Some levels have a boss at the very end which the player must defeat in order to complete the level. Each boss design will be unique and have a relevance to the story. 
 
 \subsection{Training Level}
 
