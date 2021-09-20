@@ -21,3 +21,4 @@ This text file notes down all the ideas for the game that may or may not make it
 - Make a projection of HM-4170 and the player stay at the location the Chrono Drift was activated
 - Make Field Weapons purposefully be used for mini-puzzles and specific types of enemies by design so that the player has to strategically use the weapons and conserve ammo
 - Make it so that the player can switch between all his weapons at any time. This might make Evo Cores completely useless and unlocking things will be done through scrap only, but this needs to be thought through
+- Make it so that the player only can only use one power-up at a time and can find them in secret areas or craft them. The power-up can be carried and used at any time and there will be four tiers of power-ups based on their price in checkpoints and the level of advantage it gives the player. The tiers are color-coded
