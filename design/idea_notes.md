@@ -18,4 +18,5 @@ This text file notes down all the ideas for the game that may or may not make it
 - The player must use Chrono Drift to set a checkpoint at a checkpoint station. These stations allow the player to use Scrap to heal and refill their ammo. 
 - HM-4170 Mechanic: Scanning the same type of enemy several times allows you to get a perk against that type of enemy. I.e, a perk against the Rush Rogue allows you to shoot through their shield
 - Enemies that wield hitscan weapons take time to lock on to the player (lock on is indicated) before shooting. The lock on can be disrupted by ram sliding into the enemy or performing other stun moves
-- Make a projection of HM-4170 stay at the location the Chrono Drift was activated
+- Make a projection of HM-4170 and the player stay at the location the Chrono Drift was activated
+- Make Field Weapons purposefully be used for mini-puzzles and specific types of enemies by design so that the player has to strategically use the weapons and conserve ammo
