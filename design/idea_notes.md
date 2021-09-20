@@ -20,3 +20,4 @@ This text file notes down all the ideas for the game that may or may not make it
 - Enemies that wield hitscan weapons take time to lock on to the player (lock on is indicated) before shooting. The lock on can be disrupted by ram sliding into the enemy or performing other stun moves
 - Make a projection of HM-4170 and the player stay at the location the Chrono Drift was activated
 - Make Field Weapons purposefully be used for mini-puzzles and specific types of enemies by design so that the player has to strategically use the weapons and conserve ammo
+- Make it so that the player can switch between all his weapons at any time. This might make Evo Cores completely useless and unlocking things will be done through scrap only, but this needs to be thought through
