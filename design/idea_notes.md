@@ -14,3 +14,11 @@ This text file notes down all the ideas for the game that may or may not make it
 - HM-4170 Mechanic: Scanning the same type of enemy several times allows you to get a perk against that type of enemy. I.e, a perk against the Rush Rogue allows you to shoot through their shield
 - Enemies that wield hitscan weapons take time to lock on to the player (lock on is indicated) before shooting. The lock on can be disrupted by ram sliding into the enemy or performing other stun moves
 - Make a projection of HM-4170 and the player stay at the location the Chrono Drift was activated
+
+
+- Starter-power-ups can be unlocked using Evo Cores and equipped before selecting a level. Enough Power-Scrap must be gained to enable its usage during combat
+- High-tier power-ups can be found in secret areas and mid-tier ones are crafted on checkpoints
+- Standard weapons can be unlocked using Evo Cores and equipped before selecting a level
+- Three stats can be upgraded: Health, Rush Energy, Weapon Ammo. Upgrade points must be unlocked using Evo Cores and the points can be added to each stat to customize the stats. These stats can be customize before selecting a level
+- Field Weapons can be upgraded using Evo Cores and each upgrade is unique to the weapon
+- Player can switch between all his already-unlocked Field Weapons during a level
