@@ -143,6 +143,16 @@ Health Scrap is a green-colored cogwheel collectible that heals the player when 
 
 Power Scrap is a blue-colored cogwheel collectible that charges the player's Power-Up meter and refills the player's Rush Energy simultaneously. This type of scrap only spawns when an enemy takes critical hit damage or when eliminated.
 
+\subsubsection{Field Weapon Ammo and Ammo Types}
+
+The player can fire their weapon as long as the ammo type it takes is present in their inventory. There are three types of weapon ammo
+
+\begin{itemize}
+	\item Pyro Fuel (Used by Firewall and Falcon)
+	\item Energy Cells (Used by Neostar and KE-60)
+	\item Anti Metal (Used by Nullshatter)
+\end{itemize}
+
 \subsection{Interactions}
 
 \subsubsection{Enemy vs. Player Contact}
@@ -255,7 +265,24 @@ The Humanoid Enemies are enemies that drop Field Weapons upon death. Their comba
 
 \subsubsection{Elements of Enemies}
 
-The enemies will have an element signifying what type of ammo they will drop on death. Not all enemies will have an element tied to them because that would decrease the variety in their behaviour for the following reason: elements also signify their battle-style. For instance, Fire-based enemies will fight close-range and deal high damage per hit. The element will be displayed on the enemy based on their visual design using colors. Enemies without an element will not drop ammo and only scraps and will have their own unique way of fighting. Mini-bosses and bosses are always going to have an element tied to them, though some exceptions can be made. 
+The enemies will have an element signifying what type of ammo they will drop on death. Not all enemies will have an element tied to them because that would decrease the variety in their behaviour for the following reason: elements also signify their battle-style. For instance, Fire-based enemies will fight close-range and deal high damage per hit. The element will be displayed on the enemy based on their visual design using colors. Enemies without an element will not drop ammo and only scraps and will have their own unique way of fighting. Mini-bosses and bosses are always going to have an element tied to them, though some exceptions can be made depending on level design. Lastly, the playstyles from these elements will have a type triangle similar to the starter Pokemon types. The playstyle for the ammo type a Field Weapon takes will also apply to the player, though this will depend on the player's skill level or their choice of playstyle. 
+
+
+\paragraph{Element Triangle}
+\begin{itemize}
+	\item Flame: Strong against Energy, weak against Dark
+	\item Energy: Strong against Dark, weak against Energy
+	\item Dark: Strong against Flame, Weak against Energy
+\end{itemize}
+
+\paragraph{Element Playstyles}
+
+\begin{itemize}
+	\item Flame: Operates in close-range combat and deals high damage
+	\item Energy: Durable heavy enemies that deal concentrated damage focusing on locking down an area
+	\item Dark: Long-range operating enemies with evasive abilities
+\end{itemize}
+
 
 \subsection{Enemy List}
 
@@ -283,12 +310,16 @@ Here is a list of all the enemies and their different mechanics.
 
 \subsection{Combat}
 
-The combat mechanics in this game are very simple. The player can Power Slide, fire their weapon and use the weapon's ability. Lastly, enemies have a weak spot on top of their head. The player must jump over the enemy and aim down to be able to hit it. Most enemies die from one hit on this weak spot and some take a few more hits. 
+The combat mechanics in this game are very simple. The player can Power Slide, fire their weapon and use their available power-up. Lastly, enemies have a weak spot on top of their head. The player must jump over the enemy and aim down to be able to hit it. Most enemies die from one hit on this weak spot and some take a few more hits. Power-sliding knocks enemies up in the air and leaves them vulnerable to the player's shots from below since some enemies cannot react to the knock-up.
 These are the core combat mechanics, the rest is determined by the weapon the player has equipped.
 
 \subsubsection{Weapon Switching}
 
 The player can switch between all his unlocked Field Weapons and equipped Standard Weapon. Switching weapons causes a delay before the player can use it. This lets the player strategically choose which weapon to conserve ammo for and not be completely reliant on their Standard Weapon. 
+
+\subsubsection{Playstyles tied to Weapon Element}
+
+As described in the section about elements for enemies, the same logic applies to the player with their equipped weapon. Flame-based  weapons are effective at close range, Energy-based weapons are easier to use when standing still and Dark-based weapons fire slowly so the player is safer at longer distances. These playstyles can change based on what the player wants to do, and practically all weapons are effective in all capacities if the player is good enough at the game. 
 
 \subsubsection{Field Weapons}
 
