@@ -103,7 +103,11 @@ Using Chorno Drift reduces the player's progress to the max rank. No usage is an
 
 \subsection{Secrets Structure}
 
-Every level has one or two secret areas that are not so obvious to find. Each secret will require a unique weapon, or two, to complete. The secret areas will have a puzzle-like structure in the obstacles which require the specific weapons as well. The weapons required will correspond to the obstacles that require it as well. Secrets reward the player with ten Evo Cores.
+Every level has one or two secret areas that are not so obvious to find. Each secret will require a unique weapon, or two, to complete. The secret areas will have a puzzle-like structure in the obstacles which require the specific weapons as well. The weapons required will correspond to the obstacles that require it as well. 
+
+\paragraph{Secret Rewards}
+
+Secrets can reward the player with three different things: a supply crate, a high-tier Power-Up and a passage to skip to the next world. The supply crates contain a large number of Normal Scrap and all ammo types (enough ammo to fully refill each weapon). The player can also find a high-tier Power-Up and replace it with their currently equipped one but fully charged. Lastly, the secret passage leading to the next level world is an alternative to end the level that rewards the player with a new path to the next world inside the level-selection screen. This last part is ideal for speedrunning. 
 
 \section{Game Mechanics}
 
@@ -159,7 +163,7 @@ Not strictly about currency, but about resource-management. For example, cooldow
 
 \subsubsection{Field-Weapon Ammo}
 
-Field weapons have limited ammunition. The player must conserve their ammo carefully.
+Field weapons have limited ammunition. The player must conserve their ammo carefully. Each Field Weapon consumes a type of ammo and one or more weapons can share that ammo type. 
 
 \subsubsection{Evo Cores}
 
@@ -194,6 +198,8 @@ Firing a weapon while aiming downwards mid-air produces recoil that propels the 
 \subsubsection{Scrap Collectible}
 
 \subsubsection{Evo Core Collectible}
+
+\subsubsection{Ammo Collectible}
 
 \subsubsection{Weapon Collectible}
 
@@ -237,13 +243,19 @@ This hitbox is similar to the default damage reception hitbox, only that it appl
 
 \paragraph{Normal Enemy}
 
+Normal Enemies are the minions that the player can kill without hitting too many shots. These are the most common and frequent enemy type the player will encounter. 
+
 \paragraph{Humanoid Enemy}
 
-The Humanoid Enemies are enemies that drop weapons the player can use upon death. Their design will vary depending on the weapon they carry, but the design is just a re-skin. 
+The Humanoid Enemies are enemies that drop Field Weapons upon death. Their combat design will vary depending on the weapon they carry, but the visual design is just a re-skin of a default base. If the player already has unlocked the weapon they carry, the enemy will just drop a high amount of ammo for that weapon (indicated by their element). Humanoid enemies are a type of mini-boss that will be very agile and somewhat resemble the capabilities of the player.
 
 \paragraph{Mini Boss}
 
 \paragraph{Boss}
+
+\subsubsection{Elements of Enemies}
+
+The enemies will have an element signifying what type of ammo they will drop on death. Not all enemies will have an element tied to them because that would decrease the variety in their behaviour for the following reason: elements also signify their battle-style. For instance, Fire-based enemies will fight close-range and deal high damage per hit. The element will be displayed on the enemy based on their visual design using colors. Enemies without an element will not drop ammo and only scraps and will have their own unique way of fighting. Mini-bosses and bosses are always going to have an element tied to them, though some exceptions can be made. 
 
 \subsection{Enemy List}
 
