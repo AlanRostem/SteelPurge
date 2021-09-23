@@ -16,3 +16,4 @@ This text file notes down all the ideas for the game that may or may not make it
 - Make a projection of HM-4170 and the player stay at the location the Chrono Drift was activated
 - HM-4170 is who activates the power-ups. Icon should be displayed on the HUD
 - Three stats can be upgraded: Health, Rush Energy, Weapon Ammo. Upgrade points must be unlocked using Evo Cores and the points can be added to each stat to customize the stats. These stats can be customize before selecting a level
+- Companion Drone Puzzle Idea: Similar to Crazy Diamon from JoJo, the drone can restore things back to the way it was using Chrono Drift
