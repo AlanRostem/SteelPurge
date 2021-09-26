@@ -16,5 +16,8 @@ This text file notes down all the ideas for the game that may or may not make it
 - Make a projection of HM-4170 and the player stay at the location the Chrono Drift was activated
 - HM-4170 is who activates the power-ups. Icon should be displayed on the HUD
 - Three stats can be upgraded: Health, Rush Energy, Weapon Ammo. Upgrade points must be unlocked using Evo Cores and the points can be added to each stat to customize the stats. These stats can be customize before selecting a level
-- Companion Drone Puzzle Idea: Similar to Crazy Diamon from JoJo, the drone can restore things back to the way it was using Chrono Drift. He can use this to restore destroyed objects or dismantle small enemies 
-- Companion Drone Puzzle Idea: The objective of the puzzles is to use the Chrono Drift ability as little as possible, which is why the drone will get a limited amount of it
+- Companion Drone Puzzle Idea: Similar to Crazy Diamon from JoJo, the drone can restore things back to the way it was using Chrono Drift. He can use this to restore destroyed objects or dismantle fully built ones
+- Companion Drone Puzzle Idea: Rechargable battery - the drone can restore an empty battery's energy to full
+- Companion Drone Puzzle Idea: When entering the puzzle area, the player is shown how all puzzle objects were affected. Based on that is how the objects can be turned back
+- Companion Drone Puzzle Idea: Make the puzzles super simple, they do not need to be the main part of the game
+- Companion Drone Puzzle Idea: The puzzles can be used as a means to reach secrets
