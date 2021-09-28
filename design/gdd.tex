@@ -365,7 +365,7 @@ This enemy is the exact same as the regular MXD-Hornet, but it can only take cri
 
 \paragraph{Moves}
 
-Like all Gunner Exos, the Firewall Gunner will only have two attack moves: fire and special ability. The first move is to fire the equipped weapon in a certain interval, and the second move is to unleash the deadly fire stream from the weapon.
+Like all Gunner Exos, the Firewall Gunner will only have two attack moves: shoot and special ability. The first move is to fire the equipped weapon in a certain interval, and the second move is to unleash the deadly fire stream from the weapon.
 
 \paragraph{Durability}
 
@@ -404,12 +404,25 @@ As described in the section about elements for enemies, the same logic applies t
 
 Field weapons are weapons that can only be unlocked by picking it up for the first time. Field weapons have a limited ammo capacity and can be upgraded to have an extra special ability.
 
+\subsubsection{Ammo Type Traits}
+
+Based on the ammo type the weapon consumes, the shots coming out of a Field Weapon will have a specific trait. Here is a list of the traits. 
+
+\begin{itemize}
+	\item Pyro Fuel: Shots are always pin-point accurate but projectiles disappear after a certain range. Requires the player to play up close
+	\item Energy Cells: Projectiles travel slowly with poor accuracy. Requires the player to concentrate fire on a target to deal enough damage
+	\item Anti Metal: Slow fire rate, but shots land instantly at the target and accurately with massive damage. Requires the player to be accurate with their shots and make them count
+\end{itemize}
+
+Standard Weapons will also borrow parts of each trait. Since there will be only three weapons, each weapon will take one of these traits to make every Standard Weapon unique.
+
 \paragraph{M7 Neostar}
 
 Rapid-fire magnetic machine-gun. A quick charge up time is required for the weapon to fire, but it can be spammed to keep it at almost-max charge. Hitting an enemy enough times magnetizes the enemy and makes all your shots follow the enemy. It is also possible to magnetize metallic surfaces in the same way.
 
 \begin{itemize}
 	\item Ammo capacity: 200
+	\item Ammo type: Energy Cells
 	\item Damage: 2
 	\item Recoil-boost usage: ??
 \end{itemize}
@@ -421,6 +434,7 @@ Explosive energy orb launcher that can propel any object, including the player. 
 
 \begin{itemize}
 	\item Ammo capacity: 30
+	\item Ammo type: Energy Cells
 	\item Direct-hit Damage: 5
 	\item Explosive Damage: 5
 	\item Recoil-boost usage: ??
@@ -433,6 +447,7 @@ Flame shotgun that burns enemies over time. The weapon fires a spread of flame p
 
 \begin{itemize}
 	\item Ammo capacity: 50
+	\item Ammo type: Pyro Fuel
 	\item Damage per Pellet: 2
 	\item Pellet count per shot: 5
 	\item Burn-damage per second: 2
@@ -445,6 +460,7 @@ Rifle with a rocket and bayonet attached. It shoots projectile bullets propelled
 
 \begin{itemize}
 	\item Ammo capacity: 50
+	\item Ammo type: Pyro Fuel
 	\item Damage: 5
 	\item Recoil-boost usage: ??
 	\item Slide ammo consumption: 5
@@ -453,10 +469,11 @@ Rifle with a rocket and bayonet attached. It shoots projectile bullets propelled
 
 \paragraph{Nullshatter IDSR}
 
-Reality-shattering inter-dimensional sniper rifle. Fires slowly and makes infinitely long cracks in space-time to deal damage to anything that comes in contact with it. This weapon generally instantly kills enemies. Shooting at Null Transporters activates a portal that you can use to briefly enter the Null Dimension and avoid all damage. Being in the Null-Dimension opens up secret paths the player can take.
+Reality-shattering inter-dimensional sniper rifle. Fires slowly and makes infinitely long cracks in space-time to deal damage to anything that comes in contact with it. This weapon generally instantly kills enemies, but has a long delay after each shot. Shooting at Null Transporters activates a portal that you can use to briefly enter the Null Dimension and avoid all damage. Being in the Null-Dimension opens up secret paths the player can take.
 
 \begin{itemize}
 	\item Ammo capacity: 
+	\item Ammo type: Anti Metal
 	\item Damage: 
 	\item Recoil-boost usage:
 \end{itemize}
@@ -478,15 +495,14 @@ Standard weapons are weaker than Field Weapons and are not equipped with a speci
 Default pistol with infinite ammunition that fires rapidly. The damage is hit-scan based. It lets the player Recoil-boost in the air without falling.
 
 \begin{itemize}
-	\item Ammo capacity: infinite
+	\item Shot type: Limited range hit-scan
 	\item Damage: 1
 	\item Recoil-boost usage: ??
 \end{itemize}
 
-\paragraph{Improv M-SAR} 
+\paragraph{Mikhailov M-SAR} 
 
 \begin{itemize}
-	\item Ammo capacity: infinite
 	\item Damage: 3
 	\item Recoil-boost usage: ??
 \end{itemize}
