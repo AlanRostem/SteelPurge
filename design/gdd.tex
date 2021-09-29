@@ -15,7 +15,7 @@ Smooth high mobility platformer game with various types of guns, levels, enemies
 
 \subsection{Genre(s)}
 
-Run n' gun, platformer, sidescroller, action, RPG.
+Run n' gun, platformer, sidescroller, action.
 
 \subsection{Game Structure}
 
@@ -244,6 +244,30 @@ The Magma Spike hazard prevents the player from reaching an area since it instan
 
 \subsubsection{Null Transporter}
 
+\subsection{Companion Drone Puzzle Objects}
+
+These objects will only be accessible to the companion drone and commonly in puzzle areas.
+
+\subsubsection{Battery}
+
+The battery is a movable object that delivers power to powered objects such as hatches. It can fall and be pushed by the companion drone. If it comes in contact with a Power Line, it will deliver power to it and activate anything connected to the Power Line. The battery comes in two states: drained and full (for now). Chrono Restore can fully charge the battery or completely drain it.
+
+\subsubsection{Stalactite}
+
+Stalactites objects that block the path of movable objects and the companion drone. When they are on the ground, the companion drone can use Chrono Restore to revert it back to the ceiling, opening the path it was blocking. 
+
+\subsubsection{Debris}
+
+Debris comes in many looks where the parts inside the debris resemble something broken. Chrono Restore can revert the debris back to its original form, effectively opening a blocked path and restoring an arbitrary object into an position. If an object is already in the way of the new object to be restored, the restoration is cancelled and the object becomes debris again. 
+
+\subsubsection{Hatch (Powered)}
+
+Hatches are doors that can be opened/closed when powered/not powered. They can be placed vertically and horizontally.
+
+\subsubsection{Power Line}
+
+Power Lines transfer power from a power source to an object that consumes power. 
+
 \subsection{Other Objects}
 
 \subsubsection{Storm Fuse}
@@ -265,6 +289,10 @@ Chrono Restore is an ability that allows the companion drone to restore an objec
 \subsubsection{Pick Up}
 
 The companion drone can pick up small objects and rest them on top of any platform.
+
+\subsubsection{Push}
+
+The companion drone can push small objects that are hanging off a  roof or on ground.
 
 \subsection{Enemy Mechanics}
 
@@ -728,6 +756,18 @@ The in-game heads-up display will only show necessary information about the play
 \begin{itemize}
 	\item TODO: Show images of all the HUD behavior
 \end{itemize}
+
+\subsubsection{Gameplay Dialogues}
+
+Characters that speak to the player through the story will have their dialogues conveyed through text boxes that pop up on the player's HUD. The companion drone will often talk to the player, so that is why dialogue boxes will often appear while the player is playing in a level. Dialogue boxes appear at the top of the screen with an image of the character next to its name. The text continuously writes itself in a slow manner, but the player can press and hold the interact button to make it go quicker. After the text is complete, the player can press the interact button to move to the next line. The button bound to skipping lines will also show up next to the dialogue. Dialogue boxes can also be disabled in the settings menu. 
+
+\begin{itemize}
+	\item TODO: Show images of all the dialogue behavior
+\end{itemize}
+
+\subsubsection{Companion Drone Speech Bubbles}
+
+The companion drone will sometimes assist the player using hints. This is conveyed through speech bubbles above the player (since the drone is rested on top of the player's head). Hints are short and are usually used to remind the player about the mechanics in the beginning. However, further down the game, these will be used for dramatic effect through the story. The drone will also say when a power-up is activated. 
 
 \subsubsection{Menus}
 
