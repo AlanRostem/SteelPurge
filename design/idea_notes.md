@@ -25,3 +25,4 @@ This text file notes down all the ideas for the game that may or may not make it
 - Remove the drone puzzles. Instead make him hover on top of the player when a power up is ready
 - Breakable obstacles that grant scrap when broken. Can be used to teach recoil boosting
 - Focus on designing level elements that provide variety in combat the levels. For example, a platform that lifts in the air while enemies spawn in from the sides
+- make the gsme 8bit style both in art (music and pixel art) and the interface. This requires making the recoil boost energy a simpler system
