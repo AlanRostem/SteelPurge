@@ -21,3 +21,4 @@ This text file notes down all the ideas for the game that may or may not make it
 - Companion Drone Puzzle Idea: When entering the puzzle area, the player is shown how all puzzle objects were affected. Based on that is how the objects can be turned back
 - Companion Drone Puzzle Idea: Make the puzzles super simple, they do not need to be the main part of the game
 - Companion Drone Puzzle Idea: The puzzles can be used as a means to reach secrets
+- Crates only breakable via power slide. They can contain scrap and ammo
