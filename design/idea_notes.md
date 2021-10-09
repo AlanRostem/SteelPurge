@@ -13,4 +13,4 @@ This text file notes down all the ideas for the game that may or may not make it
 - Enemies that wield hitscan weapons take time to lock on to the player (lock on is indicated) before shooting. The lock on can be disrupted by ram sliding into the enemy or performing other stun moves
 - HM-4170 is who activates the power-ups. Icon should be displayed on the HUD
 - Focus on designing level elements that provide variety in combat the levels. For example, a platform that lifts in the air while enemies spawn in from the sides
-
+- Power-up: Blaster Storm - Shoot a volley of energy balls that deal massive damage for a short time
