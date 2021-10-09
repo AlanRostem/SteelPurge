@@ -12,8 +12,5 @@ This text file notes down all the ideas for the game that may or may not make it
 - Movement: the player can climb and bounce off walls
 - Enemies that wield hitscan weapons take time to lock on to the player (lock on is indicated) before shooting. The lock on can be disrupted by ram sliding into the enemy or performing other stun moves
 - HM-4170 is who activates the power-ups. Icon should be displayed on the HUD
-- Crates only breakable via power slide or shots. They can contain scrap and ammo
-- Remove the drone puzzles. Instead make him hover on top of the player when a power up is ready
-- Breakable obstacles that grant scrap when broken. Can be used to teach recoil boosting
 - Focus on designing level elements that provide variety in combat the levels. For example, a platform that lifts in the air while enemies spawn in from the sides
-- Make the gsme 8bit style both in art (music and pixel art) and the interface. This requires making the recoil boost energy a simpler system
+
