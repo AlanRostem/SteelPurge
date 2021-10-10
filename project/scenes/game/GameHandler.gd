@@ -8,11 +8,14 @@ that in mind, all user interface, such as the pause menu and HUD, will be handle
 the playable nodes themselves (such as a level and the level select world)
 """
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var __current_level = null
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+"""
+Deletes the current level (if one is active) and instances a new one from the specified
+scene.
+"""
+func set_current_level(level_scene):
+	if __current_level != null:
+		__current_level.queue_free()
+	__current_level = level_scene.instance()
