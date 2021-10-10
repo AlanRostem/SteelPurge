@@ -115,11 +115,11 @@ This is a critical part of the design document. Emphasize this section when writ
 
 \subsubsection{Health}
 
-The player has a limited amount of health which, once depleted, kills the player. The health is divided into three segments. This means the player has, let's say, 120 health, but each segment is worth 40 health. When an enemy does damage to the player, they do 40 damage to deplete one segment of health. This exists so that the player can gradually heal when picking up scrap while maintaining a simple health structure. 
+The player has a limited amount of health which, once depleted, kills the player. The health pool is comprised of three dots. Taking any form for damage depletes one dot. Below the health bar, there is a bar that will fill up when collecting Health Scrap. Once the bar is full, the player will be given one dot of health. The bar cannot fill up when the player has full health, and enemies won't drop health scrap. Instead, the player will be given extra normal scrap. 
 
 \subsubsection{Rush Energy}
 
-Rush Energy is a resource that allows the player to Power Slide, Recoil Boost and Chrono Drift. The player has a maximum of six dots of energy displayed on their HUD and each dot refills slowly only when the player is grounded. Different weapons will use different amounts of dots per shot when recoil boosting, and power-sliding uses one. Chrono Drift must use two per use to balance such a powerful ability. 
+Rush Energy is a resource that allows the player to Power Slide, Recoil Boost and Chrono Drift. The player has a maximum of six dots of energy displayed on their HUD and each dot refills slowly only when the player is grounded. Different weapons will use different amounts of dots per shot when recoil boosting, and power-sliding uses one. Chrono Drift must use two to balance such a powerful ability. 
 
 \subsubsection{Power-Up Charge}
 
