@@ -1,8 +1,6 @@
-"""
-Base class for moving entities. Its collision mode can be modified between 
-MOVE, SLIDE, and SNAP. Its velocity can be changed at any time but is only 
-registered in the next physics process call.
-"""
+# Base class for moving entities. Its collision mode can be modified between 
+# MOVE, SLIDE, and SNAP. Its velocity can be changed at any time but is only 
+# registered in the next physics process call.
 
 extends KinematicBody2D
 
