@@ -10,7 +10,7 @@ enum CollisionModes {
 	SNAP
 }
 
-export(CollisionModes) var current_collision_mode
+export(CollisionModes) var collision_mode
 
 export var is_gravity_enabled = true
 
@@ -54,7 +54,7 @@ func _physics_process(delta):
 	if is_gravity_enabled:
 		__velocity += __down_vector * gravity * delta
 	
-	match current_collision_mode:
+	match collision_mode:
 		CollisionModes.MOVE:
 			move_and_collide(__velocity * delta)
 		CollisionModes.SLIDE:
