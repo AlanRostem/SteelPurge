@@ -5,7 +5,14 @@
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "This node contains all world collision and an entity pool. Spawning/despawning of
+entities is managed by this node, but are attached to the entity pool node"
+}
 
 [node name="CustomTileMap" parent="." instance=ExtResource( 2 )]
 
 [node name="EntityPool" type="Node2D" parent="."]
+__meta__ = {
+"_editor_description_": "This node holds all the active game objects. The parent GameWorld node manages the objects in this node"
+}
