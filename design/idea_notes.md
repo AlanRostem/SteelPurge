@@ -11,12 +11,11 @@ This text file notes down all the ideas for the game that may or may not make it
 - Auto lock-on Power-up: This allows the player to gradually aim at a target without having to perfectly line up their weapon with it
 - Movement: the player can climb and bounce off walls
 - Enemies that wield hitscan weapons take time to lock on to the player (lock on is indicated) before shooting. The lock on can be disrupted by ram sliding into the enemy or performing other stun moves
-- HM-4170 is who activates the power-ups. Icon should be displayed on the HUD
-- Focus on designing level elements that provide variety in combat the levels. For example, a platform that lifts in the air while enemies spawn in from the sides
-- Power-up: Blaster Storm - Shoot a volley of energy balls that deal massive damage for a short time
 
-## Roguelite overhaul ideas
+## SMB NES Style Ovehaul
 
-- Design overhaul: Make the game into a roguelite using all the already-designed mechanics. This includes combat, progression and objectives. A way to integrate all these things into a roguelite genre must be thought through and the pre-defined mechanics may have to change. The same applies to the story, but this time the backstory can be told throughout the game's progression
-- Story idea: the characters on the player's side developed a way to turn back time in order to succeed against the Exos. Each time the player dies, time is turned back and the player is transported back to the main base. The main base is a ship that is not affected by time being turned back and the player can store what they collected through battles (scrap, unlocks, etc). However, this time travel technology has a limit. Time can only be restored so long as the events occurred *after* the device was built and the timeline ahead is altered, causing physical objects to appear in a different areas than the previous timeline (procedurally generated levels).
-- Story idea: HM-4170 reacts strangely to the altered levels the first time the player retries the game
+This ovehaul is here to make the game really simple and short with the premise of making it similar to an NES game such as Super Mario Bros. 
+
+- Treat weapons like a temporary power-up
+- When the player touches another weapon collectible while holding a field weapon, he drops the one he's holding and instantly equips the other one.
+This frees up one button on the SNES controller.
