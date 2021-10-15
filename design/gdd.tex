@@ -126,15 +126,11 @@ Field weapons have limited ammunition. The player must conserve their ammo caref
 
 \subsubsection{Scrap}
 
-Scrap is a gameplay currency used to refill ammo and health. When the player completes a level, they will lose all the scrap they collected. 
+Scrap is a gameplay currency used to refill ammo and health. When the player completes a level, they will lose all the scrap they collected and it will be converted to score. 
 
 \subsection{Movement}
 
 The player can move left and right just like any other 2D platformer. The walking is initially gradual but quick and seamless making it feel natural and easy to use. Jumping is also included in the character movement and the jump height is controllable.
-
-\subsubsection{Slip Jump}
-
-If the player jumps as soon as they change directions, the player receives a boost in momentum towards the new direction.
 
 \subsubsection{Crouch and Sliding}
 
@@ -162,7 +158,7 @@ Key objects are objects that can trigger a special effect using a specific weapo
 
 \subsubsection{Incendiary Barrel Hazard}
 
-The incendiary barrel is an explosive barrel that can only be triggered by shooting at it using flame-based weapons only. Enemies caught in the blast will be damaged, knocked away and have a burn-effect applied to them. If the player is caught in this blast, he will only take a small amount of damage and be knocked away far. The Incendiary Barrel can be knocked upwards using Power-Slide. The player can also push the Incendiary Barrel in two directions, but this slows down the player's movement and he cannot shoot his weapon. If shots that come from the Firewall or Falcon hit the Incendiary Barrel, then it will explode. It can also explode if it happens to collide with the tip of a Magma Spike. Explosions from other Incendiary Barrels can also trigger another Incendiary Barrel, but the KE-60's explosive projectiles can only push around the Incendiary Barrel, not detonate it. The explosions from Incendiary Barrels can also destroy breakable objects in the same way the KE-60's projectiles explosions can. These interactions exist so that the player can have many opportunities for completing mini-puzzles and take advantage of the Incendiary Barrel's properties during combat. 
+The incendiary barrel is an explosive barrel that can be detonated by shooting at it using the Firewall Shotgun only. Enemies caught in the blast will be damaged, knocked away and have a burn-effect applied to them. If the player is caught in this blast, they will take one dot of damage and be knocked away with high momentum without being burned. It can also explode if it happens to collide with the tip of a Magma Spike. Explosions from other Incendiary Barrels can also trigger another Incendiary Barrel, but the KE-60's explosive projectiles can only push around the Incendiary Barrel, not detonate it. The explosions from Incendiary Barrels can also destroy breakable objects in the same way the KE-60's projectiles explosions can. These interactions exist so that the player can have many opportunities for completing mini-puzzles and take advantage of the Incendiary Barrel's properties during combat. 
 
 \paragraph{Combat Purposes}
 
@@ -170,7 +166,7 @@ The player can use Power-Slide to re-position the barrel quickly to deal massive
 
 \paragraph{Secret Purposes}
 
-This paragraph will not describe in detail how the Incendiary Barrels will work in puzzles. However, the Incendiary Barrel's properties open up for a lot of opportunities in creating puzzle structures. The main thing the Incendiary Barrel provides is the possibility to push it towards a breakable structure that lets the player access a secret area behind it by exploding it. 
+The Incendiary Barrel's properties open up for a lot of opportunities in creating puzzle structures. The main thing the Incendiary Barrel provides is that it lets the player access a secret area behind a breakable obstacle by exploding it. 
 
 \subsubsection{Magma Spike Hazard}
 
@@ -196,11 +192,11 @@ The Magma Spike hazard prevents the player from reaching an area since it instan
 
 \subsubsection{Crate}
 
-Crates are breakable objects that grant a reward for the player. Crates can contain different types of ammo and scrap. Some rarer crates also contain a weapon, but the weapon itself is not revealed until the crate is broken. The containments will be indicated by an icon on the crate. Power-slide, shooting or any other damaging ability can crack open a crate and drop its items.  Power-sliding into a crate causes the contents to fly up into the air. 
+Crates are breakable objects that grant a reward for the player. Crates can contain different types of scrap and weapon ammo. Some rarer crates also contain a weapon, but the weapon itself is not revealed until the crate is broken. The containments will be indicated by an icon on the crate. Power-slide, shooting or any other damaging ability can crack open a crate and drop its items.  Power-sliding into a crate causes the contents to fly up into the air. 
 
 \subsubsection{Damaged Obstacle}
 
-Damaged obstacles are destructible and grant scrap upon taking damage and when destroyed, similar to how enemies work. They are used to add a fun way to progress the level and reward some scrap. These are square-shaped and blocky, which is meant to be distinguishable.
+Damaged obstacles are destructible and grant scrap upon taking damage and when destroyed, similar to how enemies work. They are used to add a fun way to progress the level and reward some scrap. These are square-shaped and blocky, which is meant to be distinguishable. These can be damaged using any weapon. Explosive damage instantly destroys it. 
 
 \subsection{Enemy Mechanics}
 
@@ -226,25 +222,11 @@ Normal Enemies are the minions that the player can kill without hitting too many
 
 \paragraph{Gunner Enemy}
 
-The Gunner Enemies are humanoid-looking enemies that drop Field Weapons upon death. Their combat design will vary depending on the weapon they carry, but the visual design is just a re-skin of a default base. If the player already has unlocked the weapon they carry, the enemy will just drop a high amount of ammo for that weapon (indicated by their element). Gunner enemies are a type of mini-boss that will be very agile and somewhat resemble the capabilities of the player. Gunner enemies only fire their weapon in a certain interval followed up by a offensive/defensive usage of the weapon's special ability. These enemies are supposed to be harder to defeat than normal enemies (both by their AI and HP), but easy for experienced players (by learning the enemies). These enemies are not common, but start becoming more common after the first encounter since the player would have unlocked the enemy's weapon by the time it was defeated. 
+The Gunner Enemies are humanoid-looking enemies that drop Field Weapons upon death. Their combat design will vary depending on the weapon they carry, but the visual design is just a re-skin of a default base. If the player already has equipped the weapon they carry, the enemy will just drop ammo. Gunner enemies are a type of mini-boss that will be very agile and somewhat resemble the capabilities of the player. Gunner enemies only fire their weapon in a certain interval followed up by a offensive/defensive usage of the weapon's special ability. These enemies are supposed to be harder to defeat than normal enemies (both by their AI and HP), but easy for experienced players (by learning the enemies). These enemies are not common, but start becoming more common after the first encounter since the player would have unlocked the enemy's weapon by the time it was defeated. 
 
 \paragraph{Mini Boss}
 
 \paragraph{Boss}
-
-\subsubsection{Elements of Enemies}
-
-The enemies will have an element signifying what type of ammo they will drop on death. Not all enemies will have an element tied to them because that would decrease the variety in their behaviour for the following reason: elements also signify their battle-style. For instance, Fire-based enemies will fight close-range and deal high damage per hit. The element will be displayed on the enemy based on their visual design using colors. Enemies without an element will not drop ammo and only scraps and will have their own unique way of fighting. Mini-bosses and bosses are always going to have an element tied to them, though some exceptions can be made depending on level design. 
-
-\paragraph{Element Playstyles}
-
-\begin{itemize}
-	\item Flame: Operates in close-range combat and deals high damage
-	\item Energy: Durable heavy enemies that deal concentrated damage focusing on locking down an area
-	\item Dark: Long-range operating enemies with evasive abilities
-\end{itemize}
-
-
 \subsection{Enemy List}
 
 Here is a list of all the enemies and their different mechanics. 
@@ -354,21 +336,13 @@ This enemy will have the same placement in a level like any other Gunner Exo. Th
 The combat mechanics in this game are very simple. The player can Power Slide, jump and fire their weapon. Lastly, enemies have a weak spot on top of their head. The player must jump over the enemy and aim down to be able to hit it. Most enemies die from one hit on this weak spot and some take a few more hits. Power-sliding knocks enemies up in the air and leaves them vulnerable to the player's shots from below since some enemies cannot react to the knock-up.
 These are the core combat mechanics, the rest is determined by the weapon the player has equipped.
 
-\subsubsection{Weapon Switching}
-
-The player can switch between all his unlocked Field Weapons and equipped Standard Weapon. Switching weapons causes a delay before the player can use it. This lets the player strategically choose which weapon to conserve ammo for and not be completely reliant on their Standard Weapon. 
-
-\subsubsection{Playstyles tied to Weapon Element}
-
-As described in the section about elements for enemies, the same logic applies to the player with their equipped weapon. Flame-based  weapons are effective at close range, Energy-based weapons are easier to use when standing still and Dark-based weapons fire slowly so the player is safer at longer distances. These playstyles can change based on what the player wants to do, and practically all weapons are effective in all capacities if the player is good enough at the game. 
-
 \subsubsection{Field Weapons}
 
-Field weapons are weapons that can only be unlocked by picking it up for the first time. Field weapons come with limited ammo in specific amount, but the player can pick up as much ammo as they want for a weapon. The player carries the weapon they picked up to the next level. 
+Field weapons are weapons that can only be unlocked by picking it up for the first time. Field weapons come with limited ammo in specific amount, but the player can pick up as much ammo as they want for a weapon. The player carries the weapon they picked up to the next level. Some weapons give the player a passive ability  as well. 
 
 \paragraph{Neostar Machinegun}
 
-Rapid-fire magnetic machine-gun. A quick charge up time is required for the weapon to fire, but it can be spammed to keep it at almost-max charge. Hitting an enemy enough times magnetizes the enemy and makes all your shots follow the enemy. It is also possible to magnetize metallic surfaces in the same way.
+Rapid-fire magnetic machine-gun. A quick charge up time is required for the weapon to fire, but it can be spammed to keep it at almost-max charge. Hitting an enemy enough times magnetizes the enemy and makes all your shots follow the enemy. Wielding this weapon allows the player to walk on metallic surfaces.
 
 \begin{itemize}
 	\item Initial Ammo: 200
@@ -379,19 +353,20 @@ Rapid-fire magnetic machine-gun. A quick charge up time is required for the weap
 
 \paragraph{KE-60 Grenadier}
 
-Explosive energy orb launcher that can propel any object, including the player. The propelling property of the orbs is meant to allow the player to rocket-jump and gain massive momentum at a cost for HP since it also damages the player. The explosion from the orbs can also destroy stone-based hazards and obstacles. 
+Explosive energy orb launcher that can propel any object, including the player. The propelling property of the orbs is meant to allow the player to rocket-jump and gain massive momentum at a cost for HP since it also damages the player. The explosion from the orbs can also destroy stone-based hazards and damaged obstacles. Wielding this weapon surrounds the player with a kinetic energy shield that allows the player to take one hit without losing health. The shield recharges after a few seconds when it is used.
 
 \begin{itemize}
 	\item Initial Ammo: 30
 	\item Direct-hit Damage: 5
 	\item Explosive Damage: 5
 	\item Recoil-boost usage: ??
+	\item Shield-recharge time: ??
 \end{itemize} 
 
 
 \paragraph{Firewall Shotgun}
 
-Flame shotgun that burns enemies over time. The weapon fires a spread of flame pellets for each shot. This is also the only weapon that can trigger explosive barrels, which do high damage to enemies and allows the player to rocket-jump on them. 
+Flame shotgun that burns enemies over time. The weapon fires a spread of flame pellets for each shot. This is the only weapon that can trigger explosive barrels, which do high damage to enemies and allows the player to rocket-jump on them. 
 
 \begin{itemize}
 	\item Initial Ammo: 50
@@ -403,7 +378,7 @@ Flame shotgun that burns enemies over time. The weapon fires a spread of flame p
 
 \paragraph{Falcon Rifle}
 
-Rifle with a rocket and bayonet attached. It shoots projectile bullets propelled by the rocket receiver of the weapon. Wielding this weapon allows the player to slide faster and deal more melee-based damage (i.e., Power Slide). If the player runs out of Rush Energy, they can still Power Slide with the default speed and damage, but this consumes ammo. 
+Rifle with a rocket and bayonet attached. It shoots projectile bullets propelled by the rocket receiver of the weapon. Wielding this weapon allows the player to slide faster and deal more Power-Slide. If the player runs out of Rush Energy, they can still Power Slide with the default speed and damage.
 
 \begin{itemize}
 	\item Initial Ammo: 50
