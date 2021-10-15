@@ -47,33 +47,9 @@ TODO
 
 \subsection{Progression Systems}
 
-\subsubsection{Power-Ups}
+\subsubsection{Field Weapons}
 
-To gain a power-up during combat, the player must pick up a number of Power Scrap corresponding to the equipped Power-Up's tier, craft it using Scrap from checkpoints or pick them up from wherever they may spawn as a collectible item on a level. There will be three tiers of Power-Ups: Starter, Mid and High tier. The Starter tier is a collection of already available power-ups that the player can choose from before entering a level. The Mid tier Power-Ups have a chance to be dropped by dead enemies and stronger enemies have a higher chance of dropping one. High tier power-ups can only be picked up from secret areas. The player can also choose to pay Scrap to fully charge their equipped Power-Up before entering a level. Picking up an above-starter-tier power up allows the player to regain it even after it was used. 
-
-\paragraph{Storm Rounds}
-
-The player fully refills their equipped weapon's ammo and boosts its damage and fire-rate until the weapon runs out of ammo. After running out of ammo, the weapon will continue using the ammo pool for its ammo type. 
-
-\begin{itemize}
-	\item Tier: Mid
-	\item Duration: Until equipped weapon is out of ammo
-	\item Power Scrap Requirement: 250
-\end{itemize}
-
-\paragraph{Storm Overload}
-
-The player is surrounded by electricity that rapidly damages and slows down enemies caught in it. The radius of this power-up is large, but still requires the player to be aggressive. It is worth mentioning that the player can still take damage during this power-up's uptime. 
-
-\begin{itemize}
-	\item Tier: High
-	\item Duration: 10s
-	\item Power Scrap Requirement: 600
-\end{itemize}
-
-\subsubsection{Field Weapon Unlocks and Upgrades}
-
-Picking up a new weapon that they player has never used is all that it takes to unlock it for deployment. Subsequently, the player can unlock upgrades for an unlocked Field Weapon. To do so, the player must find Upgrade Parts at semi-secret locations. The upgrades can also be found at the beginning of certain levels, but these are placed deliberately to keep the player up-to-speed. The player must pay a certain amount of scrap to upgrade their weapon. Weapon upgrades are essentially an extra ability on the weapon. It uses ammo.
+The only form for a progression system that technically counts as one would be picking up new weapons and learning how to use them. 
 
 \subsection{Play Flow}
 
@@ -105,7 +81,7 @@ Every level has one or two secret areas that are not so obvious to find. Each se
 
 \paragraph{Secret Rewards}
 
-Secrets can reward the player with three different things: a supply crate, a high-tier Power-Up and a passage to skip to the next world. The supply crates contain a large number of Normal Scrap and all ammo types (enough ammo to fully refill each weapon). The player can also find a high-tier Power-Up and replace it with their currently equipped one but fully charged. Lastly, the secret passage leading to the next level world is an alternative to end the level that rewards the player with a new path to the next world inside the level-selection screen. This last part is ideal for speedrunning. 
+Secrets can reward the player with three different things: a supply crate and a passage to skip some levels. The supply crates contain a large number of Normal Scrap and all ammo types (enough ammo to fully refill the equipped weapon). Lastly, the secret passage leading to the next level world is an alternative to end the level that rewards the player with a new path to the next world inside the level-selection screen. This last part is ideal for speedrunning. 
 
 \section{Game Mechanics}
 
@@ -121,10 +97,6 @@ The player has a limited amount of health which, once depleted, kills the player
 
 Rush Energy is a resource that allows the player to Power Slide, Recoil Boost and Chrono Drift. The player has a maximum of six dots of energy displayed on their HUD and each dot refills slowly only when the player is grounded. Different weapons will use different amounts of dots per shot when recoil boosting, and power-sliding uses one. Chrono Drift must use two to balance such a powerful ability. 
 
-\subsubsection{Power-Up Charge}
-
-The player cannot use their equipped Power-Up unless they have enough charge which can be collected from Power-Scrap during combat. Using a Power-Up depletes the charge and the player must collect more Power-Scrap if they want a second use of their Power-Up. 
-
 \subsubsection{Scrap}
 
 There are various types of scrap that enemies drop and they each have a different purpose. All types are dropped by enemies (some more/less than others) and are colored differently based on their use. All types of scrap spawn when an enemy is eliminated. Each is designed to reward the player for being aggressive, but also recover when they must play more carefully. 
@@ -135,26 +107,12 @@ The player will lose scrap each time they die and the amount is scaled with how 
 
 \paragraph{Normal Scrap}
 
-The first type of scrap is the "economical" scrap (just called Scrap), which is colored as a standard rusty cogwheel. This type of scrap's amount is shown in the HUD and the player can carry as much as they want of it (there should be a very high maximum due to technical reasons). This scrap can be used to refill health, ammunition and fully charge an equipped power-up at checkpoints. % but can also be converted to Evo Cores when the player completes a level. For every hundred scrap, the player earns an Evo Core at the end of the level.
-The only way to gain this type of scrap is by damaging an enemy, making weaker weapons useful for refilling ammo or health before reaching a checkpoint. 
+The first type of scrap is the "economical" scrap (just called Scrap), which is colored as a standard rusty cogwheel. This type of scrap's amount is shown in the HUD and the player can carry as much as they want of it (there should be a very high maximum due to technical reasons). This scrap can be used to refill health  and ammunition. % but can also be converted to Evo Cores when the player completes a level. For every hundred scrap, the player earns an Evo Core at the end of the level.
+The only way to gain this type of scrap is by damaging an enemy, making weaker weapons useful for refilling ammo or health before reaching a checkpoint. All scrap is lost when a level is completed.
 
 \paragraph{Health Scrap}
 
 Health Scrap is a green-colored cogwheel collectible that heals the player when collected. This type of scrap can only spawn when an enemy has below half of their health. After that, the health scrap can spawn when the enemy takes damage from the player. The companion drone starts using this scrap to repair the player's suit. 
-
-\paragraph{Power Scrap}
-
-Power Scrap is a blue-colored cogwheel collectible that charges the player's Power-Up meter and refills the player's Rush Energy simultaneously. This type of scrap only spawns when an enemy takes critical hit damage or when eliminated.
-
-\subsubsection{Field Weapon Ammo and Ammo Types}
-
-The player can fire their weapon as long as the ammo type it takes is present in their inventory. There are three types of weapon ammo
-
-\begin{itemize}
-	\item Pyro Fuel (Used by Firewall and Falcon)
-	\item Energy Cells (Used by Neostar and KE-60)
-	\item Anti Metal (Used by Nullshatter)
-\end{itemize}
 
 \subsection{Interactions}
 
@@ -176,11 +134,11 @@ Not strictly about currency, but about resource-management. For example, cooldow
 
 \subsubsection{Field-Weapon Ammo}
 
-Field weapons have limited ammunition. The player must conserve their ammo carefully. Each Field Weapon consumes a type of ammo and one or more weapons can share that ammo type. 
+Field weapons have limited ammunition. The player must conserve their ammo carefully. Each Field Weapon consumes their very own ammo pool which does not have a maximum. However, picking up a weapon initially gives a predefined amount. 
 
 \subsubsection{Scrap}
 
-Scrap is a gameplay currency used to refill ammo, health and power-up charge at checkpoints. When the player completes a level, they will keep all the scrap they collected for the next one.  
+Scrap is a gameplay currency used to refill ammo and health. When the player completes a level, they will lose all the scrap they collected. 
 
 \subsection{Movement}
 
@@ -405,7 +363,7 @@ This enemy will have the same placement in a level like any other Gunner Exo. Th
 
 \subsection{Combat}
 
-The combat mechanics in this game are very simple. The player can Power Slide, fire their weapon and use their available power-up. Lastly, enemies have a weak spot on top of their head. The player must jump over the enemy and aim down to be able to hit it. Most enemies die from one hit on this weak spot and some take a few more hits. Power-sliding knocks enemies up in the air and leaves them vulnerable to the player's shots from below since some enemies cannot react to the knock-up.
+The combat mechanics in this game are very simple. The player can Power Slide, jump and fire their weapon. Lastly, enemies have a weak spot on top of their head. The player must jump over the enemy and aim down to be able to hit it. Most enemies die from one hit on this weak spot and some take a few more hits. Power-sliding knocks enemies up in the air and leaves them vulnerable to the player's shots from below since some enemies cannot react to the knock-up.
 These are the core combat mechanics, the rest is determined by the weapon the player has equipped.
 
 \subsubsection{Weapon Switching}
@@ -429,8 +387,6 @@ Based on the ammo type the weapon consumes, the shots coming out of a Field Weap
 	\item Energy Cells: Projectiles travel slowly with poor accuracy. Requires the player to concentrate fire on a target to deal enough damage
 	\item Anti Metal: Slow fire rate, but shots land instantly at the target and accurately with massive damage. Requires the player to be accurate with their shots and make them count
 \end{itemize}
-
-Standard Weapons will also borrow parts of each trait. Since there will be only three weapons, each weapon will take one of these traits to make every Standard Weapon unique.
 
 \paragraph{M7 Neostar}
 
@@ -502,9 +458,9 @@ Reality-shattering inter-dimensional sniper rifle. Fires slowly and makes infini
 	\item Recoil-boost usage:
 \end{itemize}
 
-\subsubsection{Standard Weapons}
+\subsubsection{Standard Weapon}
 
-Standard weapons are weaker than Field Weapons and are not equipped with a special ability. These exist so that the player has a weapon to start with or have one at all when the player runs out of ammo on his Field Weapons. The reason standard weapons have infinite ammo is because they are powered by The Storm and shoot white Storm Lasers. 
+The player is equipped with a short-ranged pistol that deals a small amount of damage but shoots infinitely. It has no special trait.
 
 \paragraph{Hamilton M99} 
 
@@ -513,13 +469,6 @@ Default pistol with infinite ammunition that fires rapidly. The damage is hit-sc
 \begin{itemize}
 	\item Shot type: Limited range hit-scan
 	\item Damage: 1
-	\item Recoil-boost usage: ??
-\end{itemize}
-
-\paragraph{Mikhailov M-SAR} 
-
-\begin{itemize}
-	\item Damage: 3
 	\item Recoil-boost usage: ??
 \end{itemize}
 
@@ -641,7 +590,7 @@ Inspired by similar robot characters such as BT-7274 from Titanfall 2. HM-4170 i
 
 \subsubsection{Abilities}
 
-HM-4170 can hover and travel back in time, but he also has the ability to use Storm Cores to give the player a power-up. 
+HM-4170 can hover and travel back in time. %, but he also has the ability to use Storm Cores to give the player a power-up. 
 
 \subsubsection{Relevance to the Story}
 
@@ -665,11 +614,13 @@ WIP: This subsection describes the general areas the player will encounter as a 
 
 \subsubsection{Secret Areas and Rewards}
 
-Secret areas can be reached through puzzles using the companion drone, regular exploration, platforming and using Key Objects. Secrets can reward the player with a High-Tier Power-Up or a Weapon Upgrade.
+Secret areas can be reached through plaforming or using a weapon's unique trait to access a key object to help with the platforming. Secret areas can reward the player with weapon ammo, scrap or sometimes the ability to skip many levels. 
+
+% Secret areas can be reached through puzzles using the companion drone, regular exploration, platforming and using Key Objects. Secrets can reward the player with a High-Tier Power-Up or a Weapon Upgrade.
 
 \subsubsection{Checkpoint Placement, Usage and Purpose}
 
-Despite the fact that the player can make a checkpoint wherever they want using Chrono Drift, there will be "automatic" checkpoints placed throughout the level with extra functionality. These checkpoints are where the player will respawn if they die, hence why it was referred to as an automatic checkpoint. The player just needs to collide with the checkpoint to mark it as a respawn-point. Additionally, this type of checkpoint allows the player to use scrap to instantly refill ammo, heal up to full health and gain one power-up. The checkpoints are made to get the player up-to-speed on the challenges that are to come and make it more intuitive to retry after death. They are normally placed so that they are available after several combat areas and before objectives, puzzles and platforming areas. However, this can vary depending on a given level's design. Levels will be large enough and filled with content so that there will be several checkpoints. The average amount of checkpoints on a level should be three, but there can be more. Boss fights always have a checkpoint near them. 
+Despite the fact that the player can make a checkpoint wherever they want using Chrono Drift, there will be "automatic" checkpoints placed throughout the level with extra functionality. These checkpoints are where the player will respawn if they die, hence why it was referred to as an automatic checkpoint. The player just needs to collide with the checkpoint to mark it as a respawn-point. Additionally, this type of checkpoint allows the player to use scrap to instantly refill ammo and heal up to full health. The checkpoints are made to get the player up-to-speed on the challenges that are to come and make it more intuitive to retry after death. They are normally placed so that they are available after several combat areas and before objectives, puzzles and platforming areas. However, this can vary depending on a given level's design. Levels will only have one checkpoint to make the game simple, but the exception is levels with boss fights that always have a checkpoint near them (which makes the level have two checkpoints). 
 
 \subsubsection{Objective Placement and Types}
 
@@ -707,7 +658,7 @@ The interface will be a simple pixel-art based interface with menus and a HUD. P
 
 \subsubsection{HUD}
 
-The in-game heads-up display will only show necessary information about the player's status initially. This includes health, equipped weapon, ammo, scrap and the power-up meter with all equipped power-ups. Some weapons may have additional user interface elements to display the availability of certain actions (i.e., charge-up time). Lastly, the Rush Energy meter is also a part of the HUD, kind of. It is only displayed when drained or recharging and hovers over the player's head inside the game world. 
+The in-game heads-up display will only show necessary information about the player's status initially. This includes health, equipped weapon, ammo scrap. Some weapons may have additional user interface elements to display the availability of certain actions (i.e., charge-up time). Lastly, the Rush Energy meter is also a part of the HUD, kind of. It is only displayed when drained or recharging and hovers over the player's head inside the game world. 
 
 \begin{itemize}
 	\item TODO: Show images of all the HUD behavior
@@ -723,7 +674,7 @@ Characters that speak to the player through the story will have their dialogues 
 
 \subsubsection{Companion Drone Speech Bubbles}
 
-The companion drone will sometimes assist the player using hints. This is conveyed through speech bubbles above the player (since the drone is rested on top of the player's head). Hints are short and are usually used to remind the player about the mechanics in the beginning. However, further down the game, these will be used for dramatic effect through the story. The drone will also say when a power-up is activated. 
+The companion drone will sometimes assist the player using hints. This is conveyed through speech bubbles above the player (since the drone is rested on top of the player's head). Hints are short and are usually used to remind the player about the mechanics in the beginning. However, further down the game, these will be used for dramatic effect through the story.
 
 \subsubsection{Menus}
 
@@ -744,7 +695,7 @@ The input options when the player is playing in a level will be limited to the b
  \hline
  R & Attack \\  
  \hline 
- L & Use Power-Up \\
+ L & - \\
  \hline
  D-pad Left & Walk Left \\
  \hline
