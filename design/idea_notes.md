@@ -11,6 +11,7 @@ This text file notes down all the ideas for the game that may or may not make it
 - Auto lock-on Power-up: This allows the player to gradually aim at a target without having to perfectly line up their weapon with it
 - Movement: the player can climb and bounce off walls
 - Enemies that wield hitscan weapons take time to lock on to the player (lock on is indicated) before shooting. The lock on can be disrupted by ram sliding into the enemy or performing other stun moves
+- Nazi-commander style Exo enemy
 
 ## SMB NES Style Ovehaul
 
@@ -21,4 +22,3 @@ This ovehaul is here to make the game really simple and short with the premise o
 This frees up one button on the SNES controller.
 - Special ability dots: amount of uses allowed for the equipped weapon's special ability. This can be refilled with scrap or found from crates
 - Collect objective: the player must collect a certain amount of objects and evacuate to finish the level. Taking damage makes the player drop that object on the ground and they must pick it up again. If the object falls in a pit or is destroyed, the player must go back to the location they originally found it. The player does not drop their weapon as long as they have an object
-- 
