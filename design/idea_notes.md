@@ -20,3 +20,5 @@ This ovehaul is here to make the game really simple and short with the premise o
 - When the player touches another weapon collectible while holding a field weapon, he drops the one he's holding and instantly equips the other one.
 This frees up one button on the SNES controller.
 - Special ability dots: amount of uses allowed for the equipped weapon's special ability. This can be refilled with scrap or found from crates
+- Collect objective: the player must collect a certain amount of objects and evacuate to finish the level. Taking damage makes the player drop that object on the ground and they must pick it up again. If the object falls in a pit or is destroyed, the player must go back to the location they originally found it. The player does not drop their weapon as long as they have an object
+- 
