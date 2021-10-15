@@ -19,3 +19,4 @@ This ovehaul is here to make the game really simple and short with the premise o
 - Treat weapons like a temporary power-up
 - When the player touches another weapon collectible while holding a field weapon, he drops the one he's holding and instantly equips the other one.
 This frees up one button on the SNES controller.
+- Special ability dots: amount of uses allowed for the equipped weapon's special ability. This can be refilled with scrap or found from crates
