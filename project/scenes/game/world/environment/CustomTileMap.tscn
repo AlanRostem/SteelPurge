@@ -1,10 +1,20 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/resources/MainTileSet.tres" type="TileSet" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends TileMap
+
+
+# TODO: Make this return based on the tile set resource
+func get_tile_size():
+	return 16
+"
 
 [node name="CustomTileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
 format = 1
+script = SubResource( 1 )
 __meta__ = {
 "_editor_description_": "Default tilemap node for all levels. Loads a specific TileSet resource with all tiles defined for later use"
 }

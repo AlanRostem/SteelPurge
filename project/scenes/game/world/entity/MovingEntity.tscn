@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/game/world/entity/MovingEntity.gd" type="Script" id=1]
+
+[node name="MovingEntity" type="KinematicBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Base class for moving entities. Its collision mode can be modified between 
+MOVE, SLIDE, and SNAP. Its velocity can be changed at any time but is only 
+registered in the next physics process call."
+}
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]

@@ -7,6 +7,15 @@ extends Node2D
 
 onready var __entity_pool = $EntityPool
 
+onready var __tile_map = $CustomTileMap
+
+
+"""
+Retrieve the pixel cell size for the tile map
+"""
+func get_tile_size():
+	return __tile_map.get_tile_size()
+
 """
 Instance a node that inherits the base entity scene through a specified scene and
 specify a relative location for the entity to be present. The node is then added as 
