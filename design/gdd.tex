@@ -19,13 +19,13 @@ Run n' gun, platformer, sidescroller, action.
 
 \subsection{Game Structure}
 
-The game is a 2D sidescroller containing four level per eight worlds where each level has a unique objective to complete per world. The objectives range from reaching the end of the level, collecting items and making sure you don't lose them, planting a bomb and last, but not least, defeating a boss.
+The game is a 2D sidescroller containing four levels per eight worlds where each level has a unique objective to complete per world. The objectives range from reaching the end of the level, collecting items and making sure you don't lose them, planting a bomb and last, but not least, defeating a boss.
 
 % The game is a 2D sidescroller where the primary level type will start from left to right in the first half of the level objective like standard sidescrollers. The first half of the level is about carrying an explosive to a point. Along the way, there will be several obstacles and enemies posing a challenge to the player. After reaching the point, the player plant's the explosive and a timer starts. The player must now go back to the initial spawn point of the level within the bomb time limit. The level design will be two-way, meaning the first half will go from left to right and be more slow-paced as opposed to the second half which is more fast-paced. Since this is the primary level type, there will be more ways to play the levels, but this is the main selling point. 
 
 \subsection{Look and Feel}
 
-Summarize the visuals and the basic style of the game. Use similar products as example. 
+The game will be structurally similar to Super Mario Bros. on the NES and have 8bit style pixel art and music/audio with a mix of high-fidelity sounds. 
 
 \section{Gameplay}
 
@@ -45,9 +45,11 @@ The player must explore around the level to find Storm Cores, a collectible item
 
 \subsubsection{Defeat the Boss}
 
-This type of level is the last level for the given world and the boss is located at the end of the level. All the player has to do is deal damage to the boss while dodging its attacks until the boss' health is depleted.
+This type of level is the last level for the given world and the boss is located at the end of the level. All the player has to do is deal damage to the boss while dodging its attacks until the boss' health is depleted. This type of level will have the same design as the "Purge the Steel"-levels with an extra checkpoint and a boss-fight at the end. 
 
 \subsection{Progression Systems}
+
+\subsubsection{Score}
 
 \subsubsection{Field Weapons}
 
@@ -57,37 +59,15 @@ The only form for a progression system that technically counts as one would be p
 
 Explain how the gameplay elements are connected to each other. Does it feel natural?
 
-\subsection{Side-Challenge Structure}
-
-The side-challenges exist to motivate the player to complete the level fully to achieve a higher rank, which is displayed on level completion. At the end of a level, the player is given information on their performance for each side-challenge. Completing a side-challenge does nothing for now, and only makes the player feel rewarded for being good. 
-
-\subsubsection{Kill All Enemies}
-
-Most levels have a finite number of enemies. Killing all enemies on a level is a side-challenge.
-
-\subsubsection{Break your Evacuation Record}
-
-There is a pre-defined time trial record that the player can break as part of the evacuation process of a level. 
-
-\subsubsection{Take No Damage}
-
-Taking no damage during the playing of a level is a side-challenge. 
-
-\subsubsection{Chrono-Drift Usage}
-
-Using Chorno Drift reduces the player's progress to the max rank. No usage is an indication that the player is skilled enough or has learnt the level, hence they get a reward for completing it without any usage. 
-
 \subsection{Secrets Structure}
 
 Every level has one or two secret areas that are not so obvious to find. Each secret will require a unique weapon, or two, to complete. The secret areas will have a puzzle-like structure in the obstacles which require the specific weapons as well. The weapons required will correspond to the obstacles that require it as well. 
 
-\paragraph{Secret Rewards}
+\subsubsection{Rewards}
 
-Secrets can reward the player with three different things: a supply crate and a passage to skip some levels. The supply crates contain a large number of Normal Scrap and all ammo types (enough ammo to fully refill the equipped weapon). Lastly, the secret passage leading to the next level world is an alternative to end the level that rewards the player with a new path to the next world inside the level-selection screen. This last part is ideal for speedrunning. 
+Secrets can reward the player with two different things: a supply crate and a passage to skip some levels. The supply crates contain a large number of Normal Scrap and some ammo. Lastly, the secret passage leading to the next level world is an alternative to end the level that rewards the player with a new path to the next world inside the level-selection screen. This last part is ideal for speedrunning. 
 
 \section{Game Mechanics}
-
-This is a critical part of the design document. Emphasize this section when writing.
 
 \subsection{Rules}
 
@@ -95,9 +75,9 @@ This is a critical part of the design document. Emphasize this section when writ
 
 Taking damage depletes one dot of health and knocks the player backwards and sending them into a temporary invincibility state. Additionally, the player drops their weapon on the ground when taking damage. Then, the player is only given a small amount of time to pick up the weapon again before it automatically disappears. 
 
-\subsubsection{Health}
+\subsubsection{Health and Death}
 
-The player has a limited amount of health which, once depleted, kills the player. The health pool is comprised of three dots. Taking any form for damage depletes one dot. Below the health bar, there is a bar that will fill up when collecting Health Scrap. Once the bar is full, the player will be given one dot of health. The bar cannot fill up when the player has full health, and enemies won't drop health scrap. Instead, the player will be given extra normal scrap. 
+The player has a limited amount of health which, once depleted, kills the player and they must start over from their last checkpoint. Dying causes the player to lose scrap. The health pool is comprised of three dots. Taking any form for damage depletes one dot. Below the health bar, there is a bar that will fill up when collecting Health Scrap. Once the bar is full, the player will be given one dot of health. The bar cannot fill up when the player has full health, and enemies won't drop health scrap. Instead, the player will be given extra normal scrap. 
 
 \subsubsection{Rush Energy}
 
@@ -109,14 +89,14 @@ There are various types of scrap that enemies drop and they each have a differen
 
 \subsubsection{Scrap Loss upon Death}
 
-The player will lose scrap each time they die and the amount is scaled with how much the player currently has. 
+The player will lose scrap each time they die they lose half of the scrap they have and it will be dropped in their death location to be picked up again. 
 
-\paragraph{Normal Scrap}
+\subsubsection{Normal Scrap}
 
-The first type of scrap is the "economical" scrap (just called Scrap), which is colored as a standard rusty cogwheel. This type of scrap's amount is shown in the HUD and the player can carry as much as they want of it (there should be a very high maximum due to technical reasons). This scrap can be used to refill health  and ammunition. % but can also be converted to Evo Cores when the player completes a level. For every hundred scrap, the player earns an Evo Core at the end of the level.
-The only way to gain this type of scrap is by damaging an enemy, making weaker weapons useful for refilling ammo or health before reaching a checkpoint. All scrap is lost when a level is completed.
+The first type of scrap is the "economical" scrap (just called Scrap), which is colored as a standard rusty cogwheel. This type of scrap's amount is shown in the HUD and the player can carry as much as they want of it (there should be a very high maximum due to technical reasons). This scrap can be used to refill health  and ammunition at checkpoints. % but can also be converted to Evo Cores when the player completes a level. For every hundred scrap, the player earns an Evo Core at the end of the level.
+The only way to gain this type of scrap is by damaging an enemy, which makes weaker weapons useful for farming scrap. All scrap is lost when a level is completed and is converted to score. 
 
-\paragraph{Health Scrap}
+\subsubsection{Health Scrap}
 
 Health Scrap is a green-colored cogwheel collectible that heals the player when collected. This type of scrap can only spawn when an enemy has below half of their health. After that, the health scrap can spawn when the enemy takes damage from the player. The companion drone starts using this scrap to repair the player's suit. 
 
