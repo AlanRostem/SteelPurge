@@ -1,3 +1,8 @@
+# Finite state machine for game objects such as the player, enemies and more.
+# This uses a node path for the initial state which must be specified for 
+# everything to work. The state objects are added simply by adding them to this
+# node.
+
 extends Node
 
 signal transitioned(state_name)
