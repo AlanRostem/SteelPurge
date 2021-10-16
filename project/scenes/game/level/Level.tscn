@@ -5,3 +5,5 @@
 [node name="Level" type="Node2D"]
 
 [node name="GameWorld" parent="." instance=ExtResource( 1 )]
+
+[editable path="GameWorld"]

@@ -13,6 +13,13 @@ config_version=4
 config/name="Steel Purge"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=512
+window/size/height=288
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
 [importer_defaults]
 
 texture={
