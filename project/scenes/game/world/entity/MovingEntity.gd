@@ -27,6 +27,7 @@ var __snap_vector = Vector2.DOWN
 # changing of velocity is done.
 func set_down_vector(vector):
 	__down_vector = vector
+	__snap_vector = vector
 
 # Retrieve the velocity vector as perceived by the down vector
 func get_velocity():
