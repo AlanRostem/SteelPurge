@@ -23,11 +23,19 @@ var __velocity = Vector2()
 var __down_vector = Vector2.DOWN
 var __snap_vector = Vector2.DOWN
 
+var __can_accelerate = true
+
+# Returns true if the absolute value of the entity's x-velocity is greater
+# than the max_viable_x_speed export variable
+func is_moving_too_fast(max_viable_x_speed):
+	var margin = 0.1
+	return abs(get_velocity().x) >= max_viable_x_speed + margin
+
 # Change where "down" points to relative to the entity. This affects how the 
 # changing of velocity is done.
 func set_down_vector(vector):
 	__down_vector = vector
-	__snap_vector = vector
+	__snap_vector = vector 
 
 # Retrieve the velocity vector as perceived by the down vector
 func get_velocity():
@@ -50,6 +58,26 @@ func set_velocity_y(y):
 	if y < 0:
 		__snap_vector = Vector2.ZERO
 	__velocity = Vector2(get_velocity().x, y).rotated(__down_vector.angle())
+	
+func accelerate_x(x, max_speed, delta):
+	var vx = get_velocity().x
+	var movement = x * delta;
+	var result = abs(vx + movement);
+	var differing_dir = sign(movement) != sign(vx);
+
+	if !__can_accelerate:
+		if result < max_speed or differing_dir:
+			__can_accelerate = true;
+		else: return
+
+	if result > max_speed and !differing_dir:
+		movement = (result - max_speed) * delta * sign(x);
+		result = abs(vx + movement);
+		if result > max_speed:
+			movement = 0;
+		__can_accelerate = false;
+
+	set_velocity_x(vx + movement)
 
 func _physics_process(delta):
 	if is_gravity_enabled:
