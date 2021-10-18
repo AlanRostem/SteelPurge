@@ -15,13 +15,9 @@ var crouch = false
 
 func input_update(event: InputEvent):
 	# Testing how Godot input works
-	if event is InputEventKey:
-		if event.is_action_pressed("move_left"):
-			move_left = true
-		elif event.is_action_released("move_left"):
-			move_left = false
-			
-		if event.is_action_pressed("move_right"):
-			move_right = true
-		elif event.is_action_released("move_right"):
-			move_right = false
+	
+	if event.is_action("move_left"):
+		move_left = event.is_pressed()
+
+	if event.is_action("move_right"):
+		move_right = event.is_pressed()

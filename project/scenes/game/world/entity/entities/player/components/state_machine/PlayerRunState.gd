@@ -8,4 +8,3 @@ func physics_update(delta):
 			parent_state_machine.transition_to("PlayerIdleState")
 		return
 	player.run(int(move_right) - int(move_left), delta)
-	
