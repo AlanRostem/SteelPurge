@@ -14,4 +14,14 @@ var jump = false
 var crouch = false
 
 func input_update(event: InputEvent):
-	pass
+	# Testing how Godot input works
+	if event is InputEventKey:
+		if event.is_action_pressed("move_left"):
+			move_left = true
+		elif event.is_action_released("move_left"):
+			move_left = false
+			
+		if event.is_action_pressed("move_right"):
+			move_right = true
+		elif event.is_action_released("move_right"):
+			move_right = false

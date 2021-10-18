@@ -22,12 +22,13 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	__current_state.physics_update(delta)
+	print(get_current_state())
 
 func transition_to(state_name: String, message: Dictionary = {}):
 	if not has_node(state_name):
 		return
 
 	__current_state.exit()
-	__current_state = get_node(__current_state)
+	__current_state = get_node(state_name)
 	__current_state.enter(message)
 	emit_signal("transitioned", __current_state.name)
