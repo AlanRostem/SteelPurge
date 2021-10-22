@@ -16,7 +16,7 @@ height = 9.973
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 collision_mode = 2
-air_acceleration = 360.0
+air_acceleration = 400.0
 walk_transition_weight = 0.2
 max_walk_speed = 100.0
 walk_friction = 0.4

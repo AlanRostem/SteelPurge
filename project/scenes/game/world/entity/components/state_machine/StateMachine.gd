@@ -26,9 +26,10 @@ func _physics_process(delta):
 
 func transition_to(state_name: String, message: Dictionary = {}):
 	if not has_node(state_name):
-		return
+		return false
 
 	__current_state.exit()
 	__current_state = get_node(state_name)
 	__current_state.enter(message)
 	emit_signal("transitioned", __current_state.name)
+	return true

@@ -6,5 +6,5 @@ func movement_update(delta):
 	else:
 		player.stop_running()
 		if player.is_effectively_standing_still():
-			# parent_state_machine.transition_to("PlayerIdleState")
+			parent_state_machine.transition_to("PlayerIdleState")
 			player.set_velocity_x(0)
