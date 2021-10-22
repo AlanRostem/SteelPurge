@@ -8,3 +8,6 @@ func movement_update(delta):
 		if player.is_effectively_standing_still():
 			parent_state_machine.transition_to("PlayerIdleState")
 			player.set_velocity_x(0)
+			
+	if crouch:
+		parent_state_machine.transition_to("PlayerCrouchState")

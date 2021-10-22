@@ -21,7 +21,8 @@ func physics_process_input_update(delta):
 	move_right = Input.is_action_pressed("move_right")
 	jump = Input.is_action_just_pressed("jump")
 	cancel_jump = Input.is_action_just_released("jump")
-	
+	crouch = Input.is_action_pressed("crouch")
+
 func physics_update(delta):
 	movement_update(delta)
 	# print(name)
