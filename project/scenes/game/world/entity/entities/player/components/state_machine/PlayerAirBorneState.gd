@@ -17,7 +17,7 @@ func movement_update(delta):
 			else:
 				parent_state_machine.transition_to("PlayerIdleState")
 		else:
-			pass # TODO: Implement this case
+			parent_state_machine.transition_to("PlayerSlideState")
 	
 
 func enter(message: Dictionary):

@@ -3,6 +3,7 @@
 # registered in the next physics process call.
 
 extends KinematicBody2D
+class_name MovingEntity
 
 enum CollisionModes {
 	MOVE,

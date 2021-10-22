@@ -12,6 +12,10 @@ export var min_jump_speed: float
 export var max_crouch_speed: float
 export var crouch_transition_weight: float
 
+export var slide_speed: float
+export var slide_friction: float
+export var slide_mitigation_acceleration: float
+
 
 var moving_direction = 1
 var can_swap_looking_direction = true
@@ -30,14 +34,21 @@ func air_move(direction: int, delta: float):
 	accelerate_x(air_acceleration * direction, max_walk_speed, delta)
 	moving_direction = direction
 	
+func negate_slide(direction: int, delta: float):
+	accelerate_x(slide_mitigation_acceleration * direction, max_walk_speed, delta)
+	moving_direction = direction
+	
+func apply_slide_friction(delta):
+	set_velocity_x(lerp(get_velocity().x, 0, slide_friction))
+	
 func stop_running():
 	set_velocity_x(lerp(get_velocity().x, 0, walk_friction))
 
 func crouch_walk(direction: int, delta: float):
 	pass
 
-func slide(direction: int, delta: float):
-	pass
+func slide(direction: int):
+	set_velocity_x(direction * slide_speed)
 	
 func crouch():
 	__body_shape.shape.height = 0
