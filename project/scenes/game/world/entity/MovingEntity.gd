@@ -16,6 +16,8 @@ export var is_gravity_enabled = true
 
 export var gravity = 600
 
+export var stop_on_slope = true
+
 var parent_world = null
 
 var __velocity = Vector2()
@@ -100,7 +102,7 @@ func _physics_process(delta):
 			# perspective vector
 			__velocity.y = move_and_slide_with_snap(
 				__velocity, __snap_vector * parent_world.get_tile_size(),
-				-__down_vector, true).y
+				-__down_vector, stop_on_slope).y
 				
 			if is_on_floor():
 				__snap_vector = Vector2(__down_vector)

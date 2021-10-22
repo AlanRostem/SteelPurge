@@ -13,9 +13,11 @@ height = 10.0
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-walk_acceleration = 360.0
+collision_mode = 2
+walk_acceleration = 420.0
+walk_transition_weight = 0.2
 max_walk_speed = 140.0
-walk_friction = 0.95
+walk_friction = 0.4
 
 [node name="BodyShape" parent="." index="0"]
 shape = SubResource( 1 )
