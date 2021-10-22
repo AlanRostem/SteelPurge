@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/world/entity/MovingEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/world/entity/components/state_machine/StateMachine.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/game/world/entity/entities/player/components/state_machine/PlayerState.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/world/entity/entities/player/components/state_machine/PlayerRunState.gd" type="Script" id=6]
 [ext_resource path="res://assets/sprites/char/player/player.png" type="Texture" id=7]
+[ext_resource path="res://scenes/game/world/entity/entities/player/components/state_machine/PlayerAirBorneState.gd" type="Script" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -15,10 +16,12 @@ height = 9.973
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 collision_mode = 2
-walk_acceleration = 420.0
+air_acceleration = 360.0
 walk_transition_weight = 0.2
 max_walk_speed = 100.0
 walk_friction = 0.4
+jump_speed = 255.0
+min_jump_speed = 100.0
 
 [node name="BodyShape" parent="." index="0"]
 shape = SubResource( 1 )
@@ -28,9 +31,14 @@ __inital_state = NodePath("PlayerIdleState")
 
 [node name="PlayerIdleState" parent="PlayerFSM" index="0" instance=ExtResource( 5 )]
 script = ExtResource( 4 )
+is_grounded_state = true
 
 [node name="PlayerRunState" parent="PlayerFSM" index="1" instance=ExtResource( 5 )]
 script = ExtResource( 6 )
+is_grounded_state = true
+
+[node name="PlayerAirBorneState" parent="PlayerFSM" index="2" instance=ExtResource( 5 )]
+script = ExtResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="." index="2"]
 position = Vector2( 0, -5 )
