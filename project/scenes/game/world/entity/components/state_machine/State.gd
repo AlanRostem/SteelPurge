@@ -15,5 +15,8 @@ func exit():
 func input_update(event: InputEvent):
 	pass
 	
+func physics_process_input_update(delta):
+	pass
+	
 func physics_update(delta):
 	pass

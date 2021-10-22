@@ -13,11 +13,6 @@ var aim_down = false
 var jump = false
 var crouch = false
 
-func input_update(event: InputEvent):
-	# Testing how Godot input works
-	
-	if event.is_action("move_left"):
-		move_left = event.is_pressed()
-
-	if event.is_action("move_right"):
-		move_right = event.is_pressed()
+func physics_process_input_update(delta):
+	move_left = Input.is_action_pressed("move_left")
+	move_right = Input.is_action_pressed("move_right")

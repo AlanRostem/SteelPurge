@@ -21,8 +21,9 @@ func _unhandled_input(event):
 	__current_state.input_update(event)
 
 func _physics_process(delta):
+	__current_state.physics_process_input_update(delta)
 	__current_state.physics_update(delta)
-	print(__current_state.move_right)
+	# print(__current_state.move_right)
 
 func transition_to(state_name: String, message: Dictionary = {}):
 	if not has_node(state_name):
