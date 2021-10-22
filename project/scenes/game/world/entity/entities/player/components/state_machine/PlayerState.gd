@@ -35,7 +35,7 @@ func physics_update(delta):
 				parent_state_machine.transition_to("PlayerAirBorneState", {
 					"jumping": true
 				})
-		else: 
+		else:
 			parent_state_machine.transition_to("PlayerAirBorneState")
 		
 	
