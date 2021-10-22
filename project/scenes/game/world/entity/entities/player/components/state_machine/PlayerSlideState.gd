@@ -18,7 +18,7 @@ func movement_update(delta):
 		})
 
 func enter(message):
-	if !player.is_moving_too_fast(player.max_walk_speed):
+	if !player.is_moving_too_fast(player.max_walk_speed) and message.has("boost"):
 		player.slide(player.moving_direction)
 	player.crouch()
 	player.collision_mode = MovingEntity.CollisionModes.SLIDE
