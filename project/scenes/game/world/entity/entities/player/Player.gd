@@ -20,6 +20,8 @@ export var slide_mitigation_acceleration: float
 var moving_direction = 1
 var can_swap_looking_direction = true
 
+var __is_on_ground = false
+
 onready var __body_shape: CollisionShape2D = $BodyShape
 
 func run(direction: int, delta: float):
@@ -63,3 +65,12 @@ func jump():
 	
 func is_effectively_standing_still():
 	return int(round(get_velocity().x)) == 0
+
+func is_on_ground():
+	return __is_on_ground
+
+func _on_GroundDetector_body_entered(area):
+	__is_on_ground = true
+
+func _on_GroundDetector_body_exited(area):
+	__is_on_ground = false

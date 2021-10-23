@@ -12,10 +12,13 @@ func movement_update(delta):
 		else:
 			parent_state_machine.transition_to("PlayerIdleState")
 			
-	if jump:
+	if jump and player.is_on_ground():
 		parent_state_machine.transition_to("PlayerAirBorneState", {
 			"jumping": true
 		})
+		
+	if !player.is_on_ground():
+		parent_state_machine.transition_to("PlayerAirBorneState")
 
 func enter(message):
 	if !player.is_moving_too_fast(player.max_walk_speed) and message.has("boost"):

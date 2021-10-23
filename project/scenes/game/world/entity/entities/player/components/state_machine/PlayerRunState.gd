@@ -7,6 +7,10 @@ func enter(message):
 		__can_slide = false
 
 func movement_update(delta):
+	if player.is_moving_too_fast(player.max_walk_speed):
+		parent_state_machine.transition_to("PlayerSlideState")
+		return
+	
 	if move_left or move_right:
 		player.run(int(move_right) - int(move_left), delta)
 	else:

@@ -10,7 +10,7 @@ func movement_update(delta):
 			
 	player.air_move(int(move_right) - int(move_left), delta)
 	
-	if player.is_on_floor():
+	if player.is_on_ground():
 		if !player.is_moving_too_fast(player.max_walk_speed):
 			if player.get_velocity().x != 0:
 				parent_state_machine.transition_to("PlayerRunState", {

@@ -10,5 +10,6 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 1, 2, 1, 1, 3, 1, 1, 4, 1, 2, 7, 1, 0, 
 
 [node name="Player" parent="GameWorld/EntityPool" index="0" instance=ExtResource( 2 )]
 position = Vector2( 187.806, 37.4542 )
+collision_layer = 1
 
 [editable path="GameWorld"]
