@@ -8,7 +8,13 @@ func movement_update(delta):
 			__is_jumping = false
 			player.set_velocity_y(-player.min_jump_speed)
 			
-	player.air_move(int(move_right) - int(move_left), delta)
+	if !player.is_moving_too_fast(player.max_walk_speed):
+		player.air_move(int(move_right) - int(move_left), delta)
+	else:
+		var intended_dir = int(move_right) - int(move_left)
+		var move_dir = sign(player.get_velocity().x)
+		if intended_dir != move_dir:
+			player.air_move(intended_dir, delta)
 	
 	if player.is_on_ground():
 		if !player.is_moving_too_fast(player.max_walk_speed):

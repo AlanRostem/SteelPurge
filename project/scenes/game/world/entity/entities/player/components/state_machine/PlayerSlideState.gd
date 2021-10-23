@@ -1,7 +1,10 @@
 extends "res://scenes/game/world/entity/entities/player/components/state_machine/PlayerState.gd"
 
 func movement_update(delta):
-	# player.slide_move(int(move_right) - int(move_left), delta)
+	var intended_dir = int(move_right) - int(move_left)
+	var move_dir = sign(player.get_velocity().x)
+	if intended_dir != move_dir:
+		player.negate_slide(intended_dir, delta)
 	player.apply_slide_friction(delta)
 	if !player.is_moving_too_fast(player.max_walk_speed):
 		if !player.is_effectively_standing_still():
