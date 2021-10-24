@@ -50,8 +50,8 @@ is_grounded_state = true
 [node name="PlayerRunState" parent="PlayerFSM" index="1" instance=ExtResource( 5 )]
 script = ExtResource( 6 )
 is_grounded_state = true
-__power_slide_energy_fill_per_second = 100.0
-__power_slide_energy_loss_per_second = 160.0
+__power_slide_energy_fill_per_second = 250.0
+__power_slide_energy_loss_per_second = 250.0
 
 [node name="PlayerAirBorneState" parent="PlayerFSM" index="2" instance=ExtResource( 5 )]
 script = ExtResource( 8 )
