@@ -5,6 +5,12 @@ func movement_update(delta):
 	if player.is_effectively_standing_still():
 		player.set_velocity_x(0)
 			
+	if jump:
+		parent_state_machine.transition_to("PlayerAirborneState", {
+			"jumping": true
+		})
+		return
+			
 	if !crouch:
 		if player.is_effectively_standing_still():
 			parent_state_machine.transition_to("PlayerIdleState")

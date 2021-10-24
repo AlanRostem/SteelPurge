@@ -20,11 +20,9 @@ export var slide_mitigation_acceleration: float
 var moving_direction = 1
 var can_swap_looking_direction = true
 
-var __is_on_ground = false
 var __is_crouched = false
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
-onready var __ground_detector = $GroundDetector
 
 func run(direction: int, delta: float):
 	set_velocity_x(lerp(get_velocity().x, direction * max_walk_speed, walk_transition_weight))
@@ -74,10 +72,4 @@ func is_effectively_standing_still():
 	return int(round(get_velocity().x)) == 0
 
 func is_on_ground():
-	return __is_on_ground or is_on_floor()
-
-func _on_GroundDetector_body_entered(area):
-	__is_on_ground = true
-
-func _on_GroundDetector_body_exited(area):
-	__is_on_ground = false
+	return is_on_floor()

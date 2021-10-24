@@ -107,5 +107,5 @@ func _physics_process(delta):
 				
 			if is_on_floor():
 				__snap_vector = Vector2(__down_vector)
-	
+				
 	# TODO: Check if the entity is on a slope and store that in a variable

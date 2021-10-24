@@ -4,5 +4,12 @@ func movement_update(delta):
 	if crouch:
 		parent_state_machine.transition_to("PlayerCrouchState")
 		return
+		
+	if jump:
+		parent_state_machine.transition_to("PlayerAirborneState", {
+			"jumping": true
+		})
+		return
+		
 	if move_left or move_right:
 		parent_state_machine.transition_to("PlayerRunState")
