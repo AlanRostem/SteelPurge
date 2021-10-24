@@ -23,13 +23,13 @@ script = ExtResource( 3 )
 collision_mode = 2
 air_acceleration = 400.0
 walk_transition_weight = 0.2
-max_walk_speed = 100.0
+max_walk_speed = 140.0
 walk_friction = 0.4
 jump_speed = 255.0
 min_jump_speed = 100.0
 max_crouch_speed = 20.0
 crouch_transition_weight = 0.3
-slide_speed = 260.0
+slide_speed = 230.0
 slide_friction = 0.02
 slide_mitigation_acceleration = 400.0
 
@@ -50,6 +50,8 @@ is_grounded_state = true
 [node name="PlayerRunState" parent="PlayerFSM" index="1" instance=ExtResource( 5 )]
 script = ExtResource( 6 )
 is_grounded_state = true
+__power_slide_energy_fill_per_second = 100.0
+__power_slide_energy_loss_per_second = 160.0
 
 [node name="PlayerAirBorneState" parent="PlayerFSM" index="2" instance=ExtResource( 5 )]
 script = ExtResource( 8 )

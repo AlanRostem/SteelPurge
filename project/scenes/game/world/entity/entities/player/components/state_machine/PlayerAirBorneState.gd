@@ -19,9 +19,7 @@ func movement_update(delta):
 	if player.is_on_ground():
 		if !player.is_moving_too_fast(player.max_walk_speed):
 			if player.get_velocity().x != 0:
-				parent_state_machine.transition_to("PlayerRunState", {
-					"just_landed": true
-				})
+				parent_state_machine.transition_to("PlayerRunState")
 			else:
 				parent_state_machine.transition_to("PlayerIdleState")
 		else:

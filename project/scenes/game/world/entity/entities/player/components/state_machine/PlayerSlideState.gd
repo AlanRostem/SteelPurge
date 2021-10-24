@@ -24,7 +24,7 @@ func movement_update(delta):
 		parent_state_machine.transition_to("PlayerAirBorneState")
 
 func enter(message):
-	if !player.is_moving_too_fast(player.max_walk_speed) and message.has("boost"):
+	if !player.is_moving_too_fast(player.max_walk_speed):
 		player.slide(player.moving_direction)
 	player.crouch()
 	player.collision_mode = MovingEntity.CollisionModes.SLIDE
