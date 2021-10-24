@@ -16,7 +16,7 @@ signal hit_dealt(hitbox)
 # box that can receive hits.
 export(HitBoxActionType) var hit_box_action_type = HitBoxActionType.HIT_DEALER
 
-export(String) var team = UN_SET_TEAM
+export(String) var __team = UN_SET_TEAM
 
 onready var parent_entity = get_parent()
 
@@ -27,12 +27,18 @@ func _ready():
 		HitBoxActionType.HIT_RECEIVER:
 			set_collision_layer_bit(HIT_BOX_IN_COLLISION_BIT, true)
 
+func change_team(team):
+	__team = team
+
+func get_team():
+	return __team
+
 # This connected signal will only be called if the hit box action type is set to
 # deal hits. 
 func _on_HitBox_area_entered(area):
-	assert(team != UN_SET_TEAM)
-	assert(area.team != UN_SET_TEAM)
-	if team == area.team: return
+	assert(__team != UN_SET_TEAM)
+	assert(area.get_team() != UN_SET_TEAM)
+	if __team == area.get_team(): return
 	
 	area.emit_signal("hit_received", self)
 	emit_signal("hit_dealt", area)
