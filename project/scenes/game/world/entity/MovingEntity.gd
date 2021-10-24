@@ -97,7 +97,7 @@ func _physics_process(delta):
 		CollisionModes.MOVE:
 			move_and_collide(__velocity * delta)
 		CollisionModes.SLIDE:
-			__velocity = move_and_slide(__velocity, __down_vector)
+			__velocity = move_and_slide(__velocity, -__down_vector)
 		CollisionModes.SNAP:
 			# TODO: Determine if this needs rotation when changing 
 			# perspective vector
