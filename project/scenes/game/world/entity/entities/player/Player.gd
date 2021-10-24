@@ -22,10 +22,7 @@ var can_swap_looking_direction = true
 
 var __is_on_ground = false
 
-var __is_crouched = false
-
 onready var __body_shape: CollisionShape2D = $BodyShape
-onready var __ground_detector = $GroundDetector
 
 func run(direction: int, delta: float):
 	set_velocity_x(lerp(get_velocity().x, direction * max_walk_speed, walk_transition_weight))
@@ -56,21 +53,12 @@ func slide(direction: int):
 	set_velocity_x(direction * slide_speed)
 	
 func crouch():
-	if __is_crouched: return
 	__body_shape.shape.height = 0
 	position.y += 5
-	__ground_detector.position.y = 6
-	__is_crouched = true
 	
 func stand_up():
-	if !__is_crouched: return
 	position.y -= 5
 	__body_shape.shape.height = 10
-	__ground_detector.position.y = 11
-	__is_crouched = false
-	
-func is_crouched():
-	return __is_crouched
 
 func jump():
 	set_velocity_y(-jump_speed)
