@@ -27,9 +27,9 @@ func enter(message):
 	if !player.is_moving_too_fast(player.max_walk_speed):
 		player.slide(player.moving_direction)
 	player.crouch()
-#	player.collision_mode = MovingEntity.CollisionModes.SLIDE
+	player.collision_mode = MovingEntity.CollisionModes.SLIDE
 	
 func exit():
 	if !crouch:
 		player.stand_up()
-#	player.collision_mode = MovingEntity.CollisionModes.SNAP
+	player.collision_mode = MovingEntity.CollisionModes.SNAP
