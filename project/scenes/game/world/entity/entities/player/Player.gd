@@ -23,7 +23,7 @@ var can_swap_looking_direction = true
 var __is_on_ground = false
 var __is_crouched = false
 
-onready var __body_shape: CollisionShape2D = $BodyShape
+onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 onready var __ground_detector = $GroundDetector
 
 func run(direction: int, delta: float):
@@ -56,16 +56,12 @@ func slide(direction: int):
 
 func crouch():
 	if __is_crouched: return
-	__body_shape.shape.height = 0
-	position.y += 5
-	__ground_detector.position.y = 6
+	__upper_body_shape.disabled = true
 	__is_crouched = true
 	
 func stand_up():
 	if !__is_crouched: return
-	position.y -= 5
-	__body_shape.shape.height = 10
-	__ground_detector.position.y = 11
+	__upper_body_shape.disabled = false
 	__is_crouched = false
 	
 func is_crouched():
@@ -78,7 +74,7 @@ func is_effectively_standing_still():
 	return int(round(get_velocity().x)) == 0
 
 func is_on_ground():
-	return __is_on_ground
+	return __is_on_ground or is_on_floor()
 
 func _on_GroundDetector_body_entered(area):
 	__is_on_ground = true
