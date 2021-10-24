@@ -1,12 +1,9 @@
 extends "res://scenes/game/world/entity/entities/player/components/state_machine/PlayerState.gd"
 
 func movement_update(delta):
-	if move_left or move_right:
-		player.sneak(int(move_right) - int(move_left), delta)
-	else:
-		player.stop_running()
-		if player.is_effectively_standing_still():
-			player.set_velocity_x(0)
+	player.apply_slide_friction(delta)
+	if player.is_effectively_standing_still():
+		player.set_velocity_x(0)
 			
 	if !crouch:
 		if player.is_effectively_standing_still():

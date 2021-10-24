@@ -26,6 +26,7 @@ func physics_process_input_update(delta):
 func physics_update(delta):
 	movement_update(delta)
 #	print(name)
+	print(player.get_velocity())
 	
 	if player.is_on_wall():
 		player.set_velocity_x(0)

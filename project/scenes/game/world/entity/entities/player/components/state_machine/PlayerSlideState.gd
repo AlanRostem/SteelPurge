@@ -7,14 +7,14 @@ func movement_update(delta):
 		player.negate_slide(intended_dir, delta)
 	player.apply_slide_friction(delta)
 	if !player.is_moving_too_fast(player.max_walk_speed):
-		if !player.is_effectively_standing_still():
+		if player.is_effectively_standing_still():
 			if crouch:
 				parent_state_machine.transition_to("PlayerCrouchState")
 			else:
-				parent_state_machine.transition_to("PlayerRunState")
+				parent_state_machine.transition_to("PlayerIdleState")
 		else:
-			parent_state_machine.transition_to("PlayerIdleState")
-			
+			parent_state_machine.transition_to("PlayerRunState")
+		
 	if jump and player.is_on_ground():
 		parent_state_machine.transition_to("PlayerAirBorneState", {
 			"jumping": true
@@ -30,5 +30,6 @@ func enter(message):
 	player.collision_mode = MovingEntity.CollisionModes.SLIDE
 	
 func exit():
-	player.stand_up()
+	if !crouch:
+		player.stand_up()
 	player.collision_mode = MovingEntity.CollisionModes.SNAP
