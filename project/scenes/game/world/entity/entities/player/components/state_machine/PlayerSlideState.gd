@@ -13,7 +13,10 @@ func movement_update(delta):
 			else:
 				parent_state_machine.transition_to("PlayerIdleState")
 		else:
-			parent_state_machine.transition_to("PlayerRunState")
+			if crouch:
+				parent_state_machine.transition_to("PlayerCrouchState")
+			else:
+				parent_state_machine.transition_to("PlayerRunState")
 		
 	if jump and player.is_on_ground():
 		parent_state_machine.transition_to("PlayerAirBorneState", {
