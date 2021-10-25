@@ -5,6 +5,10 @@ func movement_update(delta):
 	if player.is_effectively_standing_still():
 		player.set_velocity_x(0)
 			
+	var dir = int(move_right) - int(move_left)
+	if dir != 0:
+		player.horizontal_looking_direction = dir
+			
 	if jump:
 		parent_state_machine.transition_to("PlayerAirborneState", {
 			"jumping": true

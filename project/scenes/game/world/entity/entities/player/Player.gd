@@ -22,6 +22,8 @@ var can_swap_looking_direction = true
 
 var __is_crouched = false
 
+var horizontal_looking_direction = 1
+
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 
 func run(direction: int, delta: float):
