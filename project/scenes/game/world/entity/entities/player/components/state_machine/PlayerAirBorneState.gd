@@ -7,11 +7,12 @@ func movement_update(delta):
 		if cancel_jump and player.get_velocity().y < -player.min_jump_speed:
 			__is_jumping = false
 			player.set_velocity_y(-player.min_jump_speed)
-			
+
+	var dir = int(move_right) - int(move_left)
+	if dir != 0:
+		player.horizontal_looking_direction = dir
+		
 	if !player.is_moving_too_fast(player.max_walk_speed):
-		var dir = int(move_right) - int(move_left)
-		if dir != 0:
-			player.horizontal_looking_direction = dir
 		player.air_move(dir, delta)
 	else:
 		var intended_dir = int(move_right) - int(move_left)
