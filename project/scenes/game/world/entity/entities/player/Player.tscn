@@ -40,7 +40,8 @@ slide_mitigation_acceleration = 400.0
 [node name="PlayerSprite" type="AnimatedSprite" parent="." index="0"]
 position = Vector2( 0, -5 )
 frames = ExtResource( 7 )
-animation = "idle"
+animation = "walking"
+playing = true
 script = ExtResource( 11 )
 
 [node name="UpperBodyShape" type="CollisionShape2D" parent="." index="1"]
