@@ -36,9 +36,9 @@ var horizontal_looking_direction = 1
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 
-func _physics_process(delta):
-	print(__dash_charge)
-	print(get_velocity().x)
+#func _physics_process(delta):
+#	print(__dash_charge)
+#	print(get_velocity().x)
 
 func run(direction: int, delta: float):
 	set_velocity_x(lerp(get_velocity().x, direction * max_dash_speed, dash_transition_weight))
