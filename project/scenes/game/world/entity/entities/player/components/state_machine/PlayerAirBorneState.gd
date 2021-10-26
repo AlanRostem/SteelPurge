@@ -25,7 +25,10 @@ func movement_update(delta):
 				if crouch:
 					parent_state_machine.transition_to("PlayerSlideState")
 				else:
-					parent_state_machine.transition_to("PlayerRunState")
+					if player.is_moving_too_fast(player.max_walk_speed):
+						parent_state_machine.transition_to("PlayerRunState")
+					else:
+						parent_state_machine.transition_to("PlayerWalkState")
 			else:
 				parent_state_machine.transition_to("PlayerIdleState")
 		else:

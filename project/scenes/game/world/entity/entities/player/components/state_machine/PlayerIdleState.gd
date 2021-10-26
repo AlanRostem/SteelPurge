@@ -12,4 +12,4 @@ func movement_update(delta):
 		return
 		
 	if move_left or move_right:
-		parent_state_machine.transition_to("PlayerRunState")
+		parent_state_machine.transition_to("PlayerWalkState")

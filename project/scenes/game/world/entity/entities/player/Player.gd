@@ -8,6 +8,10 @@ export var walk_transition_weight: float
 export var max_walk_speed: float
 export var walk_friction: float
 
+export var dash_transition_weight: float
+export var max_dash_speed: float
+export var dash_friction: float
+
 export var jump_speed: float
 export var min_jump_speed: float
 
@@ -32,10 +36,17 @@ var horizontal_looking_direction = 1
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 
+func _physics_process(delta):
+	print(__dash_charge)
+
 func run(direction: int, delta: float):
+	set_velocity_x(lerp(get_velocity().x, direction * max_dash_speed, dash_transition_weight))
+	moving_direction = direction
+
+func walk(direction: int, delta: float):
 	set_velocity_x(lerp(get_velocity().x, direction * max_walk_speed, walk_transition_weight))
 	moving_direction = direction
-	
+
 func sneak(direction: int, delta):
 	set_velocity_x(lerp(get_velocity().x, direction * max_crouch_speed, crouch_transition_weight))
 	moving_direction = direction

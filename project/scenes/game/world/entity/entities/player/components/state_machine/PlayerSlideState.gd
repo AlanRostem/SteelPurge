@@ -10,13 +10,20 @@ func movement_update(delta):
 		if player.is_effectively_standing_still():
 			if crouch:
 				parent_state_machine.transition_to("PlayerCrouchState")
+				return
 			else:
 				parent_state_machine.transition_to("PlayerIdleState")
+				return
 		else:
 			if crouch:
 				parent_state_machine.transition_to("PlayerCrouchState")
+				return
 			else:
-				parent_state_machine.transition_to("PlayerRunState")
+				parent_state_machine.transition_to("PlayerWalkState")
+				return
+	elif !crouch:
+		parent_state_machine.transition_to("PlayerRunState")
+		return
 		
 	if jump and player.is_on_ground():
 		parent_state_machine.transition_to("PlayerAirBorneState", {
@@ -27,7 +34,7 @@ func movement_update(delta):
 		parent_state_machine.transition_to("PlayerAirBorneState")
 
 func enter(message):
-	if !player.is_moving_too_fast(player.max_walk_speed):
+	if message.has("boost"):
 		player.slide(player.moving_direction)
 	player.crouch()
 	player.collision_mode = MovingEntity.CollisionModes.SLIDE
