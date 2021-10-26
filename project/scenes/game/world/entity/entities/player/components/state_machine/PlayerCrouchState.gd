@@ -25,6 +25,8 @@ func movement_update(delta):
 
 func enter(message):
 	player.crouch()
+	player.collision_mode = MovingEntity.CollisionModes.SLIDE
 	
 func exit():
 	player.stand_up()
+	player.collision_mode = MovingEntity.CollisionModes.SNAP
