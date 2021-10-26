@@ -24,20 +24,20 @@ script = ExtResource( 3 )
 collision_mode = 2
 air_acceleration = 400.0
 walk_transition_weight = 0.2
-max_walk_speed = 140.0
+max_walk_speed = 120.0
 walk_friction = 0.4
-dash_transition_weight = 0.1
+dash_transition_weight = 0.05
 max_dash_speed = 200.0
 dash_friction = 0.1
 jump_speed = 255.0
 min_jump_speed = 100.0
 max_crouch_speed = 20.0
 crouch_transition_weight = 0.3
-slide_speed = 260.0
+slide_speed = 285.0
 slide_friction = 0.02
 slide_mitigation_acceleration = 400.0
-__dash_charge_fill_per_second = 120.0
-__dash_charge_loss_per_second = 180.0
+__dash_charge_fill_per_second = 60.0
+__dash_charge_loss_per_second = 120.0
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="." index="0"]
 position = Vector2( 0, -5 )

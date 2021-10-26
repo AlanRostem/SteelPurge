@@ -5,6 +5,8 @@ func movement_update(delta):
 	if player.is_effectively_standing_still():
 		player.set_velocity_x(0)
 			
+	player.reduce_dash_charge(delta)
+	
 	var dir = int(move_right) - int(move_left)
 	if dir != 0:
 		player.horizontal_looking_direction = dir

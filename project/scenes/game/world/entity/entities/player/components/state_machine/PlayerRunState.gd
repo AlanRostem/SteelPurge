@@ -12,7 +12,7 @@ func movement_update(delta):
 		player.run(dir, delta)
 		
 		var vel_x = player.get_velocity().x
-		if sign(vel_x) == dir:
+		if sign(vel_x) != dir:
 			player.reduce_dash_charge(delta)
 	else:
 		player.reduce_dash_charge(delta)

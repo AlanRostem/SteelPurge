@@ -20,7 +20,7 @@ func movement_update(delta):
 			player.air_move(intended_dir, delta)
 	
 	if player.is_on_ground():
-		if !player.is_moving_too_fast(player.max_walk_speed):
+		if !player.is_moving_too_fast(player.max_dash_speed):
 			if player.get_velocity().x != 0:
 				if crouch:
 					parent_state_machine.transition_to("PlayerSlideState")
