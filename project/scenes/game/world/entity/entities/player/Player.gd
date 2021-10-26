@@ -1,5 +1,7 @@
 extends "res://scenes/game/world/entity/MovingEntity.gd"
 
+const MAX_DASH_CHARGE = 100
+
 export var air_acceleration: float
 
 export var walk_transition_weight: float
@@ -16,6 +18,10 @@ export var slide_speed: float
 export var slide_friction: float
 export var slide_mitigation_acceleration: float
 
+export(float) var __dash_charge_fill_per_second 
+export(float) var __dash_charge_loss_per_second 
+
+var __dash_charge = 0
 
 var moving_direction = 1
 var can_swap_looking_direction = true
@@ -69,6 +75,21 @@ func is_crouched():
 
 func jump():
 	set_velocity_y(-jump_speed)
+	
+func increase_dash_charge(delta):
+	__dash_charge = clamp(__dash_charge + __dash_charge_fill_per_second * delta, 0, MAX_DASH_CHARGE)
+
+func reduce_dash_charge(delta):
+	__dash_charge = clamp(__dash_charge - __dash_charge_loss_per_second * delta, 0, MAX_DASH_CHARGE)
+	
+func maximize_dash_charge():
+	__dash_charge = MAX_DASH_CHARGE
+	
+func has_max_dash_charge():
+	return __dash_charge == MAX_DASH_CHARGE
+	
+func clear_dash_charge():
+	__dash_charge = 0
 	
 func is_effectively_standing_still():
 	return int(round(get_velocity().x)) == 0
