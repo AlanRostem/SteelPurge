@@ -21,9 +21,11 @@ func movement_update(delta):
 	
 	if player.is_on_ground():
 		if !player.is_moving_too_fast(player.max_dash_speed):
-			if player.get_velocity().x != 0:
+			if !player.is_effectively_standing_still():
 				if crouch:
-					parent_state_machine.transition_to("PlayerSlideState")
+					parent_state_machine.transition_to("PlayerSlideState", {
+						"boost": true
+					})
 				else:
 					if player.is_moving_too_fast(player.max_walk_speed):
 						parent_state_machine.transition_to("PlayerRunState")

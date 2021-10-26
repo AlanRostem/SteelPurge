@@ -22,8 +22,8 @@ export var slide_speed: float
 export var slide_friction: float
 export var slide_mitigation_acceleration: float
 
-export(float) var __dash_charge_fill_per_second 
-export(float) var __dash_charge_loss_per_second 
+var __dash_charge_fill_per_second = 200
+var __dash_charge_loss_per_second = 120
 
 var __dash_charge = 0
 

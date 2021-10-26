@@ -6,14 +6,10 @@ func movement_update(delta):
 		if dir != 0:
 			player.horizontal_looking_direction = dir
 		player.walk(dir, delta)
-		
-		var vel_x = player.get_velocity().x
-		if sign(vel_x) == dir:
-			player.increase_dash_charge(delta)
-			if player.has_max_dash_charge():
-				parent_state_machine.transition_to("PlayerRunState")
-		else:
-			player.reduce_dash_charge(delta)
+
+		if player.is_moving_approximately_at_speed(player.max_walk_speed):
+			parent_state_machine.transition_to("PlayerRunState")
+			return
 	else:
 		player.reduce_dash_charge(delta)
 		player.stop_running()
@@ -23,7 +19,7 @@ func movement_update(delta):
 			player.clear_dash_charge()
 		
 	if crouch:
-		if player.get_velocity().x != 0:
+		if !player.is_effectively_standing_still():
 			parent_state_machine.transition_to("PlayerSlideState")
 			player.clear_dash_charge()
 		else:

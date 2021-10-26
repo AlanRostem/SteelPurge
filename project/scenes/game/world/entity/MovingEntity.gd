@@ -37,6 +37,10 @@ func _ready():
 func is_moving_too_fast(max_viable_x_speed):
 	var margin = 0.1
 	return abs(get_velocity().x) >= max_viable_x_speed + margin
+	
+func is_moving_approximately_at_speed(max_viable_x_speed):
+	var margin = 1
+	return max_viable_x_speed - abs(get_velocity().x) <=  + margin
 
 # Change where "down" points to relative to the entity. This affects how the 
 # changing of velocity is done.

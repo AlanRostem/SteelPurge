@@ -6,23 +6,19 @@ func movement_update(delta):
 	if intended_dir != move_dir:
 		player.negate_slide(intended_dir, delta)
 	player.apply_slide_friction(delta)
-	if !player.is_moving_too_fast(player.max_walk_speed):
+	
+	if !crouch:
 		if player.is_effectively_standing_still():
-			if crouch:
-				parent_state_machine.transition_to("PlayerCrouchState")
-				return
-			else:
-				parent_state_machine.transition_to("PlayerIdleState")
-				return
-		else:
-			if crouch:
-				parent_state_machine.transition_to("PlayerCrouchState")
-				return
-			else:
-				parent_state_machine.transition_to("PlayerWalkState")
-				return
-	elif !crouch:
-		parent_state_machine.transition_to("PlayerRunState")
+			parent_state_machine.transition_to("PlayerIdleState")
+			return
+		elif !player.is_moving_too_fast(player.max_dash_speed):
+			parent_state_machine.transition_to("PlayerRunState")
+			return
+		elif !player.is_moving_too_fast(player.max_walk_speed):
+			parent_state_machine.transition_to("PlayerWalkState")
+			return
+	elif !player.is_moving_too_fast(player.max_walk_speed):
+		parent_state_machine.transition_to("PlayerCrouchState")
 		return
 		
 	if jump and player.is_on_ground():

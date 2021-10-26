@@ -14,6 +14,8 @@ func movement_update(delta):
 		var vel_x = player.get_velocity().x
 		if sign(vel_x) != dir:
 			player.reduce_dash_charge(delta)
+		else:
+			player.increase_dash_charge(delta)
 	else:
 		player.reduce_dash_charge(delta)
 		player.stop_running()
@@ -23,7 +25,11 @@ func movement_update(delta):
 		return
 			
 	if crouch:
-		player.clear_dash_charge()
-		parent_state_machine.transition_to("PlayerSlideState", {
+		if player.has_max_dash_charge():
+			parent_state_machine.transition_to("PlayerSlideState", {
 				"boost": true
 			})
+		else:
+			parent_state_machine.transition_to("PlayerSlideState")
+		player.clear_dash_charge()
+		
