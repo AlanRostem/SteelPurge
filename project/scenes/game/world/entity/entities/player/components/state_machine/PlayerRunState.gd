@@ -22,6 +22,7 @@ func movement_update(delta):
 		
 	if !player.is_moving_too_fast(player.max_walk_speed):
 		parent_state_machine.transition_to("PlayerWalkState")
+		player.clear_dash_charge()
 		return
 			
 	if crouch:
