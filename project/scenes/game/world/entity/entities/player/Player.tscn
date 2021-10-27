@@ -41,6 +41,7 @@ slide_mitigation_acceleration = 400.0
 position = Vector2( 0, -5 )
 frames = ExtResource( 7 )
 animation = "walking"
+frame = 1
 playing = true
 script = ExtResource( 11 )
 
