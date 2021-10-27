@@ -15,5 +15,5 @@ func fire_projectiles_in_shot_gun_pattern(scene, dir_vec, spread_angle, pellet_c
 	var offsetAngle = dir_vec.angle() - spread_angle / 2
 	for i in range(pellet_count):
 		var projectile = world.spawn_entity_deferred(scene, player.position)
-		projectile.call_deferred("init_from_player_weapon", Vector2(sin(offsetAngle), cos(offsetAngle)), parent_weapon)
+		projectile.call_deferred("init_from_player_weapon", Vector2(cos(offsetAngle), sin(offsetAngle)), parent_weapon)
 		offsetAngle += spread_angle / float(pellet_count)

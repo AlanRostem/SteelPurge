@@ -5,6 +5,7 @@
 [ext_resource path="res://scenes/game/world/gun/components/ShotgunProjectileFiringOutputDevice.gd" type="Script" id=3]
 
 [node name="FirewallShotgun" instance=ExtResource( 1 )]
+shots_per_minute = 140
 
 [node name="FiringOutputDevice" parent="." index="1"]
 script = ExtResource( 3 )
