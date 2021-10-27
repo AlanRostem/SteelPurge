@@ -13,6 +13,18 @@ var __healing_scrap = 0
 
 var __equipped_weapon
 
+func _ready():
+	if __equipped_weapon == null:
+		equip_default_weapon()
+		
+func _physics_process(delta):
+	if Input.is_action_pressed("fire"):
+		__equipped_weapon.pull_trigger()
+		if !__equipped_weapon.is_firing():
+			__equipped_weapon.fire()
+	else:
+		__equipped_weapon.release_trigger()
+			
 func instance_and_equip_weapon(scene):
 	var weapon = scene.instance()
 	equip_weapon(weapon)

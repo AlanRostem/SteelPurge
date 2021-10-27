@@ -23,19 +23,37 @@ onready var __ammo = max_ammo
 
 var __is_firing = false
 
+var __is_holding_trigger = false
+
 func fire():
+	if __ammo == 0: 
+		return
+	
+	if __is_firing and !__is_holding_trigger:
+		stop_firing()
+		__is_holding_trigger = false
+		return
+		
 	if !__is_firing:
 		__is_firing = true
+		__is_holding_trigger = true
 		emit_signal("start_firing_cycle")
 	emit_signal("fired")
 	if !infinite_ammo and __ammo > 0:
 		__ammo -= 1
 		if __ammo == 0:
 			stop_firing()
+			__is_holding_trigger = false
 			
 func stop_firing():
 	emit_signal("end_firing_cycle")
 	__is_firing = false
+	
+func pull_trigger():
+	__is_holding_trigger = true
+	
+func release_trigger():
+	__is_holding_trigger = false
 
 func get_ammo():
 	return __ammo
