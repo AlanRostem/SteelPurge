@@ -13,6 +13,8 @@ var __healing_scrap = 0
 
 var __equipped_weapon
 
+onready var __player = get_parent()
+
 func _ready():
 	if __equipped_weapon == null:
 		equip_default_weapon()
@@ -31,8 +33,9 @@ func instance_and_equip_weapon(scene):
 
 func equip_weapon(weapon):
 	__equipped_weapon = weapon
+	__equipped_weapon.owner_player = __player
 	add_child(__equipped_weapon)
-	
+
 func equip_default_weapon():
 	instance_and_equip_weapon(default_weapon_scene)
 	

@@ -25,6 +25,8 @@ var __is_firing = false
 
 var __is_holding_trigger = false
 
+var owner_player
+
 func fire():
 	if __ammo == 0: 
 		return
