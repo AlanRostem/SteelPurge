@@ -1,4 +1,5 @@
 extends Area2D
+class_name HitBox
 
 enum HitBoxActionType {
 	HIT_DEALER,
@@ -7,8 +8,9 @@ enum HitBoxActionType {
 
 const HIT_BOX_IN_COLLISION_BIT = 1
 const UN_SET_TEAM = "unset"
+const PLAYER_TEAM = "player_team"
 
-signal hit_received(hitbox)
+signal hit_received(hitbox, damage)
 signal hit_dealt(hitbox)
 
 # Describes what the hit box should do in the game world. By changing this enum,
@@ -32,6 +34,9 @@ func change_team(team):
 
 func get_team():
 	return __team
+	
+func take_hit(hitbox, damage):
+	emit_signal("hit_received", self, damage)
 
 # This connected signal will only be called if the hit box action type is set to
 # deal hits. 
@@ -39,6 +44,4 @@ func _on_HitBox_area_entered(area):
 	assert(__team != UN_SET_TEAM)
 	assert(area.get_team() != UN_SET_TEAM)
 	if __team == area.get_team(): return
-	
-	area.emit_signal("hit_received", self)
 	emit_signal("hit_dealt", area)

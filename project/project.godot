@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "HitBox",
+"language": "GDScript",
+"path": "res://scenes/game/world/entity/components/hit_box/HitBox.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "MovingEntity",
 "language": "GDScript",
 "path": "res://scenes/game/world/entity/MovingEntity.gd"
 } ]
 _global_script_class_icons={
+"HitBox": "",
 "MovingEntity": ""
 }
 
