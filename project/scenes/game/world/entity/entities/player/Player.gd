@@ -32,7 +32,7 @@ var can_swap_looking_direction = true
 
 var __is_crouched = false
 
-var horizontal_looking_direction = 1
+var looking_vector = Vector2.RIGHT
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 

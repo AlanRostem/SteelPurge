@@ -10,7 +10,7 @@ func movement_update(delta):
 
 	var dir = int(move_right) - int(move_left)
 	if dir != 0:
-		player.horizontal_looking_direction = dir
+		player.looking_vector.x = dir
 		
 	if !player.is_moving_too_fast(player.max_walk_speed):
 		player.air_move(dir, delta)

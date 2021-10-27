@@ -4,7 +4,7 @@ func movement_update(delta):
 	if move_left or move_right:
 		var dir = int(move_right) - int(move_left)
 		if dir != 0:
-			player.horizontal_looking_direction = dir
+			player.looking_vector.x = dir
 		player.walk(dir, delta)
 
 		if player.is_moving_approximately_at_speed(player.max_walk_speed):
