@@ -35,6 +35,7 @@ var __is_crouched = false
 var looking_vector = Vector2.RIGHT
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
+onready var state_machine = $PlayerFSM
 
 #func _physics_process(delta):
 #	print(__dash_charge)

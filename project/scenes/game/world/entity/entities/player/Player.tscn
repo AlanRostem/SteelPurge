@@ -42,8 +42,7 @@ slide_mitigation_acceleration = 400.0
 [node name="PlayerSprite" type="AnimatedSprite" parent="." index="0"]
 position = Vector2( 0, -5 )
 frames = ExtResource( 7 )
-animation = "walking"
-frame = 2
+animation = "aim_down"
 playing = true
 script = ExtResource( 11 )
 

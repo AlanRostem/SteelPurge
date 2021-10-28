@@ -12,6 +12,9 @@ func _physics_process(delta):
 		"PlayerRunState": 
 			animation = "running"
 			frame = f
-		"PlayerAirBorneState": animation = "jump"
+		"PlayerAirBorneState": 
+			animation = "jump"
+			if player.looking_vector.y > 0:
+				animation = "aim_down"
 		"PlayerCrouchState": animation = "slide"
 		"PlayerSlideState": animation = "slide"

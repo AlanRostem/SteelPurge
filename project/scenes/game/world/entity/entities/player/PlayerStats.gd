@@ -26,7 +26,18 @@ func _physics_process(delta):
 			__equipped_weapon.fire()
 	else:
 		__equipped_weapon.release_trigger()
-			
+		
+	if Input.is_action_just_pressed("aim_down"):
+		if __player.state_machine.get_current_state() == "PlayerAirBorneState":
+			if __player.looking_vector.y != 1:
+				__player.looking_vector.y = 1
+				__player.looking_vector.x = 0
+			else:
+				__player.looking_vector.y = 0
+	
+	if __player.state_machine.get_current_state() != "PlayerAirBorneState":
+		__player.looking_vector.y = 0
+	
 func instance_and_equip_weapon(scene):
 	var weapon = scene.instance()
 	equip_weapon(weapon)
