@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/resources/sprite_frames/ui/hud/RushEnergyBarSpriteFrames.tres" type="SpriteFrames" id=1]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RushEnergyBar" type="Control" parent="."]
+margin_left = 13.0
+margin_top = 262.0
+margin_right = 60.0
+margin_bottom = 278.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="0" type="AnimatedSprite" parent="RushEnergyBar"]
+position = Vector2( 8, 8 )
+frames = ExtResource( 1 )
+animation = "empty"
+
+[node name="1" type="AnimatedSprite" parent="RushEnergyBar"]
+position = Vector2( 23, 8 )
+frames = ExtResource( 1 )
+animation = "empty"
+
+[node name="2" type="AnimatedSprite" parent="RushEnergyBar"]
+position = Vector2( 38, 8 )
+frames = ExtResource( 1 )
+animation = "empty"
