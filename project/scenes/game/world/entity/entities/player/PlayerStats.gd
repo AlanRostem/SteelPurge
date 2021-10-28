@@ -24,7 +24,6 @@ func _ready():
 		equip_default_weapon()
 		
 func _physics_process(delta):
-	print(__rush_energy_count)
 	if Input.is_action_pressed("fire"):
 		__equipped_weapon.pull_trigger()
 		if !__equipped_weapon.is_firing():
