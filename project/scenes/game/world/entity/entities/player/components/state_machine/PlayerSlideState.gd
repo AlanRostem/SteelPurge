@@ -31,7 +31,9 @@ func movement_update(delta):
 
 func enter(message):
 	if message.has("boost"):
-		player.slide(player.moving_direction)
+		if player.stats.get_rush_energy() >= 2:
+			player.stats.use_rush_energy(2)
+			player.slide(player.moving_direction)
 	player.clear_dash_charge()
 	player.crouch()
 	player.collision_mode = MovingEntity.CollisionModes.SLIDE

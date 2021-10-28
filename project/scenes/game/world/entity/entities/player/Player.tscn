@@ -90,3 +90,13 @@ drag_margin_bottom = 1.0
 [node name="PlayerStats" type="Node2D" parent="." index="5"]
 script = ExtResource( 13 )
 default_weapon_scene = ExtResource( 14 )
+
+[node name="RushEnergyRechargeTimer" type="Timer" parent="PlayerStats" index="0"]
+wait_time = 0.4
+
+[node name="RushEnergyRechargeStartingDelayTimer" type="Timer" parent="PlayerStats" index="1"]
+wait_time = 1.7
+one_shot = true
+
+[connection signal="timeout" from="PlayerStats/RushEnergyRechargeTimer" to="PlayerStats" method="_on_RushEnergyRechargeTimer_timeout"]
+[connection signal="timeout" from="PlayerStats/RushEnergyRechargeStartingDelayTimer" to="PlayerStats" method="_on_RushEnergyRechargeStartingDelayTimer_timeout"]

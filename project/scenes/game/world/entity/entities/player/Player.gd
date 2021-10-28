@@ -36,6 +36,7 @@ var looking_vector = Vector2.RIGHT
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 onready var state_machine = $PlayerFSM
+onready var stats = $PlayerStats
 
 #func _physics_process(delta):
 #	print(__dash_charge)
@@ -109,3 +110,6 @@ func is_effectively_standing_still():
 
 func is_on_ground():
 	return is_on_floor()
+	
+func recoil_boost(speed):
+	set_velocity_y(-speed)
