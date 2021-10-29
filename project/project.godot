@@ -18,16 +18,22 @@ _global_script_classes=[ {
 "class": "MovingEntity",
 "language": "GDScript",
 "path": "res://scenes/game/world/entity/MovingEntity.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scenes/game/world/entity/entities/player/Player.gd"
 } ]
 _global_script_class_icons={
 "HitBox": "",
-"MovingEntity": ""
+"MovingEntity": "",
+"Player": ""
 }
 
 [application]
 
 config/name="Steel Purge"
-run/main_scene="res://scenes/game/level/levels/TestingLevel.tscn"
+run/main_scene="res://scenes/main/Main.tscn"
 config/icon="res://icon.png"
 
 [display]

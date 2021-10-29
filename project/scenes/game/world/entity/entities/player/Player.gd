@@ -1,4 +1,5 @@
 extends "res://scenes/game/world/entity/MovingEntity.gd"
+class_name Player
 
 const MAX_DASH_CHARGE = 100
 
