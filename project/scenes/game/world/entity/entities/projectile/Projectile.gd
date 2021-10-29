@@ -32,7 +32,6 @@ func init(dir_vec, team, offset = Vector2.ZERO):
 	direction = dir_vec
 	
 	var angle = direction.angle()
-	print(angle)
 	match __rotation_mode:
 		RotationMode.WHOLE:
 			rotation = angle
