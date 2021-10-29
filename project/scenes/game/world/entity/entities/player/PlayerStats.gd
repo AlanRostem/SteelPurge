@@ -4,6 +4,9 @@ const MAX_HEALTH = 3
 const MAX_HEALING_SCRAP = 50
 const MAX_RUSH_ENERGY = 6
 
+signal scrap_changed(value)
+signal health_changed(value)
+signal healing_scrap_changed(value)
 signal rush_energy_changed(value)
 signal weapon_changed(weapon)
 signal weapon_ammo_changed(value)
