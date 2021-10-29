@@ -5,6 +5,8 @@ const MAX_HEALING_SCRAP = 50
 const MAX_RUSH_ENERGY = 6
 
 signal rush_energy_changed(value)
+signal weapon_changed(weapon)
+signal weapon_ammo_changed(value)
 
 export(PackedScene) var default_weapon_scene
 
@@ -23,9 +25,11 @@ onready var __rush_energy_recharge_starting_delay_timer = $RushEnergyRechargeSta
 
 func _ready():
 	if __equipped_weapon == null:
-		equip_default_weapon()
+		call_deferred("equip_default_weapon")
+	call_deferred("set_rush_energy", MAX_RUSH_ENERGY)
 	
 func _physics_process(delta):
+	if __equipped_weapon == null: return
 	if Input.is_action_pressed("fire"):
 		__equipped_weapon.pull_trigger()
 		if !__equipped_weapon.is_firing():
@@ -55,7 +59,9 @@ func equip_weapon(weapon):
 	__equipped_weapon = weapon
 	__equipped_weapon.owner_player = __player
 	__equipped_weapon.connect("fired", self, "_on_equipped_weapon_fired")
+	__equipped_weapon.connect("ammo_changed", self, "_on_equipped_weapon_ammo_changed")
 	add_child(__equipped_weapon)
+	emit_signal("weapon_changed", __equipped_weapon)
 
 func equip_default_weapon():
 	instance_and_equip_weapon(default_weapon_scene)
@@ -96,6 +102,9 @@ func _on_equipped_weapon_fired():
 	if __player.get_velocity().y > -__equipped_weapon.recoil_boost_horizontal_speed and __player.looking_vector.y > 0 and get_rush_energy() >= __equipped_weapon.recoil_boost_rush_energy_usage:
 		use_rush_energy(__equipped_weapon.recoil_boost_rush_energy_usage)
 		__player.recoil_boost(__equipped_weapon.recoil_boost_horizontal_speed)
+
+func _on_equipped_weapon_ammo_changed(ammo):
+	emit_signal("weapon_ammo_changed", ammo)
 
 func recharge_rush_energy():
 	set_rush_energy(__rush_energy_count + 2)

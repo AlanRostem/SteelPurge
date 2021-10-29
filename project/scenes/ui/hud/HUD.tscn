@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/resources/sprite_frames/ui/hud/RushEnergyBarSpriteFrames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/ui/hud/RushEnergyBar.gd" type="Script" id=2]
 [ext_resource path="res://scenes/ui/hud/HUD.gd" type="Script" id=3]
+[ext_resource path="res://scenes/ui/hud/WeaponInfo.gd" type="Script" id=4]
+[ext_resource path="res://scenes/ui/elements/label/PixelLabel.tscn" type="PackedScene" id=5]
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
@@ -13,10 +15,10 @@ __meta__ = {
 }
 
 [node name="RushEnergyBar" type="Control" parent="."]
-margin_left = 13.0
-margin_top = 262.0
-margin_right = 60.0
-margin_bottom = 278.0
+margin_left = 16.0
+margin_top = 232.0
+margin_right = 63.0
+margin_bottom = 248.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
@@ -26,14 +28,44 @@ __meta__ = {
 [node name="First" type="AnimatedSprite" parent="RushEnergyBar"]
 position = Vector2( 38, 8 )
 frames = ExtResource( 1 )
-animation = "full"
+animation = "empty"
 
 [node name="Second" type="AnimatedSprite" parent="RushEnergyBar"]
 position = Vector2( 23, 8 )
 frames = ExtResource( 1 )
-animation = "full"
+animation = "empty"
 
 [node name="Third" type="AnimatedSprite" parent="RushEnergyBar"]
 position = Vector2( 8, 8 )
 frames = ExtResource( 1 )
-animation = "full"
+animation = "empty"
+
+[node name="WeaponInfo" type="Control" parent="."]
+margin_left = 16.0
+margin_top = 248.0
+margin_right = 72.0
+margin_bottom = 272.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoLabel" parent="WeaponInfo" instance=ExtResource( 5 )]
+margin_left = 32.0
+margin_top = 14.0
+margin_right = 56.0
+margin_bottom = 25.0
+text = "30"
+
+[node name="NameLabel" parent="WeaponInfo" instance=ExtResource( 5 )]
+margin_left = 2.0
+margin_right = 42.0
+text = "Weapon"
+
+[node name="AmmoTextLabel" parent="WeaponInfo" instance=ExtResource( 5 )]
+margin_left = 2.0
+margin_top = 14.0
+margin_right = 26.0
+margin_bottom = 25.0
+text = "Ammo:"

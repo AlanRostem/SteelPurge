@@ -1,5 +1,7 @@
 extends Node2D
 
+export(String) var display_name
+
 export(int) var damage_per_shot
 export(int) var shots_per_minute
 
@@ -14,6 +16,7 @@ export(bool) var infinite_ammo = false
 # export(SpriteFrames) var player_sprite_frames;
 
 signal fired()
+signal ammo_changed(value)
 signal start_firing_cycle()
 signal end_firing_cycle()
 
@@ -42,11 +45,22 @@ func fire():
 		emit_signal("start_firing_cycle")
 	emit_signal("fired")
 	if !infinite_ammo and __ammo > 0:
-		__ammo -= 1
+		use_ammo()
 		if __ammo == 0:
 			stop_firing()
 			__is_holding_trigger = false
-			
+
+func use_ammo(amount = 1):
+	__ammo -= amount
+	emit_signal("ammo_changed", __ammo)
+	
+func set_ammo(amount):
+	__ammo = amount
+	emit_signal("ammo_changed", __ammo)
+	
+func get_ammo():
+	return __ammo
+
 func stop_firing():
 	emit_signal("end_firing_cycle")
 	__is_firing = false
@@ -56,9 +70,6 @@ func pull_trigger():
 	
 func release_trigger():
 	__is_holding_trigger = false
-
-func get_ammo():
-	return __ammo
 
 func is_firing():
 	return __is_firing
