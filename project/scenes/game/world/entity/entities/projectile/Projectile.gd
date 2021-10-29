@@ -3,7 +3,8 @@ extends MovingEntity
 enum RotationMode {
 	WHOLE,
 	SPRITE,
-	HIT_BOX
+	HIT_BOX,
+	NONE
 }
 
 export(float) var max_velocity = 200
@@ -29,7 +30,9 @@ func init(dir_vec, team, offset = Vector2.ZERO):
 	position += offset
 	__hit_box.change_team(team)
 	direction = dir_vec
-	var angle = round(direction.angle())
+	
+	var angle = direction.angle()
+	print(angle)
 	match __rotation_mode:
 		RotationMode.WHOLE:
 			rotation = angle
