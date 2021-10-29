@@ -95,7 +95,7 @@ default_weapon_scene = ExtResource( 14 )
 wait_time = 0.4
 
 [node name="RushEnergyRechargeStartingDelayTimer" type="Timer" parent="PlayerStats" index="1"]
-wait_time = 1.7
+wait_time = 2.2
 one_shot = true
 
 [connection signal="timeout" from="PlayerStats/RushEnergyRechargeTimer" to="PlayerStats" method="_on_RushEnergyRechargeTimer_timeout"]
