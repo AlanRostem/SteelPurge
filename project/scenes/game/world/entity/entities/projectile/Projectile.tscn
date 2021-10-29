@@ -12,13 +12,13 @@ script = ExtResource( 2 )
 is_gravity_enabled = false
 max_velocity = 360.0
 
-[node name="HitBox" parent="." index="1" instance=ExtResource( 3 )]
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+[node name="HitBox" parent="." index="2" instance=ExtResource( 3 )]
 collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
 shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="." index="2"]
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
 [connection signal="hit_dealt" from="HitBox" to="." method="_on_HitBox_hit_dealt"]
