@@ -9,8 +9,8 @@ func movement_update(delta):
 	
 	var dir = int(move_right) - int(move_left)
 	if dir != 0:
-		player.looking_vector.x = dir
-			
+		player.look_horizontally(dir)
+
 	if jump:
 		parent_state_machine.transition_to("PlayerAirborneState", {
 			"jumping": true

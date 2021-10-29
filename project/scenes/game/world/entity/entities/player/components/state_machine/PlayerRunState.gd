@@ -8,7 +8,7 @@ func movement_update(delta):
 	if move_left or move_right:
 		var dir = int(move_right) - int(move_left)
 		if dir != 0:
-			player.looking_vector.x = dir
+			player.look_horizontally(dir)
 		player.run(dir, delta)
 		
 		var vel_x = player.get_velocity().x

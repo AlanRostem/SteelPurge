@@ -42,14 +42,10 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("aim_down"):
 		if __player.state_machine.get_current_state() == "PlayerAirBorneState":
-			if __player.looking_vector.y != 1:
-				__player.looking_vector.y = 1
-				__player.looking_vector.x = 0
-			else:
-				__player.looking_vector.y = 0
+			__player.toggle_aim_down()
 	
 	if __player.is_on_ground():
-		__player.looking_vector.y = 0
+		__player.stop_aiming_down()
 		if __rush_energy_count < MAX_RUSH_ENERGY and !__is_recharging_rush_energy:
 			__rush_energy_recharge_starting_delay_timer.start()
 			__is_recharging_rush_energy = true
@@ -102,7 +98,7 @@ func use_rush_energy(count):
 	__is_recharging_rush_energy = false
 
 func _on_equipped_weapon_fired():
-	if __player.get_velocity().y > -__equipped_weapon.recoil_boost_horizontal_speed and __player.looking_vector.y > 0 and get_rush_energy() >= __equipped_weapon.recoil_boost_rush_energy_usage:
+	if __player.get_velocity().y > -__equipped_weapon.recoil_boost_horizontal_speed and __player.get_looking_vector().y > 0 and get_rush_energy() >= __equipped_weapon.recoil_boost_rush_energy_usage:
 		use_rush_energy(__equipped_weapon.recoil_boost_rush_energy_usage)
 		__player.recoil_boost(__equipped_weapon.recoil_boost_horizontal_speed)
 

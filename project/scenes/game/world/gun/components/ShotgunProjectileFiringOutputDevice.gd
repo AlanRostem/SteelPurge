@@ -6,7 +6,7 @@ export(float) var pellet_spread_angle = 15
 func _on_Gun_fired():
 	var player = parent_weapon.owner_player
 	var world = parent_weapon.owner_player.parent_world
-	fire_projectiles_in_shot_gun_pattern(projectile_scene, player.looking_vector, deg2rad(pellet_spread_angle), pellets_per_shot)
+	fire_projectiles_in_shot_gun_pattern(projectile_scene, player.get_looking_vector(), deg2rad(pellet_spread_angle), pellets_per_shot)
 
 func fire_projectiles_in_shot_gun_pattern(scene, dir_vec, spread_angle, pellet_count):
 	var player = parent_weapon.owner_player

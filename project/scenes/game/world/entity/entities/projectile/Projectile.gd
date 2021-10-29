@@ -1,12 +1,21 @@
 extends MovingEntity
 
+enum RotationMode {
+	WHOLE,
+	SPRITE,
+	HIT_BOX
+}
+
 export(float) var max_velocity = 200
 
 var owner_weapon
 
 onready var __hit_box = $HitBox
+onready var __sprite = $Sprite
 
 export(int) var __damage
+
+export(RotationMode) var __rotation_mode = RotationMode.WHOLE
 
 var direction: Vector2
 
@@ -20,6 +29,15 @@ func init(dir_vec, team, offset = Vector2.ZERO):
 	position += offset
 	__hit_box.change_team(team)
 	direction = dir_vec
+	var angle = round(direction.angle())
+	match __rotation_mode:
+		RotationMode.WHOLE:
+			rotation = angle
+		RotationMode.SPRITE:
+			__sprite.rotation = angle
+		RotationMode.HIT_BOX:
+			__hit_box.rotation = angle
+		
 	
 func deal_hit(hit_box):
 	hit_box.take_hit(self, __damage)

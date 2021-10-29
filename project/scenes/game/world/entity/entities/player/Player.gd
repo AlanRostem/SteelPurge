@@ -33,7 +33,8 @@ var can_swap_looking_direction = true
 
 var __is_crouched = false
 
-var looking_vector = Vector2.RIGHT
+var __looking_vector = Vector2.RIGHT
+var __horizontal_looking_direction = 1
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 onready var state_machine = $PlayerFSM
@@ -114,3 +115,26 @@ func is_on_ground():
 	
 func recoil_boost(speed):
 	set_velocity_y(-speed)
+	
+func look_horizontally(dir):
+	if __looking_vector.y == 0:
+		__looking_vector.x = dir
+	__horizontal_looking_direction = dir
+	
+func toggle_aim_down():
+	if __looking_vector.y == 0:
+		__looking_vector.y = 1
+		__looking_vector.x = 0
+	else:
+		__looking_vector.y = 0
+		__looking_vector.x = __horizontal_looking_direction
+		
+func stop_aiming_down():
+	__looking_vector.x = __horizontal_looking_direction
+	__looking_vector.y = 0
+	
+func get_looking_vector():
+	return __looking_vector
+	
+func get_horizontal_looking_direction():
+	return __horizontal_looking_direction
