@@ -4,6 +4,8 @@ const MAX_HEALTH = 3
 const MAX_HEALING_SCRAP = 50
 const MAX_RUSH_ENERGY = 6
 
+signal rush_energy_changed(value)
+
 export(PackedScene) var default_weapon_scene
 
 var __scrap_count = 0
@@ -79,9 +81,13 @@ func add_healing_scrap(count):
 
 func get_rush_energy():
 	return __rush_energy_count
+	
+func set_rush_energy(count):
+	__rush_energy_count = clamp(count, 0, MAX_RUSH_ENERGY)
+	emit_signal("rush_energy_changed", __rush_energy_count)
 
 func use_rush_energy(count):
-	__rush_energy_count = clamp(__rush_energy_count - count, 0, INF)
+	set_rush_energy(__rush_energy_count - count)
 	__rush_energy_recharge_starting_delay_timer.stop()
 	__rush_energy_recharge_timer.stop()
 	__is_recharging_rush_energy = false
@@ -92,7 +98,7 @@ func _on_equipped_weapon_fired():
 		__player.recoil_boost(__equipped_weapon.recoil_boost_horizontal_speed)
 
 func recharge_rush_energy():
-	__rush_energy_count = clamp(__rush_energy_count + 2, 0, MAX_RUSH_ENERGY)
+	set_rush_energy(__rush_energy_count + 2)
 	if __rush_energy_count == MAX_RUSH_ENERGY:
 		__rush_energy_recharge_timer.stop()
 		__is_recharging_rush_energy = false

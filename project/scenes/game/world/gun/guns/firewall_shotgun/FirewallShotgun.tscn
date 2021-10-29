@@ -6,6 +6,7 @@
 
 [node name="FirewallShotgun" instance=ExtResource( 1 )]
 shots_per_minute = 140
+recoil_boost_rush_energy_usage = 1
 
 [node name="FiringOutputDevice" parent="." index="1"]
 script = ExtResource( 3 )

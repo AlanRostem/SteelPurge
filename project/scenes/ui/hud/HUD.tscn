@@ -24,7 +24,7 @@ __meta__ = {
 }
 
 [node name="First" type="AnimatedSprite" parent="RushEnergyBar"]
-position = Vector2( 8, 8 )
+position = Vector2( 38, 8 )
 frames = ExtResource( 1 )
 animation = "empty"
 
@@ -34,6 +34,6 @@ frames = ExtResource( 1 )
 animation = "empty"
 
 [node name="Third" type="AnimatedSprite" parent="RushEnergyBar"]
-position = Vector2( 38, 8 )
+position = Vector2( 8, 8 )
 frames = ExtResource( 1 )
 animation = "empty"
