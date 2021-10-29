@@ -6,7 +6,9 @@
 
 [node name="FirewallShotgun" instance=ExtResource( 1 )]
 display_name = "Firewall Shotgun"
+damage_per_shot = 3
 shots_per_minute = 160
+recoil_boost_rush_energy_usage = 1
 max_ammo = 40
 
 [node name="FiringOutputDevice" parent="." index="1"]
