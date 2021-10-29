@@ -26,14 +26,14 @@ __meta__ = {
 [node name="First" type="AnimatedSprite" parent="RushEnergyBar"]
 position = Vector2( 38, 8 )
 frames = ExtResource( 1 )
-animation = "empty"
+animation = "full"
 
 [node name="Second" type="AnimatedSprite" parent="RushEnergyBar"]
 position = Vector2( 23, 8 )
 frames = ExtResource( 1 )
-animation = "empty"
+animation = "full"
 
 [node name="Third" type="AnimatedSprite" parent="RushEnergyBar"]
 position = Vector2( 8, 8 )
 frames = ExtResource( 1 )
-animation = "empty"
+animation = "full"

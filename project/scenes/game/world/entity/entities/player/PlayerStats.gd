@@ -9,7 +9,7 @@ signal rush_energy_changed(value)
 export(PackedScene) var default_weapon_scene
 
 var __scrap_count = 0
-var __rush_energy_count
+var __rush_energy_count = MAX_RUSH_ENERGY
 var __health = MAX_HEALTH
 var __healing_scrap = 0
 
@@ -24,7 +24,6 @@ onready var __rush_energy_recharge_starting_delay_timer = $RushEnergyRechargeSta
 func _ready():
 	if __equipped_weapon == null:
 		equip_default_weapon()
-	set_rush_energy(MAX_RUSH_ENERGY)
 	
 func _physics_process(delta):
 	if Input.is_action_pressed("fire"):

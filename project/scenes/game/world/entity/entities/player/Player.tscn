@@ -35,7 +35,7 @@ jump_speed = 255.0
 min_jump_speed = 100.0
 max_crouch_speed = 20.0
 crouch_transition_weight = 0.3
-slide_speed = 260.0
+slide_speed = 280.0
 slide_friction = 0.02
 slide_mitigation_acceleration = 400.0
 
