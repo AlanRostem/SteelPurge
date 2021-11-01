@@ -44,12 +44,11 @@ slide_speed = 280.0
 slide_friction = 0.02
 slide_mitigation_acceleration = 400.0
 
-[node name="HitBox" parent="." index="0" instance=ExtResource( 15 )]
-visible = false
+[node name="InHitBox" parent="." index="0" instance=ExtResource( 15 )]
 hit_box_action_type = 1
 __team = "player_team"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InHitBox" index="0"]
 position = Vector2( 0, -1 )
 shape = SubResource( 1 )
 

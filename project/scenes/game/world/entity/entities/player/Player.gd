@@ -37,7 +37,7 @@ var __looking_vector = Vector2.RIGHT
 var __horizontal_looking_direction = 1
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
-onready var __hit_box_shape = $HitBox/CollisionShape2D
+onready var __hit_box_shape = $InHitBox/CollisionShape2D
 onready var state_machine = $PlayerFSM
 onready var stats = $PlayerStats
 

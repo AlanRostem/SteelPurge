@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/game/world/entity/MovingEntity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/world/entity/components/hit_box/HitBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/Enemy.gd" type="Script" id=3]
+
+[node name="Enemy" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="InHitBox" parent="." index="1" instance=ExtResource( 2 )]
+hit_box_action_type = 1
+__team = "enemy_team"
+
+[node name="OutHitBox" parent="." index="2" instance=ExtResource( 2 )]
+__team = "enemy_team"
