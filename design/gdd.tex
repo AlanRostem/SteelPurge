@@ -83,7 +83,11 @@ The player has a limited amount of health which, once depleted, kills the player
 
 \subsubsection{Rush Energy}
 
-Rush Energy is a resource that allows the player to Power Slide, Recoil Boost and Chrono Drift. The player has a maximum of six dots of energy displayed on their HUD and each dot refills slowly only when the player is grounded. Different weapons will use different amounts of dots per shot when recoil boosting, and power-sliding uses one. Chrono Drift must use two to balance such a powerful ability. 
+Rush Energy is a resource that allows the player to Power Slide and Recoil Boost. The player has a maximum of six dots of energy displayed on their HUD and each dot refills slowly only when the player is grounded. Different weapons will use different amounts of dots per shot when recoil boosting, and power-sliding uses one.
+
+\subsubsection{Perk Lifetime}
+
+The player can gain perks from Perk Stations secretly placed around a level in exchange for some scrap. After the player completes the level they found the perk from, the perk disappears and the player must find another Perk Station in the next level if they choose. 
 
 \subsubsection{Scrap}
 
@@ -122,11 +126,11 @@ Not strictly about currency, but about resource-management. For example, cooldow
 
 \subsubsection{Field-Weapon Ammo}
 
-Field weapons have limited ammunition. The player must conserve their ammo carefully. Each Field Weapon consumes their very own ammo pool which does not have a maximum. However, picking up a weapon initially gives a predefined amount. 
+Field weapons have limited ammunition. The player must conserve their ammo carefully. Each Field Weapon consumes their very own ammo pool which does not have a maximum. However, picking up a weapon initially gives a predefined amount. When the player runs out of ammo, they will automatically equip their standard weapon that comes with infinite ammo and must find or craft ammo to use their field weapon again. 
 
 \subsubsection{Scrap}
 
-Scrap is a gameplay currency used to refill ammo and health. When the player completes a level, they will lose all the scrap they collected and it will be converted to score. 
+Scrap is a gameplay currency used to refill ammo and health at checkpoints, or use to purchase a perk at a Perk Station. When the player completes a level, they will lose all the scrap they collected and it will be converted to score. 
 
 \subsection{Movement}
 
@@ -180,15 +184,13 @@ There is not much talk about when it comes to combat. It can help the player esc
 
 The Magma Spike hazard prevents the player from reaching an area since it instantly kills him, making it easy for the level designer to hide secret areas since it is not apparent to the player that they can access what's behind the spikes. Accessing what's behind the spikes is only possible using explosions, which the KE-60 weapon easily provides, but it's also slightly possible using flame-based weapons too. 
 
-\subsubsection{Null Cracked Wall}
-
 \subsubsection{Metallic Surface}
 
-\subsubsection{Null Transporter}
+\subsection{Objective Objects}
 
-\subsection{Other Objects}
+\subsubsection{Storm Bomb}
 
-\subsubsection{Storm Fuse}
+\subsection{Environmental Objects}
 
 \subsubsection{Crate}
 
@@ -197,6 +199,16 @@ Crates are breakable objects that grant a reward for the player. Crates can cont
 \subsubsection{Damaged Obstacle}
 
 Damaged obstacles are destructible and grant scrap upon taking damage and when destroyed, similar to how enemies work. They are used to add a fun way to progress the level and reward some scrap. These are square-shaped and blocky, which is meant to be distinguishable. These can be damaged using any weapon. Explosive damage instantly destroys it. 
+
+\subsection{Other Objects}
+
+\subsubsection{Perk Station}
+
+A Perk Station is an object that the player can interact with to gain a passive ability in exchange for some scrap. 
+
+\subsubsection{Checkpoint Station}
+
+A Checkpoint Station defines the player's checkpoint once the player comes in contact with it. The player can also refill their ammo and heal up in exchange for scrap. 
 
 \subsection{Enemy Mechanics}
 
@@ -378,7 +390,7 @@ Flame shotgun that burns enemies over time. The weapon fires a spread of flame p
 	\item Recoil-boost usage: ??
 \end{itemize} 
 
-\paragraph{Falcon Rifle}
+\paragraph{F-41 Rocket Rifle}
 
 Rifle with a rocket and bayonet attached. It shoots projectile bullets propelled by the rocket receiver of the weapon. Wielding this weapon allows the player to slide faster and deal more Power-Slide damage. Hitting enemies with this empowered slide consumes ammo. If the player runs out of Rush Energy, they can still Power Slide with the default speed and damage.
 
@@ -389,17 +401,6 @@ Rifle with a rocket and bayonet attached. It shoots projectile bullets propelled
 	\item Power-up: Increased slide length and damage
 	\item Slide ammo consumption: 5
 \end{itemize} 
-
-
-\paragraph{Nullshatter Sniper}
-
-Reality-shattering inter-dimensional sniper rifle. Fires slowly and makes infinitely long cracks in space-time to deal damage to anything that comes in contact with it. This weapon generally instantly kills enemies, but has a long delay after each shot. Shooting at Null Cracked objects activates a portal that you can use to briefly enter the Null Dimension and avoid all damage. Being in the Null-Dimension opens up secret paths the player can take.
-
-\begin{itemize}
-	\item Initial Ammo: 30
-	\item Damage: 
-	\item Recoil-boost usage:
-\end{itemize}
 
 \paragraph{Stormhammer}
 
@@ -424,13 +425,21 @@ Default pistol with infinite ammunition that fires rapidly. The damage is hit-sc
 	\item Recoil-boost usage: ??
 \end{itemize}
 
-\subsection{Actions}
+\subsection{Perks}
 
-Explain all the possible actions the player is able to perform. This includes opening doors, picking up objects or attacks.
+The player can acquire perks through Perk Stations found in secret areas on a level. There are several unique perks in the game and they disappear when the player exits the level they found the perk in. Getting perks costs scrap, making it harder to gain, but this is intentional since perks are meant to be very powerful. 
 
-\subsubsection{Chrono Drift}
+\subsubsection{Storm Rounds}
 
-The companion drone that stands alongside the player has the ability to travel back in time at any moment. With the press of a button, the player can save their current location and situation for later time travel. Double-tapping the button will reset time back to the point the player saved. The reason for double tapping is so that the player does not accidentally travel time after making lots of progress. Pressing the button once just saves time in the player's current location again. This ability is in place so that the player can learn the levels without having to go back too much, but this must be a concious decision since this drains two dots of Rush Energy. All of the player's stats (such as health and weapon ammo) will remain the same when travelling time, but every other object in the level will reset. However, the scrap count will reset to balance this effect since the player must not be able to infinitely generate scrap. % At the end of a level, it shows how much the player used this ability and the player will be rewarded with a higher rank when they don't use it at all throughout the level. Chrono Drift usage drains Rush Energy to limit the player's ability to exploit it.
+Amplifies the damage output of the currently equipped Field Weapon by 20\% and refills the weapon's ammo by double the standard amount. Taking damage will not make the player drop their weapon. The player will not lose this perk when switching out their weapon for another but the ammo will be scaled accordingly.
+
+\subsubsection{Storm Energy}
+
+The player will never run out of Rush Energy when Power Sliding or Recoil Boosting. Additionally, Power Sliding into enemies will shock them and deal immense damage. However, using this technique consumes Rush Energy and can only be used three times since Rush Energy does not recharge at this state. 
+
+\subsubsection{Storm Armour}
+
+The player is equipped with three additional temporary health. When taking damage from an enemy, the enemy is instantly defeated and other enemies in the area are damaged and shocked. 
 
 \subsection{Screen Flow}
 
@@ -440,7 +449,7 @@ Explain how the screen behaves when performing certain actions.
 
 \subsubsection{Weapon Switching}
 
-Picking up a different weapon can limit or open up the possibilities the player has a ahead. This includes accessing key objects, affecting mobility and affecting the ease of defeating a specific type of enemy. 
+Picking up a different weapon can limit or open up the possibilities the player has a ahead. This includes accessing key objects, affecting mobility and affecting the ease of defeating a specific type of enemy. With the press of a button, the player can also switch to their standard weapon to save ammo on their Field Weapon.
 
 \subsection{Replaying and Saving}
 
@@ -663,9 +672,7 @@ The input options when the player is playing in a level will be limited to the b
  \hline
  Hold B & Control Jump-Height\\
  \hline
- X & Set Time Travel Point \\
- \hline
- Double-Tap X & Travel Time \\
+ X & Switch Weapon \\
  \hline
   Y (when near object) & Interact \\
  \hline
