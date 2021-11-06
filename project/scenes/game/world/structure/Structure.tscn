@@ -3,4 +3,5 @@
 [ext_resource path="res://scenes/game/world/structure/Structure.gd" type="Script" id=1]
 
 [node name="Structure" type="StaticBody2D"]
+collision_mask = 0
 script = ExtResource( 1 )

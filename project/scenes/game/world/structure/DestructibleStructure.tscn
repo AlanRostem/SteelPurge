@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/game/world/structure/Structure.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/world/entity/components/hit_box/HitBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/world/structure/DestructibleStructure.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/world/entity/components/health/HealthComponent.tscn" type="PackedScene" id=4]
+
+[node name="DestructibleStructure" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="InHitBox" parent="." index="0" instance=ExtResource( 2 )]
+hit_box_action_type = 1
+__team = "destructible"
+
+[node name="HealthComponent" parent="." index="1" instance=ExtResource( 4 )]
+
+[node name="ScrapDropLocation" type="Position2D" parent="." index="2"]
+position = Vector2( 0, -27 )
+
+[connection signal="hit_received" from="InHitBox" to="." method="_on_InHitBox_hit_received"]
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_HealthComponent_health_depleted"]
