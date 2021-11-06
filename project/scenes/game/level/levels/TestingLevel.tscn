@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/level/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/world/entity/entities/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/dummy/Dummy.tscn" type="PackedScene" id=3]
 
 [node name="TestingLevel" instance=ExtResource( 1 )]
 
@@ -11,5 +12,17 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 1, 2, 1, 1, 3, 1, 1, 4, 1, 2, 7, 1, 0, 
 [node name="Player" parent="GameWorld/EntityPool" index="0" instance=ExtResource( 2 )]
 position = Vector2( 187.806, 37.4542 )
 collision_layer = 1
+
+[node name="Dummy" parent="GameWorld/EntityPool" index="1" instance=ExtResource( 3 )]
+position = Vector2( 506, 139 )
+collision_layer = 0
+
+[node name="Dummy2" parent="GameWorld/EntityPool" index="2" instance=ExtResource( 3 )]
+position = Vector2( 583, 142 )
+collision_layer = 0
+
+[node name="Dummy3" parent="GameWorld/EntityPool" index="3" instance=ExtResource( 3 )]
+position = Vector2( 687, 144 )
+collision_layer = 0
 
 [editable path="GameWorld"]

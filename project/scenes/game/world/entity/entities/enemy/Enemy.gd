@@ -12,3 +12,4 @@ func _on_HealthComponent_health_depleted(health_left):
 
 func _on_InHitBox_hit_received(hitbox, damage):
 	__health_component.take_damage(damage)
+	print(__health_component.get_health())
