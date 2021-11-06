@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/game/world/entity/components/health/HealthComponent.gd" type="Script" id=1]
+
+[node name="HealthComponent" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Component node used as a child of the HitBox node to determine "
+}

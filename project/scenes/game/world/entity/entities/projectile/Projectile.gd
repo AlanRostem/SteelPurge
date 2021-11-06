@@ -42,7 +42,7 @@ func init(dir_vec, team, offset = Vector2.ZERO):
 		
 	
 func deal_hit(hit_box):
-	hit_box.take_hit(self, __damage)
+	hit_box.take_hit(__hit_box, __damage)
 	destroy()
 
 func destroy():

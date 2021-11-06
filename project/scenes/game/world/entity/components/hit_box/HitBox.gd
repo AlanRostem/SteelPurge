@@ -35,8 +35,10 @@ func change_team(team):
 func get_team():
 	return __team
 	
+# Manually call this function to deal damage to a hitbox exclusively. Should be
+# used after connecting to "hit_dealt"
 func take_hit(hitbox, damage):
-	emit_signal("hit_received", self, damage)
+	emit_signal("hit_received", hitbox, damage)
 
 # This connected signal will only be called if the hit box action type is set to
 # deal hits. 
