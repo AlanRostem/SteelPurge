@@ -5,7 +5,7 @@ extends Node2D
 
 onready var __entity_pool = $EntityPool
 
-onready var __tile_map = $CustomTileMap
+onready var __tile_map = $Geometry/CustomTileMap
 
 onready var __parent_level = get_parent()
 

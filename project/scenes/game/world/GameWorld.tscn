@@ -10,7 +10,9 @@ __meta__ = {
 entities is managed by this node, but are attached to the entity pool node"
 }
 
-[node name="CustomTileMap" parent="." instance=ExtResource( 2 )]
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="CustomTileMap" parent="Geometry" instance=ExtResource( 2 )]
 script = null
 
 [node name="EntityPool" type="Node2D" parent="."]
