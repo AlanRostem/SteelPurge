@@ -70,9 +70,11 @@ func get_equipped_weapon():
 
 func add_scrap(count):
 	__scrap_count += count
+	emit_signal("scrap_changed", __scrap_count)
 	
 func lose_scrap(count):
 	__scrap_count = clamp(__scrap_count - count, 0, INF)
+	emit_signal("scrap_changed", __scrap_count)
 	
 func get_scrap_count():
 	return __scrap_count

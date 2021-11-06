@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/resources/sprite_frames/ui/hud/RushEnergyBarSpriteFrames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/ui/hud/RushEnergyBar.gd" type="Script" id=2]
 [ext_resource path="res://scenes/ui/hud/HUD.gd" type="Script" id=3]
 [ext_resource path="res://scenes/ui/hud/WeaponInfo.gd" type="Script" id=4]
 [ext_resource path="res://scenes/ui/elements/label/PixelLabel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sprites/item/scrap/scrap.png" type="Texture" id=6]
+[ext_resource path="res://scenes/ui/hud/ScrapInfo.gd" type="Script" id=7]
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
@@ -73,3 +75,25 @@ margin_top = 14.0
 margin_right = 26.0
 margin_bottom = 25.0
 text = "Ammo:"
+
+[node name="ScrapInfo" type="Control" parent="."]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 56.0
+margin_bottom = 32.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ScrapCountLabel" parent="ScrapInfo" instance=ExtResource( 5 )]
+margin_left = 10.0
+margin_right = 50.0
+margin_bottom = 11.0
+text = "x0"
+
+[node name="TextureRect" type="TextureRect" parent="ScrapInfo"]
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 6 )
