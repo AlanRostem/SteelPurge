@@ -14,11 +14,14 @@ position = Vector2( 200, 140 )
 
 [node name="Dummy" parent="GameWorld/EntityPool" index="1" instance=ExtResource( 3 )]
 position = Vector2( 506, 139 )
+collision_layer = 0
 
 [node name="Dummy2" parent="GameWorld/EntityPool" index="2" instance=ExtResource( 3 )]
 position = Vector2( 583, 142 )
+collision_layer = 0
 
 [node name="Dummy3" parent="GameWorld/EntityPool" index="3" instance=ExtResource( 3 )]
 position = Vector2( 687, 144 )
+collision_layer = 0
 
 [editable path="GameWorld"]
