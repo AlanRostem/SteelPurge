@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/resources/sprite_frames/ui/hud/RushEnergyBarSpriteFrames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/ui/hud/RushEnergyBar.gd" type="Script" id=2]
@@ -7,6 +7,31 @@
 [ext_resource path="res://scenes/ui/elements/label/PixelLabel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sprites/item/scrap/scrap.png" type="Texture" id=6]
 [ext_resource path="res://scenes/ui/hud/ScrapInfo.gd" type="Script" id=7]
+[ext_resource path="res://assets/sprites/ui/hud/health.png" type="Texture" id=8]
+[ext_resource path="res://scenes/ui/hud/HealthInfo.gd" type="Script" id=9]
+[ext_resource path="res://assets/sprites/ui/hud/healing_scrap.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/ui/hud/healing_scrap_under.png" type="Texture" id=11]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 8 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "full",
+"speed": 5.0
+} ]
 
 [node name="HUD" type="Control"]
 anchor_right = 1.0
@@ -97,3 +122,47 @@ text = "x0"
 margin_right = 8.0
 margin_bottom = 8.0
 texture = ExtResource( 6 )
+
+[node name="HealthInfo" type="Control" parent="."]
+margin_left = 432.0
+margin_top = 240.0
+margin_right = 496.0
+margin_bottom = 280.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="Control" parent="HealthInfo"]
+margin_left = 8.0
+margin_right = 64.0
+margin_bottom = 16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="First" type="AnimatedSprite" parent="HealthInfo/Health"]
+position = Vector2( 8, 8 )
+frames = SubResource( 3 )
+animation = "empty"
+
+[node name="Second" type="AnimatedSprite" parent="HealthInfo/Health"]
+position = Vector2( 24, 8 )
+frames = SubResource( 3 )
+animation = "empty"
+
+[node name="Third" type="AnimatedSprite" parent="HealthInfo/Health"]
+position = Vector2( 40, 8 )
+frames = SubResource( 3 )
+animation = "empty"
+
+[node name="HealingScrap" type="TextureProgress" parent="HealthInfo"]
+margin_left = 8.0
+margin_top = 16.0
+margin_right = 56.0
+margin_bottom = 56.0
+texture_under = ExtResource( 11 )
+texture_progress = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

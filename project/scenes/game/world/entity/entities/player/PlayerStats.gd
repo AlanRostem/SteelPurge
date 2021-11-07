@@ -1,4 +1,5 @@
 extends Node2D
+class_name PlayerStats
 
 const MAX_HEALTH = 3
 const MAX_HEALING_SCRAP = 50
