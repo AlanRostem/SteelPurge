@@ -2,7 +2,7 @@ extends Node2D
 class_name PlayerStats
 
 const MAX_HEALTH = 3
-const MAX_HEALING_SCRAP = 50
+const MAX_HEALING_SCRAP = 5
 const MAX_RUSH_ENERGY = 6
 
 signal scrap_changed(value)
@@ -84,15 +84,17 @@ func get_scrap_count():
 
 func add_healing_scrap(count):
 	if __health == MAX_HEALTH:
-		add_scrap(count)
+		add_scrap(count + __healing_scrap)
+		__healing_scrap = 0
 		return
 	__healing_scrap += count
 	if __healing_scrap >= MAX_HEALING_SCRAP:
 		var diff = __healing_scrap - MAX_HEALING_SCRAP
 		add_one_health()
 		add_healing_scrap(diff)
+		
 	emit_signal("healing_scrap_changed", __healing_scrap)
-	
+
 func take_one_damage():
 	set_health(__health - 1)
 	if __health == 0:

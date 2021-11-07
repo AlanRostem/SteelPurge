@@ -3,6 +3,10 @@
 
 extends Node2D
 
+class_name GameWorld
+
+const SOLID_OBJECT_COLLISION_BIT = 0
+
 onready var __entity_pool = $EntityPool
 
 onready var __tile_map = $Geometry/CustomTileMap
