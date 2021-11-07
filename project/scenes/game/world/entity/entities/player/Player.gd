@@ -41,6 +41,7 @@ onready var __hit_box_shape = $InHitBox/CollisionShape2D
 onready var hit_box = $InHitBox
 onready var state_machine = $PlayerFSM
 onready var stats = $PlayerStats
+onready var __sprite = $PlayerSprite
 
 #func _physics_process(delta):
 #	print(__dash_charge)
@@ -144,3 +145,8 @@ func get_looking_vector():
 	
 func get_horizontal_looking_direction():
 	return __horizontal_looking_direction
+	
+func set_sprite_frames(frames):
+	var frame = __sprite.frame
+	__sprite.frames = frames
+	__sprite.frame = frame

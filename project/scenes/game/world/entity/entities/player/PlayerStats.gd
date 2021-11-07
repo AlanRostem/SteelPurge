@@ -62,6 +62,7 @@ func equip_weapon(weapon):
 	__equipped_weapon.owner_player = __player
 	__equipped_weapon.connect("fired", self, "_on_equipped_weapon_fired")
 	__equipped_weapon.connect("ammo_changed", self, "_on_equipped_weapon_ammo_changed")
+	__equipped_weapon.equip()
 	add_child(__equipped_weapon)
 	emit_signal("weapon_changed", __equipped_weapon)
 

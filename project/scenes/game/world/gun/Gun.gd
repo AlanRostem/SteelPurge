@@ -13,7 +13,7 @@ export(int) var max_ammo = 60
 export(int) var ammo_usage_per_shot = 1
 export(bool) var infinite_ammo = false
 
-# export(SpriteFrames) var player_sprite_frames;
+export(SpriteFrames) var player_sprite_frames
 
 signal fired()
 signal ammo_changed(value)
@@ -29,6 +29,9 @@ var __is_firing = false
 var __is_holding_trigger = false
 
 var owner_player
+
+func equip():
+	owner_player.set_sprite_frames(player_sprite_frames)
 
 func fire():
 	if __ammo == 0: 
