@@ -80,11 +80,19 @@ func get_scrap_count():
 	return __scrap_count
 
 func add_healing_scrap(count):
+	if __health == MAX_HEALTH:
+		add_scrap(count)
+		return
 	__healing_scrap += count
 	if __healing_scrap >= MAX_HEALING_SCRAP:
 		var diff = __healing_scrap - MAX_HEALING_SCRAP
-		__health += 1
+		add_one_health()
 		add_healing_scrap(diff)
+	emit_signal("healing_scrap_changed", __healing_scrap)
+	
+func add_one_health():
+	__health += 1
+	emit_signal("health_changed", __health)
 
 func get_rush_energy():
 	return __rush_energy_count
