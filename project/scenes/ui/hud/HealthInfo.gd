@@ -24,6 +24,11 @@ func set_health(count):
 			__first.animation = "full"
 			__second.animation = "empty"
 			__third.animation = "empty"
+			
+		0:
+			__first.animation = "empty"
+			__second.animation = "empty"
+			__third.animation = "empty"
 
 func set_healing_scrap(count):
 	__healing_scrap.value = count

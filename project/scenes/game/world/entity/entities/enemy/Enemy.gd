@@ -44,3 +44,9 @@ func _on_HealthComponent_damage_taken(damage):
 		drop_scrap(scrap_drop_count_damaged)
 	else:
 		drop_healing_scrap(scrap_drop_count_damaged)
+
+
+func _on_OutHitBox_hit_dealt(hitbox):
+	var player = hitbox.get_parent()
+	if player is Player:
+		player.stats.take_one_damage()

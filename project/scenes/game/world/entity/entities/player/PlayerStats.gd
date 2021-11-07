@@ -8,6 +8,7 @@ const MAX_RUSH_ENERGY = 6
 signal scrap_changed(value)
 signal health_changed(value)
 signal healing_scrap_changed(value)
+signal died()
 signal rush_energy_changed(value)
 signal weapon_changed(weapon)
 signal weapon_ammo_changed(value)
@@ -31,6 +32,7 @@ func _ready():
 	if __equipped_weapon == null:
 		call_deferred("equip_default_weapon")
 	call_deferred("set_rush_energy", MAX_RUSH_ENERGY)
+	call_deferred("set_health", MAX_HEALTH)
 	
 func _physics_process(delta):
 	if __equipped_weapon == null: return
@@ -91,8 +93,16 @@ func add_healing_scrap(count):
 		add_healing_scrap(diff)
 	emit_signal("healing_scrap_changed", __healing_scrap)
 	
+func take_one_damage():
+	set_health(__health - 1)
+	if __health == 0:
+		emit_signal("died")
+	
 func add_one_health():
-	__health += 1
+	set_health(__health + 1)
+	
+func set_health(value):
+	__health = value
 	emit_signal("health_changed", __health)
 
 func get_rush_energy():

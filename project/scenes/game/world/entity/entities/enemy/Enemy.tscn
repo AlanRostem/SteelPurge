@@ -20,3 +20,4 @@ __team = "enemy_team"
 [connection signal="damage_taken" from="HealthComponent" to="." method="_on_HealthComponent_damage_taken"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_HealthComponent_health_depleted"]
 [connection signal="hit_received" from="InHitBox" to="." method="_on_InHitBox_hit_received"]
+[connection signal="hit_dealt" from="OutHitBox" to="." method="_on_OutHitBox_hit_dealt"]
