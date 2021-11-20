@@ -11,7 +11,7 @@
 
 \subsection{Concept}
 
-Smooth high mobility platformer game with various types of guns, levels, enemies and secrets. The game will feature multiple different objectives than the standard level completion of all platformers. 
+Smooth high mobility platformer game with various types of power suits, levels, enemies and secrets. The game will feature multiple different objectives than the standard level completion of all platformers. 
 
 \subsection{Genre(s)}
 
@@ -41,7 +41,7 @@ At the start of the level, the player is given an explosive item called the "Sto
 
 \subsubsection{Collect the Storm Cores}
 
-The player must explore around the level to find Storm Cores, a collectible item, to progress towards completing the level. After collecting all Storm Cores, the exit will be unlocked and the player can complete the level by passing through the exit. If the player takes damage while having collected a Storm Core, they will drop it and must pick it up again. If the item falls into a pit or gets destroyed by a hazard, the item will spawn back at its original location and it will be indicated on the HUD. When holding one or more Storm Cores, taking damage will not drop your weapon. The level design will be very open, similar to metroidvania levels, and have the exit in an easily accessible location to make it more rewarding. 
+The player must explore around the level to find Storm Cores, a collectible item, to progress towards completing the level. After collecting all Storm Cores, the exit will be unlocked and the player can complete the level by passing through the exit. If the player takes damage while having collected a Storm Core, they will drop it and must pick it up again. If the item falls into a pit or gets destroyed by a hazard, the item will spawn back at its original location and it will be indicated on the HUD. When holding one or more Storm Cores, taking damage will not drop your Turbo Suit Core. The level design will be very open, similar to metroidvania levels, and have the exit in an easily accessible location to make it more rewarding. 
 
 \subsubsection{Defeat the Boss}
 
@@ -53,21 +53,17 @@ This type of level is the last level for the given world and the boss is located
 
 Scrap Score is a bragging-rights metric displayed at the title screen of the level showing how much scrap the player has collected in total after completing every level. 
 
-\subsubsection{Field Weapons}
-
-The only form for a progression system that technically counts as one would be picking up new weapons and learning how to use them. 
-
 \subsection{Play Flow}
 
 Explain how the gameplay elements are connected to each other. Does it feel natural?
 
 \subsection{Secrets Structure}
 
-Every level has one or two secret areas that are not so obvious to find. Each secret will require a unique weapon, or two, to complete. The secret areas will have a puzzle-like structure in the obstacles which require the specific weapons as well. The weapons required will correspond to the obstacles that require it as well. 
+Every level has one or two secret areas that are not so obvious to find. Each secret will require a unique Turbo Suit Blaster to complete. The secret areas will have a puzzle-like structure in the obstacles which require the specific Turbo Suit Blaster as well.
 
 \subsubsection{Rewards}
 
-Secrets can reward the player with two different things: a supply crate and a passage to skip some levels. The supply crates contain a large number of Normal Scrap and some ammo. Lastly, the secret passage leading to the next level world is an alternative to end the level that rewards the player with a new path to the next world inside the level-selection screen. This last part is ideal for speedrunning. 
+Secrets can reward the player with two different things: a supply crate and a passage to skip some levels. The supply crates contain a large number of Normal and Healing Scrap. Secondly, the secrets can also have a Perk Station present in its area. Lastly, the secret passage leading to the next level world is an alternative to end the level that rewards the player with a new path to the next world inside the level-selection screen. This last part is ideal for speedrunning. 
 
 \section{Game Mechanics}
 
@@ -75,15 +71,15 @@ Secrets can reward the player with two different things: a supply crate and a pa
 
 \subsubsection{Taking Damage}
 
-Taking damage depletes one dot of health and knocks the player backwards and sending them into a temporary invincibility state. Additionally, the player drops their weapon on the ground when taking damage. Then, the player is only given a small amount of time to pick up the weapon again before it automatically disappears. 
+Taking damage depletes one dot of health and knocks the player backwards and sending them into a temporary invincibility state. Additionally, the player drops their Turbo Suit Core on the ground when taking damage. Then, the player is only given a small amount of time to pick up the core again before it automatically disappears. 
 
 \subsubsection{Health and Death}
 
-The player has a limited amount of health which, once depleted, kills the player and they must start over from their last checkpoint. Dying causes the player to lose scrap. The health pool is comprised of three dots. Taking any form for damage depletes one dot. Below the health bar, there is a bar that will fill up when collecting Health Scrap. Once the bar is full, the player will be given one dot of health. The bar cannot fill up when the player has full health, and enemies won't drop health scrap. Instead, the player will be given extra normal scrap. 
+The player has a limited amount of health which, once depleted, kills the player and they must start over from their last checkpoint. Dying causes the player to lose scrap (this affects the temporary amount the player has in the level). The health pool is comprised of three dots. Taking any form for damage depletes one dot. Below the health bar, there is a bar that will fill up when collecting Health Scrap. Once the bar is full, the player will be given one dot of health. The bar cannot fill up when the player has full health, and enemies won't drop health scrap. Instead, the player will be given extra normal scrap. 
 
 \subsubsection{Rush Energy}
 
-Rush Energy is a resource that allows the player to Power Slide and Recoil Boost. The player has a maximum of six dots of energy displayed on their HUD and each dot refills slowly only when the player is grounded. Different weapons will use different amounts of dots per shot when recoil boosting, and power-sliding uses one.
+Rush Energy is a resource that allows the player to Power Slide and Recoil Boost. The player has a maximum of six dots of energy displayed on their HUD and each dot refills slowly only when the player is grounded. Different Turbo Suit Blasters will use different amounts of dots per shot when recoil boosting, and power-sliding uses one.
 
 \subsubsection{Perk Lifetime}
 
@@ -95,12 +91,12 @@ There are various types of scrap that enemies drop and they each have a differen
 
 \subsubsection{Scrap Loss upon Death}
 
-The player will lose scrap each time they die they lose half of the scrap they have and it will be dropped in their death location to be picked up again. 
+The player will permanently lose some scrap each time they die.
 
 \subsubsection{Normal Scrap}
 
 The first type of scrap is the "economical" scrap (just called Scrap), which is colored as a standard rusty cogwheel. This type of scrap's amount is shown in the HUD and the player can carry as much as they want of it (there should be a very high maximum due to technical reasons). This scrap can be used to refill health  and ammunition at checkpoints. % but can also be converted to Evo Cores when the player completes a level. For every hundred scrap, the player earns an Evo Core at the end of the level.
-The only way to gain this type of scrap is by damaging an enemy, which makes weaker weapons useful for farming scrap. All scrap is lost when a level is completed and is converted to score. 
+The only way to gain this type of scrap is by damaging an enemy, which makes weaker Blasters useful for farming scrap. All scrap is lost when a level is completed and is converted to score. 
 
 \subsubsection{Health Scrap}
 
@@ -114,7 +110,7 @@ If the player comes in contact with an enemy, the player will take a certain amo
 
 \subsubsection{Player Sliding into Enemies}
 
-The player can slide into enemies to deal a small amount of damage and launch them up into the air. This is meant to let the player do one of two things: perform a "finishing move" to kill the enemy when the enemy's health is low, or to create crowd control. Additionally, this helps speedrunners complete ANY\% speedruns. 
+The player can slide into enemies to deal a small amount of damage and launch them up into the air. This is meant to let the player do one of two things: perform a "finishing move" to kill the enemy when the enemy's health is low, or to create crowd control. Additionally, this helps speedrunners. 
 
 \subsection{Physics}
 
@@ -124,13 +120,9 @@ The game contains standard 2D kinematic non-realistic physics. Refer to the diff
 
 Not strictly about currency, but about resource-management. For example, cooldowns on abilities or remaining items in inventory. 
 
-\subsubsection{Field-Weapon Ammo}
-
-Field weapons have limited ammunition. The player must conserve their ammo carefully. Each Field Weapon consumes their very own ammo pool which does not have a maximum. However, picking up a weapon initially gives a predefined amount. When the player runs out of ammo, they will automatically equip their standard weapon that comes with infinite ammo and must find or craft ammo to use their field weapon again. 
-
 \subsubsection{Scrap}
 
-Scrap is a gameplay currency used to refill ammo and health at checkpoints, or use to purchase a perk at a Perk Station. When the player completes a level, they will lose all the scrap they collected and it will be converted to score. 
+Scrap is a gameplay currency used to refill health at checkpoints or used to purchase a perk at a Perk Station. When the player completes a level, they will lose all the scrap they collected and it will be converted to score. 
 
 \subsection{Movement}
 
@@ -146,27 +138,25 @@ Power Slide is a faster version of the standard slide that allows the player to 
 
 \subsubsection{Recoil Boosting}
 
-Firing a weapon while aiming downwards mid-air produces recoil that propels the player upwards so the player can stay in the air longer. Recoil Boosting depletes the Rush Energy meter. Every weapon propels a different amount and uses varying values of Rush Energy. 
+Firing a Blaster while aiming downwards mid-air produces recoil that propels the player upwards so the player can stay in the air longer. Recoil Boosting depletes the Rush Energy meter. Every Blaster propels a different amount and uses varying values of Rush Energy. 
 
 \subsection{Collectible Objects}
 
 \subsubsection{Scrap Collectible}
 
-\subsubsection{Ammo Collectible}
-
-\subsubsection{Weapon Collectible}
+\subsubsection{Turbo Suit Core Collectible}
 
 \subsection{Key Objects}
 
-Key objects are objects that can trigger a special effect using a specific weapon's shots. They are meant to be used in combat and platforming.
+Key objects are objects that can trigger a special effect using a specific Blaster's shots. They are meant to be used in combat and platforming.
 
 \subsubsection{Incendiary Barrel Hazard}
 
-The incendiary barrel is an explosive barrel that can be detonated by shooting at it using the Firewall Shotgun only. Enemies caught in the blast will be damaged, knocked away and have a burn-effect applied to them. If the player is caught in this blast, they will take one dot of damage and be knocked away with high momentum without being burned. It can also explode if it happens to collide with the tip of a Magma Spike. Explosions from other Incendiary Barrels can also trigger another Incendiary Barrel, but the KE-60's explosive projectiles can only push around the Incendiary Barrel, not detonate it. The explosions from Incendiary Barrels can also destroy breakable objects in the same way the KE-60's projectiles explosions can. These interactions exist so that the player can have many opportunities for completing mini-puzzles and take advantage of the Incendiary Barrel's properties during combat. 
+The incendiary barrel is an explosive barrel that can be detonated by shooting at it using the Magma Suit or Rocket Suit Blasters. Enemies caught in the blast will be damaged, knocked away and have a burn-effect applied to them. If the player is caught in this blast, they will take one dot of damage and be knocked away with high momentum without being burned. It can also explode if it happens to collide with the tip of a Magma Spike. Explosions from other Incendiary Barrels can also trigger another Incendiary Barrel, but the Kinetic Suit's explosive projectiles can only push around the Incendiary Barrel, not detonate it. The explosions from Incendiary Barrels can also destroy breakable objects in the same way the Kinetic Suit's projectiles explosions can. These interactions exist so that the player can have many opportunities for completing mini-puzzles and take advantage of the Incendiary Barrel's properties during combat. 
 
 \paragraph{Combat Purposes}
 
-The player can use Power-Slide to re-position the barrel quickly to deal massive damage to an enemy elevated higher. The primary usage for this object is to explode it using a flame-based weapons to clear out many enemies nearby or weaken strong enemies such as mini-bosses. This can also give the player momentum to escape combat at a cost for health. The player just needs to jump above the barrel, aim down and shoot at it with their flame-based weapon to use the explosion to launch themselves far away from combat. This is risky, but can help the player complete the level faster. 
+The player can use Power-Slide to re-position the barrel quickly to deal massive damage to an enemy elevated higher. The primary usage for this object is to explode it using a flame-based Blasters to clear out many enemies nearby or weaken strong enemies such as mini-bosses. This can also give the player momentum to escape combat at a cost for health. The player just needs to jump above the barrel, aim down and shoot at it with their flame-based Blaster to use the explosion to launch themselves far away from combat. This is risky, but can help the player complete the level faster. 
 
 \paragraph{Secret Purposes}
 
@@ -178,11 +168,11 @@ The Magma Spike is a breakable object that can be destroyed using explosions. If
 
 \paragraph{Combat Purposes}
 
-There is not much talk about when it comes to combat. It can help the player escape when destroyed and using utilities that push enemies towards it can also be helpful since it instantly kills them. The KE-60 is a perfectly balanced example of this, since the player can use that weapon to knock enemies into the spikes, but also risk destroying it in the process, making it a strategic decision.
+There is not much talk about when it comes to combat. It can help the player escape when destroyed and using utilities that push enemies towards it can also be helpful since it instantly kills them. The Kinetic Core is a perfectly balanced example of this, since the player can use that Blaster to knock enemies into the spikes, but also risk destroying it in the process, making it a strategic decision.
 
 \paragraph{Secret Purposes}
 
-The Magma Spike hazard prevents the player from reaching an area since it instantly kills him, making it easy for the level designer to hide secret areas since it is not apparent to the player that they can access what's behind the spikes. Accessing what's behind the spikes is only possible using explosions, which the KE-60 weapon easily provides, but it's also slightly possible using flame-based weapons too. 
+The Magma Spike hazard prevents the player from reaching an area since it instantly kills him, making it easy for the level designer to hide secret areas since it is not apparent to the player that they can access what's behind the spikes. Accessing what's behind the spikes is only possible using explosions, which the Kinetic Core Blaster easily provides, but it's also slightly possible using flame-based Blasters too. 
 
 \subsubsection{Metallic Surface}
 
@@ -194,11 +184,15 @@ The Magma Spike hazard prevents the player from reaching an area since it instan
 
 \subsubsection{Crate}
 
-Crates are breakable objects that grant a reward for the player. Crates can contain different types of scrap and weapon ammo. Some rarer crates also contain a weapon, but the weapon itself is not revealed until the crate is broken. The containments will be indicated by an icon on the crate. Power-slide, shooting or any other damaging ability can crack open a crate and drop its items.  Power-sliding into a crate causes the contents to fly up into the air. 
+Crates are breakable objects that grant a reward for the player. Crates can contain different types of scrap. Some rarer crates also contain a Turbo Suit Core, but the type of core itself is not revealed until the crate is broken. The containments will be indicated by an icon on the crate. Power-slide, shooting or any other damaging ability can crack open a crate and drop its items. Power-sliding into a crate causes the contents to fly up into the air. 
 
 \subsubsection{Damaged Obstacle}
 
-Damaged obstacles are destructible and grant scrap upon taking damage and when destroyed, similar to how enemies work. They are used to add a fun way to progress the level and reward some scrap. These are square-shaped and blocky, which is meant to be distinguishable. These can be damaged using any weapon. Explosive damage instantly destroys it. 
+Damaged obstacles are destructible and grant scrap upon taking damage and when destroyed, similar to how enemies work. They are used to add a fun way to progress the level and reward some scrap. These are square-shaped and blocky, which is meant to be distinguishable. These can be damaged using any Blaster. Explosive damage instantly destroys it. 
+
+\subsubsection{Hardened Obstacle}
+
+Similar to Damaged Obstacles, these can be destroyed to reveal secrets. However, these are only breakable through explosive damage (use the Kinetic Suit). 
 
 \subsection{Other Objects}
 
@@ -208,7 +202,7 @@ A Perk Station is an object that the player can interact with to gain a passive 
 
 \subsubsection{Checkpoint Station}
 
-A Checkpoint Station defines the player's checkpoint once the player comes in contact with it. The player can also refill their ammo and heal up in exchange for scrap. 
+A Checkpoint Station defines the player's checkpoint once the player comes in contact with it. The player can also heal up in exchange for scrap. 
 
 \subsection{Enemy Mechanics}
 
@@ -220,7 +214,7 @@ All enemies have a default hitbox that damages the player with one bar of health
 
 \subsubsection{Damage Reception Hitbox}
 
-This hitbox is the default area of the enemy that the player must deal damage to using weapons or abilities. The hitbox spans the entire body of the enemy.
+This hitbox is the default area of the enemy that the player must deal damage to using Blasters or abilities. The hitbox spans the entire body of the enemy.
 
 \subsubsection{Critical Damage Reception Hitbox}
 
@@ -232,9 +226,9 @@ This hitbox is similar to the default damage reception hitbox, only that it appl
 
 Normal Enemies are the minions that the player can kill without hitting too many shots. These are the most common and frequent enemy type the player will encounter. 
 
-\paragraph{Gunner Enemy}
+\paragraph{Enchanted Enemy}
 
-The Gunner Enemies are humanoid-looking enemies that drop Field Weapons upon death. Their combat design will vary depending on the weapon they carry, but the visual design is just a re-skin of a default base. If the player already has equipped the weapon they carry, the enemy will just drop ammo. Gunner enemies are a type of mini-boss that will be very agile and somewhat resemble the capabilities of the player. Gunner enemies only fire their weapon in a certain interval followed up by a offensive/defensive usage of the weapon's special ability. These enemies are supposed to be harder to defeat than normal enemies (both by their AI and HP), but easy for experienced players (by learning the enemies). These enemies are not common, but start becoming more common after the first encounter since the player would have unlocked the enemy's weapon by the time it was defeated. 
+Enchanted enemies are normal enemies with a higher health pool and have a Turbo Suit Core based power-up. They also drop a Turbo Suit Core when defeated. 
 
 \paragraph{Mini Boss}
 
@@ -265,7 +259,7 @@ The only move this enemy has is rushing towards the player.
 
 \paragraph{Durability}
 
-This enemy is is not very durable and critical hits from Field Weapons are a one-hit kill.
+This enemy is is not very durable and critical hits from Blasters are a one-hit kill.
 
 \paragraph{Mobility}
 
@@ -317,59 +311,31 @@ This enemy is very common and can be seen often throughout the first levels.
 
 Ranged Miner Exo is the same as the regular Miner Exo, but the AI is a bit different. It will try to keep distance instead of charging towards the player and throws two pickaxes each time it attacks instead of meleeing. 
 
-\subsubsection{Firewall Gunner Exo}
-
-\paragraph{Moves}
-
-Like all Gunner Exos, the Firewall Gunner will only have two attack moves: shoot and special ability. The first move is to fire the equipped weapon in a certain interval, and the second move is to unleash the deadly fire stream from the weapon.
-
-\paragraph{Durability}
-
-This enemy is as durable as any Gunner Exo. Gunner Exos have a higher durability than normal enemies and tend to be as strong as mini-bosses. 
-
-\paragraph{Mobility}
-
-This enemy has the same base mobility as any Gunner Exo. It is able to move left and right with faster movement than the normal enemy.
-
-\paragraph{AI}
-
-This enemy will move left and right while simultaneously firing 2-4 shots out of its weapon no matter how close the player is to it. These intervals are fixed and the player can predict them. The enemy is also able to shoot upwards if the managed to jump above it during the shooting interval. After this shooting interval, the enemy will try to retreat and use the fire stream ability, but it will only be fired horizontally, giving the player the chance to land several critical hits. 
-
-\paragraph{Difficulty}
-
-This enemy is meant to be slightly harder than normal enemies to defeat, but also very easy if the player has learnt the enemy's AI. 
-
-\paragraph{Encounters}
-
-This enemy will have the same placement in a level like any other Gunner Exo. The enemy will be rarer than the normal enemies and won't be encountered very often until the player has already encountered at least one of them (to unlock the weapon they wield). 
-
 \subsection{Combat}
 
 The combat mechanics in this game are very simple. The player can Power Slide, jump and fire their weapon. Secondly, firing a weapon causes the player to move slower on the ground, thus making it impossible to slide while firing on the ground. It is still possible to fire mid air or while sliding, making it possible for the player to keep their momentum. Weapons cal also be aimed up, down or diagonally and, with the use of a button, the player can lock themselves in place and aim in any direction without accidentally moving. Lastly, enemies have a weak spot on top of their head. The player must jump over the enemy and aim down to be able to hit it. Most enemies die from one hit on this weak spot and some take a few more hits. Power-sliding knocks enemies up in the air and leaves them vulnerable to the player's shots from below since some enemies cannot react to the knock-up.
 These are the core combat mechanics, the rest is determined by the weapon the player has equipped.
 
-\subsubsection{Field Weapons}
+\subsubsection{Turbo Suits Cores}
 
-Field weapons are weapons that can only be unlocked by picking it up for the first time. Field weapons come with limited ammo in specific amount, but the player can pick up as much ammo as they want for a weapon. The player carries the weapon they picked up to the next level. Some weapons give the player a passive ability  as well. 
+Turbo Suits Cores are modifications to the player's main suit that gives them a different blaster on their other hand. The blaster fires a different type of projectile with a special after-effect upon damaging an enemy. Additionally, the player gains a special passive ability that helps them through traversing a level. The player carries the Turbo Suit they picked up to the next level.
 
-\paragraph{Neostar LMG}
+\paragraph{Neo Core}
 
-Rapid-fire magnetic machine-gun. A quick charge up time is required for the weapon to fire, but it can be spammed to keep it at almost-max charge. Hitting an enemy enough times magnetizes the enemy and makes all your shots follow the enemy. Wielding this weapon allows the player to walk on metallic surfaces.
+Equips the player with a rapid-fire magnetic Blaster. Hitting an enemy enough times magnetizes the enemy and makes all your shots follow the enemy. This suit allows the player to walk on metallic surfaces.
 
 \begin{itemize}
-	\item Initial Ammo: 200
 	\item Damage: 2
 	\item Recoil-boost usage: ??
 	\item Power-up: Walk on metallic surfaces
 \end{itemize}
 
 
-\paragraph{KE-60 Grenadier}
+\paragraph{Kinetic Core}
 
-Explosive energy orb launcher that can propel any object, including the player. The propelling property of the orbs is meant to allow the player to rocket-jump and gain massive momentum at a cost for HP since it also damages the player. The explosion from the orbs can also destroy stone-based hazards and damaged obstacles. Wielding this weapon surrounds the player with a kinetic energy shield that allows the player to take one hit without losing health. The shield recharges after a few seconds when it is used.
+Equips the player with an explosive energy orb Blaster. The orbs can propel any object on impact, including the player. The propelling property of the orbs is meant to allow the player to rocket-jump and gain massive momentum at a cost for Healing Scrap since it also damages the player. The explosion from the orbs can also destroy stone-based hazards and damaged obstacles. This suit surrounds the player with a kinetic energy shield that allows the player to take one hit without losing health and walk on hazards for a short period. The shield recharges after a few seconds when it is used.
 
 \begin{itemize}
-	\item Initial Ammo: 30
 	\item Direct-hit Damage: 5
 	\item Explosive Damage: 5
 	\item Recoil-boost usage: ??
@@ -378,48 +344,43 @@ Explosive energy orb launcher that can propel any object, including the player. 
 \end{itemize} 
 
 
-\paragraph{Firewall Shotgun}
+\paragraph{Magma Core}
 
-Flame shotgun that burns enemies over time. The weapon fires a spread of flame pellets for each shot. This is the only weapon that can trigger explosive barrels, which do high damage to enemies and allows the player to rocket-jump on them. 
+Equips the player with a blaster that shoots a spread flare pellets that burn enemies over time. This is the only Blaster that can trigger explosive barrels, which do high damage to enemies and allows the player to rocket-jump on them. This weapon can also burn down flammable objects and allows the player to swim in magma.  
 
 \begin{itemize}
-	\item Initial Ammo: 50
 	\item Damage per Pellet: 2
 	\item Pellet count per shot: 5
 	\item Burn-damage per second: 2
 	\item Recoil-boost usage: ??
 \end{itemize} 
 
-\paragraph{F-41 Rocket Rifle}
+\paragraph{Rocket Core}
 
-Rifle with a rocket and bayonet attached. It shoots projectile bullets propelled by the rocket receiver of the weapon. Wielding this weapon allows the player to slide faster and deal more Power-Slide damage. Hitting enemies with this empowered slide consumes ammo. If the player runs out of Rush Energy, they can still Power Slide with the default speed and damage.
+Equips the player with a rocket blaster shooting small micro-missiles that can detonate explosive objects. This suit allows the player to slide faster and deal more Power-Slide damage. If the player runs out of Rush Energy, they can still Power Slide with the default speed and damage.
 
 \begin{itemize}
-	\item Initial Ammo: 50
 	\item Damage: 5
 	\item Recoil-boost usage: ??
 	\item Power-up: Increased slide length and damage
-	\item Slide ammo consumption: 5
 \end{itemize} 
 
-\paragraph{Stormhammer}
+\paragraph{Null Core}
 
 \begin{itemize}
-	\item Ammo capacity: 100%
 	\item Damage: 
 	\item Recoil-boost usage:
 \end{itemize}
 
-\subsubsection{Standard Weapon}
+\subsubsection{Standard Suit}
 
-The player always is equipped with a short-ranged pistol that deals a small amount of damage but shoots infinitely. The player starts with this weapon and automatically equips this one when losing a field weapon or running out of ammo. It has no special trait.
+The player always is equipped with a short-ranged Blaster that deals a small amount of damage.
 
-\paragraph{M99 Pistol} 
+\paragraph{Turbo Suit} 
 
-Default pistol with infinite ammunition that fires rapidly. The damage is hit-scan based. It lets the player Recoil-boost in the air without falling.
+Default suit with a minimal damage Blaster that fires rapidly. The damage is hit-scan based. It lets the player Recoil-boost in the air without falling.
 
 \begin{itemize}
-	\item Ammo: Infinite
 	\item Shot type: Limited range hit-scan
 	\item Damage: 1
 	\item Recoil-boost usage: ??
@@ -431,7 +392,7 @@ The player can acquire perks through Perk Stations found in secret areas on a le
 
 \subsubsection{Storm Rounds}
 
-Amplifies the damage output of the currently equipped Field Weapon by 20\% and refills the weapon's ammo by double the standard amount. Taking damage will not make the player drop their weapon. The player will not lose this perk when switching out their weapon for another but the ammo will be scaled accordingly.
+Amplifies the damage output of the currently equipped Blaster by 20\% and increases the rate of fire. This adds an ammo pool to the Blaster, making this ability disappear when the player runs out of it. Taking damage will not make the player drop their Turbo Suit Core. The player will not lose this perk when switching out their Turbo Suit for another, but the ammo is scaled accordingly.
 
 \subsubsection{Storm Energy}
 
@@ -446,10 +407,6 @@ The player is equipped with three additional temporary health. When taking damag
 Explain how the screen behaves when performing certain actions.
 
 \subsection{Game Options that Affect Gameplay}
-
-\subsubsection{Weapon Switching}
-
-Picking up a different weapon can limit or open up the possibilities the player has a ahead. This includes accessing key objects, affecting mobility and affecting the ease of defeating a specific type of enemy. With the press of a button, the player can also switch to their standard weapon to save ammo on their Field Weapon.
 
 \subsection{Replaying and Saving}
 
@@ -515,7 +472,7 @@ This area is where the first level will be a part of, but as soon as the player 
 
 \subsubsection{Description and Physical Characteristics}
 
-This area is a usual mining facility inside a large mountain cave, but with lost of advanced metallic sci-fi mineshafts and storage rooms. The background of the levels will feature stalagmites and gemstones with some metallic structures holding things in place. Some areas will have piles of stones and ores to signify that the place is under work by the Exos. Some places will also have Exos mining ores with pickaxes. There will also be some incendiary barrels that contain gunpowder which can be exploded using the Firewall .127 weapon. 
+This area is a usual mining facility inside a large mountain cave, but with lost of advanced metallic sci-fi mineshafts and storage rooms. The background of the levels will feature stalagmites and gemstones with some metallic structures holding things in place. Some areas will have piles of stones and ores to signify that the place is under work by the Exos. Some places will also have Exos mining ores with pickaxes. There will also be some incendiary barrels that contain gunpowder which can be exploded using the Magma Blaster. 
 
 \subsubsection{Relations to the Rest of the World}
 
@@ -619,7 +576,7 @@ The interface will be a simple pixel-art based interface with menus and a HUD. P
 
 \subsubsection{HUD}
 
-The in-game heads-up display will only show necessary information about the player's status initially. This includes health, equipped weapon, ammo and scrap. Some weapons may have additional user interface elements to display the availability of certain actions (i.e., charge-up time). Lastly, the Rush Energy meter is also a part of the HUD, kind of. It is only displayed when drained or recharging and hovers over the player's head inside the game world. 
+The in-game heads-up display will only show necessary information about the player's status initially. This includes health and scrap. Lastly, the Rush Energy meter is also a part of the HUD.
 
 \begin{itemize}
 	\item TODO: Show images of all the HUD behavior
@@ -654,9 +611,11 @@ The input options when the player is playing in a level will be limited to the b
  \hline
  \textbf{Input option} & \textbf{Action} \\
  \hline
- R & Attack \\  
+ R & Crouch/Slide \\  
  \hline 
  L & Lock \\
+ \hline
+ L (when near object) & Interact \\
  \hline
  D-pad Left & Walk Left \\
  \hline
@@ -666,15 +625,15 @@ The input options when the player is playing in a level will be limited to the b
  \hline
  D-pad Down (when mid-air) & Aim Down \\
  \hline
- Hold A & Crouch/Slide \\
+ A & - \\
  \hline
  B & Jump \\
  \hline
- Hold B & Control Jump-Height\\
+ Release B & Control Jump-Height\\
  \hline
- X & Switch Weapon \\
+ X & - \\
  \hline
-  Y (when near object) & Interact \\
+ Y  &  Attack \\
  \hline
  Start & Pause Menu \\
  \hline
