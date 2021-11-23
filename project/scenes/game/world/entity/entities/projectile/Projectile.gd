@@ -22,7 +22,6 @@ var direction: Vector2
 
 func init_from_player_weapon(dir_vec, weapon, offset = Vector2.ZERO):
 	owner_weapon = weapon
-	__damage = weapon.damage_per_shot
 	init(dir_vec, HitBox.PLAYER_TEAM, offset)
 	
 func init(dir_vec, team, offset = Vector2.ZERO):

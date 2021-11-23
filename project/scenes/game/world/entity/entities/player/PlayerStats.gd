@@ -13,7 +13,7 @@ signal rush_energy_changed(value)
 signal weapon_changed(weapon)
 signal weapon_ammo_changed(value)
 
-export(PackedScene) var default_weapon_scene
+export(PackedScene) var test_weapon_scene
 
 var __scrap_count = 0
 var __rush_energy_count = MAX_RUSH_ENERGY
@@ -29,6 +29,8 @@ onready var __rush_energy_recharge_timer = $RushEnergyRechargeTimer
 onready var __rush_energy_recharge_starting_delay_timer = $RushEnergyRechargeStartingDelayTimer
 
 func _ready():
+	if test_weapon_scene != null:
+		call_deferred("equip_test_weapon")
 	call_deferred("set_rush_energy", MAX_RUSH_ENERGY)
 	call_deferred("set_health", MAX_HEALTH)
 	
@@ -55,13 +57,12 @@ func instance_and_equip_weapon(scene):
 
 func equip_weapon(weapon):
 	__equipped_weapon = weapon
-	__equipped_weapon.owner_player = __player
-	__equipped_weapon.equip()
 	add_child(__equipped_weapon)
+	__equipped_weapon.equip()	
 	emit_signal("weapon_changed", __equipped_weapon)
 
-func equip_default_weapon():
-	instance_and_equip_weapon(default_weapon_scene)
+func equip_test_weapon():
+	instance_and_equip_weapon(test_weapon_scene)
 	
 func get_equipped_weapon():
 	return __equipped_weapon

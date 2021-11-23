@@ -22,6 +22,9 @@ func attack():
 		emit_signal("downwards_attack")
 	else:
 		emit_signal("attacked")
+		
+func get_owner_player():
+	return __player_owner
 	
 func equip():
 	__player_owner.set_sprite_frames(__player_sprite_frames)
