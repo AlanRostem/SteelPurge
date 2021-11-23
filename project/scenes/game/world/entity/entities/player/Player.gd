@@ -49,6 +49,9 @@ onready var __sprite = $PlayerSprite
 onready var __flashing_timer = $FlashingTimer
 onready var __invincibility_timer = $InvincibilityTimer
 
+onready var __ram_slide_hit_box = $RamSlideHitBox
+onready var __ram_slide_hit_box_shape = $RamSlideHitBox/CollisionShape2D
+
 #func _physics_process(delta):
 #	print(__dash_charge)
 #	print(get_velocity().x)
@@ -130,6 +133,7 @@ func look_horizontally(dir):
 	if __looking_vector.y == 0:
 		__looking_vector.x = dir
 	__horizontal_looking_direction = dir
+	__ram_slide_hit_box.scale.x = dir
 	
 func toggle_aim_down():
 	if __looking_vector.y == 0:
@@ -165,6 +169,9 @@ func start_invinvibility_sequence():
 	
 func is_roof_above():
 	return __is_roof_above
+	
+func set_ram_slide_hit_box_enabled(value):
+	__ram_slide_hit_box_shape.set_deferred("disabled", !value)
 
 func _on_FlashingTimer_timeout():
 	visible = !visible
@@ -179,3 +186,10 @@ func _on_RoofDetector_body_entered(body):
 
 func _on_RoofDetector_body_exited(body):
 	__is_roof_above = false
+
+func _on_RamSlideHitBox_hit_dealt(hitbox):
+	var parent = hitbox.get_parent()
+	if parent is MovingEntity:
+		parent.set_velocity_x(0)
+		parent.set_velocity_y(-200)
+	hitbox.take_hit(__ram_slide_hit_box, 2)

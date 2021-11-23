@@ -34,6 +34,7 @@ func enter(message):
 		if player.stats.get_rush_energy() >= 2:
 			player.stats.use_rush_energy(2)
 			player.slide(player.moving_direction)
+			player.set_ram_slide_hit_box_enabled(true)
 	player.clear_dash_charge()
 	player.crouch()
 	player.collision_mode = MovingEntity.CollisionModes.SLIDE
@@ -42,3 +43,4 @@ func exit():
 	if !crouch:
 		player.stand_up()
 	player.collision_mode = MovingEntity.CollisionModes.SNAP
+	player.set_ram_slide_hit_box_enabled(false)
