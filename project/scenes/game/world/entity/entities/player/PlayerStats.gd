@@ -33,23 +33,21 @@ func _ready():
 	call_deferred("set_health", MAX_HEALTH)
 	
 func _physics_process(delta):
-	if __equipped_weapon == null: return
-	if Input.is_action_pressed("fire"):
-		__equipped_weapon.pull_trigger()
-		if !__equipped_weapon.is_firing():
-			__equipped_weapon.fire()
-	else:
-		__equipped_weapon.release_trigger()
-		
-	if Input.is_action_just_pressed("aim_down"):
-		if __player.state_machine.get_current_state() == "PlayerAirBorneState":
-			__player.toggle_aim_down()
-	
 	if __player.is_on_ground():
 		__player.stop_aiming_down()
 		if __rush_energy_count < MAX_RUSH_ENERGY and !__is_recharging_rush_energy:
 			__rush_energy_recharge_starting_delay_timer.start()
 			__is_recharging_rush_energy = true
+	
+	if __equipped_weapon == null: return
+	if Input.is_action_just_pressed("fire"):
+		__equipped_weapon.attack()
+		
+	if Input.is_action_just_pressed("aim_down"):
+		if __player.state_machine.get_current_state() == "PlayerAirBorneState":
+			__player.toggle_aim_down()
+	
+
 	
 func instance_and_equip_weapon(scene):
 	var weapon = scene.instance()
@@ -58,8 +56,6 @@ func instance_and_equip_weapon(scene):
 func equip_weapon(weapon):
 	__equipped_weapon = weapon
 	__equipped_weapon.owner_player = __player
-	__equipped_weapon.connect("fired", self, "_on_equipped_weapon_fired")
-	__equipped_weapon.connect("ammo_changed", self, "_on_equipped_weapon_ammo_changed")
 	__equipped_weapon.equip()
 	add_child(__equipped_weapon)
 	emit_signal("weapon_changed", __equipped_weapon)
@@ -118,14 +114,6 @@ func use_rush_energy(count):
 	__rush_energy_recharge_starting_delay_timer.stop()
 	__rush_energy_recharge_timer.stop()
 	__is_recharging_rush_energy = false
-
-func _on_equipped_weapon_fired():
-	if __player.get_velocity().y > -__equipped_weapon.recoil_boost_horizontal_speed and __player.get_looking_vector().y > 0 and get_rush_energy() >= __equipped_weapon.recoil_boost_rush_energy_usage:
-		use_rush_energy(__equipped_weapon.recoil_boost_rush_energy_usage)
-		__player.recoil_boost(__equipped_weapon.recoil_boost_horizontal_speed)
-
-func _on_equipped_weapon_ammo_changed(ammo):
-	emit_signal("weapon_ammo_changed", ammo)
 
 func recharge_rush_energy():
 	set_rush_energy(__rush_energy_count + 2)
