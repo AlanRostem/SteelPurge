@@ -32,7 +32,7 @@ func equip():
 	__player_owner.set_sprite_frames(__player_sprite_frames)
 	
 func drop():
-	var spot = __player_owner.position + __player_owner.get_looking_vector() * 12 + __player_owner.get_velocity() * get_physics_process_delta_time()
+	var spot = __player_owner.position + __player_owner.get_looking_vector() * -20
 	var collectible = __player_owner.parent_world.spawn_entity_deferred(__collectible_scene, spot)
 	collectible.weapon = self
 	collectible.call_deferred("set_sprite", __collectible_sprite)
