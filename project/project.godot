@@ -56,8 +56,8 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=512
-window/size/height=288
+window/size/width=240
+window/size/height=160
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
