@@ -18,7 +18,7 @@ func attack():
 	__attack_delay_timer.start(__attack_delay)
 	__can_attack = false
 	
-	if __player_owner.get_looking_vector().y > 0:
+	if __player_owner.get_looking_vector().y > 0 and __player_owner.state_machine.get_current_state() == "PlayerAirBorneState":
 		emit_signal("downwards_attack")
 	else:
 		emit_signal("attacked")

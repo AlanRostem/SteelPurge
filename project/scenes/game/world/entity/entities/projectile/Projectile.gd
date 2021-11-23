@@ -26,6 +26,12 @@ func init_from_player_weapon(dir_vec, weapon, offset = Vector2.ZERO):
 	
 func init(dir_vec, team, offset = Vector2.ZERO):
 	set_velocity(dir_vec * max_velocity)
+	
+	if dir_vec.x != 0:
+		offset.x *= dir_vec.x
+		
+	if dir_vec.y != 0:
+		offset.y *= dir_vec.y
 	position += offset
 	__hit_box.change_team(team)
 	direction = dir_vec

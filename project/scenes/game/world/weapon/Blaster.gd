@@ -9,4 +9,16 @@ func fire_projectile(scene):
 	var player = get_owner_player()
 	var world = player.parent_world
 	var projectile = world.spawn_entity_deferred(scene, player.position)
-	projectile.call_deferred("init_from_player_weapon", player.get_looking_vector(), self)
+	
+	var dir = player.get_looking_vector()
+	var offset = Vector2(6, -3)
+	projectile.call_deferred("init_from_player_weapon", dir, self, offset)
+
+
+func _on_Blaster_downwards_attack():
+	fire_projectile(__projectile_scene)
+	
+	var player = get_owner_player()
+	if player.stats.get_rush_energy() > 0:
+		player.recoil_boost(20)
+		player.stats.use_rush_energy(1)

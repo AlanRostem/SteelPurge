@@ -10,3 +10,4 @@ __player_sprite_frames = ExtResource( 3 )
 __attack_delay = 0.1
 
 [connection signal="attacked" from="." to="." method="_on_Blaster_attacked"]
+[connection signal="downwards_attack" from="." to="." method="_on_Blaster_downwards_attack"]

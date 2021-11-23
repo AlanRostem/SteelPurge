@@ -49,8 +49,6 @@ func _physics_process(delta):
 		if __player.state_machine.get_current_state() == "PlayerAirBorneState":
 			__player.toggle_aim_down()
 	
-
-	
 func instance_and_equip_weapon(scene):
 	var weapon = scene.instance()
 	equip_weapon(weapon)
@@ -58,7 +56,7 @@ func instance_and_equip_weapon(scene):
 func equip_weapon(weapon):
 	__equipped_weapon = weapon
 	add_child(__equipped_weapon)
-	__equipped_weapon.equip()	
+	__equipped_weapon.equip()
 	emit_signal("weapon_changed", __equipped_weapon)
 
 func equip_test_weapon():
