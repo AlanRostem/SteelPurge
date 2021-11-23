@@ -1,11 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/world/entity/entities/item/collectible_items/Scrap.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/game/world/entity/entities/item/collectible_items/HealingScrap.gd" type="Script" id=2]
-[ext_resource path="res://assets/sprites/item/scrap/healing_scrap.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://scenes/game/world/entity/entities/item/collectible_items/Scrap.gd\"
+
+
+func _player_collected(player):
+	player.stats.add_healing_scrap(amount_per_collect)
+"
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/healing_scrap.png-b5499c05d513363c2ad8365a52fb039e.stex"
 
 [node name="HealingScrap" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+script = SubResource( 1 )
 
 [node name="Sprite" parent="." index="2"]
-texture = ExtResource( 3 )
+texture = SubResource( 2 )
