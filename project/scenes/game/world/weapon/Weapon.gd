@@ -28,6 +28,9 @@ func get_owner_player():
 	
 func equip():
 	__player_owner.set_sprite_frames(__player_sprite_frames)
+	
+func drop():
+	pass
 
 func _on_AttackDelayTimer_timeout():
 	__can_attack = true

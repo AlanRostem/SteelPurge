@@ -30,7 +30,6 @@ z_index = 1
 collision_layer = 4
 script = ExtResource( 3 )
 collision_mode = 2
-gravity = 400
 air_acceleration = 250.0
 walk_transition_weight = 0.4
 max_walk_speed = 55.0

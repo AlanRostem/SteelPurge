@@ -15,6 +15,8 @@ signal weapon_ammo_changed(value)
 
 export(PackedScene) var test_weapon_scene
 
+var __default_player_sprite_frames = preload("res://assets/resources/sprite_frames/char/PlayerSpriteFrames.tres")
+
 var __scrap_count = 0
 var __rush_energy_count = MAX_RUSH_ENERGY
 var __health = MAX_HEALTH
@@ -91,6 +93,11 @@ func add_healing_scrap(count):
 
 func take_one_damage():
 	set_health(__health - 1)
+	if __equipped_weapon != null:
+		__equipped_weapon.drop()
+		__equipped_weapon.queue_free()
+		__equipped_weapon = null
+		__player.set_sprite_frames(__default_player_sprite_frames)
 	if __health == 0:
 		emit_signal("died")
 	
