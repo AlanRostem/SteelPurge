@@ -95,7 +95,6 @@ func take_one_damage():
 	set_health(__health - 1)
 	if __equipped_weapon != null:
 		__equipped_weapon.drop()
-		__equipped_weapon.queue_free()
 		__equipped_weapon = null
 		__player.set_sprite_frames(__default_player_sprite_frames)
 	if __health == 0:
