@@ -44,6 +44,9 @@ onready var state_machine = $PlayerFSM
 onready var stats = $PlayerStats
 onready var __sprite = $PlayerSprite
 
+onready var __flashing_timer = $FlashingTimer
+onready var __invincibility_timer = $InvincibilityTimer
+
 #func _physics_process(delta):
 #	print(__dash_charge)
 #	print(get_velocity().x)
@@ -148,3 +151,20 @@ func set_sprite_frames(frames):
 	var frame = __sprite.frame
 	__sprite.frames = frames
 	__sprite.frame = frame
+
+func set_hit_box_enabled(value):
+	__hit_box_shape.set_deferred("disabled", !value)
+	
+func start_invinvibility_sequence():
+	set_hit_box_enabled(false)
+	__invincibility_timer.start()
+	__flashing_timer.start()
+	visible = false
+
+func _on_FlashingTimer_timeout():
+	visible = !visible
+
+func _on_InvincibilityTimer_timeout():
+	set_hit_box_enabled(true)
+	__flashing_timer.stop()
+	visible = true

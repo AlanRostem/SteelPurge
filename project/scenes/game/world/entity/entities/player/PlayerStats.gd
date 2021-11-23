@@ -97,6 +97,8 @@ func take_one_damage():
 		__equipped_weapon.drop()
 		__equipped_weapon = null
 		__player.set_sprite_frames(__default_player_sprite_frames)
+	__player.set_velocity_x(0)
+	__player.start_invinvibility_sequence()
 	if __health == 0:
 		emit_signal("died")
 	
