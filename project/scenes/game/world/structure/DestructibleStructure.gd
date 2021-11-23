@@ -25,4 +25,8 @@ func _on_InHitBox_hit_received(hitbox, damage):
 
 
 func _on_HealthComponent_health_depleted(health_left):
+	_destroyed()
 	queue_free()
+
+func _destroyed():
+	pass

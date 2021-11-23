@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/game/world/structure/DestructibleStructure.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/world/structure/destructible/Crate.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/item/crate/crate.png" type="Texture" id=3]
+[ext_resource path="res://scenes/game/world/entity/entities/item/collectible_items/Scrap.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4, 4 )
+
+[node name="Crate" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+drop_scrap_on_damaged = false
+__containment_scene = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InHitBox" index="0"]
+shape = SubResource( 1 )
+
+[node name="HealthComponent" parent="." index="1"]
+max_health = 2
+
+[node name="ScrapDropLocation" parent="." index="2"]
+position = Vector2( 0, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="." index="4"]
+texture = ExtResource( 3 )
