@@ -37,6 +37,8 @@ var __is_crouched = false
 var __looking_vector = Vector2.RIGHT
 var __horizontal_looking_direction = 1
 
+var __is_roof_above = false
+
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 onready var __hit_box_shape = $InHitBox/CollisionShape2D
 onready var hit_box = $InHitBox
@@ -160,6 +162,9 @@ func start_invinvibility_sequence():
 	__invincibility_timer.start()
 	__flashing_timer.start()
 	visible = false
+	
+func is_roof_above():
+	return __is_roof_above
 
 func _on_FlashingTimer_timeout():
 	visible = !visible
@@ -168,3 +173,9 @@ func _on_InvincibilityTimer_timeout():
 	set_hit_box_enabled(true)
 	__flashing_timer.stop()
 	visible = true
+
+func _on_RoofDetector_body_entered(body):
+	__is_roof_above = true
+
+func _on_RoofDetector_body_exited(body):
+	__is_roof_above = false

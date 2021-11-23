@@ -7,7 +7,7 @@ func movement_update(delta):
 		player.negate_slide(intended_dir, delta)
 	player.apply_slide_friction(delta)
 	
-	if !crouch:
+	if !crouch and !player.is_roof_above():
 		if player.is_effectively_standing_still():
 			parent_state_machine.transition_to("PlayerIdleState")
 			return

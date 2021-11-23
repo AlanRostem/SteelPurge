@@ -118,7 +118,16 @@ wait_time = 0.4
 wait_time = 2.2
 one_shot = true
 
+[node name="RoofDetector" type="Area2D" parent="." index="9"]
+collision_layer = 0
+
+[node name="UpperBodyShape" type="CollisionShape2D" parent="RoofDetector" index="0"]
+position = Vector2( 0, -7 )
+shape = SubResource( 2 )
+
 [connection signal="timeout" from="FlashingTimer" to="." method="_on_FlashingTimer_timeout"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_InvincibilityTimer_timeout"]
 [connection signal="timeout" from="PlayerStats/RushEnergyRechargeTimer" to="PlayerStats" method="_on_RushEnergyRechargeTimer_timeout"]
 [connection signal="timeout" from="PlayerStats/RushEnergyRechargeStartingDelayTimer" to="PlayerStats" method="_on_RushEnergyRechargeStartingDelayTimer_timeout"]
+[connection signal="body_entered" from="RoofDetector" to="." method="_on_RoofDetector_body_entered"]
+[connection signal="body_exited" from="RoofDetector" to="." method="_on_RoofDetector_body_exited"]

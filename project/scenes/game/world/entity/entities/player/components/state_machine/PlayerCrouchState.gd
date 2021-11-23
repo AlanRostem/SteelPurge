@@ -17,7 +17,7 @@ func movement_update(delta):
 		})
 		return
 			
-	if !crouch:
+	if !crouch and !player.is_roof_above():
 		if player.is_effectively_standing_still():
 			parent_state_machine.transition_to("PlayerIdleState")
 		else:
