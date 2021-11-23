@@ -5,11 +5,6 @@ onready var __first = $Health/First
 onready var __second = $Health/Second
 onready var __third = $Health/Third
 
-onready var __healing_scrap = $HealingScrap
-
-func _ready():
-	__healing_scrap.max_value = PlayerStats.MAX_HEALING_SCRAP
-
 func set_health(count):
 	match count:
 		3:
@@ -29,6 +24,3 @@ func set_health(count):
 			__first.animation = "empty"
 			__second.animation = "empty"
 			__third.animation = "empty"
-
-func set_healing_scrap(count):
-	__healing_scrap.value = count
