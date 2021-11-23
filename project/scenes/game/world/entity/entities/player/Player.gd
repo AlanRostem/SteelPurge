@@ -83,15 +83,12 @@ func crouch():
 	if __is_crouched: return
 	__upper_body_shape.disabled = true
 	__is_crouched = true
-	__hit_box_shape.shape.extents.y = 6
-	__hit_box_shape.position.y = 6
 	
 func stand_up():
 	if !__is_crouched: return
 	__upper_body_shape.disabled = false
 	__is_crouched = false
-	__hit_box_shape.shape.extents.y = 12
-	__hit_box_shape.position.y = 0
+
 	
 func is_crouched():
 	return __is_crouched
