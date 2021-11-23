@@ -7,5 +7,6 @@
 [node name="Blaster" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 __player_sprite_frames = ExtResource( 3 )
+__attack_delay = 0.1
 
 [connection signal="attacked" from="." to="." method="_on_Blaster_attacked"]
