@@ -29,8 +29,6 @@ onready var __rush_energy_recharge_timer = $RushEnergyRechargeTimer
 onready var __rush_energy_recharge_starting_delay_timer = $RushEnergyRechargeStartingDelayTimer
 
 func _ready():
-	if __equipped_weapon == null:
-		call_deferred("equip_default_weapon")
 	call_deferred("set_rush_energy", MAX_RUSH_ENERGY)
 	call_deferred("set_health", MAX_HEALTH)
 	
