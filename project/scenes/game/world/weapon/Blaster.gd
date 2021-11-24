@@ -11,16 +11,8 @@ func fire_projectile(scene):
 	var projectile = world.spawn_entity_deferred(scene, player.position)
 	
 	var dir = player.get_looking_vector()
-	var offset = Vector2(6, -3)
-	
-	if dir.x != 0:
-		offset.x *= dir.x
-		
-	if dir.y != 0:
-		offset.x = 0
-		offset.y = 6
-		
-	projectile.call_deferred("init_from_player_weapon", dir, self, offset)
+
+	projectile.call_deferred("init_from_player_weapon", dir, self)
 
 
 func _on_Blaster_downwards_attack():

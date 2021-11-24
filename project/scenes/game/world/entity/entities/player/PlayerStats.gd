@@ -38,7 +38,8 @@ func _ready():
 	
 func _physics_process(delta):
 	if __player.is_on_ground():
-		__player.stop_aiming_down()
+		if __player.is_aiming_down():
+			__player.stop_aiming_down()
 		if __rush_energy_count < MAX_RUSH_ENERGY and !__is_recharging_rush_energy:
 			__rush_energy_recharge_starting_delay_timer.start()
 			__is_recharging_rush_energy = true
@@ -50,6 +51,11 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("aim_down"):
 		if __player.state_machine.get_current_state() == "PlayerAirBorneState":
 			__player.toggle_aim_down()
+			
+	if Input.is_action_just_pressed("aim_up"):
+		__player.set_aim_up(true)
+	elif Input.is_action_just_released("aim_up"):
+		__player.set_aim_up(false)
 	
 func instance_and_equip_weapon(scene):
 	var weapon = scene.instance()
