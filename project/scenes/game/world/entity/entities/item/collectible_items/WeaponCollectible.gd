@@ -17,7 +17,7 @@ func set_sprite(sprite):
 
 func set_recently_dropped(value):
 	if value:
-		call_deferred("__set_life_timer_wait_time_to_low",)
+		call_deferred("__set_life_timer_wait_time_to_low")
 		
 func __set_life_timer_wait_time_to_low():
 	_life_timer.start(2)

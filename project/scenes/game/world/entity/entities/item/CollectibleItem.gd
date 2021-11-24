@@ -9,6 +9,10 @@ func _process(delta):
 	if _life_timer.time_left < _life_timer.wait_time / 2 and !__flashing:
 		__flash_timer.start()
 		__flashing = true
+		
+func _physics_process(delta):
+	if is_on_floor():
+		set_velocity_x(0)
 
 func _player_collected(player):
 	pass
