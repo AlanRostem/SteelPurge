@@ -8,7 +8,7 @@ extents = Vector2( 4, 4 )
 
 [node name="CollectibleItem" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-collision_mode = 2
+collision_mode = 1
 
 [node name="BodyShape" parent="." index="0"]
 shape = SubResource( 1 )

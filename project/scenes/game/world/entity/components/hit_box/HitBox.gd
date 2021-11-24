@@ -12,6 +12,7 @@ const PLAYER_TEAM = "player_team"
 
 signal hit_received(hitbox, damage)
 signal hit_dealt(hitbox)
+signal received_additional_message(message)
 
 # Describes what the hit box should do in the game world. By changing this enum,
 # the hitbox will be used to either receive a hit or give one out to another hit
@@ -37,8 +38,10 @@ func get_team():
 	
 # Manually call this function to deal damage to a hitbox exclusively. Should be
 # used after connecting to "hit_dealt"
-func take_hit(hitbox, damage):
+func take_hit(hitbox, damage, message: Dictionary = {}):
 	emit_signal("hit_received", hitbox, damage)
+	if message.size() > 0:
+		emit_signal("received_additional_message", message)
 
 # This connected signal will only be called if the hit box action type is set to
 # deal hits. 

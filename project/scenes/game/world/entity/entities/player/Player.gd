@@ -3,6 +3,7 @@ class_name Player
 
 const MAX_DASH_CHARGE = 100
 const PLAYER_TEAM = "player_team"
+const RAM_SLIDE_SPEED = 200
 
 export var air_acceleration: float
 
@@ -191,5 +192,7 @@ func _on_RamSlideHitBox_hit_dealt(hitbox):
 	var parent = hitbox.get_parent()
 	if parent is MovingEntity:
 		parent.set_velocity_x(0)
-		parent.set_velocity_y(-200)
-	hitbox.take_hit(__ram_slide_hit_box, 2)
+		parent.set_velocity_y(-RAM_SLIDE_SPEED)
+	hitbox.take_hit(__ram_slide_hit_box, 2, {
+		"ram_slide": true
+	})

@@ -6,7 +6,6 @@
 
 [node name="Scrap" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-collision_mode = 0
 
 [node name="Sprite" type="Sprite" parent="." index="2"]
 texture = ExtResource( 3 )

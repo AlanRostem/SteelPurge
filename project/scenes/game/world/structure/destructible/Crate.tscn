@@ -20,7 +20,7 @@ __containment_scene = ExtResource( 4 )
 shape = SubResource( 1 )
 
 [node name="HealthComponent" parent="." index="1"]
-max_health = 2
+max_health = 1
 
 [node name="ScrapDropLocation" parent="." index="2"]
 position = Vector2( 0, 0 )
@@ -30,3 +30,5 @@ shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="." index="4"]
 texture = ExtResource( 3 )
+
+[connection signal="received_additional_message" from="InHitBox" to="." method="_on_InHitBox_received_additional_message"]
