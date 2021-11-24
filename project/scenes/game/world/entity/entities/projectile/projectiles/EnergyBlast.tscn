@@ -3,15 +3,17 @@
 [ext_resource path="res://scenes/game/world/entity/entities/projectile/Projectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/projectile/blast.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 2.0
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1.5, 1.5 )
 
 [node name="EnergyBlast" instance=ExtResource( 1 )]
 max_velocity = 260.0
 __damage = 2
 
 [node name="Sprite" parent="." index="0"]
+position = Vector2( -0.5, 0 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2( 0, -0.5 )
 shape = SubResource( 1 )

@@ -12,7 +12,7 @@ func fire_projectile(scene):
 	
 	var dir = player.get_looking_vector()
 
-	projectile.call_deferred("init_from_player_weapon", dir, self)
+	projectile.call_deferred("init_from_player_weapon", dir, self, position)
 
 
 func _on_Blaster_downwards_attack():
