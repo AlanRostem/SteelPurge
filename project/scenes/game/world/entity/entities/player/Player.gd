@@ -137,13 +137,16 @@ func look_horizontally(dir):
 	__ram_slide_hit_box.scale.x = dir
 	
 func set_aim_up(value):
-	if value:
+	if value and !is_crouched():
 		if __looking_vector.y == 0:
 			__looking_vector.x = 0
 			__looking_vector.y = -1
 	else:
 		__looking_vector.y = 0
 		__looking_vector.x = __horizontal_looking_direction
+	
+func is_aiming_up():
+	return __looking_vector.y < 0
 	
 func is_aiming_down():
 	return __looking_vector.y > 0

@@ -8,29 +8,29 @@ func _physics_process(delta):
 	var f = frame
 	match player_state_machine.get_current_state():
 		"PlayerIdleState": 
-			animation = "idle"
 			if player.is_aiming_up():
 				animation = "aim_up_idle"
+			else: 
+				animation = "idle"
 		"PlayerWalkState": 
-			animation = "walking"
 			if player.is_aiming_up():
 				animation = "aim_up_walking"
+			else: 
+				animation = "walking"
 		"PlayerRunState":
 			if player.is_aiming_up():
 				animation = "aim_up_running"
-			animation = "running"
+			else: 
+				animation = "running"
 			frame = f
 		"PlayerAirBorneState": 
-			animation = "jump"
 			if player.is_aiming_up():
 				animation = "aim_up_jump"
-			elif player.get_looking_vector().y > 0:
+			elif player.is_aiming_down():
 				animation = "aim_down"
+			else:
+				animation = "jump"
 		"PlayerCrouchState": 
 			animation = "slide"
-			if player.is_aiming_up():
-				animation = "aim_up_slide"
 		"PlayerSlideState": 
 			animation = "slide"
-			if player.is_aiming_up():
-				animation = "aim_up_slide"
