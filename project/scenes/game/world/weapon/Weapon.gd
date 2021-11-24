@@ -37,6 +37,7 @@ func drop():
 	collectible.weapon = self
 	collectible.call_deferred("set_sprite", __collectible_sprite)
 	__player_owner.stats.remove_child(self)
+	collectible.set_recently_dropped(true)
 
 func _on_AttackDelayTimer_timeout():
 	__can_attack = true
