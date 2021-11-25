@@ -32,9 +32,9 @@ func equip():
 	__player_owner.set_sprite_frames(__player_sprite_frames)
 	
 func drop():
-	var spot = __player_owner.position + Vector2(__player_owner.get_looking_vector().x * -16, 0)
-	var collectible = __player_owner.parent_world.spawn_entity_deferred(__collectible_scene, spot)
+	var collectible = __player_owner.parent_world.spawn_entity_deferred(__collectible_scene, __player_owner.position)
 	collectible.weapon = self
+	collectible.set_velocity(Vector2(-__player_owner.get_horizontal_looking_dir() * 50, -100))
 	collectible.call_deferred("set_sprite", __collectible_sprite)
 	__player_owner.stats.remove_child(self)
 	collectible.set_recently_dropped(true)

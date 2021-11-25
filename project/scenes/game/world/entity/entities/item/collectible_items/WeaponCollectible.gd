@@ -20,4 +20,7 @@ func set_recently_dropped(value):
 		call_deferred("__set_life_timer_wait_time_to_low")
 		
 func __set_life_timer_wait_time_to_low():
-	_life_timer.start(2)
+	_life_timer.start(3.5)
+	
+func _pick_up_condition(player):
+	return player.can_pick_up_weapon(weapon)

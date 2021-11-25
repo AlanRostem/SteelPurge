@@ -101,8 +101,9 @@ func take_one_damage():
 	set_health(__health - 1)
 	if __equipped_weapon != null:
 		__equipped_weapon.drop()
-		__equipped_weapon = null
 		__player.set_sprite_frames(__default_player_sprite_frames)
+		__player.set_weapon_that_cannot_be_picked_up(__equipped_weapon)
+		__equipped_weapon = null
 	__player.set_velocity_x(0)
 	__player.start_invinvibility_sequence()
 	if __health == 0:

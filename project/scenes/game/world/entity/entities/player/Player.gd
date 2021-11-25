@@ -4,6 +4,7 @@ class_name Player
 const MAX_DASH_CHARGE = 100
 const PLAYER_TEAM = "player_team"
 const RAM_SLIDE_SPEED = 200
+const RAM_SLIDE_DAMAGE = 5
 
 export var air_acceleration: float
 
@@ -39,7 +40,7 @@ var __looking_vector = Vector2.RIGHT
 var __horizontal_looking_direction = 1
 
 var __is_roof_above = false
-var __can_pick_up = true
+var __weapon_that_cannot_be_picked_up = null
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 onready var __hit_box_shape = $InHitBox/CollisionShape2D
@@ -137,6 +138,9 @@ func look_horizontally(dir):
 	__horizontal_looking_direction = dir
 	__ram_slide_hit_box.scale.x = dir
 	
+func get_horizontal_looking_dir():
+	return __horizontal_looking_direction
+	
 func set_aim_up(value):
 	if value and !is_crouched():
 		if __looking_vector.y == 0:
@@ -187,11 +191,11 @@ func start_invinvibility_sequence():
 func is_roof_above():
 	return __is_roof_above
 	
-func can_pick_up():
-	return __can_pick_up
+func can_pick_up_weapon(weapon):
+	return __weapon_that_cannot_be_picked_up != weapon
 	
-func set_can_pick_up(value):
-	__can_pick_up = value
+func set_weapon_that_cannot_be_picked_up(weapon):
+	__weapon_that_cannot_be_picked_up = weapon
 	
 func set_ram_slide_hit_box_enabled(value):
 	__ram_slide_hit_box_shape.set_deferred("disabled", !value)
@@ -203,6 +207,7 @@ func _on_InvincibilityTimer_timeout():
 	set_hit_box_enabled(true)
 	__flashing_timer.stop()
 	visible = true
+	set_weapon_that_cannot_be_picked_up(null)
 
 func _on_RoofDetector_body_entered(body):
 	__is_roof_above = true
@@ -215,6 +220,6 @@ func _on_RamSlideHitBox_hit_dealt(hitbox):
 	if parent is MovingEntity:
 		parent.set_velocity_x(0)
 		parent.set_velocity_y(-RAM_SLIDE_SPEED)
-	hitbox.take_hit(__ram_slide_hit_box, 2, {
+	hitbox.take_hit(__ram_slide_hit_box, RAM_SLIDE_DAMAGE, {
 		"ram_slide": true
 	})
