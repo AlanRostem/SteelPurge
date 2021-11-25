@@ -1,6 +1,0 @@
-[gd_scene format=2]
-
-[node name="LevelSelectWorld" type="Node2D"]
-
-[node name="LevelSelectTileMap" type="TileMap" parent="."]
-format = 1

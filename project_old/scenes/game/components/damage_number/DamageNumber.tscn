@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://scenes/game/components/damage_number/DamageNumber.cs" type="Script" id=1]
-[ext_resource path="res://scenes/game/ui/FloatingTempText.tscn" type="PackedScene" id=2]
-
-[node name="DamageNumber" instance=ExtResource( 2 )]
-script = ExtResource( 1 )
