@@ -39,6 +39,7 @@ var __looking_vector = Vector2.RIGHT
 var __horizontal_looking_direction = 1
 
 var __is_roof_above = false
+var __can_pick_up = true
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 onready var __hit_box_shape = $InHitBox/CollisionShape2D
@@ -185,6 +186,12 @@ func start_invinvibility_sequence():
 	
 func is_roof_above():
 	return __is_roof_above
+	
+func can_pick_up():
+	return __can_pick_up
+	
+func set_can_pick_up(value):
+	__can_pick_up = value
 	
 func set_ram_slide_hit_box_enabled(value):
 	__ram_slide_hit_box_shape.set_deferred("disabled", !value)
