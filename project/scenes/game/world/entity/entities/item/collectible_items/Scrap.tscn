@@ -6,6 +6,7 @@
 
 [node name="Scrap" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+amount_per_collect = 1
 
 [node name="Sprite" type="Sprite" parent="." index="2"]
 texture = ExtResource( 3 )

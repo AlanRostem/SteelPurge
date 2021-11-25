@@ -192,6 +192,8 @@ func is_roof_above():
 	return __is_roof_above
 	
 func can_pick_up_weapon(weapon):
+	if __weapon_that_cannot_be_picked_up == null:
+		return true
 	return __weapon_that_cannot_be_picked_up != weapon
 	
 func set_weapon_that_cannot_be_picked_up(weapon):

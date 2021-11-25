@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/game/world/entity/entities/item/collectible_items/WeaponCollectible.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/world/weapon/Blaster.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/item/weapon/blaster.png" type="Texture" id=3]
+
+[node name="BlasterCollectible" instance=ExtResource( 1 )]
+__weapon_scene = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="2"]
+texture = ExtResource( 3 )
