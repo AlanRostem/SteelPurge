@@ -17,8 +17,12 @@ __team = "enemy_team"
 [node name="OutHitBox" parent="." index="3" instance=ExtResource( 2 )]
 __team = "enemy_team"
 
+[node name="DamageAvailabilityTimer" type="Timer" parent="." index="4"]
+one_shot = true
+
 [connection signal="damage_taken" from="HealthComponent" to="." method="_on_HealthComponent_damage_taken"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_HealthComponent_health_depleted"]
 [connection signal="hit_received" from="InHitBox" to="." method="_on_InHitBox_hit_received"]
 [connection signal="received_additional_message" from="InHitBox" to="." method="_on_InHitBox_received_additional_message"]
 [connection signal="hit_dealt" from="OutHitBox" to="." method="_on_OutHitBox_hit_dealt"]
+[connection signal="timeout" from="DamageAvailabilityTimer" to="." method="_on_DamageAvailabilityTimer_timeout"]
