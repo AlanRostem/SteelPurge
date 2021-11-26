@@ -8,6 +8,7 @@ var scrap_scene = preload("res://scenes/game/world/entity/entities/item/collecti
 
 onready var __health_component = $HealthComponent
 onready var __damage_timer = $DamageAvailabilityTimer
+onready var state_machine = $EnemyFSM
 
 export(int) var scrap_drop_count_damaged = 1
 export(int) var scrap_drop_count_eliminated = 10

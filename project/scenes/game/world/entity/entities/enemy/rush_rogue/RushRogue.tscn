@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/resources/sprite_frames/char/RushRogueSpriteFrames.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/rush_rogue/RushRogue.gd" type="Script" id=3]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/rush_rogue/state_machine/RushRogueState.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/rush_rogue/state_machine/RushRoguePartolState.gd" type="Script" id=5]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/rush_rogue/state_machine/RushRogueRushState.gd" type="Script" id=6]
@@ -11,8 +12,7 @@
 extents = Vector2( 7, 3 )
 
 [node name="RushRogue" instance=ExtResource( 1 )]
-collision_mode = 2
-player_detection_range_in_tiles = 6.0
+script = ExtResource( 3 )
 
 [node name="BodyShape" parent="." index="0"]
 shape = SubResource( 1 )
@@ -26,8 +26,7 @@ shape = SubResource( 1 )
 [node name="RushRogueSprite" type="AnimatedSprite" parent="." index="5"]
 position = Vector2( 0, -5 )
 frames = ExtResource( 2 )
-animation = "walk"
-frame = 1
+animation = "charge"
 playing = true
 script = ExtResource( 7 )
 
