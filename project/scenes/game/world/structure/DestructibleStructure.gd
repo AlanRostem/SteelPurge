@@ -23,10 +23,12 @@ func _on_InHitBox_hit_received(hitbox, damage):
 	if drop_scrap_on_damaged:
 		drop_scrap(scrap_drop_count_damaged)
 
-
-func _on_HealthComponent_health_depleted(health_left):
+func destroy_self():
 	_destroyed()
 	queue_free()
+
+func _on_HealthComponent_health_depleted(health_left):
+	destroy_self()
 
 func _destroyed():
 	pass

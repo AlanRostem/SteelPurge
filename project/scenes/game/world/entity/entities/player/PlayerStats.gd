@@ -57,6 +57,9 @@ func _physics_process(delta):
 	elif Input.is_action_just_released("aim_up"):
 		__player.set_aim_up(false)
 	
+func has_weapon():
+	return __equipped_weapon != null
+	
 func instance_and_equip_weapon(scene):
 	var weapon = scene.instance()
 	equip_weapon(weapon)
