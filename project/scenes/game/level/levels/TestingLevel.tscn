@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/game/level/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/world/entity/entities/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/dummy/Dummy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/terrain/tile_sheet_slopes.png" type="Texture" id=4]
 [ext_resource path="res://scenes/game/world/structure/destructible/Crate.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/rush_rogue/RushRogue.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 8, 0, 8, 8, 0, 8, 8 )
@@ -179,6 +180,10 @@ position = Vector2( 53, 110 )
 
 [node name="Dummy" parent="GameWorld/EntityPool" index="1" instance=ExtResource( 3 )]
 position = Vector2( 420, 138 )
+collision_layer = 0
+
+[node name="RushRogue" parent="GameWorld/EntityPool" index="2" instance=ExtResource( 6 )]
+position = Vector2( 168, 124 )
 collision_layer = 0
 
 [editable path="GameWorld"]

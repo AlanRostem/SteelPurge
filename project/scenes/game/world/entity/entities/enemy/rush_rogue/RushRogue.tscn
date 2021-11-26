@@ -11,6 +11,8 @@
 extents = Vector2( 7, 4 )
 
 [node name="RushRogue" instance=ExtResource( 1 )]
+collision_mode = 2
+player_detection_range_in_tiles = 2.0
 
 [node name="BodyShape" parent="." index="0"]
 shape = SubResource( 1 )
@@ -25,7 +27,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -4 )
 frames = ExtResource( 2 )
 animation = "walk"
-frame = 1
+frame = 2
 playing = true
 
 [node name="RushRogueFSM" parent="." index="6" instance=ExtResource( 3 )]
