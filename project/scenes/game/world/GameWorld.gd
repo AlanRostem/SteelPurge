@@ -13,12 +13,15 @@ onready var __tile_map = $Geometry/CustomTileMap
 
 onready var __parent_level = get_parent()
 
+var player_node
+
 func _ready():
 	var player = __entity_pool.get_node_or_null("Player")
 	if player != null:
 		assign_player_node(player)
 
 func assign_player_node(player):
+	player_node = player
 	__parent_level.player_node = player
 
 # Retrieve the pixel cell size for the tile map

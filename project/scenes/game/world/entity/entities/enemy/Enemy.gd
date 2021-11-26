@@ -1,6 +1,9 @@
 extends MovingEntity
 class_name Enemy
 
+signal player_detected(player)
+signal player_visual_lost(player)
+
 var scrap_scene = preload("res://scenes/game/world/entity/entities/item/collectible_items/Scrap.tscn")
 
 onready var __health_component = $HealthComponent
@@ -8,8 +11,27 @@ onready var __damage_timer = $DamageAvailabilityTimer
 
 export(int) var scrap_drop_count_damaged = 1
 export(int) var scrap_drop_count_eliminated = 10
+export(float) var player_detection_range_in_tiles = 5 
 
 var __can_deal_damage_to_player = true
+var __is_player_seen = false
+var __horizontal_player_detect_direction = -1
+
+func _physics_process(delta):
+	var player = parent_world.player_node
+	if player == null: return
+	var diff = position.x - player.position.x
+	__horizontal_player_detect_direction = sign(diff)
+	if abs(diff) < player_detection_range_in_tiles * 8:
+		if !__is_player_seen:
+			__is_player_seen = true
+			emit_signal("player_detected", player)
+	elif __is_player_seen:
+		__is_player_seen = false
+		emit_signal("player_visual_lost", player)
+
+func get_horizontal_player_detect_direction():
+	return __horizontal_player_detect_direction
 
 func drop_scrap(count):
 	randomize()
@@ -19,7 +41,6 @@ func drop_scrap(count):
 	scrap.set_velocity(Vector2(
 		rand_range(-drop_speed, drop_speed), -drop_speed
 	))
-	
 
 func die():
 	# TODO: Implement further
@@ -51,7 +72,6 @@ func _on_InHitBox_received_additional_message(message):
 		set_velocity_y(-Player.RAM_SLIDE_SPEED)
 		set_can_deal_damage(false)
 		__damage_timer.start()
-
 
 func _on_DamageAvailabilityTimer_timeout():
 	set_can_deal_damage(true)

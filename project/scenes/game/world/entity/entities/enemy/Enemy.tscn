@@ -20,6 +20,8 @@ __team = "enemy_team"
 [node name="DamageAvailabilityTimer" type="Timer" parent="." index="4"]
 one_shot = true
 
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="." index="5"]
+
 [connection signal="damage_taken" from="HealthComponent" to="." method="_on_HealthComponent_damage_taken"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_HealthComponent_health_depleted"]
 [connection signal="hit_received" from="InHitBox" to="." method="_on_InHitBox_hit_received"]
