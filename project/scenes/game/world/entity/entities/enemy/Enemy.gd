@@ -37,3 +37,9 @@ func _on_OutHitBox_hit_dealt(hitbox):
 	var player = hitbox.get_parent()
 	if player is Player:
 		player.stats.take_one_damage()
+
+
+func _on_InHitBox_received_additional_message(message):
+	if message.has("ram_slide"):
+		set_velocity_x(0)
+		set_velocity_y(-Player.RAM_SLIDE_SPEED)

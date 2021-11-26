@@ -218,10 +218,6 @@ func _on_RoofDetector_body_exited(body):
 	__is_roof_above = false
 
 func _on_RamSlideHitBox_hit_dealt(hitbox):
-	var parent = hitbox.get_parent()
-	if parent is MovingEntity:
-		parent.set_velocity_x(0)
-		parent.set_velocity_y(-RAM_SLIDE_SPEED)
 	hitbox.take_hit(__ram_slide_hit_box, RAM_SLIDE_DAMAGE, {
 		"ram_slide": true
 	})
