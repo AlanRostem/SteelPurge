@@ -16,11 +16,12 @@ export(float) var player_detection_range_in_tiles = 5
 var __can_deal_damage_to_player = true
 var __is_player_seen = false
 var __horizontal_player_detect_direction = -1
+var horizontal_looking_direction = -1
 
 func _physics_process(delta):
 	var player = parent_world.player_node
 	if player == null: return
-	var diff = position.x - player.position.x
+	var diff = player.position.x - position.x
 	__horizontal_player_detect_direction = sign(diff)
 	if abs(diff) < player_detection_range_in_tiles * 8:
 		if !__is_player_seen:
