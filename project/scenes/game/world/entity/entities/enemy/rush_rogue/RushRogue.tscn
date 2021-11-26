@@ -13,6 +13,7 @@ extents = Vector2( 7, 3 )
 
 [node name="RushRogue" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+collision_mode = 2
 
 [node name="BodyShape" parent="." index="0"]
 shape = SubResource( 1 )
