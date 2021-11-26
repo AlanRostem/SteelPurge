@@ -9,4 +9,5 @@ script = ExtResource( 2 )
 amount_per_collect = 1
 
 [node name="Sprite" type="Sprite" parent="." index="2"]
+position = Vector2( 0, -1 )
 texture = ExtResource( 3 )

@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/game/world/entity/entities/item/CollectibleItem.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 4 )
+extents = Vector2( 3, 3 )
 
 [node name="CollectibleItem" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

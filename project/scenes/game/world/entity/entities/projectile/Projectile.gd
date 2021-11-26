@@ -14,7 +14,7 @@ var owner_weapon
 onready var __hit_box = $HitBox
 onready var __sprite = $Sprite
 
-export(int) var __damage
+export(int) var damage
 
 export(RotationMode) var __rotation_mode = RotationMode.WHOLE
 
@@ -41,7 +41,7 @@ func init(dir_vec, team, offset = Vector2.ZERO):
 		
 	
 func deal_hit(hit_box):
-	hit_box.take_hit(__hit_box, __damage)
+	hit_box.take_hit(__hit_box, damage)
 	destroy()
 
 func destroy():
