@@ -40,7 +40,6 @@ var __looking_vector = Vector2.RIGHT
 var __horizontal_looking_direction = 1
 
 var __is_roof_above = false
-var __weapon_that_cannot_be_picked_up = null
 
 var __can_move_on_ground = true
 
@@ -192,15 +191,7 @@ func start_invinvibility_sequence():
 	
 func is_roof_above():
 	return __is_roof_above
-	
-func can_pick_up_weapon(weapon):
-	if __weapon_that_cannot_be_picked_up == null:
-		return true
-	return __weapon_that_cannot_be_picked_up != weapon
-	
-func set_weapon_that_cannot_be_picked_up(weapon):
-	__weapon_that_cannot_be_picked_up = weapon
-	
+
 func set_ram_slide_hit_box_enabled(value):
 	__ram_slide_hit_box_shape.set_deferred("disabled", !value)
 
@@ -217,7 +208,6 @@ func _on_InvincibilityTimer_timeout():
 	set_hit_box_enabled(true)
 	__flashing_timer.stop()
 	visible = true
-	set_weapon_that_cannot_be_picked_up(null)
 
 func _on_RoofDetector_body_entered(body):
 	__is_roof_above = true

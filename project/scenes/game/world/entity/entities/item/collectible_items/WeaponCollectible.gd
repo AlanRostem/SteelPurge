@@ -4,6 +4,10 @@ export(PackedScene) var __weapon_scene
 
 onready var __sprite = $Sprite
 
+onready var __pick_up_timer = $PickUpAvailabilityTimer
+
+onready var __detection_shape = $PlayerDetectionArea/BodyShape
+
 var weapon
 
 func _player_collected(player):
@@ -21,6 +25,8 @@ func set_recently_dropped(value):
 		
 func __set_life_timer_wait_time_to_low():
 	_life_timer.start(3.5)
-	
-func _pick_up_condition(player):
-	return player.can_pick_up_weapon(weapon)
+	__pick_up_timer.start()
+	__detection_shape.disabled = true
+
+func _on_PickUpAvailabilityTimer_timeout():
+	__detection_shape.disabled = false

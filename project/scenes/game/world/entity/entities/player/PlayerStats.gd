@@ -68,6 +68,8 @@ func instance_and_equip_weapon(scene):
 	equip_weapon(weapon)
 
 func equip_weapon(weapon):
+	if has_weapon():
+		__equipped_weapon.drop()
 	__equipped_weapon = weapon
 	add_child(__equipped_weapon)
 	__equipped_weapon.equip()
@@ -108,7 +110,6 @@ func take_one_damage():
 	if __equipped_weapon != null:
 		__equipped_weapon.drop()
 		__player.set_sprite_frames(__default_player_sprite_frames)
-		__player.set_weapon_that_cannot_be_picked_up(__equipped_weapon)
 		__equipped_weapon = null
 		__player.set_aim_up(false)
 		__player.stop_aiming_down()

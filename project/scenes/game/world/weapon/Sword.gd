@@ -56,11 +56,9 @@ func _on_Sword_downwards_attack():
 	__boost_damage = true
 	__is_slamming = true
 
-
 func _on_Sword_dropped():
 	__is_slamming = false
 	__boost_damage = false
 	__hit_box_shape.disabled = true
 	var player = get_owner_player()
 	player.set_can_move_on_ground(true)
-	print(__hit_box_shape.disabled)
