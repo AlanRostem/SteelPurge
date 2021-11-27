@@ -165,7 +165,7 @@ animations = [ {
 "speed": 5.0
 }, {
 "frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
-"loop": true,
+"loop": false,
 "name": "melee_up",
 "speed": 15.0
 }, {
@@ -175,7 +175,7 @@ animations = [ {
 "speed": 12.0
 }, {
 "frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
+"loop": false,
 "name": "melee",
 "speed": 15.0
 }, {
