@@ -29,6 +29,11 @@ func attack():
 	else:
 		emit_signal("attacked")
 		
+func manually_end_attack_cycle():
+	__can_attack = true
+	__attack_delay_timer.stop()
+	emit_signal("attack_cycle_end")
+	
 func get_owner_player():
 	return __player_owner
 	
