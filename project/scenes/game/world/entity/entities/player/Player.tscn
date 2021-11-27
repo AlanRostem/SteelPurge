@@ -16,7 +16,7 @@
 [ext_resource path="res://scenes/game/world/entity/components/hit_box/HitBox.tscn" type="PackedScene" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 6 )
+extents = Vector2( 6, 3 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5, 7 )
@@ -61,7 +61,7 @@ one_shot = true
 __team = "player_team"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RamSlideHitBox" index="0"]
-position = Vector2( 11, -4 )
+position = Vector2( 11, -1 )
 shape = SubResource( 1 )
 disabled = true
 
