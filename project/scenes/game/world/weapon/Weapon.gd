@@ -1,6 +1,7 @@
 extends Node2D
 
 signal attacked()
+signal attack_cycle_end()
 signal downwards_attack()
 
 export(SpriteFrames) var __player_sprite_frames
@@ -41,3 +42,4 @@ func drop():
 
 func _on_AttackDelayTimer_timeout():
 	__can_attack = true
+	emit_signal("attack_cycle_end")

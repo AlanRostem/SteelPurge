@@ -5,7 +5,7 @@ func movement_update(delta):
 		parent_state_machine.transition_to("PlayerSlideState")
 		return
 	
-	if move_left or move_right:
+	if (move_left or move_right) and player.can_move_on_ground():
 		var dir = int(move_right) - int(move_left)
 		if dir != 0:
 			player.look_horizontally(dir)

@@ -42,6 +42,8 @@ var __horizontal_looking_direction = 1
 var __is_roof_above = false
 var __weapon_that_cannot_be_picked_up = null
 
+var __can_move_on_ground = true
+
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 onready var __hit_box_shape = $InHitBox/CollisionShape2D
 onready var hit_box = $InHitBox
@@ -204,6 +206,12 @@ func set_ram_slide_hit_box_enabled(value):
 
 func _on_FlashingTimer_timeout():
 	visible = !visible
+	
+func set_can_move_on_ground(value):
+	__can_move_on_ground = value
+
+func can_move_on_ground():
+	return __can_move_on_ground
 
 func _on_InvincibilityTimer_timeout():
 	set_hit_box_enabled(true)

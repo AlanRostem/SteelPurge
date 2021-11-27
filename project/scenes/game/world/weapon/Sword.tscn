@@ -19,8 +19,10 @@ __attack_delay = 0.27
 __team = "player_team"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutHitBox" index="0"]
-position = Vector2( 11, 0 )
+position = Vector2( 11, -1 )
 shape = SubResource( 1 )
+disabled = true
 
+[connection signal="attack_cycle_end" from="." to="." method="_on_Sword_attack_cycle_end"]
 [connection signal="attacked" from="." to="." method="_on_Sword_attacked"]
 [connection signal="hit_dealt" from="OutHitBox" to="." method="_on_OutHitBox_hit_dealt"]

@@ -1,7 +1,7 @@
 extends "res://scenes/game/world/entity/entities/player/components/state_machine/PlayerState.gd"
 
 func movement_update(delta):
-	if move_left or move_right:
+	if (move_left or move_right) and player.can_move_on_ground():
 		var dir = int(move_right) - int(move_left)
 		if dir != 0:
 			player.look_horizontally(dir)
