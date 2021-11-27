@@ -41,3 +41,6 @@ func transition_to(state_name: String, message: Dictionary = {}):
 	__current_state.enter(message)
 	emit_signal("transitioned", __current_state.name)
 	return true
+
+func get_initial_state():
+	return __inital_state

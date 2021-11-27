@@ -7,7 +7,6 @@ signal player_visual_lost(player)
 var scrap_scene = preload("res://scenes/game/world/entity/entities/item/collectible_items/Scrap.tscn")
 
 onready var __health_component = $HealthComponent
-onready var __damage_timer = $DamageAvailabilityTimer
 onready var state_machine = $EnemyFSM
 
 export(int) var scrap_drop_count_damaged = 1
@@ -70,10 +69,9 @@ func set_can_deal_damage(value):
 
 func _on_InHitBox_received_additional_message(message):
 	if message.has("ram_slide"):
-		set_velocity_x(0)
-		set_velocity_y(-Player.RAM_SLIDE_SPEED)
-		set_can_deal_damage(false)
-		__damage_timer.start()
+		state_machine.transition_to("EnemyRamIntoAirState")
+	elif message.has("knock_back"):
+		pass
 
 func _on_DamageAvailabilityTimer_timeout():
 	set_can_deal_damage(true)
