@@ -1,7 +1,7 @@
 extends "res://scenes/game/world/weapon/Weapon.gd"
 
-const CRITICAL_DAMAGE = 15
-const STANDARD_DAMAGE = 2
+const CRITICAL_DAMAGE = 8
+const STANDARD_DAMAGE = 1
 
 var __projectile_scene = preload("res://scenes/game/world/entity/entities/projectile/projectiles/EnergyBlast.tscn")
 
