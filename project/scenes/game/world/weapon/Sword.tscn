@@ -26,4 +26,5 @@ disabled = true
 [connection signal="attack_cycle_end" from="." to="." method="_on_Sword_attack_cycle_end"]
 [connection signal="attacked" from="." to="." method="_on_Sword_attacked"]
 [connection signal="downwards_attack" from="." to="." method="_on_Sword_downwards_attack"]
+[connection signal="dropped" from="." to="." method="_on_Sword_dropped"]
 [connection signal="hit_dealt" from="OutHitBox" to="." method="_on_OutHitBox_hit_dealt"]

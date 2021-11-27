@@ -19,7 +19,9 @@ func _physics_process(delta):
 	else:
 		__hit_box.rotation = 0
 		
-	if __is_slamming:
+	use_attacking_delay = !player.is_aiming_down()
+		
+	if __is_slamming and player.is_on_ground():
 		__is_slamming = false
 		manually_end_attack_cycle()
 
@@ -53,3 +55,12 @@ func _on_Sword_downwards_attack():
 	player.set_velocity_y(SLAM_SPEED)
 	__boost_damage = true
 	__is_slamming = true
+
+
+func _on_Sword_dropped():
+	__is_slamming = false
+	__boost_damage = false
+	__hit_box_shape.disabled = true
+	var player = get_owner_player()
+	player.set_can_move_on_ground(true)
+	print(__hit_box_shape.disabled)

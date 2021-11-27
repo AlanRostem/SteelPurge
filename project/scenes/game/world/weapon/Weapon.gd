@@ -3,9 +3,13 @@ extends Node2D
 signal attacked()
 signal attack_cycle_end()
 signal downwards_attack()
+signal dropped()
 
 export(SpriteFrames) var __player_sprite_frames
 export(Texture) var __collectible_sprite
+
+export(bool) var use_attacking_delay = true
+
 var __collectible_scene = preload("res://scenes/game/world/entity/entities/item/collectible_items/WeaponCollectible.tscn")
 
 export(float) var __attack_delay = 0.8
@@ -18,10 +22,15 @@ var __can_attack = true
 
 func is_attacking():
 	return !__can_attack
+	
+func set_can_attack(value):
+	__can_attack = value
 
 func attack():
 	if !__can_attack: return
-	__attack_delay_timer.start(__attack_delay)
+	
+	if use_attacking_delay:
+		__attack_delay_timer.start(__attack_delay)
 	__can_attack = false
 	
 	if __player_owner.get_looking_vector().y > 0 and __player_owner.state_machine.get_current_state() == "PlayerAirBorneState":
@@ -47,6 +56,7 @@ func drop():
 	collectible.call_deferred("set_sprite", __collectible_sprite)
 	__player_owner.stats.remove_child(self)
 	collectible.set_recently_dropped(true)
+	emit_signal("dropped")
 
 func _on_AttackDelayTimer_timeout():
 	__can_attack = true
