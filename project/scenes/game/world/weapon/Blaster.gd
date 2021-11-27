@@ -19,7 +19,6 @@ func fire_projectile(scene):
 
 	projectile.call_deferred("init_from_player_weapon", dir, self, position)
 
-
 func _on_Blaster_downwards_attack():
 	fire_projectile(__projectile_scene)
 	

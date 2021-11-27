@@ -8,3 +8,4 @@ script = ExtResource( 3 )
 collision_mode = 0
 
 [node name="Sprite" type="Sprite" parent="." index="2"]
+offset = Vector2( 0, -2 )
