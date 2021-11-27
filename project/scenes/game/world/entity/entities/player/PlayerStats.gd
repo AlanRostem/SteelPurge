@@ -60,6 +60,9 @@ func _physics_process(delta):
 func has_weapon():
 	return __equipped_weapon != null
 	
+func get_weapon():
+	return __equipped_weapon
+	
 func instance_and_equip_weapon(scene):
 	var weapon = scene.instance()
 	equip_weapon(weapon)

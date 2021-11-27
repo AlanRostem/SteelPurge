@@ -16,6 +16,9 @@ onready var __attack_delay_timer = $AttackDelayTimer
 
 var __can_attack = true
 
+func is_attacking():
+	return !__can_attack
+
 func attack():
 	if !__can_attack: return
 	__attack_delay_timer.start(__attack_delay)

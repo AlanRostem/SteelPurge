@@ -20,6 +20,7 @@ func _on_OutHitBox_hit_dealt(hitbox):
 		"knock_back": true
 	})
 
+
 func _on_Sword_attacked():
 	__hit_box_shape.disabled = false
 	var player = get_owner_player()
