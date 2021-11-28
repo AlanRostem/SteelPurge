@@ -10,6 +10,7 @@ signal health_changed(value)
 signal healing_scrap_changed(value)
 signal died()
 signal rush_energy_changed(value)
+signal rush_energy_consumed()
 signal weapon_changed(weapon)
 signal weapon_ammo_changed(value)
 
@@ -137,6 +138,7 @@ func use_rush_energy(count):
 	__rush_energy_recharge_starting_delay_timer.stop()
 	__rush_energy_recharge_timer.stop()
 	__is_recharging_rush_energy = false
+	emit_signal("rush_energy_consumed")
 
 func recharge_rush_energy():
 	set_rush_energy(__rush_energy_count + 2)

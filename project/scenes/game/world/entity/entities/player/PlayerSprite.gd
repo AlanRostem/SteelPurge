@@ -2,6 +2,7 @@ extends AnimatedSprite
 
 onready var player = get_parent()
 onready var player_state_machine = get_parent().get_node("PlayerFSM")
+onready var __rush_energy_activity_timer = $RushEnergyVisualActivityTimer
 
 func _physics_process(delta):
 	flip_h = player.get_horizontal_looking_direction() < 0
@@ -47,3 +48,12 @@ func _physics_process(delta):
 			animation = "slide"
 		"PlayerSlideState": 
 			animation = "slide"
+
+
+func _on_RushEnergyVisualActivityTimer_timeout():
+	use_parent_material = true
+
+
+func _on_PlayerStats_rush_energy_consumed():
+	__rush_energy_activity_timer.start()
+	use_parent_material = false
