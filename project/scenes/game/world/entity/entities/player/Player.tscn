@@ -78,7 +78,7 @@ shape = SubResource( 4 )
 [node name="PlayerSprite" type="AnimatedSprite" parent="." index="4"]
 material = ExtResource( 16 )
 use_parent_material = true
-position = Vector2( 0, -5 )
+position = Vector2( 0, -4 )
 frames = ExtResource( 7 )
 animation = "idle"
 playing = true
