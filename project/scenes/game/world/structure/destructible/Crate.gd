@@ -1,5 +1,7 @@
 extends "res://scenes/game/world/structure/DestructibleStructure.gd"
 
+var __break_effect_scene = preload("res://scenes/game/world/other/CrateBreakEffect.tscn")
+
 export(PackedScene) var __containment_scene
 
 var __collectible
@@ -12,6 +14,7 @@ func _process(delta):
 
 func _destroyed():
 	__collectible = parent_world.spawn_entity_deferred(__containment_scene, position)
+	parent_world.show_effect_deferred(__break_effect_scene, position)
 
 func _on_InHitBox_received_additional_message(message):
 	if message.has("ram_slide"):

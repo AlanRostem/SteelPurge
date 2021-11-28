@@ -54,3 +54,8 @@ func spawn_entity_deferred(entity_scene, location):
 
 # func move_entity_to_world(entity, world):
 #	pass
+
+func show_effect_deferred(scene, location):
+	var effect = scene.instance()
+	effect.position = location
+	__entity_pool.call_deferred("add_child", effect)
