@@ -1,7 +1,7 @@
 extends "res://scenes/game/world/weapon/Weapon.gd"
 
 const CRITICAL_DAMAGE = 24
-const STANDARD_DAMAGE = 9
+const STANDARD_DAMAGE = 8
 const SLAM_SPEED = 230
 
 onready var __hit_box = $OutHitBox
