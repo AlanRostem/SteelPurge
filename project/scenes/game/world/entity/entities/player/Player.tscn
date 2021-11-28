@@ -59,7 +59,11 @@ wait_time = 0.1
 wait_time = 2.0
 one_shot = true
 
-[node name="RamSlideHitBox" parent="." index="2" instance=ExtResource( 15 )]
+[node name="CrateOpeningTimer" type="Timer" parent="." index="2"]
+wait_time = 0.1
+one_shot = true
+
+[node name="RamSlideHitBox" parent="." index="3" instance=ExtResource( 15 )]
 __team = "player_team"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RamSlideHitBox" index="0"]
@@ -67,7 +71,7 @@ position = Vector2( 11, -1 )
 shape = SubResource( 3 )
 disabled = true
 
-[node name="InHitBox" parent="." index="3" instance=ExtResource( 15 )]
+[node name="InHitBox" parent="." index="4" instance=ExtResource( 15 )]
 hit_box_action_type = 1
 __team = "player_team"
 
@@ -75,7 +79,7 @@ __team = "player_team"
 position = Vector2( 0, -4 )
 shape = SubResource( 4 )
 
-[node name="PlayerSprite" type="AnimatedSprite" parent="." index="4"]
+[node name="PlayerSprite" type="AnimatedSprite" parent="." index="5"]
 material = ExtResource( 16 )
 use_parent_material = true
 position = Vector2( 0, -4 )
@@ -88,14 +92,14 @@ script = ExtResource( 11 )
 wait_time = 0.22
 one_shot = true
 
-[node name="UpperBodyShape" type="CollisionShape2D" parent="." index="5"]
+[node name="UpperBodyShape" type="CollisionShape2D" parent="." index="6"]
 position = Vector2( 0, -7 )
 shape = SubResource( 5 )
 
-[node name="BodyShape" parent="." index="6"]
+[node name="BodyShape" parent="." index="7"]
 shape = SubResource( 6 )
 
-[node name="PlayerFSM" parent="." index="7" instance=ExtResource( 2 )]
+[node name="PlayerFSM" parent="." index="8" instance=ExtResource( 2 )]
 __inital_state = NodePath("PlayerIdleState")
 
 [node name="PlayerIdleState" parent="PlayerFSM" index="0" instance=ExtResource( 5 )]
@@ -120,7 +124,7 @@ is_grounded_state = true
 [node name="PlayerSlideState" parent="PlayerFSM" index="5" instance=ExtResource( 5 )]
 script = ExtResource( 10 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="8"]
+[node name="Camera2D" type="Camera2D" parent="." index="9"]
 current = true
 limit_top = 0
 limit_bottom = 0
@@ -128,7 +132,7 @@ drag_margin_h_enabled = true
 drag_margin_top = 1.0
 drag_margin_bottom = 1.0
 
-[node name="PlayerStats" type="Node2D" parent="." index="9"]
+[node name="PlayerStats" type="Node2D" parent="." index="10"]
 script = ExtResource( 13 )
 test_weapon_scene = ExtResource( 14 )
 
@@ -139,7 +143,7 @@ wait_time = 0.4
 wait_time = 2.2
 one_shot = true
 
-[node name="RoofDetector" type="Area2D" parent="." index="10"]
+[node name="RoofDetector" type="Area2D" parent="." index="11"]
 collision_layer = 0
 
 [node name="UpperBodyShape" type="CollisionShape2D" parent="RoofDetector" index="0"]
@@ -148,6 +152,7 @@ shape = SubResource( 7 )
 
 [connection signal="timeout" from="FlashingTimer" to="." method="_on_FlashingTimer_timeout"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_InvincibilityTimer_timeout"]
+[connection signal="timeout" from="CrateOpeningTimer" to="." method="_on_CrateOpeningTimer_timeout"]
 [connection signal="hit_dealt" from="RamSlideHitBox" to="." method="_on_RamSlideHitBox_hit_dealt"]
 [connection signal="timeout" from="PlayerSprite/RushEnergyVisualActivityTimer" to="PlayerSprite" method="_on_RushEnergyVisualActivityTimer_timeout"]
 [connection signal="rush_energy_consumed" from="PlayerStats" to="PlayerSprite" method="_on_PlayerStats_rush_energy_consumed"]

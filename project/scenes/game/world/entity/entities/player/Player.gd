@@ -42,6 +42,7 @@ var __horizontal_looking_direction = 1
 var __is_roof_above = false
 
 var __can_move_on_ground = true
+var __is_opening_crate = false
 
 onready var __upper_body_shape: CollisionShape2D = $UpperBodyShape
 onready var __hit_box_shape = $InHitBox/CollisionShape2D
@@ -55,6 +56,8 @@ onready var __invincibility_timer = $InvincibilityTimer
 
 onready var __ram_slide_hit_box = $RamSlideHitBox
 onready var __ram_slide_hit_box_shape = $RamSlideHitBox/CollisionShape2D
+
+onready var __crate_opening_timer = $CrateOpeningTimer
 
 #func _physics_process(delta):
 #	print(__dash_charge)
@@ -102,7 +105,6 @@ func stand_up():
 	__upper_body_shape.disabled = false
 	__is_crouched = false
 
-	
 func is_crouched():
 	return __is_crouched
 
@@ -191,6 +193,15 @@ func start_invinvibility_sequence():
 	
 func is_roof_above():
 	return __is_roof_above
+	
+func is_opening_crate():
+	return __is_opening_crate
+
+func set_opening_crate(value):
+	__is_opening_crate = value
+	__can_move_on_ground = !value
+	if value:
+		__crate_opening_timer.start()
 
 func set_ram_slide_hit_box_enabled(value):
 	__ram_slide_hit_box_shape.set_deferred("disabled", !value)
@@ -219,3 +230,7 @@ func _on_RamSlideHitBox_hit_dealt(hitbox):
 	hitbox.take_hit(__ram_slide_hit_box, RAM_SLIDE_DAMAGE, {
 		"ram_slide": true
 	})
+
+
+func _on_CrateOpeningTimer_timeout():
+	set_opening_crate(false)

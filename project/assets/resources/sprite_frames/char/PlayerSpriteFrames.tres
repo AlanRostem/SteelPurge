@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=13 format=2]
+[gd_resource type="SpriteFrames" load_steps=15 format=2]
 
 [ext_resource path="res://assets/sprites/char/player/char.png" type="Texture" id=1]
 
@@ -46,6 +46,14 @@ region = Rect2( 128, 0, 32, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 160, 0, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 384, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
 [resource]
 animations = [ {
 "frames": [ SubResource( 1 ) ],
@@ -72,4 +80,9 @@ animations = [ {
 "loop": true,
 "name": "running",
 "speed": 12.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ) ],
+"loop": false,
+"name": "open_crate",
+"speed": 2.0
 } ]

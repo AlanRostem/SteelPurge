@@ -8,6 +8,7 @@ var __player_nearby
 func _process(delta):
 	if __player_nearby != null and !__player_nearby.stats.has_weapon() and  Input.is_action_just_pressed("fire"):
 		destroy_self()
+		__player_nearby.set_opening_crate(true)
 
 func _destroyed():
 	__collectible = parent_world.spawn_entity_deferred(__containment_scene, position)

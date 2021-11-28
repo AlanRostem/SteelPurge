@@ -18,6 +18,10 @@ func _physics_process(delta):
 				else:
 					animation = "melee"
 				return
+	elif player.is_opening_crate():
+		animation = "open_crate"
+		return
+
 	
 	var f = frame
 	match player_state_machine.get_current_state():
