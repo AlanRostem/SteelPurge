@@ -169,64 +169,49 @@ tile_data = PoolIntArray( -196598, 0, 0, -196593, 0, 0, -65549, 0, 0, -65548, 0,
 
 [node name="Crate4" parent="GameWorld/Geometry" index="1" instance=ExtResource( 5 )]
 position = Vector2( 108, 124 )
-collision_mask = 0
 __containment_scene = ExtResource( 6 )
 
 [node name="Crate6" parent="GameWorld/Geometry" index="2" instance=ExtResource( 5 )]
 position = Vector2( 252, 124 )
-collision_mask = 0
 
 [node name="Crate11" parent="GameWorld/Geometry" index="3" instance=ExtResource( 5 )]
 position = Vector2( 388, 140 )
-collision_mask = 0
 
 [node name="Crate12" parent="GameWorld/Geometry" index="4" instance=ExtResource( 5 )]
 position = Vector2( 396, 140 )
-collision_mask = 0
 
 [node name="Crate13" parent="GameWorld/Geometry" index="5" instance=ExtResource( 5 )]
 position = Vector2( 404, 140 )
-collision_mask = 0
 
 [node name="Crate14" parent="GameWorld/Geometry" index="6" instance=ExtResource( 5 )]
 position = Vector2( 436, 140 )
-collision_mask = 0
 
 [node name="Crate15" parent="GameWorld/Geometry" index="7" instance=ExtResource( 5 )]
 position = Vector2( 444, 140 )
-collision_mask = 0
 
 [node name="Crate16" parent="GameWorld/Geometry" index="8" instance=ExtResource( 5 )]
 position = Vector2( 444, 132 )
-collision_mask = 0
 
 [node name="Crate18" parent="GameWorld/Geometry" index="9" instance=ExtResource( 5 )]
 position = Vector2( 444, 124 )
-collision_mask = 0
 
 [node name="Crate17" parent="GameWorld/Geometry" index="10" instance=ExtResource( 5 )]
 position = Vector2( 436, 132 )
-collision_mask = 0
 
 [node name="Crate9" parent="GameWorld/Geometry" index="11" instance=ExtResource( 5 )]
 position = Vector2( 244, 124 )
-collision_mask = 0
 
 [node name="Crate10" parent="GameWorld/Geometry" index="12" instance=ExtResource( 5 )]
 position = Vector2( 244, 115 )
-collision_mask = 0
 
 [node name="Crate5" parent="GameWorld/Geometry" index="13" instance=ExtResource( 5 )]
 position = Vector2( 204, 84 )
-collision_mask = 0
 
 [node name="Crate7" parent="GameWorld/Geometry" index="14" instance=ExtResource( 5 )]
 position = Vector2( 212, 84 )
-collision_mask = 0
 
 [node name="Crate8" parent="GameWorld/Geometry" index="15" instance=ExtResource( 5 )]
 position = Vector2( 220, 84 )
-collision_mask = 0
 
 [node name="Player" parent="GameWorld/EntityPool" index="0" instance=ExtResource( 2 )]
 position = Vector2( 53, 110 )
@@ -245,6 +230,10 @@ collision_layer = 0
 
 [node name="RushRogue" parent="GameWorld/EntityPool" index="4" instance=ExtResource( 7 )]
 position = Vector2( 104, -20 )
+collision_layer = 0
+
+[node name="RushRogue2" parent="GameWorld/EntityPool" index="5" instance=ExtResource( 7 )]
+position = Vector2( 171, 119 )
 collision_layer = 0
 
 [editable path="GameWorld"]

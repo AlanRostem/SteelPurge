@@ -57,7 +57,6 @@ func _on_InHitBox_hit_received(hitbox, damage):
 	__health_component.take_damage(damage)
 	__damage_taken_timer.start()
 	__sprite.use_parent_material = false
-	print(1)
 
 func _on_HealthComponent_damage_taken(damage):
 	drop_scrap(scrap_drop_count_damaged)

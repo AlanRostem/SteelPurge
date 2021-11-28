@@ -46,7 +46,6 @@ one_shot = true
 position = Vector2( 0, -5 )
 frames = ExtResource( 2 )
 animation = "patrol"
-frame = 2
 playing = true
 script = ExtResource( 7 )
 
