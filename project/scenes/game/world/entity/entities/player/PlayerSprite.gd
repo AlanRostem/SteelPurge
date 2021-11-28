@@ -5,7 +5,7 @@ onready var player_state_machine = get_parent().get_node("PlayerFSM")
 onready var __rush_energy_activity_timer = $RushEnergyVisualActivityTimer
 
 func _physics_process(delta):
-	flip_h = player.get_horizontal_looking_direction() < 0
+	scale.x = player.get_horizontal_looking_direction()
 	
 	if player.stats.has_weapon():
 		var weapon = player.stats.get_weapon()
