@@ -7,6 +7,8 @@ enum RotationMode {
 	NONE
 }
 
+var __hit_effect = preload("res://scenes/game/world/other/BlastHitEffect.tscn")
+
 export(float) var max_velocity = 200
 
 var owner_weapon
@@ -45,6 +47,7 @@ func deal_hit(hit_box):
 	destroy()
 
 func destroy():
+	parent_world.show_effect_deferred(__hit_effect, position)
 	queue_free()
 
 func _on_HitBox_body_entered(body):

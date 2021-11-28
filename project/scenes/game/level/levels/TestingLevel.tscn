@@ -232,8 +232,4 @@ collision_layer = 0
 position = Vector2( 104, -20 )
 collision_layer = 0
 
-[node name="RushRogue2" parent="GameWorld/EntityPool" index="5" instance=ExtResource( 7 )]
-position = Vector2( 171, 119 )
-collision_layer = 0
-
 [editable path="GameWorld"]
