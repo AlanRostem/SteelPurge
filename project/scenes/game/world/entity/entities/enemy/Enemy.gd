@@ -71,11 +71,13 @@ func _on_OutHitBox_hit_dealt(hitbox):
 func set_can_deal_damage(value):
 	__can_deal_damage_to_player = value
 
-func _on_InHitBox_received_additional_message(message):
+func _on_InHitBox_received_additional_message(message: Dictionary):
 	if message.has("ram_slide"):
 		state_machine.transition_to("EnemyRamIntoAirState")
 	elif message.has("knock_back"):
-		pass
+		state_machine.transition_to("EnemyMeleeKnockBackState", {
+			"direction": message["knock_back"]
+		})
 
 func _on_DamageTakenTimer_timeout():
 	__sprite.use_parent_material = true

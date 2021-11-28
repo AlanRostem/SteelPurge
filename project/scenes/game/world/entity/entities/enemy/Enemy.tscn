@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/world/entity/MovingEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/world/entity/components/hit_box/HitBox.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/components/EnemyState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/components/EnemyRamIntoAirState.gd" type="Script" id=7]
 [ext_resource path="res://assets/resources/shaders/WhiteningShader.tres" type="Material" id=8]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/components/EnemyMeleeKnockBackState.gd" type="Script" id=9]
 
 [node name="Enemy" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -32,6 +33,11 @@ script = ExtResource( 7 )
 one_shot = true
 
 [node name="EnemyMeleeKnockBackState" parent="EnemyFSM" index="1" instance=ExtResource( 6 )]
+script = ExtResource( 9 )
+
+[node name="KnockBackTimer" type="Timer" parent="EnemyFSM/EnemyMeleeKnockBackState" index="0"]
+wait_time = 0.2
+one_shot = true
 
 [node name="EnemySprite" type="AnimatedSprite" parent="." index="6"]
 material = ExtResource( 8 )
@@ -48,4 +54,5 @@ one_shot = true
 [connection signal="hit_dealt" from="OutHitBox" to="." method="_on_OutHitBox_hit_dealt"]
 [connection signal="timeout" from="EnemyFSM/EnemyRamIntoAirState/AirborneStunTimer" to="EnemyFSM/EnemyRamIntoAirState" method="_on_AirborneStunTimer_timeout"]
 [connection signal="timeout" from="EnemyFSM/EnemyRamIntoAirState/AirborneStunTimer" to="." method="_on_DamageAvailabilityTimer_timeout"]
+[connection signal="timeout" from="EnemyFSM/EnemyMeleeKnockBackState/KnockBackTimer" to="EnemyFSM/EnemyMeleeKnockBackState" method="_on_KnockBackTimer_timeout"]
 [connection signal="timeout" from="DamageTakenTimer" to="." method="_on_DamageTakenTimer_timeout"]

@@ -34,7 +34,7 @@ func _on_OutHitBox_hit_dealt(hitbox):
 		__boost_damage = false
 		damage = CRITICAL_DAMAGE
 	hitbox.take_hit(__hit_box, damage, {
-		"knock_back": true
+		"knock_back": get_owner_player().get_horizontal_looking_direction()
 	})
 
 func _on_Sword_attacked():
