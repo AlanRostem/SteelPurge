@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/game/world/entity/MovingEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/world/entity/components/state_machine/StateMachine.tscn" type="PackedScene" id=2]
@@ -13,23 +13,22 @@
 [ext_resource path="res://scenes/game/world/entity/entities/player/PlayerSprite.gd" type="Script" id=11]
 [ext_resource path="res://scenes/game/world/entity/entities/player/components/state_machine/PlayerWalkState.gd" type="Script" id=12]
 [ext_resource path="res://scenes/game/world/entity/entities/player/PlayerStats.gd" type="Script" id=13]
-[ext_resource path="res://scenes/game/world/weapon/Sword.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/game/world/entity/components/hit_box/HitBox.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/resources/shaders/OutlineShader.tres" type="Material" id=16]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 3 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 3, 4 )
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=4]
 radius = 3.0
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 3, 4 )
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -68,7 +67,7 @@ __team = "player_team"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RamSlideHitBox" index="0"]
 position = Vector2( 11, -1 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="InHitBox" parent="." index="4" instance=ExtResource( 15 )]
@@ -77,7 +76,7 @@ __team = "player_team"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InHitBox" index="0"]
 position = Vector2( 0, -4 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="." index="5"]
 material = ExtResource( 16 )
@@ -94,10 +93,10 @@ one_shot = true
 
 [node name="UpperBodyShape" type="CollisionShape2D" parent="." index="6"]
 position = Vector2( 0, -7 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="BodyShape" parent="." index="7"]
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="PlayerFSM" parent="." index="8" instance=ExtResource( 2 )]
 __inital_state = NodePath("PlayerIdleState")
@@ -134,7 +133,6 @@ drag_margin_bottom = 1.0
 
 [node name="PlayerStats" type="Node2D" parent="." index="10"]
 script = ExtResource( 13 )
-test_weapon_scene = ExtResource( 14 )
 
 [node name="RushEnergyRechargeTimer" type="Timer" parent="PlayerStats" index="0"]
 wait_time = 0.4
@@ -148,7 +146,7 @@ collision_layer = 0
 
 [node name="UpperBodyShape" type="CollisionShape2D" parent="RoofDetector" index="0"]
 position = Vector2( 0, -7 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [connection signal="timeout" from="FlashingTimer" to="." method="_on_FlashingTimer_timeout"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_InvincibilityTimer_timeout"]
