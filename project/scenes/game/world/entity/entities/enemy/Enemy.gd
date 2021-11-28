@@ -8,6 +8,8 @@ var scrap_scene = preload("res://scenes/game/world/entity/entities/item/collecti
 
 onready var __health_component = $HealthComponent
 onready var state_machine = $EnemyFSM
+onready var __damage_taken_timer = $DamageTakenTimer
+onready var __sprite = $EnemySprite
 
 export(int) var scrap_drop_count_damaged = 1
 export(int) var scrap_drop_count_eliminated = 10
@@ -53,6 +55,9 @@ func _on_HealthComponent_health_depleted(health_left):
 
 func _on_InHitBox_hit_received(hitbox, damage):
 	__health_component.take_damage(damage)
+	__damage_taken_timer.start()
+	__sprite.use_parent_material = false
+	print(1)
 
 func _on_HealthComponent_damage_taken(damage):
 	drop_scrap(scrap_drop_count_damaged)
@@ -73,5 +78,5 @@ func _on_InHitBox_received_additional_message(message):
 	elif message.has("knock_back"):
 		pass
 
-func _on_DamageAvailabilityTimer_timeout():
-	set_can_deal_damage(true)
+func _on_DamageTakenTimer_timeout():
+	__sprite.use_parent_material = true

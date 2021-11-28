@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game/world/entity/MovingEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/world/entity/components/hit_box/HitBox.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/game/world/entity/components/state_machine/StateMachine.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/components/EnemyState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/components/EnemyRamIntoAirState.gd" type="Script" id=7]
+[ext_resource path="res://assets/resources/shaders/WhiteningShader.tres" type="Material" id=8]
 
 [node name="Enemy" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -32,10 +33,19 @@ one_shot = true
 
 [node name="EnemyMeleeKnockBackState" parent="EnemyFSM" index="1" instance=ExtResource( 6 )]
 
+[node name="EnemySprite" type="AnimatedSprite" parent="." index="6"]
+material = ExtResource( 8 )
+use_parent_material = true
+
+[node name="DamageTakenTimer" type="Timer" parent="." index="7"]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="damage_taken" from="HealthComponent" to="." method="_on_HealthComponent_damage_taken"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_HealthComponent_health_depleted"]
 [connection signal="hit_received" from="InHitBox" to="." method="_on_InHitBox_hit_received"]
 [connection signal="received_additional_message" from="InHitBox" to="." method="_on_InHitBox_received_additional_message"]
 [connection signal="hit_dealt" from="OutHitBox" to="." method="_on_OutHitBox_hit_dealt"]
-[connection signal="timeout" from="EnemyFSM/EnemyRamIntoAirState/AirborneStunTimer" to="." method="_on_DamageAvailabilityTimer_timeout"]
 [connection signal="timeout" from="EnemyFSM/EnemyRamIntoAirState/AirborneStunTimer" to="EnemyFSM/EnemyRamIntoAirState" method="_on_AirborneStunTimer_timeout"]
+[connection signal="timeout" from="EnemyFSM/EnemyRamIntoAirState/AirborneStunTimer" to="." method="_on_DamageAvailabilityTimer_timeout"]
+[connection signal="timeout" from="DamageTakenTimer" to="." method="_on_DamageTakenTimer_timeout"]

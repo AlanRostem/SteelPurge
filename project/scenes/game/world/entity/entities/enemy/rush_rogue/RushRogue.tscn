@@ -25,18 +25,11 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutHitBox" index="0"]
 shape = SubResource( 1 )
 
-[node name="RushRogueSprite" type="AnimatedSprite" parent="." index="5"]
-position = Vector2( 0, -5 )
-frames = ExtResource( 2 )
-animation = "charge"
-playing = true
-script = ExtResource( 7 )
-
-[node name="VisibilityEnabler2D" parent="." index="6"]
+[node name="VisibilityEnabler2D" parent="." index="4"]
 position = Vector2( 5.68434e-14, -1 )
 scale = Vector2( 0.7, 0.4 )
 
-[node name="EnemyFSM" parent="." index="7"]
+[node name="EnemyFSM" parent="." index="5"]
 __inital_state = NodePath("RushRoguePatrolState")
 
 [node name="RushRoguePatrolState" parent="EnemyFSM" index="0" instance=ExtResource( 4 )]
@@ -48,6 +41,14 @@ script = ExtResource( 6 )
 [node name="RushTimer" type="Timer" parent="EnemyFSM/RushRogueRushState" index="0"]
 wait_time = 0.8
 one_shot = true
+
+[node name="EnemySprite" parent="." index="6"]
+position = Vector2( 0, -5 )
+frames = ExtResource( 2 )
+animation = "patrol"
+frame = 2
+playing = true
+script = ExtResource( 7 )
 
 [connection signal="player_detected" from="." to="EnemyFSM/RushRogueRushState" method="_on_RushRogue_player_detected"]
 [connection signal="player_visual_lost" from="." to="EnemyFSM/RushRoguePatrolState" method="_on_RushRogue_player_visual_lost"]

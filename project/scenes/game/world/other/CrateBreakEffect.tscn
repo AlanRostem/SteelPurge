@@ -29,4 +29,3 @@ animations = [ {
 
 [node name="CrateBreakEffect" instance=ExtResource( 1 )]
 frames = SubResource( 1 )
-frame = 1
