@@ -40,7 +40,6 @@ func enter(message):
 	player.collision_mode = MovingEntity.CollisionModes.SLIDE
 	
 func exit():
-	if !crouch:
-		player.stand_up()
+	player.stand_up()
 	player.collision_mode = MovingEntity.CollisionModes.SNAP
 	player.set_ram_slide_hit_box_enabled(false)

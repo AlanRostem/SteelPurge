@@ -57,6 +57,8 @@ func drop():
 	__player_owner.stats.remove_child(self)
 	collectible.set_recently_dropped(true)
 	emit_signal("dropped")
+	__attack_delay_timer.stop()
+	__can_attack = true
 
 func _on_AttackDelayTimer_timeout():
 	__can_attack = true
