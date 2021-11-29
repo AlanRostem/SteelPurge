@@ -53,6 +53,5 @@ one_shot = true
 [connection signal="received_additional_message" from="InHitBox" to="." method="_on_InHitBox_received_additional_message"]
 [connection signal="hit_dealt" from="OutHitBox" to="." method="_on_OutHitBox_hit_dealt"]
 [connection signal="timeout" from="EnemyFSM/EnemyRamIntoAirState/AirborneStunTimer" to="EnemyFSM/EnemyRamIntoAirState" method="_on_AirborneStunTimer_timeout"]
-[connection signal="timeout" from="EnemyFSM/EnemyRamIntoAirState/AirborneStunTimer" to="." method="_on_DamageAvailabilityTimer_timeout"]
 [connection signal="timeout" from="EnemyFSM/EnemyMeleeKnockBackState/KnockBackTimer" to="EnemyFSM/EnemyMeleeKnockBackState" method="_on_KnockBackTimer_timeout"]
 [connection signal="timeout" from="DamageTakenTimer" to="." method="_on_DamageTakenTimer_timeout"]
