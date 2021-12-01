@@ -15,16 +15,16 @@ collision_mode = 2
 player_detection_range_in_tiles = 32.0
 
 [node name="BodyShape" parent="." index="0"]
-position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
 [node name="BodyShape" type="CollisionShape2D" parent="InHitBox" index="0"]
-position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
 [node name="BodyShape" type="CollisionShape2D" parent="OutHitBox" index="0"]
-position = Vector2( 0, 2 )
 shape = SubResource( 1 )
+
+[node name="VisibilityEnabler2D" parent="." index="4"]
+position = Vector2( 0, -2 )
 
 [node name="EnemyFSM" parent="." index="5"]
 __inital_state = NodePath("RodderShootState")
@@ -42,10 +42,9 @@ script = ExtResource( 5 )
 wait_time = 0.67
 
 [node name="EnemySprite" parent="." index="6"]
-position = Vector2( 0, -6 )
+position = Vector2( 0, -8 )
 frames = ExtResource( 3 )
 animation = "walk"
-frame = 2
 playing = true
 script = ExtResource( 6 )
 

@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/sprites/item/weapon/sword.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 4 )
+extents = Vector2( 5, 6 )
 
 [node name="Sword" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -19,7 +19,7 @@ __attack_delay = 0.27
 __team = "player_team"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutHitBox" index="0"]
-position = Vector2( 8, -1 )
+position = Vector2( 8, -3 )
 shape = SubResource( 1 )
 disabled = true
 

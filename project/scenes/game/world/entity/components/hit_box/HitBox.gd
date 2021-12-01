@@ -18,7 +18,7 @@ signal received_additional_message(message)
 # Describes what the hit box should do in the game world. By changing this enum,
 # the hitbox will be used to either receive a hit or give one out to another hit
 # box that can receive hits.
-export(HitBoxActionType) var hit_box_action_type = HitBoxActionType.HIT_DEALER
+export(HitBoxActionType) var hit_box_action_type
 
 export(String) var __team = UN_SET_TEAM
 
