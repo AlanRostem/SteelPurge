@@ -52,9 +52,10 @@ func deal_hit(hit_box):
 	hit_box.take_hit(__hit_box, damage)
 	destroy()
 
-func deflect(new_team):
+func deflect(new_team, new_damage):
 	__hit_box.change_team(new_team)
 	__in_hit_box.change_team(new_team)
+	damage = new_damage
 	set_velocity(-get_velocity())
 
 func destroy():
