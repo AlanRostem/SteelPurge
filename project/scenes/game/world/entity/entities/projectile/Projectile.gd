@@ -1,4 +1,5 @@
 extends MovingEntity
+class_name Projectile
 
 enum RotationMode {
 	WHOLE,
@@ -14,6 +15,7 @@ export(float) var max_velocity = 200
 var owner_weapon
 
 onready var __hit_box = $HitBox
+onready var __in_hit_box = $InHitBox
 onready var __sprite = $Sprite
 
 export(int) var damage
@@ -30,6 +32,7 @@ func init(dir_vec, team, offset = Vector2.ZERO):
 	set_velocity(dir_vec * max_velocity)
 	position += offset
 	__hit_box.change_team(team)
+	__in_hit_box.change_team(team)
 	direction = dir_vec
 	
 	var angle = direction.angle()
@@ -40,6 +43,7 @@ func init(dir_vec, team, offset = Vector2.ZERO):
 			__sprite.rotation = angle
 		RotationMode.HIT_BOX:
 			__hit_box.rotation = angle
+			__in_hit_box.rotation = angle
 			
 func init_deferred(dir_vec, team, offset = Vector2.ZERO):
 	call_deferred("init", dir_vec, team, offset)
@@ -47,6 +51,11 @@ func init_deferred(dir_vec, team, offset = Vector2.ZERO):
 func deal_hit(hit_box):
 	hit_box.take_hit(__hit_box, damage)
 	destroy()
+
+func deflect(new_team):
+	__hit_box.change_team(new_team)
+	__in_hit_box.change_team(new_team)
+	set_velocity(-get_velocity())
 
 func destroy():
 	parent_world.show_effect_deferred(__hit_effect, position)

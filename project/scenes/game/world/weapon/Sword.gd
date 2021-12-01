@@ -29,10 +29,14 @@ func _physics_process(delta):
 		manually_end_attack_cycle()
 
 func _on_OutHitBox_hit_dealt(hitbox):
+	var parent = hitbox.get_parent()
 	var damage = STANDARD_DAMAGE
 	if __boost_damage:
 		__boost_damage = false
 		damage = CRITICAL_DAMAGE
+	elif parent is Projectile:
+		parent.deflect(HitBox.PLAYER_TEAM)
+	print(parent)
 	hitbox.take_hit(__hit_box, damage, {
 		"knock_back": get_owner_player().get_horizontal_looking_direction()
 	})

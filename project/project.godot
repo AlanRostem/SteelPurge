@@ -38,6 +38,11 @@ _global_script_classes=[ {
 "class": "PlayerStats",
 "language": "GDScript",
 "path": "res://scenes/game/world/entity/entities/player/PlayerStats.gd"
+}, {
+"base": "MovingEntity",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://scenes/game/world/entity/entities/projectile/Projectile.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
@@ -45,7 +50,8 @@ _global_script_class_icons={
 "HitBox": "",
 "MovingEntity": "",
 "Player": "",
-"PlayerStats": ""
+"PlayerStats": "",
+"Projectile": ""
 }
 
 [application]
