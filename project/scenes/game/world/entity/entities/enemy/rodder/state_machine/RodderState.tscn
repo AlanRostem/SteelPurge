@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/rodder/state_machine/RodderState.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game/world/entity/components/state_machine/State.tscn" type="PackedScene" id=2]
+
+[node name="RodderState" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
