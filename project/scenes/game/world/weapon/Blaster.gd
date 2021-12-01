@@ -17,7 +17,7 @@ func fire_projectile(scene):
 	if dir.y == 1:
 		projectile.damage = CRITICAL_DAMAGE
 
-	projectile.call_deferred("init_from_player_weapon", dir, self)
+	projectile.call_deferred("init_from_player_weapon", dir, self, position)
 
 func _on_Blaster_downwards_attack():
 	fire_projectile(__projectile_scene)

@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/sprites/item/weapon/blaster.png" type="Texture" id=4]
 
 [node name="Blaster" instance=ExtResource( 1 )]
-position = Vector2( 0, -2 )
+position = Vector2( 0, -3 )
 script = ExtResource( 2 )
 __player_sprite_frames = ExtResource( 3 )
 __collectible_sprite = ExtResource( 4 )
