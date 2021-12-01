@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/game/level/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/world/entity/entities/player/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/game/world/entity/entities/item/collectible_items/weapon/BlasterCollectible.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/rush_rogue/RushRogue.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/game/world/entity/entities/item/collectible_items/weapon/SwordCollectible.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/rodder/Rodder.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 8, 0, 8, 8, 0, 8, 8 )
@@ -227,16 +228,16 @@ __containment_scene = ExtResource( 8 )
 [node name="Player" parent="GameWorld/EntityPool" index="0" instance=ExtResource( 2 )]
 position = Vector2( 69, 125 )
 
-[node name="Dummy" parent="GameWorld/EntityPool" index="1" instance=ExtResource( 3 )]
-position = Vector2( 205, 122 )
-collision_layer = 0
-
-[node name="Dummy3" parent="GameWorld/EntityPool" index="2" instance=ExtResource( 3 )]
+[node name="Dummy3" parent="GameWorld/EntityPool" index="1" instance=ExtResource( 3 )]
 position = Vector2( 468, 135 )
 collision_layer = 0
 
-[node name="RushRogue" parent="GameWorld/EntityPool" index="3" instance=ExtResource( 7 )]
+[node name="RushRogue" parent="GameWorld/EntityPool" index="2" instance=ExtResource( 7 )]
 position = Vector2( 384, 141 )
+collision_layer = 0
+
+[node name="Rodder" parent="GameWorld/EntityPool" index="3" instance=ExtResource( 9 )]
+position = Vector2( 213, 118 )
 collision_layer = 0
 
 [editable path="GameWorld"]

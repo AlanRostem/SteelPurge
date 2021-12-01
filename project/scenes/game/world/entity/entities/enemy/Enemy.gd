@@ -29,6 +29,7 @@ func _physics_process(delta):
 		if !__is_player_seen:
 			__is_player_seen = true
 			emit_signal("player_detected", player)
+			state_machine.transition_to(state_machine.get_initial_state())
 	elif __is_player_seen:
 		__is_player_seen = false
 		emit_signal("player_visual_lost", player)
