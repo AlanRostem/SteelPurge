@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/game/world/entity/entities/projectile/Projectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/projectile/blast.png" type="Texture" id=2]
 [ext_resource path="res://scenes/game/world/entity/entities/projectile/projectiles/EnergyBlast.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1.5, 1.5 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1.5, 1.5 )
@@ -15,6 +18,10 @@ damage = 1
 [node name="Sprite" parent="." index="0"]
 position = Vector2( -0.5, 0 )
 texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="CounterHitBox" index="0"]
+position = Vector2( 0, -0.5 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 0, -0.5 )
