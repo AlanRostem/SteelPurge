@@ -40,7 +40,9 @@ func init(dir_vec, team, offset = Vector2.ZERO):
 			__sprite.rotation = angle
 		RotationMode.HIT_BOX:
 			__hit_box.rotation = angle
-		
+			
+func init_deferred(dir_vec, team, offset = Vector2.ZERO):
+	call_deferred("init", dir_vec, team, offset)
 	
 func deal_hit(hit_box):
 	hit_box.take_hit(__hit_box, damage)
@@ -49,6 +51,9 @@ func deal_hit(hit_box):
 func destroy():
 	parent_world.show_effect_deferred(__hit_effect, position)
 	queue_free()
+
+func get_hit_box():
+	return __hit_box
 
 func _on_HitBox_body_entered(body):
 	if body is TileMap:

@@ -9,6 +9,7 @@ enum HitBoxActionType {
 const HIT_BOX_IN_COLLISION_BIT = 1
 const UN_SET_TEAM = "unset"
 const PLAYER_TEAM = "player_team"
+const ENEMY_TEAM = "enemy_team"
 
 signal hit_received(hitbox, damage)
 signal hit_dealt(hitbox)

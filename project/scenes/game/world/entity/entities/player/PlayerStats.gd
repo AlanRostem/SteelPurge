@@ -152,3 +152,7 @@ func _on_RushEnergyRechargeTimer_timeout():
 func _on_RushEnergyRechargeStartingDelayTimer_timeout():
 	__rush_energy_recharge_timer.start()
 	recharge_rush_energy()
+
+
+func _on_InHitBox_hit_received(hitbox, damage):
+	take_one_damage()

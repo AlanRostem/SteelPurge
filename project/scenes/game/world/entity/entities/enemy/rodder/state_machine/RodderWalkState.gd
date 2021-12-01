@@ -9,8 +9,5 @@ func physics_update(delta):
 func enter(message: Dictionary):
 	__walk_timer.start()
 
-func exit():
-	rodder.set_velocity_x(0)
-
 func _on_WalkTimer_timeout():
 	parent_state_machine.transition_to("RodderShootState")

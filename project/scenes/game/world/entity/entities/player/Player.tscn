@@ -152,6 +152,7 @@ shape = SubResource( 5 )
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_InvincibilityTimer_timeout"]
 [connection signal="timeout" from="CrateOpeningTimer" to="." method="_on_CrateOpeningTimer_timeout"]
 [connection signal="hit_dealt" from="RamSlideHitBox" to="." method="_on_RamSlideHitBox_hit_dealt"]
+[connection signal="hit_received" from="InHitBox" to="PlayerStats" method="_on_InHitBox_hit_received"]
 [connection signal="timeout" from="PlayerSprite/RushEnergyVisualActivityTimer" to="PlayerSprite" method="_on_RushEnergyVisualActivityTimer_timeout"]
 [connection signal="rush_energy_consumed" from="PlayerStats" to="PlayerSprite" method="_on_PlayerStats_rush_energy_consumed"]
 [connection signal="timeout" from="PlayerStats/RushEnergyRechargeTimer" to="PlayerStats" method="_on_RushEnergyRechargeTimer_timeout"]
