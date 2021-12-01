@@ -10,3 +10,9 @@ damage = 1
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 0, -1 )
 texture = ExtResource( 2 )
+
+[node name="CounterHitBox" parent="." index="2"]
+__team = "enemy_team"
+
+[node name="HitBox" parent="." index="3"]
+__team = "enemy_team"

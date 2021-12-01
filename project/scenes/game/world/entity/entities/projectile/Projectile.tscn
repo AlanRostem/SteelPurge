@@ -14,10 +14,10 @@ max_velocity = 360.0
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-[node name="InHitBox" parent="." index="2" instance=ExtResource( 3 )]
+[node name="CounterHitBox" parent="." index="2" instance=ExtResource( 3 )]
 hit_box_action_type = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InHitBox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CounterHitBox" index="0"]
 shape = SubResource( 1 )
 
 [node name="HitBox" parent="." index="3" instance=ExtResource( 3 )]

@@ -15,7 +15,7 @@ export(float) var max_velocity = 200
 var owner_weapon
 
 onready var __hit_box = $HitBox
-onready var __in_hit_box = $InHitBox
+onready var __in_hit_box = $CounterHitBox
 onready var __sprite = $Sprite
 
 export(int) var damage
