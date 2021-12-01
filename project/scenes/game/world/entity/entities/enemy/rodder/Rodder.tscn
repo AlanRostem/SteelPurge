@@ -12,6 +12,7 @@ extents = Vector2( 4, 8 )
 
 [node name="Rodder" instance=ExtResource( 1 )]
 collision_mode = 2
+__on_player_detect_state = NodePath("EnemyFSM/RodderShootState")
 player_detection_range_in_tiles = 32.0
 
 [node name="BodyShape" parent="." index="0"]

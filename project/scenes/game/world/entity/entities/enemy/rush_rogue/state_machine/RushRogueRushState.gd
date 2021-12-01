@@ -19,6 +19,7 @@ func enter(message: Dictionary):
 
 func exit():
 	__rush_timer.stop()
+	print_stack()
 	
 func _on_RushTimer_timeout():
 	rush_rogue.set_velocity_x(rush_rogue.get_horizontal_player_detect_direction() * MAX_RUSH_SPEED)
