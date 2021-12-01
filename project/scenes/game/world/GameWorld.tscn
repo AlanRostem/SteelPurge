@@ -23,4 +23,7 @@ __meta__ = {
 
 [node name="ScrapHoverText" parent="." instance=ExtResource( 3 )]
 
+[node name="WeaponHoverText" parent="." instance=ExtResource( 3 )]
+
 [connection signal="display_off" from="ScrapHoverText" to="." method="_on_ScrapHoverText_display_off"]
+[connection signal="display_off" from="WeaponHoverText" to="." method="_on_ScrapHoverText_display_off"]

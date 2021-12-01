@@ -18,6 +18,7 @@ onready var __parent_level = get_parent()
 var player_node
 
 onready var __scrap_hover_text = $ScrapHoverText
+onready var __weapon_hover_text = $WeaponHoverText
 
 var __scrap_recently_collected = 0
 
@@ -68,7 +69,10 @@ func show_effect_deferred(scene, location):
 	
 func show_hover_scrap_collected(amount, location):
 	__scrap_recently_collected += amount
-	__scrap_hover_text.display(str(__scrap_recently_collected), location)
+	__scrap_hover_text.display("+" + str(__scrap_recently_collected), location)
+
+func show_hover_weapon_collected(weapon_name, location):
+	__weapon_hover_text.display(weapon_name + " Online", location)
 
 func _on_ScrapHoverText_display_off():
 	__scrap_recently_collected = 0

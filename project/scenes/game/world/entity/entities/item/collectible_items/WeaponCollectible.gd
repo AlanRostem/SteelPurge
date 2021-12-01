@@ -13,8 +13,10 @@ var weapon
 func _player_collected(player):
 	if weapon != null:
 		player.stats.equip_weapon(weapon)
+		parent_world.show_hover_weapon_collected(weapon.name, position)
 		return
 	player.stats.instance_and_equip_weapon(__weapon_scene)
+	parent_world.show_hover_weapon_collected(player.stats.get_equipped_weapon().name, position)
 	
 func set_sprite(sprite):
 	__sprite.texture = sprite
