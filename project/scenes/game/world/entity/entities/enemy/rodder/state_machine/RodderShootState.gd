@@ -29,3 +29,7 @@ func _on_ShootTimer_timeout():
 		parent_state_machine.transition_to("RodderWalkState")
 		return
 	shoot()
+
+
+func _on_Rodder_player_detected(player):
+	parent_state_machine.transition_to(name)

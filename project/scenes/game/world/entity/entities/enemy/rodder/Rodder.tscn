@@ -12,7 +12,6 @@ extents = Vector2( 4, 8 )
 
 [node name="Rodder" instance=ExtResource( 1 )]
 collision_mode = 2
-__on_player_detect_state = NodePath("EnemyFSM/RodderShootState")
 player_detection_range_in_tiles = 32.0
 
 [node name="BodyShape" parent="." index="0"]
@@ -46,9 +45,9 @@ wait_time = 0.67
 position = Vector2( 0, -8 )
 frames = ExtResource( 3 )
 animation = "walk"
-frame = 1
 playing = true
 script = ExtResource( 6 )
 
+[connection signal="player_detected" from="." to="EnemyFSM/RodderShootState" method="_on_Rodder_player_detected"]
 [connection signal="timeout" from="EnemyFSM/RodderWalkState/WalkTimer" to="EnemyFSM/RodderWalkState" method="_on_WalkTimer_timeout"]
 [connection signal="timeout" from="EnemyFSM/RodderShootState/ShootTimer" to="EnemyFSM/RodderShootState" method="_on_ShootTimer_timeout"]

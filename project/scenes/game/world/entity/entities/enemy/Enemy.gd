@@ -11,7 +11,6 @@ onready var state_machine = $EnemyFSM
 onready var __damage_taken_timer = $DamageTakenTimer
 onready var __sprite = $EnemySprite
 
-export(NodePath) var __on_player_detect_state
 export(int) var scrap_drop_count_damaged = 1
 export(int) var scrap_drop_count_eliminated = 10
 export(float) var player_detection_range_in_tiles = 5 
@@ -30,7 +29,6 @@ func _physics_process(delta):
 		if !__is_player_seen:
 			__is_player_seen = true
 			emit_signal("player_detected", player)
-			state_machine.transition_to(__on_player_detect_state)
 	elif __is_player_seen:
 		__is_player_seen = false
 		emit_signal("player_visual_lost", player)
