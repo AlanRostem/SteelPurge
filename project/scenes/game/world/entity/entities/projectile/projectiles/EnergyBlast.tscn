@@ -5,10 +5,10 @@
 [ext_resource path="res://scenes/game/world/entity/entities/projectile/projectiles/EnergyBlast.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1.5, 1.5 )
+extents = Vector2( 2, 2 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1.5, 1.5 )
+extents = Vector2( 0, 0 )
 
 [node name="EnergyBlast" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -16,15 +16,12 @@ max_velocity = 280.0
 damage = 1
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( -0.5, 0 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="CounterHitBox" index="0"]
-position = Vector2( 0, -0.5 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2( 0, -0.5 )
 shape = SubResource( 1 )
 
 [connection signal="hit_dealt" from="HitBox" to="." method="_on_HitBox_hit_dealt_to_counter"]

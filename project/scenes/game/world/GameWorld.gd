@@ -7,6 +7,8 @@ class_name GameWorld
 
 const SOLID_OBJECT_COLLISION_BIT = 0
 
+var __hover_text_scene = preload("res://scenes/ui/world/hover_text/WorldHoverText.tscn")
+
 onready var __entity_pool = $EntityPool
 
 onready var __tile_map = $Geometry/CustomTileMap
@@ -14,6 +16,10 @@ onready var __tile_map = $Geometry/CustomTileMap
 onready var __parent_level = get_parent()
 
 var player_node
+
+onready var __scrap_hover_text = $ScrapHoverText
+
+var __scrap_recently_collected = 0
 
 func _ready():
 	var player = __entity_pool.get_node_or_null("Player")
@@ -59,3 +65,10 @@ func show_effect_deferred(scene, location):
 	var effect = scene.instance()
 	effect.position = location
 	__entity_pool.call_deferred("add_child", effect)
+	
+func show_hover_scrap_collected(amount, location):
+	__scrap_recently_collected += amount
+	__scrap_hover_text.display(str(__scrap_recently_collected), location)
+
+func _on_ScrapHoverText_display_off():
+	__scrap_recently_collected = 0

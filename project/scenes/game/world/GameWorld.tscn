@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/game/world/GameWorld.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/world/environment/CustomTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/world/hover_text/WorldHoverText.tscn" type="PackedScene" id=3]
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,3 +20,7 @@ script = null
 __meta__ = {
 "_editor_description_": "This node holds all the active game objects. The parent GameWorld node manages the objects in this node"
 }
+
+[node name="ScrapHoverText" parent="." instance=ExtResource( 3 )]
+
+[connection signal="display_off" from="ScrapHoverText" to="." method="_on_ScrapHoverText_display_off"]
