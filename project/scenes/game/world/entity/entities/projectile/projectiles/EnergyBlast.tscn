@@ -13,6 +13,7 @@ extents = Vector2( 0, 0 )
 [node name="EnergyBlast" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 max_velocity = 280.0
+damage_type = "energy"
 damage = 1
 
 [node name="Sprite" parent="." index="0"]

@@ -38,7 +38,7 @@ func _on_OutHitBox_hit_dealt(hitbox):
 		parent.deflect(HitBox.PLAYER_TEAM, STANDARD_DAMAGE)
 	hitbox.take_hit(__hit_box, damage, {
 		"knock_back": get_owner_player().get_horizontal_looking_direction()
-	})
+	}, HealthComponent.DAMAGE_TYPE_MELEE)
 
 func _on_Sword_attacked():
 	__hit_box_shape.disabled = false

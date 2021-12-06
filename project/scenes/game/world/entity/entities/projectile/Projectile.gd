@@ -11,6 +11,7 @@ enum RotationMode {
 var __hit_effect = preload("res://scenes/game/world/other/BlastHitEffect.tscn")
 
 export(float) var max_velocity = 200
+export(String) var damage_type = HealthComponent.DAMAGE_TYPE_STANDARD
 
 var owner_weapon
 
