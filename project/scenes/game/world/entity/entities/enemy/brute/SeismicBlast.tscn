@@ -30,11 +30,11 @@ animations = [ {
 "frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
 "loop": true,
 "name": "default",
-"speed": 10.0
+"speed": 15.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 8, 6 )
+extents = Vector2( 5, 4 )
 
 [node name="SeismicBlast" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -42,32 +42,25 @@ is_gravity_enabled = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 5 )
-frame = 2
 playing = true
 
-[node name="SpawnTimer" type="Timer" parent="." index="2"]
-wait_time = 0.2
+[node name="LifeTimer" type="Timer" parent="." index="2"]
+wait_time = 0.27
 one_shot = true
 autostart = true
 
-[node name="LifeTimer" type="Timer" parent="." index="3"]
-wait_time = 0.5
-one_shot = true
-autostart = true
-
-[node name="HitBox" parent="." index="4" instance=ExtResource( 4 )]
+[node name="HitBox" parent="." index="3" instance=ExtResource( 4 )]
 __team = "enemy_team"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
 shape = SubResource( 6 )
 
-[node name="GeometryDetector" type="Area2D" parent="." index="5"]
+[node name="GeometryDetector" type="Area2D" parent="." index="4"]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GeometryDetector" index="0"]
 shape = SubResource( 6 )
 
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
 [connection signal="hit_dealt" from="HitBox" to="." method="_on_HitBox_hit_dealt"]
 [connection signal="body_entered" from="GeometryDetector" to="." method="_on_GeometryDetector_body_entered"]
