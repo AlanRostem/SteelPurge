@@ -14,6 +14,7 @@ func physics_update(delta):
 		
 func enter(mesage: Dictionary):
 	__shoot_timer.start()
+	print(name)
 	
 func exit():
 	__shots = 0
