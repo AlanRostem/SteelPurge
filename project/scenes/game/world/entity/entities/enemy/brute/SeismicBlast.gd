@@ -13,7 +13,7 @@ func _on_SpawnTimer_timeout():
 	if idx == MAX_IDX: return
 	var location = position + Vector2(dir * 16, 0)
 	var blast = parent_world.spawn_entity_deferred(__scene, location)
-	blast.idx = idx+1
+	blast.idx = idx + 1
 	blast.dir = dir
 	
 
