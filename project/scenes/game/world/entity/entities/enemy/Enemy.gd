@@ -14,6 +14,7 @@ onready var __sprite = $EnemySprite
 export(int) var scrap_drop_count_damaged = 1
 export(int) var scrap_drop_count_eliminated = 10
 export(float) var player_detection_range_in_tiles = 5 
+export(bool) var can_be_knocked_back = true 
 
 var __can_deal_damage_to_player = true
 var __is_player_seen = false
@@ -71,6 +72,7 @@ func set_can_deal_damage(value):
 	__can_deal_damage_to_player = value
 
 func _on_InHitBox_received_additional_message(message: Dictionary):
+	if !can_be_knocked_back: return
 	if message.has("ram_slide"):
 		state_machine.transition_to("EnemyRamIntoAirState")
 	elif message.has("knock_back"):

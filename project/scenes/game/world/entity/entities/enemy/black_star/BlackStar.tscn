@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/sprites/char/black_star/black_star.png" type="Texture" id=1]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/black_star/state_machine/BlackStarFlightState.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/black_star/state_machine/BlackStarState.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 6, 6 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "flight",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "x_mode",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "plus_mode",
+"speed": 5.0
+} ]
+
+[node name="BlackStar" instance=ExtResource( 2 )]
+is_gravity_enabled = false
+can_be_knocked_back = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InHitBox" index="0"]
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutHitBox" index="0"]
+shape = SubResource( 6 )
+
+[node name="VisibilityEnabler2D" parent="." index="4"]
+position = Vector2( -8.34465e-07, 0 )
+scale = Vector2( 0.6, 0.6 )
+
+[node name="EnemyFSM" parent="." index="5"]
+__inital_state = NodePath("BlackStarFlightState")
+
+[node name="BlackStarFlightState" parent="EnemyFSM" index="0" instance=ExtResource( 4 )]
+script = ExtResource( 3 )
+
+[node name="EnemySprite" parent="." index="6"]
+frames = SubResource( 5 )
+animation = "flight"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="8"]
+shape = SubResource( 6 )

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game/world/entity/components/state_machine/State.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/black_star/state_machine/BlackStarState.gd" type="Script" id=2]
+
+[node name="BlackStarState" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
