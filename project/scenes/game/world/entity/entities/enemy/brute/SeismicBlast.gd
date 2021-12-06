@@ -7,6 +7,8 @@ var __scene = load("res://scenes/game/world/entity/entities/enemy/brute/SeismicB
 var dir = -1
 var idx = 0
 
+onready var __hit_box = $HitBox
+
 func _on_SpawnTimer_timeout():
 	if idx == MAX_IDX: return
 	var location = position + Vector2(dir * 16, 0)
@@ -17,3 +19,7 @@ func _on_SpawnTimer_timeout():
 
 func _on_LifeTimer_timeout():
 	queue_free()
+
+
+func _on_HitBox_hit_dealt(hitbox):
+	hitbox.take_hit(__hit_box, 1)
