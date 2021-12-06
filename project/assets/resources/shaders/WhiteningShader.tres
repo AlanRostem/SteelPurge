@@ -7,7 +7,7 @@ const float whitening = 1.f;
 
 void fragment() {
     vec4 texture_color = texture(TEXTURE, UV);
-    COLOR = vec4(mix(texture_color.rgb, vec3(1,1,1), whitening), texture_color.a);
+    COLOR = vec4(155, 188, 15, texture_color.a);
 }"
 
 [resource]
