@@ -3,11 +3,9 @@
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-const float whitening = 1.f;
-
 void fragment() {
     vec4 texture_color = texture(TEXTURE, UV);
-    COLOR = vec4(155, 188, 15, texture_color.a);
+    COLOR = vec4(155.f/255.f, 188.f/255.f, 15.f/255.f, texture_color.a);
 }"
 
 [resource]
