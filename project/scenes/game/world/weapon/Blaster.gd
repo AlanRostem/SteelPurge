@@ -16,6 +16,7 @@ func fire_projectile(scene):
 	var dir = player.get_looking_vector()
 	if dir.y == 1:
 		projectile.damage = CRITICAL_DAMAGE
+		projectile.damage_type = HealthComponent.DAMAGE_TYPE_CRITICAL
 
 	projectile.call_deferred("init_from_player_weapon", dir, self, position)
 

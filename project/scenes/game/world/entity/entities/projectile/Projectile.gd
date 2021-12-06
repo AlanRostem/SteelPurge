@@ -50,7 +50,7 @@ func init_deferred(dir_vec, team, offset = Vector2.ZERO):
 	call_deferred("init", dir_vec, team, offset)
 	
 func deal_hit(hit_box):
-	hit_box.take_hit(__hit_box, damage)
+	hit_box.take_hit(__hit_box, damage, {}, damage_type)
 	destroy()
 
 func deflect(new_team, new_damage):

@@ -55,12 +55,11 @@ func _on_HealthComponent_health_depleted(health_left):
 
 func _on_InHitBox_hit_received(hitbox, damage, damage_type):
 	__health_component.take_damage(damage, damage_type)
-	__damage_taken_timer.start()
-	__sprite.use_parent_material = false
 
 func _on_HealthComponent_damage_taken(damage):
 	drop_scrap(scrap_drop_count_damaged)
-
+	__damage_taken_timer.start()
+	__sprite.use_parent_material = false
 
 func _on_OutHitBox_hit_dealt(hitbox):
 	if !__can_deal_damage_to_player: return

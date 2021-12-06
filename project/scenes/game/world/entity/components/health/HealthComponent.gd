@@ -6,6 +6,7 @@ const STANDARD_HEALTH = 10
 const DAMAGE_TYPE_STANDARD = "standard"
 const DAMAGE_TYPE_ENERGY = "energy"
 const DAMAGE_TYPE_MELEE = "melee"
+const DAMAGE_TYPE_CRITICAL = "critical"
 
 signal damage_taken(damage)
 signal health_depleted(health_left)
