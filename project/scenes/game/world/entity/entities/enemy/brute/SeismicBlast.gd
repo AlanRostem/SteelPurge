@@ -23,3 +23,8 @@ func _on_LifeTimer_timeout():
 
 func _on_HitBox_hit_dealt(hitbox):
 	hitbox.take_hit(__hit_box, 1)
+
+
+func _on_GeometryDetector_body_entered(body):
+	if body is TileMap:
+		queue_free()
