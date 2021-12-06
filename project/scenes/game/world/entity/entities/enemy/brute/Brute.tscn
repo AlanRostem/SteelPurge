@@ -47,14 +47,13 @@ wait_time = 0.4
 one_shot = true
 
 [node name="SlamDelayTimer" type="Timer" parent="EnemyFSM/BruteSlamState" index="1"]
-wait_time = 1.3
+wait_time = 2.0
 one_shot = true
 
 [node name="EnemySprite" parent="." index="6"]
 position = Vector2( 1, -10 )
 frames = ExtResource( 2 )
 animation = "idle_slam"
-frame = 2
 playing = true
 script = ExtResource( 7 )
 
