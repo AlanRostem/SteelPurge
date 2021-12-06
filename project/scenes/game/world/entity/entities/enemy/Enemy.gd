@@ -15,6 +15,7 @@ export(int) var scrap_drop_count_damaged = 1
 export(int) var scrap_drop_count_eliminated = 10
 export(float) var player_detection_range_in_tiles = 5 
 export(bool) var can_be_knocked_back = true 
+export(bool) var detect_player_on_visible = false 
 
 var __can_deal_damage_to_player = true
 var __is_player_seen = false
@@ -26,6 +27,7 @@ func _physics_process(delta):
 	if player == null: return
 	var diff = player.position.x - position.x
 	__horizontal_player_detect_direction = sign(diff)
+	if detect_player_on_visible: return
 	if abs(diff) < player_detection_range_in_tiles * 8:
 		if !__is_player_seen:
 			__is_player_seen = true
@@ -82,3 +84,18 @@ func _on_InHitBox_received_additional_message(message: Dictionary):
 
 func _on_DamageTakenTimer_timeout():
 	__sprite.use_parent_material = true
+
+
+func _on_VisibilityEnabler2D_screen_entered():
+	if !detect_player_on_visible: return
+	var player = parent_world.player_node
+	if player == null: return
+	__is_player_seen = true
+	emit_signal("player_detected", player)
+
+func _on_VisibilityEnabler2D_screen_exited():
+	if !detect_player_on_visible: return
+	var player = parent_world.player_node
+	if player == null: return
+	__is_player_seen = false
+	emit_signal("player_visual_lost", player)

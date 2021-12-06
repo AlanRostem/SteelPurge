@@ -18,7 +18,7 @@ func enter(mesage: Dictionary):
 func exit():
 	__shots = 0
 	__shoot_timer.stop()
-
+	
 func shoot():
 	__shots += 1
 	var rod = rodder.parent_world.spawn_entity_deferred(__rod_scene, rodder.position)
@@ -29,7 +29,6 @@ func _on_ShootTimer_timeout():
 		parent_state_machine.transition_to("RodderWalkState")
 		return
 	shoot()
-
 
 func _on_Rodder_player_detected(player):
 	parent_state_machine.transition_to(name)
