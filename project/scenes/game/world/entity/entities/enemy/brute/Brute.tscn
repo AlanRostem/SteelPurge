@@ -21,6 +21,7 @@ shape = SubResource( 1 )
 
 [node name="HealthComponent" parent="." index="1"]
 max_health = 24
+__immunities = [ "energy" ]
 
 [node name="BodyShape" type="CollisionShape2D" parent="InHitBox" index="0"]
 shape = SubResource( 1 )
@@ -53,7 +54,7 @@ one_shot = true
 position = Vector2( 1, -10 )
 frames = ExtResource( 2 )
 animation = "idle_slam"
-frame = 1
+frame = 2
 playing = true
 script = ExtResource( 7 )
 

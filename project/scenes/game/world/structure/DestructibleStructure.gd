@@ -18,8 +18,8 @@ func drop_scrap(count):
 		rand_range(-drop_speed, drop_speed), -drop_speed
 	))
 
-func _on_InHitBox_hit_received(hitbox, damage):
-	__health_component.take_damage(damage)
+func _on_InHitBox_hit_received(hitbox, damage, damage_type):
+	__health_component.take_damage(damage, damage_type)
 	if drop_scrap_on_damaged:
 		drop_scrap(scrap_drop_count_damaged)
 
