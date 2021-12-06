@@ -14,3 +14,6 @@ func exit():
 	
 func _on_WalkTimer_timeout():
 	parent_state_machine.transition_to("RodderShootState")
+
+func _on_Rodder_player_visual_lost(player):
+	__walk_timer.stop()

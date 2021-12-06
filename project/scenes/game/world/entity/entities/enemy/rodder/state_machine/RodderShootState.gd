@@ -33,3 +33,7 @@ func _on_ShootTimer_timeout():
 
 func _on_Rodder_player_detected(player):
 	parent_state_machine.transition_to(name)
+
+func _on_Rodder_player_visual_lost(player):
+	__shots = 0
+	__shoot_timer.stop()
