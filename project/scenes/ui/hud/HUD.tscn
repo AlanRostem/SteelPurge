@@ -125,3 +125,8 @@ animation = "full"
 position = Vector2( 20, 8 )
 frames = SubResource( 3 )
 animation = "full"
+
+[node name="FlashTimer" type="Timer" parent="HealthInfo"]
+wait_time = 0.3
+
+[connection signal="timeout" from="HealthInfo/FlashTimer" to="HealthInfo" method="_on_FlashTimer_timeout"]
