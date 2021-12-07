@@ -35,6 +35,9 @@ func _physics_process(delta):
 	elif __is_player_seen:
 		__is_player_seen = false
 		emit_signal("player_visual_lost", player)
+		
+func can_see_player():
+	return __is_player_seen
 
 func get_horizontal_player_detect_direction():
 	return __horizontal_player_detect_direction

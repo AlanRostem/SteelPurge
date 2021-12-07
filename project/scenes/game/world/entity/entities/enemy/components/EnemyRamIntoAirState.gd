@@ -10,6 +10,6 @@ func enter(message: Dictionary):
 	
 func exit():
 	enemy.set_can_deal_damage(true)
-
+	
 func _on_AirborneStunTimer_timeout():
 	parent_state_machine.transition_to(parent_state_machine.get_initial_state())

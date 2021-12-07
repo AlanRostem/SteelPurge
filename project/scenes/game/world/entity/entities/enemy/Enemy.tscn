@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/game/world/entity/MovingEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/world/entity/components/hit_box/HitBox.tscn" type="PackedScene" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/components/EnemyRamIntoAirState.gd" type="Script" id=7]
 [ext_resource path="res://assets/resources/shaders/WhiteningShader.tres" type="Material" id=8]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/components/EnemyMeleeKnockBackState.gd" type="Script" id=9]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/EnemyFSM.gd" type="Script" id=10]
+[ext_resource path="res://scenes/game/world/entity/components/state_machine/State.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/game/world/entity/entities/enemy/components/EnemyIdleState.gd" type="Script" id=12]
 
 [node name="Enemy" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -23,16 +26,23 @@ __team = "enemy_team"
 __team = "enemy_team"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="." index="4"]
+process_parent = true
+physics_process_parent = true
 
 [node name="EnemyFSM" parent="." index="5" instance=ExtResource( 5 )]
+script = ExtResource( 10 )
+init_state_on_ready = false
 
-[node name="EnemyRamIntoAirState" parent="EnemyFSM" index="0" instance=ExtResource( 6 )]
+[node name="EnemyIdleState" parent="EnemyFSM" index="0" instance=ExtResource( 11 )]
+script = ExtResource( 12 )
+
+[node name="EnemyRamIntoAirState" parent="EnemyFSM" index="1" instance=ExtResource( 6 )]
 script = ExtResource( 7 )
 
 [node name="AirborneStunTimer" type="Timer" parent="EnemyFSM/EnemyRamIntoAirState" index="0"]
 one_shot = true
 
-[node name="EnemyMeleeKnockBackState" parent="EnemyFSM" index="1" instance=ExtResource( 6 )]
+[node name="EnemyMeleeKnockBackState" parent="EnemyFSM" index="2" instance=ExtResource( 6 )]
 script = ExtResource( 9 )
 
 [node name="KnockBackTimer" type="Timer" parent="EnemyFSM/EnemyMeleeKnockBackState" index="0"]
@@ -53,7 +63,9 @@ one_shot = true
 [connection signal="received_additional_message" from="InHitBox" to="." method="_on_InHitBox_received_additional_message"]
 [connection signal="hit_dealt" from="OutHitBox" to="." method="_on_OutHitBox_hit_dealt"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="EnemyFSM" method="_on_VisibilityEnabler2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="EnemyFSM" method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="timeout" from="EnemyFSM/EnemyRamIntoAirState/AirborneStunTimer" to="EnemyFSM/EnemyRamIntoAirState" method="_on_AirborneStunTimer_timeout"]
 [connection signal="timeout" from="EnemyFSM/EnemyMeleeKnockBackState/KnockBackTimer" to="EnemyFSM/EnemyMeleeKnockBackState" method="_on_KnockBackTimer_timeout"]
 [connection signal="timeout" from="DamageTakenTimer" to="." method="_on_DamageTakenTimer_timeout"]

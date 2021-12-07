@@ -17,7 +17,7 @@
 [ext_resource path="res://assets/resources/shaders/OutlineShader.tres" type="Material" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6, 3 )
+extents = Vector2( 6, 2 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5, 7 )
@@ -66,7 +66,7 @@ one_shot = true
 __team = "player_team"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RamSlideHitBox" index="0"]
-position = Vector2( 11, -1 )
+position = Vector2( 11, 0 )
 shape = SubResource( 1 )
 disabled = true
 

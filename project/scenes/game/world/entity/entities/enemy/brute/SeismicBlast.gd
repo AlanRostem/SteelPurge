@@ -1,6 +1,6 @@
 extends MovingEntity
 
-const MAX_IDX = 5
+const MAX_IDX = 3
 
 var __scene = load("res://scenes/game/world/entity/entities/enemy/brute/SeismicBlast.tscn")
 

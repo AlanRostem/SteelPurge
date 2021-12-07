@@ -14,7 +14,6 @@ func physics_update(delta):
 		
 func enter(mesage: Dictionary):
 	__shoot_timer.start()
-	print(name)
 	
 func exit():
 	__shots = 0
@@ -30,10 +29,3 @@ func _on_ShootTimer_timeout():
 		parent_state_machine.transition_to("RodderWalkState")
 		return
 	shoot()
-
-func _on_Rodder_player_detected(player):
-	parent_state_machine.transition_to(name)
-
-func _on_Rodder_player_visual_lost(player):
-	__shots = 0
-	__shoot_timer.stop()

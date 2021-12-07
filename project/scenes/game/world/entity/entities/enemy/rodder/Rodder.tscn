@@ -25,10 +25,11 @@ shape = SubResource( 1 )
 shape = SubResource( 1 )
 
 [node name="VisibilityEnabler2D" parent="." index="4"]
-position = Vector2( 0, -3 )
+position = Vector2( -2.38419e-07, -0.5 )
+scale = Vector2( 0.4, 0.75 )
 
 [node name="EnemyFSM" parent="." index="5"]
-__inital_state = NodePath("RodderShootState")
+__inital_state = NodePath("RodderWalkState")
 
 [node name="RodderWalkState" parent="EnemyFSM" index="2" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
@@ -46,12 +47,8 @@ wait_time = 0.67
 position = Vector2( 0, -9 )
 frames = ExtResource( 3 )
 animation = "walk"
-frame = 2
 playing = true
 script = ExtResource( 6 )
 
-[connection signal="player_detected" from="." to="EnemyFSM/RodderShootState" method="_on_Rodder_player_detected"]
-[connection signal="player_visual_lost" from="." to="EnemyFSM/RodderWalkState" method="_on_Rodder_player_visual_lost"]
-[connection signal="player_visual_lost" from="." to="EnemyFSM/RodderShootState" method="_on_Rodder_player_visual_lost"]
 [connection signal="timeout" from="EnemyFSM/RodderWalkState/WalkTimer" to="EnemyFSM/RodderWalkState" method="_on_WalkTimer_timeout"]
 [connection signal="timeout" from="EnemyFSM/RodderShootState/ShootTimer" to="EnemyFSM/RodderShootState" method="_on_ShootTimer_timeout"]
