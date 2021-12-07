@@ -8,22 +8,24 @@ onready var __third = $Health/Third
 onready var __flash_timer = $FlashTimer
 
 func set_health(count):
+	if count > 1:
+		__flash_timer.stop()
+		visible = true
+	else:
+		__flash_timer.start()
 	match count:
 		3:
 			__first.animation = "full"
 			__second.animation = "full"
 			__third.animation = "full"
-			__flash_timer.stop()
 		2:
 			__first.animation = "full"
 			__second.animation = "full"
 			__third.animation = "empty"
-			__flash_timer.stop()
 		1:
 			__first.animation = "full"
 			__second.animation = "empty"
 			__third.animation = "empty"
-			__flash_timer.start()
 			
 		0:
 			__first.animation = "empty"

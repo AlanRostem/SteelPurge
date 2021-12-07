@@ -38,15 +38,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 240.0
+margin_bottom = 24.0
+color = Color( 0.188235, 0.384314, 0.188235, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="RushEnergyBar" type="Control" parent="."]
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -16.0
-margin_top = -24.0
-margin_right = 12.0
-margin_bottom = -8.0
+margin_left = -14.0
+margin_top = 3.0
+margin_right = 14.0
+margin_bottom = 19.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
@@ -67,6 +73,9 @@ animation = "empty"
 position = Vector2( 4, 8 )
 frames = ExtResource( 1 )
 animation = "empty"
+
+[node name="FlashTimer" type="Timer" parent="RushEnergyBar"]
+wait_time = 0.12
 
 [node name="ScrapInfo" type="Control" parent="."]
 anchor_left = 1.0
@@ -129,4 +138,5 @@ animation = "full"
 [node name="FlashTimer" type="Timer" parent="HealthInfo"]
 wait_time = 0.3
 
+[connection signal="timeout" from="RushEnergyBar/FlashTimer" to="RushEnergyBar" method="_on_FlashTimer_timeout"]
 [connection signal="timeout" from="HealthInfo/FlashTimer" to="HealthInfo" method="_on_FlashTimer_timeout"]
