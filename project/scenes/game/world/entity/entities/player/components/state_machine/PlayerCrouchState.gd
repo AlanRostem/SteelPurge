@@ -12,14 +12,16 @@ func movement_update(delta):
 	var dir = int(move_right) - int(move_left)
 	if dir != 0:
 		player.look_horizontally(dir)
+	
+	if player.is_roof_above(): return
 
-	if jump and player.is_on_ground() and !player.is_roof_above():
+	if jump and player.is_on_ground():
 		parent_state_machine.transition_to("PlayerAirborneState", {
 			"jumping": true
 		})
 		return
 
-	if !crouch and !player.is_roof_above():
+	if !crouch:
 		if player.is_effectively_standing_still():
 			parent_state_machine.transition_to("PlayerIdleState")
 		else:
