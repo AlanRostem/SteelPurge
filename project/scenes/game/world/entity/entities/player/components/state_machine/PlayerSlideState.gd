@@ -1,15 +1,16 @@
 extends "res://scenes/game/world/entity/entities/player/components/state_machine/PlayerState.gd"
 
 func movement_update(delta):
+	if player.is_roof_above(): return
+
 	var intended_dir = int(move_right) - int(move_left)
 	var move_dir = sign(player.get_velocity().x)
 	if intended_dir != move_dir:
 		player.negate_slide(intended_dir, delta)
 		
-	if !player.is_roof_above():
-		player.apply_slide_friction(delta)
+	player.apply_slide_friction(delta)
 	
-	if !crouch and !player.is_roof_above():
+	if !crouch:
 		if player.is_effectively_standing_still():
 			parent_state_machine.transition_to("PlayerIdleState")
 			return
@@ -23,7 +24,7 @@ func movement_update(delta):
 		parent_state_machine.transition_to("PlayerCrouchState")
 		return
 		
-	if jump and player.is_on_ground() and !player.is_roof_above():
+	if jump and player.is_on_ground():
 		parent_state_machine.transition_to("PlayerAirBorneState", {
 			"jumping": true
 		})

@@ -1,8 +1,10 @@
 extends "res://scenes/game/world/entity/entities/player/components/state_machine/PlayerState.gd"
 
 func movement_update(delta):
-	if !player.is_roof_above():
-		player.apply_slide_friction(delta)
+	if player.is_roof_above(): 
+		return
+		
+	player.apply_slide_friction(delta)
 
 	if player.is_effectively_standing_still():
 		player.set_velocity_x(0)
@@ -13,8 +15,6 @@ func movement_update(delta):
 	if dir != 0:
 		player.look_horizontally(dir)
 	
-	if player.is_roof_above(): return
-
 	if jump and player.is_on_ground():
 		parent_state_machine.transition_to("PlayerAirborneState", {
 			"jumping": true
