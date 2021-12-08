@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/game/level/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/world/entity/entities/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/world/entity/entities/item/collectible_items/weapon/BlasterCollectible.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/terrain/tile_sheet_slopes.png" type="Texture" id=4]
 [ext_resource path="res://scenes/game/world/structure/destructible/Crate.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/game/world/environment/HealthShop.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/brute/Brute.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/game/world/entity/entities/item/collectible_items/weapon/SwordCollectible.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/game/world/entity/entities/enemy/rodder/Rodder.tscn" type="PackedScene" id=9]
@@ -223,6 +224,9 @@ position = Vector2( 492, 132 )
 [node name="Crate8" parent="GameWorld/Geometry" index="18" instance=ExtResource( 5 )]
 position = Vector2( 344, 124 )
 __containment_scene = ExtResource( 8 )
+
+[node name="HealthShop" parent="GameWorld/Geometry" index="19" instance=ExtResource( 6 )]
+position = Vector2( 152, 116 )
 
 [node name="Player" parent="GameWorld/EntityPool" index="0" instance=ExtResource( 2 )]
 position = Vector2( 92, -20 )

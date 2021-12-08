@@ -126,6 +126,8 @@ func set_health(value):
 	__health = value
 	emit_signal("health_changed", __health)
 
+func get_health(): return __health
+
 func get_rush_energy():
 	return __rush_energy_count
 	

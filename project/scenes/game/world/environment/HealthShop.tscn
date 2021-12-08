@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/game/world/environment/Shop.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/world/environment/HealthShop.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/item/other/heart.png" type="Texture" id=3]
+
+[node name="HealthShop" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="ItemSprite" parent="." index="2"]
+position = Vector2( 0, -7 )
+texture = ExtResource( 3 )
