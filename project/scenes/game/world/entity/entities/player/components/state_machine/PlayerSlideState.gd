@@ -5,7 +5,9 @@ func movement_update(delta):
 	var move_dir = sign(player.get_velocity().x)
 	if intended_dir != move_dir:
 		player.negate_slide(intended_dir, delta)
-	player.apply_slide_friction(delta)
+		
+	if !player.is_roof_above():
+		player.apply_slide_friction(delta)
 	
 	if !crouch and !player.is_roof_above():
 		if player.is_effectively_standing_still():
@@ -21,7 +23,7 @@ func movement_update(delta):
 		parent_state_machine.transition_to("PlayerCrouchState")
 		return
 		
-	if jump and player.is_on_ground():
+	if jump and player.is_on_ground() and !player.is_roof_above():
 		parent_state_machine.transition_to("PlayerAirBorneState", {
 			"jumping": true
 		})

@@ -10,8 +10,8 @@
 position = Vector2( -20, 0 )
 
 [node name="HealthShop" parent="." instance=ExtResource( 2 )]
+position = Vector2( 20, 0 )
 __price = 100
 
 [node name="BlasterShop" parent="." instance=ExtResource( 1 )]
-position = Vector2( 20, 0 )
 __price = 50
