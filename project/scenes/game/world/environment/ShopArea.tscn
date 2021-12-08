@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/game/world/environment/BlasterShop.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/world/environment/HealthShop.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/world/environment/SwordShop.tscn" type="PackedScene" id=3]
+
+[node name="ShopArea" type="Node2D"]
+
+[node name="SwordShop" parent="." instance=ExtResource( 3 )]
+position = Vector2( -20, 0 )
+
+[node name="HealthShop" parent="." instance=ExtResource( 2 )]
+__price = 100
+
+[node name="BlasterShop" parent="." instance=ExtResource( 1 )]
+position = Vector2( 20, 0 )
+__price = 50

@@ -1,7 +1,5 @@
 extends Node2D
 
-onready var parent_world = get_parent().get_parent()
-
 export var __price = 25
 
 var __player
